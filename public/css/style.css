@@ -1,0 +1,70 @@
+/*global*/
+li{
+list-style-type: none;
+}
+/*twitter*/
+.hero-unit{
+    padding: 30px 60px;
+}
+
+
+/*header*/
+
+.header{
+    float:right;
+}
+
+#globalNav {
+
+    float: right;
+    padding-top: 22px;
+}
+
+#globalNav ul {
+    margin: 0;
+    padding: 0;
+}
+
+#globalNav ul li{
+    border-left:1px solid black;
+    padding-left: 6px;
+    display: inline;
+}
+#globalNav ul li:first-child {
+    border-left: medium none;
+}
+
+/*login*/
+
+#loginFormHolder #remember{
+    float:left;
+    margin-right: 5px;
+}
+#loginFormHolder label{
+    float:left;
+    margin-right: 25px;
+}
+#loginFormHolder #login{
+    margin-bottom: 9px;
+}
+/*registration*/
+#registrationFormHolder .buttonBar input[type="radio"]{
+display: none;
+}
+#registrationFormHolder .buttonBar{
+    margin: 0 0 15px 22px;
+}
+#registrationFormHolder .buttonBar label{
+    display: inline;
+    border:2px solid #666;
+    padding:5px;
+    margin:3px;
+}
+#registrationFormHolder .buttonBar .checked{
+    background-color: #AFE0A3;
+}
+
+#SignUp-element{
+    margin-left: 148px;
+}
+

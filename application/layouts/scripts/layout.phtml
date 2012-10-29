@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta CHARSET="UTF-8">
+    <title></title>
+    <?php
+    $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=utf-8');
+    $this->addHelperPath("ZendX/JQuery/View/Helper", "ZendX_JQuery_View_Helper");
+    ?>
+    <?php echo $this  ->jQuery()->setVersion("1.7.1")->uiEnable(); ?>
+    <?php $this->headLink()->appendStylesheet('/twitter/css/bootstrap.css');?>
+    <?php $this->headScript()->appendFile('/js/jquery/main.js');?>
+    <?php $this->headLink()->appendStylesheet('/css/style.css');?>
+
+    <?php $this->headScript()->appendFile('/twitter/js/bootstrap.js');?>
+
+    <?php echo $this->headScript();?>
+    <?php echo $this->headLink();?>
+</head>
+<body>
+<div class="row-fluid">
+    <div class="span7">
+        <h1 class="header">Welcome to Aimya</h1>
+    </div>
+    <div class="span3">
+        <nav id="globalNav">
+            <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">About Aimya</a></li>
+                <li><a href="#">Help</a></li>
+
+            </ul>
+        </nav>
+    </div>
+</div>
+<div id="wrapper">
+   <?php $identity = Zend_Auth::getInstance()->getStorage()->read();
+   print_r($identity);?>
+
+    <?php echo $this->layout()->content;?>
+
+
+    <footer>
+    </footer>
+
+</div>
+<!--end: wrapper-->
+</body>
+</html>

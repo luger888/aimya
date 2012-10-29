@@ -1,0 +1,69 @@
+<!-- login -->
+<div class="row-fluid">
+    <div class="span5 hero-unit">
+    </div>
+
+    <div class="span7 hero-unit">
+
+        <div id="loginFormHolder">
+            <form id="signIn" action="user/login" name="signIn"  method="post">
+
+                <?php
+                echo $this->login['username'];
+                echo $this->login['password'];
+                echo $this->login['login'].'<br>';
+                echo $this->login['remember'];
+                echo '<label for="'.$this->login['remember']->id.'">Keep me signed in</label>';
+                ?>
+                <a href="#">Forgot your password?</a>
+
+            </form>
+            <!-- /login -->
+        </div>
+    </div>
+    <!-- /span3 -->
+</div><!-- /row -->
+
+<div class="row-fluid">
+    <div class="span5 hero-unit">
+        <fieldset>
+            <legend>About Aimya</legend>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut laoreet orci. Ut dolor est, dapibus id
+            bibendum ut, commodo a eros. Nulla suscipit, velit in mollis aliquam, lacus mauris vulputate risus, a
+            faucibus turpis metus sed odio. Integer tempus lobortis adipiscing. Fusce dictum dui et arcu vestibulum
+            dignissim. Nunc consequat nunc nec sem fringilla quis feugiat nisl vestibulum. Proin semper fringilla nisi
+            sit amet dapibus. In luctus, nibh tempor pretium suscipit, neque massa ultrices massa, tincidunt hendrerit
+            leo nibh ut lectus. Donec sit amet congue turpis. Pellentesque ut leo sem, eget bibendum urna. Maecenas
+            vitae justo non eros posuere tempus ut quis risus. Praesent tincidunt, tellus vel tempor porttitor, dolor
+            risus lobortis augue, eu pulvinar dolor dui sed libero. Integer quis ante quis turpis adipiscing egestas.
+
+            Nullam blandit arcu ut nibh iaculis tempus. Suspendisse potenti.
+        </fieldset>
+    </div>
+    <div class="span5  hero-unit">
+        <!-- registration -->
+        <div id="registrationFormHolder">
+            <form id="signUp" action="/user/registration/" name="signUp" method="post">
+                <fieldset>
+                    <legend>SIGN UP</legend>
+
+                    <div class='buttonBar'>
+                        <?php echo $this->reg['type'] . '<br>';?>
+                    </div>
+                    <ul>
+                        <li><?php echo $this->reg['firstName'];?></li>
+                        <li><?php echo $this->reg['lastName'];?></li>
+                        <li><?php echo $this->reg['userName'];?></li>
+                        <li><?php echo $this->reg['email'];?></li>
+                        <li><?php echo $this->reg['password'];?></li>
+                        <li><?php echo $this->reg['password2'];?></li>
+                        <li><?php echo $this->reg['SignUp'];?></li>
+                    </ul>
+                </fieldset>
+            </form>
+            <!-- /registration -->
+        </div>
+    </div>
+    <div class="span2 hero-unit"></div>
+</div>
+
