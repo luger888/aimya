@@ -7,43 +7,45 @@ class Application_Form_Profile extends Zend_Form
 
     public function init()
     {
-        $firstName = new Zend_Form_Element_Text('firstName');
-        $firstName->setRequired(true)
-            ->addValidator('NotEmpty')
-            ->setAttrib('placeholder', 'First Name')
+
+        $this->setName('profile');
+        $this->setEnctype(Zend_Form::ENCTYPE_MULTIPART);
+
+        $avatar = new Zend_Form_Element_File('avatar');
+        $avatar ->setAttrib('id', 'avatar')
+             ->addValidator('Size', false, 1024000)
+             ->addValidator('Extension', false, 'jpg,png,gif,jpeg');
+
+
+        $firstName = new Zend_Form_Element_Text('firstname');
+        $firstName ->setAttrib('placeholder', 'First Name')
             ->setAttrib('class', 'required')
-            ->setAttrib('id', 'firstName')
+            ->setAttrib('id', 'firstname')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 
-        $lastName = new Zend_Form_Element_Text('lastName');
-        $lastName ->setRequired(true)
-            ->addValidator('NotEmpty')
-            ->setAttrib('class', 'required')
+        $lastName = new Zend_Form_Element_Text('lastname');
+        $lastName ->setAttrib('class', 'required')
             ->setAttrib('placeholder', 'Last Name')
-            ->setAttrib('id', 'lastName')
+            ->setAttrib('id', 'lastname')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 
-        $birthday = new Zend_Form_Element_Hidden('birthday');
-        $birthday ->setRequired(true)
-            ->addValidator('NotEmpty')
-            ->setAttrib('id', 'birthday')
+        $birthday = new Zend_Form_Element_Text('birthday');
+        $birthday ->setAttrib('id', 'birthday')
+            ->setAttrib('placeholder', '/ / /')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 
         $language = new Zend_Form_Element_Text('language');
-        $language ->setRequired(true)
-            ->addValidator('NotEmpty')
-            ->setAttrib('placeholder', 'Language Spoken')
+        $language ->setAttrib('placeholder', 'Language Spoken')
             ->setAttrib('id', 'language')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 
         $initials = new Zend_Form_Element_Text('initials');
-        $initials ->setRequired(true)
-            ->addValidator('NotEmpty')
-            ->setAttrib('id', 'initials')
+        $initials ->setAttrib('id', 'initials')
+            ->setAttrib('placeholder', 'initials')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 
@@ -54,22 +56,25 @@ class Application_Form_Profile extends Zend_Form
             ->setAttrib('class', 'clearInput required email')
             ->setDecorators($this->basicDecorators);
 
-        $timeZone = new Zend_Form_Element_Select('timeZone');
-        $timeZone->addValidator('NotEmpty')
-            ->setAttrib('id', 'timeZone')
+        $timeZone = new Zend_Form_Element_Select('timezone');
+        $timeZone->setAttrib('id', 'timezone')
             ->addFilters($this->basicFilters)
-            ->setDecorators($this->basicDecorators);
+            ->setDecorators($this->basicDecorators)
+            ->addMultiOptions(array('0'   => 'time zone'));
 
         $intro = new Zend_Form_Element_Textarea('intro');
         $intro->addValidator('NotEmpty')
             ->setAttrib('id', 'intro')
             ->addFilters($this->basicFilters)
-            ->setDecorators($this->basicDecorators);
+            ->setDecorators($this->basicDecorators)
+            -> setAttrib('rows', '7');
 
         $submit = new Zend_Form_Element_Submit('saveProfile');
-        $submit ->setAttrib('id', 'saveProfile');
+        $submit ->setAttrib('id', 'saveProfile')
+             ->setAttrib('class', 'btn');
 
-        $this->addElements(array($firstName, $lastName, $birthday, $language, $email, $timeZone, $initials, $intro, $submit));
+
+        $this->addElements(array($avatar, $firstName, $lastName, $birthday, $language, $email, $timeZone, $initials, $intro, $submit));
 
     }
 }

@@ -1,10 +1,7 @@
 <?php
 class UserController extends Zend_Controller_Action
 {
-    private $aclUndefined = 0;
-    private $aclPending = 1;
-    private $aclUser = 2;
-    private $aclAdmin = 3;
+
 
     public function init()
     {
@@ -27,15 +24,14 @@ class UserController extends Zend_Controller_Action
 
             $data = $this->getRequest()->getPost();
 
-            if($login->isValid($data)){
-
+            if ($login->isValid($data)) {
                 $username = $this->getRequest()->getPost('username');
                 $password = md5($this->getRequest()->getPost('password'));
-                $identity = Zend_Auth::getInstance()->getStorage()->read();
+                Zend_Auth::getInstance()->getStorage()->read();
 
                 $authAdapter = new Zend_Auth_Adapter_DbTable(Zend_Db_Table::getDefaultAdapter());
 
-                $authAdapter    ->setTableName('user')
+                $authAdapter->setTableName('user')
                     ->setIdentityColumn('username')
                     ->setCredentialColumn('password')
                     ->setIdentity($username)
@@ -44,38 +40,11 @@ class UserController extends Zend_Controller_Action
                 $auth = Zend_Auth::getInstance();
                 $result = $auth->authenticate($authAdapter);
 
-                if($result->isValid()){
+                if ($result->isValid()) {
 
                     $identity = $authAdapter->getResultRowObject();
                     $authStorage = $auth->getStorage();
                     $authStorage->write($identity);
-
-                    /* if($identity->role == $this->aclPending){
-
-                        $this->_helper->redirector('index', 'index'); //////////////another redirect
-
-                    }
-                    else{
-
-
-                      if($this->getRequest()->getPost('remember')){
-
-                            setcookie("email", $this->getRequest()->getPost('email') ,time() + 3600 * 24 * 365 , '/');
-
-                        }
-                        else{
-
-                            setcookie("email", '' ,time() + 3600 * 24 * 365 , '/');
-
-                        }
-
-                        $this->_helper->redirector('index', 'account');
-                    }*/
-
-                }
-                else{
-
-                    $this->view->warning = 1;
 
                 }
             }
@@ -86,14 +55,14 @@ class UserController extends Zend_Controller_Action
     {
 
         $reg = new Application_Form_Registration();
-        if($this->getRequest()->isPost()){
+        if ($this->getRequest()->isPost()) {
             $model = new Application_Model_User();
 
             $formData = $this->getRequest()->getPost();
             $this->view->data = $formData;
             if ($reg->isValid($formData)) {
 
-                $status = $model->addNewUser($formData);
+                $model->addNewUser($formData);
                 $this->_helper->redirector('index', 'index'); ///////account redirect!
 
             } else {
@@ -103,5 +72,11 @@ class UserController extends Zend_Controller_Action
             }
         }
 
+    }
+
+    public function logoutAction()
+    {
+        Zend_Auth::getInstance()->clearIdentity();
+        $this->_helper->redirector('index', 'index');
     }
 }

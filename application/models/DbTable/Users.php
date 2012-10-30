@@ -7,17 +7,19 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
     #check email to unique
 
-    public function checkByMail($email){
+    public function checkByMail($email)
+    {
 
-        $data = $this   ->select()
-            ->from('user', array('id', 'firstname', 'lastname' , 'password'))
-            ->where('email=?' , $email);
+        $data = $this->select()
+            ->from('user', array('id', 'firstname', 'lastname', 'password'))
+            ->where('email=?', $email);
 
         return $data->query()->fetch();
 
     }
 
-    public function createUser($array){
+    public function createUser($array)
+    {
 
         $status = (isset($array['status'])) ? 1 : 0;
         $password = (isset($array['password'])) ? md5($array['password']) : '';
@@ -29,7 +31,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
             'email' => $array['email'],
             'password' => $password,
             'role' => $array['type'],
-            'username'=>$array['userName'],
+            'username' => $array['userName'],
             'firstname' => $array['firstName'],
             'lastname' => $array['lastName'],
             'status' => $status,

@@ -10,6 +10,9 @@ class IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
+
+
+
         $login = new Application_Form_Login();
         $reg = new Application_Form_Registration();
 
