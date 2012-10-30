@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:views="com.aimialesson.UI.views.*">
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("com.aimialesson.UI.views.VideoChatUI")]
+	</fx:Metadata>
+	<s:BorderContainer>
+		<s:VGroup gap="10">
+			<!--mx:VideoDisplay id="myVideo" width="200" height="150" /-->
+			<!--mx:VideoDisplay id="partnerVideo" width="200" height="150" /-->
+			<mx:UIComponent id="myVideoContainter"  width="200" height="150"/>
+			<mx:UIComponent id="partnerVideoContainter"  width="200" height="150"/>
+		</s:VGroup>
+	</s:BorderContainer>
+</s:Skin>
