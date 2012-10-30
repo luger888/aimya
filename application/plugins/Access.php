@@ -2,6 +2,7 @@
 
 class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
 {
+    
     const GUEST = '0';
     const STUDENT = '1';
     const TEACHER = '2';
