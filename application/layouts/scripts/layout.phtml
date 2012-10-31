@@ -38,8 +38,19 @@
 
 <!-- CONTENT -->
 <div id="wrapper">
+    <!-- ACCOUNT LAYOUT -->
+        <?php
+            $front = Zend_Controller_Front::getInstance();
+            $controllerName = $front->getRequest()->getControllerName();
+           # print_r($front);
+            if($controllerName == 'account'){
+                echo $this->partial('partials/account.phtml',
+                    array('account' => $this->data));
 
-    <?php echo $this->layout()->content;?>
+            }else{
+                echo $this->layout()->content;
+            }
+        ?> <!-- END ACCOUNT LAYOUT -->
 
 
     <footer>
@@ -49,3 +60,4 @@
 <!--END of CONTENT-->
 </body>
 </html>
+<?php  print_r(Zend_Auth::getInstance()->getStorage()->read());?>

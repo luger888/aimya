@@ -1,4 +1,5 @@
 <div class = "profile">
+    <form method="post" name="profile" action = "" enctype="multipart/form-data">
     <div class="row-fluid">
         <div class="span12">
              <?php echo $this->profile->avatar; ?>
@@ -35,5 +36,7 @@
             <?php echo $this->profile->saveProfile; ?>
         </div>
     </div>
-
+    </form>
 </div><!--End PROFILE  -->
+
+<?php print_r($this->errors) ;?>

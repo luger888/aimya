@@ -45,7 +45,9 @@ class UserController extends Zend_Controller_Action
                     $identity = $authAdapter->getResultRowObject();
                     $authStorage = $auth->getStorage();
                     $authStorage->write($identity);
-
+                    $this->_helper->redirector('index', 'account');
+                }else{
+                    $this->view->error = 'Authentication failed.';
                 }
             }
         }
@@ -63,7 +65,7 @@ class UserController extends Zend_Controller_Action
             if ($reg->isValid($formData)) {
 
                 $model->addNewUser($formData);
-                $this->_helper->redirector('index', 'index'); ///////account redirect!
+                $this->_helper->redirector('index', 'account');
 
             } else {
 

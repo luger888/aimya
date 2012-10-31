@@ -2,7 +2,7 @@
 
 class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
 {
-    
+
     const GUEST = '0';
     const STUDENT = '1';
     const TEACHER = '2';
@@ -77,7 +77,7 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         //echo $role .' '. $resource .' '. $action . '<br>';
         if (!$this->_acl->isAllowed($role, $resource, $action)) {
 
-            #$request->setControllerName('error')->setActionName('page404');
+            $request->setControllerName('error')->setActionName('page404');
             //throw new Zend_Acl_Exception("This page is not accessible.", Application_Plugin_Access::ACCESS_DENIED);
 
         }
