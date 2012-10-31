@@ -14,6 +14,47 @@ class UserController extends Zend_Controller_Action
 
     }
 
+    public function confirmationAction() {
+
+        $data = $this->getRequest()->getParams();
+
+        if(isset($data)){
+            if (!$data['query_id']) {
+                $this->view->message = 'no email';
+            } else if (!$data['query_key']) {
+                $this->view->message = 'no token';
+            } else if (!$data['query_key'] && !$data['query_id']) {
+
+                $this->view->message = 'no data';
+
+            } else {
+
+                $model = new Application_Model_User();
+                $this->view->message = $model->approveUser($data);
+                $this->_helper->redirector('index', 'index');
+
+            }
+        } else {
+            $this->view->message = 'request data is incorrect';
+        }
+
+    }
+
+    public function recoveryAction()
+    {
+        if($this->getRequest()->isPost()){
+
+            $model = new Application_Model_User();
+            $email = $this->getRequest()->getPost('email');
+            if ($email) {
+                $this->view->message = $model->passRecovery($email);
+            } else {
+                $this->view->message = 'no e-mail';
+            }
+
+        }
+    }
+
     public function loginAction()
     {
 
@@ -65,7 +106,7 @@ class UserController extends Zend_Controller_Action
             if ($reg->isValid($formData)) {
 
                 $model->addNewUser($formData);
-                $this->_helper->redirector('index', 'account');
+                //$this->_helper->redirector('index', 'account');
 
             } else {
 
