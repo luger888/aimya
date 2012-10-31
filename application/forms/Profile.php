@@ -34,7 +34,6 @@ class Application_Form_Profile extends Zend_Form
 
         $birthday = new Zend_Form_Element_Text('birthday');
         $birthday ->setAttrib('id', 'birthday')
-            ->setAttrib('placeholder', '/ / /')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 
@@ -63,7 +62,7 @@ class Application_Form_Profile extends Zend_Form
             ->setDecorators($this->basicDecorators)
             ->addMultiOptions(array('0'   => 'time zone'));
 
-        $intro = new Zend_Form_Element_Textarea('intro');
+        $intro = new Zend_Form_Element_Textarea('add_info');
         $intro->addValidator('NotEmpty')
             ->setAttrib('id', 'intro')
             ->addFilters($this->basicFilters)
