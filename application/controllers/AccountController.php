@@ -31,6 +31,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
 
             }
         }else{
+
             $this->view->profile = $profileForm->populate($profileModel->getProfile($identity->id));$this->view->profile = $profileForm->populate($profileModel->getProfile($identity->id));
         }
     }

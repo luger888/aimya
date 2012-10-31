@@ -64,8 +64,8 @@ class Application_Form_Registration extends Zend_Form
         $type = new Zend_Form_Element_Radio('type');
         $type->addMultiOptions(array(
 
-                'teaching' => 'Teaching member',
-                'learning' => 'Learning member'
+                '2' => 'Teaching member',
+                '1' => 'Learning member'
 
             )
         );
