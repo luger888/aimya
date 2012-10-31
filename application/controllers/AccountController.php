@@ -1,6 +1,5 @@
 <?php
-
-class AccountController extends Zend_Controller_Action #implements Application_Controller_AccountInterface
+class AccountController extends Zend_Controller_Action implements Aimya_Controller_AccountInterface
 {
 
     public function init()
