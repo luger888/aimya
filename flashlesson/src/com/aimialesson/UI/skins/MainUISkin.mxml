@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx"
+		xmlns:views="com.aimialesson.UI.views.*"
+		width="800">
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("com.aimialesson.UI.views.MainUI")]
+	</fx:Metadata>
+	<s:VGroup width="100%" height="100%">
+		<s:HGroup width="100%" height="100%">
+			<views:VideoChatUI id="videoChat" skinClass="com.aimialesson.UI.skins.VideoChatSkin"  height="100%"/>
+			<views:TextChatUI id="textChat" skinClass="com.aimialesson.UI.skins.TextChatSkin" height="100%" width="100%"/>
+			<views:PresentationUI id="presentation" skinClass="com.aimialesson.UI.skins.PresentationSkin" />
+		</s:HGroup>		
+		<s:TextArea id="debugger"  width="100%" height="200"/>
+	</s:VGroup>
+</s:Skin>
