@@ -24,4 +24,20 @@ class Application_Model_DbTable_Profile extends Application_Model_DbTable_Abstra
 
         $this->insert($data);
     }
+
+    public function createProfile($array, $id){
+
+        if(isset($array['birthday']))$zend = new Zend_Date($array['birthday']);
+        $date = (isset($array['birthday'])) ? $zend->get('Y-M-d') : '';
+
+        $data = array(
+
+            'user_id' => $id,
+            'birthday' => $date
+
+        );
+
+        $this->insert($data);
+
+    }
 }

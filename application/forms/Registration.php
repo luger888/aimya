@@ -9,30 +9,30 @@ class Application_Form_Registration extends Zend_Form
 
     public function init(){
 
-        $firstName = new Zend_Form_Element_Text('firstName');
+        $firstName = new Zend_Form_Element_Text('firstname');
         $firstName->setRequired(true)
             ->addValidator('NotEmpty')
             ->setAttrib('placeholder', 'First Name')
             ->setAttrib('class', 'required')
-            ->setAttrib('id', 'firstName')
+            ->setAttrib('id', 'firstname')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 
-        $lastName = new Zend_Form_Element_Text('lastName');
+        $lastName = new Zend_Form_Element_Text('lastname');
         $lastName ->setRequired(true)
             ->addValidator('NotEmpty')
             ->setAttrib('class', 'required')
             ->setAttrib('placeholder', 'Last Name')
-            ->setAttrib('id', 'lastName')
+            ->setAttrib('id', 'lastname')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 
-        $userName = new Zend_Form_Element_Text('userName');
+        $userName = new Zend_Form_Element_Text('username');
         $userName->setRequired(true)
             ->addValidator('NotEmpty')
             ->setAttrib('placeholder', 'User Name')
             ->setAttrib('class', 'required')
-            ->setAttrib('id', 'userName')
+            ->setAttrib('id', 'username')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 
@@ -73,8 +73,8 @@ class Application_Form_Registration extends Zend_Form
             ->setDecorators($this->basicDecorators)
             ->setSeparator('');
 
-        $submit = new Zend_Form_Element_Submit('SignUp');
-        $submit ->setAttrib('id', 'SignUp')
+        $submit = new Zend_Form_Element_Submit('signup');
+        $submit ->setAttrib('id', 'signup')
                 ->setAttrib('class', 'btn');
 
         $this->addElements(array($firstName, $lastName, $userName, $email, $password, $password2, $type, $submit));
