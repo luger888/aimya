@@ -86,6 +86,12 @@ class UserController extends Zend_Controller_Action
                     $identity = $authAdapter->getResultRowObject();
                     $authStorage = $auth->getStorage();
                     $authStorage->write($identity);
+                    if ($identity->status == '0') {
+                        $this->_helper->flashMessenger->addMessage(array("failure'=>'Account is not confirmed. Please check you email and confirm registration"));
+                    } else {
+                        $this->_helper->flashMessenger->addMessage(array("success'=>'Account confirmed. Please login to your account"));
+                    }
+
                     $this->_helper->redirector('index', 'account');
                 }else{
                     $this->view->error = 'Authentication failed.';

@@ -40,6 +40,9 @@
 
 <!-- CONTENT -->
 <div id="wrapper">
+    <div class="messages">
+        <?php echo $this->flashMessages();?>
+    </div>
     <!-- ACCOUNT LAYOUT -->
         <?php
             $front = Zend_Controller_Front::getInstance();

@@ -34,11 +34,13 @@ class Application_Model_User
 
                 $user->createUser($array);
                 $lastId = $user->getAdapter()->lastInsertId();
-                $profile->createProfile($array, $lastId);
-                //@mkdir('./img/');
-                /*@mkdir('./img/uploads/');
-                @mkdir('./img/uploads/' . $lastId . '/');
-                @mkdir('./img/uploads/' . $lastId . '/avatar/');*/
+
+                $profile->createProfile($lastId);
+
+                @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img');
+                @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'uploads');
+                @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $lastId);
+                @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $lastId . DIRECTORY_SEPARATOR . 'avatar');
 
                 return 1;
 
