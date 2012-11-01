@@ -31,15 +31,13 @@ class Application_Model_DbTable_Profile extends Application_Model_DbTable_Abstra
         return $row->toArray();
     }
 
-    public function createProfile($array, $id){
-
-        if(isset($array['birthday']))$zend = new Zend_Date($array['birthday']);
-        $date = (isset($array['birthday'])) ? $zend->get('Y-M-d') : '';
+    public function createProfile($id){
 
         $data = array(
 
             'user_id' => $id,
-            'birthday' => $date
+            'created_at' => date('Y-m-d H:m:s'),
+            'updated_at' => date('Y-m-d H:m:s')
 
         );
 

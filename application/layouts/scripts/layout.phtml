@@ -41,7 +41,10 @@
 
 <!-- CONTENT -->
 <div id="wrapper">
-    <!-- ACCOUNT PARTIAL LAYOUT -->
+    <div class="messages">
+        <?php echo $this->flashMessages();?>
+    </div>
+    <!-- ACCOUNT LAYOUT -->
         <?php
             $front = Zend_Controller_Front::getInstance();
             $controllerName = $front->getRequest()->getControllerName();
