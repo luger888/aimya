@@ -7,7 +7,7 @@ class Application_Form_Profile extends Zend_Form
 
     public function init()
     {
-
+        $identity =  Zend_Auth::getInstance()->getStorage()->read();
         $this->setName('profile');
         $this->setEnctype(Zend_Form::ENCTYPE_MULTIPART);
 
@@ -16,7 +16,7 @@ class Application_Form_Profile extends Zend_Form
              ->setAttrib('id', 'avatar')
              ->addValidator('Size', false, 1024000)
              ->addValidator('Extension', false, 'jpg,png,gif,jpeg')
-             ->setDestination('./img/uploads/');
+             ->setDestination('./img/uploads/'.$identity->id.'/avatar/');
 
 
         $firstName = new Zend_Form_Element_Text('firstname');

@@ -20,6 +20,6 @@ class Application_Model_Profile
         $avatarName = $profile['avatar'];
         $avatarPath = '/img/uploads/'.$user_id.'/avatar/'. $avatarName;
 
-        return $avatarPath;
+        return $avatarPath;//path for avatar
     }
 }
