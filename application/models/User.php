@@ -17,7 +17,7 @@ class Application_Model_User
 
             $token = md5(uniqid(mt_rand(), true));
 
-            /*$array['token'] = $token;
+            $array['token'] = $token;
 
             $mail = new Aimya_Mail;
             $mail->setRecipient($array['email']);
@@ -29,24 +29,25 @@ class Application_Model_User
             $mail->token = $token;
             $mail->baseLink = "http://" . $_SERVER['HTTP_HOST'];
 
-            if($mail->send()){*/
+
+            if($mail->send()){
 
                 $user->createUser($array);
                 $lastId = $user->getAdapter()->lastInsertId();
                 $profile->createProfile($array, $lastId);
-                @mkdir('./img/');
+                //@mkdir('./img/');
                 /*@mkdir('./img/uploads/');
                 @mkdir('./img/uploads/' . $lastId . '/');
                 @mkdir('./img/uploads/' . $lastId . '/avatar/');*/
 
                 return 1;
 
-            /*}else{
+            }else{
 
                 die('problem with email');
                 return 2;
 
-            }*/
+            }
 
         }
     }

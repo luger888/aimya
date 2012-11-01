@@ -68,7 +68,10 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
         );
 
-        return $this->update($array, 'email = ? and confirmation_token = ?' , array($mail, $query));
+        $where[] = $this->getAdapter()->quoteInto('email = ?', $mail);
+        $where[] = $this->getAdapter()->quoteInto('confirmation_token = ?', $query);
+
+        return $this->update($array , $where);
 
     }
 

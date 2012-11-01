@@ -88,6 +88,10 @@ class Aimya_Mail
         $this->_mail->setSubject($subject);
         $this->_mail->setBodyHtml($html);
 
-        $this->_mail->send();
+        if($this->_mail->send()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
