@@ -12,7 +12,8 @@ class Application_Form_Profile extends Zend_Form
         $this->setEnctype(Zend_Form::ENCTYPE_MULTIPART);
 
         $avatar = new Zend_Form_Element_File('avatar');
-        $avatar ->setAttrib('id', 'avatar')
+        $avatar ->setLabel('Upload Image')
+             ->setAttrib('id', 'avatar')
              ->addValidator('Size', false, 1024000)
              ->addValidator('Extension', false, 'jpg,png,gif,jpeg')
              ->setDestination('./img/uploads/');
@@ -50,7 +51,7 @@ class Application_Form_Profile extends Zend_Form
             ->setDecorators($this->basicDecorators);
 
         $email = new Zend_Form_Element_Text('email');
-        $email#->addValidator(new Zend_Validate_EmailAddress())
+        $email->addValidator(new Zend_Validate_EmailAddress())
             ->setAttrib('placeholder', 'E-mail')
             ->setAttrib('placeholder', 'email address')
             ->setAttrib('class', 'clearInput required email')

@@ -12,4 +12,14 @@ class Application_Model_Profile
         $accountUserArray = array_merge($profile, $user);  //merge data from user and account db-tables
         return $accountUserArray;
     }
+
+    public function getAvatarPath($user_id)
+    {
+        $profileModel = new Application_Model_DbTable_Profile();
+        $profile = $profileModel->getProfile($user_id);
+        $avatarName = $profile['avatar'];
+        $avatarPath = '/img/uploads/'.$user_id.'/avatar/'. $avatarName;
+
+        return $avatarPath;
+    }
 }

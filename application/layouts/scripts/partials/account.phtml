@@ -3,7 +3,10 @@
 //  firstname, lastname, avatar, member since
 $identity = Zend_Auth::getInstance()->getStorage()->read();
 $userModel = new Application_Model_DbTable_Users();
+$profileModel = new Application_Model_Profile();
+
 $username = $userModel->getUser($identity->id);
+$avatarPath = $profileModel->getAvatarPath($identity->id);//path to avatar
 $memberSince = substr($username['created_at'],0,4);
 if(Zend_Registry::isRegistered('username')){
     $username = Zend_Registry::get('username');
@@ -18,7 +21,7 @@ if(Zend_Registry::isRegistered('username')){
     <div class = "leftBlockProfile span2">
        <h3> <?php echo $username;?></h3>
         Member since <?php echo $memberSince;?><br>
-        photo<br>
+        <img src ="<?php echo $avatarPath;?>">
         No rate
     </div>
 
