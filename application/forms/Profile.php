@@ -64,15 +64,17 @@ class Application_Form_Profile extends Zend_Form
             ->addMultiOptions(array('0'   => 'time zone'));
 
         $intro = new Zend_Form_Element_Textarea('add_info');
-        $intro->addValidator('NotEmpty')
+        $intro->setLabel('Introduce Yourself')
             ->setAttrib('id', 'intro')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators)
             -> setAttrib('rows', '7');
 
         $submit = new Zend_Form_Element_Submit('saveProfile');
-        $submit ->setAttrib('id', 'saveProfile')
-             ->setAttrib('class', 'btn');
+        $submit ->setLabel('Save and continue')
+             ->setAttrib('id', 'saveProfile')
+             ->setAttrib('class', 'btn')
+            ->setDecorators($this->basicDecorators);
 
 
         $this->addElements(array($avatar, $firstName, $lastName, $birthday, $language, $email, $timeZone, $username, $intro, $submit));

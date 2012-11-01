@@ -75,3 +75,10 @@ display: none;
 .leftBlockProfile{
     text-align: center;
 }
+#intro, #description{
+    width: 820px;
+}
+
+#saveProfile{
+    margin: 0 auto;
+}
