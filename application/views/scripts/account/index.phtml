@@ -1,42 +1,67 @@
-<div class = "profile">
-    <form method="post" name="profile" action = "" enctype="multipart/form-data">
-    <div class="row-fluid">
-        <div class="span12">
-             <?php echo $this->profile->avatar; ?>
-        </div>
-    </div>
-    <div class="row-fluid">
-        <div class="span12">
-            <?php echo $this->profile->firstname; ?>
-            <?php echo $this->profile->lastname; ?>
-            <?php echo $this->profile->birthday; ?>
-        </div>
-    </div>
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">Basic</a></li>
 
-    <div class="row-fluid">
-        <div class="span12">
-            <?php echo $this->profile->language; ?>
-            <?php echo $this->profile->email; ?>
-        </div>
-    </div>
+        <li><a href="#tabs-2">Service Details</a></li>
+        <li><a href="#tabs-3">Notifications/Account Settings</a></li>
+        <li><a href="#tabs-4">Users</a></li>
+        <li><a href="#tabs-5">My Resume</a></li>
+        <li><a href="#tabs-6">My Metrics</a></li>
+    </ul>
+    <div id="tabs-1">
+        <div class = "profile">
+            <form method="post" name="profile" action = "" enctype="multipart/form-data">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <?php echo $this->profile->avatar; ?>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12">
+                        <?php echo $this->profile->firstname; ?>
+                        <?php echo $this->profile->lastname; ?>
+                        <?php echo $this->profile->birthday; ?>
+                    </div>
+                </div>
 
-    <div class="row-fluid">
-        <div class="span12">
-            <?php echo $this->profile->timezone; ?>
-            <?php echo $this->profile->initials; ?>
-        </div>
+                <div class="row-fluid">
+                    <div class="span12">
+                        <?php echo $this->profile->language; ?>
+                        <?php echo $this->profile->email; ?>
+                    </div>
+                </div>
+
+                <div class="row-fluid">
+                    <div class="span12">
+                        <?php echo $this->profile->timezone; ?>
+                        <?php echo $this->profile->username; ?>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12">
+                        <?php echo $this->profile->add_info; ?>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12">
+                        <?php echo $this->profile->saveProfile; ?>
+                    </div>
+                </div>
+            </form>
+        </div><!--End PROFILE  -->
     </div>
-    <div class="row-fluid">
-        <div class="span12">
-            <?php echo $this->profile->intro; ?>
-        </div>
+    <div id="tabs-2">
     </div>
-    <div class="row-fluid">
-        <div class="span12">
-            <?php echo $this->profile->saveProfile; ?>
-        </div>
+    <div id="tabs-3">
     </div>
-    </form>
-</div><!--End PROFILE  -->
+    <div id="tabs-4">
+    </div>
+    <div id="tabs-5">
+    </div>
+    <div id="tabs-6">
+    </div>
+</div>
+
+
 
 <?php print_r($this->errors) ;?>

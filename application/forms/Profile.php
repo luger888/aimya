@@ -34,7 +34,6 @@ class Application_Form_Profile extends Zend_Form
 
         $birthday = new Zend_Form_Element_Text('birthday');
         $birthday ->setAttrib('id', 'birthday')
-            ->setAttrib('placeholder', '/ / /')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 
@@ -44,9 +43,9 @@ class Application_Form_Profile extends Zend_Form
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 
-        $initials = new Zend_Form_Element_Text('initials');
-        $initials ->setAttrib('id', 'initials')
-            ->setAttrib('placeholder', 'initials')
+        $username = new Zend_Form_Element_Text('username');
+        $username ->setAttrib('id', 'username')
+            ->setAttrib('placeholder', 'username')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 
@@ -63,7 +62,7 @@ class Application_Form_Profile extends Zend_Form
             ->setDecorators($this->basicDecorators)
             ->addMultiOptions(array('0'   => 'time zone'));
 
-        $intro = new Zend_Form_Element_Textarea('intro');
+        $intro = new Zend_Form_Element_Textarea('add_info');
         $intro->addValidator('NotEmpty')
             ->setAttrib('id', 'intro')
             ->addFilters($this->basicFilters)
@@ -75,7 +74,7 @@ class Application_Form_Profile extends Zend_Form
              ->setAttrib('class', 'btn');
 
 
-        $this->addElements(array($avatar, $firstName, $lastName, $birthday, $language, $email, $timeZone, $initials, $intro, $submit));
+        $this->addElements(array($avatar, $firstName, $lastName, $birthday, $language, $email, $timeZone, $username, $intro, $submit));
 
     }
 }

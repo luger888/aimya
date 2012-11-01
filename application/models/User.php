@@ -9,7 +9,7 @@ class Application_Model_User
         $user = new Application_Model_DbTable_Users();
         $profile = new Application_Model_DbTable_Profile();
 
-        if ($user->checkByMail($array['email'])) { //need to check username also!!!!!!!!!!!!!!
+        if ($user->checkByMail($array['email']) || $user->checkByUsername($array['username'])) { //need to check username also!!!!!!!!!!!!!!
 
             return 0;
 

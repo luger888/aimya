@@ -10,4 +10,14 @@ $(document).ready(function() {
         }
     });
     /* END Button bar(radio)*/
+    $('#birthday').datepicker({ dateFormat: 'yy-mm-dd' }).val();
+    $('#birthday').datepicker({
+        onSelect: function(dateText, inst) {
+            $("input[name='birthday']").val(dateText);
+        }
+    });
+
+    $(function() {
+        $( "#tabs" ).tabs();
+    });
 });

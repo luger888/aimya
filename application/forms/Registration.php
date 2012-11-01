@@ -47,10 +47,11 @@ class Application_Form_Registration extends Zend_Form
         $password = new Zend_Form_Element_Password('password');
         $password->setRequired(true)
             ->addValidator('NotEmpty')
+            ->addValidator('stringLength', false, array(6, 200))
             ->setAttrib('placeholder', 'Password')
             ->setAttrib('class', 'clearInput required')
             ->addFilters($this->basicFilters)
-            ->setDecorators($this->basicDecorators);;
+            ->setDecorators($this->basicDecorators);
 
         $password2 = new Zend_Form_Element_Password('password2');
         $password2->setRequired(true)
@@ -63,8 +64,8 @@ class Application_Form_Registration extends Zend_Form
         $type = new Zend_Form_Element_Radio('type');
         $type->addMultiOptions(array(
 
-                'teaching' => 'Teaching member',
-                'learning' => 'Learning member'
+                '2' => 'Teaching member',
+                '1' => 'Learning member'
 
             )
         );

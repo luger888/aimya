@@ -18,6 +18,17 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
     }
 
+    public function checkByUsername($username)
+    {
+
+        $data = $this->select()
+            ->from('user', array('id', 'firstname', 'lastname', 'password'))
+            ->where('username=?', $username);
+
+        return $data->query()->fetch();
+
+    }
+
     public function createUser($array)
     {
 
@@ -31,7 +42,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
             'email' => $array['email'],
             'password' => $password,
-            'role' => 1,
+            'role' => (int)$array['type'],
             'username' => $array['username'],
             'firstname' => $array['firstname'],
             'lastname' => $array['lastname'],
@@ -75,6 +86,33 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         );
 
         $this->update($array, 'email = ?', $data['email']);
+
+    }
+
+    public function getUser($user_id){
+        $user_id = (int)$user_id;
+        $row = $this->fetchRow('id = ' . $user_id);
+        if(!$row) {
+            throw new Exception("There is no element with ID: $user_id");
+        }
+
+        return $row->toArray();
+    }
+
+    public function updateUser($array, $id)
+    {
+
+        $data = array(
+
+            'firstname'=> $array['firstname'],
+            'lastname' => $array['lastname'],
+            'email' => $array['email'],
+            'username' => $array['username'],
+            'updated_at' => date('Y-m-d H:m:s')
+
+        );
+
+        $this->update($data, 'id='.$id);
 
     }
 }

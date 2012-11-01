@@ -8,21 +8,27 @@ class Application_Model_DbTable_Profile extends Application_Model_DbTable_Abstra
 
         $data = array(
 
-            'id'=> NULL,
-            'user_id' => $id,
-            'education' => 5,
-            'degree'=>5,
-            'add_info'=> 5,
-            'birthday' => 5,
-            'language' => 5,
-            'timezone' => 5,
-            'avatar' => 5,
-            'created_at' => date('Y-m-d H:m:s'),
+            'add_info'=> $array['add_info'],
+            'birthday' => $array['birthday'],
+            'language' => $array['language'],
+            'timezone' => '',
+            'avatar' => '',
             'updated_at' => date('Y-m-d H:m:s')
 
         );
 
-        $this->insert($data);
+        $this->update($data, 'user_id='.$id);
+
+    }
+
+    public function getProfile($user_id){
+        $user_id = (int)$user_id;
+        $row = $this->fetchRow('user_id = ' . $user_id);
+        if(!$row) {
+            throw new Exception("There is no element with ID: $user_id");
+        }
+
+        return $row->toArray();
     }
 
     public function createProfile($array, $id){
