@@ -11,8 +11,8 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
     {
         $identity = Zend_Auth::getInstance()->getStorage()->read();
         $profileForm = new Application_Form_Profile();
-        $profileModel = new Application_Model_DbTable_Profile();
-
+        $profileModel = new Application_Model_Profile();
+        $this->view->profile = $profileForm->populate($profileModel->getProfileAccount($identity->id));
 
         if ($this->getRequest()->isPost()) {
 
@@ -25,6 +25,9 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                 $updateProfile = new Application_Model_DbTable_Profile();
                 $updateProfile->updateProfile($formData, $identity->id);
 
+                $updateUser = new Application_Model_DbTable_Users();
+                $updateUser->updateUser($formData, $identity->id);
+
             } else {
 
                 $this->view->errors = $profileForm->getErrors();
@@ -32,7 +35,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
             }
         }else{
 
-            $this->view->profile = $profileForm->populate($profileModel->getProfile($identity->id));$this->view->profile = $profileForm->populate($profileModel->getProfile($identity->id));
+
         }
     }
 

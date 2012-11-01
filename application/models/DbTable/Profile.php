@@ -8,13 +8,11 @@ class Application_Model_DbTable_Profile extends Application_Model_DbTable_Abstra
 
         $data = array(
 
-            'user_id' => $id,
             'add_info'=> $array['add_info'],
             'birthday' => $array['birthday'],
             'language' => $array['language'],
             'timezone' => '',
             'avatar' => '',
-            'created_at' => date('Y-m-d H:m:s'),
             'updated_at' => date('Y-m-d H:m:s')
 
         );
