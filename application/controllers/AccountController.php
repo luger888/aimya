@@ -13,14 +13,14 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         $profileForm = new Application_Form_Profile();
         $profileModel = new Application_Model_Profile();
         $this->view->profile = $profileForm->populate($profileModel->getProfileAccount($identity->id));
-
         if ($this->getRequest()->isPost()) {
 
             $formData = $this->getRequest()->getPost();
 
 
             if ($profileForm->isValid($formData)) {
-                $profileForm->avatar->receive;
+
+                $profileForm->avatar->receive();
 
                 $updateProfile = new Application_Model_DbTable_Profile();
                 $updateProfile->updateProfile($formData, $identity->id);
@@ -33,9 +33,6 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                 $this->view->errors = $profileForm->getErrors();
 
             }
-        }else{
-
-
         }
     }
 
