@@ -31,6 +31,7 @@
                 <li><a href="#">Privacy Policy</a></li>
                 <li><a href="#">About Aimya</a></li>
                 <li><a href="#">Help</a></li>
+                <?php if(Zend_Auth::getInstance()->getStorage()->read()){echo '<li><a href="/user/logout/">Logout</a></li>';}?>
 
             </ul>
         </nav>
@@ -40,7 +41,7 @@
 
 <!-- CONTENT -->
 <div id="wrapper">
-    <!-- ACCOUNT LAYOUT -->
+    <!-- ACCOUNT PARTIAL LAYOUT -->
         <?php
             $front = Zend_Controller_Front::getInstance();
             $controllerName = $front->getRequest()->getControllerName();

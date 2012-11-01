@@ -17,10 +17,14 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
 
             $formData = $this->getRequest()->getPost();
 
-
             if ($profileForm->isValid($formData)) {
-
+                Zend_Registry::set('username', "{$formData['firstname']} {$formData['lastname']}");
                 $profileForm->avatar->receive();
+                echo $_FILES['avatar']['name'];
+                //pushing avatar name to form array
+                array_push($formData, $_FILES['avatar']['name']);
+                $formData['avatar'] = $formData[0];
+                unset($formData[0]);
 
                 $updateProfile = new Application_Model_DbTable_Profile();
                 $updateProfile->updateProfile($formData, $identity->id);
