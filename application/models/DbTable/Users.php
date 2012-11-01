@@ -104,6 +104,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
             'firstname'=> $array['firstname'],
             'lastname' => $array['lastname'],
             'email' => $array['email'],
+            'username' => $array['username'],
             'updated_at' => date('Y-m-d H:m:s')
 
         );
