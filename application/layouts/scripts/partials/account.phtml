@@ -1,17 +1,28 @@
 <?php
-
+//information in left block of account:
+//  firstname, lastname, avatar, member since
+$identity = Zend_Auth::getInstance()->getStorage()->read();
+$userModel = new Application_Model_DbTable_Users();
+$username = $userModel->getUser($identity->id);
+$memberSince = substr($username['created_at'],0,4);
 if(Zend_Registry::isRegistered('username')){
     $username = Zend_Registry::get('username');
 }else{
-    $identity = Zend_Auth::getInstance()->getStorage()->read();
-    $userModel = new Application_Model_DbTable_Users();
-    $username = $userModel->getUser($identity->id);
+
     $username = "{$username['firstname']} {$username['lastname']}";
     Zend_Registry::set('username', $username);
 }
-echo '<div class="accountWrapper">
-<div class = "leftBlockProfile">' . $username .'</div>'.
+?>
+<div class="accountWrapper row-fluid">
 
-    $this->layout()->content.
+    <div class = "leftBlockProfile span2">
+       <h3> <?php echo $username;?></h3>
+        Member since <?php echo $memberSince;?><br>
+        photo<br>
+        No rate
+    </div>
 
-    '</div>';
+    <div class = "mainBlockProfile span10">
+        <?php echo $this->layout()->content; ?>
+    </div>
+</div>

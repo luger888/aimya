@@ -69,7 +69,9 @@ display: none;
 }
 
 
+/*account*/
 
-.accountWrapper{
-    border:1px solid black;
+
+.leftBlockProfile{
+    text-align: center;
 }
