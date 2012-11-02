@@ -4,6 +4,7 @@ class Aimya_Mail
     // templates name
     const SIGNUP_ACTIVATION          = "signup-activation";
     const FORGOT_PASSWORD            = "forgot_password";
+    const SUBSCRIBE                  = "subscribe";
     const JOIN_CLUB_CONFIRMATION     = "join-club-confirmation";
 
 
@@ -67,6 +68,19 @@ class Aimya_Mail
         $templatePath = $config->production->email->templatePath;
         //Zend_Debug::dump($emailPath);
         //die;
+
+        $smtpServer = $config->production->email->smtpserver;
+        $username = $config->production->email->smtpuser;
+        $password = $config->production->email->smtppassword;
+        $smtpport = $config->production->email->smtpport;
+        $conf = array(
+            //'ssl' => 'tls',
+            'port' => $smtpport,
+            'username' => $username,
+            'password' => $password);
+
+        $transport = new Zend_Mail_Transport_Smtp($smtpServer, $conf);
+
         $templateVars = $config->production->resources->mail->toArray();
 
         foreach ($templateVars as $key => $value)
@@ -88,10 +102,12 @@ class Aimya_Mail
         $this->_mail->setSubject($subject);
         $this->_mail->setBodyHtml($html);
 
-        if($this->_mail->send()) {
+        try {
+            $this->_mail->send($transport);
             return true;
-        } else {
-            return false;
+        } catch(Exception $e) {
+            //return false;
+            echo 'Error Code: ',  $e->getMessage(), "\n";
         }
     }
 }
