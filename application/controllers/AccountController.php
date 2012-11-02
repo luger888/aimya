@@ -22,7 +22,6 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                 Zend_Registry::set('username', "{$formData['firstname']} {$formData['lastname']}");
                 $profileForm->avatar->receive();
 
-
                 $updateProfile = new Application_Model_DbTable_Profile();
                 $updateProfile->updateProfile($formData, $identity->id);
                 if($_FILES['avatar']['name']){//if new avatar -> update db
