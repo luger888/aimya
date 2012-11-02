@@ -46,7 +46,7 @@ class Application_Model_User
 
             }else{
 
-                die('problem with email');
+                //die('problem with email');
                 return 2;
 
             }
