@@ -41,8 +41,10 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
     public function servicesAction()
     {
         $this->_helper->layout()->disableLayout();
-        $servicesForm = new Application_Form_ServiceDetails();
         $identity = Zend_Auth::getInstance()->getStorage()->read();
+        $servicesForm = new Application_Form_ServiceDetails();
+        $servicesModel = new Application_Model_DbTable_ServiceDetail();
+
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
 
@@ -53,8 +55,8 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                 $this->_helper->redirector('index', 'account', 'default', $params);
             }
         }
-
-        $this->view->services = $servicesForm;
+        $this->view->services = $servicesModel->getServiceByUser($identity->id);
+        $this->view->servicesForm = $servicesForm;
     }
 
     public function availabilityAction()

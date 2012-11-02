@@ -21,4 +21,16 @@ class Application_Model_DbTable_ServiceDetail extends Application_Model_DbTable_
         $this->insert($data);
 
     }
+
+    public function getServiceByUser($user_id)
+    {
+        $user_id = (int)$user_id;
+        $row = $this->fetchAll('user_id = ' . $user_id);
+        if(!$row) {
+            throw new Exception("There is no element with ID: $user_id");
+        }
+
+        return $row->toArray();
+    }
+
 }
