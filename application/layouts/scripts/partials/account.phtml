@@ -8,6 +8,7 @@ $profileModel = new Application_Model_Profile();
 $username = $userModel->getUser($identity->id);
 $avatarPath = $profileModel->getAvatarPath($identity->id);//path to avatar
 $memberSince = substr($username['created_at'],0,4);
+
 if(Zend_Registry::isRegistered('username')){
     $username = Zend_Registry::get('username');
 }else{

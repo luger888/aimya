@@ -1,0 +1,23 @@
+<div id="tabs-2">
+    <form method="post" name="profile" action="account/services" enctype="multipart/form-data">
+        <div class="row-fluid">
+            <div class="span12">
+                <?php echo $this->services->lesson_category; ?>
+                <?php echo $this->services->subcategory; ?>
+                <?php echo $this->services->rate; ?>
+                <?php echo $this->services->duration; ?>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <?php echo $this->services->description; ?>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span12 offset4">
+                <?php echo $this->services->saveService; ?>
+            </div>
+        </div>
+    </form>
+</div>

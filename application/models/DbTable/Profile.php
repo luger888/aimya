@@ -12,8 +12,19 @@ class Application_Model_DbTable_Profile extends Application_Model_DbTable_Abstra
             'birthday' => $array['birthday'],
             'language' => $array['language'],
             'timezone' => $array['timezone'],
-            'avatar' => $array['avatar'],
             'updated_at' => date('Y-m-d H:m:s')
+
+        );
+
+        $this->update($data, 'user_id='.$id);
+
+    }
+    public function updateAvatar($avatar, $id)
+    {
+
+        $data = array(
+
+            'avatar'=> $avatar
 
         );
 
@@ -45,22 +56,5 @@ class Application_Model_DbTable_Profile extends Application_Model_DbTable_Abstra
 
     }
 
-    public function addService($array, $id){
 
-        $data = array(
-
-            'user_id' => $id,
-            'lesson_category' => $array['lesson_category'],
-            'subcategory' => $array['subcategory'],
-            'rate' => (int)$array['rate'],
-            'duration' => $array['duration'],
-            'description' => $array['description'],
-            'created_at' => date('Y-m-d H:m:s'),
-            'updated_at' => date('Y-m-d H:m:s')
-
-        );
-
-        $this->insert($data);
-
-    }
 }

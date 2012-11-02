@@ -9,14 +9,11 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
 
     public function indexAction()
     {
-        $identity = Zend_Auth::getInstance()->getStorage()->read();
         //basic tab
+        $identity = Zend_Auth::getInstance()->getStorage()->read();
         $profileForm = new Application_Form_Profile();
         $profileModel = new Application_Model_Profile();
         $this->view->profile = $profileForm->populate($profileModel->getProfileAccount($identity->id));
-        //services tab
-        $servicesForm = new Application_Form_ServiceDetails();
-        $this->view->services = $servicesForm;
         if ($this->getRequest()->isPost()) {
 
             $formData = $this->getRequest()->getPost();
@@ -24,15 +21,13 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
             if ($profileForm->isValid($formData)) {
                 Zend_Registry::set('username', "{$formData['firstname']} {$formData['lastname']}");
                 $profileForm->avatar->receive();
-                echo $_FILES['avatar']['name'];
-                //pushing avatar name to form array
-                array_push($formData, $_FILES['avatar']['name']);
-                $formData['avatar'] = $formData[0];
-                unset($formData[0]);
+
 
                 $updateProfile = new Application_Model_DbTable_Profile();
                 $updateProfile->updateProfile($formData, $identity->id);
-
+                if($_FILES['avatar']['name']){//if new avatar -> update db
+                    $updateProfile->updateAvatar($_FILES['avatar']['name'], $identity->id);
+                 }
                 $updateUser = new Application_Model_DbTable_Users();
                 $updateUser->updateUser($formData, $identity->id);
 
@@ -42,6 +37,54 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
 
             }
         }
+    }
+    public function servicesAction()
+    {
+        $this->_helper->layout()->disableLayout();
+        $servicesForm = new Application_Form_ServiceDetails();
+        $identity = Zend_Auth::getInstance()->getStorage()->read();
+        if ($this->getRequest()->isPost()) {
+            $formData = $this->getRequest()->getPost();
+
+            if ($servicesForm->isValid($formData)) {
+                $addService = new Application_Model_DbTable_ServiceDetail();
+                $addService->addService($formData, $identity->id);
+                $params = array('tab' => '2');
+                $this->_helper->redirector('index', 'account', 'default', $params);
+            }
+        }
+
+        $this->view->services = $servicesForm;
+    }
+
+    public function availabilityAction()
+    {
+        $this->_helper->layout()->disableLayout();
+
+    }
+
+    public function notificationsAction()
+    {
+        $this->_helper->layout()->disableLayout();
+
+    }
+
+    public function usersAction()
+    {
+        $this->_helper->layout()->disableLayout();
+
+    }
+
+    public function resumeAction()
+    {
+        $this->_helper->layout()->disableLayout();
+
+    }
+
+    public function metricsAction()
+    {
+        $this->_helper->layout()->disableLayout();
+
     }
 
 }
