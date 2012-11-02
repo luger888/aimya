@@ -86,3 +86,11 @@ display: none;
 .service {
     margin-left: 5%;
 }
+#addService
+{
+    display: none;
+}
+
+#addMoreServices{
+    margin: 1% 0 2%;
+}

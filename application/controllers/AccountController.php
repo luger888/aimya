@@ -62,7 +62,9 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
     public function availabilityAction()
     {
         $this->_helper->layout()->disableLayout();
-
+        $identity = Zend_Auth::getInstance()->getStorage()->read();
+        $availabilityForm = new Application_Form_Availability();
+        $this->view->availabilityForm = $availabilityForm;
     }
 
     public function notificationsAction()

@@ -33,4 +33,6 @@ class Application_Model_DbTable_ServiceDetail extends Application_Model_DbTable_
         return $row->toArray();
     }
 
+
+
 }
