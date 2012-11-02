@@ -7,18 +7,16 @@ class Application_Form_ServiceDetails extends Zend_Form
 
     public function init()
     {
+        $lessonDbModel = new Application_Model_DbTable_LessonCategory();
+        $lessonCategories = $lessonDbModel->getLessonCategories();
+
         $this->setName('serviceDetails');
 
         $lesson_category = new Zend_Form_Element_Select('lesson_category');
         $lesson_category->setAttrib('id', 'lesson_category')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators)
-            ->addMultiOptions(array('Languages'   => 'Languages',
-            'Business'   => 'Business',
-            'Tutoring'   => 'Tutoring',
-            'Consulting'   => 'Consulting',
-            'other?'   => 'other?'
-        ));
+            ->addMultiOptions($lessonCategories);
 
         $subcategory = new Zend_Form_Element_Text('subcategory');
         $subcategory ->setAttrib('placeholder', 'Specify Category')

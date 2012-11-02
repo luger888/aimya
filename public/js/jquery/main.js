@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-/* Button bar(radio)*/
+    /* Button bar(radio)*/
     $('.buttonBar label').first().addClass('checked');
     $('.buttonBar input').first().prop('checked', true);
     $('.buttonBar input[type="radio"]').change(function(){
@@ -21,3 +21,8 @@ $(document).ready(function() {
         $( "#tabs" ).tabs();
     });
 });
+
+function addService(){
+
+    $("#addService").css('display', 'block');
+}
