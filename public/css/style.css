@@ -84,7 +84,8 @@ display: none;
 }
 
 .service {
-    margin-left: 5%;
+    margin: 0 5% 5% 5%;
+    border-bottom: 1px solid #ccc;
 }
 #addService
 {
@@ -92,7 +93,7 @@ display: none;
 }
 
 #addMoreServices{
-    margin: 1% 0 2%;
+    margin: 1% 0 1%;
 }
 
 /*Availability tab*/
