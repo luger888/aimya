@@ -1,12 +1,12 @@
 <?php
 class UserController extends Zend_Controller_Action
 {
-
-
     public function init()
     {
-
-
+        $this   ->_helper->AjaxContext()
+            ->addActionContext('registration','json')
+            ->addActionContext('login','json')
+            ->initContext('json');
     }
 
     public function indexAction()
@@ -110,7 +110,7 @@ class UserController extends Zend_Controller_Action
             $this->view->data = $formData;
             if ($reg->isValid($formData)) {
                 $user = new Application_Model_DbTable_Users();
-                if ($user->checkByMail($formData['email']) || $user->checkByUsername($formData['username'])) { //need to check username also!!!!!!!!!!!!!!
+                if ($user->checkByMail($formData['email']) || $user->checkByUsername($formData['username'])) {
                     $this->_helper->flashMessenger->addMessage(array('failure'=>'This email or username already exist'));
                     $this->_helper->redirector('index', 'index');
                 } else {

@@ -36,9 +36,14 @@ $(document).ready(function() {
             $tabs.tabs( 'select', stickyTab );
         }
     });
+
+
+
+
 });
 
 function addService(){
 
     $("#addService").css('display', 'block');
 }
+

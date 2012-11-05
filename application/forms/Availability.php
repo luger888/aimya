@@ -41,6 +41,11 @@ class Application_Form_Availability extends Zend_Form
                 'ViewHelper')));
         }
         $this->addElements($days);
+
+        $submit = new Zend_Form_Element_Submit('save');
+        $submit ->setAttrib('id', 'save')
+            ->setAttrib('class', 'btn');
+          $this->addElement($submit);
     }
 }
 
