@@ -110,12 +110,20 @@ class UserController extends Zend_Controller_Action
             $formData = $this->getRequest()->getPost();
             $this->view->data = $formData;
             if ($reg->isValid($formData)) {
+                $user = new Application_Model_DbTable_Users();
+                if ($user->checkByMail($formData['email']) || $user->checkByUsername($formData['username'])) { //need to check username also!!!!!!!!!!!!!!
+                    $this->_helper->flashMessenger->addMessage(array('failure'=>'This email or username already exist'));
+                    $this->_helper->redirector('index', 'index');
+                } else {
+                    $status = $model->addNewUser($formData);
 
-                $model->addNewUser($formData);
-
-                $this->_helper->flashMessenger->addMessage(array('success'=>'Please confirm your email'));
-                $this->_helper->redirector('index', 'account');
-
+                    if($status) {
+                        $this->_helper->flashMessenger->addMessage(array('success'=>'Please confirm your email'));
+                        $this->_helper->redirector('index', 'index');
+                    } else {
+                        die('error');
+                    }
+                }
             } else {
 
                 $this->view->errors = $reg->getErrors();

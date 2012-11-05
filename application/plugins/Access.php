@@ -33,10 +33,12 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         $acl->addResource('cms');
         $acl->addResource('error');
         $acl->addResource('account');
+        $acl->addResource('lesson');
 
         #allow to user
         $acl->allow(self::STUDENT , 'user', array('logout'));
         $acl->allow(self::STUDENT , 'account', array('index'));
+        $acl->allow(self::STUDENT , 'account', array('index', 'setup', 'details'));
         $acl->deny(self::STUDENT , 'user', array('index', 'registration', 'login'));
 
         #allow to guest
