@@ -97,3 +97,6 @@ display: none;
 
 /*Availability tab*/
 
+.table td{
+    vertical-align: middle;
+}

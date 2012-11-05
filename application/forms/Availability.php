@@ -24,27 +24,23 @@ class Application_Form_Availability extends Zend_Form
 
             $this->addElement('select',  'from' . $day, array(
                 'multiOptions' => $hours,
-                'class' => 'input-small'
+                'class' => 'input-small',
+                'decorators'=>array('ViewHelper')
             ));
             $this->addElement('select',  'to' . $day, array(
                 'multiOptions' => $hours,
-                'class' => 'input-small'
+                'class' => 'input-small',
+                'decorators'=>array('ViewHelper')
             ));
 
         }
         /*--END: DropDowns 'FROM' and 'TO' for every day of week */
         $daysOfWeek = array_values($daysOfWeek);
         for($i = 0; $i < sizeof($daysOfWeek); $i++){
-            $days[] = new Zend_Form_Element_Checkbox('checkbox' .$daysOfWeek[$i], array(
-                'label'=> $daysOfWeek[$i]
-            ));
+            $days[] = new Zend_Form_Element_Checkbox('checkbox' .$daysOfWeek[$i], array('decorators'=>array(
+                'ViewHelper')));
         }
         $this->addElements($days);
-        $day = new Zend_Form_Element_MultiCheckbox('day');
-        $day ->addMultiOptions($daysOfWeek);
-
-
-        $this->addElements(array( $day));
     }
 }
 
