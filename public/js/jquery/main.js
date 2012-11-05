@@ -18,7 +18,23 @@ $(document).ready(function() {
     });
 
     $(function() {
-        $( "#tabs" ).tabs();
+        var cookieName, $tabs, stickyTab;
+
+        cookieName = 'stickyTab';
+        $tabs = $( '#tabs' );
+
+        $tabs.tabs( {
+            select: function( e, ui )
+            {
+                $.cookies.set( cookieName, ui.index );
+            }
+        } );
+
+        stickyTab = $.cookies.get( cookieName );
+        if( ! isNaN( stickyTab )  )
+        {
+            $tabs.tabs( 'select', stickyTab );
+        }
     });
 });
 
