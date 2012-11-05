@@ -50,8 +50,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
             if ($servicesForm->isValid($formData)) {
                 $addService = new Application_Model_DbTable_ServiceDetail();
                 $addService->addService($formData, $identity->id);
-                $params = array('tab' => '2');
-                $this->_helper->redirector('index', 'account', 'default', $params);
+                $this->_helper->redirector('index', 'account');
             }
         }
         $this->view->services = $servicesModel->getServiceByUser($identity->id);
