@@ -12,7 +12,7 @@ class IndexController extends Zend_Controller_Action
     {
 
 
-
+        $this->view->headScript()->appendFile('../../js/jquery/validation/registrationValidation.js');
         $login = new Application_Form_Login();
         $reg = new Application_Form_Registration();
 

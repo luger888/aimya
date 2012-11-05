@@ -11,7 +11,7 @@ class Application_Form_Login extends Zend_Form
 
         $username = new Zend_Form_Element_Text('username');
         $username->setAttrib('placeholder', 'username or email')
-            ->setAttrib('id', 'username')
+            ->setAttrib('id', 'username-login')
             ->setAttrib('class', 'customInput required login clearInput')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
@@ -21,7 +21,7 @@ class Application_Form_Login extends Zend_Form
             ->addValidator('NotEmpty')
             ->setAttrib('placeholder', 'password')
             ->setAttrib('class', 'customInput required clearInput')
-            ->setAttrib('id', 'password')
+            ->setAttrib('id', 'password-login')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 

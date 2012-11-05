@@ -5,6 +5,7 @@
 <?php
 $daysOfWeek = array('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun');
 ?>
+<form method = 'post'>
 <table class = 'table table-striped table-condensed'>
     <?php
     $day = 'checkbox';
@@ -16,5 +17,8 @@ $daysOfWeek = array('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun');
         $$availableTo = 'to'.$daysOfWeek[$index];
        echo "<tr><td>{$this->availabilityForm->$checkbox}</td><td>{$daysOfWeek[$index]}</td><td>{$this->availabilityForm->$selectFrom}</td> <td>to</td> <td>{$this->availabilityForm->$selectTo}</td></td></tr>";
     }
+
 ?>
 </table>
+    <?php  echo $this->availabilityForm->save;?>
+</form>
