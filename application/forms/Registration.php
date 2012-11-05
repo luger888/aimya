@@ -3,6 +3,7 @@
 
 class Application_Form_Registration extends Zend_Form
 {
+
     //need password and email validators!
     public $basicDecorators = array('ViewHelper', 'Errors');
     public $basicFilters = array('StripTags', 'StringTrim');
@@ -16,6 +17,7 @@ class Application_Form_Registration extends Zend_Form
             ->setAttrib('class', 'required')
             ->setAttrib('id', 'firstname')
             ->addFilters($this->basicFilters)
+            ->setErrorMessages(array('Insert your first name'))
             ->setDecorators($this->basicDecorators);
 
         $lastName = new Zend_Form_Element_Text('lastname');
@@ -25,6 +27,7 @@ class Application_Form_Registration extends Zend_Form
             ->setAttrib('placeholder', 'Last Name')
             ->setAttrib('id', 'lastname')
             ->addFilters($this->basicFilters)
+            ->setErrorMessages(array('Insert your last name'))
             ->setDecorators($this->basicDecorators);
 
         $userName = new Zend_Form_Element_Text('username');
@@ -34,6 +37,7 @@ class Application_Form_Registration extends Zend_Form
             ->setAttrib('class', 'required')
             ->setAttrib('id', 'username')
             ->addFilters($this->basicFilters)
+            ->setErrorMessages(array('Insert your username'))
             ->setDecorators($this->basicDecorators);
 
         $email = new Zend_Form_Element_Text('email');
@@ -42,6 +46,7 @@ class Application_Form_Registration extends Zend_Form
             ->setAttrib('placeholder', 'E-mail')
             ->setAttrib('placeholder', 'email address')
             ->setAttrib('class', 'clearInput required email')
+            ->setErrorMessages(array('Insert your email'))
             ->setDecorators($this->basicDecorators);
 
         $password = new Zend_Form_Element_Password('password');
@@ -51,11 +56,13 @@ class Application_Form_Registration extends Zend_Form
             ->setAttrib('placeholder', 'Password')
             ->setAttrib('class', 'clearInput required')
             ->addFilters($this->basicFilters)
-            ->setDecorators($this->basicDecorators);
+            ->setDecorators($this->basicDecorators)
+            ->setErrorMessages(array('Insert your password'));
 
         $password2 = new Zend_Form_Element_Password('password2');
         $password2->setRequired(true)
             ->addValidator('NotEmpty')
+            ->addValidator('stringLength', false, array(6, 200))
             ->setAttrib('placeholder', 'Confirm password')
             ->setAttrib('class', 'clearInput required')
             ->addFilters($this->basicFilters)

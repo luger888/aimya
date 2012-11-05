@@ -1,0 +1,52 @@
+<ul>
+<?php
+$acl = Zend_View_Helper_Navigation_HelperAbstract::getAcl();
+$role = Zend_View_Helper_Navigation_HelperAbstract::getRole();
+$front = Zend_Controller_Front::getInstance();
+$controllerName = $front->getRequest()->getControllerName();
+$html = array();
+$iterator = 0;
+foreach ($this->container as $page)
+{
+	if($acl->isAllowed($role, $page->_resource, $page->_action)){
+        $isActive = $page->isActive ( true );
+        $liClass = '';
+        $aClass = '';
+        if($page->tag != 'topMenu') {
+            $aClass = $isActive ? 'active' : '';
+        } else {
+            $aClass = ($page->_controller == $controllerName) ? 'main_item main_menu_active' : 'main_item';
+        }
+        if($iterator == 0){ $liClass = 'menu_first';} elseif($iterator == 5){ $liClass = 'menu_last'; }
+        $html [] = '<li class="'. $liClass .'">';
+        $html [] = '<a href="' . $page->getHref () . '" class="' . $aClass .'" id="' . $page->tag . "_" . strtolower($page->getLabel()) . '">';
+        $html [] = "<span>";
+        $html [] =  $page->getLabel();
+        $html [] = ($page->getLabel() == 'Messages') ? $role : '';
+        $html [] = "</span></a>";
+        if (!empty($page->pages) )
+        {
+            $ulClass =  ($page->_controller == $controllerName) ? 'block' : 'none';
+            $html[] = '<div class="top_sub_menu"';
+            $html[] = 'style="display:' . $ulClass .'">';
+            $html[] = '<ul class="' . $page->_resource . '_sub_menu">';
+            foreach ($page->pages as $subpage)
+            {
+                if($acl->isAllowed($role, $subpage->_resource, $subpage->_action)){
+                    $html[] = "<li>";
+                    $html[] = "<a href=\"{$subpage->getHref()}\"><span>";
+                    $html[] = $subpage->getLabel() . "</span></a>";
+                    $html[] = "</li>";
+                }
+            }
+            $html[] = "</ul></div>";
+        }
+        $iterator++;
+	}
+
+    $html[] = "</li>";
+}
+//echo count($itarator);
+echo join(PHP_EOL, $html);
+?>
+</ul>

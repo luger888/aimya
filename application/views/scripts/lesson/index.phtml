@@ -2,51 +2,22 @@
     <ul>
         <li><a href="#tabs-1">Sheduled</a></li>
         <li><a href="/lesson/setup">On The Air</a></li>
-        <li><a href="/lesson/detail">Lesson Details</a></li>
+        <li><a href="/lesson/details">Lesson Details</a></li>
     </ul>
     <div id="tabs-1">
-        <div class="profile">
-            <form method="post" name="profile" action="" enctype="multipart/form-data">
-                <div class="row-fluid">
-                    <div class="span12">
-                    </div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span12">
-
-                    </div>
-                </div>
-
-                <div class="row-fluid">
-                    <div class="span12">
-                    </div>
-                </div>
-
-                <div class="row-fluid">
-                    <div class="span12">
-
-                    </div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span12">
-
-                    </div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span12 offset3">
-                    </div>
-                </div>
-            </form>
-        </div>
-        <!--End PROFILE  -->
-    </div>
-
-    <div id="tabs-3">
-    </div>
-    <div id="tabs-4">
-    </div>
-    <div id="tabs-5">
-    </div>
-    <div id="tabs-6">
+        <?php
+        echo "foo";
+        $baseLink = $this->baseLink();
+        ?>
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://active.macromedia.com/flash4/cabs/swflash.cab#version=4,0,0,0" id="name" width="500" height="500">
+            <param name="movie" value="<?php echo "{$baseLink}/flash/test4pix.swf"?>">
+            <param name="quality" value="high">
+            <param name="wmode" value="transparent">
+            <embed name="name" src="<?php echo "{$baseLink}/flash/test4pix.swf" ?>" quality="high" wmode="transparent" width="500" height="500" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer"></embed>
+        </object>
     </div>
 </div>
+    <?php $front = Zend_Controller_Front::getInstance();
+//Zend_Debug::dump($front);
+//die;
+?>
