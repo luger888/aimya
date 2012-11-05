@@ -17,15 +17,23 @@ $(document).ready(function() {
         }
     });
 
+
     $(function() {
         var cookieName, $tabs, stickyTab;
 
         cookieName = 'stickyTab';
         $tabs = $( '#tabs' );
 
-        $tabs.tabs( {
+        $tabs.tabs( {cache:true,
+            load: function (e, ui) {
+                $(ui.panel).find(".tab-loading").remove();
+            },
             select: function( e, ui )
             {
+                var $panel = $(ui.panel);
+                if ($panel.is(":empty")) {
+                    $panel.append("<div class='tab-loading'>Loading...</div>")
+                }
                 $.cookies.set( cookieName, ui.index );
             }
         } );
