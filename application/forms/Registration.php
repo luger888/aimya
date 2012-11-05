@@ -60,9 +60,7 @@ class Application_Form_Registration extends Zend_Form
             ->setErrorMessages(array('Insert your password'));
 
         $password2 = new Zend_Form_Element_Password('password2');
-        $password2->setRequired(true)
-            ->addValidator('NotEmpty')
-            ->addValidator('stringLength', false, array(6, 200))
+        $password2->addValidator('stringLength', false, array(6, 200))
             ->setAttrib('placeholder', 'Confirm password')
             ->setAttrib('class', 'clearInput required')
             ->addFilters($this->basicFilters)
@@ -76,8 +74,7 @@ class Application_Form_Registration extends Zend_Form
 
             )
         );
-        $type->setRequired(true)
-            ->setAttrib('class', 'styledCheckbox required')
+        $type->setAttrib('class', 'styledCheckbox required')
             ->setDecorators($this->basicDecorators)
             ->setSeparator('');
 
