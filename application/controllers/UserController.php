@@ -31,6 +31,8 @@ class UserController extends Zend_Controller_Action
 
                 $model = new Application_Model_User();
                 $this->view->message = $model->approveUser($data);
+
+                $this->_helper->flashMessenger->addMessage(array('success'=>'Account confirmed. Please login to your account'));
                 $this->_helper->redirector('index', 'index');
 
             }
@@ -89,9 +91,6 @@ class UserController extends Zend_Controller_Action
                     if ($identity->status == '0') {
                         $this->_helper->flashMessenger->addMessage(array('failure'=>'Account is not confirmed. Please check you email and confirm registration'));
                         $this->_helper->redirector('index', 'index');
-                    } else {
-                        $this->_helper->flashMessenger->addMessage(array('success'=>'Account confirmed. Please login to your account'));
-                        $this->_helper->redirector('index', 'account');
                     }
                 }else{
                     $this->view->error = 'Authentication failed.';
