@@ -10,7 +10,10 @@ $(document).ready(function() {
         }
     });
     /* END Button bar(radio)*/
-    $('#birthday').datepicker({ dateFormat: 'yy-mm-dd' }).val();
+    $('#birthday').datepicker({ dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        yearRange: "1910:2012" }).val();
     $('#birthday').datepicker({
         onSelect: function(dateText, inst) {
             $("input[name='birthday']").val(dateText);
