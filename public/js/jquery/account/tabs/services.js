@@ -12,13 +12,13 @@ function deleteService(e) {
     var answer = confirm("Delete service?");
 
     if (answer) {
-
-
+        $(e).parents('.service').remove();
         $.post(
 
             '/account/services/0/controller%3D%3Eaccount/1/action%3D%3Eservices', {'deleteService':id}
 
         );
+
     }
 
     return false;
