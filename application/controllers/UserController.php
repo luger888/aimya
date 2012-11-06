@@ -91,6 +91,9 @@ class UserController extends Zend_Controller_Action
                     if ($identity->status == '0') {
                         $this->_helper->flashMessenger->addMessage(array('failure'=>'Account is not confirmed. Please check you email and confirm registration'));
                         $this->_helper->redirector('index', 'index');
+                    }else{
+
+                        $this->_helper->redirector('index', 'account');
                     }
                 }else{
                     $this->view->error = 'Authentication failed.';

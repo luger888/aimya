@@ -11,6 +11,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
     {
         //basic tab
         $identity = Zend_Auth::getInstance()->getStorage()->read();
+        $this->view->headScript()->appendFile('../../js/jquery/account/tabs/services.js');
         $profileForm = new Application_Form_Profile();
         $profileModel = new Application_Model_Profile();
         $this->view->profile = $profileForm->populate($profileModel->getProfileAccount($identity->id));
@@ -40,22 +41,29 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
     public function servicesAction()
     {
         $this->_helper->layout()->disableLayout();
+
         $identity = Zend_Auth::getInstance()->getStorage()->read();
         $servicesForm = new Application_Form_ServiceDetails();
         $servicesModel = new Application_Model_DbTable_ServiceDetail();
 
         if ($this->getRequest()->isPost()) {
-            $formData = $this->getRequest()->getPost();
+            $dbServiceDetail = new Application_Model_DbTable_ServiceDetail();
 
-            if ($servicesForm->isValid($formData)) {
-                $addService = new Application_Model_DbTable_ServiceDetail();
-                $addService->addService($formData, $identity->id);
-                $this->_helper->redirector('index', 'account');
+            if($this->getRequest()->getParam('deleteService')){
+                $dbServiceDetail->deleteService($this->getRequest()->getParam('deleteService'), $identity->id);
+
+            }else{
+                $formData = $this->getRequest()->getPost();
+
+                if ($servicesForm->isValid($formData)) {
+                    $dbServiceDetail->addService($formData, $identity->id);
+                    $this->_helper->redirector('index', 'account');
+                }
             }
         }
         $this->view->services = $servicesModel->getServiceByUser($identity->id);
         $this->view->servicesForm = $servicesForm;
-    }
+        }
 
     public function availabilityAction()
     {

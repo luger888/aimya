@@ -3,7 +3,8 @@ class Application_Model_DbTable_ServiceDetail extends Application_Model_DbTable_
 {
     protected $_name = 'service_detail';
 
-    public function addService($array, $id){
+    public function addService($array, $id)
+    {
 
         $data = array(
 
@@ -22,17 +23,28 @@ class Application_Model_DbTable_ServiceDetail extends Application_Model_DbTable_
 
     }
 
+    public function deleteService($id, $user_id)
+    {
+        $where = array(
+
+            $this->getAdapter()->quoteInto('id = ?', $id),
+            $this->getAdapter()->quoteInto('user_id = ?', $user_id)
+
+        );
+        $this->delete($where);
+
+    }
+
     public function getServiceByUser($user_id)
     {
         $user_id = (int)$user_id;
         $row = $this->fetchAll('user_id = ' . $user_id);
-        if(!$row) {
+        if (!$row) {
             throw new Exception("There is no element with ID: $user_id");
         }
 
         return $row->toArray();
     }
-
 
 
 }

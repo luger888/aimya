@@ -50,8 +50,3 @@ $(document).ready(function() {
 
 });
 
-function addService(){
-
-    $("#addService").css('display', 'block');
-}
-
