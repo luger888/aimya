@@ -50,7 +50,7 @@
 
     $front = Zend_Controller_Front::getInstance();
             $controllerName = $front->getRequest()->getControllerName();
-            if($controllerName == 'account'){
+            if($controllerName == 'account' or $controllerName == 'lesson'){
                 echo $this->partial('partials/account.phtml',
                     array('account' => $this->data));
 
