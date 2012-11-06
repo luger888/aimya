@@ -57,4 +57,5 @@ class Application_Model_DbTable_Profile extends Application_Model_DbTable_Abstra
     }
 
 
+
 }
