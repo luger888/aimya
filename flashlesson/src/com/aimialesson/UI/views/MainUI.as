@@ -1,6 +1,7 @@
 package com.aimialesson.UI.views
 {
 	import com.aimialesson.events.PresentationEvent;
+	import com.aimialesson.events.TextChatEvent;
 	import com.aimialesson.model.Main;
 	
 	import flash.events.EventDispatcher;
@@ -10,6 +11,7 @@ package com.aimialesson.UI.views
 	
 	[Event (name="MOVE_TO_LEFT", type="com.aimialesson.events.PresentationEvent")]
 	[Event (name="MOVE_TO_RIGHT", type="com.aimialesson.events.PresentationEvent")]
+	[Event (name="addNewLine", type="com.aimialesson.events.TextChatEvent")]
 	public class MainUI extends SkinnableComponent
 	{
 		[SkinPart (required="true")]
@@ -33,6 +35,8 @@ package com.aimialesson.UI.views
 			} else if ( instance == presentation ) {
 				(instance as EventDispatcher).addEventListener( PresentationEvent.MOVE_TO_LEFT, onPresentationEvent );
 				(instance as EventDispatcher).addEventListener( PresentationEvent.MOVE_TO_RIGHT, onPresentationEvent );
+			} else if ( instance == textChat ) {
+				(instance as EventDispatcher).addEventListener( TextChatEvent.ADD_NEW_LINE, onTextChatEvent );
 			} 
 		}
 		
@@ -44,13 +48,17 @@ package com.aimialesson.UI.views
 			debug("connectionInit");
 			videoChat.myVideoInit();
 			videoChat.partnerVideoInit();
-			textChat.initChat();
 		}
 		
 		private function onPresentationEvent ( event : PresentationEvent ) : void {
 			debug("MainUI:onPresentationEvent " + event.type);
 			this.dispatchEvent ( event );
-		} 
+		}
+		
+		private function onTextChatEvent ( event : TextChatEvent ) : void {
+			debug("MainUI:onTextChatEvent " + event.type);
+			this.dispatchEvent ( event );
+		}
 		
 		private function debug ( mes : String) : void {
 			if (Main.getInstance().debugger != null)

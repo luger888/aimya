@@ -1,16 +1,18 @@
 package com.aimialesson.UI.views
 {
-	import com.aimialesson.model.Media;
+	import com.aimialesson.events.TextChatEvent;
 	import com.aimialesson.model.Main;
+	import com.aimialesson.model.Media;
+	//import com.aimialesson.model.User;
 	
 	import flash.events.*;
-	import flash.net.*;
 	
 	import spark.components.Button;
 	import spark.components.TextArea;
 	import spark.components.TextInput;
 	import spark.components.supportClasses.SkinnableComponent;
 
+	[Event (name="addNewLine", type="com.aimialesson.events.TextChatEvent")]
 	public class TextChatUI extends SkinnableComponent
 	{
 		[SkinPart (required="true")]
@@ -19,7 +21,8 @@ package com.aimialesson.UI.views
 		public var messageInput:TextInput;
 		[SkinPart (required="true")]
 		public var sendBtn:Button;
-		private var so:SharedObject; 
+		
+//		private var user:User;
 		
 		public function TextChatUI()
 		{
@@ -27,11 +30,15 @@ package com.aimialesson.UI.views
 		}
 		override protected function partAdded(partName:String, instance:Object):void
 		{
-			if (instance == chatArea){
+			if (instance == chatArea) {
+	//			user = User.getInstance();
 				//initChat();
 			} else {
 				if (instance == sendBtn){
 					sendBtn.addEventListener(MouseEvent.CLICK, onClickSendBtn);
+				}
+				if (instance == messageInput) {
+					messageInput.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
 				}
 			}
 		}
@@ -39,44 +46,18 @@ package com.aimialesson.UI.views
 			
 		}
 		
-		public function initChat():void
-		{
-			so = SharedObject.getRemote(Media.getInstance().chatID, Media.getInstance().nc.uri, false);
-//			so = SharedObject.getRemote("SampleChat", "rtmp://localhost/SOSample", false);
-			so.addEventListener(SyncEvent.SYNC, soOnSync);
-			so.client    = this;
-			so.connect(Media.getInstance().nc);
-		}
-		
 		private function onClickSendBtn(event:MouseEvent):void
 		{
-			so.setProperty("chatMessage", messageInput.text);
+			messageInput.text = Media.getInstance().userName + ": " + messageInput.text; 
+			this.dispatchEvent( new TextChatEvent ( TextChatEvent.ADD_NEW_LINE,  messageInput.text) );
+			messageInput.text = "";
 		}
-				
-		private function onReply(result:Object):void 
-		{
-			if (!result)    return;
-			
-			debug("onReply : resultObj = " + result);
-			for ( var prop:String in result)
-			{
-				debug("prop : "+prop+" = "+result[prop]);
+		
+		private function onKeyDown(ev:KeyboardEvent):void {
+			if (ev.keyCode==13){
+				onClickSendBtn(null);
 			}
 		}
-		
-		private function soOnSync(event:SyncEvent):void
-		{
-			debug("soOnSync");
-			
-			for (var prop:String in so.data) 
-			{
-				debug("prop "+prop+" = "+so.data[prop]);
-			}
-			if (so.data['chatMessage'] != undefined)
-				chatArea.text += so.data['chatMessage'] + "\n";
-		}
-		
-		
 		
 		private function debug (str:String):void {
 			if (Main.getInstance().debugger != null)
