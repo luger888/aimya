@@ -1,16 +1,48 @@
 <div id="tabs">
     <ul>
         <li><a href="#tabs-1">Sheduled</a></li>
-        <li><a href="/lesson/setup">On The Air</a></li>
+        <li><a href="#tabs-2">On The Air</a></li>
         <li><a href="/lesson/details">Lesson Details</a></li>
     </ul>
     <div id="tabs-1">
-        <?php
-        echo "foo";
-        ?>
+        <?php $users = $this->userList; ?>
+        <form method="POST" id='start_session' action="<?php echo $this->baseLink() . '/lesson/setup/'?>">
+            <table>
+                <?php foreach($users as $user): ?>
+                <?php if($user['id'] != Zend_Auth::getInstance()->getIdentity()->id):?>
+                    <tr>
+                        <td><?php echo $user['username']?></td>
+                        <td><input name="student_id" type="hidden" value="<?php echo $user['id'];?>"></td>
+                        <td><a href="#" onclick="startSession(); return false;" id="start_session">Start Session</a></td>
+                    </tr>
+                    <?php endif?>
+                <?php endforeach; ?>
+            </table>
+        </form>
+    </div>
+    <div id="tabs-2">
+        <div id="flash_element">
+        </div>
     </div>
 </div>
     <?php //$front = Zend_Controller_Front::getInstance();
 //Zend_Debug::dump($front);
 //die;
 ?>
+<script type="text/javascript">
+
+    function startSession(){
+        var form = $('#start_session');
+        var serializedData = form.serialize();
+        $('#tabs').tabs('select', 1);
+        $.ajax({
+            'url': $('#start_session').attr('action'),
+            'data': serializedData,
+            'dataType': 'json',
+            'type': 'post',
+            success: function(data) {
+                $('#flash_element').append(data.flashObj);
+            }
+        });
+    }
+</script>
