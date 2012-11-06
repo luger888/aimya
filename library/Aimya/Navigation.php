@@ -1,6 +1,6 @@
 <?php
 
-class Aimya_Navigation extends My_Navigation_Container
+class Aimya_Navigation extends Aimya_Navigation_Container
 {
 	public function __construct($pages=null)
 	{

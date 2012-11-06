@@ -77,6 +77,21 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $router->addRoute('([a-zA-Z0-9_&\-]+)\.html', $route);
 
     }
+    public function _initNavigation()
+    {
+
+        $this -> bootstrap('view');
+        $view = $this->getResource('view');
+        $navigation = new Aimya_Navigation(new Zend_Config(require APPLICATION_PATH . DIRECTORY_SEPARATOR . 'configs' . DIRECTORY_SEPARATOR . 'navigation.php'));
+
+        Zend_Registry::set('Zend_Navigation', $navigation);
+
+        $acl = Zend_Registry::get('Zend_Acl');
+
+        $view -> navigation($navigation)
+            ->setAcl($acl)
+            ->setRole(Zend_Registry::get('currentRole'));
+    }
 
 
 }

@@ -6,27 +6,35 @@ $userModel = new Application_Model_DbTable_Users();
 $profileModel = new Application_Model_Profile();
 
 $username = $userModel->getUser($identity->id);
-$avatarPath = $profileModel->getAvatarPath($identity->id);//path to avatar
-$memberSince = substr($username['created_at'],0,4);
+$avatarPath = $profileModel->getAvatarPath($identity->id); //path to avatar
+$memberSince = substr($username['created_at'], 0, 4);
 
-if(Zend_Registry::isRegistered('username')){
+if (Zend_Registry::isRegistered('username')) {
     $username = Zend_Registry::get('username');
-}else{
+} else {
 
     $username = "{$username['firstname']} {$username['lastname']}";
     Zend_Registry::set('username', $username);
 }
 ?>
-<div class="accountWrapper row-fluid">
-
-    <div class = "leftBlockProfile span2">
-       <h3> <?php echo $username;?></h3>
+<div class="accountWrapper row-fluid no-space">
+    <div class="leftNavigation span1">
+        <?php
+        echo $this->navigation()
+            ->menu()
+            ->setMaxDepth(0)
+            ->setUlClass('nav nav-tabs nav-stacked')
+            ->render(new Aimya_Navigation($this->navigation()->findAllBy('tag', 'leftMenu', true)));
+        ?>
+    </div>
+    <div class="leftBlockProfile span2">
+        <h3> <?php echo $username;?></h3>
         Member since <?php echo $memberSince;?><br>
-        <img src ="<?php echo $avatarPath;?>">
+        <img src="<?php echo $avatarPath;?>">
         No rate
     </div>
 
-    <div class = "mainBlockProfile span10">
+    <div class="mainBlockProfile span9">
         <?php echo $this->layout()->content; ?>
     </div>
 </div>

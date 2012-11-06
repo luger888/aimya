@@ -37,7 +37,7 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
 
         #allow to user
         $acl->allow(self::STUDENT , 'user', array('logout'));
-        $acl->allow(self::STUDENT , 'account', array('index'));
+        $acl->allow(self::STUDENT , 'lesson', array('index'));
         $acl->allow(self::STUDENT , 'account', array('index', 'setup', 'details'));
         $acl->deny(self::STUDENT , 'user', array('index', 'registration', 'login'));
 
