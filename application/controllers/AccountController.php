@@ -4,7 +4,9 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
 
     public function init()
     {
-
+        $this->_helper->AjaxContext()
+            ->addActionContext('edit', 'json')
+            ->initContext('json');
     }
 
     public function indexAction()
@@ -25,9 +27,9 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
 
                 $updateProfile = new Application_Model_DbTable_Profile();
                 $updateProfile->updateProfile($formData, $identity->id);
-                if($_FILES['avatar']['name']){//if new avatar -> update db
+                if ($_FILES['avatar']['name']) { //if new avatar -> update db
                     $updateProfile->updateAvatar($_FILES['avatar']['name'], $identity->id);
-                 }
+                }
                 $updateUser = new Application_Model_DbTable_Users();
                 $updateUser->updateUser($formData, $identity->id);
 
@@ -38,6 +40,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
             }
         }
     }
+
     public function servicesAction()
     {
         $this->_helper->layout()->disableLayout();
@@ -49,21 +52,28 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         if ($this->getRequest()->isPost()) {
             $dbServiceDetail = new Application_Model_DbTable_ServiceDetail();
 
-            if($this->getRequest()->getParam('deleteService')){
-                $dbServiceDetail->deleteService($this->getRequest()->getParam('deleteService'), $identity->id);
+            if ($this->getRequest()->getParam('saveService')) {
 
-            }else{
                 $formData = $this->getRequest()->getPost();
 
                 if ($servicesForm->isValid($formData)) {
                     $dbServiceDetail->addService($formData, $identity->id);
                     $this->_helper->redirector('index', 'account');
                 }
+
+            } else if ($this->getRequest()->getParam('updateService')) {
+                $updateData = $this->getRequest()->getPost();
+                if ($servicesForm->isValid($updateData)) {
+                    $dbServiceDetail->updateService($updateData, $identity->id);
+                    $this->_helper->redirector('index', 'account');
+                }
             }
+
         }
+
         $this->view->services = $servicesModel->getServiceByUser($identity->id);
         $this->view->servicesForm = $servicesForm;
-        }
+    }
 
     public function availabilityAction()
     {
@@ -112,5 +122,24 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         $this->_helper->layout()->disableLayout();
 
     }
+
+    public function editAction()
+    {
+        $this->_helper->layout()->disableLayout();
+        $identity = Zend_Auth::getInstance()->getStorage()->read();
+        if ($this->getRequest()->isPost()) {
+            $dbServiceDetail = new Application_Model_DbTable_ServiceDetail();
+
+            if ($this->getRequest()->getParam('deleteService')) {
+
+                $dbServiceDetail->deleteService($this->getRequest()->getParam('deleteService'), $identity->id);
+
+            } else if ($this->getRequest()->getParam('editService')) {
+                $this->view->editForm = $dbServiceDetail->getItem($this->getRequest()->getParam('editService'));
+
+            }
+        }
+    }
+
 
 }

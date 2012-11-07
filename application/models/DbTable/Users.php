@@ -42,7 +42,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
             'email' => $array['email'],
             'password' => $password,
-            'role' => (int)$array['type'],
+            'role' => (int)$array['role'],
             'username' => $array['username'],
             'firstname' => $array['firstname'],
             'lastname' => $array['lastname'],

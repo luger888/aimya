@@ -28,9 +28,9 @@
 ?>
     <!-- END LIST OF SERVICES -->
 
-    <!-- SERVICE FORM: css display:none;-->
+    <!-- SERVICE FORM -> ADD NEW: css display:none;-->
     <div id ="addService">
-        <form method="post" name="profile" action="account/services" enctype="multipart/form-data">
+        <form method="post" name="serviceDetails" action="account/services" id="serviceForm">
             <div class="row-fluid">
                 <div class="span12">
                     <?php echo $this->servicesForm->lesson_category; ?>
@@ -52,6 +52,6 @@
             </div>
         </form>
     </div>
-    <!-- END SERVICE FORM -->
+    <!-- END SERVICE FORM -> ADD NEW-->
     <input type = "button" id = "addMoreServices" value = "Add More" class = "btn" onclick = "addService();">
 </div>
