@@ -25,7 +25,7 @@ $(document).ready(function() {
 
                 if(response.status == 1){
 
-                    alert(1);
+                    window.location.href = "/account/index/";
 
                 }
 

@@ -41,7 +41,7 @@ $controllerName = $front->getRequest()->getControllerName();
 
 
     <!-- LOGIN -->
-    <?php if($controllerName == 'index'){
+    <?php if ($controllerName == 'index') {
     echo "<div class='span5'>
 
         <div id='loginFormHolder'>
@@ -59,6 +59,20 @@ $controllerName = $front->getRequest()->getControllerName();
         </div>
     </div>
     <!-- /span3 -->";
+} else {
+    echo '<div class="span3">
+        <nav id="globalNav">
+            <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">About Aimya</a></li>
+            <li><a href="#">Help</a></li>';
+            if (Zend_Auth::getInstance()->getStorage()->read()) {
+                echo '<li><a href="/user/logout/">Logout</a></li>';
+            }
+
+    echo '</ul>
+        </nav>
+    </div>';
 }
     ?>
     <!--<div class="span3">
@@ -81,16 +95,16 @@ $controllerName = $front->getRequest()->getControllerName();
         <?php echo $this->flashMessages();?>
     </div>
     <!-- ACCOUNT LAYOUT -->
-        <?php
+    <?php
 
-            if($controllerName == 'account' or $controllerName == 'lesson'){
-                echo $this->partial('partials/account.phtml',
-                    array('account' => $this->data));
+    if ($controllerName == 'account' or $controllerName == 'lesson') {
+        echo $this->partial('partials/account.phtml',
+            array('account' => $this->data));
 
-            }else{
-                echo $this->layout()->content;
-            }
-        ?> <!-- END ACCOUNT LAYOUT -->
+    } else {
+        echo $this->layout()->content;
+    }
+    ?> <!-- END ACCOUNT LAYOUT -->
 
 
     <footer>
