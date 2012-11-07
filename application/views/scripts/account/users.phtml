@@ -9,19 +9,21 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <td> ... </td>
-        <td> ... </td>
-        <td> ... </td>
-        <td> ... </td>
-        <td> ... </td>
-    </tr>
-    <tr>
-        <td> ... </td>
-        <td> ... </td>
-        <td> ... </td>
-        <td> ... </td>
-        <td> ... </td>
-    </tr>
+    <?php
+    if($this->friends){
+        foreach($this->friends as $value){
+            echo '<tr>
+        <td>'.$value['firstname'].'</td>
+        <td>'.$value['lastname'].'</td>
+        <td>'.$value['username'].'</td>
+        <td>...</td>
+        <td>Block/Delete</td>
+    </tr>';
+        }
+
+    }
+
+    ?>
+
     </tbody>
 </table>
