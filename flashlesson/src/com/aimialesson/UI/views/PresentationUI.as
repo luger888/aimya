@@ -27,6 +27,7 @@ package com.aimialesson.UI.views
 			super();
 		}
 		
+		
 		override protected function partAdded ( partName : String, instance : Object) : void
 		{
 			if (instance == previusBtn || instance == nextBtn){

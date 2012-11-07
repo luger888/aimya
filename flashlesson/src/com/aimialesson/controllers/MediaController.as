@@ -1,6 +1,7 @@
 package com.aimialesson.controllers
 {
 	import com.aimialesson.events.AppEvent;
+	import com.aimialesson.model.Client;
 	import com.aimialesson.model.Main;
 	import com.aimialesson.model.Media;
 	
@@ -8,6 +9,8 @@ package com.aimialesson.controllers
 	import flash.events.NetStatusEvent;
 	import flash.events.SecurityErrorEvent;
 	import flash.net.NetConnection;
+	
+	import spark.components.Application;
 
 	[Event (name="connectInitComplete", type="com.aimialesson.events.AppEvent")]
 	public class MediaController extends EventDispatcher
@@ -16,11 +19,24 @@ package com.aimialesson.controllers
 		{
 		}
 		
-		public function initConnection():void {
+		public function setParameters ( parameters : Object ) : void {
+			if (parameters.myStreamName)
+				Media.getInstance().myStreamName = parameters.myStreamName;
+			if (parameters.partnerStreamName)
+				Media.getInstance().partnerStreamName = parameters.partnerStreamName;
+			if (parameters.soID)
+				Media.getInstance().soID = parameters.soID;
+			if (parameters.userName)
+				Media.getInstance().userName = parameters.userName;
+
+		}
+		
+		public function initConnection () : void {
 			debug("MediaController:initConnection");
 			Media.getInstance().nc = new NetConnection();
 			Media.getInstance().nc.addEventListener(NetStatusEvent.NET_STATUS, netStatusHandler);
 			Media.getInstance().nc.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
+			Media.getInstance().nc.client = new Client(); 
 			Media.getInstance().nc.connect(Media.getInstance().rtmp);
 		}
 				
