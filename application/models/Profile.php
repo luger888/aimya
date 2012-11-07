@@ -22,4 +22,6 @@ class Application_Model_Profile
 
         return $avatarPath;//path for avatar
     }
+
+
 }

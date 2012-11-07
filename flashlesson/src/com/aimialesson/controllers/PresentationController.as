@@ -6,16 +6,20 @@ package com.aimialesson.controllers
 	
 	import flash.events.EventDispatcher;
 	import flash.events.IEventDispatcher;
-	
+	import flash.net.SharedObject;
+		
 	import mx.collections.ArrayCollection;
 	
 	public class PresentationController extends EventDispatcher
 	{
+		
+		private var so:SharedObject;
+		
 		public function PresentationController(target:IEventDispatcher=null)
 		{
 			super(target);
 		}
-		
+				
 		public function presentationEventHandler ( event : PresentationEvent ) : void {
 			debug("PresentationController:presentationEventHandler " + event.type);
 			switch (event.type) {

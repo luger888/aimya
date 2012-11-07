@@ -10,7 +10,7 @@ $(document).ready(function() {
                 "username" : $("#username").val(),
                 "email" : $("#email").val(),
                 "password" : $("#password").val(),
-                "role" : $('input[name=type]:checked', '#signup').val()
+                "role" : $('input[name=type]:checked').val()
 
             },
 

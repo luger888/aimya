@@ -10,6 +10,8 @@ $(document).ready(function() {
         }
     });
     /* END Button bar(radio)*/
+
+    /* DatePicker jquery UI */
     $('#birthday').datepicker({ dateFormat: 'yy-mm-dd',
         changeMonth: true,
         changeYear: true,
@@ -19,15 +21,17 @@ $(document).ready(function() {
             $("input[name='birthday']").val(dateText);
         }
     });
+    /* END DatePicker jquery UI */
 
-
+    /* TABS with COOKIES jquery UI */
     $(function() {
         var cookieName, $tabs, stickyTab;
 
         cookieName = 'stickyTab';
         $tabs = $( '#tabs' );
 
-        $tabs.tabs( {cache:true,
+        $tabs.tabs(
+            {cache:true,
             load: function (e, ui) {
                 $(ui.panel).find(".tab-loading").remove();
             },
@@ -39,7 +43,7 @@ $(document).ready(function() {
                 }
                 $.cookies.set( cookieName, ui.index );
             }
-        } );
+        });
 
         stickyTab = $.cookies.get( cookieName );
         if( ! isNaN( stickyTab )  )
@@ -47,7 +51,7 @@ $(document).ready(function() {
             $tabs.tabs( 'select', stickyTab );
         }
     });
-
+    /* END TABS with COOKIES jquery UI */
 
 
 

@@ -107,7 +107,7 @@ class UserController extends Zend_Controller_Action
 
         $reg = new Application_Form_Registration();
         if ($this->getRequest()->isPost()) {
-            $model = new Application_Model_User();
+            $modelUser = new Application_Model_User();
 
             $formData = $this->getRequest()->getPost();
             $this->view->data = $formData;
@@ -117,7 +117,8 @@ class UserController extends Zend_Controller_Action
                     $this->_helper->flashMessenger->addMessage(array('failure'=>'This email or username already exist'));
                     $this->_helper->redirector('index', 'index');
                 } else {
-                    $status = $model->addNewUser($formData);
+                    $status = $modelUser->addNewUser($formData);
+
 
                     if($status) {
                         $this->_helper->flashMessenger->addMessage(array('success'=>'Please confirm your email'));
