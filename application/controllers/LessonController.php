@@ -60,11 +60,7 @@ class LessonController extends Zend_Controller_Action
 
 
                 $flashObj = '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://active.macromedia.com/flash4/cabs/swflash.cab#version=4,0,0,0" id="name" width="800" height="800">
-                             <param name="movie" value=' . $baseLink . '/flash/aimia_lesson.swf">
-                             <param value="' . $resultParams['teacherStream'] . '" name="myStreamName">
-                             <param value="' . $resultParams['studentStream'] . '" name="partnerStreamName">
-                             <param value="' . $resultParams['soID'] . '" name="soID">
-                             <param value="' . Zend_Auth::getInstance()->getIdentity()->username . '" name="userName">
+                             <param name="flashvars" value="movie=' . $baseLink . '/flash/aimia_lesson.swf&userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&myStreamName=' . $resultParams['teacherStream'] . '&partnerStreamName=' . $resultParams['studentStream'] . '&soID=' . $resultParams['soID'] . '">
                              <embed name="name" src="' . $baseLink . '/flash/aimia_lesson.swf" quality="high" wmode="transparent" width="800" height="800" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer"></embed>
                              </object>';
 
@@ -100,13 +96,9 @@ class LessonController extends Zend_Controller_Action
 
 
             $flashObj = '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://active.macromedia.com/flash4/cabs/swflash.cab#version=4,0,0,0" id="name" width="800" height="800">
-                             <param name="movie" value=' . $baseLink . '/flash/aimia_lesson.swf">
-                             <param value="' . $result['creator_stream_name'] . '" name="partnerStreamName">
-                             <param value="' . $result['partner_stream_name'] . '" name="myStreamName">
-                             <param value="' . $result['so_id'] . '" name="soID">
-                             <param value="' . Zend_Auth::getInstance()->getIdentity()->username . '" name="userName">
-                             <embed name="name" src="' . $baseLink . '/flash/aimia_lesson.swf" quality="high" wmode="transparent" width="800" height="800" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer"></embed>
-                             </object>';
+                         <param name="flashvars" value="movie=' . $baseLink . '/flash/aimia_lesson.swf&userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&myStreamName=' . $result['partner_stream_name'] . '&partnerStreamName=' . $result['creator_stream_name'] . '&soID=' . $result['so_id'] . '">    
+                         <embed name="name" src="' . $baseLink . '/flash/aimia_lesson.swf" quality="high" wmode="transparent" width="800" height="800" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer"></embed>
+                         </object>';
 
             $this->view->flashObj = $flashObj;
             $this->view->responce = $result;
