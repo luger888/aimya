@@ -23,6 +23,29 @@ class Application_Model_DbTable_ServiceDetail extends Application_Model_DbTable_
 
     }
 
+    public function updateService($array, $id)
+    {
+
+        $data = array(
+
+            'lesson_category'=> $array['lesson_category'],
+            'subcategory' => $array['subcategory'],
+            'rate' => (int)$array['rate'],
+            'duration' => $array['duration'],
+            'description' => $array['description'],
+            'updated_at' => date('Y-m-d H:m:s')
+
+        );
+        $where = array(
+
+            $this->getAdapter()->quoteInto('id = ?', $array['hiddenId']),
+            $this->getAdapter()->quoteInto('user_id = ?', $id)
+
+        );
+        $this->update($data, $where);
+
+    }
+
     public function deleteService($id, $user_id)
     {
         $where = array(

@@ -2,6 +2,18 @@
 li{
 list-style-type: none;
 }
+body{
+    background-color: #b8d3c7;
+}
+/* FONTS*/
+@font-face {
+    font-family: lobster1;
+    src: url('fonts/Lobster_1_4.otf');
+}
+@font-face {
+    font-family: krungthep;
+    src: url('fonts/Krungthep.ttf');
+}
 /*twitter*/
 .hero-unit{
     padding: 30px 60px;
@@ -11,11 +23,32 @@ list-style-type: none;
 }
 
 /*header*/
+.header {
+    background-image: url('../img/design/header.png');
+    background-repeat: repeat-x;
 
-.header{
-    float:right;
 }
+.header .logo{
+    position: relative;
+    bottom: 10px;
 
+
+}
+.header .logo a{
+    color:#e2e2e2;
+    text-decoration: none;
+}
+.header .logo a h1{
+    color:#e2e2e2;
+    font:45pt lobster1;
+    text-shadow: 1px 1px 2px black;
+}
+.header .logo h1 span {
+    font: 25pt krungthep sans-serif;
+    color:#7caa9f;
+    text-shadow: 1px 1px 0 black;
+
+}
 #globalNav {
 
     float: right;
@@ -37,14 +70,25 @@ list-style-type: none;
 }
 
 /*login*/
-
+#loginFormHolder{
+    margin-top:1%;
+    color:white;
+}
+#loginFormHolder a{
+    color:white;
+}
+#loginFormHolder  span {
+    width:206px;
+    color:white;
+}
 #loginFormHolder #remember{
     float:left;
     margin-right: 5px;
 }
 #loginFormHolder label{
     float:left;
-    margin-right: 25px;
+    margin-right: 90px;
+
 }
 #loginFormHolder #login{
     margin-bottom: 9px;

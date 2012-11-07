@@ -21,22 +21,57 @@
     <?php echo $this->headLink();?>
 </head>
 <body>
+<?php
+
+$front = Zend_Controller_Front::getInstance();
+$controllerName = $front->getRequest()->getControllerName();
+?>
+
+
+
+
+
 <!-- HEADER & NAVIGATION -->
-<div class="row-fluid">
-    <div class="span7">
-        <h1 class="header">Welcome to Aimya</h1>
+<div class="row-fluid header">
+    <div class="span5 offset1">
+        <div class="logo">
+            <a href="index"><h1>Aimya<span>.com</span></h1></a>
+        </div>
     </div>
-    <div class="span3">
+
+
+    <!-- LOGIN -->
+    <?php if($controllerName == 'index'){
+    echo "<div class='span5'>
+
+        <div id='loginFormHolder'>
+            <form id='signIn' action='user/login' name='signIn'  method='post'>
+            <span class='login'>Login:</span> <span class='pass'>Password:</span><br>
+                {$this->login['username']}
+                {$this->login['password']}
+                {$this->login['login']}<br>
+                {$this->login['remember']}
+                <label for='{$this->login['remember']->id}'>Keep me signed in</label>
+                <a href='#'>Forgot your password?</a>
+
+            </form>
+            <!-- END /LOGIN -->
+        </div>
+    </div>
+    <!-- /span3 -->";
+}
+    ?>
+    <!--<div class="span3">
         <nav id="globalNav">
             <ul>
                 <li><a href="#">Privacy Policy</a></li>
                 <li><a href="#">About Aimya</a></li>
                 <li><a href="#">Help</a></li>
-                <?php if(Zend_Auth::getInstance()->getStorage()->read()){echo '<li><a href="/user/logout/">Logout</a></li>';}?>
+                <?php #if(Zend_Auth::getInstance()->getStorage()->read()){echo '<li><a href="/user/logout/">Logout</a></li>';}?>
 
             </ul>
         </nav>
-    </div>
+    </div>-->
 </div>
 <!-- END of HEADER & NAVIGATION  -->
 
@@ -48,8 +83,6 @@
     <!-- ACCOUNT LAYOUT -->
         <?php
 
-    $front = Zend_Controller_Front::getInstance();
-            $controllerName = $front->getRequest()->getControllerName();
             if($controllerName == 'account' or $controllerName == 'lesson'){
                 echo $this->partial('partials/account.phtml',
                     array('account' => $this->data));
