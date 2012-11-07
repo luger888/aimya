@@ -1,12 +1,12 @@
 <?php
 class UserController extends Zend_Controller_Action
 {
-
-
     public function init()
     {
-
-
+        $this   ->_helper->AjaxContext()
+            ->addActionContext('registration','json')
+            ->addActionContext('login','json')
+            ->initContext('json');
     }
 
     public function indexAction()
@@ -31,6 +31,8 @@ class UserController extends Zend_Controller_Action
 
                 $model = new Application_Model_User();
                 $this->view->message = $model->approveUser($data);
+
+                $this->_helper->flashMessenger->addMessage(array('success'=>'Account confirmed. Please login to your account'));
                 $this->_helper->redirector('index', 'index');
 
             }
@@ -89,8 +91,8 @@ class UserController extends Zend_Controller_Action
                     if ($identity->status == '0') {
                         $this->_helper->flashMessenger->addMessage(array('failure'=>'Account is not confirmed. Please check you email and confirm registration'));
                         $this->_helper->redirector('index', 'index');
-                    } else {
-                        $this->_helper->flashMessenger->addMessage(array('success'=>'Account confirmed. Please login to your account'));
+                    }else{
+
                         $this->_helper->redirector('index', 'account');
                     }
                 }else{
@@ -105,17 +107,25 @@ class UserController extends Zend_Controller_Action
 
         $reg = new Application_Form_Registration();
         if ($this->getRequest()->isPost()) {
-            $model = new Application_Model_User();
+            $modelUser = new Application_Model_User();
 
             $formData = $this->getRequest()->getPost();
             $this->view->data = $formData;
             if ($reg->isValid($formData)) {
+                $user = new Application_Model_DbTable_Users();
+                if ($user->checkByMail($formData['email']) || $user->checkByUsername($formData['username'])) {
+                    $this->_helper->flashMessenger->addMessage(array('failure'=>'This email or username already exist'));
+                    $this->_helper->redirector('index', 'index');
+                } else {
+                    $status = $modelUser->addNewUser($formData);
 
-                $model->addNewUser($formData);
-
-                $this->_helper->flashMessenger->addMessage(array('success'=>'Please confirm your email'));
-                $this->_helper->redirector('index', 'account');
-
+                    if($status) {
+                        $this->_helper->flashMessenger->addMessage(array('success'=>'Please confirm your email'));
+                        $this->_helper->redirector('account', 'index');
+                    } else {
+                        die('error');
+                    }
+                }
             } else {
 
                 $this->view->errors = $reg->getErrors();

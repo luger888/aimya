@@ -1,0 +1,75 @@
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">Sheduled</a></li>
+        <?php //if(Zend_Auth::getInstance()->getIdentity()->role == 2):?>
+            <li><a href="#tabs-2">On The Air</a></li>
+        <?php /*elseif(Zend_Auth::getInstance()->getIdentity()->role == 1):?>
+        <li><a href="/lesson/join">On The Air</a></li>
+        <?php endif; */?>
+        <li><a href="/lesson/details">Lesson Details</a></li>
+    </ul>
+    <div id="tabs-1">
+        <?php $users = $this->userList; ?>
+        <form method="POST" id='start_session' action="<?php echo $this->baseLink() . '/lesson/setup/'?>">
+            <table>
+                <?php foreach($users as $user): ?>
+                <?php if($user['id'] != Zend_Auth::getInstance()->getIdentity()->id):?>
+                    <tr>
+                        <td><?php echo $user['username']?></td>
+                        <td><input name="student_id" type="hidden" value="<?php echo $user['id'];?>"></td>
+                        <?php if(Zend_Auth::getInstance()->getIdentity()->role == 2):?>
+                            <td><a href="#" id="<?php echo $user['id'];?>" onclick="startSession(this.id); return false;" id="start_session">Start Session</a></td>
+                        <?php endif;?>
+                    </tr>
+                    <?php endif?>
+                <?php endforeach; ?>
+            </table>
+        </form>
+    </div>
+    <div id="tabs-2">
+        <div id="flash_element">
+            <?php $this->flashObj;?>
+        </div>
+    </div>
+</div>
+<?php if(Zend_Auth::getInstance()->getIdentity()->role == 2):?>
+<script type="text/javascript">
+
+    function startSession(id){
+        var form = $('#start_session');
+        var serializedData = form.serialize();
+        $('#tabs').tabs('select', 1);
+        $.ajax({
+            'url': $('#start_session').attr('action'),
+            'data': ({student_id : id}),
+            //'data': serializedData,
+            'dataType': 'json',
+            'type': 'get',
+            success: function(data) {
+                $('#flash_element').append(data.flashObj);
+            }
+        });
+    }
+</script>
+<?php elseif(Zend_Auth::getInstance()->getIdentity()->role == 1):?>
+<script type="text/javascript">
+    function doAjax() {
+        $.ajax({
+            'url': '<?php echo $this->baseLink() . "/lesson/join/";?>',
+            'data': ({student_id : 3}),
+            //'data': serializedData,
+            'dataType': 'json',
+            'type': 'get',
+            success: function(data) {
+                if(data.result == true){
+                    $('#flash_element').append(data.flashObj);
+                    return false;
+                } else {
+                    setTimeout(doAjax,3000);
+                }
+            }
+        });
+    }
+    doAjax();
+</script>
+<?php endif; ?>

@@ -3,7 +3,8 @@ class Application_Model_DbTable_ServiceDetail extends Application_Model_DbTable_
 {
     protected $_name = 'service_detail';
 
-    public function addService($array, $id){
+    public function addService($array, $id)
+    {
 
         $data = array(
 
@@ -22,17 +23,51 @@ class Application_Model_DbTable_ServiceDetail extends Application_Model_DbTable_
 
     }
 
+    public function updateService($array, $id)
+    {
+
+        $data = array(
+
+            'lesson_category'=> $array['lesson_category'],
+            'subcategory' => $array['subcategory'],
+            'rate' => (int)$array['rate'],
+            'duration' => $array['duration'],
+            'description' => $array['description'],
+            'updated_at' => date('Y-m-d H:m:s')
+
+        );
+        $where = array(
+
+            $this->getAdapter()->quoteInto('id = ?', $array['hiddenId']),
+            $this->getAdapter()->quoteInto('user_id = ?', $id)
+
+        );
+        $this->update($data, $where);
+
+    }
+
+    public function deleteService($id, $user_id)
+    {
+        $where = array(
+
+            $this->getAdapter()->quoteInto('id = ?', $id),
+            $this->getAdapter()->quoteInto('user_id = ?', $user_id)
+
+        );
+        $this->delete($where);
+
+    }
+
     public function getServiceByUser($user_id)
     {
         $user_id = (int)$user_id;
         $row = $this->fetchAll('user_id = ' . $user_id);
-        if(!$row) {
+        if (!$row) {
             throw new Exception("There is no element with ID: $user_id");
         }
 
         return $row->toArray();
     }
-
 
 
 }

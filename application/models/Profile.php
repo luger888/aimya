@@ -22,4 +22,18 @@ class Application_Model_Profile
 
         return $avatarPath;//path for avatar
     }
+
+    public function getFriends($user_id)
+    {
+        $dbUserRelations = new Application_Model_DbTable_UserRelations();
+        $userRelations = $dbUserRelations->getUserRelations($user_id);
+        $UserModel = new Application_Model_DbTable_Users();
+        $friends = array();
+        foreach($userRelations as $value){
+
+           $friends[]= $UserModel->getUserInfo($value['friend_id']);
+        }
+        return $friends;//get friends firstname, lastname,username, id
+
+    }
 }

@@ -1,33 +1,9 @@
 
 
-<!-- LOGIN -->
-<div class="row-fluid">
-    <div class="span5 hero-unit">
-    </div>
 
-    <div class="span7 hero-unit">
-
-        <div id="loginFormHolder">
-            <form id="signIn" action="user/login" name="signIn"  method="post">
-
-                <?php
-                echo $this->login['username'];
-                echo $this->login['password'];
-                echo $this->login['login'].'<br>';
-                echo $this->login['remember'];
-                echo '<label for="'.$this->login['remember']->id.'">Keep me signed in</label>';
-                ?>
-                <a href="#">Forgot your password?</a>
-
-            </form>
-            <!-- END /LOGIN -->
-        </div>
-    </div>
-    <!-- /span3 -->
-</div><!-- /row -->
 
 <div class="row-fluid">
-    <div class="span5 hero-unit">
+    <div class="span5">
         <fieldset>
             <legend>About Aimya</legend>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut laoreet orci. Ut dolor est, dapibus id
@@ -42,7 +18,7 @@
             Nullam blandit arcu ut nibh iaculis tempus. Suspendisse potenti.
         </fieldset>
     </div>
-    <div class="span5  hero-unit">
+    <div class="span5">
         <!-- REGISTRATION -->
         <div id="registrationFormHolder">
             <form id="signUp" action="/user/registration/" name="signUp" method="post">
@@ -66,6 +42,6 @@
             <!-- END of REGISTRATION -->
         </div>
     </div>
-    <div class="span2 hero-unit"></div>
+    <div class="span2"></div>
 </div>
 

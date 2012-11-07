@@ -8,50 +8,43 @@ class Application_Model_User
 
         $user = new Application_Model_DbTable_Users();
         $profile = new Application_Model_DbTable_Profile();
+        $dbAvailability = new Application_Model_DbTable_Availability();
 
-        if ($user->checkByMail($array['email']) || $user->checkByUsername($array['username'])) { //need to check username also!!!!!!!!!!!!!!
+        $token = md5(uniqid(mt_rand(), true));
 
-            return 0;
+        $array['token'] = $token;
 
-        } else {
+        $mail = new Aimya_Mail;
+        $mail->setRecipient($array['email']);
+        $mail->setTemplate(Aimya_Mail::SIGNUP_ACTIVATION);
+        $mail->firstname = $array['firstname'];
+        $mail->lastname = $array['lastname'];
+        $mail->email = $array['email'];
+        $mail->password = $array['password'];
+        $mail->token = $token;
+        $mail->baseLink = "http://" . $_SERVER['HTTP_HOST'];
 
-            $token = md5(uniqid(mt_rand(), true));
+        if($mail->send()){
 
-            $array['token'] = $token;
+            $user->createUser($array);
+            $lastId = $user->getAdapter()->lastInsertId();
 
-            $mail = new Aimya_Mail;
-            $mail->setRecipient($array['email']);
-            $mail->setTemplate(Aimya_Mail::SIGNUP_ACTIVATION);
-            $mail->firstname = $array['firstname'];
-            $mail->lastname = $array['lastname'];
-            $mail->email = $array['email'];
-            $mail->password = $array['password'];
-            $mail->token = $token;
-            $mail->baseLink = "http://" . $_SERVER['HTTP_HOST'];
+            $profile->createProfile($lastId);
+            $dbAvailability->createAvailability($lastId);
 
+            @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img');
+            @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'uploads');
+            @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $lastId);
+            @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $lastId . DIRECTORY_SEPARATOR . 'avatar');
 
-            if($mail->send()){
+            return true;
 
-                $user->createUser($array);
-                $lastId = $user->getAdapter()->lastInsertId();
+        }else{
 
-                $profile->createProfile($lastId);
-
-                @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img');
-                @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'uploads');
-                @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $lastId);
-                @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $lastId . DIRECTORY_SEPARATOR . 'avatar');
-
-                return 1;
-
-            }else{
-
-                //die('problem with email');
-                return 2;
-
-            }
+            die('problem with email');
 
         }
+
     }
 
     public function approveUser($data){
