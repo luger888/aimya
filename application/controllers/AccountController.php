@@ -108,6 +108,9 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
     public function usersAction()
     {
         $this->_helper->layout()->disableLayout();
+        $identity = Zend_Auth::getInstance()->getStorage()->read();
+        $profileModel = new Application_Model_Profile();
+        $this->view->friends = $profileModel->getFriends($identity->id);
 
     }
 

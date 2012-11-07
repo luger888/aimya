@@ -119,10 +119,9 @@ class UserController extends Zend_Controller_Action
                 } else {
                     $status = $modelUser->addNewUser($formData);
 
-
                     if($status) {
                         $this->_helper->flashMessenger->addMessage(array('success'=>'Please confirm your email'));
-                        $this->_helper->redirector('index', 'index');
+                        $this->_helper->redirector('account', 'index');
                     } else {
                         die('error');
                     }
