@@ -53,13 +53,13 @@ package com.aimialesson.UI.views
 		}
 		
 		public function myVideoInit():void {
-			//myVideo.attachNetStream(ns);
+			//return;
 			cam = Camera.getCamera();
-			cam.setMode(640, 480, 24);
-			cam.setQuality(0, 80);
-			mic = Microphone.getMicrophone(1);
+			mic = Microphone.getMicrophone();
 			if ( cam != null ) 
 			{
+				cam.setMode(640, 480, 24);
+				cam.setQuality(0, 80);
 				Media.getInstance().myNetStream.attachCamera(cam);
 				myVideo.attachCamera(cam);
 			}
@@ -67,11 +67,13 @@ package com.aimialesson.UI.views
 			{
 				Media.getInstance().myNetStream.attachAudio(mic);
 			}
-			Media.getInstance().myNetStream.publish(Media.getInstance().myStreamName);
+			//Media.getInstance().myNetStream.bufferTime = 3;
+			Media.getInstance().myNetStream.publish(Media.getInstance().myStreamName, "record");
 		}
 		
 		public function partnerVideoInit():void {
 			debug("VideoChat:partnerVideoInit");
+			//return;
 			Media.getInstance().partnerNetStream.play(Media.getInstance().partnerStreamName);
 			partnerVideo.attachNetStream(Media.getInstance().partnerNetStream);
 		}
