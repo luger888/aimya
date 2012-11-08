@@ -46,7 +46,7 @@ $controllerName = $front->getRequest()->getControllerName();
 
         <div id='loginFormHolder'>
             <form id='signIn' action='user/login' name='signIn'  method='post'>
-            <span class='login'>Login:</span> <span class='pass'>Password:</span><br>
+            <span class='login'>Login or email:</span> <span class='pass'>Password:</span><br>
                 {$this->login['username']}
                 {$this->login['password']}
                 {$this->login['login']}<br>
@@ -59,20 +59,6 @@ $controllerName = $front->getRequest()->getControllerName();
         </div>
     </div>
     <!-- /span3 -->";
-} else {
-    echo '<div class="span3">
-        <nav id="globalNav">
-            <ul>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">About Aimya</a></li>
-            <li><a href="#">Help</a></li>';
-            if (Zend_Auth::getInstance()->getStorage()->read()) {
-                echo '<li><a href="/user/logout/">Logout</a></li>';
-            }
-
-    echo '</ul>
-        </nav>
-    </div>';
 }
     ?>
     <!--<div class="span3">
@@ -107,7 +93,9 @@ $controllerName = $front->getRequest()->getControllerName();
     ?> <!-- END ACCOUNT LAYOUT -->
 
 
-    <footer>
+    <footer class='footer'>
+        Copyright 2012 Aimya<br>
+        Created by Svitla.com
     </footer>
 
 </div>

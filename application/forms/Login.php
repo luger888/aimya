@@ -10,17 +10,17 @@ class Application_Form_Login extends Zend_Form
     {
 
         $username = new Zend_Form_Element_Text('username');
-        $username->setAttrib('placeholder', 'username or email')
+        $username#->setAttrib('placeholder', 'username or email')
             ->setAttrib('id', 'username-login')
-            ->setAttrib('class', 'customInput required login clearInput')
+            ->setAttrib('class', 'customInput logTextInput login clearInput')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 
         $password = new Zend_Form_Element_Password('password');
         $password->setRequired(true)
             ->addValidator('NotEmpty')
-            ->setAttrib('placeholder', 'password')
-            ->setAttrib('class', 'customInput required clearInput')
+            #->setAttrib('placeholder', 'password')
+            ->setAttrib('class', 'customInput logTextInput clearInput')
             ->setAttrib('id', 'password-login')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
@@ -31,7 +31,8 @@ class Application_Form_Login extends Zend_Form
 
         $submit = new Zend_Form_Element_Submit('login');
         $submit->setAttrib('id', 'login')
-            ->setAttrib('class', 'btn')
+               ->setLabel('LOGIN')
+            ->setAttrib('class', 'btn btnStrict')
             ->setDecorators($this->basicDecorators);
 
         $this->addElements(array($username, $password, $submit, $remember));
