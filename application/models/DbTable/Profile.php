@@ -16,7 +16,7 @@ class Application_Model_DbTable_Profile extends Application_Model_DbTable_Abstra
 
         );
 
-        $this->update($data, 'user_id='.$id);
+        $this->update($data, 'user_id=?', (int)$id);
 
     }
     public function updateAvatar($avatar, $id)
@@ -28,13 +28,13 @@ class Application_Model_DbTable_Profile extends Application_Model_DbTable_Abstra
 
         );
 
-        $this->update($data, 'user_id='.$id);
+        $this->update($data, 'user_id=?', (int)$id);
 
     }
 
     public function getProfile($user_id){
         $user_id = (int)$user_id;
-        $row = $this->fetchRow('user_id = ' . $user_id);
+        $row = $this->fetchRow('user_id = ?', (int)$user_id);
         if(!$row) {
             throw new Exception("There is no element with ID: $user_id");
         }

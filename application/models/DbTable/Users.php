@@ -120,7 +120,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
         );
 
-        $this->update($data, 'id='.$id);
+        $this->update($data, 'id=?',$id);
 
     }
 }
