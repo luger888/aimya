@@ -151,5 +151,12 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         }
     }
 
+ public function featuresAction()
+ {
+     $dbUserModel=new Application_Model_DbTable_Users();
+     $this->view->featured = $dbUserModel->getLatestFeatured();
+
+
+ }
 
 }

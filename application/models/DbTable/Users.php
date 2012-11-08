@@ -123,4 +123,18 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         $this->update($data, $where);
 
     }
+    public function getLatestFeatured(){
+        $order = 'created_at';
+        $count  = 5;
+        $offset = 0;
+
+        $data = $this->select()
+            ->from('user', array('id', 'firstname', 'lastname', 'username'))
+            ->order($order)
+            ->limit($count, $offset);
+
+        return $data->query()->fetchAll();
+
+    }
+
 }
