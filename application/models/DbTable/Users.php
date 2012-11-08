@@ -68,8 +68,8 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
         );
 
-        $where[] = $this->getAdapter()->quoteInto('email = ?', $mail);
-        $where[] = $this->getAdapter()->quoteInto('confirmation_token = ?', $query);
+        $where[] = $this->getAdapter()->quoteInto('email=?', $mail);
+        $where[] = $this->getAdapter()->quoteInto('confirmation_token=?', $query);
 
         return $this->update($array , $where);
 
@@ -84,14 +84,14 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
             'password' => md5($data['password'])
 
         );
-
-        $this->update($array, 'email = ?', $data['email']);
+        $where = $this->getAdapter()->quoteInto('email=?', $data['email']);
+        $this->update($array, $where);
 
     }
 
     public function getUser($user_id){
         $user_id = (int)$user_id;
-        $row = $this->fetchRow('id =? ' , (int)$user_id);
+        $row = $this->fetchRow($this->select()->where('id = ?', $user_id));
         if(!$row) {
             throw new Exception("There is no element with ID: $user_id");
         }
@@ -119,8 +119,8 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
             'updated_at' => date('Y-m-d H:m:s')
 
         );
-
-        $this->update($data, 'id=?', (int)$id);
+        $where = $this->getAdapter()->quoteInto('id = ?', $id);
+        $this->update($data, $where);
 
     }
 }

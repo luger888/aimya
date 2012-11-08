@@ -5,7 +5,7 @@ abstract class Application_Model_DbTable_Abstract extends Zend_Db_Table_Abstract
 
     public function getItem($id){
         $id = (int)$id;
-        $row = $this->fetchRow('id = ?' , $id);
+        $row = $this->fetchRow('id=?', $id);
         if(!$row) {
             throw new Exception("There is no element with ID: $id");
         }
@@ -32,14 +32,14 @@ abstract class Application_Model_DbTable_Abstract extends Zend_Db_Table_Abstract
     public function deleteItem($id)
     {
 
-        $this->delete('id=?' , ((int)$id));
+        $this->delete('id=?', ((int)$id));
 
     }
 
     public function updateItem($data,$id)
     {
         try{
-            $pk = $this->update($data, 'id = ?' , (int)$id);
+            $pk = $this->update($data, 'id=?', (int)$id);
             return true;
         } catch  (Exception $e) {
             $pk = false;

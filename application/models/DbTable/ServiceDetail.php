@@ -38,8 +38,8 @@ class Application_Model_DbTable_ServiceDetail extends Application_Model_DbTable_
         );
         $where = array(
 
-            $this->getAdapter()->quoteInto('id = ?', $array['hiddenId']),
-            $this->getAdapter()->quoteInto('user_id = ?', $id)
+            $this->getAdapter()->quoteInto('id=?', $array['hiddenId']),
+            $this->getAdapter()->quoteInto('user_id=?', $id)
 
         );
         $this->update($data, $where);
@@ -50,8 +50,8 @@ class Application_Model_DbTable_ServiceDetail extends Application_Model_DbTable_
     {
         $where = array(
 
-            $this->getAdapter()->quoteInto('id = ?', (int)$id),
-            $this->getAdapter()->quoteInto('user_id = ?', (int)$user_id)
+            $this->getAdapter()->quoteInto('id =?', (int)$id),
+            $this->getAdapter()->quoteInto('user_id=?', (int)$user_id)
 
         );
         $this->delete($where);
@@ -61,7 +61,7 @@ class Application_Model_DbTable_ServiceDetail extends Application_Model_DbTable_
     public function getServiceByUser($user_id)
     {
         $user_id = (int)$user_id;
-        $row = $this->fetchAll('user_id = ?' , (int)$user_id);
+        $row = $this->fetchAll('user_id=?' , (int)$user_id);
         if (!$row) {
             throw new Exception("There is no element with ID: $user_id");
         }
