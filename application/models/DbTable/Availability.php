@@ -12,7 +12,7 @@ class Application_Model_DbTable_Availability extends Application_Model_DbTable_A
 
         );
 
-        $this->update($data, 'user_id='.$user_id);
+        $this->update($data, 'user_id=?',$user_id);
     }
 
     public function createAvailability($user_id)
