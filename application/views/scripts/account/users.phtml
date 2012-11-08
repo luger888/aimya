@@ -1,4 +1,4 @@
-<table  class="table table-striped table-hover">
+<div class = "userRelations"><table  class="table table-striped table-hover">
     <thead style="background: #ccc">
     <tr>
         <td> First Name </td>
@@ -17,7 +17,7 @@
         <td>'.$value['lastname'].'</td>
         <td>'.$value['username'].'</td>
         <td>...</td>
-        <td>Block/Delete</td>
+        <td><div class = "blockUser" onclick ="blockUser(this);return false;">Block</div><div class = "deleteUser" onclick ="deleteUser(this);return false;">Delete</div><input type = "hidden" value = '. $value['id'].'</td>
     </tr>';
         }
 
@@ -27,3 +27,4 @@
 
     </tbody>
 </table>
+</div>

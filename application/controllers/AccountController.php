@@ -14,7 +14,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         //basic tab
         $identity = Zend_Auth::getInstance()->getStorage()->read();
         $this->view->headScript()->appendFile('../../js/jquery/account/tabs/services.js');
-
+        $this->view->headScript()->appendFile('../../js/jquery/account/tabs/users.js');
         $profileForm = new Application_Form_Profile();
         $profileModel = new Application_Model_Profile();
         $this->view->profile = $profileForm->populate($profileModel->getProfileAccount($identity->id));
@@ -133,7 +133,8 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         $identity = Zend_Auth::getInstance()->getStorage()->read();
         if ($this->getRequest()->isPost()) {
             $dbServiceDetail = new Application_Model_DbTable_ServiceDetail();
-
+            $dbUserRelations = new Application_Model_DbTable_UserRelations();
+            /*Service Details tab*/
             if ($this->getRequest()->getParam('deleteService')) {
 
                 $dbServiceDetail->deleteService($this->getRequest()->getParam('deleteService'), $identity->id);
@@ -142,6 +143,11 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                 $this->view->editForm = $dbServiceDetail->getItem($this->getRequest()->getParam('editService'));
 
             }
+            /*  Users tab, update relations    */
+            if($this->getRequest()->getParam('updateUserId')){
+                $dbUserRelations->updateUserStatus($this->getRequest()->getPost(), $identity->id);
+            }
+
         }
     }
 

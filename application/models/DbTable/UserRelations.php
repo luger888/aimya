@@ -16,5 +16,22 @@ class Application_Model_DbTable_UserRelations extends Application_Model_DbTable_
         return $row->toArray();
     }
 
+    public function updateUserStatus($array = array(), $user_id)
+    {
+
+        $data = array(
+
+            'status'=> $array['status'],
+            'updated_at' => date('Y-m-d H:m:s')
+
+        );
+        $where = array(
+
+            $this->getAdapter()->quoteInto('friend_id=?', $array['updateUserId']),
+            $this->getAdapter()->quoteInto('sender_id=?', $user_id)
+
+        );
+        $this->update($data, $where);
+    }
 
 }
