@@ -14,73 +14,81 @@ class Application_Form_Registration extends Zend_Form
         $firstName->setRequired(true)
             ->addValidator('NotEmpty')
             ->setAttrib('placeholder', 'First Name')
-            ->setAttrib('class', 'required')
+            ->setAttrib('class', 'regTextInput')
             ->setAttrib('id', 'firstname')
             ->addFilters($this->basicFilters)
             ->setErrorMessages(array('Insert your first name'))
-            ->setDecorators($this->basicDecorators);
+            ->setLabel('First Name:');
+            #->setDecorators($this->basicDecorators);
 
         $lastName = new Zend_Form_Element_Text('lastname');
         $lastName ->setRequired(true)
             ->addValidator('NotEmpty')
-            ->setAttrib('class', 'required')
+            ->setAttrib('class', 'regTextInput')
             ->setAttrib('placeholder', 'Last Name')
             ->setAttrib('id', 'lastname')
             ->addFilters($this->basicFilters)
             ->setErrorMessages(array('Insert your last name'))
-            ->setDecorators($this->basicDecorators);
+            ->setLabel('Last Name:');
+           # ->setDecorators($this->basicDecorators);
 
         $userName = new Zend_Form_Element_Text('username');
         $userName->setRequired(true)
             ->addValidator('NotEmpty')
             ->setAttrib('placeholder', 'User Name')
-            ->setAttrib('class', 'required')
+            ->setAttrib('class', 'regTextInput')
             ->setAttrib('id', 'username')
             ->addFilters($this->basicFilters)
             ->setErrorMessages(array('Insert your username'))
-            ->setDecorators($this->basicDecorators);
+            ->setLabel('Login:');
+            #->setDecorators($this->basicDecorators);
 
         $email = new Zend_Form_Element_Text('email');
         $email->setRequired(true)
             ->addValidator(new Zend_Validate_EmailAddress())
             ->setAttrib('placeholder', 'E-mail')
             ->setAttrib('placeholder', 'email address')
-            ->setAttrib('class', 'clearInput required email')
+            ->setAttrib('class', 'clearInput regTextInput email')
             ->setErrorMessages(array('Insert your email'))
-            ->setDecorators($this->basicDecorators);
+            ->setLabel('Email address:');
+            #->setDecorators($this->basicDecorators);
 
         $password = new Zend_Form_Element_Password('password');
         $password->setRequired(true)
             ->addValidator('NotEmpty')
             ->addValidator('stringLength', false, array(6, 200))
             ->setAttrib('placeholder', 'Password')
-            ->setAttrib('class', 'clearInput required')
+            ->setAttrib('class', 'clearInput regTextInput')
             ->addFilters($this->basicFilters)
-            ->setDecorators($this->basicDecorators)
-            ->setErrorMessages(array('Insert your password'));
+            #->setDecorators($this->basicDecorators)
+            ->setErrorMessages(array('Insert your password'))
+            ->setLabel('Password:');
 
         $password2 = new Zend_Form_Element_Password('password2');
         $password2->addValidator('stringLength', false, array(6, 200))
             ->setAttrib('placeholder', 'Confirm password')
-            ->setAttrib('class', 'clearInput required')
+            ->setAttrib('class', 'clearInput regTextInput')
             ->addFilters($this->basicFilters)
-            ->setDecorators($this->basicDecorators);
+            ->setLabel('Confirm password:');
+            #->setDecorators($this->basicDecorators);
 
         $type = new Zend_Form_Element_Radio('type');
         $type->addMultiOptions(array(
 
-                '2' => 'Teaching member',
-                '1' => 'Learning member'
+                '2' => 'TEACHING MEMBER',
+                '1' => 'LEARNING MEMBER'
 
             )
         );
-        $type->setAttrib('class', 'styledCheckbox required')
+        $type->setAttrib('class', 'btnStrict')
             ->setDecorators($this->basicDecorators)
             ->setSeparator('');
 
         $submit = new Zend_Form_Element_Submit('signup');
         $submit ->setAttrib('id', 'signup')
-                ->setAttrib('class', 'btn');
+                ->setLabel('SIGN UP')
+                ->setAttrib('class', 'btn btnStrict signup-element')
+                ->setDecorators($this->basicDecorators);
 
         $this->addElements(array($firstName, $lastName, $userName, $email, $password, $password2, $type, $submit));
     }

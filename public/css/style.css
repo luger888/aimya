@@ -1,18 +1,75 @@
 /*global*/
-li{
-list-style-type: none;
-}
 body{
-    background-color: #b8d3c7;
+    font-family: helvetica;
+    background-color: #cee5db;
 }
+li{
+    list-style-type: none;
+}
+
+
 /* FONTS*/
 @font-face {
     font-family: lobster1;
     src: url('fonts/Lobster_1_4.otf');
 }
 @font-face {
-    font-family: krungthep
+    font-family: dosis-semibold;
+    src: url('fonts/Dosis-SemiBold.ttf');
+}
+@font-face {
+    font-family: krungthep;
     src: url('fonts/Krungthep.ttf');
+}
+.strictFont{
+font:15px dosis-semibold;
+}
+/*Buttons*/
+.btnStrict{
+    font:13px dosis-semibold;
+
+    background-color: hsl(153, 30%, 41%) !important;
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#70b294", endColorstr="#49876b");
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#70b294), to(#49876b));
+    background-image: -moz-linear-gradient(top, #70b294, #49876b);
+    background-image: -ms-linear-gradient(top, #70b294, #49876b);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #70b294), color-stop(100%, #49876b));
+    background-image: -webkit-linear-gradient(top, #70b294, #49876b);
+    background-image: -o-linear-gradient(top, #70b294, #49876b);
+    box-shadow: 0 1px 0 rgba(176, 214, 200, 0.7) inset;
+    border-color: #579673;
+    color: #fff !important;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.33);
+    -webkit-font-smoothing: antialiased;
+    width:100px !important;
+    height:37px;
+
+}
+/*Inputs*/
+.regTextInput{
+    width:165px;
+    height: 25px !important;
+    border: 1px solid #80af9a !important;
+    border-radius: 0 !important;
+}
+.logTextInput{
+    padding:2px !important;
+    border-radius: 0 !important;
+    margin-bottom: 0 !important;
+}
+.regTextInput:focus{
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 12px rgba(255, 255, 255, 1) !important;
+}
+.logTextInput:focus{
+
+    border:1px solid #0b6049 !important;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 5px rgba(255, 255, 255, 1) !important;
+}
+.buttonBar label{
+    font:13px dosis-semibold;
+    color:white;
+
 }
 /*twitter*/
 .hero-unit{
@@ -26,11 +83,13 @@ body{
 .header {
     background-image: url('../img/design/header.png');
     background-repeat: repeat-x;
+    height:85px;
+    -moz-box-shadow: 0 0 4px rgba(0,0,0,0.5); /* Для Firefox */
+    -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.5); /* Для Safari и Chrome */
+    box-shadow: 0 0 4px rgba(0,0,0,0.5);
 
 }
 .header .logo{
-    position: relative;
-    bottom: 10px;
 
 
 }
@@ -40,13 +99,14 @@ body{
 }
 .header .logo a h1{
     color:#e2e2e2;
-    font:45pt lobster1;
+    font:52px lobster1;
     text-shadow: 1px 1px 2px black;
+    display: inline;
 }
 .header .logo h1 span {
-    font: 25pt krungthep sans-serif;
+    font: 30px krungthep;
     color:#7caa9f;
-    text-shadow: 1px 1px 0 black;
+    text-shadow: 0px 0px 0px black;
 
 }
 #globalNav {
@@ -87,13 +147,29 @@ body{
 }
 #loginFormHolder label{
     float:left;
-    margin-right: 90px;
+    margin-right: 81px;
 
 }
 #loginFormHolder #login{
-    margin-bottom: 9px;
+
+}
+#loginFormHolder .pass{
+    margin-left: 118px;
 }
 /*registration*/
+#registrationFormHolder{
+    width:390px;
+}
+
+#registrationFormHolder dt,#registrationFormHolder dd{
+    float:left;
+}
+#registrationFormHolder label{
+    width: 109px;
+    font:12px helvetica;
+    margin-top:10px;
+}
+
 #registrationFormHolder .buttonBar input[type="radio"]{
 display: none;
 }
@@ -110,11 +186,39 @@ display: none;
     background-color: #AFE0A3;
 }
 
-#SignUp-element{
-    margin-left: 148px;
+.signup-element{
+    margin-left: 198px;
+    margin-top: 12px;
 }
+/*Social buttons*/
 
-
+.twitterIcon{
+    background-image: url('../img/design/socialButtons/twitter.png');
+    height:18px;
+    width:18px;
+    left: 25px;
+    position: relative;
+    width: 18px;
+    bottom: 33px;
+}
+.facebookIcon{
+    background-image: url('../img/design/socialButtons/facebook.png');
+    height:18px;
+    width:18px;
+    bottom: 51px;
+    position: relative;
+    width: 18px;
+    left: 52px;
+}
+.linkedInIcon{
+    background-image: url('../img/design/socialButtons/linkedin.png');
+    height:18px;
+    width:18px;
+    left: 80px;
+    position: relative;
+    width: 18px;
+    bottom: 69px;
+}
 /*account*/
 
 
