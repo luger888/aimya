@@ -8,7 +8,7 @@ class Application_Model_DbTable_UserRelations extends Application_Model_DbTable_
     public function getUserRelations($sender_id)
     {
         $sender_id = (int)$sender_id;
-        $row = $this->fetchAll('sender_id=?' , $sender_id);
+        $row = $this->fetchAll($this->select()->where('sender_id=?' , $sender_id));
         if (!$row) {
             throw new Exception("There is no element with ID: $sender_id");
         }

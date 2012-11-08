@@ -29,7 +29,7 @@ class Application_Model_DbTable_Availability extends Application_Model_DbTable_A
     public function getAvailability($user_id)
     {
         $user_id = (int)$user_id;
-        $row = $this->fetchRow('user_id=?' , (int)$user_id);
+        $row = $this->fetchRow($this->select()->where('user_id=?' , (int)$user_id));
         if(!$row) {
             throw new Exception("There is no element with ID: $user_id");
         }
