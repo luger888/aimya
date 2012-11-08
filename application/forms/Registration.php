@@ -13,7 +13,7 @@ class Application_Form_Registration extends Zend_Form
         $firstName = new Zend_Form_Element_Text('firstname');
         $firstName->setRequired(true)
             ->addValidator('NotEmpty')
-            ->setAttrib('placeholder', 'First Name')
+            #->setAttrib('placeholder', 'First Name')
             ->setAttrib('class', 'regTextInput')
             ->setAttrib('id', 'firstname')
             ->addFilters($this->basicFilters)
@@ -25,7 +25,7 @@ class Application_Form_Registration extends Zend_Form
         $lastName ->setRequired(true)
             ->addValidator('NotEmpty')
             ->setAttrib('class', 'regTextInput')
-            ->setAttrib('placeholder', 'Last Name')
+            #->setAttrib('placeholder', 'Last Name')
             ->setAttrib('id', 'lastname')
             ->addFilters($this->basicFilters)
             ->setErrorMessages(array('Insert your last name'))
@@ -35,7 +35,7 @@ class Application_Form_Registration extends Zend_Form
         $userName = new Zend_Form_Element_Text('username');
         $userName->setRequired(true)
             ->addValidator('NotEmpty')
-            ->setAttrib('placeholder', 'User Name')
+           # ->setAttrib('placeholder', 'User Name')
             ->setAttrib('class', 'regTextInput')
             ->setAttrib('id', 'username')
             ->addFilters($this->basicFilters)
@@ -46,8 +46,8 @@ class Application_Form_Registration extends Zend_Form
         $email = new Zend_Form_Element_Text('email');
         $email->setRequired(true)
             ->addValidator(new Zend_Validate_EmailAddress())
-            ->setAttrib('placeholder', 'E-mail')
-            ->setAttrib('placeholder', 'email address')
+            #->setAttrib('placeholder', 'E-mail')
+            #->setAttrib('placeholder', 'email address')
             ->setAttrib('class', 'clearInput regTextInput email')
             ->setErrorMessages(array('Insert your email'))
             ->setLabel('Email address:');
@@ -57,7 +57,7 @@ class Application_Form_Registration extends Zend_Form
         $password->setRequired(true)
             ->addValidator('NotEmpty')
             ->addValidator('stringLength', false, array(6, 200))
-            ->setAttrib('placeholder', 'Password')
+            #->setAttrib('placeholder', 'Password')
             ->setAttrib('class', 'clearInput regTextInput')
             ->addFilters($this->basicFilters)
             #->setDecorators($this->basicDecorators)
@@ -66,7 +66,7 @@ class Application_Form_Registration extends Zend_Form
 
         $password2 = new Zend_Form_Element_Password('password2');
         $password2->addValidator('stringLength', false, array(6, 200))
-            ->setAttrib('placeholder', 'Confirm password')
+            #->setAttrib('placeholder', 'Confirm password')
             ->setAttrib('class', 'clearInput regTextInput')
             ->addFilters($this->basicFilters)
             ->setLabel('Confirm password:');

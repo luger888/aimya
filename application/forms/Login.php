@@ -10,7 +10,7 @@ class Application_Form_Login extends Zend_Form
     {
 
         $username = new Zend_Form_Element_Text('username');
-        $username->setAttrib('placeholder', 'username or email')
+        $username#->setAttrib('placeholder', 'username or email')
             ->setAttrib('id', 'username-login')
             ->setAttrib('class', 'customInput logTextInput login clearInput')
             ->addFilters($this->basicFilters)
@@ -19,7 +19,7 @@ class Application_Form_Login extends Zend_Form
         $password = new Zend_Form_Element_Password('password');
         $password->setRequired(true)
             ->addValidator('NotEmpty')
-            ->setAttrib('placeholder', 'password')
+            #->setAttrib('placeholder', 'password')
             ->setAttrib('class', 'customInput logTextInput clearInput')
             ->setAttrib('id', 'password-login')
             ->addFilters($this->basicFilters)
