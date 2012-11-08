@@ -23,8 +23,8 @@ class Application_Model_DbTable_Lesson extends Application_Model_DbTable_Abstrac
 
         $data = $this   ->select()
             ->from($this->_name)
-            ->where('partner_id='. (int)$userId)
-            ->where('status=1');
+            ->where('partner_id=?', (int)$userId)
+            ->where('status=?', 1);
 
         $userData = $data->query();
         $row = $userData->fetch();
@@ -40,12 +40,16 @@ class Application_Model_DbTable_Lesson extends Application_Model_DbTable_Abstrac
     public function changeStatus($id)
     {
 
+        $where   = array(
+            $this->getAdapter()->quoteInto('id=?', (int)$id),
+        );
+
         $data = array(
             'status'=> 2,
             'updated_at' => date('Y-m-d H:m:s')
         );
 
-        $this->update($data, 'id='.$id);
+        $this->update($data, $where);
 
     }
 
