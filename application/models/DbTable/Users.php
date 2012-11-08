@@ -29,7 +29,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
     }
 
-    public function createUser($array)
+    public function createUser($array = array())
     {
 
 
@@ -91,7 +91,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
     public function getUser($user_id){
         $user_id = (int)$user_id;
-        $row = $this->fetchRow('id = ' . $user_id);
+        $row = $this->fetchRow('id =? ' , (int)$user_id);
         if(!$row) {
             throw new Exception("There is no element with ID: $user_id");
         }
@@ -102,12 +102,12 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
     public function getUserInfo($user_id){
         $data = $this->select()
             ->from('user', array('id', 'firstname', 'lastname', 'username'))
-            ->where('id=?', $user_id);
+            ->where('id=?', (int)$user_id);
 
         return $data->query()->fetch();
     }
 
-    public function updateUser($array, $id)
+    public function updateUser($array = array(), $id)
     {
 
         $data = array(
@@ -120,7 +120,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
         );
 
-        $this->update($data, 'id=?',$id);
+        $this->update($data, 'id=?', (int)$id);
 
     }
 }

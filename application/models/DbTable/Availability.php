@@ -3,7 +3,7 @@ class Application_Model_DbTable_Availability extends Application_Model_DbTable_A
 {
     protected $_name = 'user_availability';
 
-    public function updateAvailability($array, $user_id)
+    public function updateAvailability($array = array(), $user_id)
     {
         $serializedArray = serialize($array);
         $data = array(
@@ -19,7 +19,7 @@ class Application_Model_DbTable_Availability extends Application_Model_DbTable_A
     {
         $data = array(
 
-            'user_id' => $user_id
+            'user_id' => (int)$user_id
 
         );
 

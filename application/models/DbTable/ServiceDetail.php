@@ -3,12 +3,12 @@ class Application_Model_DbTable_ServiceDetail extends Application_Model_DbTable_
 {
     protected $_name = 'service_detail';
 
-    public function addService($array, $id)
+    public function addService($array = array(), $id)
     {
 
         $data = array(
 
-            'user_id' => $id,
+            'user_id' => (int)$id,
             'lesson_category' => $array['lesson_category'],
             'subcategory' => $array['subcategory'],
             'rate' => (int)$array['rate'],
@@ -23,7 +23,7 @@ class Application_Model_DbTable_ServiceDetail extends Application_Model_DbTable_
 
     }
 
-    public function updateService($array, $id)
+    public function updateService($array = array(), $id)
     {
 
         $data = array(
@@ -50,8 +50,8 @@ class Application_Model_DbTable_ServiceDetail extends Application_Model_DbTable_
     {
         $where = array(
 
-            $this->getAdapter()->quoteInto('id = ?', $id),
-            $this->getAdapter()->quoteInto('user_id = ?', $user_id)
+            $this->getAdapter()->quoteInto('id = ?', (int)$id),
+            $this->getAdapter()->quoteInto('user_id = ?', (int)$user_id)
 
         );
         $this->delete($where);
@@ -61,7 +61,7 @@ class Application_Model_DbTable_ServiceDetail extends Application_Model_DbTable_
     public function getServiceByUser($user_id)
     {
         $user_id = (int)$user_id;
-        $row = $this->fetchAll('user_id = ?' , $user_id);
+        $row = $this->fetchAll('user_id = ?' , (int)$user_id);
         if (!$row) {
             throw new Exception("There is no element with ID: $user_id");
         }

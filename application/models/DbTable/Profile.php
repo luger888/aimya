@@ -3,7 +3,7 @@ class Application_Model_DbTable_Profile extends Application_Model_DbTable_Abstra
 {
     protected $_name = 'account';
 
-    public function updateProfile($array, $id)
+    public function updateProfile($array = array(), $id)
     {
 
         $data = array(
@@ -46,7 +46,7 @@ class Application_Model_DbTable_Profile extends Application_Model_DbTable_Abstra
 
         $data = array(
 
-            'user_id' => $id,
+            'user_id' => (int)$id,
             'created_at' => date('Y-m-d H:m:s'),
             'updated_at' => date('Y-m-d H:m:s')
 
