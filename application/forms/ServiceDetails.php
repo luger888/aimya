@@ -10,13 +10,20 @@ class Application_Form_ServiceDetails extends Zend_Form
 
         $lessonDbModel = new Application_Model_DbTable_LessonCategory();
         $lessonCategories = $lessonDbModel->getLessonCategories();//category from db
+
+        $categories = array();
+        foreach($lessonCategories as $value){
+            $categories[$value['title']] = $value['title'];
+        }
         $this->setName('serviceDetails');
 
         $lesson_category = new Zend_Form_Element_Select('lesson_category');
         $lesson_category->setAttrib('id', 'lesson_category')
             ->addFilters($this->basicFilters)
-            ->setDecorators($this->basicDecorators)
-            ->addMultiOptions(array($lessonCategories[0]['title']=>$lessonCategories[0]['title']));
+            ->setDecorators($this->basicDecorators);
+        foreach ($lessonCategories as  $value) {
+            $lesson_category->addMultiOption($value['title'], $value['title']);
+        }
 
         $subcategory = new Zend_Form_Element_Text('subcategory');
         $subcategory ->setAttrib('placeholder', 'Specify Category')

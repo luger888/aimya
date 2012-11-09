@@ -21,9 +21,10 @@ class Application_Form_FeaturesFilter extends Zend_Form
         $lesson_category = new Zend_Form_Element_Select('lesson_category');
         $lesson_category->setAttrib('id', 'lesson_category')
             ->addFilters($this->basicFilters)
-            ->setDecorators($this->basicDecorators)
-            ->addMultiOptions(array($lessonCategories[0]['title'] => $lessonCategories[0]['title']));
-
+            ->setDecorators($this->basicDecorators);
+        foreach ($lessonCategories as  $value) {
+            $lesson_category->addMultiOption($value['title'], $value['title']);
+        }
         $this->addElements(array($author, $lesson_category));
     }
 }
