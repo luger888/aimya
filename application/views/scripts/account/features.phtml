@@ -1,4 +1,6 @@
 <?php
+echo $this->filters->author;
+echo $this->filters->lesson_category.'<br>';
 foreach($this->featured as $person){
     echo $person['firstname'].' URL: <a href="/user/'.$person['id'].'">'.$person['username'].'</a><br>';
 }
