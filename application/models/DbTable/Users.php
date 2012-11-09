@@ -123,4 +123,19 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         $this->update($data, 'id='.$id);
 
     }
+
+    public function getFullData($id){
+
+        $data = $this->getAdapter()
+            ->select()
+            ->from($this->_name)
+            //->joinLeft('account', $where)
+            ->joinLeft('account', 'account.user_id = user.id')
+            ->where('user.id=?', $id);
+
+        $result = $data->query()->fetch();
+        $result['id'] = $id;
+
+        return $result;
+    }
 }

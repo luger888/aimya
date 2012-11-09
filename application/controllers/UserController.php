@@ -11,7 +11,17 @@ class UserController extends Zend_Controller_Action
 
     public function indexAction()
     {
+        $userId = $this->getRequest()->getParam('id');
 
+        $userModel = new Application_Model_DbTable_Users();
+
+        $user = $userModel->getFullData($userId);
+        if($user) {
+            $userData = $user;
+        } else {
+            $this->_helper->redirector('page404','error');
+        }
+        $this->view->userData = $userData;
     }
 
     public function confirmationAction() {

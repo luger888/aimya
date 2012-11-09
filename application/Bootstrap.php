@@ -52,7 +52,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $front->getRouter()->addRoute('user', $restRoute );
     }*/
 
-    protected function _initRouter(){
+    protected function _initCMSRouter(){
 
         $frontController = Zend_Controller_Front::getInstance();
         $router = $frontController->getRouter();
@@ -77,6 +77,27 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $router->addRoute('([a-zA-Z0-9_&\-]+)\.html', $route);
 
     }
+
+    protected function _initUserRouter(){
+
+        $frontController = Zend_Controller_Front::getInstance();
+        $router = $frontController->getRouter();
+        $route = new Zend_Controller_Router_Route_Regex(
+            'user/(\d+)',
+            array(
+                'controller' => 'user',
+                'action'     => 'index'
+            ),
+            array(
+                1 => 'id'
+            )
+
+        );
+
+        $router->addRoute('user/(\d+)', $route);
+
+    }
+
     public function _initNavigation()
     {
 
