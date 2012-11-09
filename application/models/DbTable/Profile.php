@@ -15,8 +15,8 @@ class Application_Model_DbTable_Profile extends Application_Model_DbTable_Abstra
             'updated_at' => date('Y-m-d H:m:s')
 
         );
-
-        $this->update($data, 'user_id='.$id);
+        $where = $this->getAdapter()->quoteInto('user_id = ?', (int)$id);
+        $this->update($data, $where);
 
     }
     public function updateAvatar($avatar, $id)
@@ -27,14 +27,14 @@ class Application_Model_DbTable_Profile extends Application_Model_DbTable_Abstra
             'avatar'=> $avatar
 
         );
-
-        $this->update($data, 'user_id='.$id);
+        $where = $this->getAdapter()->quoteInto('user_id = ?', (int)$id);
+        $this->update($data, $where);
 
     }
 
     public function getProfile($user_id){
         $user_id = (int)$user_id;
-        $row = $this->fetchRow('user_id = ' . $user_id);
+        $row = $this->fetchRow($this->select()->where('user_id = ?', $user_id));
         if(!$row) {
             throw new Exception("There is no element with ID: $user_id");
         }
@@ -46,7 +46,7 @@ class Application_Model_DbTable_Profile extends Application_Model_DbTable_Abstra
 
         $data = array(
 
-            'user_id' => $id,
+            'user_id' => (int)$id,
             'created_at' => date('Y-m-d H:m:s'),
             'updated_at' => date('Y-m-d H:m:s')
 
@@ -55,7 +55,5 @@ class Application_Model_DbTable_Profile extends Application_Model_DbTable_Abstra
         $this->insert($data);
 
     }
-
-
 
 }

@@ -3,7 +3,7 @@ class Application_Model_DbTable_Availability extends Application_Model_DbTable_A
 {
     protected $_name = 'user_availability';
 
-    public function updateAvailability($array, $user_id)
+    public function updateAvailability($array = array(), $user_id)
     {
         $serializedArray = serialize($array);
         $data = array(
@@ -11,15 +11,15 @@ class Application_Model_DbTable_Availability extends Application_Model_DbTable_A
             'available_at' => $serializedArray
 
         );
-
-        $this->update($data, 'user_id='.$user_id);
+        $where = $this->getAdapter()->quoteInto('user_id = ?', (int)$user_id);
+        $this->update($data, $where);
     }
 
     public function createAvailability($user_id)
     {
         $data = array(
 
-            'user_id' => $user_id
+            'user_id' => (int)$user_id
 
         );
 
@@ -29,7 +29,7 @@ class Application_Model_DbTable_Availability extends Application_Model_DbTable_A
     public function getAvailability($user_id)
     {
         $user_id = (int)$user_id;
-        $row = $this->fetchRow('user_id = ' . $user_id);
+        $row = $this->fetchRow($this->select()->where('user_id=?' , (int)$user_id));
         if(!$row) {
             throw new Exception("There is no element with ID: $user_id");
         }

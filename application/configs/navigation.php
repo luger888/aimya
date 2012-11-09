@@ -11,6 +11,18 @@ return array(
         'route' => 'default',
         'pages' => array
         (
+
+            array
+            (
+                'label' => 'Latest Featured',
+                'tag' => 'leftMenu',
+                'route' => 'default',
+                'module' => 'default',
+                'controller' => 'account',
+                'action' => 'features',
+                'resource'      => 'account',
+                'privilege'     => 'features',
+            ),
             array
             (
                 'label' => 'Profile',

@@ -313,7 +313,11 @@ display: none;
     vertical-align: middle;
 
 }
+/*Users tab*/
 
+.userRelations .blockUser, .userRelations .deleteUser{
+    display: inline-block;
+}
 /*Left Navigation Bar */
 .leftNavigation
 {
