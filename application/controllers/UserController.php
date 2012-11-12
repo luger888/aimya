@@ -79,6 +79,8 @@ class UserController extends Zend_Controller_Action
 
             if ($login->isValid($data)) {
                 $username = $this->getRequest()->getPost('username');
+                $f = new Aimya_Filter_EmailToUsername();
+                $username = $f->filter($username);
                 $password = md5($this->getRequest()->getPost('password'));
                 Zend_Auth::getInstance()->getStorage()->read();
 
