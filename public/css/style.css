@@ -160,7 +160,11 @@ font:15px dosis-semibold;
     margin: 0 5px 0 0;
     position: relative;
     bottom:2px;
+
+    background-image: url('../img/design/keepSignedCheclbox.png');
+    background-repeat: no-repeat;
 }
+
 #loginFormHolder label, #loginFormHolder a{
     float:left;
     margin-right: 85px;
@@ -177,7 +181,9 @@ font:15px dosis-semibold;
 }
 /*registration*/
 #registrationFormHolder{
-    width:390px;
+    width: 345px;
+    float:left;
+    margin-left: 3%;
 }
 
 #registrationFormHolder dt,#registrationFormHolder dd{
@@ -188,14 +194,18 @@ font:15px dosis-semibold;
     font:12px helvetica;
     margin-top:10px;
 }
-
+.error{
+    float: left;
+    font-size: 10px;
+    height: 500px;
+}
 #registrationFormHolder .buttonBar input[type="radio"]{
 display: none;
 }
 #registrationFormHolder .buttonBar{
     margin: 0 0 15px 22px;
 }
-#registrationFormHolder .buttonBar label:not(.checked){
+#registrationFormHolder .buttonBar .checked{
     display: inline-block;
     padding: 10px;
     margin:0 15px 15px 0;
@@ -220,7 +230,7 @@ display: none;
     width:122px !important;
     height:19px;
 }
-#registrationFormHolder .buttonBar .checked{
+#registrationFormHolder .buttonBar label:not(.checked){
 
     display: inline-block;
     padding: 10px;
