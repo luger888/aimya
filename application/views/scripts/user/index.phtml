@@ -1,2 +1,19 @@
-<?php $userData = $this->userData; ?>
-<?php Zend_Debug::dump($userData); ?>
+<div class="accountWrapper row-fluid no-space">
+    <div class="leftNavigation span1">
+        <?php
+        echo $this->navigation()
+            ->menu()
+            ->setMaxDepth(0)
+            ->setUlClass('nav nav-tabs nav-stacked')
+            ->render(new Aimya_Navigation($this->navigation()->findAllBy('tag', 'leftMenu', true)));
+        ?>
+    </div>
+    <div class="mainBlockProfile span9">
+        <?php $userData = $this->userData; ?>
+        <?php Zend_Debug::dump($userData); ?>
+        <form action="/friends/send" method="POST"  id="send_request">
+
+        </form>
+    </div>
+</div>
+
