@@ -129,19 +129,31 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         $order = 'created_at';
         $count  = 5;
         $offset = 0;
+        $data = $this->getAdapter()
+        ->select()
+        ->from('user', array('id', 'firstname', 'lastname', 'username', 'role'))
+        ->order($order)
+        ->limit($count, $offset);
+       if($role!=='0'){
+           $data  ->where('role=?', $role);
+       }
+        $author = $data->query()->fetchAll();
 
-        $data = $this->select();
-        $data ->from('user', array('id', 'firstname', 'lastname', 'username', 'role'));
-        if($role!=='0'){
-            $data  ->where('role=?', $role);
+        foreach($author as $index=>$value){
+            $services = $this->getAdapter()
+                ->select()
+                ->from('service_detail')
+                ->where('user_id=?', $value['id']);
+            if($category!=='All'){
+                $services->where('lesson_category=?', $category);
+            }
+            $servicesResult = $services->query()->fetchAll();
+
+            $author[$index]['services'] = $servicesResult;
+
         }
-        if($category!=='All'){
-        $data->joinLeft('service_detail', 'service_detail.user_id = user.id');
-        }
-        $data  ->order($order);
-        $data  ->limit($count, $offset);
-        #Zend_Debug::dump($data->query()->fetchAll());
-        return $data->query()->fetchAll();
+
+     return $author;
     }
     public function getFullData($id){
 
