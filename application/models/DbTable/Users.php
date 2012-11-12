@@ -151,8 +151,15 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
             //->joinLeft('account', $where)
             ->joinLeft('account', 'account.user_id = user.id')
             ->where('user.id=?', $id);
+        $services = $this->getAdapter()
+            ->select()
+            ->from('service_detail')
+            ->where('service_detail.user_id=?', $id);
+
+        $servicesResult = $services->query()->fetchAll();
 
         $result = $data->query()->fetch();
+        $result['services'] = $servicesResult;
         $result['id'] = $id;
 
         return $result;
