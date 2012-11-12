@@ -119,6 +119,14 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
     {
         $this->_helper->layout()->disableLayout();
 
+        $identity = Zend_Auth::getInstance()->getStorage()->read();
+
+        $servicesModel = new Application_Model_DbTable_ServiceDetail();
+        $this->view->services = $servicesModel->getServiceByUser($identity->id);
+
+        $profileModel = new Application_Model_Profile();
+        $this->view->profile = $profileModel->getProfileAccount($identity->id);
+        $this->view->avatarPath = $profileModel->getAvatarPath($identity->id); //path to avatar
     }
 
     public function metricsAction()

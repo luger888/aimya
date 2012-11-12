@@ -1,8 +1,9 @@
+<img class ="resumePhoto" src="<?php echo$this->avatarPath;?>">
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: Dima
- * Date: 30.10.12
- * Time: 11:44
- * To change this template use File | Settings | File Templates.
- */
+
+echo $this->profile['firstname'] . ' ' . $this->profile['lastname'] . '<br>';
+    foreach($this->services as $value):
+    echo $value['subcategory'] . ' ';
+ endforeach;
+echo  '<br>' . $this->profile['email'];
+?>

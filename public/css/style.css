@@ -328,6 +328,11 @@ display: none;
 .userRelations .blockUser, .userRelations .deleteUser{
     display: inline-block;
 }
+/* resume*/
+.resumePhoto
+{
+width:100px;
+}
 /*Left Navigation Bar */
 .leftNavigation
 {
