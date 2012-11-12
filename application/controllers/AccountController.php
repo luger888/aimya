@@ -157,6 +157,10 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
      $dbUserModel=new Application_Model_DbTable_Users();
      $this->view->featured = $dbUserModel->getLatestFeatured();
      $this->view->filters = new Application_Form_FeaturesFilter();
+     if ($this->getRequest()->isGet()) {
+         $userType = $this->getRequest()->getParam('user');// Teacher or students only
+         $lessonCat = $this->getRequest()->getParam('category');
+     }
 
  }
 
