@@ -4,3 +4,6 @@ echo $this->filters->lesson_category.'<br>';
 foreach($this->featured as $person){
     echo $person['firstname'].' URL: <a href="/user/'.$person['id'].'">'.$person['username'].'</a><br>';
 }
+foreach($this->featured as $person){
+    echo $person['lesson_category'].' URL: <a href="/user/'.$person['id'].'">'.$person['lesson_category'].'</a><br>';
+}

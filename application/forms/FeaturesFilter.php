@@ -14,7 +14,8 @@ class Application_Form_FeaturesFilter extends Zend_Form
         $author->setAttrib('id', 'author')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators)
-            ->addMultiOptions(array('2' => 'Instructors only',
+            ->addMultiOptions(array('0' => 'All',
+            '2' => 'Instructors only',
             '1' => 'Students only'
         ));
 

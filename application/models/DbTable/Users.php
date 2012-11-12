@@ -85,6 +85,8 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
         );
         $where = $this->getAdapter()->quoteInto('email=?', $data['email']);
+
+
         $this->update($array, $where);
 
     }
@@ -123,18 +125,23 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         $this->update($data, $where);
 
     }
-    public function getLatestFeatured(){
+    public function getLatestFeatured($role='0', $category = 'All'){
         $order = 'created_at';
         $count  = 5;
         $offset = 0;
 
-        $data = $this->select()
-            ->from('user', array('id', 'firstname', 'lastname', 'username'))
-            ->order($order)
-            ->limit($count, $offset);
-
+        $data = $this->select();
+        $data ->from('user', array('id', 'firstname', 'lastname', 'username', 'role'));
+        if($role!=='0'){
+            $data  ->where('role=?', $role);
+        }
+        if($category!=='All'){
+        $data->joinLeft('service_detail', 'service_detail.user_id = user.id');
+        }
+        $data  ->order($order);
+        $data  ->limit($count, $offset);
+        #Zend_Debug::dump($data->query()->fetchAll());
         return $data->query()->fetchAll();
-
     }
     public function getFullData($id){
 
