@@ -36,4 +36,6 @@ class Application_Model_Profile
         return $friends;//get friends firstname, lastname,username, id
 
     }
+
+
 }
