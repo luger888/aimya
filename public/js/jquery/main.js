@@ -45,6 +45,25 @@ $(document).ready(function() {
             }
         });
 
+        $leftTabs = $( '#left_tabs' );
+
+        $( "#left_tabs" ).tabs().addClass( "ui-tabs-vertical ui-helper-clearfix" );
+        $( "#left_tabs li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
+
+        $leftTabs.tabs(
+            {cache:true,
+                load: function (e, ui) {
+                    $(ui.panel).find(".tab-loading").remove();
+                },
+                select: function( e, ui )
+                {
+                    var $panel = $(ui.panel);
+                    if ($panel.is(":empty")) {
+                        $panel.append("<div class='tab-loading'>Loading...</div>")
+                    }
+                }
+            });
+
         stickyTab = $.cookies.get( cookieName );
         if( ! isNaN( stickyTab )  )
         {

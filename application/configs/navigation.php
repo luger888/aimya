@@ -36,6 +36,17 @@ return array(
             ),
             array
             (
+                'label' => 'My Inbox',
+                'tag' => 'leftMenu',
+                'route' => 'default',
+                'module' => 'default',
+                'controller' => 'message',
+                'action' => 'inbox',
+                'resource'      => 'message',
+                'privilege'     => 'inbox',
+            ),
+            array
+            (
                 'label' => 'Lesson',
                 'tag' => 'leftMenu',
                 'route' => 'default',
