@@ -104,10 +104,23 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
     {
         $this->_helper->layout()->disableLayout();
         $identity = Zend_Auth::getInstance()->getStorage()->read();
+        $dbNotifications = new Application_Model_DbTable_Notifications();
         $notificationForm = new Application_Form_Notifications();
-        $profileModel = new Application_Model_Profile();
-        $this->view->notifications = $notificationForm;
+        $this->view->notificationsForm = $notificationForm->populate($dbNotifications->getNotifications($identity->id));
+        if ($this->getRequest()->isPost()) {
+            $formData = $this->getRequest()->getPost();
 
+            if ($notificationForm->isValid($formData)) {
+
+                $dbNotifications->updateNotifications($formData, $identity->id);
+                $this->_helper->redirector('index', 'account');
+
+            } else {
+
+                $this->view->errors = $notificationForm->getErrors();
+
+            }
+        }
     }
 
     public function usersAction()

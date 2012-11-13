@@ -7,6 +7,7 @@ class Application_Form_Notifications extends Zend_Form
     /*Roles*/
     private  $teacher = '2';
     private  $student = '1';
+
     public function init()
     {
         $identity = Zend_Auth::getInstance()->getStorage()->read();
@@ -57,9 +58,9 @@ class Application_Form_Notifications extends Zend_Form
             ->setErrorMessages(array('Insert your password'));
 
 
-        $submit = new Zend_Form_Element_Submit('saveProfile');
-        $submit ->setLabel('Save and continue')
-            ->setAttrib('id', 'saveProfile')
+        $submit = new Zend_Form_Element_Submit('saveNotifications');
+        $submit ->setLabel('Save')
+            ->setAttrib('id', 'saveNotifications')
             ->setAttrib('class', 'btn')
             ->setDecorators($this->basicDecorators);
 
@@ -67,7 +68,7 @@ class Application_Form_Notifications extends Zend_Form
             $this->addElement($notify);
         }
 
-        $this->addElements(array($oldPassword, $newPassword, $newPasswordConfirm, $alert, $submit));
+        $this->addElements(array(/*$oldPassword, $newPassword, $newPasswordConfirm,*/ $alert, $submit));
 
 
     }
