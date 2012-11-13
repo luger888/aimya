@@ -34,6 +34,7 @@ class Application_Model_DbTable_Notifications extends Application_Model_DbTable_
             throw new Exception("There is no element with ID: $user_id");
         }
         $row = unserialize($row['settings']);
+
         if($row == '0'){
             $row = array();
         }
