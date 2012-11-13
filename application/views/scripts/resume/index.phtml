@@ -1,0 +1,26 @@
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">Basic</a></li>
+
+        <li><a href="/resume/experience">Describe Experience</a></li>
+        <li><a href="/resume/education">Describe Education</a></li>
+        <li><a href="/resume/skills">Describe Skills</a></li>
+    </ul>
+    <div id="tabs-1">
+        <img class ="resumePhoto" src="<?php echo$this->avatarPath;?>">
+        <?php
+
+        echo $this->profile['firstname'] . ' ' . $this->profile['lastname'] . '<br>';
+        foreach($this->services as $value):
+            echo $value['subcategory'] . ' ';
+        endforeach;
+        echo  '<br>' . $this->profile['email'];
+        ?>
+    </div>
+
+
+</div>
+
+
+
+<?php print_r($this->errors); ?>
