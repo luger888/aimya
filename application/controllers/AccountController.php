@@ -103,6 +103,10 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
     public function notificationsAction()
     {
         $this->_helper->layout()->disableLayout();
+        $identity = Zend_Auth::getInstance()->getStorage()->read();
+        $notificationForm = new Application_Form_Notifications();
+        $profileModel = new Application_Model_Profile();
+        $this->view->notifications = $notificationForm;
 
     }
 
