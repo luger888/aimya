@@ -36,6 +36,7 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         $acl->addResource('lesson');
         $acl->addResource('message');
         $acl->addResource('resume');
+        $acl->addResource('admin');
         #allow to user
         $acl->allow(self::STUDENT , 'user', array('logout'));
         $acl->allow(self::STUDENT , 'lesson', array('index', 'details', 'join'));
@@ -51,7 +52,8 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         $acl->allow(self::GUEST , 'index', array('index'));
         $acl->allow(self::GUEST , 'user', array('index','registration', 'login'));
         $acl->allow(self::GUEST , 'error', array('index'));
-
+        #allow to admin
+        $acl->allow(self::ADMIN , 'admin', array('index', 'payments', 'metrics'));
 
         Zend_Registry::set('Zend_Acl',$acl);
 
