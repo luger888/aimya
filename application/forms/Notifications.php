@@ -32,7 +32,7 @@ class Application_Form_Notifications extends Zend_Form
 
 
         /* Change password */
-        $oldPassword = new Zend_Form_Element_Password('password');
+        $oldPassword = new Zend_Form_Element_Password('oldPassword');
         $oldPassword->addValidator('stringLength', false, array(6, 200))
             ->setAttrib('placeholder', 'Old Password')
             ->setAttrib('class', 'clearInput required')
@@ -40,7 +40,7 @@ class Application_Form_Notifications extends Zend_Form
             ->setDecorators($this->basicDecorators)
             ->setErrorMessages(array('Insert your old password'));
 
-        $newPassword = new Zend_Form_Element_Password('password');
+        $newPassword = new Zend_Form_Element_Password('newPassword');
         $newPassword ->addValidator('stringLength', false, array(6, 200))
             ->setAttrib('placeholder', ' New Password')
             ->setAttrib('class', 'clearInput required')
@@ -48,7 +48,7 @@ class Application_Form_Notifications extends Zend_Form
             ->setDecorators($this->basicDecorators)
             ->setErrorMessages(array('Insert your password'));
 
-        $newPasswordConfirm = new Zend_Form_Element_Password('password');
+        $newPasswordConfirm = new Zend_Form_Element_Password('newPasswordConfirm');
         $newPasswordConfirm->addValidator('stringLength', false, array(6, 200))
             ->setAttrib('placeholder', 'Confirm Password')
             ->setAttrib('class', 'clearInput required')
@@ -67,7 +67,7 @@ class Application_Form_Notifications extends Zend_Form
             $this->addElement($notify);
         }
 
-        $this->addElements(array(/*$oldPassword, $newPassword, $newPasswordConfirm,*/ $alert, $submit));
+        $this->addElements(array($oldPassword, $newPassword, $newPasswordConfirm, $alert, $submit));
 
 
     }
