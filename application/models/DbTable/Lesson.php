@@ -21,10 +21,15 @@ class Application_Model_DbTable_Lesson extends Application_Model_DbTable_Abstrac
 
     public function checkAvailableLesson($userId){
 
-        $data = $this   ->select()
-            ->from($this->_name)
-            ->where('partner_id=?', (int)$userId)
-            ->where('status=?', 1);
+        $identity =  Zend_Auth::getInstance()->getStorage()->read();
+        $data = $this->select()
+            ->from($this->_name);
+        if($identity->role == 1){
+            $data->where('partner_id=?', (int)$userId);
+        } else {
+            $data->where('creator_id=?', (int)$userId);
+        }
+            $data->where('status=?', 1);
 
         $userData = $data->query();
         $row = $userData->fetch();
