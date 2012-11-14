@@ -1,14 +1,14 @@
 <?php
-class Application_Model_DbTable_ResumeExperience extends Application_Model_DbTable_Abstract
+class Application_Model_DbTable_ResumeEducation extends Application_Model_DbTable_Abstract
 
 {
-    protected $_name = 'experience';
+    protected $_name = 'education';
 
-    public function createExperience($array = array(), $user_id){
+    public function createEducation($array = array(), $user_id){
         $data = array(
 
             'user_id' => (int)$user_id,
-            'content' => $array['experience']
+            'content' => $array['education']
 
         );
 
@@ -17,7 +17,7 @@ class Application_Model_DbTable_ResumeExperience extends Application_Model_DbTab
         return $lastId;
     }
 
-    public function updateExperience($array = array(), $user_id)
+    public function updateEducation($array = array(), $user_id)
     {
 
         $data = array(
@@ -27,16 +27,16 @@ class Application_Model_DbTable_ResumeExperience extends Application_Model_DbTab
         );
         $where = array(
 
-            $this->getAdapter()->quoteInto('id =?', (int)$array['updateExperience']),
+            $this->getAdapter()->quoteInto('id =?', (int)$array['updateEducation']),
             $this->getAdapter()->quoteInto('user_id=?', (int)$user_id)
 
         );
         $this->update($data, $where);
     }
 
-    public function getExperiences($user_id)
+    public function getEducations($user_id)
     {
-        $array = $this->fetchAll($this->select()->where('user_id=?' , (int)$user_id)->order('id'));
+        $array = $this->fetchAll($this->select()->where('user_id=?' , (int)$user_id));
         if(!$array) {
             throw new Exception("There is no element with ID: $user_id");
         }
@@ -46,7 +46,7 @@ class Application_Model_DbTable_ResumeExperience extends Application_Model_DbTab
         return $array;
 
     }
-    public function deleteExperience($id, $user_id)
+    public function deleteEducation($id, $user_id)
     {
         $where = array(
 

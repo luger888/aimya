@@ -29,14 +29,13 @@ function saveExperience(){
             if(response.success == 1){ //if success
 
                 $('#experience').val('');
-                var content = '<div class = "experienceItem">'+
-                              '<div class = "experienceHeader">Experience : </div>'+
-                              '<div class = "experienceBody">'+ experience + '</div>'+
-                              '<input type = "button" value ="edit" class = "btn" onclick=editExperience(this);>'+
+                var content = '<div class = "experienceHeader">Experience : </div>'+
+                              '<div class = "experienceBody">'+ experience +
                               '<input type = "button" value ="delete" class = "btn" onclick=deleteExperience(this);>'+
+                              '<input type = "button" value ="edit" class = "btn" onclick=editExperience(this);>'+
                               '<input type = "hidden" value="' + response.lastId + '">'+
                               '</div>';
-                $('.experienceItem:last').after(content);
+                $('.experienceBody:last').after(content);
             }
 
         }

@@ -328,7 +328,7 @@ display: none;
     display: inline-block;
 }
 /* resume*/
-.experienceBody{
+.experienceBody, .educationBody{
     padding: 10px;
     border:1px solid #c0c0c0;
     margin:5px;
