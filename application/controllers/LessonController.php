@@ -159,69 +159,47 @@ class LessonController extends Zend_Controller_Action
         //Zend_Session::setOptions(array('strict' => 'on'));
         //session_id('tgpae3nf7oe20rbkuvnib6a4g7');
 
-        //$identityId = Zend_Auth::getInstance()->getIdentity()->id;
+        $identityId = Zend_Auth::getInstance()->getIdentity()->id;
         //$identityId =  Zend_Auth::getInstance()->getStorage()->read()->id;
         //$identityId = Zend_Registry::get('userid');
 
 
 
-        //$lessonTable = new Application_Model_DbTable_Lesson();
-        //$activeLesson = $lessonTable->checkAvailableLesson($identityId);
+        $lessonTable = new Application_Model_DbTable_Lesson();
+        $activeLesson = $lessonTable->checkAvailableLesson($identityId);
 
         @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation');
-        /*@mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . $identityId);
+        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . $identityId);
         $presPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $activeLesson['id'];
         @mkdir($presPath);
 
         $formData = $this->getRequest()->getParams();
 
-
-
-        if(isset($_FILES['Filedata']['name']) && $_FILES['Filedata']['name'] != '') {*/
+        if(isset($_FILES['Filedata']['name']) && $_FILES['Filedata']['name'] != '') {
 
             /*$text = json_encode($_POST);
             $text .= session_id();
             $this->write($text);*/
-            /*$presentationForm = new Application_Form_Presentation();
+            $presentationForm = new Application_Form_Presentation();
             $presentationForm->getElement("Filedata")->setDestination($presPath);
-            $presentationForm->Filedata->receive();*/
+            $presentationForm->Filedata->receive();
 
             //$fileName = $_FILES['Filedata']['name'];
-            //$filePath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $activeLesson['id'] . DIRECTORY_SEPARATOR . $formData['Filename'];
+            $filePath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $activeLesson['id'] . DIRECTORY_SEPARATOR . $formData['Filename'];
 
             /*$text = json_encode($filePath);
             //$text .= session_id();
             $this->write($text);*/
 
-            /*exec("conv.sh {$filePath}");
+            exec("conv.sh {$filePath}");
             $info = pathinfo($filePath);
             $pdfPath = $info['filename'] . '.pdf';
             $imgsPath = $presPath . DIRECTORY_SEPARATOR . 'jpges';
 
-            exec("convert {$pdfPath} {$imgsPath}file.jpg");*/
+            exec("convert {$pdfPath} {$imgsPath}file.jpg");
 
-        //}
-
-        //
-
-        //if(isset($_FILES['Filedata']['name']) && $_FILES['Filedata']['name'] != '') {
-                //$presentationForm->Filedata->receive();
-                /*if($fileName = $_FILES['Filedata']['name']) {
-                    $presentationForm->Filedata->receive();
-                }
-                $fileName = $_FILES['Filedata']['name'];
-                $filePath = $presPath . DIRECTORY_SEPARATOR . 'Svitla_Presentation_Kyiv2011.PPT';
-
-
-                exec("conv.sh {$filePath}");
-                $info = pathinfo($filePath);
-                $pdfPath = $info['filename'] . '.pdf';
-                $imgsPath = $presPath . DIRECTORY_SEPARATOR . 'jpges' . DIRECTORY_SEPARATOR;
-
-                exec("convert {$pdfPath} {$imgsPath}file.jpg");*/
-        //}
-
-       // exit;
+        }
+        exit;
 
     }
 
