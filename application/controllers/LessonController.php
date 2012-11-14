@@ -169,7 +169,7 @@ class LessonController extends Zend_Controller_Action
         $activeLesson = $lessonTable->checkAvailableLesson($identityId);
 
         @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation');
-        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . $identityId);
+        /*@mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . $identityId);
         $presPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $activeLesson['id'];
         @mkdir($presPath);
 
@@ -177,14 +177,14 @@ class LessonController extends Zend_Controller_Action
 
 
 
-        if(isset($_FILES['Filedata']['name']) && $_FILES['Filedata']['name'] != '') {
+        if(isset($_FILES['Filedata']['name']) && $_FILES['Filedata']['name'] != '') {*/
 
             /*$text = json_encode($_POST);
             $text .= session_id();
             $this->write($text);*/
-            $presentationForm = new Application_Form_Presentation();
+            /*$presentationForm = new Application_Form_Presentation();
             $presentationForm->getElement("Filedata")->setDestination($presPath);
-            $presentationForm->Filedata->receive();
+            $presentationForm->Filedata->receive();*/
 
             //$fileName = $_FILES['Filedata']['name'];
             //$filePath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $activeLesson['id'] . DIRECTORY_SEPARATOR . $formData['Filename'];
@@ -200,7 +200,7 @@ class LessonController extends Zend_Controller_Action
 
             exec("convert {$pdfPath} {$imgsPath}file.jpg");*/
 
-        }
+        //}
 
         //
 
@@ -221,7 +221,7 @@ class LessonController extends Zend_Controller_Action
                 exec("convert {$pdfPath} {$imgsPath}file.jpg");*/
         //}
 
-        exit;
+       // exit;
 
     }
 
