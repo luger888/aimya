@@ -182,11 +182,7 @@ class LessonController extends Zend_Controller_Action
             $presentationForm->getElement("Filedata")->setDestination($presPath);
             $presentationForm->Filedata->receive();
 
-            $filePath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $activeLesson['id'] . DIRECTORY_SEPARATOR . $formData['Filename'];
-
-            /*$text = json_encode($filePath);
-            //$text .= session_id();
-            $this->write($text);*/
+            $filePath = $presPath . DIRECTORY_SEPARATOR . $formData['Filename'];
 
             exec("conv.sh {$filePath}");
             $info = pathinfo($filePath);
