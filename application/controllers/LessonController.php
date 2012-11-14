@@ -182,12 +182,12 @@ class LessonController extends Zend_Controller_Action
             $presentationForm->getElement("Filedata")->setDestination($presPath);
             $presentationForm->Filedata->receive();
 
-            $filePath = $presPath . DIRECTORY_SEPARATOR . $formData['Filename'];
+            $filePath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $activeLesson['id'] . DIRECTORY_SEPARATOR . $formData['Filename'];
 
             exec("conv.sh {$filePath}");
             $info = pathinfo($filePath);
             $pdfPath = $info['filename'] . '.pdf';
-            $imgsPath = $presPath . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR;
+            $imgsPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $activeLesson['id'] . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR;
 
             exec("convert {$pdfPath} {$imgsPath}file.jpg");
         }
