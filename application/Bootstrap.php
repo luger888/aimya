@@ -16,6 +16,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     protected function _initACL()
     {
+        $session = new Aimya_Controller_Session();
+        $session->checkSessionIdInPost();
 
         $fc = Zend_Controller_Front::getInstance();
         $fc -> registerPlugin(new Application_Plugin_Access());
