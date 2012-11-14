@@ -34,7 +34,10 @@ class Application_Model_DbTable_Availability extends Application_Model_DbTable_A
             throw new Exception("There is no element with ID: $user_id");
         }
         $row = unserialize($row['available_at']);
-       return $row;
+        if($row == '0'){
+            $row = array();
+        }
+        return $row;
 
     }
 

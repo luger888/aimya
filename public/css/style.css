@@ -250,7 +250,6 @@ display: none;
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f4f4f4), color-stop(100%, #bcbcbc));
     background-image: -webkit-linear-gradient(top, #f4f4f4, #bcbcbc);
     background-image: -o-linear-gradient(top, #f4f4f4, #bcbcbc);
-    background-image: linear-gradient(#f4f4f4, #bcbcbc);
     border-color: #bcbcbc #bcbcbc hsl(0, 0%, 68.5%);
     color: #585858 !important;
     text-shadow: 0 1px 1px rgba(255, 255, 255, 0.36);
@@ -329,6 +328,11 @@ display: none;
     display: inline-block;
 }
 /* resume*/
+.experienceBody{
+    padding: 10px;
+    border:1px solid #c0c0c0;
+    margin:5px;
+}
 .resumePhoto
 {
 width:100px;

@@ -1,31 +1,30 @@
 <div id="tabs-2">
     <!--LIST OF SERVICES -->
-    <?php foreach($this->services as $value){
-    echo "<div class = 'service'>
+    <?php foreach($this->services as $value):?>
+        <div class = 'service'>
         <div class = 'row-fluid'>
             <div class='span12'>
-         {$value['lesson_category']} -
-               {$value['subcategory']}
-                \${$value['rate']} per
-               {$value['duration']}
+         <?php echo $value['lesson_category'];?> -
+                <?php echo $value['subcategory'];?>
+                $<?php echo $value['rate'];?> per
+                <?php echo $value['duration'];?>
             </div>
         </div>
         <div class='row-fluid'>
             <div class='span12'>
                 Service Description :<br>
-                {$value['description']}
+                <?php echo $value['description'];?>
             </div>
         </div>
         <div class='row-fluid'>
             <div class='span12 offset1'>
                     <input type = 'button' id = 'editService' value = 'Edit' class = 'btn' onclick ='editService(this);return false;'>
                     <input type = 'button' id = 'deleteService' value = 'Delete' class = 'btn' onclick ='deleteService(this);return false;'>
-                    <input type = 'hidden' value = ". $value['id'].">
+                    <input type = 'hidden' value = " <?php echo $value['id'];?>">
             </div>
         </div>
-    </div>";
-}
-?>
+    </div>
+<?php endforeach;?>
     <!-- END LIST OF SERVICES -->
 
     <!-- SERVICE FORM -> ADD NEW: css display:none;-->

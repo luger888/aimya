@@ -36,6 +36,17 @@ return array(
             ),
             array
             (
+                'label' => 'My resume',
+                'tag' => 'leftMenu',
+                'route' => 'default',
+                'module' => 'default',
+                'controller' => 'resume',
+                'action' => 'index',
+                'resource'      => 'resume',
+                'privilege'     => 'index',
+            ),
+            array
+            (
                 'label' => 'My Inbox',
                 'tag' => 'leftMenu',
                 'route' => 'default',

@@ -9,7 +9,7 @@ class Application_Model_User
         $user = new Application_Model_DbTable_Users();
         $profile = new Application_Model_DbTable_Profile();
         $dbAvailability = new Application_Model_DbTable_Availability();
-
+        $dbNotifications  = new Application_Model_DbTable_Notifications();
         $token = md5(uniqid(mt_rand(), true));
 
         $array['token'] = $token;
@@ -31,6 +31,7 @@ class Application_Model_User
 
             $profile->createProfile($lastId);
             $dbAvailability->createAvailability($lastId);
+            $dbNotifications->createNotifications($lastId);
 
             @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img');
             @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'uploads');

@@ -83,7 +83,7 @@ $controllerName = $front->getRequest()->getControllerName();
     <!-- ACCOUNT LAYOUT -->
     <?php
 
-    if ($controllerName == 'account' or $controllerName == 'lesson' or $controllerName == 'message') {
+    if ($controllerName == 'account' or $controllerName == 'lesson' or $controllerName == 'message' or $controllerName == 'resume') {
         echo $this->partial('partials/account.phtml',
             array('account' => $this->data));
 

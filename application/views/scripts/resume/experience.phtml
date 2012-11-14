@@ -1,0 +1,14 @@
+<?php
+foreach($this->experienceList as $value):?>
+<div class = "experienceHeader">Experience : </div>
+    <div class = "experienceBody">
+        <?php echo $value['content'];?>
+        <input type = "button" value ="delete" class = "btn" onclick=deleteExperience(this);>
+        <input type = "button" value ="edit" class = "btn" onclick=editExperience(this);>
+        <input type = "hidden" value="<?php echo $value['id'];?>">
+    </div>
+
+<?php endforeach;
+echo $this->experienceForm->getElement('experience');
+?>
+<input type = "button" value ="save" class = "btn" onclick=saveExperience();>
