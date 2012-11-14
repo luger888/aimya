@@ -159,14 +159,14 @@ class LessonController extends Zend_Controller_Action
         //Zend_Session::setOptions(array('strict' => 'on'));
         //session_id('tgpae3nf7oe20rbkuvnib6a4g7');
 
-        $identityId = Zend_Auth::getInstance()->getIdentity()->id;
+        //$identityId = Zend_Auth::getInstance()->getIdentity()->id;
         //$identityId =  Zend_Auth::getInstance()->getStorage()->read()->id;
         //$identityId = Zend_Registry::get('userid');
 
 
 
-        $lessonTable = new Application_Model_DbTable_Lesson();
-        $activeLesson = $lessonTable->checkAvailableLesson($identityId);
+        //$lessonTable = new Application_Model_DbTable_Lesson();
+        //$activeLesson = $lessonTable->checkAvailableLesson($identityId);
 
         @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation');
         /*@mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . $identityId);
