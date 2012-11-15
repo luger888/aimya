@@ -194,7 +194,7 @@ class LessonController extends Zend_Controller_Action
 
             $pdfPath = $presPath . $pdfName;
 
-            $this->write(' / ' . $pdfPath . " / \n");
+            //$this->write(' / ' . $pdfPath . " / \n");
 
             @mkdir($presPath . 'jpges' . DIRECTORY_SEPARATOR);
             $imgsPath = $presPath . 'jpges' . DIRECTORY_SEPARATOR;
