@@ -18,9 +18,9 @@ class Application_Model_Lesson
     public function createPresentationPath($lessonId) {
 
         $identityId = Zend_Auth::getInstance()->getIdentity()->id;
-        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation');
-        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . $identityId);
-        $presPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $lessonId;
+        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentatio');
+        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentatio' . DIRECTORY_SEPARATOR . $identityId);
+        $presPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentatio' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR;
         @mkdir($presPath);
 
         return $presPath;
@@ -29,7 +29,7 @@ class Application_Model_Lesson
     public function getImages($lessonId) {
         $lessonTable = new Application_Model_DbTable_Lesson();
         $lessonData = $lessonTable->getItem($lessonId);
-        $imagesPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . $lessonData['creator_id'] . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR;
+        $imagesPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentatio' . DIRECTORY_SEPARATOR . $lessonData['creator_id'] . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR;
         $imageNames = scandir($imagesPath);
         $imagePath = array();
         foreach($imageNames as $name) {

@@ -167,7 +167,7 @@ class LessonController extends Zend_Controller_Action
 
         $presPath = $lessonModel->createPresentationPath($activeLesson['id']);
 
-
+        $this->write($presPath);
 
         $formData = $this->getRequest()->getParams();
 
