@@ -1,0 +1,31 @@
+<?php echo $this->form;?>
+<div id="responce">
+
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        jQuery("#send").click(function() {
+            var value = jQuery("#method option:selected").text();
+            var requestData = jQuery('#data').val();
+            var sendVals = '';
+            var params = '';
+            if(value != 'GET') {
+                eval('sendVals = {' + requestData + '};');
+            } else {
+                params = requestData;
+            }
+            jQuery.ajax({
+
+                url: jQuery('#controller').val() + params,
+                type: value,
+                data: sendVals,
+                //dataType: "json",
+                success: function(result) {
+                    $('#responce').text(result.toSource())
+                }
+            });
+            return false;
+        });
+    });
+
+</script>
