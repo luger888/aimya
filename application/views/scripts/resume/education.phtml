@@ -1,3 +1,19 @@
 <?php
-echo $this->educationForm;
-echo $this->educationForm;
+foreach($this->educationList as $value):?>
+    <div class = "educationItem">
+        <div class = "educationHeader">Education : </div>
+        <div class = "educationBody">
+            <?php echo $value['content'];?>
+        </div>
+        <input type = "button" value ="edit" class = "btn" onclick=editEducation(this);>
+        <input type = "button" value ="delete" class = "btn" onclick=deleteEducation(this);>
+        <input type = "hidden" value="<?php echo $value['id'];?>">
+    </div>
+
+<?php endforeach;?>
+<div>Add new education: </div>
+<?php
+echo $this->educationForm->getElement('education');
+?>
+<input type = "button" value ="save" class = "btn" onclick=saveEducation();>
+

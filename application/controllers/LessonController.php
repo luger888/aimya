@@ -9,6 +9,7 @@ class LessonController extends Zend_Controller_Action
             ->addActionContext('setup', 'json')
             ->addActionContext('index', 'json')
             ->addActionContext('join', 'json')
+            ->addActionContext('upload', 'json')
             ->initContext('json');
     }
 
@@ -69,13 +70,13 @@ class LessonController extends Zend_Controller_Action
                                 <param name="bgcolor" value="#ffffff" />
                                 <param name="allowScriptAccess" value="sameDomain" />
                                 <param name="allowFullScreen" value="true" />
-                                <param name="flashvars" value="movie=' . $baseLink . '/flash/aimia_lesson.swf&userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&myStreamName=' . $resultParams['teacherStream'] . '&partnerStreamName=' . $resultParams['studentStream'] . '&soID=' . $resultParams['soID'] . '">
+                                <param name="flashvars" value="movie=' . $baseLink . '/flash/aimia_lesson.swf&userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&myStreamName=' . $resultParams['teacherStream'] . '&partnerStreamName=' . $resultParams['studentStream'] . '&soID=' . $resultParams['soID'] . '&PHPSESSID=' . Zend_Session::getId() . '">
                                 <object type="application/x-shockwave-flash" data="' . $baseLink . '/flash/aimia_lesson.swf" width="800" height="800">
                                     <param name="quality" value="high" />
                                     <param name="bgcolor" value="#ffffff" />
                                     <param name="allowScriptAccess" value="sameDomain" />
                                     <param name="allowFullScreen" value="true" />
-                                    <param name="flashvars" value="movie=' . $baseLink . '/flash/aimia_lesson.swf&userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&myStreamName=' . $resultParams['teacherStream'] . '&partnerStreamName=' . $resultParams['studentStream'] . '&soID=' . $resultParams['soID'] . '">
+                                    <param name="flashvars" value="movie=' . $baseLink . '/flash/aimia_lesson.swf&userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&myStreamName=' . $resultParams['teacherStream'] . '&partnerStreamName=' . $resultParams['studentStream'] . '&soID=' . $resultParams['soID'] . '&PHPSESSID=' . Zend_Session::getId() . '">
                                     <p>
                                         Either scripts and active content are not permitted to run or Adobe Flash Player version
                                         10.0.0 or greater is not installed.
@@ -100,6 +101,7 @@ class LessonController extends Zend_Controller_Action
     {
         $this->_helper->layout()->disableLayout();
 
+
         $studentId = Zend_Auth::getInstance()->getIdentity()->id;
         $lessonTable = new Application_Model_DbTable_Lesson();
 
@@ -113,8 +115,8 @@ class LessonController extends Zend_Controller_Action
             //$student = $userModel->getItem(Zend_Auth::getInstance()->getIdentity()->id);
             //$teacher = $userModel->getItem($result['creator_id']);
 
-            $lessonModel = new Application_Model_DbTable_Lesson();
-            $lessonModel->changeStatus($result['id']);
+            //$lessonModel = new Application_Model_DbTable_Lesson();
+            //$lessonModel->changeStatus($result['id'], $status);
 
             /*<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://active.macromedia.com/flash4/cabs/swflash.cab#version=4,0,0,0" id="name" width="800" height="800">
                          <param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&myStreamName=' . $result['partner_stream_name'] . '&partnerStreamName=' . $result['creator_stream_name'] . '&soID=' . $result['so_id'] . '">
@@ -126,13 +128,13 @@ class LessonController extends Zend_Controller_Action
                                 <param name="bgcolor" value="#ffffff" />
                                 <param name="allowScriptAccess" value="sameDomain" />
                                 <param name="allowFullScreen" value="true" />
-                                <param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&myStreamName=' . $result['partner_stream_name'] . '&partnerStreamName=' . $result['creator_stream_name'] . '&soID=' . $result['so_id'] . '">
+                                <param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&myStreamName=' . $result['partner_stream_name'] . '&partnerStreamName=' . $result['creator_stream_name'] . '&soID=' . $result['so_id'] . '&PHPSESSID=' . Zend_Session::getId() . '">
                                 <object type="application/x-shockwave-flash" data="' . $baseLink . '/flash/aimia_lesson.swf" width="800" height="800">
                                     <param name="quality" value="high" />
                                     <param name="bgcolor" value="#ffffff" />
                                     <param name="allowScriptAccess" value="sameDomain" />
                                     <param name="allowFullScreen" value="true" />
-                                    <param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&myStreamName=' . $result['partner_stream_name'] . '&partnerStreamName=' . $result['creator_stream_name'] . '&soID=' . $result['so_id'] . '">
+                                    <param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&myStreamName=' . $result['partner_stream_name'] . '&partnerStreamName=' . $result['creator_stream_name'] . '&soID=' . $result['so_id'] . '&PHPSESSID=' . Zend_Session::getId() .'">
                                     <p>
                                         Either scripts and active content are not permitted to run or Adobe Flash Player version
                                         10.0.0 or greater is not installed.
@@ -150,6 +152,69 @@ class LessonController extends Zend_Controller_Action
             $this->view->result = false;
         }
 
+    }
+
+    public function uploadAction() {
+
+        //Zend_Session::setOptions(array('strict' => 'on'));
+        //session_id('tgpae3nf7oe20rbkuvnib6a4g7');
+
+        $identityId = Zend_Auth::getInstance()->getIdentity()->id;
+        //$identityId =  Zend_Auth::getInstance()->getStorage()->read()->id;
+        //$identityId = Zend_Registry::get('userid');
+
+
+
+        $lessonTable = new Application_Model_DbTable_Lesson();
+        $activeLesson = $lessonTable->checkAvailableLesson($identityId);
+
+        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation');
+        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . $identityId);
+        $presPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $activeLesson['id'];
+        @mkdir($presPath);
+
+        $formData = $this->getRequest()->getParams();
+
+        if(isset($_FILES['Filedata']['name']) && $_FILES['Filedata']['name'] != '') {
+
+            /*$text = json_encode($_POST);
+            $text .= session_id();
+            $this->write($text);*/
+            $presentationForm = new Application_Form_Presentation();
+            $presentationForm->getElement("Filedata")->setDestination($presPath);
+            $presentationForm->Filedata->receive();
+
+            //$fileName = $_FILES['Filedata']['name'];
+            $filePath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $activeLesson['id'] . DIRECTORY_SEPARATOR . $formData['Filename'];
+
+            /*$text = json_encode($filePath);
+            //$text .= session_id();
+            $this->write($text);*/
+
+            exec("conv.sh {$filePath}");
+            $info = pathinfo($filePath);
+            $pdfPath = $info['filename'] . '.pdf';
+            $imgsPath = $presPath . DIRECTORY_SEPARATOR . 'jpges';
+
+            exec("convert {$pdfPath} {$imgsPath}file.jpg");
+
+        }
+        exit;
+
+    }
+
+    function write($the_string )
+    {
+        if( $fh = @fopen("./logfile.txt", "a+") )
+        {
+            fputs( $fh, $the_string, strlen($the_string) );
+            fclose( $fh );
+            return( true );
+        }
+        else
+        {
+            return( false );
+        }
     }
 
 }

@@ -80,14 +80,14 @@ class Application_Form_Registration extends Zend_Form
 
             )
         );
-        $type->setAttrib('class', 'btnStrict')
+        $type
             ->setDecorators($this->basicDecorators)
             ->setSeparator('');
 
         $submit = new Zend_Form_Element_Submit('signup');
         $submit ->setAttrib('id', 'signup')
                 ->setLabel('SIGN UP')
-                ->setAttrib('class', 'btn btnStrict signup-element')
+                ->setAttrib('class', 'btnSignup signup-element')
                 ->setDecorators($this->basicDecorators);
 
         $this->addElements(array($firstName, $lastName, $userName, $email, $password, $password2, $type, $submit));

@@ -29,12 +29,12 @@ class Application_Form_ResumeEducation extends Zend_Form
             ->setAttrib('class', 'btn')
             ->setDecorators($this->basicDecorators);
 
-        $certificate = new Zend_Form_Element_File('certificate');
-        $certificate ->setLabel('Upload Certificate')
-            ->setAttrib('id', 'certificate')
-            ->addValidator('Size', false, 1024000)
-            ->addValidator('Extension', false, 'jpg,png,gif,jpeg')
-            ->setDestination('./img/uploads/'.$identity->id.'/education/');
+//        $certificate = new Zend_Form_Element_File('certificate');
+//        $certificate ->setLabel('Upload Certificate')
+//            ->setAttrib('id', 'certificate')
+//            ->addValidator('Size', false, 1024000)
+//            ->addValidator('Extension', false, 'jpg,png,gif,jpeg')
+//            ->setDestination('./img/uploads/'.$identity->id.'/education/');
 
         $submit = new Zend_Form_Element_Submit('saveEducation');
         $submit ->setLabel('Save')
@@ -45,7 +45,7 @@ class Application_Form_ResumeEducation extends Zend_Form
 
 
 
-        $this->addElements(array($education, $delete, $add, $certificate, $submit));
+        $this->addElements(array($education, $delete, $add,  $submit));
 
     }
 }

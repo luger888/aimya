@@ -32,7 +32,7 @@ class Application_Form_Login extends Zend_Form
         $submit = new Zend_Form_Element_Submit('login');
         $submit->setAttrib('id', 'login')
                ->setLabel('LOGIN')
-            ->setAttrib('class', 'btn btnStrict')
+            ->setAttrib('class', 'btnLogin')
             ->setDecorators($this->basicDecorators);
 
         $this->addElements(array($username, $password, $submit, $remember));

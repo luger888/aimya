@@ -12,7 +12,8 @@ class Application_Form_ResumeExperience extends Zend_Form
         $this->setEnctype(Zend_Form::ENCTYPE_MULTIPART);
 
         $experience = new Zend_Form_Element_Textarea('experience');
-        $experience ->setAttrib('id', 'experience')
+        $experience ->setRequired(true)
+            ->setAttrib('id', 'experience')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators)
             ->setAttrib('rows', '7');
@@ -29,12 +30,13 @@ class Application_Form_ResumeExperience extends Zend_Form
             ->setAttrib('class', 'btn')
             ->setDecorators($this->basicDecorators);
 
-        $file = new Zend_Form_Element_File('file');
-        $file ->setLabel('Upload File')
-            ->setAttrib('id', 'file')
-            ->addValidator('Size', false, 1024000)
-            ->addValidator('Extension', false, 'jpg,png,gif,jpeg')
-            ->setDestination('./img/uploads/'.$identity->id.'/experience/');
+//        $file = new Zend_Form_Element_File('file');
+//        $file ->setRequired(false)
+//            ->setLabel('Upload File')
+//            ->setAttrib('id', 'file')
+//            ->addValidator('Size', false, 1024000)
+//            ->addValidator('Extension', false, 'jpg,png,gif,jpeg')
+//            ->setDestination('./img/uploads/'.$identity->id.'/experience/');
 
         $submit = new Zend_Form_Element_Submit('saveExperience');
         $submit ->setLabel('Save')
@@ -45,7 +47,7 @@ class Application_Form_ResumeExperience extends Zend_Form
 
 
 
-        $this->addElements(array($experience, $delete, $add, $file, $submit));
+        $this->addElements(array($experience, $delete, $add,  $submit));
 
     }
 }
