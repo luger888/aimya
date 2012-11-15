@@ -192,8 +192,12 @@ class LessonController extends Zend_Controller_Action
             $info = pathinfo($filePath);
             $pdfPath = $info['filename'] . '.pdf';
 
+            $this->write(' / ' . $pdfPath . " / \n");
+
             @mkdir($presPath . 'jpges' . DIRECTORY_SEPARATOR);
             $imgsPath = $presPath . 'jpges' . DIRECTORY_SEPARATOR;
+
+            $this->write(' / ' . "{$imgsPath}file.jpg" . " / \n");
 
             exec("convert {$pdfPath} {$imgsPath}file.jpg");
 
