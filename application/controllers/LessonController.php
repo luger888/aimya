@@ -172,6 +172,7 @@ class LessonController extends Zend_Controller_Action
         $formData = $this->getRequest()->getParams();
 
         if(isset($_FILES['Filedata']['name']) && $_FILES['Filedata']['name'] != '') {
+            $lessonModel->delTree($presPath);
 
             /*$text = json_encode($_POST);
             $text .= session_id();
@@ -190,7 +191,9 @@ class LessonController extends Zend_Controller_Action
             exec("conv.sh {$filePath}");
             $info = pathinfo($filePath);
             $pdfPath = $info['filename'] . '.pdf';
-            $imgsPath = $presPath . DIRECTORY_SEPARATOR . 'jpges';
+
+            @mkdir($presPath . 'jpges' . DIRECTORY_SEPARATOR);
+            $imgsPath = $presPath . 'jpges' . DIRECTORY_SEPARATOR;
 
             exec("convert {$pdfPath} {$imgsPath}file.jpg");
 
