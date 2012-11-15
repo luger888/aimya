@@ -1,4 +1,7 @@
 /*global*/
+html{
+    height: 100%;
+}
 body{
     font-family: helvetica;
 
@@ -6,13 +9,22 @@ body{
     background-color: #d5e4ad;
     background-position: center center;
     color:#446158;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+#wrapper{
+    height: auto !important;
+    min-height: 100%;
+    padding: 0;
 }
 .footer {
-    position: absolute;
-    bottom:10px;
+    color: #91AEA1;
+    font: 11px helvetica;
     left: 8.6%;
-    font:11px helvetica;
-    color:#91aea1;
+    margin-top: 50px;
+    padding: 0;
+    position: relative;
 }
 fieldset legend{
 
