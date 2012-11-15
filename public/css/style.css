@@ -1,15 +1,34 @@
 /*global*/
+html{
+    height: 100%;
+}
 body{
     font-family: helvetica;
-    background-color: #cee5db;
+
+    background: url('../img/design/mainPage/background.png') no-repeat;
+    background-color: #d5e4ad;
+    background-position: center center;
     color:#446158;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+#wrapper{
+    height: auto !important;
+    min-height: 100%;
+    padding: 0;
 }
 .footer {
-    position: absolute;
-    bottom:10px;
+    color: #91AEA1;
+    font: 11px helvetica;
     left: 8.6%;
-    font:11px helvetica;
-    color:#91aea1;
+    margin-top: 50px;
+    padding: 0;
+    position: relative;
+}
+fieldset legend{
+
+    border: none !important;
 }
 li{
     list-style-type: none;
@@ -33,35 +52,16 @@ li{
 }
 .strictFont{
 font:15px dosis-semibold;
-    color:#33685a;
+    color:#3e5602;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
 }
 /*Buttons*/
-.btnStrict{
-    font:13px dosis-semibold;
 
-    background-color: hsl(153, 30%, 41%) !important;
-    background-repeat: repeat-x;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#70b294", endColorstr="#49876b");
-    background-image: -khtml-gradient(linear, left top, left bottom, from(#70b294), to(#49876b));
-    background-image: -moz-linear-gradient(top, #70b294, #49876b);
-    background-image: -ms-linear-gradient(top, #70b294, #49876b);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #70b294), color-stop(100%, #49876b));
-    background-image: -webkit-linear-gradient(top, #70b294, #49876b);
-    background-image: -o-linear-gradient(top, #70b294, #49876b);
-    box-shadow: 0 1px 0 rgba(176, 214, 200, 0.7) inset;
-    border-color: #579673;
-    color: #fff !important;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.33);
-    -webkit-font-smoothing: antialiased;
-    width:100px !important;
-    height:37px;
-
-}
 /*Inputs*/
 .regTextInput{
     width:165px;
     height: 25px !important;
-    border: 1px solid #80af9a !important;
+    border: 1px solid #95a861 !important;
     border-radius: 0 !important;
 }
 .logTextInput{
@@ -69,16 +69,22 @@ font:15px dosis-semibold;
     border-radius: 0 !important;
     margin-bottom: 0 !important;
     margin-right: 15px;
-    padding: 2px !important;
     width: 165px;
+    height: 19px !important;
 }
+
 .regTextInput:focus{
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 12px rgba(255, 255, 255, 1) !important;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 12px rgba(255, 255, 255, 0.6) !important;
 }
 .logTextInput:focus{
-
-    border:1px solid #0b6049 !important;
+    border:1px solid #536e10 !important;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 5px rgba(255, 255, 255, 1) !important;
+}
+.buttonBar{
+
+    border-top-image: url('../img/design/mainPage/shadow_separator.png');
+
+
 }
 .buttonBar label{
     font:13px dosis-semibold;
@@ -95,7 +101,7 @@ font:15px dosis-semibold;
 
 /*header*/
 .header {
-    background-image: url('../img/design/header.png');
+    background-image: url('../img/design/mainPage/header.png');
     background-repeat: repeat-x;
     height:85px;
     -moz-box-shadow: 0 0 4px rgba(0,0,0,0.5); /* Для Firefox */
@@ -103,26 +109,17 @@ font:15px dosis-semibold;
     box-shadow: 0 0 4px rgba(0,0,0,0.5);
 
 }
-.header .logo{
 
+.header .logo {
+   display: inline-block;
+}
+.header .logo .bigLogoImg{
+    background-image: url('../img/design/mainPage/big_aimya_logo.png');
+    width: 196px;
+    height: 61px;
+    margin-top: 11px;
+}
 
-}
-.header .logo a{
-    color:#e2e2e2;
-    text-decoration: none;
-}
-.header .logo a h1{
-    color:#e2e2e2;
-    font:52px lobster1;
-    text-shadow: 1px 1px 2px black;
-    display: inline;
-}
-.header .logo h1 span {
-    font: 30px krungthep;
-    color:#7caa9f;
-    text-shadow: 0px 0px 0px black;
-
-}
 #globalNav {
 
     float: right;
@@ -143,45 +140,73 @@ font:15px dosis-semibold;
     border-left: medium none;
 }
 
+.galleryMain{
+    background: url('../img/design/mainPage/background_slider.png') no-repeat;
+    width:400px;
+    height:290px;
+}
 /*login*/
 #loginFormHolder{
     margin-top:1%;
     color:white;
 }
+#loginFormHolder input{
+    font-size:12px;
+}
+
 #loginFormHolder a{
     color:white;
 }
 #loginFormHolder  span {
     width:206px;
     color:white;
+    font:11px Helvetica;
+    text-shadow: 1px 1px 1px #4e6c06;
 }
-#loginFormHolder #remember{
+#loginFormHolder input[type="checkbox"]{
     float:left;
-    margin: 0 5px 0 0;
+    margin: -2px -12px 0 0;
     position: relative;
-    bottom:2px;
 
-    background-image: url('../img/design/keepSignedCheclbox.png');
-    background-repeat: no-repeat;
+    display: block;
+    opacity: 0;
 }
-
+#loginFormHolder input[type="checkbox"]+label{
+    background: url('../img/design/mainPage/keepSignedCheclbox.png') left center no-repeat;
+    padding: 1px 0 0 15px;
+}
+#loginFormHolder input[type="checkbox"]:checked +label{
+    background: url('../img/design/mainPage/keepSignedChecked.png') left center no-repeat;
+}
 #loginFormHolder label, #loginFormHolder a{
     float:left;
     margin-right: 85px;
     font-size:11px;
-    color:#7fa698;
+    color:#bedf6c;
     position: relative;
-    bottom:5px;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.4);
 }
 #loginFormHolder #login{
 
 }
 #loginFormHolder .pass{
-    margin-left: 93px;
+    margin-left: 115px;
+}
+.btnLogin{
+    background: url('../img/design/mainPage/buttons/loginBut.png') no-repeat;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.4);
+    width: 65px !important;
+    height:30px;
+    border: none;
+    color:white;
+    font:12px dosis-semibold;
+}
+.btnLogin:hover{
+    background-image: url('../img/design/mainPage/buttons/loginButOver.png')
 }
 /*registration*/
 #registrationFormHolder{
-    width: 345px;
+    width: 350px;
     float:left;
     margin-left: 3%;
 }
@@ -193,6 +218,8 @@ font:15px dosis-semibold;
     width: 109px;
     font:12px helvetica;
     margin-top:10px;
+    color:#324503;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
 }
 .error{
     float: left;
@@ -205,65 +232,56 @@ display: none;
 #registrationFormHolder .buttonBar{
     margin: 0 0 15px 22px;
 }
-#registrationFormHolder .buttonBar .checked{
-    display: inline-block;
-    padding: 10px;
-    margin:0 15px 15px 0;
+#registrationFormHolder .buttonBar label{
+
+    width: 135px !important;
+    height:30px;
+    border: none;
+    font:12px dosis-semibold;
     text-align: center;
-    font:13px dosis-semibold;
-    border: 1px solid;
-    background-color: hsl(153, 30%, 41%) !important;
-    background-repeat: repeat-x;
-    border-radius: 4px;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#70b294", endColorstr="#49876b");
-    background-image: -khtml-gradient(linear, left top, left bottom, from(#70b294), to(#49876b));
-    background-image: -moz-linear-gradient(top, #70b294, #49876b);
-    background-image: -ms-linear-gradient(top, #70b294, #49876b);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #70b294), color-stop(100%, #49876b));
-    background-image: -webkit-linear-gradient(top, #70b294, #49876b);
-    background-image: -o-linear-gradient(top, #70b294, #49876b);
-    box-shadow: 0 1px 0 rgba(176, 214, 200, 0.7) inset;
-    border-color: #579673;
-    color: #fff !important;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.33);
-    -webkit-font-smoothing: antialiased;
-    width:122px !important;
-    height:19px;
+    display: inline-block;
+
+    margin:0 29px 15px 0;
+    line-height:30px;
+}
+#registrationFormHolder .buttonBar .checked{
+    background: url('../img/design/mainPage/buttons/teacherBut.png') no-repeat;
+    color:#fff;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.4);
+}
+#registrationFormHolder .buttonBar .checked:hover{
+    background: url('../img/design/mainPage/buttons/teacherButOver.png') no-repeat;
 }
 #registrationFormHolder .buttonBar label:not(.checked){
-
-    display: inline-block;
-    padding: 10px;
-    margin:0 15px 15px 0;
-    text-align: center;
-    font:13px dosis-semibold;
-    width:122px !important;
-    height:19px;
-    border: 1px solid;
-    border-radius: 4px;
-    background-color: hsl(0, 0%, 74%) !important;
-    background-repeat: repeat-x;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f4f4f4", endColorstr="#bcbcbc");
-    background-image: -khtml-gradient(linear, left top, left bottom, from(#f4f4f4), to(#bcbcbc));
-    background-image: -moz-linear-gradient(top, #f4f4f4, #bcbcbc);
-    background-image: -ms-linear-gradient(top, #f4f4f4, #bcbcbc);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f4f4f4), color-stop(100%, #bcbcbc));
-    background-image: -webkit-linear-gradient(top, #f4f4f4, #bcbcbc);
-    background-image: -o-linear-gradient(top, #f4f4f4, #bcbcbc);
-    border-color: #bcbcbc #bcbcbc hsl(0, 0%, 68.5%);
-    color: #585858 !important;
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.36);
-    -webkit-font-smoothing: antialiased;
+    background: url('../img/design/mainPage/buttons/studentBut.png') no-repeat;
+    color:#585858;
+    text-shadow: 1px 1px 0 rgba(255,255,255,0.9);
+    cursor: pointer;
 }
-
+#registrationFormHolder .buttonBar label:not(.checked):hover{
+    background: url('../img/design/mainPage/buttons/studentButOver.png') no-repeat;
+}
+.btnSignup{
+    background: url('../img/design/mainPage/buttons/signUpBut.png') no-repeat;
+    width: 85px !important;
+    height:30px;
+    border: none;
+    color:white;
+    font:12px dosis-semibold;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.4);
+}
+.btnSignup:hover{
+    background: url('../img/design/mainPage/buttons/signUpButOver.png') no-repeat;
+}
 .signup-element{
-    margin-left: 198px;
+    margin-left: 213px;
     margin-top: 12px;
 }
 /*Social buttons*/
 
 .twitterIcon{
-    background-image: url('../img/design/socialButtons/twitter.png');
+    background-image: url('../img/design/socialButtons/social_icons.png');
+    background-position: 0 100%;
     height:18px;
     width:18px;
     left: 25px;
@@ -272,7 +290,8 @@ display: none;
     bottom: 33px;
 }
 .facebookIcon{
-    background-image: url('../img/design/socialButtons/facebook.png');
+    background-image: url('../img/design/socialButtons/social_icons.png');
+    background-position: 50% 100%;
     height:18px;
     width:18px;
     bottom: 51px;
@@ -281,13 +300,23 @@ display: none;
     left: 52px;
 }
 .linkedInIcon{
-    background-image: url('../img/design/socialButtons/linkedin.png');
+    background-image: url('../img/design/socialButtons/social_icons.png');
+    background-position: 100% 100%;
     height:18px;
     width:18px;
     left: 80px;
     position: relative;
     width: 18px;
     bottom: 69px;
+}
+.twitterIcon:hover{
+    background-position: 0 0;
+}
+.facebookIcon:hover{
+    background-position: 50% 0;
+}
+.linkedInIcon:hover{
+    background-position: 100% 0;
 }
 /*account*/
 
