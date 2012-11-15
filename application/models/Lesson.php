@@ -23,7 +23,7 @@ class Application_Model_Lesson
         $presPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR;
         @mkdir($presPath);
 
-        $this->write(' / ' . $identityId . " / \n");
+        //$this->write(' / ' . $identityId . " / \n");
 
         return $presPath;
     }
