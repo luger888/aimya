@@ -27,7 +27,7 @@ $(document).ready(function() {
 
                 if(response.status == 1){
 
-                    window.location.href = "/account/index/";
+                    $('.messages').html(response.confirmFlash);
 
                 }
 
