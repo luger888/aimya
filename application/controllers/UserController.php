@@ -132,6 +132,7 @@ class UserController extends Zend_Controller_Action
                     $status = $modelUser->addNewUser($formData);
 
                     if($status) {
+                        $this->view->confirmFlash = 'Please confirm your email';
                         $this->_helper->flashMessenger->addMessage(array('success'=>'Please confirm your email'));
                         $this->_helper->redirector('account', 'index');
                     } else {
