@@ -133,8 +133,7 @@ class UserController extends Zend_Controller_Action
 
                     if($status) {
                         $this->view->confirmFlash = 'Please confirm your email';
-                        $this->_helper->flashMessenger->addMessage(array('success'=>'Please confirm your email'));
-                        $this->_helper->redirector('account', 'index');
+
                     } else {
                         die('error');
                     }
