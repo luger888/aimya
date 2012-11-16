@@ -69,9 +69,5 @@ $(document).ready(function() {
         return false;
 
     });
-    $("#signUp input").focus(function(){
 
-        $(this).removeClass('input-error');
-
-    })
 });

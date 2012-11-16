@@ -64,9 +64,9 @@ class Application_Form_Registration extends Zend_Form
             ->setLabel('Password:');
 
         $password2 = new Zend_Form_Element_Password('password2');
-        $password2 ->setRequired(true)
+        $password2 #->setRequired(true)
             ->addValidator('NotEmpty')
-            ->addValidator('stringLength', false, array(6, 200))
+           #->addValidator('stringLength', false, array(6, 200))
             #->setAttrib('placeholder', 'Confirm password')
             ->setAttrib('class', 'clearInput regTextInput')
             ->addFilters($this->basicFilters)
