@@ -73,13 +73,13 @@ class LessonController extends Zend_Controller_Action
                                 <param name="bgcolor" value="#ffffff" />
                                 <param name="allowScriptAccess" value="sameDomain" />
                                 <param name="allowFullScreen" value="true" />
-                                <param name="flashvars" value="movie=' . $baseLink . '/flash/aimia_lesson.swf&userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&partnerName=' . $student['username'] . '&myStreamName=' . $resultParams['teacherStream'] . '&partnerStreamName=' . $resultParams['studentStream'] . '&soID=' . $resultParams['soID'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink .'&lesson_id=' . $lastAddedId .'">
+                                <param name="flashvars" value="movie=' . $baseLink . '/flash/aimia_lesson.swf&userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&partnerName=' . $student['username'] . '&userRole=' . Zend_Auth::getInstance()->getIdentity()->role . '&myStreamName=' . $resultParams['teacherStream'] . '&partnerStreamName=' . $resultParams['studentStream'] . '&soID=' . $resultParams['soID'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink .'&lesson_id=' . $lastAddedId .'">
                                 <object type="application/x-shockwave-flash" data="' . $baseLink . '/flash/aimia_lesson.swf" width="1000" height="1000">
                                     <param name="quality" value="high" />
                                     <param name="bgcolor" value="#ffffff" />
                                     <param name="allowScriptAccess" value="sameDomain" />
                                     <param name="allowFullScreen" value="true" />
-                                    <param name="flashvars" value="movie=' . $baseLink . '/flash/aimia_lesson.swf&userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&partnerName=' . $student['username'] . '&myStreamName=' . $resultParams['teacherStream'] . '&partnerStreamName=' . $resultParams['studentStream'] . '&soID=' . $resultParams['soID'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink .'&lesson_id=' . $lastAddedId .'">
+                                    <param name="flashvars" value="movie=' . $baseLink . '/flash/aimia_lesson.swf&userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&partnerName=' . $student['username'] . '&userRole=' . Zend_Auth::getInstance()->getIdentity()->role . '&myStreamName=' . $resultParams['teacherStream'] . '&partnerStreamName=' . $resultParams['studentStream'] . '&soID=' . $resultParams['soID'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink .'&lesson_id=' . $lastAddedId .'">
                                     <p>
                                         Either scripts and active content are not permitted to run or Adobe Flash Player version
                                         10.0.0 or greater is not installed.
@@ -131,13 +131,13 @@ class LessonController extends Zend_Controller_Action
                                 <param name="bgcolor" value="#ffffff" />
                                 <param name="allowScriptAccess" value="sameDomain" />
                                 <param name="allowFullScreen" value="true" />
-                                <param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&partnerName=' . $teacher['username'] . '&myStreamName=' . $result['partner_stream_name'] . '&partnerStreamName=' . $result['creator_stream_name'] . '&soID=' . $result['so_id'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink .'&lesson_id=' . $result['id'] .'">
+                                <param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&partnerName=' . $teacher['username'] . '&userRole=' . Zend_Auth::getInstance()->getIdentity()->role . '&myStreamName=' . $result['partner_stream_name'] . '&partnerStreamName=' . $result['creator_stream_name'] . '&soID=' . $result['so_id'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink .'&lesson_id=' . $result['id'] .'">
                                 <object type="application/x-shockwave-flash" data="' . $baseLink . '/flash/aimia_lesson.swf" width="1000" height="1000">
                                     <param name="quality" value="high" />
                                     <param name="bgcolor" value="#ffffff" />
                                     <param name="allowScriptAccess" value="sameDomain" />
                                     <param name="allowFullScreen" value="true" />
-                                    <param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&partnerName=' . $teacher['username'] . '&myStreamName=' . $result['partner_stream_name'] . '&partnerStreamName=' . $result['creator_stream_name'] . '&soID=' . $result['so_id'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink .'&lesson_id=' . $result['id'] .'">
+                                    <param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&partnerName=' . $teacher['username'] . '&userRole=' . Zend_Auth::getInstance()->getIdentity()->role . '&myStreamName=' . $result['partner_stream_name'] . '&partnerStreamName=' . $result['creator_stream_name'] . '&soID=' . $result['so_id'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink .'&lesson_id=' . $result['id'] .'">
                                     <p>
                                         Either scripts and active content are not permitted to run or Adobe Flash Player version
                                         10.0.0 or greater is not installed.
@@ -209,14 +209,10 @@ class LessonController extends Zend_Controller_Action
     }
 
     public function filesAction() {
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
 
         if ($this->getRequest()->isXmlHttpRequest()) {
-            $bootstrap = $this->getInvokeArg('bootstrap');
-
-            $this->_helper->layout->disableLayout();
-            $this->_helper->viewRenderer->setNoRender(TRUE);
-            //if AJAX request - disable lauout rendering
-            Zend_Controller_Action_HelperBroker::removeHelper('layouts');
 
             $data = $this->getRequest()->getPost();
             if(isset($data['lesson_id'])) {

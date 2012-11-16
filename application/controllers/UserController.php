@@ -136,10 +136,10 @@ class UserController extends Zend_Controller_Action
 
                     if($status) {
                         $this->_helper->flashMessenger->addMessage(array('success'=>'Please confirm your email'));
-                        $this->_helper->redirector('account', 'index');
                     } else {
-                        die('error');
+                        $this->_helper->flashMessenger->addMessage(array('failure'=>'Problem with email'));
                     }
+                    $this->_helper->redirector('index', 'index');
                 }
             } else {
 
