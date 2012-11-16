@@ -11,6 +11,8 @@ class Application_Form_Login extends Zend_Form
 
         $username = new Zend_Form_Element_Text('username');
         $username#->setAttrib('placeholder', 'username or email')
+            ->setRequired(true)
+            ->addValidator('NotEmpty')
             ->setAttrib('id', 'username-login')
             ->setAttrib('class', 'customInput logTextInput login clearInput')
             ->addFilters($this->basicFilters)
