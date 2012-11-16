@@ -5,15 +5,23 @@ html{
 body{
     font-family: helvetica;
 
-    background: url('../img/design/mainPage/background.png') no-repeat;
+    background: url('../img/design/mainPage/background.png') no-repeat center top;
     background-color: #d5e4ad;
-    background-position: center center;
+
     color:#446158;
     height: 100%;
     margin: 0;
     padding: 0;
+    /*background: -moz-radial-gradient(top, ellipse cover, #f4f7ea 8%, #e3f5ab 71%, #d5e4ad 100%); *//* FF3.6+ */
+    /*background: -webkit-gradient(radial, top top, 0px, top top, 100%, color-stop(8%,#f4f7ea), color-stop(71%,#e3f5ab), color-stop(100%,#d5e4ad)); *//* Chrome,Safari4+ */
+    /*background: -webkit-radial-gradient(top, ellipse cover, #f4f7ea 8%,#e3f5ab 71%,#d5e4ad 100%); *//* Chrome10+,Safari5.1+ */
+    /*background: -o-radial-gradient(top, ellipse cover, #f4f7ea 8%,#e3f5ab 71%,#d5e4ad 100%); *//* Opera 12+ */
+    /*background: -ms-radial-gradient(top, ellipse cover, #f4f7ea 8%,#e3f5ab 71%,#d5e4ad 100%); *//* IE10+ */
+    /*background: radial-gradient(ellipse at center, #f4f7ea 8%,#e3f5ab 71%,#d5e4ad 100%); *//* W3C */
 }
+
 form{
+
     margin-bottom:0;
 }
 #wrapper{
@@ -210,13 +218,36 @@ font:15px dosis-semibold;
 }
 /*registration*/
 #registrationFormHolder{
-    width: 350px;
+
     float:left;
     margin-left: 3%;
 }
 
+#registrationFormHolder .error{
+    display: block;
+    float: left;
+    font-size: 9px;
+    position: relative;
+    right: 107px;
+    color:red;
+}
+
+#signUp{
+    height: 600px;
+    margin: 25px auto;
+    width: 640px;
+}
 #registrationFormHolder dt,#registrationFormHolder dd{
     float:left;
+
+}
+#registrationFormHolder dt{
+    width:230px;
+}
+#registrationFormHolder dd{
+    position: relative;
+    right: 121px;
+    width: 180px;
 }
 #registrationFormHolder label{
     width: 109px;
@@ -224,11 +255,6 @@ font:15px dosis-semibold;
     margin-top:10px;
     color:#324503;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
-}
-.error{
-    float: left;
-    font-size: 10px;
-    height: 500px;
 }
 #registrationFormHolder .buttonBar input[type="radio"]{
 display: none;
@@ -383,3 +409,6 @@ width:100px;
 .ui-tabs-vertical .ui-tabs-nav li a { display:block; }
 .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; border-right-width: 1px; }
 .ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 40em;}
+
+
+
