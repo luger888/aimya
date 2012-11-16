@@ -32,7 +32,7 @@ class Application_Model_Lesson
         $lessonTable = new Application_Model_DbTable_Lesson();
         $lessonData = $lessonTable->getItem($lessonId);
         //$imagesPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . $lessonData['creator_id'] . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'jpegs' . DIRECTORY_SEPARATOR;
-        $imagesPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . "1" . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'jpegs' . DIRECTORY_SEPARATOR;
+        $imagesPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . "1" . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'jpges' . DIRECTORY_SEPARATOR;
         $imageNames = scandir($imagesPath);
         $imagePath = array();
         foreach($imageNames as $name) {
