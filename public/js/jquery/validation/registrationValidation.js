@@ -25,7 +25,7 @@ $(document).ready(function() {
 
                 }
 
-                if(response.status == 1){
+                if(response.confirmFlash){
 
                     $('.alert').html(response.confirmFlash);
 
