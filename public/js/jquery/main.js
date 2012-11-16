@@ -35,6 +35,7 @@ $(document).ready(function() {
             {cache:true,
             load: function (e, ui) {
                 $(ui.panel).find(".tab-loading").remove();
+                test();
             },
             select: function( e, ui )
             {
@@ -76,4 +77,15 @@ $(document).ready(function() {
 
 
 });
-
+function test(){
+    //$(function() {
+    $('#file_upload').uploadifive({
+        'auto'         : false,
+        'formData'     : {'experienceUpload' : 'certificate'},
+        'queueID'      : 'queue',
+        'uploadScript' : '/resume/upload',
+        'onUploadComplete' : function(file, data) {
+            console.log(data);
+        }
+    });
+}
