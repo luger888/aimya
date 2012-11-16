@@ -230,9 +230,13 @@ class LessonController extends Zend_Controller_Action
                     $this->view->data  = $imageArray;
                 } else {
                     $this->view->answer = 'failure';
-                    $this->view->comment = '';
-                    $this->view->data  = "There no any images";
+                    $this->view->comment = 'There no any images';
+                    $this->view->data  = "";
                 }
+            } else {
+                $this->view->answer = 'failure';
+                $this->view->comment = '';
+                $this->view->data  = "There no any parameters";
             }
         }
 
