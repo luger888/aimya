@@ -24,10 +24,8 @@
                     echo '<tr>
                     <td><input type="checkbox" id="' . $message['id'] . '"></td>
         <td>'.$message['sender_id'].'</td>
-        <td>'.$message['subject'].'</td>
-        <td>'.$message['content'].'</td>
-
-        <td><div class = "blockUser" onclick ="blockUser(this);return false;">Block</div><div class = "deleteUser" onclick ="deleteUser(this);return false;">Delete</div><input type = "hidden" value = '. $value['id'].'</td>
+        <td>'.$message['theme'].'</td>
+        <td>'.$message['out'].'</td>
     </tr>';
                 }
 

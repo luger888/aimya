@@ -51,7 +51,7 @@ class MessageController extends Zend_Controller_Action
                     $sendStatus = $messageTable->sendMessage($data);
                     if($sendStatus){
                         $this->_helper->flashMessenger->addMessage(array('success'=>'Message sent'));
-                        $this->_helper->redirector('sent', 'message');
+                        //$this->_helper->redirector('sent', 'message');
                     } else {
                         $this->_helper->flashMessenger->addMessage(array('failure'=>'Error with sending, please try again later'));
                     }
