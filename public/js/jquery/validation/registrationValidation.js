@@ -27,7 +27,7 @@ $(document).ready(function() {
 
                 if(response.confirmFlash){
 
-                    $('.alert').html(response.confirmFlash);
+                    $('.alertBlock').append('<div class="alert">'+response.confirmFlash+'</div>');
 
                 }
 
