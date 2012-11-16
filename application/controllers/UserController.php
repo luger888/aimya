@@ -110,7 +110,10 @@ class UserController extends Zend_Controller_Action
                 }else{
                     $this->view->error = 'Authentication failed.';
                 }
-            }
+            }else {
+
+                $this->view->errors = $login->getErrors();
+                }
         }
     }
 

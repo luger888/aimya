@@ -67,14 +67,14 @@ class LessonController extends Zend_Controller_Action
                              <embed name="name" src="' . $baseLink . '/flash/aimia_lesson.swf" quality="high" wmode="transparent" width="800" height="800" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer"></embed>
                              </object>*/
 
-                $flashObj = '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="800" height="800" id="aimia_lesson">
+                $flashObj = '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="1000" height="1000" id="aimia_lesson">
                                 <param name="movie" value="' . $baseLink . '/flash/aimia_lesson.swf" />
                                 <param name="quality" value="high" />
                                 <param name="bgcolor" value="#ffffff" />
                                 <param name="allowScriptAccess" value="sameDomain" />
                                 <param name="allowFullScreen" value="true" />
                                 <param name="flashvars" value="movie=' . $baseLink . '/flash/aimia_lesson.swf&userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&partnerName=' . $student['username'] . '&myStreamName=' . $resultParams['teacherStream'] . '&partnerStreamName=' . $resultParams['studentStream'] . '&soID=' . $resultParams['soID'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink .'&lesson_id=' . $lastAddedId .'">
-                                <object type="application/x-shockwave-flash" data="' . $baseLink . '/flash/aimia_lesson.swf" width="800" height="800">
+                                <object type="application/x-shockwave-flash" data="' . $baseLink . '/flash/aimia_lesson.swf" width="1000" height="1000">
                                     <param name="quality" value="high" />
                                     <param name="bgcolor" value="#ffffff" />
                                     <param name="allowScriptAccess" value="sameDomain" />
@@ -125,14 +125,14 @@ class LessonController extends Zend_Controller_Action
                          <param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&myStreamName=' . $result['partner_stream_name'] . '&partnerStreamName=' . $result['creator_stream_name'] . '&soID=' . $result['so_id'] . '">
                          <embed name="name" src="' . $baseLink . '/flash/aimia_lesson.swf" quality="high" wmode="transparent" width="800" height="800" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer"></embed>
                          </object>*/
-            $flashObj = '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="800" height="800" id="aimia_lesson">
+            $flashObj = '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="1000" height="1000" id="aimia_lesson">
                                 <param name="movie" value="' . $baseLink . '/flash/aimia_lesson.swf" />
                                 <param name="quality" value="high" />
                                 <param name="bgcolor" value="#ffffff" />
                                 <param name="allowScriptAccess" value="sameDomain" />
                                 <param name="allowFullScreen" value="true" />
                                 <param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&partnerName=' . $teacher['username'] . '&myStreamName=' . $result['partner_stream_name'] . '&partnerStreamName=' . $result['creator_stream_name'] . '&soID=' . $result['so_id'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink .'&lesson_id=' . $result['id'] .'">
-                                <object type="application/x-shockwave-flash" data="' . $baseLink . '/flash/aimia_lesson.swf" width="800" height="800">
+                                <object type="application/x-shockwave-flash" data="' . $baseLink . '/flash/aimia_lesson.swf" width="1000" height="1000">
                                     <param name="quality" value="high" />
                                     <param name="bgcolor" value="#ffffff" />
                                     <param name="allowScriptAccess" value="sameDomain" />
@@ -167,11 +167,12 @@ class LessonController extends Zend_Controller_Action
 
         $presPath = $lessonModel->createPresentationPath($activeLesson['id']);
 
-
+        //$this->write($presPath);
 
         $formData = $this->getRequest()->getParams();
 
         if(isset($_FILES['Filedata']['name']) && $_FILES['Filedata']['name'] != '') {
+            //$lessonModel->delTree($presPath);
 
             /*$text = json_encode($_POST);
             $text .= session_id();
@@ -189,8 +190,16 @@ class LessonController extends Zend_Controller_Action
 
             exec("conv.sh {$filePath}");
             $info = pathinfo($filePath);
-            $pdfPath = $info['filename'] . '.pdf';
-            $imgsPath = $presPath . DIRECTORY_SEPARATOR . 'jpges';
+            $pdfName = $info['filename'] . '.pdf';
+
+            $pdfPath = $presPath . $pdfName;
+
+            //$this->write(' / ' . $pdfPath . " / \n");
+
+            @mkdir($presPath . 'jpges' . DIRECTORY_SEPARATOR);
+            $imgsPath = $presPath . 'jpges' . DIRECTORY_SEPARATOR;
+
+            //$this->write(' / ' . "{$imgsPath}file.jpg" . " / \n");
 
             exec("convert {$pdfPath} {$imgsPath}file.jpg");
 
@@ -221,9 +230,13 @@ class LessonController extends Zend_Controller_Action
                     $this->view->data  = $imageArray;
                 } else {
                     $this->view->answer = 'failure';
-                    $this->view->comment = '';
-                    $this->view->data  = "There no any images";
+                    $this->view->comment = 'There no any images';
+                    $this->view->data  = "";
                 }
+            } else {
+                $this->view->answer = 'failure';
+                $this->view->comment = '';
+                $this->view->data  = "There no any parameters";
             }
         }
 

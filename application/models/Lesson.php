@@ -20,8 +20,10 @@ class Application_Model_Lesson
         $identityId = Zend_Auth::getInstance()->getIdentity()->id;
         @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation');
         @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . $identityId);
-        $presPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $lessonId;
+        $presPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR;
         @mkdir($presPath);
+
+        //$this->write(' / ' . $identityId . " / \n");
 
         return $presPath;
     }
@@ -29,7 +31,8 @@ class Application_Model_Lesson
     public function getImages($lessonId) {
         $lessonTable = new Application_Model_DbTable_Lesson();
         $lessonData = $lessonTable->getItem($lessonId);
-        $imagesPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . $lessonData['creator_id'] . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR;
+        //$imagesPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . $lessonData['creator_id'] . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'jpegs' . DIRECTORY_SEPARATOR;
+        $imagesPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . "1" . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'jpges' . DIRECTORY_SEPARATOR;
         $imageNames = scandir($imagesPath);
         $imagePath = array();
         foreach($imageNames as $name) {
@@ -49,5 +52,19 @@ class Application_Model_Lesson
                 unlink( $file );
         }
         rmdir( $dir );
+    }
+
+    function write($the_string )
+    {
+        if( $fh = @fopen("./logfile.txt", "a+") )
+        {
+            fputs( $fh, $the_string, strlen($the_string) );
+            fclose( $fh );
+            return( true );
+        }
+        else
+        {
+            return( false );
+        }
     }
 }
