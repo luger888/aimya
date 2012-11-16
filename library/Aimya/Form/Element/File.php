@@ -4,20 +4,18 @@ class Aimya_Form_Element_File extends Aimya_Form_Element_Uploadify
 {
     public function setup()
     {
-        $elementID = $this->getId();
-
         $options = array('uploader'     => '/flash/uploadify.swf',
-            'cancelImg'    => '/images/jquery.uploadify/cancel.png',
-            'onSelect'	    => 'function() { $(\'#'.$elementID.'Upload\').show(); }',
-            'onCancel'     => 'function() { $(\'#'.$elementID.'Upload\').hide(); }',
-            'onComplete'   => 'function() { $(\'#'.$elementID.'Upload\').hide().parents(\'form:first\').submit(); }',
-            'myShowUpload' => false
+            'cancelImg'    => '/images/cancel.png',
+            'onSelect'	    => 'function() {}',
+            'onCancel'     => 'function() {}',
+            'onComplete'   => 'function() { $(\'#'.$this->getId().'Upload\').parents(\'form:first\').submit(); }',
+            'myShowUpload' => true
         );
-        $this->getView()->headLink()->appendStylesheet('/css/uploadify/uploadify.css', 'screen');
-        $this->getView()->headScript()->appendFile('/scripts/lib/jquery.uploadify.v2.1.0.min.js')
-            ->appendFile('/scripts/lib/swfobject.js')
+        $this->getView()->headLink()->appendStylesheet('/styles/uploadify.css', 'screen');
+        $this->getView()->headScript()->appendFile('/scripts/jquery.uploadify.v2.1.0.min.js')
+            ->appendFile('/scripts/swfobject.js')
             ->appendScript($this->getJavaScript($options));
-
+        // Rename uploaded file
         $this->addFilter('rename', $this->getRandomFileName());
     }
 }

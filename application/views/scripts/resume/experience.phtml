@@ -14,5 +14,6 @@ foreach($this->experienceList as $value):?>
 <div>Add new experience: </div>
 <?php
 echo $this->experienceForm->getElement('experience');
+echo $this->experienceForm->getElement('file');
 ?>
 <input type = "button" value ="save" class = "btn" onclick=saveExperience();>

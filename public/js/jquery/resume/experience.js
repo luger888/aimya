@@ -1,6 +1,5 @@
 // JavaScript Document
 
-/* create account */
 
 $(document).ready(function () {
 
@@ -49,13 +48,13 @@ function deleteExperience(e){
         var answer = confirm("Delete experience?");
 
         if (answer) {
-            $(e).parents('.service').remove();
+            ;
             $.post(
 
                 '/resume/ajax/0/controller%3D%3Eresume/1/action%3D%3Eajax', {'deleteExperience':id},
 
             function (response){
-                window.location.reload();
+                $(e).parent().remove();
             }
             );
 

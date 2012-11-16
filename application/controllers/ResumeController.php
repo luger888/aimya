@@ -15,6 +15,7 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
         $identity = Zend_Auth::getInstance()->getStorage()->read();
         $this->view->headScript()->appendFile('../../js/jquery/resume/experience.js');
         $this->view->headScript()->appendFile('../../js/jquery/resume/education.js');
+        $this->view->headScript()->appendFile('../../js/jquery/resume/objective.js');
         $servicesModel = new Application_Model_DbTable_ServiceDetail();
         $this->view->services = $servicesModel->getServiceByUser($identity->id);
 
@@ -59,17 +60,22 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
 
         $skillsForm = new Application_Form_ResumeSkills();
         $this->view->skillsForm = $skillsForm;
+        if ($this->getRequest()->isPost()){
+            $this->view->succes =1;
+        }
     }
 
     public function ajaxAction()
     {
         $identity = Zend_Auth::getInstance()->getStorage()->read();
         $this->_helper->layout()->disableLayout();
-
+            Zend_Debug::dump($_FILES);
         if ($this->getRequest()->isXmlHttpRequest()){
             $dbExperience = new Application_Model_DbTable_ResumeExperience();
             $dbEducation = new Application_Model_DbTable_ResumeEducation();
+            $dbProfile = new Application_Model_DbTable_Profile();
             $data = $this->getRequest()->getPost();
+
             /* EXPERIENCE TAB*/
             if($this->getRequest()->getParam('experience'))  {
                 $form = new Application_Form_ResumeExperience();
@@ -94,7 +100,7 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
             if($this->getRequest()->getParam('education'))  {
                 $form = new Application_Form_ResumeEducation();
                 if ($form->isValid($data)){
-                    $this->view->lastId = $dbEducation -> createEducation($data, $identity->id);
+                    $dbEducation -> createEducation($data, $identity->id);
                     $this->view->success = '1';
                 }else{
 
@@ -108,7 +114,29 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
             if ($this->getRequest()->getParam('updateEducation')) {
                 $dbEducation->updateEducation($this->getRequest()->getParams(), $identity->id);
             }
-            /* END -- EDUCATION TAB*/
+            /*  END -- EDUCATION TAB*/
+            /*  OBJECTIVE TAB*/
+            if($this->getRequest()->getParam('objective'))  {
+                $form = new Application_Form_ResumeObjective();
+                if ($form->isValid($data)){
+                    $this->view->lastId = $dbProfile -> updateObjective($data, $identity->id);
+                }else{
+                    $this->view->errors = $form->getErrors();
+                }
+
+            }
+            /*  END --  OBJECTIVE TAB*/
+            if($this->getRequest()->getParam('test'))  {
+
+                    $this->view->success = '1';
+                }else{
+
+                $this->view->success = '0';
+
+                }
+
+        }else{
+
         }
 
     }

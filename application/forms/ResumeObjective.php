@@ -8,7 +8,9 @@ class Application_Form_ResumeObjective extends Zend_Form
     public function init()
     {
         $objective = new Zend_Form_Element_Textarea('objective');
-        $objective ->setAttrib('id', 'objective')
+        $objective ->addValidator('NotEmpty')
+            ->setRequired(true)
+            ->setAttrib('id', 'objective')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators)
             ->setAttrib('rows', '7');

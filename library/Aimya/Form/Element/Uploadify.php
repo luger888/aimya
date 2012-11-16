@@ -2,7 +2,7 @@
 
 /**
  * Zend Framework Uplaodify Extension
- * 
+ *
  * @author  gondo
  * @email   gondo@webdesigners.sk
  * @link    http://gondo.webdesigners.sk/zend-framework-uploadify-extension
@@ -11,61 +11,52 @@
  */
 class Aimya_Form_Element_Uploadify extends Zend_Form_Element_File
 {
-    
-    const SESSION_ORIGINAL_FILE_NAME = 'original';
-    const SESSION_FILE_NAME = 'fileName';
-    
     /**
      * Custom Uploadify Form Element identifier
      *
      * @var unknown_type
      */
     protected $_identifier;
-    
+
     /**
      * Random generated file name
      *
      * @var string
      */
     protected $_newName;
-    
+
     /**
      * Determinate if Uploadify was used
      *
      * @var bool
      */
     protected $_isUploadify;
-    
+
     /**
-     * File path, to what was file uploaded via uplaodify 
+     * File path, to what was file uploaded via uplaodify
      *
      * @var string
      */
     protected $_uplaodifyFile;
 
     /**
-     * Originla file name 
-     *
-     * @var string
-     */
-    protected $_originalFile;
-    
-    /**
      * Setup Uploadify
      *
      */
-    public function setup() {}
-    
+    public function setup()
+    {}
+
     /**
      * Initialize Uploadify
      * All custom settings are done here
      *
      */
-    public function create() {
+    public function create()
+    {
         $this->setup();
         $this->upolad();
     }
-    
+
     /**
      * Overwritten validation method to bypass validation
      * when file was uploaded via Uploadify
@@ -74,14 +65,15 @@ class Aimya_Form_Element_Uploadify extends Zend_Form_Element_File
      * @param  mixed  $context
      * @return bool
      */
-    public function isValid($value, $context = null) {
-        if ($this->isUploadify()) {
+    public function isValid($value, $context = null)
+    {
+        if($this->isUploadify()) {
             $this->_validated = true;
             return true;
         }
         return parent::isValid($value, $context);
     }
-    
+
     /**
      * Overwritten function to return correct name when Uploadify was used
      *
@@ -89,30 +81,27 @@ class Aimya_Form_Element_Uploadify extends Zend_Form_Element_File
      * @param  boolean $path  (Optional) Return also the path, defaults to true
      * @return string
      */
-    public function getFileName($value = null, $path = true) {
-        if ($this->isUploadify()) {
+    public function getFileName($value = null, $path = true)
+    {
+        if($this->isUploadify()) {
             return $this->_uplaodifyFile;
         }
         return parent::getFileName($value, $path);
     }
-    
-    public function getOriginalFileName() {
-        return $this->_originalFile;
-    }
-    
+
     /**
      * Check if file was uploaded via Uploadify
      * If so, then get file path from $_SESSION
      *
      * @return bool
      */
-    public function isUploadify() {
-        if ($this->_isUploadify) {
+    public function isUploadify()
+    {
+        if($this->_isUploadify) {
             return $this->_isUploadify;
         }
         if (isset($_SESSION[$this->getIdentifier()])) {
-            $this->_uplaodifyFile = $_SESSION[$this->getIdentifier()][self::SESSION_FILE_NAME];
-            $this->_originalFile = $_SESSION[$this->getIdentifier()][self::SESSION_ORIGINAL_FILE_NAME];
+            $this->_uplaodifyFile = $_SESSION[$this->getIdentifier()];
             unset($_SESSION[$this->getIdentifier()]);
             $this->_isUploadify = true;
             return true;
@@ -120,30 +109,18 @@ class Aimya_Form_Element_Uploadify extends Zend_Form_Element_File
         $this->_isUploadify = false;
         return false;
     }
-    
+
     /**
      * Bypass authentification session
      *
      */
-    /*public static function bypassSession() {
-        if (isset($_POST[session_name()])) {
-            $_COOKIE[session_name()] = $_POST[session_name()];
-        }
-    }*/
-
-    public static function bypassSession() {
-        $phpSessId = "tgpae3nf7oe20rbkuvnib6a4g7";
-        //$phpSessId = $request->getParam('PHPSESSID');
-        if (!empty($phpSessId) && Zend_Session::getId() != $phpSessId) {
-            if(Zend_Session::isStarted()) {
-                Zend_Session::destroy();
-            }
-            Zend_Session::setId($phpSessId);
-            Zend_Session::start();
+    public static function bypassSession()
+    {
+        if (isset($_POST['PHPSESSID'])) {
+            $_COOKIE['PHPSESSID'] = $_POST['PHPSESSID'];
         }
     }
 
-    
     /**
      * Create JavaScript code to load Uploadify
      * Options http://www.uploadify.com/documentation/
@@ -151,71 +128,74 @@ class Aimya_Form_Element_Uploadify extends Zend_Form_Element_File
      * 'sizeLimit', 'fileExt', 'fileDataName', 'script', 'scriptData'
      * Custom options:
      * 'myShowUpload' - bool - determinates if upload link will be displayed
-     * 
-     * @param array $options 
+     *
+     * @param array $options
      */
-    public function getJavaScript($options = null) {
+    public function getJavaScript($options = null)
+    {
         $ext = $this->getExtensionsString();
         $sizeLimit = $this->getSizeLimit();
         $scriptPath = $this->getScriptUrl();
         $fileDataName = $this->getName();
         $elementID = $this->getId();
-        
-        $script = 'jQuery(document).ready(function(){jQuery(\'#' . $elementID . '\').uploadify({' . "\n";
-        foreach ($options as $k => $v) {
-            if (substr($k, 0, 2) != 'my') {
+
+        $script = 'jQuery(document).ready(function(){jQuery(\'#'.$elementID.'\').uploadify({'."\n";
+        foreach ($options as $k=>$v) {
+            if (substr($k,0,2)!='my') {
                 if ($this->isFunctionObject($v)) {
-                    $script .= '\'' . $k . '\':' . $v . ',' . "\n";
+                    $script .= '\''.$k.'\':'.$v.','."\n";
                 } else {
-                    $script .= '\'' . $k . '\':\'' . str_replace('\'', '\\\'', $v) . '\',' . "\n";
+                    $script .= '\''.$k.'\':\''.str_replace('\'', '\\\'', $v ).'\','."\n";
                 }
             }
         }
-        if (! isset($options['fileDesc']) && $ext) {
-            $script .= '\'fileDesc\':\' \',' . "\n";
+        if ( ! isset($options['fileDesc']) && $ext) {
+            $script .= '\'fileDesc\':\' \','."\n";
         }
         if ($sizeLimit) {
-            $script .= '\'sizeLimit\':\'' . $sizeLimit . '\',' . "\n";
+            $script .= '\'sizeLimit\':\''.$sizeLimit.'\','."\n";
         }
         if ($ext) {
-            $script .= '\'fileExt\':\'' . $ext . '\',' . "\n";
+            $script .= '\'fileExt\':\''.$ext.'\','."\n";
         }
-        $script .= '\'fileDataName\':\'' . $fileDataName . '\',' . "\n";
-        $script .= '\'scriptData\':{\''. session_name() . '\': \'' . session_id() . '\'},' . "\n";
-        $script .= '\'script\':\'' . $scriptPath . '\'' . "\n";
+        $script .= '\'fileDataName\':\''.$fileDataName.'\','."\n";
+        $script .= '\'scriptData\':{\'PHPSESSID\': \''.session_id().'\'},'."\n";
+        $script .= '\'script\':\''.$scriptPath.'\''."\n";
         $script .= '});';
         if (isset($options['myShowUpload']) && $options['myShowUpload']) {
-            $script .= 'jQuery(\'#' . $elementID . 'Upload\').show();';
+            $script .= 'jQuery(\'#'.$elementID.'Upload\').show();';
         }
         $script .= '});';
-        
+
         return $script;
     }
-    
+
     /**
      * Return string of extensions fo JavaScript output
      *
      * @return comma separated list of extensions in format *.ext
      */
-    public function getExtensionsString() {
+    public function getExtensionsString()
+    {
         $validator = $this->getValidator('Extension');
         if ($validator) {
             $aExt = $validator->getExtension();
-            foreach ($aExt as $k => $v) {
-                $aExt[$k] = '*.' . $v;
+            foreach ($aExt as $k=>$v) {
+                $aExt[$k] = '*.'.$v;
             }
             return implode(';', $aExt);
         } else {
             return null;
         }
     }
-    
+
     /**
      * Return max file size
      *
      * @return string
      */
-    public function getSizeLimit() {
+    public function getSizeLimit()
+    {
         $validator = $this->getValidator('Size');
         if ($validator) {
             return $validator->getMax('raw');
@@ -223,105 +203,77 @@ class Aimya_Form_Element_Uploadify extends Zend_Form_Element_File
             return null;
         }
     }
-    
+
     /**
      * Generate unique random filename
      *
      * @return string
      */
-    public function getRandomFileName() {
-        $razsh = end(explode(".", (string)$this->getFileName()));
-        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+    public function getRandomFileName()
+    {
         if (empty($this->_newName)) {
-            $this->_newName = $userId . "_" . time() . "." . $razsh;
+            $this->_newName = time().rand(0,255);
         }
         return $this->_newName;
     }
-    
-    public function getUploadFileName($path) {
-        $fileName = end(explode("\\", (string)$path));
-        return $fileName;
-    }
-    
-    public function formatDir ($directory) { 
-        $dir = opendir($directory); 
-        while(($file = readdir($dir))) {
-            if ( is_file ($directory."/".$file)) 
-            { 
-                unlink ($directory."/".$file);
-            } 
-            /*} else if ( is_dir ($directory."/".$file) && ($file != ".") && ($file != "..") && ($file != '.svn')) { 
-                $this->formatDir ($directory."/".$file); 
-            }*/ 
-        } 
-        closedir ($dir);  
-        return TRUE;  
-    }
-    
-    /*function fileDelete($filepath) {
-        $success = FALSE;
-        if (file_exists($filepath)) {
-            unlink ($filepath);
-            $success = TRUE;
-        }
-        return $success;    
-    }*/ 
-    
+
     /**
      * Determinates if passed value is JavaScript function or object
      *
      * @param string $v
      * @return bool
      */
-    private function isFunctionObject($v) {
-        if (substr($v, 0, 8) == 'function') {
+    private function isFunctionObject($v)
+    {
+        if (substr($v,0,8)=='function') {
             return true;
-        } elseif (substr($v, 0, 1) == '{') {
+        } elseif (substr($v,0,1)=='{') {
             return true;
         } else {
             return false;
         }
     }
-    
+
     /**
-     * Return url for JavaScript 'script' option 
+     * Return url for JavaScript 'script' option
      *
      * @return string
      */
-    private function getScriptUrl() {
+    private function getScriptUrl()
+    {
         $url = Zend_Controller_Front::getInstance()->getRequest()->getRequestUri();
-        if (strpos($url, '?')) {
-            $url .= '&amp;' . $this->getIdentifier();
+        if (strpos($url,'?')) {
+            $url .= '&amp;'.$this->getIdentifier();
         } else {
-            $url .= '?' . $this->getIdentifier();
+            $url .= '?'.$this->getIdentifier();
         }
         return $url;
     }
-    
+
     /**
      * Return Custom Uploadify Form Element Identifier
      *
      * @return string
      */
-    private function getIdentifier() {
+    private function getIdentifier()
+    {
         if (empty($this->_identifier)) {
             $this->_identifier = md5($this->getId());
         }
         return $this->_identifier;
     }
-    
+
     /**
      * Check if file was uploaded via Uploadify
      * If so, than receive uploaded file
      * Receiving automatically validate file
      *
      */
-    private function upolad() {
+    private function upolad()
+    {
         if (isset($_GET[$this->getIdentifier()])) {
-            $this->_originalFile = parent::getFileName();
             if ($this->receive()) {
-                $this->saveSession();
-                //self::log('ok');
+                $this->setSession();
                 header("HTTP/1.0 200 ok");
                 // something must be returned
                 die('1');
@@ -330,37 +282,34 @@ class Aimya_Form_Element_Uploadify extends Zend_Form_Element_File
             }
         }
     }
-    
+
     /**
-     * Remember file path into session
+     * Remember uploaded file path into session
      *
      */
-    private function saveSession() {
-        $_SESSION[$this->getIdentifier()][self::SESSION_FILE_NAME] = parent::getFileName();
-        $_SESSION[$this->getIdentifier()][self::SESSION_ORIGINAL_FILE_NAME] = $this->_originalFile;
+    private function setSession()
+    {
+        $_SESSION[$this->getIdentifier()] = $this->getFileName();
     }
-    
+
     /**
      * Return error to flash
      *
      */
-    private function error() {
-        self::log('error');
+    private function error()
+    {
         header("HTTP/1.0 409 uploadify error");
         die();
     }
-    
+
     /**
      * Log anything to file
      *
      * @param string $msg
      * @param string $file
      */
-    private static function log($msg, $file = '') {
-        if ($file == '') {
-            $file = APPLICATION_PATH . '/logs/uplodify.txt';
-        }
-        $msg .= "\n";
+    private function log($msg, $file = '../../../LOG.TXT')
+    {
         $h = fopen($file, 'a');
         fwrite($h, $msg);
         fclose($h);
