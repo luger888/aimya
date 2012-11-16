@@ -9,11 +9,11 @@ class Application_Form_Message extends Zend_Form
     {
         $this->setName('message');
 
-        $recipientId = new Zend_Form_Element_Hidden('recipientid');
+        /*$recipientId = new Zend_Form_Element_Hidden('recipientid');
         $recipientId->setAttrib('id', 'recipientid')
             //->addValidator('NotEmpty')
             ->addFilters($this->basicFilters)
-            ->setDecorators($this->basicDecorators);
+            ->setDecorators($this->basicDecorators);*/
 
         $email = new Zend_Form_Element_Text('username');
         $email->addValidator('NotEmpty')
@@ -40,7 +40,7 @@ class Application_Form_Message extends Zend_Form
             ->setAttrib('class', 'btn')
             ->setDecorators($this->basicDecorators);
 
-        $this->addElements(array($recipientId, $email, $subject, $content, $send));
+        $this->addElements(array($email, $subject, $content, $send));
 
     }
 }

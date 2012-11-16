@@ -4,8 +4,39 @@
         <li><a href="/message/archived">Archived</a></li>
         <li><a href="/message/sent">Sent</a></li>
         <li><a href="/message/trash">Trash</a></li>
+        <li><a href="/message/send">Create</a></li>
     </ul>
     <div class="tab-content" id="tab-1">
-        skdbfhabhfabf sbahv saj,hsbahbv asbbasjvbj sabj vbsa bmvabsd sb mvsadbhjvsajb
+        <div class = "userRelations"><table  class="table table-striped table-hover">
+            <thead style="background: #ccc">
+            <tr>
+                <td> </td>
+                <td> Sender Name </td>
+                <td> Subject </td>
+                <td> Message </td>
+
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            if($this->messages){
+                foreach($this->messages as $message){
+                    echo '<tr>
+                    <td><input type="checkbox" id="' . $message['id'] . '"></td>
+        <td>'.$message['sender_id'].'</td>
+        <td>'.$message['subject'].'</td>
+        <td>'.$message['content'].'</td>
+
+        <td><div class = "blockUser" onclick ="blockUser(this);return false;">Block</div><div class = "deleteUser" onclick ="deleteUser(this);return false;">Delete</div><input type = "hidden" value = '. $value['id'].'</td>
+    </tr>';
+                }
+
+            }
+
+            ?>
+
+            </tbody>
+        </table>
+        </div>
     </div>
 </div>

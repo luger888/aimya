@@ -36,7 +36,11 @@ class Application_Model_Lesson
         $imageNames = scandir($imagesPath);
         $imagePath = array();
         foreach($imageNames as $name) {
-            $imagePath[] = $imagesPath . $name;
+            if(strlen($name) > 3) {
+                $search = realpath(APPLICATION_PATH . '/../public/');
+                $cutedPath = str_replace($search, "", $imagesPath );
+                $imagePath[] = $cutedPath . $name;
+            }
         }
 
         return $imagePath;

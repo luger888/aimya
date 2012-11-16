@@ -1,12 +1,12 @@
 <?php
 class Application_Model_DbTable_Message extends Application_Model_DbTable_Abstract
 {
-    protected $_name = 'message';
+    protected $_name = 'messages';
 
     public function sendMessage($array = array()){
 
         $data = array(
-            'sender_id' => $array['creator_id'],
+            'sender_id' => $array['sender_id'],
             'recipient_id' => $array['recipient_id'],
             'out' => $array['content'],
             'in' => $array['content'],
