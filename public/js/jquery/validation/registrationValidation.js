@@ -27,7 +27,7 @@ $(document).ready(function() {
 
                 if(response.status == 1){
 
-                    $('.messages').html(response.confirmFlash);
+                    $('.alert').html(response.confirmFlash);
 
                 }
 
