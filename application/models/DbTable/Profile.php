@@ -55,5 +55,14 @@ class Application_Model_DbTable_Profile extends Application_Model_DbTable_Abstra
         $this->insert($data);
 
     }
+    public function updateObjective($array, $user_id){
 
+        $data = array(
+
+            'objective'=> $array['objective']
+
+        );
+        $where = $this->getAdapter()->quoteInto('user_id = ?', (int)$user_id);
+        $this->update($data, $where);
+    }
 }

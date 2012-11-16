@@ -1,13 +1,28 @@
 // JavaScript Document
 
-/* create account */
-
-$(document).ready(function () {
-
-
-});
+    //});
+//});
+//$(document).ready(function () {
+function test(){
+    //$(function() {
+        //$('#file_upload').uploadifive('upload');
+    //});
+}
+//});
 
 function saveExperience(){
+        var id = $(this).nextAll('input[type=hidden]:first').val();
+
+    /*$('#file_upload').uploadifive({
+        'auto'         : false,
+        'formData'     : {'experienceUpload' : 'experience'},
+        'queueID'      : 'queue',
+        'uploadScript' : '/resume/upload',
+        'onUploadComplete' : function(file, data) {
+            console.log(data);
+        }
+    });*/
+    $('#file_upload').uploadifive('upload');
    var experience = $('#experience').val();
     $.post(
 
@@ -49,13 +64,13 @@ function deleteExperience(e){
         var answer = confirm("Delete experience?");
 
         if (answer) {
-            $(e).parents('.service').remove();
+
             $.post(
 
                 '/resume/ajax/0/controller%3D%3Eresume/1/action%3D%3Eajax', {'deleteExperience':id},
 
             function (response){
-                window.location.reload();
+                $(e).parent().remove();
             }
             );
 

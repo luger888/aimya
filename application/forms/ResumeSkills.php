@@ -29,12 +29,26 @@ class Application_Form_ResumeSkills extends Zend_Form
             ->setAttrib('class', 'btn')
             ->setDecorators($this->basicDecorators);
 
-        $certificate = new Zend_Form_Element_File('certificate');
-        $certificate ->setLabel('Upload Certificate')
-            ->setAttrib('id', 'certificate')
-            ->addValidator('Size', false, 1024000)
-            ->addValidator('Extension', false, 'jpg,png,gif,jpeg')
-            ->setDestination('./img/uploads/'.$identity->id.'/skills/');
+        $certificate = new Aimya_Form_Element_File( 'certificate' );
+        $certificate->setOptions(array(
+            'required'    => true,
+            'label'       => 'Label'
+        ))
+            ->setDestination( './img/uploads/' )
+            ->addValidators(array(
+            array( "Count", true, 1 ),
+            array( "Extension", true, array( 'jpg', 'png' ))
+        ))
+            ->addPrefixPath('Aimya_Form_Decorator', 'Aimya/Form/Decorator/', 'decorator')
+            ->setDecorators(array(
+            'File',
+            'Description',
+            'Label',
+            array('Errors', array('placement' => 'prepend')),
+            array('Uploadify', array('text' => 'Nahrať súbor'))
+        ))
+            ->create();
+
 
         $submit = new Zend_Form_Element_Submit('saveSkills');
         $submit ->setLabel('Save')

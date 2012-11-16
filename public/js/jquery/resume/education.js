@@ -1,6 +1,5 @@
 // JavaScript Document
 
-/* create account */
 
 $(document).ready(function () {
 
@@ -49,10 +48,12 @@ function deleteEducation(e){
         var answer = confirm("Delete education?");
 
         if (answer) {
-            $(e).parents('.service').remove();
             $.post(
 
-                '/resume/ajax/0/controller%3D%3Eresume/1/action%3D%3Eajax', {'deleteEducation':id}
+                '/resume/ajax/0/controller%3D%3Eresume/1/action%3D%3Eajax', {'deleteEducation':id},
+                function(response){
+                    $(e).parent().remove();
+                }
 
 
             );

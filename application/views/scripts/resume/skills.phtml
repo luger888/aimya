@@ -1,5 +1,24 @@
-<?php
-echo $this->skillsForm;
+<script type="text/javascript">
+    $(function() {
+        $('#file_upload').uploadifive({
+            'auto'         : false,
+            'formData'     : {'test' : 'something'},
+            'queueID'      : 'queue',
+            'uploadScript' : '/resume/ajax',
+            'onUploadComplete' : function(file, data) {
+                console.log(data);
+            }
+        });
+    });
+</script>
+<h1>UploadiFive Demo</h1>
+<form>
+    <div id="queue"></div>
+    <input id="file_upload" name="file_upload" type="file" multiple="true">
+</form>
 
 
+
+
+    <input type = "button" onclick="saveSkills();" value ="save">
 

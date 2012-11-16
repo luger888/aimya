@@ -1,3 +1,18 @@
+<script type="text/javascript">
+    /*$(function() {
+        $('#file_upload').uploadifive({
+            'auto'         : false,
+            'formData'     : {'experienceUpload' : 'certificate'},
+            'queueID'      : 'queue',
+            'uploadScript' : '/resume/upload',
+            'onUploadComplete' : function(file, data) {
+                console.log(data);
+            }
+        });
+    });*/
+</script>
+
+
 <?php
 foreach($this->experienceList as $value):?>
     <div class = "experienceItem">
@@ -5,6 +20,7 @@ foreach($this->experienceList as $value):?>
         <div class = "experienceBody">
             <?php echo $value['content'];?>
         </div>
+
         <input type = "button" value ="edit" class = "btn" onclick=editExperience(this);>
         <input type = "button" value ="delete" class = "btn" onclick=deleteExperience(this);>
         <input type = "hidden" value="<?php echo $value['id'];?>">
@@ -13,6 +29,8 @@ foreach($this->experienceList as $value):?>
 <?php endforeach;?>
 <div>Add new experience: </div>
 <?php
-echo $this->experienceForm->getElement('experience');
-?>
+echo $this->experienceForm->getElement('experience');?>
+<div id="queue"></div>
+        <input id="file_upload" name="file_upload" type="file" multiple="true">
+
 <input type = "button" value ="save" class = "btn" onclick=saveExperience();>
