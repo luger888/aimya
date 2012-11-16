@@ -230,6 +230,7 @@ font:15px dosis-semibold;
     position: relative;
     right: 107px;
     color:red;
+    top:5px;
 }
 
 #signUp{
@@ -257,7 +258,7 @@ font:15px dosis-semibold;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
 }
 #registrationFormHolder .buttonBar input[type="radio"]{
-display: none;
+    display: none;
 }
 #registrationFormHolder .buttonBar{
     margin: 0 0 15px 22px;
