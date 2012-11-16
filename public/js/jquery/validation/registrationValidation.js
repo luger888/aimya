@@ -25,9 +25,9 @@ $(document).ready(function() {
 
                 }
 
-                if(response.status == 1){
+                if(response.confirmFlash){
 
-                    window.location.href = "/account/index/";
+                    $('.alertBlock').append('<div class="alert">'+response.confirmFlash+'</div>');
 
                 }
 
