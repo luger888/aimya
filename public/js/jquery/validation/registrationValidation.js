@@ -16,11 +16,13 @@ $(document).ready(function() {
 
             function(response){
                     $('.error').remove();
+
                 for (key in response.errors){
+                    $("#" + key).removeClass("input-error");
                     $("#" + key).removeAttr('style');
                     if(response.errors[key].length>0){
                         $("#" + key).parent().after('<div class="error">' +response.errors[key] + '</div>');
-                        $("#" + key).attr('style', 'border: 1px solid red !important');
+                        $("#" + key).addClass("input-error");
                     }
 
                 }

@@ -54,9 +54,10 @@ fieldset .mainText{
     color:#2e3911;
 }
 fieldset legend{
-
+    margin-bottom: 10px;
     border: none !important;
 }
+
 li{
     list-style-type: none;
 }
@@ -154,7 +155,12 @@ font:15px dosis-semibold-middle;
 #globalNav ul li:first-child {
     border-left: medium none;
 }
-
+.shadowSeparator{
+    background: url('../img/design/mainPage/shadow_separator.png') no-repeat;
+    width:100%;
+    height: 10px;
+    margin-bottom: 15px;
+}
 .galleryMain{
     background: url('../img/design/mainPage/background_slider.png') no-repeat;
     width:400px;
@@ -219,6 +225,7 @@ font:15px dosis-semibold-middle;
 #loginFormHolder .pass{
     margin-left: 115px;
 }
+
 .btnLogin{
     background: url('../img/design/mainPage/buttons/loginBut.png') no-repeat;
     text-shadow: 2px 1px 0 rgba(44, 61, 00, 0.4);
@@ -237,11 +244,14 @@ font:15px dosis-semibold-middle;
     float:left;
     margin-left: 3%;
 }
-
+.input-error{
+    box-shadow: 0 0 3px #f25f5f !important;
+    border: 1px solid red !important;
+}
 #registrationFormHolder .error{
+    font: 12px Helvetica;
     display: block;
     float: left;
-    font-size: 9px;
     position: relative;
     right: 107px;
     color:red;
