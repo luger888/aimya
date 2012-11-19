@@ -159,6 +159,9 @@ class LessonController extends Zend_Controller_Action
 
     public function uploadAction() {
 
+        //$text = json_encode($_POST);
+        //$text = session_id();
+        //$this->write($text);
         $identityId = Zend_Auth::getInstance()->getIdentity()->id;
 
         $lessonModel = new Application_Model_Lesson();
@@ -174,9 +177,9 @@ class LessonController extends Zend_Controller_Action
         if(isset($_FILES['Filedata']['name']) && $_FILES['Filedata']['name'] != '') {
             //$lessonModel->delTree($presPath);
 
-            /*$text = json_encode($_POST);
-            $text .= session_id();
-            $this->write($text);*/
+            $text = json_encode($_POST);
+            $text .= $presPath;
+            $this->write($text);
             $presentationForm = new Application_Form_Presentation();
             $presentationForm->getElement("Filedata")->setDestination($presPath);
             $presentationForm->Filedata->receive();

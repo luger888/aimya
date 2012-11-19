@@ -53,7 +53,7 @@ class Application_Model_DbTable_Message extends Application_Model_DbTable_Abstra
         $row = $this->fetchAll(
             $this->select()
                 ->where('sender_id=?' , $userId)
-                ->where('sender_status=?', 1)
+                ->where('sender_status<?', 2)
         );
         if (!$row) {
             throw new Exception("There is no element with ID: $userId");
