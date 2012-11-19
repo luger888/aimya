@@ -32,6 +32,22 @@ class Application_Form_Registration extends Zend_Form
             ->setLabel('Last Name:');
            # ->setDecorators($this->basicDecorators);
 
+        $gender = new Zend_Form_Element_Select('gender');
+        $gender ->setAttrib('class', 'regSelect')
+        #->setAttrib('placeholder', 'Last Name')
+            ->setAttrib('id', 'gender')
+            ->addFilters($this->basicFilters)
+           // ->setErrorMessages(array('Select your gender'))
+            ->setLabel('Gender: ');
+        $gender->addMultiOptions(array(
+
+                'male' => 'male',
+                'female' => 'female'
+
+            )
+        );
+        # ->setDecorators($this->basicDecorators);
+
         $userName = new Zend_Form_Element_Text('username');
         $userName->setRequired(true)
             ->addValidator('NotEmpty')
@@ -91,7 +107,7 @@ class Application_Form_Registration extends Zend_Form
                 ->setAttrib('class', 'btnSignup signup-element')
                 ->setDecorators($this->basicDecorators);
 
-        $this->addElements(array($firstName, $lastName, $userName, $email, $password, $password2, $type, $submit));
+        $this->addElements(array($firstName, $lastName, $gender, $userName, $email, $password, $password2, $type, $submit));
     }
 
 }

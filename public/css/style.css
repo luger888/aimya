@@ -37,8 +37,8 @@ form{
     padding: 0;
 }
 .footer {
-    color: #aab786;
-    font: 11px helvetica;
+    color: #A1B368;
+    font: 10px helvetica;
     left: 8.6%;
     margin-top: 25px;
     padding: 0;
@@ -89,16 +89,14 @@ font:15px dosis-semibold-middle;
 }
 
 .regTextInput:focus{
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 12px rgba(255, 255, 255, 0.6) !important;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 12px rgba(254, 252, 215, 1) !important;
 }
 .logTextInput:focus{
     border:1px solid #536e10 !important;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 5px rgba(254, 252, 215, 1) !important;
 }
 .buttonBar{
-
     border-top-image: url('../img/design/mainPage/shadow_separator.png');
-
 
 }
 .buttonBar label{
@@ -115,6 +113,9 @@ font:15px dosis-semibold-middle;
 }
 
 /*header*/
+#loginFormHolder input {
+    outline:1px #fefcd7;
+}
 .header {
     background-image: url('../img/design/mainPage/header.png');
     background-repeat: repeat-x;
@@ -122,7 +123,6 @@ font:15px dosis-semibold-middle;
     -moz-box-shadow: 0 0 6px rgba(0,0,0,0.6); /* Для Firefox */
     -webkit-box-shadow: 0 0 6px rgba(0,0,0,0.6); /* Для Safari и Chrome */
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
-
 }
 
 .header .logo {
@@ -212,7 +212,7 @@ font:15px dosis-semibold-middle;
 }
 #loginFormHolder label, #loginFormHolder a{
     float:left;
-    margin-right: 85px;
+    margin-right: 90px;
     font-size:10px;
     color:#B1CC6D;
     padding-top: 1px;
@@ -261,6 +261,15 @@ font:15px dosis-semibold-middle;
 #signUp{
     height: 600px;
     width: 640px;
+}
+
+#registrationFormHolder .regSelect{
+    width:179px;
+    border: 1px solid #95a861 !important;
+    height: 33px !important;
+    border-radius: 0;
+
+
 }
 #registrationFormHolder dt,#registrationFormHolder dd{
     float:left;
