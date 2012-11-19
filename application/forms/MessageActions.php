@@ -13,10 +13,10 @@ class Application_Form_MessageActions extends Zend_Form
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators)
             ->addMultiOptions(array(
-                '0' => 'Reply',
-                '1' => 'Forward',
-                '2' => 'Move To Archived',
-                '3' => 'Trash'
+                'reply' => 'Reply',
+                'forward' => 'Forward',
+                'archive' => 'Move To Archived',
+                'delete' => 'Trash'
         ));
 
         $massActions = new Zend_Form_Element_Select('massactions');
