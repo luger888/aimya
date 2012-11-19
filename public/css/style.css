@@ -288,11 +288,11 @@ font:15px dosis-semibold-middle;
     margin: 0 0 15px 22px;
 }
 #registrationFormHolder .buttonBar label{
-
+    word-spacing: 2px;
     width: 135px !important;
     height:30px;
     border: none;
-    font:12px dosis-semibold-middle;
+    font:12px dosis-semibold;
     text-align: center;
     display: inline-block;
 
@@ -307,13 +307,14 @@ font:15px dosis-semibold-middle;
 
 #registrationFormHolder .buttonBar label:not(.checked){
     background: url('../img/design/mainPage/buttons/studentBut.png') no-repeat;
-    color:#585858;
-    text-shadow: 1px 1px 0 rgba(255,255,255,0.9);
+    color:#324a0c;
+    text-shadow: 1px 1px 0 rgba(222,236,182,0.9);
     cursor: pointer;
 }
 #registrationFormHolder .buttonBar label:not(.checked):hover{
     background: url('../img/design/mainPage/buttons/teacherButOver.png') no-repeat;
-
+    color:white;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.6);
 }
 .btnSignup{
     background: url('../img/design/mainPage/buttons/signUpBut.png') no-repeat;
