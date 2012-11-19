@@ -1,3 +1,17 @@
+
+/* FONTS*/
+@font-face {
+    font-family: helvetica;
+    src: url('fonts/Helvetica.ttf');
+}
+@font-face {
+    font-family: dosis-semibold;
+    src: url('fonts/Dosis-Light.ttf');
+}
+@font-face {
+    font-family: dosis-semibold-middle;
+    src: url('fonts/Dosis-SemiBold.ttf');
+}
 /*global*/
 html{
     height: 100%;
@@ -12,12 +26,6 @@ body{
     height: 100%;
     margin: 0;
     padding: 0;
-    /*background: -moz-radial-gradient(top, ellipse cover, #f4f7ea 8%, #e3f5ab 71%, #d5e4ad 100%); *//* FF3.6+ */
-    /*background: -webkit-gradient(radial, top top, 0px, top top, 100%, color-stop(8%,#f4f7ea), color-stop(71%,#e3f5ab), color-stop(100%,#d5e4ad)); *//* Chrome,Safari4+ */
-    /*background: -webkit-radial-gradient(top, ellipse cover, #f4f7ea 8%,#e3f5ab 71%,#d5e4ad 100%); *//* Chrome10+,Safari5.1+ */
-    /*background: -o-radial-gradient(top, ellipse cover, #f4f7ea 8%,#e3f5ab 71%,#d5e4ad 100%); *//* Opera 12+ */
-    /*background: -ms-radial-gradient(top, ellipse cover, #f4f7ea 8%,#e3f5ab 71%,#d5e4ad 100%); *//* IE10+ */
-    /*background: radial-gradient(ellipse at center, #f4f7ea 8%,#e3f5ab 71%,#d5e4ad 100%); *//* W3C */
 }
 
 form{
@@ -30,7 +38,7 @@ form{
     padding: 0;
 }
 .footer {
-    color: #91AEA1;
+    color: #aab786;
     font: 11px helvetica;
     left: 8.6%;
     margin-top: 25px;
@@ -38,10 +46,18 @@ form{
     position: relative;
     display: inline-block;
 }
+fieldset .mainText{
+    font-size: 12px;
+    line-height: 18px;
+    text-align: justify;
+    width: 400px;
+    color:#2e3911;
+}
 fieldset legend{
-
+    margin-bottom: 10px;
     border: none !important;
 }
+
 li{
     list-style-type: none;
 }
@@ -49,23 +65,11 @@ li{
     margin-top:70px;
 }
 
-/* FONTS*/
-@font-face {
-    font-family: lobster1;
-    src: url('fonts/Lobster_1_4.otf');
-}
-@font-face {
-    font-family: dosis-semibold;
-    src: url('fonts/Dosis-Light.ttf');
-}
-@font-face {
-    font-family: krungthep;
-    src: url('fonts/Krungthep.ttf');
-}
+
 .strictFont{
-font:15px dosis-semibold;
+font:15px dosis-semibold-middle;
     color:#3e5602;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    text-shadow: 1px 0 1px rgba(255, 255, 255, 1);
 }
 /*Buttons*/
 
@@ -99,7 +103,7 @@ font:15px dosis-semibold;
 
 }
 .buttonBar label{
-    font:13px dosis-semibold;
+    font:13px dosis-semibold-middle;
     color:white;
 
 }
@@ -116,9 +120,9 @@ font:15px dosis-semibold;
     background-image: url('../img/design/mainPage/header.png');
     background-repeat: repeat-x;
     height:85px;
-    -moz-box-shadow: 0 0 4px rgba(0,0,0,0.5); /* Для Firefox */
-    -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.5); /* Для Safari и Chrome */
-    box-shadow: 0 0 4px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0 0 6px rgba(0,0,0,0.6); /* Для Firefox */
+    -webkit-box-shadow: 0 0 6px rgba(0,0,0,0.6); /* Для Safari и Chrome */
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
 
 }
 
@@ -151,11 +155,17 @@ font:15px dosis-semibold;
 #globalNav ul li:first-child {
     border-left: medium none;
 }
-
+.shadowSeparator{
+    background: url('../img/design/mainPage/shadow_separator.png') no-repeat;
+    width:100%;
+    height: 10px;
+    margin-bottom: 15px;
+}
 .galleryMain{
     background: url('../img/design/mainPage/background_slider.png') no-repeat;
     width:400px;
     height:290px;
+    margin-top:25px;
 }
 /*login*/
 #loginFormHolder{
@@ -175,6 +185,15 @@ font:15px dosis-semibold;
     font:11px Helvetica;
     text-shadow: 1px 1px 1px #4e6c06;
 }
+
+#loginFormHolder input[type="text"], #loginFormHolder input[type="password"]{
+    border: 1px solid #536E10;
+    -moz-transition: none;
+    -webkit-transition: none;
+    -o-transition: none;
+    transition: none;
+}
+
 #loginFormHolder input[type="checkbox"]{
     float:left;
     margin: -2px -12px 0 0;
@@ -184,6 +203,7 @@ font:15px dosis-semibold;
     opacity: 0;
 }
 #loginFormHolder input[type="checkbox"]+label{
+    color:#D0E4A0;
     background: url('../img/design/mainPage/keepSignedCheclbox.png') left center no-repeat;
     padding: 1px 0 0 15px;
 }
@@ -194,7 +214,8 @@ font:15px dosis-semibold;
     float:left;
     margin-right: 85px;
     font-size:11px;
-    color:#bedf6c;
+    color:#BEDF6D;
+    padding-top: 1px;
     position: relative;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.4);
 }
@@ -204,6 +225,7 @@ font:15px dosis-semibold;
 #loginFormHolder .pass{
     margin-left: 115px;
 }
+
 .btnLogin{
     background: url('../img/design/mainPage/buttons/loginBut.png') no-repeat;
     text-shadow: 2px 1px 0 rgba(44, 61, 00, 0.4);
@@ -222,11 +244,14 @@ font:15px dosis-semibold;
     float:left;
     margin-left: 3%;
 }
-
+.input-error{
+    box-shadow: 0 0 3px #f25f5f !important;
+    border: 1px solid red !important;
+}
 #registrationFormHolder .error{
+    font: 12px Helvetica;
     display: block;
     float: left;
-    font-size: 9px;
     position: relative;
     right: 107px;
     color:red;
@@ -235,7 +260,6 @@ font:15px dosis-semibold;
 
 #signUp{
     height: 600px;
-    margin: 25px auto;
     width: 640px;
 }
 #registrationFormHolder dt,#registrationFormHolder dd{
@@ -255,7 +279,7 @@ font:15px dosis-semibold;
     font:12px helvetica;
     margin-top:10px;
     color:#324503;
-    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.7);
 }
 #registrationFormHolder .buttonBar input[type="radio"]{
     display: none;
@@ -268,7 +292,7 @@ font:15px dosis-semibold;
     width: 135px !important;
     height:30px;
     border: none;
-    font:12px dosis-semibold;
+    font:12px dosis-semibold-middle;
     text-align: center;
     display: inline-block;
 
@@ -280,9 +304,7 @@ font:15px dosis-semibold;
     color:#fff;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.4);
 }
-#registrationFormHolder .buttonBar .checked:hover{
-    background: url('../img/design/mainPage/buttons/teacherButOver.png') no-repeat;
-}
+
 #registrationFormHolder .buttonBar label:not(.checked){
     background: url('../img/design/mainPage/buttons/studentBut.png') no-repeat;
     color:#585858;
@@ -290,7 +312,8 @@ font:15px dosis-semibold;
     cursor: pointer;
 }
 #registrationFormHolder .buttonBar label:not(.checked):hover{
-    background: url('../img/design/mainPage/buttons/studentButOver.png') no-repeat;
+    background: url('../img/design/mainPage/buttons/teacherButOver.png') no-repeat;
+
 }
 .btnSignup{
     background: url('../img/design/mainPage/buttons/signUpBut.png') no-repeat;
