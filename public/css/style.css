@@ -69,7 +69,7 @@ li{
 .strictFont{
 font:15px dosis-semibold-middle;
     color:#3e5602;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    text-shadow: 1px 0 1px rgba(255, 255, 255, 1);
 }
 /*Buttons*/
 
@@ -313,6 +313,7 @@ font:15px dosis-semibold-middle;
 }
 #registrationFormHolder .buttonBar label:not(.checked):hover{
     background: url('../img/design/mainPage/buttons/teacherButOver.png') no-repeat;
+
 }
 .btnSignup{
     background: url('../img/design/mainPage/buttons/signUpBut.png') no-repeat;
