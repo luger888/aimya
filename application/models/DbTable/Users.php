@@ -46,6 +46,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
             'username' => $array['username'],
             'firstname' => $array['firstname'],
             'lastname' => $array['lastname'],
+            'gender' => $array['gender'],
             'status' => $status,
             'confirmation_token' => $token,
             'created_at' => date('Y-m-d H:m:s'),
