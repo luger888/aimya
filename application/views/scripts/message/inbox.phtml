@@ -1,12 +1,14 @@
-<div class="tabbable tabs-left" id="left_tabs">
-    <ul class="nav nav-tabs">
-        <li><a href="#tab-1">Inbox</a></li>
-        <li><a href="/message/archived">Archived</a></li>
-        <li><a href="/message/sent">Sent</a></li>
-        <li><a href="/message/trash">Trash</a></li>
-        <li><a href="/message/send">Create</a></li>
-    </ul>
-    <div class="tab-content" id="tab-1">
+<div class="accountWrapper row-fluid no-space">
+    <div class="leftNavigation span2">
+        <?php
+        echo $this->navigation()
+            ->menu()
+            ->setMaxDepth(0)
+            ->setUlClass('nav nav-tabs nav-stacked')
+            ->render(new Aimya_Navigation($this->navigation()->findAllBy('tag', 'messageMenu', true)));
+        ?>
+    </div>
+    <div>
         <div class = "userRelations"><table  class="table table-striped table-hover">
             <thead style="background: #ccc">
             <tr>
@@ -37,4 +39,4 @@
         </table>
         </div>
     </div>
-</div>
+

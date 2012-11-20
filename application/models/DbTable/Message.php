@@ -62,6 +62,21 @@ class Application_Model_DbTable_Message extends Application_Model_DbTable_Abstra
         return $row->toArray();
     }
 
+    public function getTrash($userId) {
+        $userId = (int)$userId;
+        $row = $this->fetchAll(
+            $this->select()
+                ->where('sender_id=?' , $userId)
+                ->where('recipient_id=?' , $userId)
+                ->where('sender_status=?', 2)
+        );
+        if (!$row) {
+            throw new Exception("There is no element with ID: $userId");
+        }
+
+        return $row->toArray();
+    }
+
     public function checkNewMessage($userId) {
         $userId = (int)$userId;
         $row = $this->fetchAll(

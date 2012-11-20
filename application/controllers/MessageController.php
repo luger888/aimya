@@ -76,7 +76,7 @@ class MessageController extends Zend_Controller_Action
     {
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
         $this->_helper->layout()->getView()->headTitle('Inbox Messages');
-        $this->_helper->layout()->disableLayout();
+        //$this->_helper->layout()->disableLayout();
         $messageTable = new Application_Model_DbTable_Message();
         $messageActionsForm = new Application_Form_MessageActions();
 
@@ -88,11 +88,21 @@ class MessageController extends Zend_Controller_Action
 
     public function trashAction()
     {
-        $this->_helper->layout()->disableLayout();
+        //$this->_helper->layout()->disableLayout();
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+        $this->_helper->layout()->getView()->headTitle('Inbox Messages');
+        //$this->_helper->layout()->disableLayout();
+        $messageTable = new Application_Model_DbTable_Message();
+        $messageActionsForm = new Application_Form_MessageActions();
+
+        $messages = $messageTable->getTrash($userId);
+
+        $this->view->messageActions = $messageActionsForm;
+        $this->view->messages = $messages;
     }
 
     public function archivedAction()
     {
-        $this->_helper->layout()->disableLayout();
+        //$this->_helper->layout()->disableLayout();
     }
 }
