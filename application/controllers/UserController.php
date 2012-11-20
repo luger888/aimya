@@ -126,7 +126,7 @@ class UserController extends Zend_Controller_Action
             if ($reg->isValid($formData)) {
                 $user = new Application_Model_DbTable_Users();
                 if ($user->checkByMail($formData['email']) || $user->checkByUsername($formData['username'])) {
-                    $this->_helper->flashMessenger->addMessage(array('failure'=>'This email or username already exist'));
+                    $this->view->confirmFlash = 'This email or username already exist';
                     $this->_helper->redirector('index', 'index');
                 } else {
                     $status = $modelUser->addNewUser($formData);
