@@ -29,7 +29,7 @@ $(document).ready(function() {
                 }
 
                 if(response.confirmFlash){
-
+                    $('.alertBlock .alert').remove();
                     $('.alertBlock').append('<div class="alert">'+response.confirmFlash+'</div>');
 
                 }

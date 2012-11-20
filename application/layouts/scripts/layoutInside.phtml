@@ -1,3 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta CHARSET="UTF-8">
+    <title></title>
+    <?php
+    $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=utf-8');
+    $this->addHelperPath("ZendX/JQuery/View/Helper", "ZendX_JQuery_View_Helper");
+    ?>
+    <?php  echo $this->jQuery(); ?>
+    <?php $this->headLink()->appendStylesheet('/twitter/css/bootstrap.css');?>
+    <?php $this->headLink()->appendStylesheet('http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css');?>
+    <?php $this->headScript()->appendFile('/js/jquery/jquery-ui-1.9.1.custom.min.js');?>
+    <?php $this->headScript()->appendFile('/js/jquery/cookieJquery.js');?>
+    <?php #$this->headScript()->appendFile('/js/jquery/jquery.uploadifive.js');?>
+    <?php $this->headScript()->appendFile('/js/jquery/main.js');?>
+    <?php $this->headLink()->appendStylesheet('/css/style.css');?>
+    <?php $this->headScript()->appendFile('/twitter/js/bootstrap.js');?>
+
+    <?php echo $this->headScript();?>
+    <?php echo $this->headLink();?>
+</head>
+<body>
+<?php
+
+$front = Zend_Controller_Front::getInstance();
+$controllerName = $front->getRequest()->getControllerName();
+?>
+
+
+
+
+
 <?php
 //information in left block of account:
 //  firstname, lastname, avatar, member since
@@ -40,3 +74,6 @@ if (Zend_Registry::isRegistered('username')) {
         <?php echo $this->layout()->content; ?>
     </div>
 </div>
+
+</body>
+</html>
