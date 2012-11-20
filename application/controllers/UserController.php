@@ -127,7 +127,7 @@ class UserController extends Zend_Controller_Action
                 $user = new Application_Model_DbTable_Users();
                 if ($user->checkByMail($formData['email']) || $user->checkByUsername($formData['username'])) {
                     $this->view->confirmFlash = 'This email or username already exist';
-                    $this->_helper->redirector('index', 'index');
+
                 } else {
                     $status = $modelUser->addNewUser($formData);
 
@@ -136,7 +136,6 @@ class UserController extends Zend_Controller_Action
                     } else {
                         $this->view->confirmFlash = 'Some tricky error';
                     }
-                    $this->_helper->redirector('index', 'index');
                 }
             } else {
 
