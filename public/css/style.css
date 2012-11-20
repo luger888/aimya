@@ -313,7 +313,8 @@ font:15px dosis-semibold-middle;
 }
 #registrationFormHolder .buttonBar label:not(.checked):hover{
     background: url('../img/design/mainPage/buttons/teacherButOver.png') no-repeat;
-
+    color:white;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.6);
 }
 .btnSignup{
     background: url('../img/design/mainPage/buttons/signUpBut.png') no-repeat;
