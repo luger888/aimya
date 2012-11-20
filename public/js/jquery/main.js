@@ -74,7 +74,13 @@ $(document).ready(function() {
     });
     /* END TABS with COOKIES jquery UI */
 
+    /*  ACCOUNT SYSTEM   */
 
+    $('#singleactions').change(function () {
+        alert('sdvsf');
+        window.location.href = '/message/' . $('#singleactions').val();
+    });
+    /*  ACCOUNT SYSTEM   */
 
 });
 function uploadify(){
