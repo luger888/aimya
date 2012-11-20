@@ -1,4 +1,3 @@
-
 /* FONTS*/
 @font-face {
     font-family: helvetica;
@@ -203,7 +202,8 @@ font:15px dosis-semibold-middle;
     opacity: 0;
 }
 #loginFormHolder input[type="checkbox"]+label{
-    color:#D0E4A0;
+    color:#DEE6BF;
+    font-size:10px;
     background: url('../img/design/mainPage/keepSignedCheclbox.png') left center no-repeat;
     padding: 1px 0 0 15px;
 }
@@ -213,11 +213,11 @@ font:15px dosis-semibold-middle;
 #loginFormHolder label, #loginFormHolder a{
     float:left;
     margin-right: 85px;
-    font-size:11px;
-    color:#BEDF6D;
+    font-size:10px;
+    color:#B1CC6D;
     padding-top: 1px;
     position: relative;
-    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.4);
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
 }
 #loginFormHolder #login{
 
