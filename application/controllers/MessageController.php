@@ -18,9 +18,11 @@ class MessageController extends Zend_Controller_Action
         $this->_helper->layout()->getView()->headTitle('Inbox Messages');
         //$this->_helper->layout()->disableLayout();
         $messageTable = new Application_Model_DbTable_Message();
+        $messageActionsForm = new Application_Form_MessageActions();
 
         $messages = $messageTable->getInbox($userId);
 
+        $this->view->messageActions = $messageActionsForm;
         $this->view->messages = $messages;
     }
 
@@ -72,7 +74,16 @@ class MessageController extends Zend_Controller_Action
 
     public function sentAction()
     {
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+        $this->_helper->layout()->getView()->headTitle('Inbox Messages');
         $this->_helper->layout()->disableLayout();
+        $messageTable = new Application_Model_DbTable_Message();
+        $messageActionsForm = new Application_Form_MessageActions();
+
+        $messages = $messageTable->getSent($userId);
+
+        $this->view->messageActions = $messageActionsForm;
+        $this->view->messages = $messages;
     }
 
     public function trashAction()
