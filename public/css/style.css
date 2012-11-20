@@ -307,8 +307,8 @@ font:15px dosis-semibold-middle;
 
 #registrationFormHolder .buttonBar label:not(.checked){
     background: url('../img/design/mainPage/buttons/studentBut.png') no-repeat;
-    color:#585858;
-    text-shadow: 1px 1px 0 rgba(255,255,255,0.9);
+    color:#324a0c;
+    text-shadow: 1px 1px 0 rgba(222,236,182,0.9);
     cursor: pointer;
 }
 #registrationFormHolder .buttonBar label:not(.checked):hover{
