@@ -315,11 +315,24 @@ font:15px dosis-semibold-middle;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.4);
 }
 #gender-element label{
-    width:50px;
+    width:62px;
     float:left;
-    margin-right: 15px;
+    margin-right: 27px;
 }
-
+#lastname{
+    margin-bottom:5px;
+}
+#gender-element input{
+    margin:0 4px 0 0;
+}
+#gender-label{
+    bottom: 4px;
+    position: relative;
+}
+#gender-element{
+    position: relative;
+    bottom: 5px;
+}
 #registrationFormHolder .buttonBar label:not(.checked){
     background: url('../img/design/mainPage/buttons/studentBut.png') no-repeat;
     color:#324a0c;
