@@ -9,13 +9,13 @@ class Application_Form_MessageActions extends Zend_Form
     {
 
         $singleActions = new Zend_Form_Element_Select('singleactions');
-        $singleActions->setAttrib('id', 'singleactions')
+        $singleActions//->setAttrib('id', 'singleactions')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators)
             ->addMultiOptions(array(
                 'reply' => 'Reply',
                 'forward' => 'Forward',
-                'archive' => 'Move To Archived',
+                //'archive' => 'Move To Archived',
                 'delete' => 'Trash'
         ));
 

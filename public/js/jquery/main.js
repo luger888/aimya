@@ -86,10 +86,10 @@ $(document).ready(function() {
 
     /*  ACCOUNT SYSTEM   */
 
-    $('#singleactions').change(function () {
-        alert('sdvsf');
+    /*$('#singleactions').change(function () {
+        id =
         window.location.href = '/message/' . $('#singleactions').val();
-    });
+    });*/
     /*  ACCOUNT SYSTEM   */
 
 });
@@ -105,3 +105,22 @@ function uploadify(){
         }
     });
 }
+
+function messageAction(element_id, action) {
+    tmpArr = element_id.split('_');
+    message_id = tmpArr[1];
+    message = $('#'+ element_id);
+    selected = message.val();
+    if(selected == "delete"){
+        var answer = confirm("Do you realy want remove this message?");
+        if (answer) {
+            window.location.href = "/message/" + selected + "/message_id/" + message_id + "/current_action/" + action;
+        }
+    } else {
+        window.location.href = "/message/" + selected + "/message_id/" + message_id + "/current_action/" + action;
+    }
+
+
+    return false;
+}
+

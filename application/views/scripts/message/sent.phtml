@@ -1,4 +1,6 @@
 <?php $messageActions = $this->messageActions; ?>
+<?php $singleAction = $messageActions->singleactions; ?>
+<?php $action = Zend_Controller_Front::getInstance()->getRequest()->getActionName()?>
 <div class="accountWrapper row-fluid no-space">
     <div class="leftNavigation span2">
         <?php
@@ -24,12 +26,14 @@
             <?php
             if($this->messages){
                 foreach($this->messages as $message){
+                    $singleAction->setAttrib('id', 'singleactions_' . $message['id']);
+                    $singleAction->setAttrib('onchange', "messageAction(this.id, '{$action}')");
                     echo '<tr>
                     <td><input type="checkbox" id="' . $message['id'] . '"></td>
         <td>'.$message['sender_id'].'</td>
         <td>'.$message['theme'].'</td>
-        <td>'.$message['out'].'</td>
-        <td>'.$messageActions->singleactions .'</td>
+        <td>'.$message['text'].'</td>
+        <td>'. $singleAction .'</td>
     </tr>';
                 }
 

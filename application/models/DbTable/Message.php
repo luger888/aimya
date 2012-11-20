@@ -8,8 +8,7 @@ class Application_Model_DbTable_Message extends Application_Model_DbTable_Abstra
         $data = array(
             'sender_id' => $array['sender_id'],
             'recipient_id' => $array['recipient_id'],
-            'out' => $array['content'],
-            'in' => $array['content'],
+            'text' => $array['content'],
             'theme' => $array['subject'],
             'sender_status' => 1,
             'recipient_status' => 0,
@@ -66,15 +65,33 @@ class Application_Model_DbTable_Message extends Application_Model_DbTable_Abstra
         $userId = (int)$userId;
         $row = $this->fetchAll(
             $this->select()
-                ->where('sender_id=?' , $userId)
-                ->where('recipient_id=?' , $userId)
-                ->where('sender_status=?', 2)
+                ->where('(' . $this->getAdapter()->quoteInto('sender_id=?' , $userId) . ' AND ' . $this->getAdapter()->quoteInto('sender_status=?' , 2) . ') OR (' . $this->getAdapter()->quoteInto('recipient_id=?' , $userId) . ' AND ' . $this->getAdapter()->quoteInto('recipient_status=?' , 2) . ')')
+
         );
         if (!$row) {
             throw new Exception("There is no element with ID: $userId");
         }
 
         return $row->toArray();
+    }
+
+    public function deleteMessage($messageId, $action) {
+
+        $array = array();
+
+        if($action == 'sent') {
+            $array['sender_status'] = 2;
+        } elseif ($action == 'inbox') {
+            $array['recipient_status'] = 2;
+        } else {
+            return false;
+        }
+
+
+
+        $where[] = $this->getAdapter()->quoteInto('id=?', $messageId);;
+
+        return $this->update($array , $where);
     }
 
     public function checkNewMessage($userId) {
