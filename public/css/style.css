@@ -179,10 +179,12 @@ font:15px dosis-semibold-middle;
     color:white;
 }
 #loginFormHolder  span {
-    width:206px;
-    color:white;
-    font:11px Helvetica;
-    text-shadow: 1px 1px 1px #4e6c06;
+    color: white;
+    font: 11px Helvetica;
+    position: relative;
+    text-shadow: 1px 1px 1px #4E6C06;
+    top: 3px;
+    width: 206px;
 }
 
 #loginFormHolder input[type="text"], #loginFormHolder input[type="password"]{
@@ -204,7 +206,7 @@ font:15px dosis-semibold-middle;
 #loginFormHolder input[type="checkbox"]+label{
     color:#DEE6BF;
     font-size:10px;
-    bottom: 2px;
+    bottom: 1px;
     padding: 1px 0 0 15px;
 }
 #loginFormHolder .rememberMe{
@@ -221,11 +223,18 @@ font:15px dosis-semibold-middle;
     float:left;
     margin-right: 93px;
     font-size:10px;
-    color:#B1CC6D;
+
     position: relative;
     bottom: 2px;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
 }
+#loginFormHolder label{
+    color:#ACC56B;
+}
+#loginFormHolder a{
+    color:#ACD330;
+}
+
 #loginFormHolder #login{
 
 }
@@ -252,8 +261,8 @@ font:15px dosis-semibold-middle;
     margin-left: 3%;
 }
 .input-error{
-    box-shadow: 0 0 3px #f25f5f !important;
-    border: 1px solid red !important;
+    box-shadow: 0 0 3px #F06062 !important;
+    border: 1px solid #BB3437 !important;
 }
 #registrationFormHolder .error{
     font: 12px Helvetica;
@@ -261,7 +270,7 @@ font:15px dosis-semibold-middle;
     float: left;
     position: relative;
     right: 107px;
-    color:red;
+    color:#B0060F;
     top:5px;
 }
 
@@ -426,7 +435,9 @@ font:15px dosis-semibold-middle;
 }
 /*account*/
 
-
+.leftBlockProfile img{
+    width:45%;
+}
 .leftBlockProfile{
     text-align: center;
 }
