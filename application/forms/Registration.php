@@ -34,10 +34,8 @@ class Application_Form_Registration extends Zend_Form
 
         $gender = new Zend_Form_Element_Radio('gender');
         $gender ->setAttrib('class', 'regRadio')
-        #->setAttrib('placeholder', 'Last Name')
             ->setAttrib('id', 'gender')
             ->addFilters($this->basicFilters)
-           // ->setErrorMessages(array('Select your gender'))
             ->setLabel('Gender: ')
             ->setSeparator('');
         $gender->addMultiOptions(array(
@@ -46,7 +44,8 @@ class Application_Form_Registration extends Zend_Form
                 'female' => 'female'
 
             )
-        );
+        )
+            ->setValue('male');
         # ->setDecorators($this->basicDecorators);
 
         $userName = new Zend_Form_Element_Text('username');

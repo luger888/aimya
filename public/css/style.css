@@ -195,7 +195,7 @@ font:15px dosis-semibold-middle;
 
 #loginFormHolder input[type="checkbox"]{
     float:left;
-    margin: -2px -12px 0 0;
+    margin: 4px -12px 0 0;
     position: relative;
 
     display: block;
@@ -204,18 +204,24 @@ font:15px dosis-semibold-middle;
 #loginFormHolder input[type="checkbox"]+label{
     color:#DEE6BF;
     font-size:10px;
-    background: url('../img/design/mainPage/keepSignedCheclbox.png') left center no-repeat;
+
     padding: 1px 0 0 15px;
 }
-#loginFormHolder input[type="checkbox"]:checked +label{
-    background: url('../img/design/mainPage/keepSignedChecked.png') left center no-repeat;
+#loginFormHolder .rememberMe{
+    background: url('../img/design/mainPage/keepSignedCheclbox.png') left center no-repeat;
+    float: left;
+    height: 13px;
+    margin: 4px 4px 0 0;
+    width: 12px;
+}
+#loginFormHolder input[type="checkbox"]:checked + .rememberMe{
+    background: url('../img/design/mainPage/keepSignedCheclbox.png') right center no-repeat;
 }
 #loginFormHolder label, #loginFormHolder a{
     float:left;
-    margin-right: 90px;
+    margin-right: 93px;
     font-size:10px;
     color:#B1CC6D;
-    padding-top: 1px;
     position: relative;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
 }
@@ -314,25 +320,6 @@ font:15px dosis-semibold-middle;
     color:#fff;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.4);
 }
-#gender-element label{
-    width:62px;
-    float:left;
-    margin-right: 27px;
-}
-#lastname{
-    margin-bottom:5px;
-}
-#gender-element input{
-    margin:0 4px 0 0;
-}
-#gender-label{
-    bottom: 4px;
-    position: relative;
-}
-#gender-element{
-    position: relative;
-    bottom: 5px;
-}
 #registrationFormHolder .buttonBar label:not(.checked){
     background: url('../img/design/mainPage/buttons/studentBut.png') no-repeat;
     color:#324a0c;
@@ -344,6 +331,41 @@ font:15px dosis-semibold-middle;
     color:white;
     text-shadow: 1px 1px 0 rgba(0,0,0,0.6);
 }
+#gender-element label{
+    float: left;
+    height: 19px;
+    line-height: 11px;
+    margin: 14px 27px 0 0;
+    width: 63px;
+}
+#lastname{
+    margin-bottom:5px;
+}
+#registrationFormHolder #gender-element input{
+    margin:0 4px 0 0;
+}
+#registrationFormHolder #gender-label{
+    bottom: 4px;
+    position: relative;
+}
+#registrationFormHolder #gender-element{
+    position: relative;
+    bottom: 5px;
+}
+
+#registrationFormHolder  #gender-element input[type="radio"]{
+    opacity: 0;
+}
+
+#registrationFormHolder #gender-element .checked{
+    background: url('../img/design/mainPage/buttons/genderChecked.png') no-repeat;
+
+}
+#registrationFormHolder #gender-element label:not(.checked){
+    background: url('../img/design/mainPage/buttons/gender.png') no-repeat;
+}
+
+
 .btnSignup{
     background: url('../img/design/mainPage/buttons/signUpBut.png') no-repeat;
     width: 85px !important;

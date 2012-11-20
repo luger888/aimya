@@ -11,7 +11,17 @@ $(document).ready(function() {
     });
 
     /* END Button bar(radio)*/
+    /* Gender bar(radio)*/
+    $('#gender-element label').first().addClass('checked');
+    $('#gender-element input[type="radio"]').change(function(){
 
+        if($(this).is(":checked")){
+            $('#gender-element label').removeClass('checked');
+            $(this).parent().addClass('checked');
+        }
+    });
+
+    /* END Gender bar(radio)*/
     /* DatePicker jquery UI */
     $('#birthday').datepicker({ dateFormat: 'yy-mm-dd',
         changeMonth: true,
