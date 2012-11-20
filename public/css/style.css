@@ -113,6 +113,9 @@ font:15px dosis-semibold-middle;
 }
 
 /*header*/
+#loginFormHolder input {
+    outline:1px #fefcd7;
+}
 .header {
     background-image: url('../img/design/mainPage/header.png');
     background-repeat: repeat-x;
