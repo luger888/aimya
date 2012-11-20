@@ -288,11 +288,11 @@ font:15px dosis-semibold-middle;
     margin: 0 0 15px 22px;
 }
 #registrationFormHolder .buttonBar label{
-
+    word-spacing: 2px;
     width: 135px !important;
     height:30px;
     border: none;
-    font:12px dosis-semibold-middle;
+    font:12px dosis-semibold;
     text-align: center;
     display: inline-block;
 
