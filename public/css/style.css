@@ -120,7 +120,6 @@ font:15px dosis-semibold-middle;
     -moz-box-shadow: 0 0 6px rgba(0,0,0,0.6); /* Для Firefox */
     -webkit-box-shadow: 0 0 6px rgba(0,0,0,0.6); /* Для Safari и Chrome */
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
-
 }
 
 .header .logo {
