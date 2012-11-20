@@ -314,6 +314,11 @@ font:15px dosis-semibold-middle;
     color:#fff;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.4);
 }
+#gender-element label{
+    width:50px;
+    float:left;
+    margin-right: 15px;
+}
 
 #registrationFormHolder .buttonBar label:not(.checked){
     background: url('../img/design/mainPage/buttons/studentBut.png') no-repeat;

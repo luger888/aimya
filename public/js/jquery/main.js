@@ -83,6 +83,7 @@ function uploadify(){
         'auto'         : false,
         'formData'     : {'experienceUpload' : 'certificate'},
         'queueID'      : 'queue',
+        'folder'        : '/img/uploads/' + $(this).attr('id'),
         'uploadScript' : '/resume/upload',
         'onUploadComplete' : function(file, data) {
         }
