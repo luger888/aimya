@@ -32,20 +32,20 @@ class Application_Form_Registration extends Zend_Form
             ->setLabel('Last Name:');
            # ->setDecorators($this->basicDecorators);
 
-        $gender = new Zend_Form_Element_Select('gender');
-        $gender ->setAttrib('class', 'regSelect')
-        #->setAttrib('placeholder', 'Last Name')
+        $gender = new Zend_Form_Element_Radio('gender');
+        $gender ->setAttrib('class', 'regRadio')
             ->setAttrib('id', 'gender')
             ->addFilters($this->basicFilters)
-           // ->setErrorMessages(array('Select your gender'))
-            ->setLabel('Gender: ');
+            ->setLabel('Gender: ')
+            ->setSeparator('');
         $gender->addMultiOptions(array(
 
                 'male' => 'male',
                 'female' => 'female'
 
             )
-        );
+        )
+            ->setValue('male');
         # ->setDecorators($this->basicDecorators);
 
         $userName = new Zend_Form_Element_Text('username');
