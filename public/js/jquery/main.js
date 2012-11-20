@@ -35,7 +35,7 @@ $(document).ready(function() {
             {cache:true,
             load: function (e, ui) {
                 $(ui.panel).find(".tab-loading").remove();
-                test();
+                uploadify();
             },
             select: function( e, ui )
             {
@@ -77,7 +77,7 @@ $(document).ready(function() {
 
 
 });
-function test(){
+function uploadify(){
     //$(function() {
     $('#file_upload').uploadifive({
         'auto'         : false,
@@ -85,7 +85,6 @@ function test(){
         'queueID'      : 'queue',
         'uploadScript' : '/resume/upload',
         'onUploadComplete' : function(file, data) {
-            console.log(data);
         }
     });
 }

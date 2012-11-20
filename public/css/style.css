@@ -262,6 +262,15 @@ font:15px dosis-semibold-middle;
     height: 600px;
     width: 640px;
 }
+
+#registrationFormHolder .regSelect{
+    width:179px;
+    border: 1px solid #95a861 !important;
+    height: 33px !important;
+    border-radius: 0;
+
+
+}
 #registrationFormHolder dt,#registrationFormHolder dd{
     float:left;
 
