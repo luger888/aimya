@@ -12,6 +12,7 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
 
     public function indexAction()
     {
+        $this->_helper->layout->setLayout("layoutInside");
         //basic tab
         $identity = Zend_Auth::getInstance()->getStorage()->read();
         $this->view->headScript()->appendFile('../../js/jquery/resume/experience.js');
