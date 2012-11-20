@@ -88,7 +88,6 @@ class MessageController extends Zend_Controller_Action
 
     public function trashAction()
     {
-        //$this->_helper->layout()->disableLayout();
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
         $this->_helper->layout()->getView()->headTitle('Inbox Messages');
         //$this->_helper->layout()->disableLayout();
@@ -101,8 +100,39 @@ class MessageController extends Zend_Controller_Action
         $this->view->messages = $messages;
     }
 
-    public function archivedAction()
+    public function archiveAction()
     {
         //$this->_helper->layout()->disableLayout();
+    }
+    public function replyAction()
+    {
+        //$this->_helper->layout()->disableLayout();
+    }
+
+    public function forwardAction()
+    {
+        //$this->_helper->layout()->disableLayout();
+    }
+
+    public function deleteAction()
+    {
+        if($this->getRequest()->getParam('message_id'))
+        {
+            if($this->getRequest()->getParam('current_action')) {
+                $messageTable = new Application_Model_DbTable_Message();
+                $deleteMessage = $messageTable->deleteMessage($this->getRequest()->getParam('message_id'), $this->getRequest()->getParam('current_action'));
+
+                if($deleteMessage) {
+                    $this->_helper->flashMessenger->addMessage(array('success'=>'Message successfully removed'));
+                    $this->_helper->redirector($this->getRequest()->getParam('current_action'), 'message');
+                } else {
+                    $this->_helper->flashMessenger->addMessage(array('failure'=>'Some problem, try again later'));
+                    $this->_helper->redirector($this->getRequest()->getParam('current_action'), 'message');
+                }
+            }
+        } else {
+            $this->_helper->flashMessenger->addMessage(array('failure'=>'Please try again later'));
+        }
+        //$this->_redirect($url, array('prependBase' => false));
     }
 }
