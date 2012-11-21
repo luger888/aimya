@@ -1,39 +1,21 @@
+<?php echo $this->partial('partials/message.phtml')?>
 <?php $form = $this->form;?>
 <form method="post" action="/message/send/">
     <table width="300px">
         <tr>
-            <td>
-                <?php echo $form->recipientid?>
-            </td>
+            <td>To</td>
+            <td><?php echo $form->username?></td>
         </tr>
         <tr>
-            <td>
-                To
-            </td>
-            <td>
-                <?php echo $form->username?>
-            </td>
+            <td>Subject</td>
+            <td><?php echo $form->subject?></td>
         </tr>
         <tr>
-            <td>
-                Subject
-            </td>
-            <td>
-                <?php echo $form->subject?>
-            </td>
+            <td>Content</td>
+            <td><?php echo $form->content?></td>
         </tr>
         <tr>
-            <td>
-                Content
-            </td>
-            <td>
-                <?php echo $form->content?>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <?php echo $form->sendbutton?>
-            </td>
+            <td><?php echo $form->sendbutton?></td>
         </tr>
     </table>
 </form>

@@ -13,6 +13,7 @@ class Application_Form_MessageActions extends Zend_Form
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators)
             ->addMultiOptions(array(
+                'default' => '',
                 'reply' => 'Reply',
                 'forward' => 'Forward',
                 //'archive' => 'Move To Archived',
@@ -24,6 +25,7 @@ class Application_Form_MessageActions extends Zend_Form
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators)
             ->addMultiOptions(array(
+                'default' => '',
                 '0' => 'Move To Archived',
                 '1' => 'Trash'
         ));

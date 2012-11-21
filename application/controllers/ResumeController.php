@@ -4,6 +4,7 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
 
     public function init()
     {
+        $this->_helper->layout->setLayout("layoutInside");
         $this->_helper->AjaxContext()
             ->addActionContext('ajax', 'json')
             ->addActionContext('upload', 'json')

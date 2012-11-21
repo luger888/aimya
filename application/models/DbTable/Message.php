@@ -108,4 +108,18 @@ class Application_Model_DbTable_Message extends Application_Model_DbTable_Abstra
         return $row->toArray();
     }
 
+    public function getReplyMessage($messageId, $userId) {
+        $userId = (int)$userId;
+        $row = $this->fetchAll(
+            $this->select()
+                ->where('id=?' , $messageId)
+                ->where('sender_id=?', $userId)
+        );
+        if (!$row) {
+            throw new Exception("There is no element with ID: $userId");
+        }
+
+        return $row->toArray();
+    }
+
 }
