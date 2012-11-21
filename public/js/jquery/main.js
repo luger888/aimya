@@ -113,7 +113,9 @@ function messageAction(element_id, action) {
     message_id = tmpArr[1];
     message = $('#'+ element_id);
     selected = message.val();
-    if(selected == "delete"){
+    if(selected == "default"){
+        return false;
+    } else if(selected == "delete"){
         var answer = confirm("Do you realy want remove this message?");
         if (answer) {
             window.location.href = "/message/" + selected + "/message_id/" + message_id + "/current_action/" + action;

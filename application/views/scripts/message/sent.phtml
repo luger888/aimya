@@ -1,49 +1,41 @@
 <?php $messageActions = $this->messageActions; ?>
 <?php $singleAction = $messageActions->singleactions; ?>
 <?php $action = Zend_Controller_Front::getInstance()->getRequest()->getActionName()?>
-<div class="accountWrapper row-fluid no-space">
-    <div class="leftNavigation span2">
+<?php echo $this->partial('partials/message.phtml')?>
+<div class="tab-content" id="tab-1">
+    <div class = "userRelations"><table  class="table table-striped table-hover">
+        <thead style="background: #ccc">
+        <tr>
+            <td> </td>
+            <td> Sender Name </td>
+            <td> Subject </td>
+            <td> Message </td>
+            <td> Action </td>
+        </tr>
+        </thead>
+        <tbody>
         <?php
-        echo $this->navigation()
-            ->menu()
-            ->setMaxDepth(0)
-            ->setUlClass('nav nav-tabs nav-stacked')
-            ->render(new Aimya_Navigation($this->navigation()->findAllBy('tag', 'messageMenu', true)));
-        ?>
-    </div>
-    <div class="tab-content" id="tab-1">
-        <div class = "userRelations"><table  class="table table-striped table-hover">
-            <thead style="background: #ccc">
-            <tr>
-                <td> </td>
-                <td> Sender Name </td>
-                <td> Subject </td>
-                <td> Message </td>
-                <td></td>
-            </tr>
-            </thead>
-            <tbody>
-            <?php
-            if($this->messages){
-                foreach($this->messages as $message){
-                    $singleAction->setAttrib('id', 'singleactions_' . $message['id']);
-                    $singleAction->setAttrib('onchange', "messageAction(this.id, '{$action}')");
-                    echo '<tr>
+        if($this->messages){
+            foreach($this->messages as $message){
+                $singleAction->setAttrib('id', 'singleactions_' . $message['id']);
+                $singleAction->setAttrib('onchange', "messageAction(this.id, '{$action}')");
+                echo '
+                <tr>
                     <td><input type="checkbox" id="' . $message['id'] . '"></td>
-        <td>'.$message['sender_id'].'</td>
-        <td>'.$message['theme'].'</td>
-        <td>'.$message['text'].'</td>
-        <td>'. $singleAction .'</td>
-    </tr>';
-                }
-
+                    <td>'.$message['sender_id'].'</td>
+                    <td>'.$message['theme'].'</td>
+                    <td>'.$message['text'].'</td>
+                    <td>'. $singleAction .'</td>
+                </tr>';
             }
 
-            ?>
+        }
 
-            </tbody>
-        </table>
-    </div>
+        ?>
+
+        </tbody>
+    </table>
 </div>
+
 
 

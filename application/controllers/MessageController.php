@@ -3,6 +3,7 @@ class MessageController extends Zend_Controller_Action
 {
     public function init()
     {
+        $this->_helper->layout->setLayout("layoutInside");
         $this   ->_helper->AjaxContext()
             ->initContext('json');
     }
@@ -28,7 +29,7 @@ class MessageController extends Zend_Controller_Action
 
     public function sendAction()
     {
-        $this->_helper->layout()->disableLayout();
+        //$this->_helper->layout()->disableLayout();
         $this->_helper->layout()->getView()->headTitle('New Message');
 
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
@@ -106,7 +107,58 @@ class MessageController extends Zend_Controller_Action
     }
     public function replyAction()
     {
-        //$this->_helper->layout()->disableLayout();
+        $this->_helper->layout()->getView()->headTitle('Reply Message');
+        if($this->getRequest()->getParam('message_id')) {
+            $userId = Zend_Auth::getInstance()->getIdentity()->id;
+
+            $form = new Application_Form_Message();
+            $this->view->form = $form;
+
+            $messageTable = new Application_Model_DbTable_Message();
+            $message = $messageTable->getReplyMessage($this->getRequest()->getParam('message_id'), $userId);
+            $userTable = new Application_Model_DbTable_Users();
+            $sender = $userTable->getItem($message['sender_id']);
+
+            $this->view->sender = $sender;
+            $this->view->message = $message;
+
+            if ($this->getRequest()->isPost()) {
+                die('0');
+                if ($form->isValid($this->getRequest()->getParams())) {
+                    //$form->populate($data);
+                    $data = $this->getRequest()->getParams();
+                    $userTable = new Application_Model_DbTable_Users();
+                    //echo $data['username'];
+
+                    $recipient = $userTable->checkByUsername($data['username']);
+
+                    if($recipient) {
+                        //die('1');
+                        $messageTable = new Application_Model_DbTable_Message();
+                        $data['sender_id'] = $userId;
+                        $data['recipient_id'] = $recipient['id'];
+                        $sendStatus = $messageTable->sendMessage($data);
+                        if($sendStatus){
+                            die('1');
+                            $this->_helper->flashMessenger->addMessage(array('success'=>'Message sent'));
+                            $this->_helper->redirector('inbox', 'message');
+                        } else {
+                            die('2');
+                            $this->_helper->flashMessenger->addMessage(array('failure'=>'Error with sending, please try again later'));
+                        }
+                    } else {
+                        unset($data['username']);
+
+                        $this->_helper->flashMessenger->addMessage(array('failure'=>'Unknown recipient'));
+                        //$this->_helper->redirector('create', 'message');
+                    }
+
+                }
+            }
+        } else {
+            $this->_helper->flashMessenger->addMessage(array('failure'=>'Some problem, try again later'));
+            $this->_helper->redirector($this->getRequest()->getParam('current_action'), 'message');
+        }
     }
 
     public function forwardAction()
