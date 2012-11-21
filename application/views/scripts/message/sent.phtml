@@ -7,7 +7,7 @@
         <thead style="background: #ccc">
         <tr>
             <td> </td>
-            <td> Sender Name </td>
+            <td> Recipient Name </td>
             <td> Subject </td>
             <td> Message </td>
             <td> Action </td>
@@ -22,7 +22,7 @@
                 echo '
                 <tr>
                     <td><input type="checkbox" id="' . $message['id'] . '"></td>
-                    <td>'.$message['sender_id'].'</td>
+                    <td>'.$message['recipient_id'].'</td>
                     <td>'.$message['theme'].'</td>
                     <td>'.$message['text'].'</td>
                     <td>'. $singleAction .'</td>
