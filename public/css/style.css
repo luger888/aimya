@@ -628,3 +628,43 @@ width:100px;
     position: absolute;
     left: 82px;
 }
+
+.mainBlockProfile  .ui-tabs-panel{
+    background-color:white !important;
+    -webkit-box-shadow: 0 0 3px 0 #888888;
+    box-shadow: 0 0 3px 0 #888888;
+    -moz-box-shadow: 0 0 3px 0 #888888;
+}
+.mainBlockProfile .ui-tabs .ui-tabs-nav{
+    padding-left:8px !important;
+    position: relative;
+    top:1px;
+}
+.mainBlockProfile .ui-tabs .ui-tabs-nav li:not(.ui-state-active){
+    margin:0;
+    border:none !important;
+    border-radius: 2px 2px 0 0 !important;
+    background: none !important;
+    -webkit-box-shadow: 4px -5px 5px -5px #888888 inset;
+    box-shadow: 4px -5px 5px -5px #888888 inset;
+    -moz-box-shadow: 4px -5px 5px -5px #888888 inset;
+    background: #f0eed9 !important; /* Old browsers */
+    background: -moz-linear-gradient(top,  #f0eed9 0%, #d0cc9d 100%)!important; /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f0eed9), color-stop(100%,#d0cc9d)) !important; /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #f0eed9 0%,#d0cc9d 100%) !important; /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #f0eed9 0%,#d0cc9d 100%) !important; /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #f0eed9 0%,#d0cc9d 100%) !important; /* IE10+ */
+    background: linear-gradient(to bottom,  #f0eed9 0%,#d0cc9d 100%) !important; /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0eed9', endColorstr='#d0cc9d',GradientType=0 ) !important; /* IE6-9 */
+
+}
+.mainBlockProfile .ui-tabs .ui-tabs-nav li.ui-state-active{
+    background: none !important;
+    border:none !important;
+    margin:0;
+    background-color: white !important;
+}
+.mainBlockProfile .ui-widget-header,.mainBlockProfile .ui-widget-content {
+    border:none;
+    background: none;
+}
