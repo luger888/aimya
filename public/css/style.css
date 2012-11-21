@@ -88,7 +88,7 @@ font:15px dosis-semibold-middle;
 }
 
 .regTextInput:focus{
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 12px rgba(254, 252, 215, 1) !important;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 10px rgba(254, 255, 255, 1) !important;
     outline:none;
 }
 .logTextInput:focus{
@@ -252,7 +252,7 @@ font:15px dosis-semibold-middle;
 
 #loginFormHolder #login{
 
-}
+}er
 #loginFormHolder .pass{
     margin-left: 115px;
 }
@@ -434,7 +434,7 @@ font:15px dosis-semibold-middle;
     background-position: 100% 0;
     height:18px;
     width:18px;
-    left: 80px;
+    left: 78px;
     position: relative;
     width: 18px;
     bottom: 69px;
