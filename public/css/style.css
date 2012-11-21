@@ -195,7 +195,7 @@ font:15px dosis-semibold-middle;
 
 #loginFormHolder input[type="checkbox"]{
     float:left;
-    margin: 4px -12px 0 0;
+    margin: 1px -12px 0 0;
     position: relative;
 
     display: block;
@@ -204,14 +204,14 @@ font:15px dosis-semibold-middle;
 #loginFormHolder input[type="checkbox"]+label{
     color:#DEE6BF;
     font-size:10px;
-
+    bottom: 2px;
     padding: 1px 0 0 15px;
 }
 #loginFormHolder .rememberMe{
     background: url('../img/design/mainPage/keepSignedCheclbox.png') left center no-repeat;
     float: left;
     height: 13px;
-    margin: 4px 4px 0 0;
+    margin: 1px 4px 0 0;
     width: 12px;
 }
 #loginFormHolder input[type="checkbox"]:checked + .rememberMe{
@@ -223,6 +223,7 @@ font:15px dosis-semibold-middle;
     font-size:10px;
     color:#B1CC6D;
     position: relative;
+    bottom: 2px;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
 }
 #loginFormHolder #login{
@@ -335,7 +336,7 @@ font:15px dosis-semibold-middle;
     float: left;
     height: 19px;
     line-height: 11px;
-    margin: 14px 27px 0 0;
+    margin: 14px 7px 0 0;
     width: 63px;
 }
 #lastname{
