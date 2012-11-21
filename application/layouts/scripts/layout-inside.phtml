@@ -68,6 +68,9 @@ if (Zend_Registry::isRegistered('username')) {
 }
 ?>
 <div class ="fill">
+    <div class="messages">
+        <?php echo $this->flashMessages();?>
+    </div>
     <div class="accountWrapper row-fluid no-space">
 
         <div class="leftBlockProfile span2">
