@@ -1,13 +1,5 @@
-<div class="accountWrapper row-fluid no-space">
-    <div class="leftNavigation span2">
-        <?php
-        echo $this->navigation()
-            ->menu()
-            ->setMaxDepth(0)
-            ->setUlClass('nav nav-tabs nav-stacked')
-            ->render(new Aimya_Navigation($this->navigation()->findAllBy('tag', 'messageMenu', true)));
-        ?>
-    </div>
+<div class="mainBlockProfile span8">
+    <?php echo $this->partial('partials/layout.phtml')?>
     <div>
         <div class = "userRelations"><table  class="table table-striped table-hover">
             <thead style="background: #ccc">
