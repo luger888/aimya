@@ -615,8 +615,8 @@ width:100px;
 }
 
 .leftNavFooter{
-    bottom: -55px;
+    bottom: -30px;
     height: 12%;
     position: absolute;
-
+    left: 82px;
 }
