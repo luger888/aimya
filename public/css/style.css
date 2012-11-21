@@ -25,7 +25,9 @@ body{
     margin: 0;
     padding: 0;
 }
-
+input:focus{
+    outline: 0;
+}
 form{
 
     margin-bottom:0;
@@ -671,4 +673,45 @@ width:100px;
 .mainBlockProfile .ui-widget-header,.mainBlockProfile .ui-widget-content {
     border:none;
     background: none;
+}
+
+
+/*PROFILE TAB*/
+.profile #username{
+    margin-bottom:9px;
+}
+.profile h3{
+    font:13px helvetica;
+    color:#1d3300;
+}
+.profile ul{
+    margin:0;
+}
+.profile ul li span{
+    display: inline-block;
+    width: 100px;
+    font:12px helvetica;
+}
+.profile ul li #birthday{
+    width:95px;
+    margin-bottom: 9px;
+}
+.input-append{
+   display: inline-block;
+    margin:0;
+
+}
+.profile ul li #timezone{
+    width:105px;
+    font:12px helvetica;
+}
+.profile ul li input{
+    width:185px;
+    font:12px helvetica;
+    border-radius: 1px;
+}
+
+.profile .profileAvatar{
+    float:right;
+
 }
