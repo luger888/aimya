@@ -12,6 +12,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
     public function indexAction()
     {
         //basic tab
+        $this->_helper->layout->setLayout("layoutInside");
         $identity = Zend_Auth::getInstance()->getStorage()->read();
         $this->view->headScript()->appendFile('../../js/jquery/account/tabs/services.js');
         $this->view->headScript()->appendFile('../../js/jquery/account/tabs/users.js');

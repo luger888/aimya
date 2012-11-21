@@ -16,7 +16,7 @@ class LessonController extends Zend_Controller_Action
 
     public function indexAction()
     {
-
+        $this->_helper->layout->setLayout("layoutInside");
         $this->_helper->layout()->getView()->headTitle('Friends');
 
         $userModel = new Application_Model_DbTable_Users();

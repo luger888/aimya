@@ -1,4 +1,6 @@
 $(document).ready(function() {
+
+
     /* Button bar(radio)*/
     $('.buttonBar label').first().addClass('checked');
     $('.buttonBar input').first().prop('checked', true);

@@ -17,7 +17,7 @@ html{
 }
 body{
     font-family: helvetica;
-
+    min-width: 1200px;
     background: url('../img/design/mainPage/background.png') no-repeat center top;
     background-color: #d5e4ad;
 
@@ -70,7 +70,6 @@ font:15px dosis-semibold-middle;
     color:#4d8801;
     text-shadow: 1px 0 1px rgba(255, 255, 255, 1);
 }
-/*Buttons*/
 
 /*Inputs*/
 .regTextInput{
@@ -125,7 +124,7 @@ font:15px dosis-semibold-middle;
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
 }
 
-.header .logo {
+ .logo {
    display: inline-block;
 }
 .header .logo .bigLogoImg{
@@ -134,25 +133,42 @@ font:15px dosis-semibold-middle;
     height: 61px;
     margin-top: 11px;
 }
-
-#globalNav {
-
-    float: right;
-    padding-top: 22px;
+.headerInside{
+    background-image: url('../img/design/mainPage/header.png');
+    background-repeat: repeat-x;
+    height:55px;
+    -moz-box-shadow: 0 0 6px rgba(0,0,0,0.6); /* Для Firefox */
+    -webkit-box-shadow: 0 0 6px rgba(0,0,0,0.6); /* Для Safari и Chrome */
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
 }
 
+.headerInside .logo .smallLogoImg{
+    background-image: url('../img/design/mainPage/small_aimya_logo.png');
+    height: 44px;
+    margin-top: 5px;
+    width: 144px;
+}
+#globalNav {
+    margin-top: 18px;
+    float: right;
+    margin-right: 19.5%;
+    font: 12px dosis-semibold-middle;
+    height:5%;
+}
+#globalNav a{color:#d7e4b9;}
 #globalNav ul {
     margin: 0;
     padding: 0;
 }
 
 #globalNav ul li{
-    border-left:1px solid black;
-    padding-left: 6px;
     display: inline;
+    margin-left: 16px;
+    padding-left: 12px;
+    background: url('../img/design/mainPage/navSeparator.png') no-repeat 0 0;
 }
 #globalNav ul li:first-child {
-    border-left: medium none;
+    background: none;
 }
 .shadowSeparator{
     background: url('../img/design/mainPage/shadow_separator.png') no-repeat;
@@ -396,7 +412,7 @@ font:15px dosis-semibold-middle;
 
 .twitterIcon{
     background-image: url('../img/design/socialButtons/social_icons.png');
-    background-position: 0 100%;
+    background-position: 0 0;
     height:18px;
     width:18px;
     left: 25px;
@@ -406,7 +422,7 @@ font:15px dosis-semibold-middle;
 }
 .facebookIcon{
     background-image: url('../img/design/socialButtons/social_icons.png');
-    background-position: 50% 100%;
+    background-position: 50% 0;
     height:18px;
     width:18px;
     bottom: 51px;
@@ -416,7 +432,7 @@ font:15px dosis-semibold-middle;
 }
 .linkedInIcon{
     background-image: url('../img/design/socialButtons/social_icons.png');
-    background-position: 100% 100%;
+    background-position: 100% 0;
     height:18px;
     width:18px;
     left: 80px;
@@ -425,22 +441,17 @@ font:15px dosis-semibold-middle;
     bottom: 69px;
 }
 .twitterIcon:hover{
-    background-position: 0 0;
+    background-position: 0 100%;
 }
 .facebookIcon:hover{
-    background-position: 50% 0;
+    background-position: 50% 100%;
 }
 .linkedInIcon:hover{
-    background-position: 100% 0;
+    background-position: 100% 100%;
 }
 /*account*/
 
-.leftBlockProfile img{
-    width:45%;
-}
-.leftBlockProfile{
-    text-align: center;
-}
+
 #intro, #description{
     width: 820px;
 }
@@ -483,12 +494,7 @@ font:15px dosis-semibold-middle;
 {
 width:100px;
 }
-/*Left Navigation Bar */
-.leftNavigation
-{
-    margin-left: 15px !important;
-    margin-top: 4%;
-}
+
 
 .ui-tabs-vertical { width: 55em; }
 .ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 12em; }
@@ -499,3 +505,126 @@ width:100px;
 
 
 
+/*Account layout*/
+.accountWrapper {
+    height: 100%
+
+}
+.accountWrapper .leftBlockProfile{
+    min-width: 190px;
+    max-width:250px;
+    background-color: #eae5cf;
+    height: 100%;
+
+}
+/*Left Navigation Bar */
+
+.leftBlockProfile{
+    -webkit-box-shadow: -6px 9px 6px -6px #888888 inset;
+    box-shadow:  -6px 9px 6px -6px #888888 inset;
+    -moz-box-shadow: -6px 9px 6px -6px #888888 inset;
+}
+.leftBlockProfile .leftNavigation ul li:not(.active){
+
+    -webkit-box-shadow: -6px 0 6px -6px #888888 inset;
+    box-shadow:  -6px 0 6px -6px #888888 inset;
+    -moz-box-shadow: -6px 0 6px -6px #888888 inset;
+}
+.leftBlockProfile img{
+    margin-top: 10px;
+    max-height: 140px;
+    width: 140px;
+}
+.leftBlockProfile{
+    text-align: center;
+}
+.profileTab{
+    margin-left: 30px;
+}
+.profileTab h3{
+    margin: 35px 0 0 0;
+  font:15px helvetica;
+    position: relative;
+    right: 28px;
+    color:#4a4322;
+}
+.profileTab h5{
+    margin: 0;
+    font:11px helvetica;
+    position: relative;
+    right: 50px;
+    color:#7f7867;
+}
+.leftNavigation
+{
+    margin-left: 15px !important;
+    margin-top: 4%;
+}
+.leftBlockProfile .leftNavigation a{
+    border:none !important;
+    font:14px dosis-semibold-middle;
+    text-align: left;
+    color:#69675c;
+    border-radius: 0;
+    background:none;
+}
+.leftBlockProfile .leftNavigation  a:hover{
+    background:none;
+}
+
+.leftBlockProfile .leftNavigation li:hover{
+    background-color:#f6f4ea;
+}
+.leftBlockProfile .leftNavigation ul{
+    float:right;
+    width:175px;
+}
+.leftBlockProfile .leftNavigation ul li{
+    background-color:#f5f2e7;
+    border-radius: 4px 0 0 4px;
+    margin:2px 0;
+}
+.leftBlockProfile .leftNavigation ul .active{
+    border-radius: 4px 0 0 4px;
+    background: rgb(255, 255, 255);
+    background: -moz-linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(247, 248, 248) 100%);
+    background: -webkit-linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(247, 248, 248) 100%);
+    background: -o-linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(247, 248, 248) 100%);
+    background: -ms-linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(247, 248, 248) 100%);
+    background: linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(247, 248, 248) 100%);
+
+}
+.leftBlockProfile .leftNavigation ul  .active a{
+    margin-left: 12px;
+}
+
+.accountWrapper .rightBlockProfile {
+   max-width:83%;
+    min-width:53%;
+    width:83%;
+}
+.leftNavPhoto{
+  background-image: url('../img/design/accountLayout/leftNavPhoto.png');
+    width:160px;
+    height: 160px;
+    margin: 0 auto;
+}
+
+.mainBlockProfile{
+    margin:35px 15px !important;
+    max-width:85% !important;
+}
+.fill{
+    background-color: #f7f8f8;
+    height: 100%;
+    -webkit-box-shadow: 0 9px 6px -6px #888888 inset;
+    box-shadow:  0 9px 6px -6px #888888 inset;
+    -moz-box-shadow: 0 9px 6px -6px #888888 inset;
+}
+
+.leftNavFooter{
+    bottom: -30px;
+    height: 12%;
+    position: absolute;
+    left: 82px;
+}

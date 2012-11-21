@@ -14,7 +14,7 @@ return array(
 
             array
             (
-                'label' => 'Latest Featured',
+                'label' => 'LATEST FEATURED',
                 'tag' => 'leftMenu',
                 'route' => 'default',
                 'module' => 'default',
@@ -25,7 +25,7 @@ return array(
             ),
             array
             (
-                'label' => 'Profile',
+                'label' => 'MY PROFILE',
                 'tag' => 'leftMenu',
                 'route' => 'default',
                 'module' => 'default',
@@ -36,7 +36,7 @@ return array(
             ),
             array
             (
-                'label' => 'My resume',
+                'label' => 'MY RESUME',
                 'tag' => 'leftMenu',
                 'route' => 'default',
                 'module' => 'default',
@@ -47,7 +47,7 @@ return array(
             ),
             array
             (
-                'label' => 'My Inbox',
+                'label' => 'MY INBOX',
                 'tag' => 'leftMenu',
                 'route' => 'default',
                 'module' => 'default',
@@ -58,7 +58,7 @@ return array(
             ),
             array
             (
-                'label' => 'Lesson',
+                'label' => 'MY LESSONS',
                 'tag' => 'leftMenu',
                 'route' => 'default',
                 'module' => 'default',
