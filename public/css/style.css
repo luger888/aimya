@@ -90,6 +90,7 @@ font:15px dosis-semibold-middle;
 .regTextInput:focus{
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 10px rgba(254, 255, 255, 1) !important;
     outline:none;
+    border:1px solid #6E8138 !important;
 }
 .logTextInput:focus{
     border:1px solid #536e10 !important;
