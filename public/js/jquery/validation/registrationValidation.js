@@ -8,7 +8,7 @@ $(document).ready(function() {
                 "firstname" : $("#firstname").val(),
                 "lastname" : $("#lastname").val(),
                 "username" : $("#username").val(),
-                "gender" : $("#gender").val(),
+                "gender" : $('input[name=gender]:checked').val(),
                 "email" : $("#email").val(),
                 "password" : $("#password").val(),
                 "role" : $('input[name=type]:checked').val()
