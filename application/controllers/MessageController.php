@@ -54,7 +54,7 @@ class MessageController extends Zend_Controller_Action
                     $sendStatus = $messageTable->sendMessage($data);
                     if($sendStatus){
                         $this->_helper->flashMessenger->addMessage(array('success'=>'Message sent'));
-                        //$this->_helper->redirector('sent', 'message');
+                        $this->_helper->redirector('inbox', 'message');
                     } else {
                         $this->_helper->flashMessenger->addMessage(array('failure'=>'Error with sending, please try again later'));
                     }
@@ -123,14 +123,17 @@ class MessageController extends Zend_Controller_Action
             $this->view->message = $message;
 
             if ($this->getRequest()->isPost()) {
-                die('0');
                 if ($form->isValid($this->getRequest()->getParams())) {
                     //$form->populate($data);
                     $data = $this->getRequest()->getParams();
                     $userTable = new Application_Model_DbTable_Users();
+
+
                     //echo $data['username'];
 
                     $recipient = $userTable->checkByUsername($data['username']);
+                    /*Zend_Debug::dump($recipient);
+                    die;*/
 
                     if($recipient) {
                         //die('1');
@@ -138,12 +141,11 @@ class MessageController extends Zend_Controller_Action
                         $data['sender_id'] = $userId;
                         $data['recipient_id'] = $recipient['id'];
                         $sendStatus = $messageTable->sendMessage($data);
+
                         if($sendStatus){
-                            die('1');
                             $this->_helper->flashMessenger->addMessage(array('success'=>'Message sent'));
                             $this->_helper->redirector('inbox', 'message');
                         } else {
-                            die('2');
                             $this->_helper->flashMessenger->addMessage(array('failure'=>'Error with sending, please try again later'));
                         }
                     } else {

@@ -17,7 +17,13 @@ class Application_Model_DbTable_Message extends Application_Model_DbTable_Abstra
             'updated_at' => date('Y-m-d H:m:s')
         );
 
-        $this->insert($data);
+        $insert = $this->insert($data);
+        if($insert) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
     public function readMessage($messageId){

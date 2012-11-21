@@ -6,7 +6,10 @@
 <form method="post" action="/message/reply/">
     <table width="300px">
         <tr>
-            <td><p style="display: none"><?php echo $form->username->setValue($sender['username']);?></p></td>
+            <td><p style="display: none">
+                <?php echo $form->message_id->setValue(Zend_Controller_Front::getInstance()->getRequest()->getParam('message_id'));?>
+                <?php echo $form->username->setValue($sender['username']);?>
+            </p></td>
             <td><p><?php echo $message['theme']?></p></td>
         </tr>
         <tr>
