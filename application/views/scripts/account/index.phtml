@@ -1,48 +1,39 @@
 <div id="tabs">
     <ul>
-        <li><a href="#tabs-1">Basic</a></li>
+        <li><a href="#tabs-1">BASIC</a></li>
 
-        <li><a href="/account/services">Service Details</a></li>
-        <li><a href="/account/availability">Availability</a></li>
-        <li><a href="/account/notifications">Notifications/Account Settings</a></li>
-        <li><a href="/account/users">Users</a></li>
-        <li><a href="/account/resume">My Resume</a></li>
-        <li><a href="/account/metrics">My Metrics</a></li>
+        <li><a href="/account/services">SERVICE DETAILS</a></li>
+        <li><a href="/account/availability">AVAILABILITY</a></li>
+        <li><a href="/account/notifications">NOTIFICATIONS/ACCOUNT SETTINGS</a></li>
+        <li><a href="/account/users">USERS</a></li>
+        <li><a href="/account/resume">MY RESUME</a></li>
+        <li><a href="/account/metrics">MY METRICS</a></li>
     </ul>
     <div id="tabs-1">
         <div class="profile">
+            <h3>YOUR BASIC INFORMATION:</h3>
             <form method="post" name="profile" action="" enctype="multipart/form-data">
-                <div class="row-fluid">
-                    <div class="span12">
-                        <?php echo $this->profile->avatar; ?>
-                    </div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span12">
-                        <?php echo $this->profile->firstname; ?>
-                        <?php echo $this->profile->lastname; ?>
-                        <?php echo $this->profile->birthday; ?>
-                    </div>
-                </div>
+                <div class="profileAvatar"> <?php echo $this->profile->avatar; ?></div>
+                <ul>
 
-                <div class="row-fluid">
-                    <div class="span12">
-                        <?php echo $this->profile->language; ?>
-                        <?php echo $this->profile->email; ?>
-                    </div>
-                </div>
 
-                <div class="row-fluid">
-                    <div class="span12">
-                        <?php echo $this->profile->timezone; ?>
-                        <?php echo $this->profile->username; ?>
-                    </div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span12">
-                        <?php echo $this->profile->add_info; ?>
-                    </div>
-                </div>
+                    <li> <span>First Name:</span>  <?php echo $this->profile->firstname; ?></li>
+
+                    <li> <span>Last Name:</span> <?php echo $this->profile->lastname; ?></li>
+
+                    <li> <span>Login:</span> <?php echo $this->profile->username; ?></li>
+
+                    <li> <span>DOB:</span> <div class="input-append"><?php echo $this->profile->birthday; ?> <span class="add-on">XXX</span></div> </li>
+
+                    <li> <span>Language:</span> <?php echo $this->profile->language; ?></li>
+
+                    <li> <span>Email:</span> <?php echo $this->profile->email; ?></li>
+
+                    <li> <span>Time Zone:</span><?php echo $this->profile->timezone; ?></li>
+
+                    <li> <?php echo $this->profile->add_info; ?></li>
+                </ul>
+
                 <div class="row-fluid">
                     <div class="span12 offset3">
                         <?php echo $this->profile->saveProfile; ?>

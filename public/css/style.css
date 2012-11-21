@@ -20,13 +20,14 @@ body{
     min-width: 1200px;
     background: url('../img/design/mainPage/background.png') no-repeat center top;
     background-color: #d5e4ad;
-
     color:#446158;
     height: 100%;
     margin: 0;
     padding: 0;
 }
-
+input:focus{
+    outline: 0;
+}
 form{
 
     margin-bottom:0;
@@ -88,7 +89,9 @@ font:15px dosis-semibold-middle;
 }
 
 .regTextInput:focus{
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 12px rgba(254, 252, 215, 1) !important;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 10px rgba(254, 255, 255, 1) !important;
+    outline:none;
+    border:1px solid #6E8138 !important;
 }
 .logTextInput:focus{
     border:1px solid #536e10 !important;
@@ -239,9 +242,7 @@ font:15px dosis-semibold-middle;
     float:left;
     margin-right: 93px;
     font-size:10px;
-
-    position: relative;
-    bottom: 2px;
+    line-height: 1.9em;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
 }
 #loginFormHolder label{
@@ -287,7 +288,7 @@ font:15px dosis-semibold-middle;
     position: relative;
     right: 107px;
     color:#B0060F;
-    top:5px;
+    top:10px;
 }
 
 #signUp{
@@ -361,7 +362,7 @@ font:15px dosis-semibold-middle;
     float: left;
     height: 19px;
     line-height: 11px;
-    margin: 14px 7px 0 0;
+    margin: 14px 14px 0 0;
     width: 63px;
 }
 #lastname{
@@ -435,7 +436,7 @@ font:15px dosis-semibold-middle;
     background-position: 100% 0;
     height:18px;
     width:18px;
-    left: 80px;
+    left: 79px;
     position: relative;
     width: 18px;
     bottom: 69px;
@@ -634,12 +635,17 @@ width:100px;
     -webkit-box-shadow: 0 0 3px 0 #888888;
     box-shadow: 0 0 3px 0 #888888;
     -moz-box-shadow: 0 0 3px 0 #888888;
+    min-height: 500px;
 }
 .mainBlockProfile .ui-tabs .ui-tabs-nav{
     padding-left:8px !important;
     position: relative;
     top:1px;
 }
+.mainBlockProfile .ui-tabs .ui-tabs-nav li{
+    font:13px semi-bold-middle;
+}
+
 .mainBlockProfile .ui-tabs .ui-tabs-nav li:not(.ui-state-active){
     margin:0;
     border:none !important;
@@ -667,4 +673,45 @@ width:100px;
 .mainBlockProfile .ui-widget-header,.mainBlockProfile .ui-widget-content {
     border:none;
     background: none;
+}
+
+
+/*PROFILE TAB*/
+.profile #username{
+    margin-bottom:9px;
+}
+.profile h3{
+    font:13px helvetica;
+    color:#1d3300;
+}
+.profile ul{
+    margin:0;
+}
+.profile ul li span{
+    display: inline-block;
+    width: 100px;
+    font:12px helvetica;
+}
+.profile ul li #birthday{
+    width:95px;
+    margin-bottom: 9px;
+}
+.input-append{
+   display: inline-block;
+    margin:0;
+
+}
+.profile ul li #timezone{
+    width:105px;
+    font:12px helvetica;
+}
+.profile ul li input{
+    width:185px;
+    font:12px helvetica;
+    border-radius: 1px;
+}
+
+.profile .profileAvatar{
+    float:right;
+
 }
