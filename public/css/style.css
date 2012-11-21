@@ -596,7 +596,7 @@ width:100px;
 .accountWrapper .rightBlockProfile {
    max-width:83%;
     min-width:53%;
-    width:100%;
+    width:83%;
 }
 .leftNavPhoto{
   background-image: url('../img/design/accountLayout/leftNavPhoto.png');
