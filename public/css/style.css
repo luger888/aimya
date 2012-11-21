@@ -518,13 +518,18 @@ width:100px;
 
 }
 /*Left Navigation Bar */
-.leftBlockProfile, .leftBlockProfile .leftNavigation ul li:not(.active){
+
+.leftBlockProfile{
+    -webkit-box-shadow: -6px 9px 6px -6px #888888 inset;
+    box-shadow:  -6px 9px 6px -6px #888888 inset;
+    -moz-box-shadow: -6px 9px 6px -6px #888888 inset;
+}
+.leftBlockProfile .leftNavigation ul li:not(.active){
 
     -webkit-box-shadow: -6px 0 6px -6px #888888 inset;
     box-shadow:  -6px 0 6px -6px #888888 inset;
     -moz-box-shadow: -6px 0 6px -6px #888888 inset;
 }
-
 .leftBlockProfile img{
     margin-top: 10px;
     max-height: 140px;
@@ -612,6 +617,9 @@ width:100px;
 .fill{
     background-color: #f7f8f8;
     height: 100%;
+    -webkit-box-shadow: 0 9px 6px -6px #888888 inset;
+    box-shadow:  0 9px 6px -6px #888888 inset;
+    -moz-box-shadow: 0 9px 6px -6px #888888 inset;
 }
 
 .leftNavFooter{
