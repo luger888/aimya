@@ -17,7 +17,7 @@ html{
 }
 body{
     font-family: helvetica;
-
+    min-width: 1200px;
     background: url('../img/design/mainPage/background.png') no-repeat center top;
     background-color: #d5e4ad;
 
@@ -508,6 +508,7 @@ width:100px;
 /*Account layout*/
 .accountWrapper {
     height: 100%
+
 }
 .accountWrapper .leftBlockProfile{
     min-width: 190px;
@@ -593,8 +594,9 @@ width:100px;
 }
 
 .accountWrapper .rightBlockProfile {
-    width:85% !important;
-
+   max-width:83%;
+    min-width:53%;
+    width:100%;
 }
 .leftNavPhoto{
   background-image: url('../img/design/accountLayout/leftNavPhoto.png');
@@ -610,4 +612,11 @@ width:100px;
 .fill{
     background-color: #f7f8f8;
     height: 100%;
+}
+
+.leftNavFooter{
+    bottom: -55px;
+    height: 12%;
+    position: absolute;
+
 }
