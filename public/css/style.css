@@ -640,6 +640,10 @@ width:100px;
     position: relative;
     top:1px;
 }
+.mainBlockProfile .ui-tabs .ui-tabs-nav li{
+    font:13px semi-bold-middle;
+}
+
 .mainBlockProfile .ui-tabs .ui-tabs-nav li:not(.ui-state-active){
     margin:0;
     border:none !important;
