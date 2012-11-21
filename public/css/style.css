@@ -20,7 +20,7 @@ body{
     min-width: 1200px;
     background: url('../img/design/mainPage/background.png') no-repeat center top;
     background-color: #d5e4ad;
-
+    min-height:1000px;
     color:#446158;
     height: 100%;
     margin: 0;
@@ -89,6 +89,7 @@ font:15px dosis-semibold-middle;
 
 .regTextInput:focus{
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 12px rgba(254, 252, 215, 1) !important;
+    outline:none;
 }
 .logTextInput:focus{
     border:1px solid #536e10 !important;
@@ -240,8 +241,8 @@ font:15px dosis-semibold-middle;
     margin-right: 93px;
     font-size:10px;
 
-    position: relative;
-    bottom: 2px;
+
+    margin-top: -2px;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
 }
 #loginFormHolder label{
@@ -634,6 +635,7 @@ width:100px;
     -webkit-box-shadow: 0 0 3px 0 #888888;
     box-shadow: 0 0 3px 0 #888888;
     -moz-box-shadow: 0 0 3px 0 #888888;
+    min-height: 750px;
 }
 .mainBlockProfile .ui-tabs .ui-tabs-nav{
     padding-left:8px !important;
