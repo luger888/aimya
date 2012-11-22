@@ -7,7 +7,7 @@ package com.aimialesson.controllers
 	import flash.events.EventDispatcher;
 	import flash.events.IEventDispatcher;
 	import flash.net.SharedObject;
-		
+	
 	import mx.collections.ArrayCollection;
 	
 	public class PresentationController extends EventDispatcher
@@ -39,6 +39,8 @@ package com.aimialesson.controllers
 		}
 		
 		public function setImages ( images : ArrayCollection ) : void {
+			debug ("PresentationController:setImages");
+			debug(images.toString());
 			Presentation.getInstance().imageUrls = images;
 		}
 		
