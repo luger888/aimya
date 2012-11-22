@@ -40,13 +40,13 @@ form{
     min-height: 100%!important;
     height: auto !important;
     height: 100%!important;
-    margin: 0 auto -142px!important; /* the bottom margin is the negative value of the footer's height */
+    margin: 0 auto -39px!important; /* the bottom margin is the negative value of the footer's height */
 
 }
 
 
 .footer, .push {
-    height: 127px; /* .push must be the same height as .footer */
+    height: 37px; /* .push must be the same height as .footer */
 }
 
 .footer {
@@ -54,10 +54,11 @@ form{
     font: 10px helvetica;
     padding: 0;
     position: relative;
-    border:1px solid red;
     clear:both;
-
     display: block;
+}
+.footer .copyright{
+    margin-left: 143px;
 }
 fieldset .mainText{
     font-size: 12px;
@@ -350,7 +351,7 @@ font:15px dosis-semibold-middle;
     text-align: center;
     display: inline-block;
 
-    margin:0 29px 15px 0;
+    margin:0 22px 15px 0;
     line-height:31px !important;
 
 }
@@ -418,7 +419,7 @@ font:15px dosis-semibold-middle;
     background: url('../img/design/mainPage/buttons/signUpButOver.png') no-repeat;
 }
 .signup-element{
-    margin-left: 213px;
+    margin-left: 205px;
     margin-top: 12px;
 }
 /*Social buttons*/
