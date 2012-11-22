@@ -1,6 +1,7 @@
 package com.aimialesson.model
 {
 	import com.aimialesson.model.Main;
+	import com.aimialesson.model.Actions;
 	
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
@@ -43,8 +44,8 @@ package com.aimialesson.model
 			if (!presentationImageUrls){
 				return "";
 			} else{
-				debug("Presentation currentImageURL:" + Media.getInstance().domain + presentationImageUrls.getItemAt(currentImageN) as String);
-				return Media.getInstance().domain + (presentationImageUrls.getItemAt(currentImageN) as String);
+				debug("Presentation currentImageURL:" + Actions.getInstance().domain + presentationImageUrls.getItemAt(currentImageN) as String);
+				return Actions.getInstance().domain + (presentationImageUrls.getItemAt(currentImageN) as String);
 			} 
 		}
 		

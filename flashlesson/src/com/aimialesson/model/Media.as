@@ -20,11 +20,7 @@ package com.aimialesson.model
 		public var videoSocketHost:String;
 		public var audioSocketPort:int;
 		public var videoSocketPort:int;
-		public var domain:String = "";
-
-		private const FILE_UPLOAD_URL:String = "/lesson/upload/";//"/test/upload.php";
-		private const PRESENTATION_IMAGES_URL:String = "/lesson/files/";
-		
+				
 		private static var instance:Media;
 		
 		public function Media()
@@ -39,12 +35,5 @@ package com.aimialesson.model
 			return instance;
 		}
 		
-		public function get fileUploadUrl () : String {
-			return this.domain + FILE_UPLOAD_URL;
-		}
-		
-		public function get getPresentaionImagesUrl () : String {
-			return this.domain + PRESENTATION_IMAGES_URL;
-		}
 	}
 }
