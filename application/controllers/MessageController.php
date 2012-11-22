@@ -128,12 +128,7 @@ class MessageController extends Zend_Controller_Action
                     $data = $this->getRequest()->getParams();
                     $userTable = new Application_Model_DbTable_Users();
 
-
-                    //echo $data['username'];
-
                     $recipient = $userTable->checkByUsername($data['username']);
-                    /*Zend_Debug::dump($recipient);
-                    die;*/
 
                     if($recipient) {
                         //die('1');

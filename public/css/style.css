@@ -1,3 +1,4 @@
+
 /* FONTS*/
 @font-face {
     font-family: helvetica;
@@ -25,6 +26,9 @@ body{
     margin: 0;
     padding: 0;
 }
+input{
+    padding:5px !important;
+}
 input:focus{
     outline: 0;
 }
@@ -33,18 +37,28 @@ form{
     margin-bottom:0;
 }
 #wrapper{
+    min-height: 100%!important;
     height: auto !important;
-    min-height: 90%;
-    padding: 0;
+    height: 100%!important;
+    margin: 0 auto -39px!important; /* the bottom margin is the negative value of the footer's height */
+
 }
+
+
+.footer, .push {
+    height: 37px; /* .push must be the same height as .footer */
+}
+
 .footer {
     color: #A1B368;
     font: 10px helvetica;
-    left: 8.6%;
-    margin-top: 25px;
     padding: 0;
     position: relative;
-    display: inline-block;
+    clear:both;
+    display: block;
+}
+.footer .copyright{
+    margin-left: 143px;
 }
 fieldset .mainText{
     font-size: 12px;
@@ -74,18 +88,17 @@ font:15px dosis-semibold-middle;
 
 /*Inputs*/
 .regTextInput{
-    width:165px;
-    height: 25px !important;
+    width:158px;
+    height: 23px !important;
     border: 1px solid #95a861 !important;
     border-radius: 0 !important;
 }
 .logTextInput{
-    padding:2px !important;
     border-radius: 0 !important;
     margin-bottom: 0 !important;
     margin-right: 15px;
-    width: 165px;
-    height: 19px !important;
+    width: 158px;
+    height: 14px !important;
 }
 
 .regTextInput:focus{
@@ -240,7 +253,7 @@ font:15px dosis-semibold-middle;
 }
 #loginFormHolder label, #loginFormHolder a{
     float:left;
-    margin-right: 93px;
+    margin-right: 89px;
     font-size:10px;
     line-height: 1.9em;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
@@ -292,7 +305,7 @@ font:15px dosis-semibold-middle;
 }
 
 #signUp{
-    height: 600px;
+
     width: 640px;
 }
 
@@ -338,7 +351,7 @@ font:15px dosis-semibold-middle;
     text-align: center;
     display: inline-block;
 
-    margin:0 29px 15px 0;
+    margin:0 22px 15px 0;
     line-height:31px !important;
 
 }
@@ -362,7 +375,7 @@ font:15px dosis-semibold-middle;
     float: left;
     height: 19px;
     line-height: 11px;
-    margin: 14px 14px 0 0;
+    margin: 14px -1px 0 0;
     width: 63px;
 }
 #lastname{
@@ -406,7 +419,7 @@ font:15px dosis-semibold-middle;
     background: url('../img/design/mainPage/buttons/signUpButOver.png') no-repeat;
 }
 .signup-element{
-    margin-left: 213px;
+    margin-left: 205px;
     margin-top: 12px;
 }
 /*Social buttons*/
@@ -696,6 +709,15 @@ width:100px;
     width:95px;
     margin-bottom: 9px;
 }
+
+.profile .add-on{
+    background: url('../img/design/accountLayout/glyphicons/calendar.png') no-repeat;
+    height: 20px;
+    position: relative;
+    right: 29px;
+    top: 3px;
+    width: 19px;
+}
 .input-append{
    display: inline-block;
     margin:0;
@@ -706,12 +728,26 @@ width:100px;
     font:12px helvetica;
 }
 .profile ul li input{
-    width:185px;
+    width:168px;
+    height: 14px;
     font:12px helvetica;
     border-radius: 1px;
+    padding-left:5px;
 }
-
-.profile .profileAvatar{
-    float:right;
-
+.profile .profileAvatar {
+    overflow: hidden;
+    width: 65px;
+    height: 20px !important;
+    cursor: pointer;
+    float: right;
+    background: url('../img/design/accountLayout/glyphicons/upload.png') no-repeat;
+}
+.profile input[type='file'] {
+    opacity:0;
+    filter:alpha(opacity:0);
+    font-size:199px;
+    cursor:pointer;
+    padding:0;
+    border:none;
+    margin-left:-450px;
 }
