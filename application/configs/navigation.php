@@ -14,7 +14,7 @@ return array(
 
             array
             (
-                'label' => 'Latest Featured',
+                'label' => 'LATEST FEATURED',
                 'tag' => 'leftMenu',
                 'route' => 'default',
                 'module' => 'default',
@@ -25,7 +25,7 @@ return array(
             ),
             array
             (
-                'label' => 'Profile',
+                'label' => 'MY PROFILE',
                 'tag' => 'leftMenu',
                 'route' => 'default',
                 'module' => 'default',
@@ -36,7 +36,7 @@ return array(
             ),
             array
             (
-                'label' => 'My resume',
+                'label' => 'MY RESUME',
                 'tag' => 'leftMenu',
                 'route' => 'default',
                 'module' => 'default',
@@ -47,7 +47,7 @@ return array(
             ),
             array
             (
-                'label' => 'My Inbox',
+                'label' => 'MY INBOX',
                 'tag' => 'leftMenu',
                 'route' => 'default',
                 'module' => 'default',
@@ -58,7 +58,7 @@ return array(
             ),
             array
             (
-                'label' => 'Lesson',
+                'label' => 'MY LESSONS',
                 'tag' => 'leftMenu',
                 'route' => 'default',
                 'module' => 'default',
@@ -66,7 +66,47 @@ return array(
                 'action' => 'index',
                 'resource'      => 'lesson',
                 'privilege'     => 'index',
-            )
+            ),
+            array(
+                'label' => 'Inbox Messages',
+                'tag' => 'messageMenu',
+                'route' => 'default',
+                'module' => 'default',
+                'controller' => 'message',
+                'action' => 'inbox',
+                'resource'      => 'message',
+                'privilege'     => 'inbox',
+            ),
+            array(
+                'label' => 'Trash Messages',
+                'tag' => 'messageMenu',
+                'route' => 'default',
+                'module' => 'default',
+                'controller' => 'message',
+                'action' => 'trash',
+                'resource'      => 'message',
+                'privilege'     => 'trash',
+            ),
+            array(
+                'label' => 'Sent Messages',
+                'tag' => 'messageMenu',
+                'route' => 'default',
+                'module' => 'default',
+                'controller' => 'message',
+                'action' => 'sent',
+                'resource'      => 'message',
+                'privilege'     => 'sent',
+            ),
+            /*array(
+                'label' => 'Archived',
+                'tag' => 'messageMenu',
+                'route' => 'default',
+                'module' => 'default',
+                'controller' => 'message',
+                'action' => 'archived',
+                'resource'      => 'message',
+                'privilege'     => 'archived',
+            )*/
         )
     )
 );

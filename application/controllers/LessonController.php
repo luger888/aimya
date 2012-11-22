@@ -16,7 +16,7 @@ class LessonController extends Zend_Controller_Action
 
     public function indexAction()
     {
-
+        $this->_helper->layout->setLayout("layoutInside");
         $this->_helper->layout()->getView()->headTitle('Friends');
 
         $userModel = new Application_Model_DbTable_Users();
@@ -176,10 +176,6 @@ class LessonController extends Zend_Controller_Action
 
         if(isset($_FILES['Filedata']['name']) && $_FILES['Filedata']['name'] != '') {
             //$lessonModel->delTree($presPath);
-
-            $text = json_encode($_POST);
-            $text .= $presPath;
-            $this->write($text);
             $presentationForm = new Application_Form_Presentation();
             $presentationForm->getElement("Filedata")->setDestination($presPath);
             $presentationForm->Filedata->receive();

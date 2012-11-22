@@ -1,27 +1,8 @@
-// JavaScript Document
 
-    //});
-//});
-//$(document).ready(function () {
-function test(){
-    //$(function() {
-        //$('#file_upload').uploadifive('upload');
-    //});
-}
-//});
 
 function saveExperience(){
         var id = $(this).nextAll('input[type=hidden]:first').val();
 
-    /*$('#file_upload').uploadifive({
-        'auto'         : false,
-        'formData'     : {'experienceUpload' : 'experience'},
-        'queueID'      : 'queue',
-        'uploadScript' : '/resume/upload',
-        'onUploadComplete' : function(file, data) {
-            console.log(data);
-        }
-    });*/
     $('#file_upload').uploadifive('upload');
    var experience = $('#experience').val();
     $.post(

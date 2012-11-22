@@ -8,6 +8,7 @@ $(document).ready(function() {
                 "firstname" : $("#firstname").val(),
                 "lastname" : $("#lastname").val(),
                 "username" : $("#username").val(),
+                "gender" : $('input[name=gender]:checked').val(),
                 "email" : $("#email").val(),
                 "password" : $("#password").val(),
                 "role" : $('input[name=type]:checked').val()
@@ -28,7 +29,7 @@ $(document).ready(function() {
                 }
 
                 if(response.confirmFlash){
-
+                    $('.alertBlock .alert').remove();
                     $('.alertBlock').append('<div class="alert">'+response.confirmFlash+'</div>');
 
                 }

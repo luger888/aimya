@@ -18,23 +18,25 @@ if (Zend_Registry::isRegistered('username')) {
 }
 ?>
 <div class="accountWrapper row-fluid no-space">
-    <div class="leftNavigation span1">
-        <?php
-        echo $this->navigation()
-            ->menu()
-            ->setMaxDepth(0)
-            ->setUlClass('nav nav-tabs nav-stacked')
-            ->render(new Aimya_Navigation($this->navigation()->findAllBy('tag', 'leftMenu', true)));
-        ?>
-    </div>
+
     <div class="leftBlockProfile span2">
+
         <h3> <?php echo $username;?></h3>
         Member since <?php echo $memberSince;?><br>
-        <img src="<?php echo $avatarPath;?>">
+        <img src="<?php echo $avatarPath;?>"><br>
         No rate
+        <div class="leftNavigation">
+            <?php
+            echo $this->navigation()
+                ->menu()
+                ->setMaxDepth(0)
+                ->setUlClass('nav nav-tabs nav-stacked')
+                ->render(new Aimya_Navigation($this->navigation()->findAllBy('tag', 'leftMenu', true)));
+            ?>
+        </div>
     </div>
 
-    <div class="mainBlockProfile span9">
+    <div class="mainBlockProfile span10">
         <?php echo $this->layout()->content; ?>
     </div>
 </div>

@@ -12,8 +12,6 @@
     <?php $this->headLink()->appendStylesheet('/twitter/css/bootstrap.css');?>
     <?php $this->headLink()->appendStylesheet('http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css');?>
     <?php $this->headScript()->appendFile('/js/jquery/jquery-ui-1.9.1.custom.min.js');?>
-    <?php $this->headScript()->appendFile('/js/jquery/cookieJquery.js');?>
-    <?php #$this->headScript()->appendFile('/js/jquery/jquery.uploadifive.js');?>
     <?php $this->headScript()->appendFile('/js/jquery/main.js');?>
     <?php $this->headLink()->appendStylesheet('/css/style.css');?>
     <?php $this->headScript()->appendFile('/twitter/js/bootstrap.js');?>
@@ -52,7 +50,7 @@ $controllerName = $front->getRequest()->getControllerName();
                 {$this->login['password']}
                 {$this->login['login']}<br>
                 {$this->login['remember']}
-                <label for='{$this->login['remember']->id}'>Keep me signed in</label>
+                <div class ='rememberMe'></div><label for='{$this->login['remember']->id}'>Keep me signed in</label>
                 <a href='#'>Forgot your password?</a>
 
             </form>
@@ -94,14 +92,14 @@ $controllerName = $front->getRequest()->getControllerName();
     ?> <!-- END ACCOUNT LAYOUT -->
 
 
-
+    <div class='footer'>
+        Copyright 2012 Aimya<br>
+        Created by Svitla.com
+    </div>
 
 </div>
 
-<div class='footer'>
-    Copyright 2012 Aimya<br>
-    Created by Svitla.com
-</div>
+
 <!--END of CONTENT-->
 </body>
 </html>

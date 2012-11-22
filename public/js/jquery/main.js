@@ -1,4 +1,6 @@
 $(document).ready(function() {
+
+
     /* Button bar(radio)*/
     $('.buttonBar label').first().addClass('checked');
     $('.buttonBar input').first().prop('checked', true);
@@ -11,7 +13,17 @@ $(document).ready(function() {
     });
 
     /* END Button bar(radio)*/
+    /* Gender bar(radio)*/
+    $('#gender-element label').first().addClass('checked');
+    $('#gender-element input[type="radio"]').change(function(){
 
+        if($(this).is(":checked")){
+            $('#gender-element label').removeClass('checked');
+            $(this).parent().addClass('checked');
+        }
+    });
+
+    /* END Gender bar(radio)*/
     /* DatePicker jquery UI */
     $('#birthday').datepicker({ dateFormat: 'yy-mm-dd',
         changeMonth: true,
@@ -35,7 +47,7 @@ $(document).ready(function() {
             {cache:true,
             load: function (e, ui) {
                 $(ui.panel).find(".tab-loading").remove();
-                test();
+                uploadify();
             },
             select: function( e, ui )
             {
@@ -74,18 +86,45 @@ $(document).ready(function() {
     });
     /* END TABS with COOKIES jquery UI */
 
+    /*  ACCOUNT SYSTEM   */
 
+    /*$('#singleactions').change(function () {
+        id =
+        window.location.href = '/message/' . $('#singleactions').val();
+    });*/
+    /*  ACCOUNT SYSTEM   */
 
 });
-function test(){
+function uploadify(){
     //$(function() {
     $('#file_upload').uploadifive({
         'auto'         : false,
         'formData'     : {'experienceUpload' : 'certificate'},
         'queueID'      : 'queue',
+        'folder'        : '/img/uploads/' + $(this).attr('id'),
         'uploadScript' : '/resume/upload',
         'onUploadComplete' : function(file, data) {
-            console.log(data);
         }
     });
 }
+
+function messageAction(element_id, action) {
+    tmpArr = element_id.split('_');
+    message_id = tmpArr[1];
+    message = $('#'+ element_id);
+    selected = message.val();
+    if(selected == "default"){
+        return false;
+    } else if(selected == "delete"){
+        var answer = confirm("Do you realy want remove this message?");
+        if (answer) {
+            window.location.href = "/message/" + selected + "/message_id/" + message_id + "/current_action/" + action;
+        }
+    } else {
+        window.location.href = "/message/" + selected + "/message_id/" + message_id + "/current_action/" + action;
+    }
+
+
+    return false;
+}
+
