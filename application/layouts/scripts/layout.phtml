@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta CHARSET="UTF-8">
+    <title></title>
+    <?php
+    $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=utf-8');
+    $this->addHelperPath("ZendX/JQuery/View/Helper", "ZendX_JQuery_View_Helper");
+    ?>
+    <?php  echo $this->jQuery(); ?>
+    <?php $this->headLink()->appendStylesheet('/twitter/css/bootstrap.css');?>
+    <?php $this->headLink()->appendStylesheet('http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css');?>
+    <?php $this->headScript()->appendFile('/js/jquery/jquery-ui-1.9.1.custom.min.js');?>
+    <?php $this->headScript()->appendFile('/js/jquery/main.js');?>
+    <?php $this->headLink()->appendStylesheet('/css/style.css');?>
+    <?php $this->headScript()->appendFile('/twitter/js/bootstrap.js');?>
+
+    <?php echo $this->headScript();?>
+    <?php echo $this->headLink();?>
+</head>
+<body>
+<?php
+
+$front = Zend_Controller_Front::getInstance();
+$controllerName = $front->getRequest()->getControllerName();
+?>
+
+
+
+
+
+
+
+<!-- CONTENT -->
+<div id="wrapper">
+
+    <!-- HEADER & NAVIGATION -->
+    <div class="row-fluid header">
+        <div class="span5 offset1">
+            <div class="logo">
+                <a href="index"><div class = "bigLogoImg"></div></a>
+            </div>
+        </div>
+
+
+        <!-- LOGIN -->
+        <?php if ($controllerName == 'index') {
+        echo "<div class='span5'>
+
+        <div id='loginFormHolder'>
+            <form id='signIn' action='user/login' name='signIn'  method='post'>
+            <span class='login'>Login or email:</span> <span class='pass'>Password:</span><br>
+                {$this->login['username']}
+                {$this->login['password']}
+                {$this->login['login']}<br>
+                {$this->login['remember']}
+                <div class ='rememberMe'></div><label for='{$this->login['remember']->id}'>Keep me signed in</label>
+                <a href='#'>Forgot your password?</a>
+
+            </form>
+            <!-- END /LOGIN -->
+        </div>
+    </div>
+    <!-- /span3 -->";
+    }
+        ?>
+        <!--<div class="span3">
+        <nav id="globalNav">
+            <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">About Aimya</a></li>
+                <li><a href="#">Help</a></li>
+                <?php #if(Zend_Auth::getInstance()->getStorage()->read()){echo '<li><a href="/user/logout/">Logout</a></li>';}?>
+
+            </ul>
+        </nav>
+    </div>-->
+    </div>
+    <!-- END of HEADER & NAVIGATION  -->
+
+    <div class="messages">
+        <?php echo $this->flashMessages();?>
+    </div>
+    <!-- ACCOUNT LAYOUT -->
+    <?php
+
+    if ($controllerName == 'account' or $controllerName == 'lesson' or $controllerName == 'message' or $controllerName == 'resume') {
+        echo $this->partial('partials/account.phtml',
+            array('account' => $this->data));
+
+    } else {
+        echo $this->layout()->content;
+    }
+    ?> <!-- END ACCOUNT LAYOUT -->
+
+
+
+<div class = 'push'></div>
+</div>
+<div class='footer'>
+    Copyright 2012 Aimya<br>
+    Created by Svitla.com
+</div>
+
+<!--END of CONTENT-->
+</body>
+</html>
