@@ -1,36 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
-			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" xmlns:views="com.aimialesson.UI.views.*"
-			   creationComplete="onInit(event)" >
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="600" minHeight="600" xmlns:views="com.aimialesson.UI.views.*"
+			   creationComplete="onInit(event)" xmlns:initcall="services.initcall.*" >
 	<fx:Script>
 		<![CDATA[
+			import com.adobe.serialization.json.JSON;
 			import com.aimialesson.UI.skins.MainUISkin;
 			import com.aimialesson.controllers.MainController;
 			import com.aimialesson.events.*;
 			import com.aimialesson.model.Main;
+			import com.aimialesson.service.ServiceMap;
 			
+			import mx.collections.ArrayCollection;
 			import mx.core.FlexGlobals;
 			import mx.events.FlexEvent;
+			import mx.rpc.events.FaultEvent;
+			import mx.rpc.events.ResultEvent;
+			import mx.rpc.soap.LoadEvent;
+			import mx.rpc.soap.WebService;
 			
-			private var mainController:MainController = new MainController; 
+			private var mainController:MainController = new MainController();
+			private var seviceMap:ServiceMap = new ServiceMap();
 			
 			private function onInit ( event : FlexEvent ) : void {
 				mainController.addEventListener(AppEvent.CONNECT_INIT_COMPLETE, connectInitComplete);
+				mainController.addEventListener(SharedObjectEvent.SHARED_PRESENTATION_UPLOADED, seviceMap.onSharedObjectEvent);
 				mainController.init(mainUI, FlexGlobals.topLevelApplication.parameters);
+				seviceMap.init();
+				seviceMap.addEventListener(ServiceEvent.GET_PRESENTATION_IMAGES_RESULT, mainController.onServiceEvent);
+				UIEventHandling();
 				debug("app:onInit");
 			}
 			
 			private function connectInitComplete ( event : AppEvent ) : void {
 				debug("app:connectInitComplete");
 				mainUI.connectionInit();
-				UIEventHandling();
+				//UIEventHandling();
 			}
 			
 			private function UIEventHandling():void {
 				mainUI.addEventListener(PresentationEvent.MOVE_TO_LEFT, mainController.onPresentationEvent);
 				mainUI.addEventListener(PresentationEvent.MOVE_TO_RIGHT, mainController.onPresentationEvent);
-				mainUI.addEventListener(TextChatEvent.ADD_NEW_LINE, mainController.onTextChatEvent);
+				mainUI.addEventListener(PresentationEvent.PRESENTATION_UPLOADED, mainController.onPresentationEvent);
+				mainUI.addEventListener(PresentationEvent.PRESENTATION_UPLOADED, seviceMap.onPresentationEvent);
+				mainUI.addEventListener(NotesEvent.ADD_NEW_LINE, mainController.onTextChatEvent);
 			}
 			
 			private function debug ( str : String ) : void {
@@ -39,8 +53,5 @@
 			}
 		]]>
 	</fx:Script>
-	<fx:Declarations>
-		<!-- Place non-visual elements (e.g., services, value objects) here -->
-	</fx:Declarations>
 	<views:MainUI id="mainUI" skinClass="com.aimialesson.UI.skins.MainUISkin"/>
 </s:Application>
