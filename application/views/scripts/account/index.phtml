@@ -13,7 +13,7 @@
         <div class="profile">
             <h3>YOUR BASIC INFORMATION:</h3>
             <form method="post" name="profile" action="" enctype="multipart/form-data">
-                <div class="profileAvatar"> <?php echo $this->profile->avatar; ?></div>
+                <div class="profileAvatar">UPLOAD <?php echo $this->profile->avatar; ?></div>
                 <ul>
 
 
@@ -23,7 +23,7 @@
 
                     <li> <span>Login:</span> <?php echo $this->profile->username; ?></li>
 
-                    <li> <span>DOB:</span> <div class="input-append"><?php echo $this->profile->birthday; ?> <span class="add-on">XXX</span></div> </li>
+                    <li> <span>DOB:</span> <?php echo $this->profile->birthday; ?> <span class="add-on"></span> </li>
 
                     <li> <span>Language:</span> <?php echo $this->profile->language; ?></li>
 

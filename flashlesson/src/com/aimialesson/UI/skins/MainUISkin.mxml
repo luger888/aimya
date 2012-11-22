@@ -3,17 +3,58 @@
 		xmlns:s="library://ns.adobe.com/flex/spark" 
 		xmlns:mx="library://ns.adobe.com/flex/mx"
 		xmlns:views="com.aimialesson.UI.views.*"
-		width="800">
+		xmlns:elements="com.aimialesson.UI.views.elements.*"  height="550" >
 	<!-- host component -->
 	<fx:Metadata>
 		[HostComponent("com.aimialesson.UI.views.MainUI")]
 	</fx:Metadata>
-	<s:VGroup width="100%" height="100%">
-		<s:HGroup width="100%" height="100%">
-			<views:VideoChatUI id="videoChat" skinClass="com.aimialesson.UI.skins.VideoChatSkin"  height="100%"/>
-			<views:TextChatUI id="textChat" skinClass="com.aimialesson.UI.skins.TextChatSkin" height="100%" width="100%"/>
-			<views:PresentationUI id="presentation" skinClass="com.aimialesson.UI.skins.PresentationSkin" />
-		</s:HGroup>		
-		<s:TextArea id="debugger"  width="100%" height="200"/>
-	</s:VGroup>
+	<fx:Script>
+		<![CDATA[
+			[Embed(source = "flashassets/fonts/Helvetica/HelveticaNeueLTStd-Md.ttf", fontWeight="Normal", fontName = "HelveticaMd", mimeType="application/x-font-truetype")]
+			private var fontHelveticaMd:Class;
+			
+			//[Embed(source = "flashassets/fonts/Helvetica/HelveticaNeueLTStd-Md 2.ttf", fontWeight="Normal", fontName = "HelveticaMd", mimeType="application/x-font-truetype")]
+			//private var fontHelveticaMd2:Class;
+			
+			[Embed(source = "flashassets/fonts/Dosis/Dosis-SemiBold.ttf", fontWeight="Normal", fontName = "DosisSB", mimeType="application/x-font-truetype")]
+			private var fontDosisSB:Class;
+			import com.aimialesson.model.Presentation;
+		]]>
+	</fx:Script>
+	<fx:Style source="lesson.css" />
+	<s:Scroller  height="100%" width="100%" horizontalScrollPolicy="off" verticalScrollPolicy="on">
+		<s:Group  width="870" >
+			<s:Rect width="870" height="1190">
+				<s:fill>
+					<s:SolidColor color="0xffffff" />
+				</s:fill>
+			</s:Rect>
+			<!--s:Group width="870" height="1190">
+				<s:BitmapImage source="@Embed('flashassets/t_my_lessons_on_the_air.jpg')" y="-130" x="-287"/>
+			</s:Group-->
+			<s:VGroup bottom="33" top="21" gap="10" width="100%" paddingRight="33" paddingLeft="33">
+				<s:BitmapImage source="@Embed('flashassets/1page_middle_separator.png')" width="100%"/>
+				<mx:Spacer height="10" />
+				<views:HeaderUI id="header" skinClass="com.aimialesson.UI.skins.HeaderSkin" width="100%"/>
+				<mx:Spacer height="10" />
+				<s:HGroup width="100%" height="100%" gap="15">
+					<s:Group height="{presantationBG.height}">
+						<elements:PresentationTitle width="{videoChat.width}" top="5"/>
+						<views:VideoChatUI id="videoChat" skinClass="com.aimialesson.UI.skins.VideoChatSkin" bottom="0"/>
+					</s:Group>
+					<s:Group width="100%" height="100%" maxWidth="634" maxHeight="600">
+						<s:BitmapImage id="presantationBG" source="@Embed('flashassets/presentation_background.png')" left="0" right="0" top="0" maxHeight="573" maxWidth="634"/>
+						<views:PresentationUI id="presentation" skinClass="com.aimialesson.UI.skins.PresentationSkin" visible="{Presentation.getInstance().loaded}" includeInLayout="{Presentation.getInstance().loaded}" left="10" right="10" top="10" bottom="10"/>
+						<views:UploadUI id="upload" skinClass="com.aimialesson.UI.skins.UploadSkin" visible="{!Presentation.getInstance().loaded}" includeInLayout="{!Presentation.getInstance().loaded}" left="10" right="10" top="10" />
+					</s:Group>
+				</s:HGroup>
+				<s:VGroup gap="30" width="100%">
+					<s:BitmapImage source="@Embed('flashassets/1page_middle_separator.png')" width="100%" />
+					<s:BitmapImage source="@Embed('flashassets/2page_middle_separator.png')" width="100%" />
+				</s:VGroup>
+				<views:NotesUI id="textChat" skinClass="com.aimialesson.UI.skins.NotesSkin" width="100%"/>
+				<s:TextArea id="debugger"  width="100%" height="200"/>
+			</s:VGroup>
+		</s:Group>
+	</s:Scroller>
 </s:Skin>

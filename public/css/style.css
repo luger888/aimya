@@ -1,3 +1,4 @@
+
 /* FONTS*/
 @font-face {
     font-family: helvetica;
@@ -33,18 +34,27 @@ form{
     margin-bottom:0;
 }
 #wrapper{
+    min-height: 100%!important;
     height: auto !important;
-    min-height: 90%;
-    padding: 0;
+    height: 100%!important;
+    margin: 0 auto -142px!important; /* the bottom margin is the negative value of the footer's height */
+
 }
+
+
+.footer, .push {
+    height: 127px; /* .push must be the same height as .footer */
+}
+
 .footer {
     color: #A1B368;
     font: 10px helvetica;
-    left: 8.6%;
-    margin-top: 25px;
     padding: 0;
     position: relative;
-    display: inline-block;
+    border:1px solid red;
+    clear:both;
+
+    display: block;
 }
 fieldset .mainText{
     font-size: 12px;
@@ -292,7 +302,7 @@ font:15px dosis-semibold-middle;
 }
 
 #signUp{
-    height: 600px;
+   
     width: 640px;
 }
 
@@ -696,6 +706,15 @@ width:100px;
     width:95px;
     margin-bottom: 9px;
 }
+
+.profile .add-on{
+    background: url('../img/design/accountLayout/glyphicons/calendar.png') no-repeat;
+    height: 20px;
+    position: relative;
+    right: 29px;
+    top: 3px;
+    width: 19px;
+}
 .input-append{
    display: inline-block;
     margin:0;
@@ -706,12 +725,25 @@ width:100px;
     font:12px helvetica;
 }
 .profile ul li input{
-    width:185px;
+    width:178px;
+    height: 24px;
     font:12px helvetica;
     border-radius: 1px;
 }
-
-.profile .profileAvatar{
-    float:right;
-
+.profile .profileAvatar {
+    overflow: hidden;
+    width: 65px;
+    height: 20px !important;
+    cursor: pointer;
+    float: right;
+    background: url('../img/design/accountLayout/glyphicons/upload.png') no-repeat;
+}
+.profile input[type='file'] {
+    opacity:0;
+    filter:alpha(opacity:0);
+    font-size:199px;
+    cursor:pointer;
+    padding:0;
+    border:none;
+    margin-left:-450px;
 }

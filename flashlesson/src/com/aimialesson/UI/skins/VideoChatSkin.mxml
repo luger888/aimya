@@ -6,12 +6,15 @@
 	<fx:Metadata>
 		[HostComponent("com.aimialesson.UI.views.VideoChatUI")]
 	</fx:Metadata>
-	<s:BorderContainer>
-		<s:VGroup gap="10">
-			<!--mx:VideoDisplay id="myVideo" width="200" height="150" /-->
-			<!--mx:VideoDisplay id="partnerVideo" width="200" height="150" /-->
-			<mx:UIComponent id="myVideoContainter"  width="200" height="150"/>
-			<mx:UIComponent id="partnerVideoContainter"  width="200" height="150"/>
-		</s:VGroup>
-	</s:BorderContainer>
+	<fx:Script>
+		<![CDATA[
+			import com.aimialesson.UI.views.elements.AimiaVideoSkin;
+			import com.aimialesson.model.User;
+		]]>
+	</fx:Script>
+	<s:VGroup gap="20">
+		<s:RichText text="VIDEO CHAT:" styleName="HeaderStyle" />
+		<views:AimiaVideoUI id="myAimiaVideo" userName="{User.getInstance().userName}" userRole="{User.getInstance().userRole}" userOnline="{User.getInstance().isOnline}" skinClass="com.aimialesson.UI.views.elements.AimiaVideoSkin" />
+		<views:AimiaVideoUI id="partnerAimiaVideo" userName="{User.getInstance().partnerName}" userRole="{User.getInstance().partnerRole}" userOnline="{User.getInstance().partnerIsOnline}" skinClass="com.aimialesson.UI.views.elements.AimiaVideoSkin" />
+	</s:VGroup>
 </s:Skin>

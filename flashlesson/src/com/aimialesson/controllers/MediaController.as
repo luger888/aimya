@@ -20,15 +20,22 @@ package com.aimialesson.controllers
 		}
 		
 		public function setParameters ( parameters : Object ) : void {
-			if (parameters.myStreamName)
+			if (parameters.myStreamName){
 				Media.getInstance().myStreamName = parameters.myStreamName;
-			if (parameters.partnerStreamName)
+				debug (parameters.myStreamName);
+			}
+			if (parameters.partnerStreamName){
 				Media.getInstance().partnerStreamName = parameters.partnerStreamName;
-			if (parameters.soID)
+				debug (parameters.partnerStreamName);
+			}
+			if (parameters.soID){
 				Media.getInstance().soID = parameters.soID;
-			if (parameters.userName)
-				Media.getInstance().userName = parameters.userName;
-
+				debug (parameters.soID);
+			}
+			if (parameters.domain){
+				Media.getInstance().domain = parameters.domain;
+				debug (parameters.domain);
+			}
 		}
 		
 		public function initConnection () : void {
