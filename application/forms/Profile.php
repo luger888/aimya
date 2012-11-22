@@ -12,12 +12,14 @@ class Application_Form_Profile extends Zend_Form
         $this->setEnctype(Zend_Form::ENCTYPE_MULTIPART);
 
         $avatar = new Zend_Form_Element_File('avatar');
-        $avatar ->setLabel('Upload Image')
+        $avatar
              ->setAttrib('id', 'avatar')
              ->addValidator('Size', false, 1024000)
              ->addValidator('Extension', false, 'jpg,png,gif,jpeg')
-             ->setDestination('./img/uploads/'.$identity->id.'/avatar/');
-
+             ->setDestination('./img/uploads/'.$identity->id.'/avatar/')
+             ->removeDecorator('DtDdWrapper')
+             ->removeDecorator('HtmlTag')
+             ->removeDecorator('label');
 
         $firstName = new Zend_Form_Element_Text('firstname');
         $firstName ->setAttrib('placeholder', 'First Name')

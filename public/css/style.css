@@ -696,6 +696,15 @@ width:100px;
     width:95px;
     margin-bottom: 9px;
 }
+
+.profile .add-on{
+    background: url('../img/design/accountLayout/glyphicons/calendar.png') no-repeat;
+    height: 20px;
+    position: relative;
+    right: 29px;
+    top: 3px;
+    width: 19px;
+}
 .input-append{
    display: inline-block;
     margin:0;
@@ -706,12 +715,25 @@ width:100px;
     font:12px helvetica;
 }
 .profile ul li input{
-    width:185px;
+    width:178px;
+    height: 24px;
     font:12px helvetica;
     border-radius: 1px;
 }
-
-.profile .profileAvatar{
-    float:right;
-
+.profile .profileAvatar {
+    overflow: hidden;
+    width: 65px;
+    height: 20px !important;
+    cursor: pointer;
+    float: right;
+    background: url('../img/design/accountLayout/glyphicons/upload.png') no-repeat;
+}
+.profile input[type='file'] {
+    opacity:0;
+    filter:alpha(opacity:0);
+    font-size:199px;
+    cursor:pointer;
+    padding:0;
+    border:none;
+    margin-left:-450px;
 }
