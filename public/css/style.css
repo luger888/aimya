@@ -1,3 +1,4 @@
+
 /* FONTS*/
 @font-face {
     font-family: helvetica;
@@ -33,18 +34,27 @@ form{
     margin-bottom:0;
 }
 #wrapper{
+    min-height: 100%!important;
     height: auto !important;
-    min-height: 90%;
-    padding: 0;
+    height: 100%!important;
+    margin: 0 auto -142px!important; /* the bottom margin is the negative value of the footer's height */
+
 }
+
+
+.footer, .push {
+    height: 127px; /* .push must be the same height as .footer */
+}
+
 .footer {
     color: #A1B368;
     font: 10px helvetica;
-    left: 8.6%;
-    margin-top: 25px;
     padding: 0;
     position: relative;
-    display: inline-block;
+    border:1px solid red;
+    clear:both;
+
+    display: block;
 }
 fieldset .mainText{
     font-size: 12px;
@@ -292,7 +302,7 @@ font:15px dosis-semibold-middle;
 }
 
 #signUp{
-    height: 600px;
+   
     width: 640px;
 }
 
