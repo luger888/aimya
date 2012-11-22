@@ -30,18 +30,23 @@ $controllerName = $front->getRequest()->getControllerName();
 
 
 
-<!-- HEADER & NAVIGATION -->
-<div class="row-fluid header">
-    <div class="span5 offset1">
-        <div class="logo">
-            <a href="index"><div class = "bigLogoImg"></div></a>
+
+
+<!-- CONTENT -->
+<div id="wrapper">
+
+    <!-- HEADER & NAVIGATION -->
+    <div class="row-fluid header">
+        <div class="span5 offset1">
+            <div class="logo">
+                <a href="index"><div class = "bigLogoImg"></div></a>
+            </div>
         </div>
-    </div>
 
 
-    <!-- LOGIN -->
-    <?php if ($controllerName == 'index') {
-    echo "<div class='span5'>
+        <!-- LOGIN -->
+        <?php if ($controllerName == 'index') {
+        echo "<div class='span5'>
 
         <div id='loginFormHolder'>
             <form id='signIn' action='user/login' name='signIn'  method='post'>
@@ -58,9 +63,9 @@ $controllerName = $front->getRequest()->getControllerName();
         </div>
     </div>
     <!-- /span3 -->";
-}
-    ?>
-    <!--<div class="span3">
+    }
+        ?>
+        <!--<div class="span3">
         <nav id="globalNav">
             <ul>
                 <li><a href="#">Privacy Policy</a></li>
@@ -71,11 +76,9 @@ $controllerName = $front->getRequest()->getControllerName();
             </ul>
         </nav>
     </div>-->
-</div>
-<!-- END of HEADER & NAVIGATION  -->
+    </div>
+    <!-- END of HEADER & NAVIGATION  -->
 
-<!-- CONTENT -->
-<div id="wrapper">
     <div class="messages">
         <?php echo $this->flashMessages();?>
     </div>
@@ -92,13 +95,13 @@ $controllerName = $front->getRequest()->getControllerName();
     ?> <!-- END ACCOUNT LAYOUT -->
 
 
-    <div class='footer'>
-        Copyright 2012 Aimya<br>
-        Created by Svitla.com
-    </div>
 
+<div class = 'push'></div>
 </div>
-
+<div class='footer'>
+    Copyright 2012 Aimya<br>
+    Created by Svitla.com
+</div>
 
 <!--END of CONTENT-->
 </body>
