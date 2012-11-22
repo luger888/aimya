@@ -26,6 +26,9 @@ body{
     margin: 0;
     padding: 0;
 }
+input{
+    padding:0 !important;
+}
 input:focus{
     outline: 0;
 }
@@ -84,18 +87,17 @@ font:15px dosis-semibold-middle;
 
 /*Inputs*/
 .regTextInput{
-    width:165px;
-    height: 25px !important;
+    width:168px;
+    height: 33px !important;
     border: 1px solid #95a861 !important;
     border-radius: 0 !important;
 }
 .logTextInput{
-    padding:2px !important;
     border-radius: 0 !important;
     margin-bottom: 0 !important;
     margin-right: 15px;
-    width: 165px;
-    height: 19px !important;
+    width: 168px;
+    height: 24px !important;
 }
 
 .regTextInput:focus{
@@ -302,7 +304,7 @@ font:15px dosis-semibold-middle;
 }
 
 #signUp{
-   
+
     width: 640px;
 }
 
@@ -729,6 +731,7 @@ width:100px;
     height: 24px;
     font:12px helvetica;
     border-radius: 1px;
+    padding-left:5px;
 }
 .profile .profileAvatar {
     overflow: hidden;
