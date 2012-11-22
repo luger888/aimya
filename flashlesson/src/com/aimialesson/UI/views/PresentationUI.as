@@ -11,8 +11,8 @@ package com.aimialesson.UI.views
 	import spark.components.Button;
 	import spark.components.supportClasses.SkinnableComponent;
 	
-	[Event (name="MOVE_TO_LEFT", type="com.aimialesson.events.PresentationEvent")]
-	[Event (name="MOVE_TO_RIGHT", type="com.aimialesson.events.PresentationEvent")]
+	[Event (name="moveToLeft", type="com.aimialesson.events.PresentationEvent")]
+	[Event (name="moveToRight", type="com.aimialesson.events.PresentationEvent")]
 	public class PresentationUI extends SkinnableComponent
 	{
 		[SkinPart (required="true")]

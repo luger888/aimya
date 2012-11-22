@@ -6,6 +6,7 @@ package com.aimialesson.events
 	{
 		public static const MOVE_TO_LEFT:String = "moveToLeft";
 		public static const MOVE_TO_RIGHT:String = "moveToRight";
+		public static const PRESENTATION_UPLOADED:String = "presentationUploaded";
 		
 		public function PresentationEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
