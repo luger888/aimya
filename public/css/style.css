@@ -27,7 +27,7 @@ body{
     padding: 0;
 }
 input{
-    padding:0 !important;
+    padding:5px !important;
 }
 input:focus{
     outline: 0;
@@ -88,8 +88,8 @@ font:15px dosis-semibold-middle;
 
 /*Inputs*/
 .regTextInput{
-    width:168px;
-    height: 33px !important;
+    width:158px;
+    height: 23px !important;
     border: 1px solid #95a861 !important;
     border-radius: 0 !important;
 }
@@ -97,8 +97,8 @@ font:15px dosis-semibold-middle;
     border-radius: 0 !important;
     margin-bottom: 0 !important;
     margin-right: 15px;
-    width: 168px;
-    height: 24px !important;
+    width: 158px;
+    height: 14px !important;
 }
 
 .regTextInput:focus{
@@ -375,7 +375,7 @@ font:15px dosis-semibold-middle;
     float: left;
     height: 19px;
     line-height: 11px;
-    margin: 14px 14px 0 0;
+    margin: 14px 8px 0 0;
     width: 63px;
 }
 #lastname{
@@ -728,8 +728,8 @@ width:100px;
     font:12px helvetica;
 }
 .profile ul li input{
-    width:178px;
-    height: 24px;
+    width:168px;
+    height: 14px;
     font:12px helvetica;
     border-radius: 1px;
     padding-left:5px;
