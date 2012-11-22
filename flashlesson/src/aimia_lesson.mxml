@@ -45,6 +45,7 @@
 				mainUI.addEventListener(PresentationEvent.PRESENTATION_UPLOADED, mainController.onPresentationEvent);
 				mainUI.addEventListener(PresentationEvent.PRESENTATION_UPLOADED, seviceMap.onPresentationEvent);
 				mainUI.addEventListener(NotesEvent.ADD_NEW_LINE, mainController.onTextChatEvent);
+				mainUI.addEventListener(NotesEvent.ADD_NEW_LINE, seviceMap.onNotesEvent);
 			}
 			
 			private function debug ( str : String ) : void {

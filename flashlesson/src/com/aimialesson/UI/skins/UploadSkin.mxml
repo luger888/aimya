@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx" >
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("com.aimialesson.UI.views.UploadUI")]
+	</fx:Metadata>
+	<fx:Script>
+		<![CDATA[
+			import com.aimialesson.UI.skins.elements.PresentationUploadBtnSkin;
+			import com.aimialesson.model.Presentation;
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<mx:NumberFormatter id="numberFormatter" />	
+	</fx:Declarations>
+	<s:VGroup maxHeight="600" maxWidth="634"  width="100%" height="100%" gap="20" >
+		<s:Group maxHeight="573" maxWidth="634"  width="100%" height="100%">
+			<mx:ProgressBar id="progressBar" horizontalCenter="0" verticalCenter="0" indeterminate="true" visible="false" />
+			<s:BitmapImage source="@Embed('flashassets/lesson_presentation_background.png')"/>
+		</s:Group>
+		<s:Group width="100%">
+			<s:Label id="message" left="10"/>
+			<s:Button id="uploadBtn" label="Upload file" right="-5" skinClass="com.aimialesson.UI.skins.elements.PresentationUploadBtnSkin" useHandCursor="true"/>
+		</s:Group>		
+	</s:VGroup>
+	
+</s:Skin>

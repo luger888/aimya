@@ -4,6 +4,7 @@ package com.aimialesson.controllers
 	import com.aimialesson.model.Client;
 	import com.aimialesson.model.Main;
 	import com.aimialesson.model.Media;
+	import com.aimialesson.model.Actions;
 	
 	import flash.events.EventDispatcher;
 	import flash.events.NetStatusEvent;
@@ -33,7 +34,7 @@ package com.aimialesson.controllers
 				debug (parameters.soID);
 			}
 			if (parameters.domain){
-				Media.getInstance().domain = parameters.domain;
+				Actions.getInstance().domain = parameters.domain;
 				debug (parameters.domain);
 			}
 		}

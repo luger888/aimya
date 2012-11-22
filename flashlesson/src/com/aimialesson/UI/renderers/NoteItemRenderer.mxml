@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				autoDrawBackground="true">
+	
+	<fx:Script>
+		<![CDATA[
+			import com.aimialesson.model.Main;
+			
+			[Bindable]
+			private var dateStr:String = ""; 
+			override public function set data(value:Object):void {
+				//debug("NoteItemRenderer");
+				super.data = value;
+				if (data) {
+					var date:Date = new Date();
+					date.setTime(value.date);
+					var d:String = date.date.toString();
+					if (d.length == 1) d = "0" + d;
+					var month:String = date.month.toString();
+					if (month.length == 1) month = "0" + month;
+					var hours:String = date.hours.toString();
+					if (hours.length == 1) hours = "0" + hours;
+					var minutes:String = date.minutes.toString();
+					if (minutes.length == 1) minutes = "0" + minutes;
+					var fullYear:String = date.fullYear.toString();
+					fullYear = fullYear.substr(2,2);
+					dateStr = d + "." + month + "." + fullYear + " " + hours + ":" + minutes;
+				}
+			}
+			
+			private function debug ( str : String ) : void {
+				if (Main.getInstance().debugger != null)
+					Main.getInstance().debugger.text += str + "\n";
+			}
+		]]>
+	</fx:Script>
+	<s:Rect visible="{!data.isEven}" top="0" bottom="0" right="0" left="0">
+		<s:fill>
+			<s:SolidColor color="#ffffff" />
+		</s:fill>
+	</s:Rect>
+	<s:Rect visible="{data.isEven}" top="0" bottom="0" right="0" left="0">
+		<s:fill>
+			<s:SolidColor color="#FCFCFC" />
+		</s:fill>
+	</s:Rect>
+	<s:Line width="100%" bottom="0">
+		<s:stroke>
+			<s:SolidColorStroke color="#EFEFEF" />
+		</s:stroke>
+	</s:Line>
+	<s:VGroup width="100%" paddingTop="10" paddingLeft="15" paddingRight="15" paddingBottom="10">
+		<s:HGroup width="100%">
+			<s:Label text="{data.name}" styleName="NoteHeaderStyle"/>
+			<mx:Spacer width="100%" />
+			<s:Label text="{dateStr}" styleName="NoteTimeStyle"/>
+		</s:HGroup>
+		<s:RichText text="{data.message}" width="100%" styleName="NoteBodyStyle"/>
+	</s:VGroup>
+	
+</s:ItemRenderer>
