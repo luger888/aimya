@@ -1,0 +1,150 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+/*
+@font-face {
+	src: url("location") | local("name");
+	fontFamily: alias;
+	[fontStyle: normal | italic | oblique;]
+	[fontWeight: normal | bold | heavy;]
+	[advancedAntiAliasing: true | false;]
+}*/
+
+@font-face {
+	src: url("flashassets/fonts/Helvetica/HelveticaNeueLTStd-Md.ttf");
+	fontFamily: HelveticaFont;
+	fontStyle: normal;
+	fontWeight: light;
+}
+
+@font-face {
+	src: url("flashassets/fonts/Helvetica/HelveticaNeueLTStd-Md.ttf");
+	fontFamily: ArialCus;
+	fontStyle: normal;
+	fontWeight: normal;
+}
+
+@font-face {
+	src: url("flashassets/fonts/Helvetica/HelveticaNeueLTStd-Md 2.ttf");
+	fontFamily: HelveticaRoman;
+	fontStyle: normal;
+	fontWeight: normal;
+}
+
+@font-face {
+	src: url("flashassets/fonts/Dosis/Dosis-SemiBold.ttf");
+	fontFamily: Dosis;
+	fontStyle: normal;
+	fontWeight: normal;
+}
+
+/*@font-face {
+	src: Arial;
+	fontFamily: Arial;
+	fontStyle: normal;
+	fontWeight: normal;
+}*/
+
+.ButtonLabelStyle {
+	fontFamily: Dosis;
+	fontStyle: normal;
+	fontWeight: normal;
+	color: #1D3300;
+	fontSize: 12;
+}
+
+.HeaderStyle {
+	fontFamily: Arial;
+	fontStyle: normal;
+	fontWeight: normal;
+	color: #1D3300;
+	fontSize: 12;
+}
+
+.NameStyle {
+	fontFamily: Arial;
+	fontStyle: normal;
+	fontWeight: normal;
+	color: #454138;
+	fontSize: 14;
+}
+
+.SmallNameStyle {
+	fontFamily: Arial;
+	fontStyle: normal;
+	fontWeight: normal;
+	color: #000000;
+	fontSize: 13;
+}
+
+.TimeTextStyle {
+	fontFamily: Arial;
+	fontStyle: normal;
+	fontWeight: normal;
+	color: #000000;
+	fontSize: 12;
+}
+
+.TimeMinStyle {
+	fontFamily: Arial;
+	fontStyle: normal;
+	fontWeight: normal;
+	color: #000000;
+	fontSize: 11;
+}
+
+.TimeValueStyle {
+	fontFamily: Times New Roman;
+	fontStyle: normal;
+	fontWeight: normal;
+	color: #C24040;
+	fontSize: 15;
+}
+
+.DescriptionStyle {
+	fontFamily: Arial;
+	fontStyle: italic;
+	fontWeight: normal;
+	color: #1E1E1E;
+	fontSize: 15;
+}
+
+.RoleStyle {
+	fontFamily: Arial;
+	fontStyle: normal;
+	fontWeight: normal;
+	color: #7E7B74;
+	fontSize: 11;
+}
+
+.NoteHeaderStyle {
+	fontFamily: Arial;
+	fontStyle: normal;
+	fontWeight: normal;
+	color: #434343;
+	fontSize: 12;
+}
+
+.NoteBodyStyle {
+	fontFamily: Arial;
+	fontStyle: normal;
+	fontWeight: normal;
+	color: #282828;
+	fontSize: 12;
+}
+
+.NoteTimeStyle {
+	fontFamily: Arial;
+	fontStyle: normal;
+	fontWeight: normal;
+	color: #858585;
+	fontSize: 11;
+}
+
+.EnterNoteStyle {
+	fontFamily: Arial;
+	fontStyle: normal;
+	fontWeight: normal;
+	color: #666666;
+	fontSize: 12;
+}
