@@ -44,12 +44,12 @@ if (Zend_Registry::isRegistered('username')) {
     Zend_Registry::set('username', $username);
 }
 ?>
-<div class="fill">
-    <div class="messages">
-        <?php echo $this->flashMessages();?>
-    </div>
-    <div class="accountWrapper row-fluid no-space">
 
+    <div class="accountWrapper row-fluid no-space">
+        <div class="fill">
+            <div class="messages">
+                <?php echo $this->flashMessages();?>
+            </div>
         <!-- HEADER & NAVIGATION -->
         <div class="row-fluid headerInside">
             <div class="headerAccount">

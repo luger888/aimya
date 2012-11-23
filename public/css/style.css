@@ -15,12 +15,15 @@
 /*global*/
 html{
     height: 100%;
+    margin: 0;
+    padding: 0;
 }
 body{
     font-family: helvetica;
     min-width: 1200px;
     background: url('../img/design/mainPage/background.png') no-repeat center top;
-    background-color: #d5e4ad;
+    /*background-color: #d5e4ad;*/
+    background-color: #f7f8f8;
     color:#446158;
     height: 100%;
     margin: 0;
@@ -41,7 +44,7 @@ form{
     height: auto !important;
     height: 100%!important;
     margin: 0 auto -39px!important; /* the bottom margin is the negative value of the footer's height */
-
+    background-color: #d5e4ad;
 }
 .mainHeader{
     width:1135px;
@@ -64,9 +67,15 @@ form{
     position: relative;
     clear:both;
     display: block;
+
+    background-color: #d5e4ad;
+
+}
+.footer div{
     margin: 0 auto;
     width: 1200px;
 }
+
 .footer .copyright{
     margin-left: 111px;
 }
@@ -644,6 +653,7 @@ width:100px;
    max-width:83%;
     min-width:53%;
     width:83%;
+    height: 100%;
 }
 .leftNavPhoto{
   background-image: url('../img/design/accountLayout/leftNavPhoto.png');
@@ -654,6 +664,7 @@ width:100px;
 
 .mainBlockProfile{
     margin:35px 15px !important;
+    height: 100%;
 }
 .fill{
     background-color: #f7f8f8;
@@ -664,18 +675,16 @@ width:100px;
 }
 
 .leftNavFooter{
-    bottom: -30px;
-    height: 12%;
-    position: absolute;
-    left: 82px;
-}
 
+}
+#tabs, #tabs-1, .profile{
+    height: 100%;
+}
 .mainBlockProfile  .ui-tabs-panel{
     background-color:white !important;
     -webkit-box-shadow: 0 0 3px 0 #888888;
     box-shadow: 0 0 3px 0 #888888;
     -moz-box-shadow: 0 0 3px 0 #888888;
-    min-height: 500px;
 }
 .mainBlockProfile .ui-tabs .ui-tabs-nav{
     padding-left:8px !important;
