@@ -299,6 +299,9 @@ font:15px dosis-semibold-middle;
     background-image: url('../img/design/mainPage/buttons/loginButOver.png')
 }
 /*registration*/
+.regBlock{
+    margin-left:15% !important;
+}
 #registrationFormHolder{
 
     float:left;
