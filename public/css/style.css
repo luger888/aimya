@@ -14,18 +14,17 @@
 }
 /*global*/
 html{
-    height: 100%;
+
     margin: 0;
     padding: 0;
 }
 body{
     font-family: helvetica;
     min-width: 1200px;
-    /*background: url('../img/design/mainPage/background.png') no-repeat center top;*/
-    /*background-color: #d5e4ad;*/
-    background-color: #f7f8f8;
+    background: url('../img/design/mainPage/background.png') no-repeat center top;
+    background-color: #d5e4ad;
     color:#446158;
-    height: 100%;
+
     margin: 0;
     padding: 0;
 }
