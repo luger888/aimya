@@ -35,6 +35,21 @@ class Application_Form_Profile extends Zend_Form
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 
+        $gender = new Zend_Form_Element_Radio('gender');
+        $gender ->setAttrib('class', 'regRadio')
+            ->setAttrib('id', 'gender')
+            ->addFilters($this->basicFilters)
+            ->setSeparator('');
+        $gender->addMultiOptions(array(
+
+                'male' => 'Male',
+                'female' => 'Female'
+
+            )
+        )
+            ->setValue('male')
+         ->setDecorators($this->basicDecorators);
+
         $birthday = new Zend_Form_Element_Text('birthday');
         $birthday ->setAttrib('id', 'birthday')
             ->addFilters($this->basicFilters)
@@ -79,7 +94,7 @@ class Application_Form_Profile extends Zend_Form
             ->setDecorators($this->basicDecorators);
 
 
-        $this->addElements(array($avatar, $firstName, $lastName, $birthday, $language, $email, $timeZone, $username, $intro, $submit));
+        $this->addElements(array($avatar, $firstName, $lastName, $gender, $birthday, $language, $email, $timeZone, $username, $intro, $submit));
 
     }
 }
