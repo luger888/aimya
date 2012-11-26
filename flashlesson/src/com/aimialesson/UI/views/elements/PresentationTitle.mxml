@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" gap="15" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:elements="com.aimialesson.UI.skins.elements.*">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:RichText text="LESSON PRESENTATION:" styleName="HeaderStyle" />
+	<s:RichText id="presentationTitle" text="Latin professor at Hampden-Sydney in Virginia to popular belie" styleName="DescriptionStyle" width="100%" />
+	<s:Group width="100%">
+		<elements:EnterBtnSkin id="enterBtn" right="0" />
+	</s:Group>
+</s:VGroup>

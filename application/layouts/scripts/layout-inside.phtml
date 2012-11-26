@@ -22,31 +22,8 @@
     <?php echo $this->headLink();?>
 </head>
 <body>
-<!-- HEADER & NAVIGATION -->
-<div class="row-fluid headerInside">
-    <div class="span2 offset1">
-        <div class="logo">
-            <a href="index"><div class = "smallLogoImg"></div></a>
-        </div>
-    </div>
 
 
-    <!-- /span3 -->
-
-    <div class="span9" >
-        <nav id="globalNav">
-            <ul>
-                <li><a href="#">HOME</a></li>
-                <li><a href="#">PRIVACY POLICY</a></li>
-                <li><a href="#">ABOUT AIMYA</a></li>
-                <li><a href="#">HELP</a></li>
-                <li><a href="/user/logout/">SIGN OUT</a></li>
-
-            </ul>
-        </nav>
-    </div>
-
-</div>
 
 
 <?php
@@ -67,36 +44,64 @@ if (Zend_Registry::isRegistered('username')) {
     Zend_Registry::set('username', $username);
 }
 ?>
-<div class ="fill">
-    <div class="messages">
-        <?php echo $this->flashMessages();?>
-    </div>
-    <div class="accountWrapper row-fluid no-space">
 
-        <div class="leftBlockProfile span2">
-            <div class ="profileTab">
-                <h3> <?php echo $username;?></h3>
-                <h5> <?php echo $role;?></h5>
-                <div class="leftNavPhoto"><img src="<?php echo $avatarPath;?>"><br></div>
-                No rate
-                <div class="leftNavigation">
-                    <?php
-                    echo $this->navigation()
-                        ->menu()
-                        ->setMaxDepth(0)
-                        ->setUlClass('nav nav-tabs nav-stacked')
-                        ->render(new Aimya_Navigation($this->navigation()->findAllBy('tag', 'leftMenu', true)));
-                    ?>
-                </div>
+    <div class="accountWrapper row-fluid no-space">
+        <div class="fill">
+            <div class="messages">
+                <?php echo $this->flashMessages();?>
             </div>
-            <div class = "leftNavFooter">
-                <br> Copyright 2012 Aimya
-                <br> Created by Svitla.com
+        <!-- HEADER & NAVIGATION -->
+        <div class="row-fluid headerInside">
+            <div class="headerAccount">
+                <div class="logo">
+                    <a href="index">
+                        <div class="smallLogoImg"></div>
+                    </a>
+                </div>
+
+
+                <!-- /span3 -->
+
+                <nav id="globalNav">
+                    <ul>
+                        <li><a href="#">HOME</a></li>
+                        <li><a href="#">PRIVACY POLICY</a></li>
+                        <li><a href="#">ABOUT AIMYA</a></li>
+                        <li><a href="#">HELP</a></li>
+                        <li><a href="/user/logout/">SIGN OUT</a></li>
+
+                    </ul>
+                </nav>
             </div>
         </div>
-        <div class="rightBlockProfile span8">
-            <div class="mainBlockProfile span10">
-                <?php echo $this->layout()->content; ?>
+        <div class="accountContent">
+
+            <div class="leftBlockProfile span2">
+                <div class="profileTab">
+                    <h3> <?php echo $username;?></h3>
+                    <h5> <?php echo $role;?></h5>
+
+                    <div class="leftNavPhoto"><img src="<?php echo $avatarPath;?>"><br></div>
+                    No rate
+                    <div class="leftNavigation">
+                        <?php
+                        echo $this->navigation()
+                            ->menu()
+                            ->setMaxDepth(0)
+                            ->setUlClass('nav nav-tabs nav-stacked')
+                            ->render(new Aimya_Navigation($this->navigation()->findAllBy('tag', 'leftMenu', true)));
+                        ?>
+                    </div>
+                </div>
+<!--                <div class="leftNavFooter">-->
+<!--                    <br> Copyright 2012 Aimya-->
+<!--                    <br> Created by Svitla.com-->
+<!--                </div>-->
+            </div>
+            <div class="rightBlockProfile span8">
+                <div class="mainBlockProfile">
+                    <?php echo $this->layout()->content; ?>
+                </div>
             </div>
         </div>
     </div>

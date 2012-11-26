@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>aimia_lesson</name>
+	<name>flashlesson</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -15,4 +15,11 @@
 		<nature>com.adobe.flexbuilder.project.flexnature</nature>
 		<nature>com.adobe.flexbuilder.project.actionscriptnature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>bin-debug</name>
+			<type>2</type>
+			<location>C:/Program Files/Red5/webapps/root/aimia</location>
+		</link>
+	</linkedResources>
 </projectDescription>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx" >
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("com.aimialesson.UI.views.NotesUI")]
+	</fx:Metadata>
+	<fx:Script>
+		<![CDATA[
+			import com.aimialesson.UI.skins.elements.EnterBtnSkin;
+			import com.aimialesson.UI.skins.elements.NotesEnterNoteContainerSkin;
+		]]>
+	</fx:Script>
+	<fx:Script>
+		<![CDATA[
+			import com.aimialesson.UI.renderers.NoteItemRenderer;
+			import com.aimialesson.UI.skins.elements.NotesMainContainerSkin;
+			import com.aimialesson.model.Notes;
+		]]>
+	</fx:Script>
+	<s:VGroup width="100%" height="100%">
+		<s:RichText text="LESSON NOTES:" fontFamily="HelveticaMd" fontSize="12" fontWeight="normal"  color="#1D3300" />
+		<s:SkinnableContainer  width="100%" height="100%" skinClass="com.aimialesson.UI.skins.elements.NotesMainContainerSkin" backgroundAlpha="100" >
+			<s:List id="notesList" width="100%" height="250" itemRenderer="com.aimialesson.UI.renderers.NoteItemRenderer" dataProvider="{Notes.getInstance().notesAC}" borderColor="#B6B5B5"/>
+			<s:Group width="100%" height="102" >
+				<s:SkinnableContainer   skinClass="com.aimialesson.UI.skins.elements.NotesEnterNoteContainerSkin" left="14" right="18" top="14" bottom="14">
+					<s:TextArea id="messageInput" borderAlpha="0" contentBackgroundAlpha="0" left="7" top="0" bottom="7" right="70" styleName="EnterNoteStyle" focusAlpha="0" focusColor="0xffffff"/>
+					<s:Button id="sendBtn" skinClass="com.aimialesson.UI.skins.elements.EnterBtnSkin" right="10" bottom="7" useHandCursor="true"/>
+				</s:SkinnableContainer>
+			</s:Group>
+		</s:SkinnableContainer>
+	</s:VGroup>
+	
+</s:Skin>

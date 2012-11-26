@@ -15,6 +15,8 @@
 /*global*/
 html{
     height: 100%;
+    margin: 0;
+    padding: 0;
 }
 body{
     font-family: helvetica;
@@ -42,8 +44,17 @@ form{
     height: 100%!important;
     margin: 0 auto -39px!important; /* the bottom margin is the negative value of the footer's height */
 
+
+}
+.mainHeader{
+    width:1135px;
+    margin: 0 auto;
 }
 
+.mainContent{
+    margin: 0 auto;
+    width:1200px;
+}
 
 .footer, .push {
     height: 37px; /* .push must be the same height as .footer */
@@ -56,9 +67,11 @@ form{
     position: relative;
     clear:both;
     display: block;
+    margin: 0 auto;
+    width: 1200px;
 }
 .footer .copyright{
-    margin-left: 143px;
+    margin-left: 111px;
 }
 fieldset .mainText{
     font-size: 12px;
@@ -142,6 +155,7 @@ font:15px dosis-semibold-middle;
 
  .logo {
    display: inline-block;
+   margin-left: 6%;
 }
 .header .logo .bigLogoImg{
     background-image: url('../img/design/mainPage/big_aimya_logo.png');
@@ -152,7 +166,7 @@ font:15px dosis-semibold-middle;
 .headerInside{
     background-image: url('../img/design/mainPage/header.png');
     background-repeat: repeat-x;
-    height:55px;
+
     -moz-box-shadow: 0 0 6px rgba(0,0,0,0.6); /* Для Firefox */
     -webkit-box-shadow: 0 0 6px rgba(0,0,0,0.6); /* Для Safari и Chrome */
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
@@ -163,11 +177,12 @@ font:15px dosis-semibold-middle;
     height: 44px;
     margin-top: 5px;
     width: 144px;
+    margin-left: 15%;
 }
 #globalNav {
     margin-top: 18px;
     float: right;
-    margin-right: 19.5%;
+    margin-right: 1.5%;
     font: 12px dosis-semibold-middle;
     height:5%;
 }
@@ -202,6 +217,8 @@ font:15px dosis-semibold-middle;
 #loginFormHolder{
     margin-top:1%;
     color:white;
+    float: right;
+    margin-right: 12%;
 }
 #loginFormHolder input{
     font-size:12px;
@@ -253,7 +270,7 @@ font:15px dosis-semibold-middle;
 }
 #loginFormHolder label, #loginFormHolder a{
     float:left;
-    margin-right: 93px;
+    margin-right: 89px;
     font-size:10px;
     line-height: 1.9em;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
@@ -285,6 +302,9 @@ font:15px dosis-semibold-middle;
     background-image: url('../img/design/mainPage/buttons/loginButOver.png')
 }
 /*registration*/
+.regBlock{
+    margin-left:15% !important;
+}
 #registrationFormHolder{
 
     float:left;
@@ -521,15 +541,27 @@ width:100px;
 
 /*Account layout*/
 .accountWrapper {
-    height: 100%
+    background-color: #f7f8f8;
+    /*height: 100%;*/
 
 }
 .accountWrapper .leftBlockProfile{
     min-width: 190px;
-    max-width:250px;
+    max-width: 250px;
     background-color: #eae5cf;
-    height: 100%;
+    height: 600px;
 
+}
+
+.headerAccount{
+    width:1135px;
+    margin: 0 auto;
+}
+.accountContent{
+    margin: 0 auto;
+    width:1135px;
+    min-height: 75%;
+    /*height: 100%;*/
 }
 /*Left Navigation Bar */
 
@@ -626,11 +658,10 @@ width:100px;
 
 .mainBlockProfile{
     margin:35px 15px !important;
-    max-width:85% !important;
 }
 .fill{
     background-color: #f7f8f8;
-    height: 100%;
+    /*height: 100%;*/
     -webkit-box-shadow: 0 9px 6px -6px #888888 inset;
     box-shadow:  0 9px 6px -6px #888888 inset;
     -moz-box-shadow: 0 9px 6px -6px #888888 inset;
@@ -741,6 +772,10 @@ width:100px;
     cursor: pointer;
     float: right;
     background: url('../img/design/accountLayout/glyphicons/upload.png') no-repeat;
+    color:#1d3300;
+    font:12px dosis-semibold-middle;
+    padding-left: 17px;
+    line-height: 13px !important;
 }
 .profile input[type='file'] {
     opacity:0;

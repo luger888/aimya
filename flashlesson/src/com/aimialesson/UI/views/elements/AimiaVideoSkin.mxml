@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:elements="com.aimialesson.UI.views.elements.*">
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("com.aimialesson.UI.views.AimiaVideoUI")]
+	</fx:Metadata>
+	
+	<!-- SkinParts
+	name=lamp, type=com.aimialesson.UI.views.elements.Lamp, required=true
+	name=userRole, type=spark.components.RichText, required=true
+	name=videoContainter, type=mx.core.UIComponent, required=true
+	name=userName, type=spark.components.RichText, required=true
+	-->
+	<s:VGroup width="100%" gap="5">
+		<s:HGroup gap="10" >
+			<s:RichText id="userNameField" text="{hostComponent.userName}" styleName="NameStyle" width="100"/>
+			<elements:Lamp online="{hostComponent.userOnline}" id="lamp" />
+		</s:HGroup>
+		<s:RichText id="userRoleField" text="{hostComponent.userRole}" styleName="RoleStyle"/>
+		<s:Group width="{bg.width}" height="{bg.height}">
+			<s:BitmapImage id="bg" source="@Embed('flashassets/video_background.png')" />
+			<mx:UIComponent id="videoContainter"  left="8" right="8" top="8" bottom="8"/>
+		</s:Group>
+		
+	</s:VGroup>
+</s:Skin>
