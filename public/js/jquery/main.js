@@ -78,7 +78,7 @@ $(document).ready(function() {
                 }
             });
 
-        stickyTab = $.cookies.get( cookieName );
+        //stickyTab = $.cookies.get( cookieName );
         if( ! isNaN( stickyTab )  )
         {
             $tabs.tabs( 'select', stickyTab );
