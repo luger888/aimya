@@ -88,9 +88,8 @@ class Application_Form_Profile extends Zend_Form
             -> setAttrib('rows', '7');
 
         $submit = new Zend_Form_Element_Submit('saveProfile');
-        $submit ->setLabel('Save and continue')
+        $submit ->setLabel('')
              ->setAttrib('id', 'saveProfile')
-             ->setAttrib('class', 'btn')
             ->setDecorators($this->basicDecorators);
 
 

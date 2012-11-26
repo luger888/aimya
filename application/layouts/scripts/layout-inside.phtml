@@ -82,13 +82,15 @@ if (Zend_Registry::isRegistered('username')) {
                     <h5> <?php echo $role;?></h5>
 
                     <div class="leftNavPhoto"><img src="<?php echo $avatarPath;?>"><br></div>
-                    <?php
-                    if($services){
-                        foreach($services as $value){
-                            echo '$'.$value['rate']. '/' .$value['duration'] . ' ' . $value['subcategory'].'<br>';
+                    <div class = "leftServices">
+                        <?php
+                        if($services){
+                            foreach($services as $value){
+                                echo '$ '.$value['rate']. ' / ' .$value['duration'] . ' ' . $value['subcategory'].'<br>';
+                            }
                         }
-                    }
-                    ;?>
+                        ?>
+                    </div>
                     <div class="leftNavigation">
                         <?php
                         echo $this->navigation()

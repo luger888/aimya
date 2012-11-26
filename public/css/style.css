@@ -437,11 +437,17 @@ font:15px dosis-semibold-middle;
 
 
 #intro, #description{
-    width: 800px;
+    width: 788px;
 }
 
 #saveProfile{
-    margin: 0 auto;
+    border:none;
+    width: 46px;
+    height: 13px;
+    position: absolute;
+    right:-32px;
+    margin-top: 10px;
+    background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat;
 }
 
 .service {
@@ -535,26 +541,30 @@ width:100px;
     text-align: center;
 }
 .profileTab{
-    margin-left: 30px;
+    margin-left: 80px;
+    width: 180px;
+    margin-top: 42px;
 }
 .profileTab h3{
-    margin: 35px 0 0 0;
-  font:15px helvetica;
+    bottom: 4px;
+    color: #4A4322;
+    font: 700 15px helvetica !important;
+    letter-spacing: 0.2pt;
     position: relative;
     right: 28px;
-    color:#4a4322;
 }
 .profileTab h5{
+    bottom: 14px;
+    color: #7F7867;
+    font: 11px helvetica;
     margin: 0;
-    font:11px helvetica;
     position: relative;
-    right: 50px;
-    color:#7f7867;
+    right: 58px;
 }
 .leftNavigation
 {
-    margin-left: 15px !important;
-    margin-top: 4%;
+
+    margin-top: 10.5%;
 }
 .leftBlockProfile .leftNavigation a{
     border:none !important;
@@ -563,6 +573,7 @@ width:100px;
     color:#69675c;
     border-radius: 0;
     background:none;
+    padding-left: 20px;
 }
 .leftBlockProfile .leftNavigation  a:hover{
     background:none;
@@ -597,13 +608,22 @@ width:100px;
 .accountWrapper .rightBlockProfile {
     width:926px;
 }
-.leftNavPhoto{
-  background-image: url('../img/design/accountLayout/leftNavPhoto.png');
-    width:160px;
+.profileTab .leftNavPhoto{
+    background-image: url("../img/design/accountLayout/leftNavPhoto.png");
+    bottom: 10px;
     height: 160px;
-    margin: 0 auto;
+    margin: 0 -1px;
+    position: relative;
+    width: 160px;
 }
-
+.profileTab .leftServices{
+    bottom: 8px;
+    color: #554D3A;
+    font: 11px helvetica;
+    left: 5px;
+    position: relative;
+    text-align: left;
+}
 .mainBlockProfile{
     margin:27px 26px !important
 }
@@ -731,7 +751,11 @@ width:100px;
 
 }
 .profile ul li #timezone{
-    width:105px;
+    width:104px;
+    font:12px helvetica;
+
+}
+.profile ul .introduceLabel{
     font:12px helvetica;
 }
 .profile ul li input:not([type="radio"]){
@@ -743,8 +767,14 @@ width:100px;
 }
 
 .profile ul li textarea{
-    width:215px;
+    resize: none;
+    height: 190px !important;
+    font: 12px helvetica;
 
+}
+.profile ul li select{
+    padding:0;
+    height: 24px;
 }
 .profile .profileAvatar {
     cursor: pointer;
