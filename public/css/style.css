@@ -827,3 +827,24 @@ width:100px;
     margin-top: 10px;
     background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat;
 }
+
+/*Users tab*/
+.userRelations {
+    margin-left: 2px;
+
+}
+.userRelations .firstSeparator{
+    background: url('../img/design/accountLayout/1page_middle_separator.png') no-repeat;
+    height: 14px;
+    width: 800px;
+    margin-bottom: 19px;
+}
+
+.userRelations table tr td{
+    padding:6px;
+    height:18px;
+    word-spacing: 2px;
+    width: 105px;
+    font:12px helvetica;
+
+}
