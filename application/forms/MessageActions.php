@@ -16,7 +16,7 @@ class Application_Form_MessageActions extends Zend_Form
                 'default' => '',
                 'reply' => 'Reply',
                 'forward' => 'Forward',
-                'archive' => 'Move To Archived',
+                //'archive' => 'Move To Archived',
                 'delete' => 'Trash'
         ));
 

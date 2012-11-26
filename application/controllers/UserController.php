@@ -3,7 +3,8 @@ class UserController extends Zend_Controller_Action
 {
     public function init()
     {
-        $this   ->_helper->AjaxContext()
+        $this->_helper->layout->setLayout("layoutInside");
+        $this->_helper->AjaxContext()
             ->addActionContext('registration','json')
             ->addActionContext('login','json')
             ->initContext('json');
@@ -11,16 +12,17 @@ class UserController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $userId = $this->getRequest()->getParam('id');
+        $accountId = $this->getRequest()->getParam('id');
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
 
         $userModel = new Application_Model_DbTable_Users();
-
-        $user = $userModel->getFullData($userId);
+        $user = $userModel->getFullData($accountId);
         if($user) {
             $userData = $user;
         } else {
             $this->_helper->redirector('page404','error');
         }
+
         $this->view->userData = $userData;
     }
 
