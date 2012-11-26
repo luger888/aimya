@@ -9,11 +9,20 @@ class Application_Form_Friend extends Zend_Form
     {
         $this->setName('friend');
 
+        $currentUrl = Zend_Controller_Front::getInstance()->getRequest()->getRequestUri();
+
         $friendId = new Zend_Form_Element_Hidden('friend_id');
         $friendId->setAttrib('id', 'friend_id')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators)
-            ->setRequired(false);
+            ->setRequired(true);
+
+        $url = new Zend_Form_Element_Hidden('url');
+        $url->setAttrib('id', 'url')
+            ->addFilters($this->basicFilters)
+            ->setDecorators($this->basicDecorators)
+            ->setValue($currentUrl)
+            ->setRequired(true);
 
         $send = new Zend_Form_Element_Submit('sendbutton');
         $send ->setLabel('Add to my Account')
@@ -21,7 +30,7 @@ class Application_Form_Friend extends Zend_Form
             ->setAttrib('class', 'btn')
             ->setDecorators($this->basicDecorators);
 
-        $this->addElements(array($friendId, $send));
+        $this->addElements(array($friendId, $url, $send));
     }
 }
 

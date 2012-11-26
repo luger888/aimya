@@ -44,6 +44,7 @@ class Application_Model_DbTable_Message extends Application_Model_DbTable_Abstra
             $this->select()
                 ->where('recipient_id=?' , $userId)
                 ->where('recipient_status<?', 2)
+                ->order((array('id DESC')))
                 //->orWhere('recipient_status=?', 0)
         );
         if (!$row) {
@@ -59,6 +60,7 @@ class Application_Model_DbTable_Message extends Application_Model_DbTable_Abstra
             $this->select()
                 ->where('sender_id=?' , $userId)
                 ->where('sender_status<?', 2)
+                ->order((array('id DESC')))
         );
         if (!$row) {
             throw new Exception("There is no element with ID: $userId");
@@ -72,6 +74,7 @@ class Application_Model_DbTable_Message extends Application_Model_DbTable_Abstra
         $row = $this->fetchAll(
             $this->select()
                 ->where('(' . $this->getAdapter()->quoteInto('sender_id=?' , $userId) . ' AND ' . $this->getAdapter()->quoteInto('sender_status=?' , 2) . ') OR (' . $this->getAdapter()->quoteInto('recipient_id=?' , $userId) . ' AND ' . $this->getAdapter()->quoteInto('recipient_status=?' , 2) . ')')
+                ->order((array('id DESC')))
 
         );
         if (!$row) {

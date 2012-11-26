@@ -2,16 +2,16 @@
 <div class="accountWrapper row-fluid no-space">
     <div class="mainBlockProfile span9">
         <?php $userData = $this->userData; ?>
-        <?php $userId = Zend_Auth::getInstance()->getIdentity()->id;?>
         <?php //$sendRequest = $this->send; ?>
         <?php Zend_Debug::dump($userData); ?>
         <?php $friendTable = new Application_Model_DbTable_Friends(); ?>
-        <?php $isFriend = $friendTable->isFriend($userId, $userData['id']); ?>
+        <?php $isFriend = $friendTable->isFriend($userData['id']); ?>
         <?php if(!$isFriend): ?>
             <?php $sendRequestForm = new Application_Form_Friend(); ?>
             <?php $sendRequestForm->friend_id->setValue($userData['id']);?>
             <form action="/friends/send/" method="post"  id="send_request">
                 <?php echo $sendRequestForm->friend_id; ?>
+                <?php echo $sendRequestForm->url;?>
                 <?php echo $sendRequestForm->sendbutton; ?>
             </form>
         <?php endif; ?>
