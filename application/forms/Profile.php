@@ -10,6 +10,7 @@ class Application_Form_Profile extends Zend_Form
         $identity =  Zend_Auth::getInstance()->getStorage()->read();
         $this->setName('profile');
         $this->setEnctype(Zend_Form::ENCTYPE_MULTIPART);
+        $idents = DateTimeZone::listIdentifiers();
 
         $avatar = new Zend_Form_Element_File('avatar');
         $avatar
@@ -78,7 +79,7 @@ class Application_Form_Profile extends Zend_Form
         $timeZone->setAttrib('id', 'timezone')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators)
-            ->addMultiOptions(array('0'   => 'time zone'));
+            ->addMultiOptions($idents);
 
         $intro = new Zend_Form_Element_Textarea('add_info');
         $intro->setLabel('Introduce Yourself')

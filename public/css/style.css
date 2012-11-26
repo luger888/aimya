@@ -760,7 +760,7 @@ width:100px;
     margin-top: 12px;
     position: relative;
     width: 104px;
-    
+
 
 }
 .profile ul .introduceLabel{
@@ -786,7 +786,7 @@ width:100px;
 }
 .profile .profileAvatar {
     cursor: pointer;
-    background: url('../img/design/accountLayout/glyphicons/upload.png') no-repeat;
+
     float: right;
     position: relative;
     bottom:31px;
@@ -802,4 +802,13 @@ width:100px;
 .profileAvaImg img{
     width:127px;
     max-height: 126px;
+}
+/*Availability Tab*/
+.availabilityTab{
+
+ }
+.availabilityTab h5{
+    font:12px helvetica;
+    color:#1d3300;
+    margin: 0 0 21px;
 }

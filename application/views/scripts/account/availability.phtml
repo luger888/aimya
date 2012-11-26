@@ -1,24 +1,25 @@
+<div class = "availabilityTab">
+    <h5> I AM AVAILABLE:</h5>
 
-<h3>Availability</h3>
-    I am available:
 
-<?php
-$daysOfWeek = array('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun');
-?>
-<form method = 'post' name='availability' action='/account/availability/'>
-<table class = 'table table-striped table-condensed'>
     <?php
-    $day = 'checkbox';
-    $availableFrom = 'selectFrom';
-    $availableTo = 'selectTo';
-    foreach($daysOfWeek as $index=>$value){
-        $$availableFrom = 'from'.$daysOfWeek[$index];
-        $$day = 'checkbox'.$daysOfWeek[$index];
-        $$availableTo = 'to'.$daysOfWeek[$index];
-       echo "<tr><td>{$this->availabilityForm->$checkbox}</td><td>{$daysOfWeek[$index]}</td><td>{$this->availabilityForm->$selectFrom}</td> <td>to</td> <td>{$this->availabilityForm->$selectTo}</td></td></tr>";
-    }
+    $daysOfWeek = array('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun');
+    ?>
+    <form method='post' name='availability' action='/account/availability/'>
+        <table class='table table-striped table-condensed'>
+            <?php
+            $day = 'checkbox';
+            $availableFrom = 'selectFrom';
+            $availableTo = 'selectTo';
+            foreach ($daysOfWeek as $index => $value) {
+                $$availableFrom = 'from' . $daysOfWeek[$index];
+                $$day = 'checkbox' . $daysOfWeek[$index];
+                $$availableTo = 'to' . $daysOfWeek[$index];
+                echo "<tr><td>{$this->availabilityForm->$checkbox}</td><td>{$daysOfWeek[$index]}</td><td>{$this->availabilityForm->$selectFrom}</td> <td>to</td> <td>{$this->availabilityForm->$selectTo}</td></td></tr>";
+            }
 
-?>
-</table>
-    <?php  echo $this->availabilityForm->save;?>
-</form>
+            ?>
+        </table>
+        <?php  echo $this->availabilityForm->save;?>
+    </form>
+</div>
