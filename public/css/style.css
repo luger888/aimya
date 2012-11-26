@@ -573,7 +573,6 @@ width:100px;
     color:#69675c;
     border-radius: 0;
     background:none;
-    padding-left: 20px;
 }
 .leftBlockProfile .leftNavigation  a:hover{
     background:none;
@@ -600,9 +599,13 @@ width:100px;
     background: -ms-linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(247, 248, 248) 100%);
     background: linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(247, 248, 248) 100%);
 
+
 }
 .leftBlockProfile .leftNavigation ul  .active a{
     margin-left: 12px;
+    background: url('../img/design/accountLayout/glyphicons/leftNavArrow.png')  3% 50%  no-repeat;
+    color:#4a4322;
+
 }
 
 .accountWrapper .rightBlockProfile {
@@ -786,11 +789,11 @@ width:100px;
     left:28px;
 
 }
-.profileAvatar input {
+/*.profileAvatar input {
     opacity: 0;
     overflow: hidden;
     margin-left: -500px;
-}
+}*/
 .profileAvaImg img{
     width:127px;
     max-height: 126px;
