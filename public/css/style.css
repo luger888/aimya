@@ -573,6 +573,7 @@ width:100px;
     color:#69675c;
     border-radius: 0;
     background:none;
+    padding-left: 21px;
 }
 .leftBlockProfile .leftNavigation  a:hover{
     background:none;
@@ -603,7 +604,7 @@ width:100px;
 }
 .leftBlockProfile .leftNavigation ul  .active a{
     margin-left: 12px;
-    background: url('../img/design/accountLayout/glyphicons/leftNavArrow.png')  3% 50%  no-repeat;
+    background: url('../img/design/accountLayout/glyphicons/leftNavArrow.png')  8% 50%  no-repeat;
     color:#4a4322;
 
 }
@@ -720,8 +721,15 @@ width:100px;
 .profile ul li{
     margin-top: 7px;
 }
+.profile ul li input[type="radio"]{
+    margin: 0 5px 2px 0;
+}
 .profile ul li label{
+    margin-top: 9px;
+    bottom: 5px;
     display: inline-block !important;
+    font: 12px helvetica;
+    position: relative;
 }
 .profile ul li #gender-female{
     margin-left: 22px;
@@ -736,26 +744,23 @@ width:100px;
     word-spacing: 3px;
 }
 .profile ul li #birthday{
-    width:95px;
+    width:82px;
     margin-bottom: 9px;
+    background: url('../img/design/accountLayout/glyphicons/calendar.png')  96% 30% no-repeat;
 }
 
-.profile .add-on{
-    background: url('../img/design/accountLayout/glyphicons/calendar.png') no-repeat;
-    height: 20px;
-    position: relative;
-    right: 29px;
-    top: 3px;
-    width: 19px;
-}
 .input-append{
-   display: inline-block;
+    display: inline-block;
     margin:0;
 
 }
 .profile ul li #timezone{
-    width:104px;
-    font:12px helvetica;
+    bottom: 7px;
+    font: 12px helvetica;
+    margin-top: 12px;
+    position: relative;
+    width: 104px;
+    
 
 }
 .profile ul .introduceLabel{
