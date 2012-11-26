@@ -11,6 +11,7 @@
             <?php $sendRequestForm->friend_id->setValue($userData['id']);?>
             <form action="/friends/send/" method="post"  id="send_request">
                 <?php echo $sendRequestForm->friend_id; ?>
+                <?php echo $sendRequestForm->url;?>
                 <?php echo $sendRequestForm->sendbutton; ?>
             </form>
         <?php endif; ?>
