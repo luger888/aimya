@@ -6,8 +6,9 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
     protected $_name = 'user_relations';
 
 
-    public function isFriend($userId, $friendId)
+    public function isFriend($friendId)
     {
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
 
         $data = $this->select()
             ->from($this->_name)
