@@ -30,6 +30,8 @@ class Application_Model_User
             $lastId = $user->getAdapter()->lastInsertId();
 
             $profile->createProfile($lastId);
+            $onlineUser = new Application_Model_DbTable_OnlineUsers();
+            $onlineUser->createLine($lastId);
             $dbAvailability->createAvailability($lastId);
             $dbNotifications->createNotifications($lastId);
 

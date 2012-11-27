@@ -32,4 +32,15 @@ class Application_Model_DbTable_OnlineUsers extends Application_Model_DbTable_Ab
         $this->update($data, $where);
     }
 
+    public function createLine($id){
+
+        $data = array(
+            'user_id' => (int)$id,
+            'status' => 0,
+        );
+
+        $this->insert($data);
+
+    }
+
 }
