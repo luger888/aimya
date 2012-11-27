@@ -110,8 +110,11 @@ class UserController extends Zend_Controller_Action
 
                     }
                 }else{
-                    $this->view->error = 'Authentication failed.';
+
+                    $this->view->confirmFlash = 'Authentication failed. Login or password are incorrect';
                 }
+            }else{
+                $this->view->errors = $login->getErrors();
             }
         }
     }

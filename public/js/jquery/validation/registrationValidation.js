@@ -42,7 +42,7 @@ $(document).ready(function() {
 
     });
     $("#login").click(function(){
-
+        $('.alertBlock .alert').remove();
         $.post(
 
             "/user/login/0/controller%3D%3Euser/1/action%3D%3Elogin",{
@@ -55,13 +55,18 @@ $(document).ready(function() {
             function(response){
                 for (key in response.errors){
                     $("#" + key +"-login").attr("placeholder", response.errors[key]);
-                    $("#" + key).addClass("input-error");
+                    $("#" + key +"-login").addClass("input-error");
 
                 }
 
                 if(response.status == 1){
 
                     window.location.href = "/account/index/";
+
+                }
+                if(response.confirmFlash){
+
+                    $('.alertBlock').append('<div class="alert">'+response.confirmFlash+'</div>');
 
                 }
 
