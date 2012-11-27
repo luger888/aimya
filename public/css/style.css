@@ -647,7 +647,7 @@ width:100px;
 }
 
 .mainBlockProfile  .ui-tabs-panel{
-    padding: 50px 31px !important;
+    padding: 20px 31px !important;
     background-color:white !important;
     -webkit-box-shadow: 0 0 3px 0 #888888;
     box-shadow: 0 0 3px 0 #888888;
@@ -701,6 +701,12 @@ width:100px;
 /*PROFILE TAB*/
 .profile{
     margin-right:35px;
+}
+.profile .firstSeparator{
+    background: url('../img/design/accountLayout/1page_middle_separator.png') no-repeat;
+    height: 14px;
+    width: 800px;
+    margin-bottom: 16px;
 }
 .profile form{
     position: relative;
@@ -811,4 +817,34 @@ width:100px;
     font:12px helvetica;
     color:#1d3300;
     margin: 0 0 21px;
+}
+.availabilityTab #save{
+    border:none;
+    width: 46px;
+    height: 13px;
+    position: absolute;
+    right: 35px;
+    margin-top: 10px;
+    background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat;
+}
+
+/*Users tab*/
+.userRelations {
+    margin-left: 2px;
+
+}
+.userRelations .firstSeparator{
+    background: url('../img/design/accountLayout/1page_middle_separator.png') no-repeat;
+    height: 14px;
+    width: 800px;
+    margin-bottom: 19px;
+}
+
+.userRelations table tr td{
+    padding:6px;
+    height:18px;
+    word-spacing: 2px;
+    width: 105px;
+    font:12px helvetica;
+
 }

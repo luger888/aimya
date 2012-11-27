@@ -11,6 +11,8 @@ class Application_Form_Profile extends Zend_Form
         $this->setName('profile');
         $this->setEnctype(Zend_Form::ENCTYPE_MULTIPART);
         $idents = DateTimeZone::listIdentifiers();
+        $timeZonesDbModel = new Application_Model_DbTable_TimeZones();
+        $timeZones = $timeZonesDbModel->getTimeZones();//category from db
 
         $avatar = new Zend_Form_Element_File('avatar');
         $avatar
@@ -78,9 +80,10 @@ class Application_Form_Profile extends Zend_Form
         $timeZone = new Zend_Form_Element_Select('timezone');
         $timeZone->setAttrib('id', 'timezone')
             ->addFilters($this->basicFilters)
-            ->setDecorators($this->basicDecorators)
-            ->addMultiOptions($idents);
-
+            ->setDecorators($this->basicDecorators);
+            foreach ($timeZones as  $value) {
+              $timeZone->addMultiOption($value['gmt'], $value['name']);
+            }
         $intro = new Zend_Form_Element_Textarea('add_info');
         $intro->setLabel('Introduce Yourself')
             ->setAttrib('id', 'intro')
