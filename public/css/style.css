@@ -465,11 +465,14 @@ font:15px dosis-semibold-middle;
 
 /*Availability tab*/
 
-.table td{
+.availabilityTab .table td{
     vertical-align: middle;
+    border:none;
 
 }
-
+.availabilityTab .table-striped tbody tr:nth-child(2n+1) td, .availabilityTab .table-striped tbody tr:nth-child(2n+1) th{
+    background-color:  #fbfcfc;
+}
 /* resume*/
 .experienceBody, .educationBody{
     padding: 10px;
@@ -807,24 +810,74 @@ width:100px;
     max-height: 126px;
 }
 /*Availability Tab*/
+
 .availabilityTab{
 
  }
+.availabilityTab .firstSeparator{
+    background: url('../img/design/accountLayout/1page_middle_separator.png') no-repeat;
+    height: 14px;
+    width: 800px;
+    margin-bottom: 12px;
+}
+.availabilityTab table{
+    margin-left: 22px;
+    margin-top: 40px;
+    width:780px;
+}
+.availabilityTab table td{
+    font:12px helvetica;
+    word-spacing: 2px;
+    height: 37px;
+}
+
+/*Availability td widths */
+.availabilityTab table tr td:nth-child(1){width: 37px;}
+.availabilityTab table tr td:nth-child(2){ width:347px;}
+.availabilityTab table tr td:nth-child(3){ width:102px;}
+.availabilityTab table tr td:nth-child(4){ width:36px;}
+.availabilityTab table tr td:nth-child(5){width: 215px;}
+
+.availabilityTab table tr td select{
+    height: 24px;
+    margin: 2px 0 0;
+    padding: 0;
+    width: 68px;
+    font:12px helvetica;
+    text-align: center;
+}
+
 .availabilityTab h5{
     font:12px helvetica;
     color:#1d3300;
-    margin: 0 0 21px;
+    margin:-3px 2px 21px;
+    word-spacing: 2px;
+   display: inline-block;
 }
 .availabilityTab #save{
-    border:none;
+    border:none !important;
     width: 46px;
     height: 13px;
     position: absolute;
-    right: 35px;
-    margin-top: 10px;
+    right: 38px;
+    margin-top: 4px;
     background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat;
 }
-
+.availabilityTab .dateZoneBlock{
+    float: right;
+    font: 11px helvetica;
+    left: 58px;
+    position: relative;
+    top: 5px;
+}
+.availabilityTab .dateZoneBlock span{
+    color: #ABABAB;
+    font: 11px helvetica;
+    position: relative;
+    right: 62px;
+    top: 4px;
+    word-spacing: 2px;
+}
 /*Users tab*/
 
 
@@ -878,6 +931,116 @@ width:100px;
 .userRelations table th, .userRelations table td{
     border:none;
 }
+<<<<<<< HEAD
+
+/**** MESSAGES ****/
+
+/* Clearfix */
+.clearfix {
+ display: inline-block;
+}
+.clearfix:after {
+ clear: both;
+ content: ' ';
+ display: block;
+ font-size: 0;
+ line-height: 0;
+ visibility: hidden;
+ width: 0;
+ height: 0
+}
+.clearfix {
+ display: block;
+}
+.messageHeader{
+}
+/* messageTabs */
+ul.messageTabs{
+	float:left;
+	margin: 0px 0px 0px 22px;
+}
+.nav-tabs.messageTabs li{
+	float:left;
+	background: url('../img/design/messagePages/tab_background.png') repeat-x 0 0;
+	border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+.nav-tabs.messageTabs > li{
+	margin-bottom: 0px;
+}
+.nav-tabs.messageTabs > li > a:hover{
+	border: none;
+}
+.nav-tabs.messageTabs li.active{
+	background: #fff;
+}
+.nav-tabs.messageTabs li, .nav-tabs.messageTabs li a{
+	font-size: 13px;
+	line-height: 37px;
+	color: #333;
+}
+.nav-tabs.messageTabs li a{
+	padding: 0px 13px;
+	margin: 0px;
+	border: none;
+	height: 37px;
+	display: block;
+	background: url('../img/design/messagePages/tab_shadow.png') no-repeat 0 0;
+	text-transform: uppercase;
+}
+/* MessageButtons */
+.messageButtons{
+	background: url('../img/design/messagePages/content_top_shadow.png') no-repeat center top;
+	padding: 34px 0px 21px;
+	border-bottom: solid 1px black;
+	line-height: 13px;
+}
+.msgBtn{
+	padding-left:24px;
+	font-size: 12px;
+	line-height: 13px;
+	text-transform: uppercase;
+	background: url('../img/design/messagePages/archived.png') no-repeat left top;
+	color: #1d3300;
+	display: inline-block;
+}
+.msgBtn.createNew{
+	padding-left: 24px;
+	background: url('../img/design/messagePages/envelope.png') no-repeat left top;
+}
+.msgBtn.archived{
+	padding-left: 19px;
+	background: url('../img/design/messagePages/archived.png') no-repeat left top;
+}
+.msgBtn.trash{
+	padding-left: 18px;
+	background: url('../img/design/messagePages/trash.png') no-repeat left top;
+}
+.msgBtn.delete{
+	padding-left: 18px;
+	background: url('../img/design/messagePages/delete.png') no-repeat left top;
+}
+.msgBtn.inbox{
+	padding-left: 18px;
+	background: url('../img/design/messagePages/inbox.png') no-repeat left top;
+}
+.messageButtons .createNew{
+	float:left;
+}
+.messageButtons .archived, .messageButtons .trash, .messageButtons .delete, .messageButtons .inbox{
+	float:right;
+}
+
+.messageContent{
+	background: #ffffff;
+	width: 805px;
+	margin: 0px 14px;
+	padding: 20px 31px 0px;
+	box-shadow: 0 0 5px #e5e5e5;
+	-moz-box-shadow: 0 0 5px #e5e5e5; /* Firefox */
+    -webkit-box-shadow: 0 0 5px #e5e5e5; /* Safari, Chrome */
+}
+
 .userRelations table tr td{
     padding:6px;
     height:18px;
@@ -892,5 +1055,3 @@ width:100px;
 .userRelations table tr td:nth-child(1){ width:82px;}
 .userRelations table tr td:nth-child(2){ width:110px;}
 .userRelations table tr td:nth-child(4){width: 106px;}
-
-

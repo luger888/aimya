@@ -67,8 +67,8 @@ return array(
                 'resource'      => 'lesson',
                 'privilege'     => 'index',
             ),
-            array(
-                'label' => 'Inbox Messages',
+			array(
+                'label' => 'Inbox',
                 'tag' => 'messageMenu',
                 'route' => 'default',
                 'module' => 'default',
@@ -76,26 +76,6 @@ return array(
                 'action' => 'inbox',
                 'resource'      => 'message',
                 'privilege'     => 'inbox',
-            ),
-            array(
-                'label' => 'Trash Messages',
-                'tag' => 'messageMenu',
-                'route' => 'default',
-                'module' => 'default',
-                'controller' => 'message',
-                'action' => 'trash',
-                'resource'      => 'message',
-                'privilege'     => 'trash',
-            ),
-            array(
-                'label' => 'Sent Messages',
-                'tag' => 'messageMenu',
-                'route' => 'default',
-                'module' => 'default',
-                'controller' => 'message',
-                'action' => 'sent',
-                'resource'      => 'message',
-                'privilege'     => 'sent',
             ),
             /*array(
                 'label' => 'Archived',
@@ -106,7 +86,27 @@ return array(
                 'action' => 'archived',
                 'resource'      => 'message',
                 'privilege'     => 'archived',
-            )*/
+            ),*/
+            array(
+                'label' => 'Sent',
+                'tag' => 'messageMenu',
+                'route' => 'default',
+                'module' => 'default',
+                'controller' => 'message',
+                'action' => 'sent',
+                'resource'      => 'message',
+                'privilege'     => 'sent',
+            ),
+            array(
+                'label' => 'Trash',
+                'tag' => 'messageMenu',
+                'route' => 'default',
+                'module' => 'default',
+                'controller' => 'message',
+                'action' => 'trash',
+                'resource'      => 'message',
+                'privilege'     => 'trash',
+            ),
         )
     )
 );

@@ -70,11 +70,12 @@ class Application_Form_Registration extends Zend_Form
             #->setDecorators($this->basicDecorators);
 
         $password = new Zend_Form_Element_Password('password');
-        $password->setRequired(true)
+        $password -> setRequired(true)
             ->addValidator('stringLength', false, array(6, 200))
             #->setAttrib('placeholder', 'Password')
             ->setAttrib('class', 'clearInput regTextInput')
             ->addFilters($this->basicFilters)
+            ->setErrorMessages(array('Insert your password'))
             #->setDecorators($this->basicDecorators)
             ->setLabel('Password:');
 
