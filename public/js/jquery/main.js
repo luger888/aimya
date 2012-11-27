@@ -111,7 +111,7 @@ $(document).ready(function() {
         }
     }
 
-    jQuery(window).bind("beforeunload", function() {
+    jQuery(window).unload( function () {
         activity = jQuery("#user_activity");
         if(activity.val() == 1) {
             jQuery.ajax({
