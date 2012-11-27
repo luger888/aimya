@@ -22,9 +22,12 @@ $(document).ready(function() {
                     $("#" + key).removeClass("input-error");
                     $("#" + key).removeAttr('style');
                     if(response.errors[key].length>0){
-                        console.log(key);
                         $("#" + key).parent().after('<div class="error">' +response.errors[key] + '</div>');
                         $("#" + key).addClass("input-error");
+                        $("#" + key).change(function() {
+                            $(this).removeClass("input-error");
+                            $(this).parent().next().remove();
+                        });
                     }
 
                 }
@@ -61,6 +64,10 @@ $(document).ready(function() {
                     if(response.errors[key].length>0){
                         $("#" + key +"-login").attr("placeholder", response.errors[key]);
                         $("#" + key +"-login").addClass("input-error");
+                        $("#" + key +"-login").change(function() {
+                            $(this).removeClass("input-error");
+                        });
+
                     }
 
                 }
