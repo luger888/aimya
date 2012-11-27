@@ -1,9 +1,13 @@
 <div class = "availabilityTab">
+    <div class="firstSeparator"></div>
     <h5> I AM AVAILABLE:</h5>
-
-
+    <div class ="dateZoneBlock">
+        You are currently at UTC +9<br>
+        <span>to change time zone go to General tab</span>
+    </div>
     <?php
     $daysOfWeek = array('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun');
+    $daysOfWeekFull = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
     ?>
     <form method='post' name='availability' action='/account/availability/'>
         <table class='table table-striped table-condensed'>
@@ -15,7 +19,7 @@
                 $$availableFrom = 'from' . $daysOfWeek[$index];
                 $$day = 'checkbox' . $daysOfWeek[$index];
                 $$availableTo = 'to' . $daysOfWeek[$index];
-                echo "<tr><td>{$this->availabilityForm->$checkbox}</td><td>{$daysOfWeek[$index]}</td><td>{$this->availabilityForm->$selectFrom}</td> <td>to</td> <td>{$this->availabilityForm->$selectTo}</td></td></tr>";
+                echo "<tr><td>{$this->availabilityForm->$checkbox}</td><td>{$daysOfWeekFull[$index]}</td><td>{$this->availabilityForm->$selectFrom}</td> <td>to</td> <td>{$this->availabilityForm->$selectTo}</td></td></tr>";
             }
 
             ?>

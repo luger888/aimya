@@ -465,11 +465,14 @@ font:15px dosis-semibold-middle;
 
 /*Availability tab*/
 
-.table td{
+.availabilityTab .table td{
     vertical-align: middle;
+    border:none;
 
 }
-
+.availabilityTab .table-striped tbody tr:nth-child(2n+1) td, .availabilityTab .table-striped tbody tr:nth-child(2n+1) th{
+    background-color:  #fbfcfc;
+}
 /* resume*/
 .experienceBody, .educationBody{
     padding: 10px;
@@ -807,24 +810,74 @@ width:100px;
     max-height: 126px;
 }
 /*Availability Tab*/
+
 .availabilityTab{
 
  }
+.availabilityTab .firstSeparator{
+    background: url('../img/design/accountLayout/1page_middle_separator.png') no-repeat;
+    height: 14px;
+    width: 800px;
+    margin-bottom: 12px;
+}
+.availabilityTab table{
+    margin-left: 22px;
+    margin-top: 40px;
+    width:780px;
+}
+.availabilityTab table td{
+    font:12px helvetica;
+    word-spacing: 2px;
+    height: 37px;
+}
+
+/*Availability td widths */
+.availabilityTab table tr td:nth-child(1){width: 37px;}
+.availabilityTab table tr td:nth-child(2){ width:347px;}
+.availabilityTab table tr td:nth-child(3){ width:102px;}
+.availabilityTab table tr td:nth-child(4){ width:36px;}
+.availabilityTab table tr td:nth-child(5){width: 215px;}
+
+.availabilityTab table tr td select{
+    height: 24px;
+    margin: 2px 0 0;
+    padding: 0;
+    width: 68px;
+    font:12px helvetica;
+    text-align: center;
+}
+
 .availabilityTab h5{
     font:12px helvetica;
     color:#1d3300;
-    margin: 0 0 21px;
+    margin:-3px 2px 21px;
+    word-spacing: 2px;
+   display: inline-block;
 }
 .availabilityTab #save{
-    border:none;
+    border:none !important;
     width: 46px;
     height: 13px;
     position: absolute;
-    right: 35px;
-    margin-top: 10px;
+    right: 38px;
+    margin-top: 4px;
     background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat;
 }
-
+.availabilityTab .dateZoneBlock{
+    float: right;
+    font: 11px helvetica;
+    left: 58px;
+    position: relative;
+    top: 5px;
+}
+.availabilityTab .dateZoneBlock span{
+    color: #ABABAB;
+    font: 11px helvetica;
+    position: relative;
+    right: 62px;
+    top: 4px;
+    word-spacing: 2px;
+}
 /*Users tab*/
 
 
