@@ -22,6 +22,7 @@ $(document).ready(function() {
                     $("#" + key).removeClass("input-error");
                     $("#" + key).removeAttr('style');
                     if(response.errors[key].length>0){
+                        console.log(key);
                         $("#" + key).parent().after('<div class="error">' +response.errors[key] + '</div>');
                         $("#" + key).addClass("input-error");
                     }
@@ -43,6 +44,8 @@ $(document).ready(function() {
     });
     $("#login").click(function(){
         $('.alertBlock .alert').remove();
+        $("input").removeClass("input-error");
+
         $.post(
 
             "/user/login/0/controller%3D%3Euser/1/action%3D%3Elogin",{
@@ -54,8 +57,11 @@ $(document).ready(function() {
 
             function(response){
                 for (key in response.errors){
-                    $("#" + key +"-login").attr("placeholder", response.errors[key]);
-                    $("#" + key +"-login").addClass("input-error");
+
+                    if(response.errors[key].length>0){
+                        $("#" + key +"-login").attr("placeholder", response.errors[key]);
+                        $("#" + key +"-login").addClass("input-error");
+                    }
 
                 }
 
