@@ -102,11 +102,10 @@ class UserController extends Zend_Controller_Action
                     $identity = $authAdapter->getResultRowObject();
                     $authStorage = $auth->getStorage();
                     $authStorage->write($identity);
-                    if ($identity->status == '0') {
-                    }else{
-                        $this->view->status = '1';
 
-                    }
+                    $this->view->status = $identity->status;
+
+
                 }else{
 
                     $this->view->confirmFlash = 'Authentication failed. Login or password are incorrect';
@@ -125,7 +124,7 @@ class UserController extends Zend_Controller_Action
             $modelUser = new Application_Model_User();
 
             $formData = $this->getRequest()->getPost();
-
+            $this->view->data = $formData;
             if ($reg->isValid($formData)) {
                 $user = new Application_Model_DbTable_Users();
                 if ($user->checkByMail($formData['email'])) {

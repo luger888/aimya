@@ -69,7 +69,7 @@ $(document).ready(function() {
 
                     window.location.href = "/account/index/";
 
-                }else{
+                }else if(response.status == 0){
                     $('.alertBlock').append('<div class="alert">Account is not confirmed. Please check you email and confirm registration</div>');
                 }
                 if(response.confirmFlash){
