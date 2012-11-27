@@ -49,8 +49,8 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
             'gender' => $array['gender'],
             'status' => $status,
             'confirmation_token' => $token,
-            'created_at' => date('Y-m-d H:m:s'),
-            'updated_at' => date('Y-m-d H:m:s')
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
 
         );
 
@@ -104,7 +104,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
     public function getUserInfo($user_id){
         $data = $this->select()
-            ->from('user', array('id', 'firstname', 'lastname', 'username'))
+            ->from('user', array('id', 'firstname', 'lastname', 'username', 'timezone'))
             ->where('id=?', (int)$user_id);
 
         return $data->query()->fetch();
@@ -117,9 +117,11 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
             'firstname'=> $array['firstname'],
             'lastname' => $array['lastname'],
+            'gender' => $array['gender'],
+            'timezone' => $array['timezone'],
             'email' => $array['email'],
             'username' => $array['username'],
-            'updated_at' => date('Y-m-d H:m:s')
+            'updated_at' => date('Y-m-d H:i:s')
 
         );
         $where = $this->getAdapter()->quoteInto('id = ?', $id);

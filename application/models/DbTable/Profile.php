@@ -11,9 +11,7 @@ class Application_Model_DbTable_Profile extends Application_Model_DbTable_Abstra
             'add_info'=> $array['add_info'],
             'birthday' => $array['birthday'],
             'language' => $array['language'],
-            'timezone' => $array['timezone'],
-            'updated_at' => date('Y-m-d H:m:s')
-
+            'updated_at' => date('Y-m-d H:i:s')
         );
         $where = $this->getAdapter()->quoteInto('user_id = ?', (int)$id);
         $this->update($data, $where);
@@ -47,8 +45,8 @@ class Application_Model_DbTable_Profile extends Application_Model_DbTable_Abstra
         $data = array(
 
             'user_id' => (int)$id,
-            'created_at' => date('Y-m-d H:m:s'),
-            'updated_at' => date('Y-m-d H:m:s')
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
 
         );
 

@@ -102,16 +102,16 @@ class UserController extends Zend_Controller_Action
                     $identity = $authAdapter->getResultRowObject();
                     $authStorage = $auth->getStorage();
                     $authStorage->write($identity);
-                    if ($identity->status == '0') {
-                        $this->_helper->flashMessenger->addMessage(array('failure'=>'Account is not confirmed. Please check you email and confirm registration'));
-                        $this->_helper->redirector('index', 'index');
-                    }else{
-                        $this->view->status = '1';
 
-                    }
+                    $this->view->status = $identity->status;
+
+
                 }else{
-                    $this->view->error = 'Authentication failed.';
+
+                    $this->view->confirmFlash = 'Authentication failed. Login or password are incorrect';
                 }
+            }else{
+                $this->view->errors = $login->getErrors();
             }
         }
     }
@@ -127,8 +127,11 @@ class UserController extends Zend_Controller_Action
             $this->view->data = $formData;
             if ($reg->isValid($formData)) {
                 $user = new Application_Model_DbTable_Users();
-                if ($user->checkByMail($formData['email']) || $user->checkByUsername($formData['username'])) {
-                    $this->view->confirmFlash = 'This email or username already exist';
+                if ($user->checkByMail($formData['email'])) {
+                    $this->view->confirmFlash = 'This email already exist';
+                }
+                else if($user->checkByUsername($formData['username'])){
+                    $this->view->confirmFlash = 'This username already exist';
 
                 } else {
                     $status = $modelUser->addNewUser($formData);
@@ -136,7 +139,7 @@ class UserController extends Zend_Controller_Action
                     if($status) {
                         $this->view->confirmFlash = 'Please confirm your email';
                     } else {
-                        $this->view->confirmFlash = 'Some tricky error';
+                        $this->view->confirmFlash = 'Technical issues with email. Please try again later';
                     }
                 }
             } else {

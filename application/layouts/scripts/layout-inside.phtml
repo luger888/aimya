@@ -23,16 +23,14 @@
 </head>
 <body>
 
-
-
-
 <?php
 //information in left block of account:
-//  firstname, lastname, avatar, member since
+//  firstname, lastname, avatar, member since, services
 $identity = Zend_Auth::getInstance()->getStorage()->read();
 $userModel = new Application_Model_DbTable_Users();
 $profileModel = new Application_Model_Profile();
-
+$servicesModel  = new Application_Model_DbTable_ServiceDetail();
+$services = $servicesModel->getServiceByUser($identity->id);
 $username = $userModel->getUser($identity->id);
 $avatarPath = $profileModel->getAvatarPath($identity->id); //path to avatar
 $role = ($username['role'] == '1' ? 'Student' : 'Instructor');
@@ -46,10 +44,7 @@ if (Zend_Registry::isRegistered('username')) {
 ?>
 
     <div class="accountWrapper row-fluid no-space">
-        <div class="fill">
-            <div class="messages">
-                <?php echo $this->flashMessages();?>
-            </div>
+
         <!-- HEADER & NAVIGATION -->
         <div class="row-fluid headerInside">
             <div class="headerAccount">
@@ -58,7 +53,7 @@ if (Zend_Registry::isRegistered('username')) {
                         <div class="smallLogoImg"></div>
                     </a>
                 </div>
-
+                <input id="user_activity" type="hidden" value="1">
 
                 <!-- /span3 -->
 
@@ -75,14 +70,24 @@ if (Zend_Registry::isRegistered('username')) {
             </div>
         </div>
         <div class="accountContent">
-
+            <div class="messages">
+                <?php echo $this->flashMessages();?>
+            </div>
             <div class="leftBlockProfile span2">
                 <div class="profileTab">
                     <h3> <?php echo $username;?></h3>
                     <h5> <?php echo $role;?></h5>
 
                     <div class="leftNavPhoto"><img src="<?php echo $avatarPath;?>"><br></div>
-                    No rate
+                    <div class = "leftServices">
+                        <?php
+                        if($services){
+                            foreach($services as $value){
+                                echo '$ '.$value['rate']. ' / ' .$value['duration'] . '  ' . $value['subcategory'].'<br>';
+                            }
+                        }
+                        ?>
+                    </div>
                     <div class="leftNavigation">
                         <?php
                         echo $this->navigation()
@@ -104,7 +109,6 @@ if (Zend_Registry::isRegistered('username')) {
                 </div>
             </div>
         </div>
-    </div>
 </div>
 </body>
 </html>

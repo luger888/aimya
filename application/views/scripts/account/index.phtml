@@ -1,25 +1,31 @@
+
 <div id="tabs">
     <ul>
-        <li><a href="#tabs-1">BASIC</a></li>
+        <li><a href="#tabs-1">GENERAL</a></li>
 
         <li><a href="/account/services">SERVICE DETAILS</a></li>
         <li><a href="/account/availability">AVAILABILITY</a></li>
         <li><a href="/account/notifications">NOTIFICATIONS/ACCOUNT SETTINGS</a></li>
         <li><a href="/account/users">USERS</a></li>
-        <li><a href="/account/resume">MY RESUME</a></li>
         <li><a href="/account/metrics">MY METRICS</a></li>
     </ul>
     <div id="tabs-1">
         <div class="profile">
+            <div class="firstSeparator"></div>
             <h3>YOUR BASIC INFORMATION:</h3>
             <form method="post" name="profile" action="" enctype="multipart/form-data">
-                <div class="profileAvatar">UPLOAD <?php echo $this->profile->avatar; ?></div>
+                <div class="profileAvatar"><div class="profileAvaImg"><img src="<?php echo $this->avatarPath;?>" alt="avatar"> </div>
+
+
+                    <?php echo $this->profile->avatar; ?></div>
                 <ul>
 
 
                     <li> <span>First Name:</span>  <?php echo $this->profile->firstname; ?></li>
 
                     <li> <span>Last Name:</span> <?php echo $this->profile->lastname; ?></li>
+
+                    <li> <span>Gender:</span> <?php echo $this->profile->gender; ?></li>
 
                     <li> <span>Login:</span> <?php echo $this->profile->username; ?></li>
 
@@ -30,7 +36,7 @@
                     <li> <span>Email:</span> <?php echo $this->profile->email; ?></li>
 
                     <li> <span>Time Zone:</span><?php echo $this->profile->timezone; ?></li>
-
+                    <li> <div class="introduceLabel">INTRODUCE YOURSELF:</div></li>
                     <li> <?php echo $this->profile->add_info; ?></li>
                 </ul>
 
@@ -50,8 +56,7 @@
     </div>
     <div id="tabs-5">
     </div>
-    <div id="tabs-6">
-    </div>
+
 </div>
 
 

@@ -21,8 +21,7 @@ html{
 body{
     font-family: helvetica;
     min-width: 1200px;
-    background: url('../img/design/mainPage/background.png') no-repeat center top;
-    background-color: #d5e4ad;
+    background-color: #f7f8f8;
     color:#446158;
     height: 100%;
     margin: 0;
@@ -99,39 +98,6 @@ font:15px dosis-semibold-middle;
     text-shadow: 1px 0 1px rgba(255, 255, 255, 1);
 }
 
-/*Inputs*/
-.regTextInput{
-    width:158px;
-    height: 23px !important;
-    border: 1px solid #95a861 !important;
-    border-radius: 0 !important;
-}
-.logTextInput{
-    border-radius: 0 !important;
-    margin-bottom: 0 !important;
-    margin-right: 15px;
-    width: 158px;
-    height: 14px !important;
-}
-
-.regTextInput:focus{
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 10px rgba(254, 255, 255, 1) !important;
-    outline:none;
-    border:1px solid #6E8138 !important;
-}
-.logTextInput:focus{
-    border:1px solid #536e10 !important;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 5px rgba(254, 252, 215, 1) !important;
-}
-.buttonBar{
-    border-top-image: url('../img/design/mainPage/shadow_separator.png');
-
-}
-.buttonBar label{
-    font:13px dosis-semibold-middle;
-    color:white;
-
-}
 /*twitter*/
 .hero-unit{
     padding: 30px 60px;
@@ -140,29 +106,13 @@ font:15px dosis-semibold-middle;
     margin-left: 0;
 }
 
-/*header*/
-#loginFormHolder input {
-    outline:1px #fefcd7;
-}
-.header {
-    background-image: url('../img/design/mainPage/header.png');
-    background-repeat: repeat-x;
-    height:85px;
-    -moz-box-shadow: 0 0 6px rgba(0,0,0,0.6); /* Для Firefox */
-    -webkit-box-shadow: 0 0 6px rgba(0,0,0,0.6); /* Для Safari и Chrome */
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
-}
+
 
  .logo {
    display: inline-block;
-   margin-left: 6%;
+
 }
-.header .logo .bigLogoImg{
-    background-image: url('../img/design/mainPage/big_aimya_logo.png');
-    width: 196px;
-    height: 61px;
-    margin-top: 11px;
-}
+
 .headerInside{
     background-image: url('../img/design/mainPage/header.png');
     background-repeat: repeat-x;
@@ -177,14 +127,14 @@ font:15px dosis-semibold-middle;
     height: 44px;
     margin-top: 5px;
     width: 144px;
-    margin-left: 15%;
+    margin-left: 7%;
 }
 #globalNav {
-    margin-top: 18px;
     float: right;
-    margin-right: 1.5%;
     font: 12px dosis-semibold-middle;
-    height:5%;
+    height: 5%;
+    margin-right: 4%;
+    margin-top: 14px;
 }
 #globalNav a{color:#d7e4b9;}
 #globalNav ul {
@@ -194,7 +144,7 @@ font:15px dosis-semibold-middle;
 
 #globalNav ul li{
     display: inline;
-    margin-left: 16px;
+    margin-left: 28px;
     padding-left: 12px;
     background: url('../img/design/mainPage/navSeparator.png') no-repeat 0 0;
 }
@@ -487,11 +437,17 @@ font:15px dosis-semibold-middle;
 
 
 #intro, #description{
-    width: 820px;
+    width: 788px;
 }
 
 #saveProfile{
-    margin: 0 auto;
+    border:none;
+    width: 46px;
+    height: 13px;
+    position: absolute;
+    right:-32px;
+    margin-top: 10px;
+    background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat;
 }
 
 .service {
@@ -509,14 +465,13 @@ font:15px dosis-semibold-middle;
 
 /*Availability tab*/
 
-.table td{
+.availabilityTab .table td{
     vertical-align: middle;
+    border:none;
 
 }
-/*Users tab*/
-
-.userRelations .blockUser, .userRelations .deleteUser{
-    display: inline-block;
+.availabilityTab .table-striped tbody tr:nth-child(2n+1) td, .availabilityTab .table-striped tbody tr:nth-child(2n+1) th{
+    background-color:  #fbfcfc;
 }
 /* resume*/
 .experienceBody, .educationBody{
@@ -542,14 +497,13 @@ width:100px;
 /*Account layout*/
 .accountWrapper {
     background-color: #f7f8f8;
-    /*height: 100%;*/
+    height: 100%;
 
 }
 .accountWrapper .leftBlockProfile{
-    min-width: 190px;
-    max-width: 250px;
+    width:260px;
     background-color: #eae5cf;
-    height: 600px;
+    height: 100%;
 
 }
 
@@ -559,13 +513,14 @@ width:100px;
 }
 .accountContent{
     margin: 0 auto;
-    width:1135px;
-    min-height: 75%;
+    width:1276px;
+    height: 100%;
     /*height: 100%;*/
 }
 /*Left Navigation Bar */
 
 .leftBlockProfile{
+    height: 100%;
     -webkit-box-shadow: -6px 9px 6px -6px #888888 inset;
     box-shadow:  -6px 9px 6px -6px #888888 inset;
     -moz-box-shadow: -6px 9px 6px -6px #888888 inset;
@@ -585,26 +540,30 @@ width:100px;
     text-align: center;
 }
 .profileTab{
-    margin-left: 30px;
+    margin-left: 80px;
+    width: 180px;
+    margin-top: 42px;
 }
 .profileTab h3{
-    margin: 35px 0 0 0;
-  font:15px helvetica;
+    bottom: 4px;
+    color: #4A4322;
+    font: 700 15px helvetica !important;
+    letter-spacing: 0.2pt;
     position: relative;
     right: 28px;
-    color:#4a4322;
 }
 .profileTab h5{
+    bottom: 14px;
+    color: #7F7867;
+    font: 11px helvetica;
     margin: 0;
-    font:11px helvetica;
     position: relative;
-    right: 50px;
-    color:#7f7867;
+    right: 58px;
 }
 .leftNavigation
 {
-    margin-left: 15px !important;
-    margin-top: 4%;
+
+    margin-top: 10.5%;
 }
 .leftBlockProfile .leftNavigation a{
     border:none !important;
@@ -613,6 +572,7 @@ width:100px;
     color:#69675c;
     border-radius: 0;
     background:none;
+    padding-left: 21px;
 }
 .leftBlockProfile .leftNavigation  a:hover{
     background:none;
@@ -639,25 +599,37 @@ width:100px;
     background: -ms-linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(247, 248, 248) 100%);
     background: linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(247, 248, 248) 100%);
 
+
 }
 .leftBlockProfile .leftNavigation ul  .active a{
     margin-left: 12px;
+    background: url('../img/design/accountLayout/glyphicons/leftNavArrow.png')  8% 50%  no-repeat;
+    color:#4a4322;
+
 }
 
 .accountWrapper .rightBlockProfile {
-   max-width:83%;
-    min-width:53%;
-    width:83%;
+    width:926px;
 }
-.leftNavPhoto{
-  background-image: url('../img/design/accountLayout/leftNavPhoto.png');
-    width:160px;
+.profileTab .leftNavPhoto{
+    background-image: url("../img/design/accountLayout/leftNavPhoto.png");
+    bottom: 10px;
     height: 160px;
-    margin: 0 auto;
+    margin: 0 -1px;
+    position: relative;
+    width: 160px;
 }
-
+.profileTab .leftServices{
+    bottom: 8px;
+    color: #554D3A;
+    font: 11px helvetica;
+    left: 5px;
+    position: relative;
+    text-align: left;
+    width:170px;
+}
 .mainBlockProfile{
-    margin:35px 15px !important;
+    margin:27px 26px !important
 }
 .fill{
     background-color: #f7f8f8;
@@ -668,13 +640,14 @@ width:100px;
 }
 
 .leftNavFooter{
-    bottom: -30px;
+    bottom: -93px;
     height: 12%;
-    position: absolute;
-    left: 82px;
+    left: 18px;
+    position: relative;
 }
 
 .mainBlockProfile  .ui-tabs-panel{
+    padding: 20px 31px !important;
     background-color:white !important;
     -webkit-box-shadow: 0 0 3px 0 #888888;
     box-shadow: 0 0 3px 0 #888888;
@@ -687,7 +660,12 @@ width:100px;
     top:1px;
 }
 .mainBlockProfile .ui-tabs .ui-tabs-nav li{
-    font:13px semi-bold-middle;
+    font:13px dosis-semibold-middle !important;
+    height: 36px;
+}
+.mainBlockProfile .ui-tabs .ui-tabs-nav li a{
+    padding: 7px 14px;
+    margin-top:3px;
 }
 
 .mainBlockProfile .ui-tabs .ui-tabs-nav li:not(.ui-state-active){
@@ -721,71 +699,239 @@ width:100px;
 
 
 /*PROFILE TAB*/
+.profile{
+    margin-right:35px;
+}
+.profile .firstSeparator{
+    background: url('../img/design/accountLayout/1page_middle_separator.png') no-repeat;
+    height: 14px;
+    width: 800px;
+    margin-bottom: 16px;
+}
+.profile form{
+    position: relative;
+    top: 1px;
+
+}
 .profile #username{
     margin-bottom:9px;
 }
 .profile h3{
-    font:13px helvetica;
+    font:12px helvetica;
     color:#1d3300;
+    margin: 0 0 21px;
 }
 .profile ul{
     margin:0;
 }
+.profile ul li{
+    margin-top: 7px;
+}
+.profile ul li input[type="radio"]{
+    margin: 0 5px 2px 0;
+}
+.profile ul li label{
+    margin-top: 9px;
+    bottom: 5px;
+    display: inline-block !important;
+    font: 12px helvetica;
+    position: relative;
+}
+.profile ul li #gender-female{
+    margin-left: 22px;
+}
 .profile ul li span{
+    bottom: 5px;
     display: inline-block;
-    width: 100px;
-    font:12px helvetica;
+    font: 12px helvetica;
+    left: 2px;
+    position: relative;
+    width: 93px;
+    word-spacing: 3px;
 }
 .profile ul li #birthday{
-    width:95px;
+    width:82px;
     margin-bottom: 9px;
+    background: url('../img/design/accountLayout/glyphicons/calendar.png')  96% 30% no-repeat;
 }
 
-.profile .add-on{
-    background: url('../img/design/accountLayout/glyphicons/calendar.png') no-repeat;
-    height: 20px;
-    position: relative;
-    right: 29px;
-    top: 3px;
-    width: 19px;
-}
 .input-append{
-   display: inline-block;
+    display: inline-block;
     margin:0;
 
 }
 .profile ul li #timezone{
-    width:105px;
+    bottom: 7px;
+    font: 12px helvetica;
+    margin-top: 12px;
+    position: relative;
+    width: 104px;
+
+
+}
+.profile ul .introduceLabel{
     font:12px helvetica;
 }
-.profile ul li input{
-    width:168px;
-    height: 14px;
-    font:12px helvetica;
-    border-radius: 1px;
-    padding-left:5px;
+.profile ul li input:not([type="radio"]){
+    border-radius: 1px 1px 1px 1px;
+    font: 12px helvetica;
+    height: 12px;
+    padding-left: 5px;
+    width: 166px;
+}
+
+.profile ul li textarea{
+    resize: none;
+    height: 190px !important;
+    font: 12px helvetica;
+
+}
+.profile ul li select{
+    padding:0;
+    height: 24px;
 }
 .profile .profileAvatar {
-    overflow: hidden;
-    width: 65px;
-    height: 20px !important;
     cursor: pointer;
+
     float: right;
-    background: url('../img/design/accountLayout/glyphicons/upload.png') no-repeat;
+    position: relative;
+    bottom:31px;
+    overflow: hidden;
+    left:28px;
+
+}
+/*.profileAvatar input {
+    opacity: 0;
+    overflow: hidden;
+    margin-left: -500px;
+}*/
+.profileAvaImg img{
+    width:127px;
+    max-height: 126px;
+}
+/*Availability Tab*/
+
+.availabilityTab{
+
+ }
+.availabilityTab .firstSeparator{
+    background: url('../img/design/accountLayout/1page_middle_separator.png') no-repeat;
+    height: 14px;
+    width: 800px;
+    margin-bottom: 12px;
+}
+.availabilityTab table{
+    margin-left: 22px;
+    margin-top: 40px;
+    width:780px;
+}
+.availabilityTab table td{
+    font:12px helvetica;
+    word-spacing: 2px;
+    height: 37px;
+}
+
+/*Availability td widths */
+.availabilityTab table tr td:nth-child(1){width: 37px;}
+.availabilityTab table tr td:nth-child(2){ width:347px;}
+.availabilityTab table tr td:nth-child(3){ width:102px;}
+.availabilityTab table tr td:nth-child(4){ width:36px;}
+.availabilityTab table tr td:nth-child(5){width: 215px;}
+
+.availabilityTab table tr td select{
+    height: 24px;
+    margin: 2px 0 0;
+    padding: 0;
+    width: 68px;
+    font:12px helvetica;
+    text-align: center;
+}
+
+.availabilityTab h5{
+    font:12px helvetica;
     color:#1d3300;
-    font:12px dosis-semibold-middle;
-    padding-left: 17px;
-    line-height: 13px !important;
+    margin:-3px 2px 21px;
+    word-spacing: 2px;
+   display: inline-block;
 }
-.profile input[type='file'] {
-    opacity:0;
-    filter:alpha(opacity:0);
-    font-size:199px;
-    cursor:pointer;
-    padding:0;
+.availabilityTab #save{
+    border:none !important;
+    width: 46px;
+    height: 13px;
+    position: absolute;
+    right: 38px;
+    margin-top: 4px;
+    background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat;
+}
+.availabilityTab .dateZoneBlock{
+    float: right;
+    font: 11px helvetica;
+    left: 58px;
+    position: relative;
+    top: 5px;
+}
+.availabilityTab .dateZoneBlock span{
+    color: #ABABAB;
+    font: 11px helvetica;
+    position: relative;
+    right: 62px;
+    top: 4px;
+    word-spacing: 2px;
+}
+/*Users tab*/
+
+
+.userRelations {
+    margin-left: 2px;
+
+}
+.userRelations .firstSeparator{
+    background: url('../img/design/accountLayout/1page_middle_separator.png') no-repeat;
+    height: 14px;
+    width: 800px;
+    margin-bottom: 19px;
+}
+.userRelations .blockUser{
+    background: url('../img/design/accountLayout/glyphicons/block.png') no-repeat;
+    margin-left: 30px;
+}
+.userRelations .deleteUser{
+    background: url('../img/design/accountLayout/glyphicons/delete.png') no-repeat;
+    margin-left: 33px;
+}
+.userRelations .blockUser, .userRelations .deleteUser{
+    display: inline-block;
+    width:55px;
+    height:12px;
+    cursor: pointer;
+}
+.userRelations table{
+    width:799px;
+}
+.userRelations table thead{
+    border:1px solid #dbdbde;
+}
+.userRelations table thead td {
+    background-color: #f3f3f4 !important;
+}
+.userRelations table{
+    border:1px solid #dbdbde;
+}
+.userRelations  table tbody tr{
+     height:35px;
+}
+
+.userRelations table td{
+    border-right:1px solid #dbdbde !important;
+}
+
+.userRelations table tr:nth-child(2n+1) td, .userRelations table tr:nth-child(2n+1) th{
+    background-color: #fbfcfc;
+}
+.userRelations table th, .userRelations table td{
     border:none;
-    margin-left:-450px;
 }
+<<<<<<< HEAD
 
 /**** MESSAGES ****/
 
@@ -894,3 +1040,18 @@ ul.messageTabs{
 	-moz-box-shadow: 0 0 5px #e5e5e5; /* Firefox */
     -webkit-box-shadow: 0 0 5px #e5e5e5; /* Safari, Chrome */
 }
+
+.userRelations table tr td{
+    padding:6px;
+    height:18px;
+    word-spacing: 2px;
+    font:12px helvetica;
+
+
+}
+/*User Relations td widths */
+.userRelations table tr td:last-child{width: 157px;}
+.userRelations table tr td:nth-child(3){ width:126px;}
+.userRelations table tr td:nth-child(1){ width:82px;}
+.userRelations table tr td:nth-child(2){ width:110px;}
+.userRelations table tr td:nth-child(4){width: 106px;}

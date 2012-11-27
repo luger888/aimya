@@ -37,12 +37,15 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         $acl->addResource('message');
         $acl->addResource('resume');
         $acl->addResource('admin');
+        $acl->addResource('friends');
         $acl->addResource('test');
+
         #allow to user
         $acl->allow(self::STUDENT , 'user', array('logout'));
         $acl->allow(self::STUDENT , 'lesson', array('index', 'details', 'join', 'upload'));
-        $acl->allow(self::STUDENT , 'account', array('index', 'features'));
+        $acl->allow(self::STUDENT , 'account', array('index', 'features', 'online', 'offline'));
         $acl->allow(self::STUDENT , 'resume', array('index'));
+        $acl->allow(self::STUDENT , 'friends', array('list', 'send'));
         $acl->allow(self::STUDENT , 'message', array('inbox', 'send', 'sent', 'trash', 'archived'));
         $acl->deny(self::STUDENT , 'user', array('index', 'registration', 'login'));
         $acl->allow(self::TEACHER , 'lesson', array('setup', 'upload'));
