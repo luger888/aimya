@@ -469,11 +469,7 @@ font:15px dosis-semibold-middle;
     vertical-align: middle;
 
 }
-/*Users tab*/
 
-.userRelations .blockUser, .userRelations .deleteUser{
-    display: inline-block;
-}
 /* resume*/
 .experienceBody, .educationBody{
     padding: 10px;
@@ -627,6 +623,7 @@ width:100px;
     left: 5px;
     position: relative;
     text-align: left;
+    width:170px;
 }
 .mainBlockProfile{
     margin:27px 26px !important
@@ -829,6 +826,8 @@ width:100px;
 }
 
 /*Users tab*/
+
+
 .userRelations {
     margin-left: 2px;
 
@@ -839,12 +838,59 @@ width:100px;
     width: 800px;
     margin-bottom: 19px;
 }
+.userRelations .blockUser{
+    background: url('../img/design/accountLayout/glyphicons/block.png') no-repeat;
+    margin-left: 30px;
+}
+.userRelations .deleteUser{
+    background: url('../img/design/accountLayout/glyphicons/delete.png') no-repeat;
+    margin-left: 33px;
+}
+.userRelations .blockUser, .userRelations .deleteUser{
+    display: inline-block;
+    width:55px;
+    height:12px;
+    cursor: pointer;
+}
+.userRelations table{
+    width:799px;
+}
+.userRelations table thead{
+    border:1px solid #dbdbde;
+}
+.userRelations table thead td {
+    background-color: #f3f3f4 !important;
+}
+.userRelations table{
+    border:1px solid #dbdbde;
+}
+.userRelations  table tbody tr{
+     height:35px;
+}
 
+.userRelations table td{
+    border-right:1px solid #dbdbde !important;
+}
+
+.userRelations table tr:nth-child(2n+1) td, .userRelations table tr:nth-child(2n+1) th{
+    background-color: #fbfcfc;
+}
+.userRelations table th, .userRelations table td{
+    border:none;
+}
 .userRelations table tr td{
     padding:6px;
     height:18px;
     word-spacing: 2px;
-    width: 105px;
     font:12px helvetica;
 
+
 }
+/*User Relations td widths */
+.userRelations table tr td:last-child{width: 157px;}
+.userRelations table tr td:nth-child(3){ width:126px;}
+.userRelations table tr td:nth-child(1){ width:82px;}
+.userRelations table tr td:nth-child(2){ width:110px;}
+.userRelations table tr td:nth-child(4){width: 106px;}
+
+
