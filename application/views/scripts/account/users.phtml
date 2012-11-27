@@ -7,7 +7,7 @@
         <td> Last Name </td>
         <td> User Name </td>
         <td> Time Zone </td>
-        <td> Block/Delete </td>
+        <td> Block / Delete </td>
     </tr>
     </thead>
     <tbody>
@@ -18,8 +18,8 @@
         <td>'.$value['firstname'].'</td>
         <td>'.$value['lastname'].'</td>
         <td>'.$value['username'].'</td>
-        <td>UTC '.'timezone'.'</td>
-        <td><div class = "blockUser" onclick ="blockUser(this);return false;">Block</div><div class = "deleteUser" onclick ="deleteUser(this);return false;">Delete</div><input type = "hidden" value = '. $value['id'].'</td>
+        <td>UTC '.$value['timezone'].'</td>
+        <td><div class = "blockUser" onclick ="blockUser(this);return false;"></div><div class = "deleteUser" onclick ="deleteUser(this);return false;"></div><input type = "hidden" value = '. $value['id'].'</td>
     </tr>';
         }
 

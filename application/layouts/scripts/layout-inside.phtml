@@ -47,9 +47,7 @@ if (Zend_Registry::isRegistered('username')) {
 ?>
 
     <div class="accountWrapper row-fluid no-space">
-            <div class="messages">
-                <?php echo $this->flashMessages();?>
-            </div>
+
         <!-- HEADER & NAVIGATION -->
         <div class="row-fluid headerInside">
             <div class="headerAccount">
@@ -73,6 +71,9 @@ if (Zend_Registry::isRegistered('username')) {
                     </ul>
                 </nav>
             </div>
+        </div>
+        <div class="messages">
+            <?php echo $this->flashMessages();?>
         </div>
         <div class="accountContent">
 
