@@ -14,8 +14,8 @@ class Application_Model_DbTable_ServiceDetail extends Application_Model_DbTable_
             'rate' => (int)$array['rate'],
             'duration' => $array['duration'],
             'description' => $array['description'],
-            'created_at' => date('Y-m-d H:m:s'),
-            'updated_at' => date('Y-m-d H:m:s')
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
 
         );
 
@@ -33,7 +33,7 @@ class Application_Model_DbTable_ServiceDetail extends Application_Model_DbTable_
             'rate' => (int)$array['rate'],
             'duration' => $array['duration'],
             'description' => $array['description'],
-            'updated_at' => date('Y-m-d H:m:s')
+            'updated_at' => date('Y-m-d H:i:s')
 
         );
         $where = array(

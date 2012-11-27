@@ -37,7 +37,7 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
                 $where = $this->getAdapter()->quoteInto('id = ?', (int)$isInList['id']);
                 $data = array(
                     'recipient_status' => 1,
-                    'updated_at' => date('Y-m-d H:m:s')
+                    'updated_at' => date('Y-m-d H:i:s')
                 );
                 $status = $this->update($data, $where);
 
@@ -58,8 +58,8 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
                 'friend_id' => $friendId,
                 'sender_status' => 1,
                 'recipient_status' => 0,
-                'created_at' => date('Y-m-d H:m:s'),
-                'updated_at' => date('Y-m-d H:m:s')
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
             );
 
             $status = $this->insert($data);

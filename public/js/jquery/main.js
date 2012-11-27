@@ -96,6 +96,35 @@ $(document).ready(function() {
     });*/
     /*  ACCOUNT SYSTEM   */
 
+    setInterval(imStillAlive, 60000);
+    function imStillAlive() {
+        activity = jQuery("#user_activity");
+        if(activity.val() == 1) {
+            jQuery.ajax({
+                url: "/account/offline",
+                type: "get",
+                success: function(result) {
+                    activity.val(0);
+                }
+            });
+            return false;
+        }
+    }
+
+    jQuery(window).bind("beforeunload", function() {
+        activity = jQuery("#user_activity");
+        if(activity.val() == 1) {
+            jQuery.ajax({
+                url: "/account/offline",
+                type: "get",
+                success: function(result) {
+                    activity.val(0);
+                }
+            });
+            return false;
+        }
+    })
+
 });
 function uploadify(){
     //$(function() {

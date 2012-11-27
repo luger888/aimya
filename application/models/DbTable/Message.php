@@ -13,8 +13,8 @@ class Application_Model_DbTable_Message extends Application_Model_DbTable_Abstra
             'sender_status' => 1,
             'recipient_status' => 0,
             'status' => 0,
-            'created_at' => date('Y-m-d H:m:s'),
-            'updated_at' => date('Y-m-d H:m:s')
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
         );
 
         $insert = $this->insert($data);
@@ -32,7 +32,7 @@ class Application_Model_DbTable_Message extends Application_Model_DbTable_Abstra
         );
         $data = array(
             'recipient_status'=> 1,
-            'updated_at' => date('Y-m-d H:m:s')
+            'updated_at' => date('Y-m-d H:i:s')
         );
         $this->update($data, $where);
     }

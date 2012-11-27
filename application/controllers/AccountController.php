@@ -7,6 +7,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         $this->_helper->layout->setLayout("layoutInside");
         $this->_helper->AjaxContext()
             ->addActionContext('edit', 'json')
+            ->addActionContext('offline', 'json')
             ->initContext('json');
     }
 
@@ -192,6 +193,18 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
             $this->view->featured = $dbUserModel->getLatestFeatured();
         }
 
+    }
+
+    public function offlineAction() {
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+        $onlineUserTable = new Application_Model_DbTable_OnlineUsers();
+        $onlineUserTable->makeOffline($userId);
+    }
+
+    public function onlineAction() {
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+        $onlineUserTable = new Application_Model_DbTable_OnlineUsers();
+        $onlineUserTable->makeOnline($userId);
     }
 
 }

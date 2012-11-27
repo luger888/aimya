@@ -47,9 +47,6 @@ if (Zend_Registry::isRegistered('username')) {
 ?>
 
     <div class="accountWrapper row-fluid no-space">
-            <div class="messages">
-                <?php echo $this->flashMessages();?>
-            </div>
         <!-- HEADER & NAVIGATION -->
         <div class="row-fluid headerInside">
             <div class="headerAccount">
@@ -58,7 +55,7 @@ if (Zend_Registry::isRegistered('username')) {
                         <div class="smallLogoImg"></div>
                     </a>
                 </div>
-
+                <input id="user_activity" type="hidden" value="1">
 
                 <!-- /span3 -->
 
@@ -75,7 +72,9 @@ if (Zend_Registry::isRegistered('username')) {
             </div>
         </div>
         <div class="accountContent">
-
+            <div class="messages">
+                <?php echo $this->flashMessages();?>
+            </div>
             <div class="leftBlockProfile span2">
                 <div class="profileTab">
                     <h3> <?php echo $username;?></h3>
