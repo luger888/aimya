@@ -1,1 +1,1 @@
-Ohana news
+Aimya news
