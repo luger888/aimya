@@ -15,15 +15,11 @@
 	<fx:Declarations>
 		<mx:NumberFormatter id="numberFormatter" />	
 	</fx:Declarations>
-	<s:VGroup maxHeight="600" maxWidth="634"  width="100%" height="100%" gap="20" >
-		<s:Group maxHeight="573" maxWidth="634"  width="100%" height="100%">
-			<mx:ProgressBar id="progressBar" horizontalCenter="0" verticalCenter="0" indeterminate="true" visible="false" />
-			<s:BitmapImage source="@Embed('flashassets/lesson_presentation_background.png')"/>
-		</s:Group>
-		<s:Group width="100%">
-			<s:Label id="message" left="10"/>
-			<s:Button id="uploadBtn" label="Upload file" right="-5" skinClass="com.aimialesson.UI.skins.elements.PresentationUploadBtnSkin" useHandCursor="true"/>
-		</s:Group>		
-	</s:VGroup>
+	<s:Group  width="100%" height="100%">
+		<mx:ProgressBar id="progressBar" horizontalCenter="0" verticalCenter="0" indeterminate="true" visible="false" />
+		<s:BitmapImage id="presantationBG" source="@Embed('flashassets/lesson_presentation_background.png')" left="0" />
+			<!--s:Label id="message" left="10"/-->
+		<s:Button id="uploadBtn" label="Upload file" x="{presantationBG.width - uploadBtn.width}" bottom="{-5 - uploadBtn.height}" skinClass="com.aimialesson.UI.skins.elements.PresentationUploadBtnSkin" useHandCursor="true"/>	
+	</s:Group>
 	
 </s:Skin>

@@ -9,16 +9,12 @@
 	<fx:Script>
 		<![CDATA[
 			import com.aimialesson.UI.skins.elements.PresentationArrowUpBtnSkin;
-		]]>
-	</fx:Script>
-	<fx:Script>
-		<![CDATA[
 			import com.aimialesson.model.Presentation;
 		]]>
 	</fx:Script>
-	<s:Group width="100%" height="100%" >
-		<mx:Image id="currentImage" source="{Presentation.getInstance().currentImageURL}" width="100%" height="100%" maintainAspectRatio="true"/>
-		<s:Button id="previusBtn" label="Previus" skinClass="com.aimialesson.UI.skins.elements.PresentationArrowDownBtnSkin" right="10" bottom="10" useHandCursor="true"/>
-		<s:Button id="nextBtn" label="Next" skinClass="com.aimialesson.UI.skins.elements.PresentationArrowUpBtnSkin" right="10" top="10" useHandCursor="true"/>
-	</s:Group>
+
+	<mx:Image id="currentImage" source="{Presentation.getInstance().currentImageURL}" verticalCenter="0" horizontalCenter="0" maintainAspectRatio="false"/>
+
+	<s:Button id="previusBtn" label="Previus" skinClass="com.aimialesson.UI.skins.elements.PresentationArrowDownBtnSkin" right="10" bottom="10" useHandCursor="true"/>
+	<s:Button id="nextBtn" label="Next" skinClass="com.aimialesson.UI.skins.elements.PresentationArrowUpBtnSkin" right="10" top="10" useHandCursor="true"/>
 </s:Skin>

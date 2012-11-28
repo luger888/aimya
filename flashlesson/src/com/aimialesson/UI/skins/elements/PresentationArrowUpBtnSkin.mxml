@@ -39,6 +39,7 @@
         <s:State name="disabled" />
     </s:states>
     
-  <s:BitmapImage source="@Embed('flashassets/1arrow_presentation.png')"/>
+  	<s:BitmapImage source="@Embed('flashassets/1arrow_presentation.png')" />
+	<s:BitmapImage source="@Embed('flashassets/1arrow_activ_presentation.png')" includeIn="over"/>
     
 </s:SparkSkin>

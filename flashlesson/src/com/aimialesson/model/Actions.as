@@ -11,6 +11,9 @@ package com.aimialesson.model
 		private const PRESENTATION_IMAGES_URL:String = "/lesson/files/";
 		private const GET_IS_ONLINE_URL:String;
 		private const ADD_NOTE_URL:String;
+		private const START_SESSION_URL:String = "/lesson/start/";
+		private const STOP_SESSION_URL:String = "/lesson/stop/";
+		private const RESIZE_URL:String = "/lesson/full/";
 
 		
 		public function Actions()
@@ -38,6 +41,18 @@ package com.aimialesson.model
 		
 		public function get addNoteUrl () : String {
 			return this.domain + ADD_NOTE_URL;
+		}
+		
+		public function get startSessionUrl () : String {
+			return this.domain + START_SESSION_URL;
+		}
+		
+		public function get stopSessionUrl () : String {
+			return this.domain + STOP_SESSION_URL;
+		}
+		
+		public function get resizeUrl () : String {
+			return this.domain + RESIZE_URL;
 		}
 	}
 }

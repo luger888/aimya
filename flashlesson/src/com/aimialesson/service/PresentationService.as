@@ -17,11 +17,7 @@ package com.aimialesson.service
 		{
 			super(target);
 			callUrl = Actions.getInstance().getPresentaionImagesUrl;
-			params = new Object();
 			params.lesson_id = User.getInstance().lesson_id;
-			if (User.getInstance().sessionID){
-				params.PHPSESSID = User.getInstance().sessionID;
-			}
 		}
 		
 		override protected function onSuccess ( result : Object ) : void {

@@ -15,11 +15,11 @@ package com.aimialesson.UI.views
 	[Event (name="moveToRight", type="com.aimialesson.events.PresentationEvent")]
 	public class PresentationUI extends SkinnableComponent
 	{
-		[SkinPart (required="true")]
+		[SkinPart (required="false")]
 		public var previusBtn:Button;
-		[SkinPart (required="true")]
+		[SkinPart (required="false")]
 		public var nextBtn:Button;
-		[SkinPart (required="true")]
+		[SkinPart (required="false")]
 		public var currentImage:Image;
 		
 		public function PresentationUI()
@@ -50,6 +50,23 @@ package com.aimialesson.UI.views
 									break;
 			}
 		}
+		
+		override protected function updateDisplayList ( unscaledWidth : Number, unscaledHeight : Number ) : void {
+			super.updateDisplayList(unscaledWidth, unscaledHeight);
+			if (!currentImage || !currentImage.loaderInfo) return;
+			
+
+			if (unscaledHeight / unscaledWidth > currentImage.loaderInfo.height / currentImage.loaderInfo.width){
+				currentImage.width = this.width - 20;
+				currentImage.height = currentImage.loaderInfo.height * ( ( this.width - 20 ) / currentImage.loaderInfo.width );
+				 
+			} else {
+				currentImage.height = this.height - 20;
+				currentImage.width = currentImage.loaderInfo.width * ( ( this.height - 20 ) / currentImage.loaderInfo.height );
+			}
+		}
+		
+
 		
 		/*public function setCurrentImage ( url : String ) : void {
 			currentImage.source = url;
