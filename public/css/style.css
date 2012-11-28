@@ -936,7 +936,7 @@ width:100px;
 }
 .userRelations .blockUser, .userRelations .deleteUser{
     display: inline-block;
-    width:55px;
+    width:57px;
     height:12px;
     cursor: pointer;
     margin-top: 2px;
