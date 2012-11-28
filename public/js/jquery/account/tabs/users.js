@@ -6,7 +6,22 @@ var removedUser = 3;
 
     function blockUser(e) {
         var id = $(e).nextAll('input[type=hidden]:first').val();
-        var answer = confirm("Block user?");
+        var answer = $(function() {
+            $( "#block-confirm" ).dialog({
+                resizable: false,
+                height:140,
+                modal: true,
+                buttons: {
+                    "Yes": function() {
+                        $( this ).dialog( "close" );
+                    },
+                    No: function() {
+                        $( this ).dialog( "close" );
+                    }
+                }
+            });
+            $('.ui-icon-alert').remove();
+        });
 
         if (answer) {
             $.post(
@@ -23,15 +38,30 @@ var removedUser = 3;
 
     function deleteUser(e) {
         var id = $(e).nextAll('input[type=hidden]:first').val();
-        var answer = confirm("Warning!" +
-            "By deleting User it will be erased" +
-            "from your account permanently!" +
-            "Are you sure you want to proceed?");
+        var answer = $(function() {
+            $( "#delete-confirm" ).dialog({
+                resizable: false,
+                height:140,
+                modal: true,
+                buttons: {
+                    "Yes": function() {
+                        $( this ).dialog( "close" );
+                    },
+                    No: function() {
+                        $( this ).dialog( "close" );
+                    }
+                }
+            });
+            $('.ui-icon-alert').remove();
+        });
 
         if (answer) {
             $.post(
 
-                '/account/edit/0/controller%3D%3Eaccount/1/action%3D%3Eedit', {'updateUserId': id, 'status': removedUser}
+                '/account/edit/0/controller%3D%3Eaccount/1/action%3D%3Eedit', {'updateUserId': id, 'status': removedUser},
+                function(response){
+                    window.location.reload();
+                }
 
             );
 
