@@ -514,7 +514,8 @@ width:100px;
 .accountContent{
     margin: 0 auto;
     width:1276px;
-    height: 100%;
+    min-height: 100%;
+    background: url('../img/design/accountLayout/leftNavBackground.png') repeat-y;
     /*height: 100%;*/
 }
 /*Left Navigation Bar */
@@ -981,6 +982,9 @@ width:100px;
 /**** MESSAGES ****/
 
 /* Clearfix */
+.accountPage{
+
+}
 .clearfix {
  display: inline-block;
 }

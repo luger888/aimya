@@ -22,7 +22,7 @@ var removedUser = 3;
             });
             $('.ui-icon-alert').remove();
         });
-
+alert(answer)
         if (answer) {
             $.post(
 
