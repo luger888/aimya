@@ -20,7 +20,7 @@ html{
 }
 body{
     font-family: helvetica;
-    min-width: 1200px;
+    min-width: 1292px;
     background-color: #f7f8f8;
     color:#446158;
     height: 100%;
@@ -45,6 +45,9 @@ form{
 
 
 }
+.accountWrapper{
+    background: url('../img/design/accountLayout/accountLayoutBackground.png') repeat-y  top center;
+}
 .mainHeader{
     width:1135px;
     margin: 0 auto;
@@ -52,7 +55,7 @@ form{
 
 .mainContent{
     margin: 0 auto;
-    width:1200px;
+    width:1292px;
 }
 
 .footer, .push {
@@ -502,7 +505,6 @@ width:100px;
 }
 .accountWrapper .leftBlockProfile{
     width:260px;
-    background-color: #eae5cf;
     height: 100%;
 
 }
@@ -513,24 +515,22 @@ width:100px;
 }
 .accountContent{
     margin: 0 auto;
-    width:1276px;
+    width:1292px;
     min-height: 100%;
-    background: url('../img/design/accountLayout/leftNavBackground.png') repeat-y;
+
     /*height: 100%;*/
 }
 /*Left Navigation Bar */
 
 .leftBlockProfile{
     height: 100%;
-    -webkit-box-shadow: -6px 9px 6px -6px #888888 inset;
-    box-shadow:  -6px 9px 6px -6px #888888 inset;
-    -moz-box-shadow: -6px 9px 6px -6px #888888 inset;
+
 }
 .leftBlockProfile .leftNavigation ul li:not(.active){
 
-    -webkit-box-shadow: -6px 0 6px -6px #888888 inset;
-    box-shadow:  -6px 0 6px -6px #888888 inset;
-    -moz-box-shadow: -6px 0 6px -6px #888888 inset;
+    -webkit-box-shadow: -5px 0 6px -6px #888888 inset;
+    box-shadow:  -5px 0 6px -6px #888888 inset;
+    -moz-box-shadow: -5px 0 6px -6px #888888 inset;
 }
 .leftBlockProfile img{
     margin-top: 10px;
@@ -585,7 +585,13 @@ width:100px;
 .leftBlockProfile .leftNavigation ul{
     float:right;
     width:175px;
+    position: relative;
+    right:0.3%;
 }
+noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
+    right:0.6%;
+}
+
 .leftBlockProfile .leftNavigation ul li{
     background-color:#f5f2e7;
     border-radius: 4px 0 0 4px;
