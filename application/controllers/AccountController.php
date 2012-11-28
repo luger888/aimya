@@ -81,8 +81,11 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
     public function availabilityAction()
     {
         $this->_helper->layout()->disableLayout();
-        $dbAvailability = new Application_Model_DbTable_Availability();
         $identity = Zend_Auth::getInstance()->getStorage()->read();
+        $dbAvailability = new Application_Model_DbTable_Availability();
+        $dbUser = new Application_Model_DbTable_Users();
+        $this->view->user = $dbUser->getUser($identity->id);
+
         $availabilityForm = new Application_Form_Availability();
         $this->view->availabilityForm = $availabilityForm->populate($dbAvailability->getAvailability($identity->id));
         if ($this->getRequest()->isPost()) {
