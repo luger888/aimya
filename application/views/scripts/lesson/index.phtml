@@ -1,37 +1,32 @@
-<div id="tabs">
-    <ul>
-        <li><a href="#tabs-1">Sheduled</a></li>
-        <?php //if(Zend_Auth::getInstance()->getIdentity()->role == 2):?>
-            <li><a href="#tabs-2">On The Air</a></li>
-        <?php /*elseif(Zend_Auth::getInstance()->getIdentity()->role == 1):?>
-        <li><a href="/lesson/join">On The Air</a></li>
-        <?php endif; */?>
-        <li><a href="/lesson/details">Lesson Details</a></li>
-    </ul>
-    <div id="tabs-1">
-        <?php $users = $this->userList; ?>
-        <form method="POST" id='start_session' action="<?php echo $this->baseLink() . '/lesson/setup/'?>">
-            <table>
-                <?php foreach($users as $user): ?>
-                <?php if($user['id'] != Zend_Auth::getInstance()->getIdentity()->id):?>
-                    <tr>
-                        <td><?php echo $user['username']?></td>
-                        <td><input name="student_id" type="hidden" value="<?php echo $user['id'];?>"></td>
-                        <?php if(Zend_Auth::getInstance()->getIdentity()->role == 2):?>
-                            <td><a href="#" id="<?php echo $user['id'];?>" onclick="startSession(this.id); return false;" id="start_session">Start Session</a></td>
-                        <?php endif;?>
-                    </tr>
-                    <?php endif?>
-                <?php endforeach; ?>
-            </table>
-        </form>
-    </div>
-    <div id="tabs-2">
-        <div id="flash_element">
-            <?php $this->flashObj;?>
-        </div>
-    </div>
+<?php echo $this->partial('partials/lesson.phtml')?>
+<div class= "messageContent">
+    <?php $users = $this->userList; ?>
+
+        <table>
+            <?php foreach($users as $user): ?>
+            <?php if($user['id'] != Zend_Auth::getInstance()->getIdentity()->id):?>
+                <tr>
+                    <td><?php echo $user['username']?></td>
+                    <td>
+                        <form method="POST" id='start_session_<?php echo $user['id'];?>' action="<?php echo $this->baseLink() . '/lesson/setup/'?>">
+                            <input name="student_id" type="hidden" value="<?php echo $user['id'];?>">
+                            <?php if(Zend_Auth::getInstance()->getIdentity()->role == 2):?>
+                                <a href="#" id="<?php echo $user['id'];?>" onclick="$('#start_session_<?php echo $user['id'];?>').submit()">Start Session</a>
+                            <?php endif;?>
+                        </form>
+                    </td>
+                </tr>
+                <?php endif?>
+            <?php endforeach; ?>
+        </table>
+    </form>
 </div>
+<!--<div id="tabs-2">
+    <div id="flash_element">
+        <?php /*$this->flashObj;*/?>
+        onclick="startSession(this.id); return false;"
+    </div>
+</div>-->
 <?php if(Zend_Auth::getInstance()->getIdentity()->role == 2):?>
 <script type="text/javascript">
 
