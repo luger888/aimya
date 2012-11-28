@@ -855,15 +855,31 @@ width:100px;
 .availabilityTab table tr td:nth-child(4){ width:36px;}
 .availabilityTab table tr td:nth-child(5){width: 215px;}
 
-.availabilityTab table tr td select{
+/*.availabilityTab table tr td select{*/
+    /*height: 24px;*/
+    /*margin: 2px 0 0;*/
+    /*padding: 0;*/
+    /*width: 68px;*/
+    /*font:12px helvetica;*/
+    /*text-align: center;*/
+/*}*/
+.styledSelect select {
+    background: none repeat scroll 0 0 transparent;
+    border: 1px solid #CCCCCC;
+    font: 12px helvetica;
     height: 24px;
-    margin: 2px 0 0;
-    padding: 0;
-    width: 68px;
-    font:12px helvetica;
-    text-align: center;
+    padding: 2px 0 0 5px;
+    width: 101px;
 }
 
+.styledSelect {
+    background: url("../img/design/accountLayout/selectArrow.png") no-repeat scroll right center transparent;
+    height: 24px;
+    overflow: hidden;
+    position: relative;
+    top: 2px;
+    width: 70px;
+}
 .availabilityTab h5{
     font:12px helvetica;
     color:#1d3300;
@@ -891,7 +907,7 @@ width:100px;
     color: #ABABAB;
     font: 11px helvetica;
     position: relative;
-    right: 62px;
+    right: 55px;
     top: 4px;
     word-spacing: 2px;
 }
