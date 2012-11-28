@@ -64,8 +64,13 @@ package com.aimialesson.controllers
 		public function onServiceEvent ( event : ServiceEvent ) : void {
 			debug("MainController:onServiceEvent");
 			switch (event.type) {
-				case (ServiceEvent.GET_PRESENTATION_IMAGES_RESULT) : presentationController.setImages(event.value as ArrayCollection);
-																break;
+				case (ServiceEvent.GET_PRESENTATION_IMAGES_RESULT) : 	presentationController.setImages(event.value as ArrayCollection);
+																		break;
+				case (ServiceEvent.SESSION_IS_STARTED_RESULT) : 		Main.getInstance().session_started = true;
+																		break;
+				case (ServiceEvent.SESSION_IS_STOPPED_RESULT) : 		Main.getInstance().session_started = false;
+																		break;
+				case (ServiceEvent.RESIZE_RESULT) :				 		break;
 			}
 		}
 		

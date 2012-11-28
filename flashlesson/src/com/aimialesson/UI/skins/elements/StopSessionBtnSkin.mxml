@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <s:SparkSkin xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" 
-             xmlns:fb="http://ns.adobe.com/flashbuilder/2009" minWidth="21" minHeight="21" alpha.disabled="0.5">
+             xmlns:fb="http://ns.adobe.com/flashbuilder/2009" alpha.disabled="0.5">
     
     <!-- host component -->
     <fx:Metadata>
@@ -38,8 +38,8 @@
         <s:State name="down" />
         <s:State name="disabled" />
     </s:states>
-    
-  	<s:BitmapImage source="@Embed('flashassets/1arrow_presentation.png')" />
-	<s:BitmapImage source="@Embed('flashassets/1arrow_activ_presentation.png')" includeIn="over"/>
+
+	<s:BitmapImage source="@Embed('flashassets/start_session_icon.png')" y="-3"/>
+	<s:Label text="STOP SESSION" x="17" styleName="ButtonLabelStyle" y="-3"/>
     
 </s:SparkSkin>

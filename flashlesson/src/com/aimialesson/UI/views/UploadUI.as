@@ -20,6 +20,8 @@ package com.aimialesson.UI.views
 	import spark.components.Button;
 	import spark.components.Label;
 	import spark.components.supportClasses.SkinnableComponent;
+	import spark.primitives.BitmapImage;
+
 	[Event (name="presentationUploaded", type="com.aimialesson.events.PresentationEvent")]
 	public class UploadUI extends SkinnableComponent
 	{
@@ -27,12 +29,14 @@ package com.aimialesson.UI.views
 		import flash.events.MouseEvent;
 		import flash.events.ProgressEvent;
 		
-		[SkinPart (required="true")]
+		[SkinPart (required="false")]
 		public var uploadBtn:Button;
-		[SkinPart (required="true")]
+		[SkinPart (required="false")]
 		public var message:Label;
 		[SkinPart (required="true")]
 		public var progressBar:ProgressBar;
+		[SkinPart (required="true")]
+		public var presantationBG:BitmapImage;
 		[SkinPart (required="true")]
 		public var numberFormatter:NumberFormatter;
 		private var fileRef:FileReference;
@@ -58,8 +62,27 @@ package com.aimialesson.UI.views
 		override protected function attachSkin():void {
 			super.attachSkin();
 			init();
+			
 		}
 		
+		override protected function updateDisplayList ( unscaledWidth : Number, unscaledHeight : Number ) : void {
+			super.updateDisplayList(unscaledWidth, unscaledHeight);
+			if (!presantationBG) return;
+			if (unscaledHeight / unscaledWidth > presantationBG.sourceHeight / presantationBG.sourceWidth){
+				presantationBG.percentWidth = 100;
+				presantationBG.height = presantationBG.sourceHeight * ( unscaledWidth / presantationBG.sourceWidth );
+			} else {
+				presantationBG.percentHeight = 100;
+				presantationBG.width = presantationBG.sourceWidth * ( unscaledHeight / presantationBG.sourceHeight );
+			}
+		}
+		
+		public function initSize () : void {
+			presantationBG.percentHeight = 0;
+			presantationBG.percentWidth = 0;
+			presantationBG.height = 0;
+			presantationBG.width = 0;
+		}
 		
 		private function init():void {
 			fileRef = new FileReference();
@@ -111,7 +134,7 @@ package com.aimialesson.UI.views
 		private function debug ( str : String ) : void {
 			if (Main.getInstance().debugger != null)
 				Main.getInstance().debugger.text += str + "\n";
-			message.text = str;
+			if (message) message.text = str;
 		}
 	}
 }

@@ -1,6 +1,7 @@
 /* CSS file */
 @namespace s "library://ns.adobe.com/flex/spark";
 @namespace mx "library://ns.adobe.com/flex/mx";
+@namespace views "com.aimialesson.UI.views.*";
 /*
 @font-face {
 	src: url("location") | local("name");
@@ -147,4 +148,23 @@
 	fontWeight: normal;
 	color: #666666;
 	fontSize: 12;
+}
+
+views|NotesUI {
+	skinClass: ClassReference("com.aimialesson.UI.skins.NotesSkin");
+}
+views|HeaderUI {
+	skinClass: ClassReference("com.aimialesson.UI.skins.HeaderSkin");
+}
+views|VideoChatUI {
+	skinClass: ClassReference("com.aimialesson.UI.skins.VideoChatSkin");
+}
+views|TPresentationUI {
+	skinClass: ClassReference("com.aimialesson.UI.skins.TPresentationSkin");
+}
+views|PresentationUI {
+	skinClass: ClassReference("com.aimialesson.UI.skins.PresentationSkin");
+}
+views|UploadUI {
+	skinClass: ClassReference("com.aimialesson.UI.skins.UploadSkin");
 }

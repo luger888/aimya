@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
-			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="600" minHeight="600" xmlns:views="com.aimialesson.UI.views.*"
-			   creationComplete="onInit(event)" xmlns:initcall="services.initcall.*" >
+			   xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:views="com.aimialesson.UI.views.*"
+			   creationComplete="onInit(event)"  >
 	<fx:Script>
 		<![CDATA[
-			import com.adobe.serialization.json.JSON;
 			import com.aimialesson.UI.skins.MainUISkin;
 			import com.aimialesson.controllers.MainController;
 			import com.aimialesson.events.*;
@@ -22,6 +21,13 @@
 			
 			private var mainController:MainController = new MainController();
 			private var seviceMap:ServiceMap = new ServiceMap();
+
+			[Embed(source = "flashassets/fonts/Helvetica/HelveticaNeueLTStd-Md.ttf", fontWeight="Normal", fontName = "HelveticaMd", mimeType="application/x-font-truetype")]
+			private var fontHelveticaMd:Class;
+			
+			[Embed(source = "flashassets/fonts/Dosis/Dosis-SemiBold.ttf", fontWeight="Normal", fontName = "DosisSB", mimeType="application/x-font-truetype")]
+			private var fontDosisSB:Class;
+			import com.aimialesson.model.Presentation;
 			
 			private function onInit ( event : FlexEvent ) : void {
 				mainController.addEventListener(AppEvent.CONNECT_INIT_COMPLETE, connectInitComplete);
@@ -29,8 +35,21 @@
 				mainController.init(mainUI, FlexGlobals.topLevelApplication.parameters);
 				seviceMap.init();
 				seviceMap.addEventListener(ServiceEvent.GET_PRESENTATION_IMAGES_RESULT, mainController.onServiceEvent);
+				seviceMap.addEventListener(ServiceEvent.RESIZE_RESULT, mainController.onServiceEvent);
+				seviceMap.addEventListener(ServiceEvent.SESSION_IS_STARTED_RESULT, mainController.onServiceEvent);
+				seviceMap.addEventListener(ServiceEvent.SESSION_IS_STOPPED_RESULT, mainController.onServiceEvent);
 				UIEventHandling();
+
+				
+//				dispState = stage.displayState;
+				this.currentState = "notFullScreen";
 				debug("app:onInit");
+			}
+			
+			private function toggleFullScreen(event:AppEvent = null):void {
+				debug( "toggleFullScreen" );
+				Main.getInstance().fsMode = !Main.getInstance().fsMode;
+				this.currentState = (this.currentState == "fullScreen") ? "notFullScreen" : "fullScreen";
 			}
 			
 			private function connectInitComplete ( event : AppEvent ) : void {
@@ -46,13 +65,24 @@
 				mainUI.addEventListener(PresentationEvent.PRESENTATION_UPLOADED, seviceMap.onPresentationEvent);
 				mainUI.addEventListener(NotesEvent.ADD_NEW_LINE, mainController.onTextChatEvent);
 				mainUI.addEventListener(NotesEvent.ADD_NEW_LINE, seviceMap.onNotesEvent);
+				mainUI.addEventListener(AppEvent.START_SESSION, seviceMap.onAppEvent);
+				mainUI.addEventListener(AppEvent.STOP_SESSION, seviceMap.onAppEvent);
+				mainUI.addEventListener(AppEvent.CHANGE_SCREEN_STATE, seviceMap.onAppEvent);
+				mainUI.addEventListener(AppEvent.CHANGE_SCREEN_STATE, toggleFullScreen);
 			}
 			
 			private function debug ( str : String ) : void {
 				if (Main.getInstance().debugger != null)
 					Main.getInstance().debugger.text += str + "\n";
 			}
+			
+			
 		]]>
 	</fx:Script>
-	<views:MainUI id="mainUI" skinClass="com.aimialesson.UI.skins.MainUISkin"/>
+	<fx:Style source="lesson.css" />
+	<s:states>
+		<s:State id="notFullScreenState" name="notFullScreen"/>
+		<s:State id="fullScreenState" name="fullScreen" />
+	</s:states>
+	<views:MainUI id="mainUI" skinClass="com.aimialesson.UI.skins.MainUISkin" skinClass.fullScreen="com.aimialesson.UI.skins.MainFSUISkin"/>
 </s:Application>
