@@ -931,6 +931,116 @@ width:100px;
 .userRelations table th, .userRelations table td{
     border:none;
 }
+<<<<<<< HEAD
+
+/**** MESSAGES ****/
+
+/* Clearfix */
+.clearfix {
+ display: inline-block;
+}
+.clearfix:after {
+ clear: both;
+ content: ' ';
+ display: block;
+ font-size: 0;
+ line-height: 0;
+ visibility: hidden;
+ width: 0;
+ height: 0
+}
+.clearfix {
+ display: block;
+}
+.messageHeader{
+}
+/* messageTabs */
+ul.messageTabs{
+	float:left;
+	margin: 0px 0px 0px 22px;
+}
+.nav-tabs.messageTabs li{
+	float:left;
+	background: url('../img/design/messagePages/tab_background.png') repeat-x 0 0;
+	border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+.nav-tabs.messageTabs > li{
+	margin-bottom: 0px;
+}
+.nav-tabs.messageTabs > li > a:hover{
+	border: none;
+}
+.nav-tabs.messageTabs li.active{
+	background: #fff;
+}
+.nav-tabs.messageTabs li, .nav-tabs.messageTabs li a{
+	font-size: 13px;
+	line-height: 37px;
+	color: #333;
+}
+.nav-tabs.messageTabs li a{
+	padding: 0px 13px;
+	margin: 0px;
+	border: none;
+	height: 37px;
+	display: block;
+	background: url('../img/design/messagePages/tab_shadow.png') no-repeat 0 0;
+	text-transform: uppercase;
+}
+/* MessageButtons */
+.messageButtons{
+	background: url('../img/design/messagePages/content_top_shadow.png') no-repeat center top;
+	padding: 34px 0px 21px;
+	border-bottom: solid 1px black;
+	line-height: 13px;
+}
+.msgBtn{
+	padding-left:24px;
+	font-size: 12px;
+	line-height: 13px;
+	text-transform: uppercase;
+	background: url('../img/design/messagePages/archived.png') no-repeat left top;
+	color: #1d3300;
+	display: inline-block;
+}
+.msgBtn.createNew{
+	padding-left: 24px;
+	background: url('../img/design/messagePages/envelope.png') no-repeat left top;
+}
+.msgBtn.archived{
+	padding-left: 19px;
+	background: url('../img/design/messagePages/archived.png') no-repeat left top;
+}
+.msgBtn.trash{
+	padding-left: 18px;
+	background: url('../img/design/messagePages/trash.png') no-repeat left top;
+}
+.msgBtn.delete{
+	padding-left: 18px;
+	background: url('../img/design/messagePages/delete.png') no-repeat left top;
+}
+.msgBtn.inbox{
+	padding-left: 18px;
+	background: url('../img/design/messagePages/inbox.png') no-repeat left top;
+}
+.messageButtons .createNew{
+	float:left;
+}
+.messageButtons .archived, .messageButtons .trash, .messageButtons .delete, .messageButtons .inbox{
+	float:right;
+}
+
+.messageContent{
+	background: #ffffff;
+	width: 805px;
+	margin: 0px 14px;
+	padding: 20px 31px 0px;
+	box-shadow: 0 0 5px #e5e5e5;
+	-moz-box-shadow: 0 0 5px #e5e5e5; /* Firefox */
+    -webkit-box-shadow: 0 0 5px #e5e5e5; /* Safari, Chrome */
+}
+
 .userRelations table tr td{
     padding:6px;
     height:18px;
@@ -945,5 +1055,3 @@ width:100px;
 .userRelations table tr td:nth-child(1){ width:82px;}
 .userRelations table tr td:nth-child(2){ width:110px;}
 .userRelations table tr td:nth-child(4){width: 106px;}
-
-

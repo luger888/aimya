@@ -43,4 +43,19 @@ class Application_Model_DbTable_OnlineUsers extends Application_Model_DbTable_Ab
 
     }
 
+    public function isOnline($userId){
+
+        $data = $this->select()
+            ->from($this->_name)
+            ->where('user_id=?', $userId);
+        $result = $data->query()->fetch();
+
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
 }
