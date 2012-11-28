@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx"
+		xmlns:views="com.aimialesson.UI.views.*"
+		xmlns:elements="com.aimialesson.UI.views.elements.*"  xmlns:elements1="com.aimialesson.UI.skins.elements.*" >
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("com.aimialesson.UI.views.MainUI")]
+	</fx:Metadata>
+	<fx:Script>
+		<![CDATA[
+			import com.aimialesson.UI.skins.elements.MaximizeBtnSkin;
+			import com.aimialesson.model.Main;
+			import com.aimialesson.model.Presentation;
+		]]>
+	</fx:Script>
+	<s:Group width="{hostComponent.stage_width}" height="{hostComponent.stage_height}" luminosityClip="true">
+		<s:BitmapImage id="bgImage" source="@Embed('flashassets/fsbg.jpg')" width="100%" height="100%"/>
+		<!--s:Group width="870" height="1190">
+			<s:BitmapImage source="@Embed('flashassets/t_my_lessons_on_the_air.jpg')" y="-130" x="-287"/>
+		</s:Group-->
+		<s:HGroup paddingTop="30" paddingBottom="30" height="{bgImage.height}" left="55" right="60" >
+			<s:Group width="100%" height="{bgImage.height - 60}"  >
+				<!--s:BitmapImage source="@Embed('flashassets/aimya_logo1.png')" top="8" left="0"/-->
+				<s:VGroup top="22" right="75">
+					<views:MainUIContainer id="remainingTimeContainer" />
+					<s:Button skinClass="com.aimialesson.UI.skins.elements.StartSessionBtnSkin" id="startSessionBtn" right="0" includeInLayout="{!Main.getInstance().session_started}" visible="{!Main.getInstance().session_started}" />
+					<s:Button skinClass="com.aimialesson.UI.skins.elements.StopSessionBtnSkin" id="stopSessionBtn" right="0" includeInLayout="{Main.getInstance().session_started}" visible="{Main.getInstance().session_started}"/>		
+				</s:VGroup>
+				<!--s:VGroup left="0" right="75" top="62" bottom="0"-->
+				<s:VGroup width="100%" height="100%" >
+					<views:MainUIContainer id="videoChatContainer" top="0"/>
+					<views:MainUIContainer id="tPresentationContainer" width="100%" height="100%"/>
+				</s:VGroup>
+			</s:Group>
+			
+			<s:Group id="rightGroup" width="100%" height="{bgImage.height - 60}" >
+				<s:Button skinClass="com.aimialesson.UI.skins.elements.MinimizeBtnSkin" id="goFSBtn" right="0" top="0"/>
+				<s:VGroup id="rightTitleGroup" top="22" left="75" right="0" >
+					<views:MainUIContainer id="onlineStudentContainer"  />
+					<views:MainUIContainer id="presentationTitleContainer" />	
+				</s:VGroup>
+				<views:MainUIContainer id="notesContainer"  bottom="0" left="75" right="0" top="{presentationTitleContainer.y + presentationTitleContainer.height}"/>
+				<!--s:TextArea id="debugger"  width="100%" height="200"/-->
+			</s:Group>				
+		</s:HGroup>
+	</s:Group>
+</s:Skin>

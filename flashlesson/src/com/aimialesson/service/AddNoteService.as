@@ -15,11 +15,7 @@ package com.aimialesson.service
 		{
 			super(target);
 			callUrl = Actions.getInstance().addNoteUrl;
-			params = new Object();
 			params.lesson_id = User.getInstance().lesson_id;
-			if (User.getInstance().sessionID){
-				params.PHPSESSID = User.getInstance().sessionID;
-			}
 		}
 		
 		public function addParams ( value : Object) : void {

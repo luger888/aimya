@@ -16,11 +16,7 @@ package com.aimialesson.service
 		{
 			super(target);
 			callUrl = Actions.getInstance().getIsOnlineUrl;
-			params = new Object();
 			params.user_id = User.getInstance().userID;
-			if (User.getInstance().sessionID){
-				params.PHPSESSID = User.getInstance().sessionID;
-			}
 			isPermanent = true;
 		}
 		

@@ -1,6 +1,6 @@
 package com.aimialesson.service
 {
-	import com.adobe.serialization.json.JSON;
+	//import com.adobe.serialization.json.JSON;
 	import com.aimialesson.events.ServiceEvent;
 	import com.aimialesson.model.Main;
 	import com.aimialesson.model.Media;
@@ -35,6 +35,10 @@ package com.aimialesson.service
 		public function AimiaService(target:IEventDispatcher=null)
 		{
 			super(target);
+			params = new Object();
+			if (User.getInstance().sessionID){
+				params.PHPSESSID = User.getInstance().sessionID;
+			}
 		}
 		
 		public function makeCall():void{
@@ -56,7 +60,7 @@ package com.aimialesson.service
 		protected function aimiaService_resultHandler ( event : ResultEvent ) : void
 		{
 			debug ("getImageService_resultHandler:");
-			var result:Object = JSON.decode(event.result as String);
+			var result:Object = JSON.parse(event.result as String);
 			debug (result.answer);
 			
 			switch (result.answer){

@@ -1,5 +1,6 @@
 package com.aimialesson.UI.views
 {
+	import com.aimialesson.UI.skins.NotesSkin;
 	import com.aimialesson.events.NotesEvent;
 	import com.aimialesson.model.Main;
 	import com.aimialesson.model.User;
@@ -22,14 +23,24 @@ package com.aimialesson.UI.views
 		[SkinPart (required="true")]
 		public var sendBtn:Button;
 		
-//		private var user:User;
-		
+		private static var instance:NotesUI;
 		public function NotesUI()
 		{
 			super();
+			//setStyle("skinClass", NotesSkin);
 		}
+		
+		public static function getInstance():NotesUI{
+			trace("getInstance:" + instance);
+			if (instance == null){
+				instance = new NotesUI();
+			}
+			return instance;
+		}
+		
 		override protected function partAdded(partName:String, instance:Object):void
 		{
+			trace("NotesUI:partAdded:" + instance);
 			if (instance == notesList) {
 	//			user = User.getInstance();
 				//initChat();
@@ -67,3 +78,4 @@ package com.aimialesson.UI.views
 		}
 	}
 }
+class SingletonEnforcer{}

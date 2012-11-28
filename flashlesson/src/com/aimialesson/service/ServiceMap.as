@@ -1,5 +1,6 @@
 package com.aimialesson.service
 {
+	import com.aimialesson.events.AppEvent;
 	import com.aimialesson.events.NotesEvent;
 	import com.aimialesson.events.PresentationEvent;
 	import com.aimialesson.events.ServiceEvent;
@@ -16,6 +17,9 @@ package com.aimialesson.service
 		private var userIsOnlineService:UserIsOnlineService;
 		private var partnerIsOnlineService:PartnerIsOnlineService;
 		private var addNoteService:AddNoteService;
+		private var resizeService:ResizeService;
+		private var startSessionService:StartSessionService;
+		private var stopSessionService:StopSessionService;
 		
 		public function ServiceMap(target:IEventDispatcher=null)
 		{
@@ -28,6 +32,9 @@ package com.aimialesson.service
 			userIsOnlineService = new UserIsOnlineService();
 			partnerIsOnlineService = new PartnerIsOnlineService();
 			addNoteService = new AddNoteService();
+			resizeService = new ResizeService();
+			startSessionService = new StartSessionService();
+			stopSessionService = new StopSessionService();
 			userIsOnlineService.makeCall();
 			partnerIsOnlineService.makeCall();
 		}
@@ -44,6 +51,19 @@ package com.aimialesson.service
 			if (event.type == NotesEvent.ADD_NEW_LINE){
 				addNoteService.addParams(event.value);
 				addNoteService.makeCall();
+			}
+		}
+		
+		public function onAppEvent ( event : AppEvent ) : void {
+			debug ( "ServiceMap : onPresentationEvent : " + event.type );
+			if (event.type == AppEvent.CHANGE_SCREEN_STATE)
+			switch (event.type) {
+				case (AppEvent.CHANGE_SCREEN_STATE):	resizeService.makeCall();
+														break;
+				case (AppEvent.START_SESSION):			startSessionService.makeCall();
+														break;
+				case (AppEvent.STOP_SESSION):			stopSessionService.makeCall();
+														break;
 			}
 		}
 		
