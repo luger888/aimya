@@ -24,6 +24,10 @@ $(document).ready(function() {
                     if(response.errors[key].length>0){
                         $("#" + key).parent().after('<div class="error">' +response.errors[key] + '</div>');
                         $("#" + key).addClass("input-error");
+                        $("#" + key).change(function() {
+                            $(this).removeClass("input-error");
+                            $(this).parent().next().remove();
+                        });
                     }
 
                 }
@@ -42,6 +46,8 @@ $(document).ready(function() {
 
     });
     $("#login").click(function(){
+        $('.alertBlock .alert').remove();
+        $("input").removeClass("input-error");
 
         $.post(
 
@@ -54,14 +60,28 @@ $(document).ready(function() {
 
             function(response){
                 for (key in response.errors){
-                    $("#" + key +"-login").attr("placeholder", response.errors[key]);
-                    $("#" + key).addClass("input-error");
+
+                    if(response.errors[key].length>0){
+                        $("#" + key +"-login").attr("placeholder", response.errors[key]);
+                        $("#" + key +"-login").addClass("input-error");
+                        $("#" + key +"-login").change(function() {
+                            $(this).removeClass("input-error");
+                        });
+
+                    }
 
                 }
 
                 if(response.status == 1){
 
                     window.location.href = "/account/index/";
+
+                }else if(response.status == 0){
+                    $('.alertBlock').append('<div class="alert">Account is not confirmed. Please check you email and confirm registration</div>');
+                }
+                if(response.confirmFlash){
+
+                    $('.alertBlock').append('<div class="alert">'+response.confirmFlash+'</div>');
 
                 }
 

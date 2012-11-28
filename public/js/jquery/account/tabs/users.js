@@ -6,36 +6,68 @@ var removedUser = 3;
 
     function blockUser(e) {
         var id = $(e).nextAll('input[type=hidden]:first').val();
-        var answer = confirm("Block user?");
+        $(function() {
+            $( "#block-confirm" ).dialog({
+                resizable: false,
+                height:140,
+                modal: true,
+                buttons: {
+                    "Yes": function() {
+                        $( this ).dialog( "close" );
+                        $.post(
 
-        if (answer) {
-            $.post(
+                            '/account/edit/0/controller%3D%3Eaccount/1/action%3D%3Eedit', {'updateUserId':id, 'status': blockedUser},
+                            function(response){
+                                window.location.reload();
+                            }
 
-                '/account/edit/0/controller%3D%3Eaccount/1/action%3D%3Eedit', {'updateUserId':id, 'status': blockedUser}
+                        );
+                    },
+                    No: function() {
+                        $( this ).dialog( "close" );
+                    }
+                }
+            });
+            $('.ui-icon-alert').remove();
+        });
 
-            );
 
-        }
+
+
+
 
         return false;
 
     }
 
     function deleteUser(e) {
+
         var id = $(e).nextAll('input[type=hidden]:first').val();
-        var answer = confirm("Warning!" +
-            "By deleting User it will be erased" +
-            "from your account permanently!" +
-            "Are you sure you want to proceed?");
+            $( "#delete-confirm" ).dialog({
+                resizable: false,
+                height:140,
+                modal: true,
+                buttons: {
+                    "Yes": function() {
+                        $( this ).dialog( "close" );
+                        $.post(
 
-        if (answer) {
-            $.post(
+                            '/account/edit/0/controller%3D%3Eaccount/1/action%3D%3Eedit', {'updateUserId': id, 'status': removedUser},
+                            function(response){
+                                window.location.reload();
+                            }
 
-                '/account/edit/0/controller%3D%3Eaccount/1/action%3D%3Eedit', {'updateUserId': id, 'status': removedUser}
+                        );
 
-            );
 
-        }
+                    },
+                    No: function() {
+                        $( this ).dialog( "close" );
+                    }
+                }
+            });
+            $('.ui-icon-alert').remove();
+
 
         return false;
 

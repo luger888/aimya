@@ -160,7 +160,50 @@ class MessageController extends Zend_Controller_Action
 
     public function forwardAction()
     {
-        //$this->_helper->layout()->disableLayout();
+        $this->_helper->layout()->getView()->headTitle('Forward Message');
+        if($this->getRequest()->getParam('message_id')) {
+            $userId = Zend_Auth::getInstance()->getIdentity()->id;
+
+            $form = new Application_Form_Message();
+            $this->view->form = $form;
+
+            $messageTable = new Application_Model_DbTable_Message();
+            $message = $messageTable->getReplyMessage($this->getRequest()->getParam('message_id'), $userId);
+            $userTable = new Application_Model_DbTable_Users();
+            $sender = $userTable->getItem($message['sender_id']);
+
+            $this->view->sender = $sender;
+            $this->view->message = $message;
+
+            if ($this->getRequest()->isPost()) {
+                if ($form->isValid($this->getRequest()->getParams())) {
+                    $data = $this->getRequest()->getParams();
+                    $userTable = new Application_Model_DbTable_Users();
+
+                    $recipient = $userTable->checkByUsername($data['username']);
+
+                    if($recipient) {
+                        $messageTable = new Application_Model_DbTable_Message();
+                        $data['sender_id'] = $userId;
+                        $data['recipient_id'] = $recipient['id'];
+                        $sendStatus = $messageTable->sendMessage($data);
+
+                        if($sendStatus){
+                            $this->_helper->flashMessenger->addMessage(array('success'=>'Message sent'));
+                            $this->_helper->redirector('inbox', 'message');
+                        } else {
+                            $this->_helper->flashMessenger->addMessage(array('failure'=>'Error with sending, please try again later'));
+                        }
+                    } else {
+                        unset($data['username']);
+                        $this->_helper->flashMessenger->addMessage(array('failure'=>'Unknown recipient'));
+                    }
+                }
+            }
+        } else {
+            $this->_helper->flashMessenger->addMessage(array('failure'=>'Some problem, try again later'));
+            $this->_helper->redirector($this->getRequest()->getParam('current_action'), 'message');
+        }
     }
 
     public function deleteAction()

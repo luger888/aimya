@@ -1,0 +1,485 @@
+
+/* FONTS*/
+@font-face {
+    font-family: helvetica;
+    src: url('fonts/Helvetica.ttf');
+}
+@font-face {
+    font-family: dosis-semibold;
+    src: url('fonts/Dosis-Light.ttf');
+}
+@font-face {
+    font-family: dosis-semibold-middle;
+    src: url('fonts/Dosis-SemiBold.ttf');
+}
+/*global*/
+html{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: helvetica;
+    min-width: 1200px;
+    background: url('../img/design/mainPage/background.png') no-repeat center top;
+    background-color: #d5e4ad;
+    color:#446158;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+input{
+    padding:5px !important;
+}
+input:focus{
+    outline: 0;
+}
+form{
+
+    margin-bottom:0;
+}
+#wrapper{
+    min-height: 100%!important;
+    height: auto !important;
+    height: 100%!important;
+    margin: 0 auto -39px!important; /* the bottom margin is the negative value of the footer's height */
+
+
+}
+.mainHeader{
+    width:1135px;
+    margin: 0 auto;
+}
+
+.mainContent{
+    margin: 0 auto;
+    width:1200px;
+}
+
+.footer, .push {
+    height: 37px; /* .push must be the same height as .footer */
+}
+
+.footer {
+    color: #A1B368;
+    font: 10px helvetica;
+    padding: 0;
+    position: relative;
+    clear:both;
+    display: block;
+    margin: 0 auto;
+    width: 1200px;
+}
+.footer .copyright{
+    margin-left: 111px;
+}
+fieldset .mainText{
+    font-size: 12px;
+    line-height: 18px;
+    text-align: justify;
+    width: 400px;
+    color:#2e3911;
+}
+fieldset legend{
+    margin-bottom: 10px;
+    border: none !important;
+}
+
+li{
+    list-style-type: none;
+}
+.layout-body{
+    margin-top:70px;
+}
+
+
+.strictFont{
+    font:15px dosis-semibold-middle;
+    color:#4d8801;
+    text-shadow: 1px 0 1px rgba(255, 255, 255, 1);
+}
+
+/*Inputs*/
+.regTextInput{
+    width:158px;
+    height: 23px !important;
+    border: 1px solid #95a861 !important;
+    border-radius: 0 !important;
+}
+.logTextInput{
+    border-radius: 0 !important;
+    margin-bottom: 0 !important;
+    margin-right: 15px;
+    width: 158px;
+    height: 14px !important;
+}
+
+.regTextInput:focus{
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 10px rgba(254, 255, 255, 1) !important;
+    outline:none;
+    border:1px solid #6E8138 !important;
+}
+.logTextInput:focus{
+    border:1px solid #536e10 !important;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 5px rgba(254, 252, 215, 1) !important;
+}
+.buttonBar{
+    border-top-image: url('../img/design/mainPage/shadow_separator.png');
+
+}
+.buttonBar label{
+    font:13px dosis-semibold-middle;
+    color:white;
+
+}
+/*twitter*/
+.hero-unit{
+    padding: 30px 60px;
+}
+.no-space [class*="span"] {
+    margin-left: 0;
+}
+
+/*header*/
+#loginFormHolder input {
+    outline:1px #fefcd7;
+}
+.header {
+    background-image: url('../img/design/mainPage/header.png');
+    background-repeat: repeat-x;
+    height:85px;
+    -moz-box-shadow: 0 0 6px rgba(0,0,0,0.6); /* Для Firefox */
+    -webkit-box-shadow: 0 0 6px rgba(0,0,0,0.6); /* Для Safari и Chrome */
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+}
+
+.logo {
+    display: inline-block;
+    margin-left: 6%;
+}
+.header .logo .bigLogoImg{
+    background-image: url('../img/design/mainPage/big_aimya_logo.png');
+    width: 196px;
+    height: 61px;
+    margin-top: 11px;
+}
+.headerInside{
+    background-image: url('../img/design/mainPage/header.png');
+    background-repeat: repeat-x;
+
+    -moz-box-shadow: 0 0 6px rgba(0,0,0,0.6); /* Для Firefox */
+    -webkit-box-shadow: 0 0 6px rgba(0,0,0,0.6); /* Для Safari и Chrome */
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+}
+
+.headerInside .logo .smallLogoImg{
+    background-image: url('../img/design/mainPage/small_aimya_logo.png');
+    height: 44px;
+    margin-top: 5px;
+    width: 144px;
+    margin-left: 15%;
+}
+#globalNav {
+    margin-top: 18px;
+    float: right;
+    margin-right: 1.5%;
+    font: 12px dosis-semibold-middle;
+    height:5%;
+}
+#globalNav a{color:#d7e4b9;}
+#globalNav ul {
+    margin: 0;
+    padding: 0;
+}
+
+#globalNav ul li{
+    display: inline;
+    margin-left: 16px;
+    padding-left: 12px;
+    background: url('../img/design/mainPage/navSeparator.png') no-repeat 0 0;
+}
+#globalNav ul li:first-child {
+    background: none;
+}
+.shadowSeparator{
+    background: url('../img/design/mainPage/shadow_separator.png') no-repeat;
+    width:100%;
+    height: 10px;
+    margin-bottom: 15px;
+}
+.galleryMain{
+    background: url('../img/design/mainPage/background_slider.png') no-repeat;
+    width:400px;
+    height:290px;
+    margin-top:25px;
+}
+/*login*/
+#loginFormHolder{
+    margin-top:1%;
+    color:white;
+    float: right;
+    margin-right: 12%;
+}
+#loginFormHolder input{
+    font-size:12px;
+}
+
+#loginFormHolder a{
+    color:white;
+}
+#loginFormHolder  span {
+    color: white;
+    font: 11px Helvetica;
+    position: relative;
+    text-shadow: 1px 1px 1px #4E6C06;
+    top: 3px;
+    width: 206px;
+}
+
+#loginFormHolder input[type="text"], #loginFormHolder input[type="password"]{
+    border: 1px solid #536E10;
+    -moz-transition: none;
+    -webkit-transition: none;
+    -o-transition: none;
+    transition: none;
+}
+
+#loginFormHolder input[type="checkbox"]{
+    float:left;
+    margin: 1px -12px 0 0;
+    position: relative;
+
+    display: block;
+    opacity: 0;
+}
+#loginFormHolder input[type="checkbox"]+label{
+    color:#DEE6BF;
+    font-size:10px;
+    bottom: 1px;
+    padding: 1px 0 0 15px;
+}
+#loginFormHolder .rememberMe{
+    background: url('../img/design/mainPage/keepSignedCheclbox.png') left center no-repeat;
+    float: left;
+    height: 13px;
+    margin: 1px 4px 0 0;
+    width: 12px;
+}
+#loginFormHolder input[type="checkbox"]:checked + .rememberMe{
+    background: url('../img/design/mainPage/keepSignedCheclbox.png') right center no-repeat;
+}
+#loginFormHolder label, #loginFormHolder a{
+    float:left;
+    margin-right: 89px;
+    font-size:10px;
+    line-height: 1.9em;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
+}
+#loginFormHolder label{
+    color:#ACC56B;
+}
+#loginFormHolder a{
+    color:#ACD330;
+}
+
+#loginFormHolder #login{
+
+}
+#loginFormHolder .pass{
+    margin-left: 115px;
+}
+
+.btnLogin{
+    background: url('../img/design/mainPage/buttons/loginBut.png') no-repeat;
+    text-shadow: 2px 1px 0 rgba(44, 61, 00, 0.4);
+    width: 65px !important;
+    height:30px;
+    border: none;
+    color:white;
+    font:12px dosis-semibold;
+}
+.btnLogin:hover{
+    background-image: url('../img/design/mainPage/buttons/loginButOver.png')
+}
+/*registration*/
+.regBlock{
+    margin-left:15% !important;
+}
+#registrationFormHolder{
+
+    float:left;
+    margin-left: 3%;
+}
+.input-error{
+    box-shadow: 0 0 3px #F06062 !important;
+    border: 1px solid #BB3437 !important;
+}
+#registrationFormHolder .error{
+    font: 12px Helvetica;
+    display: block;
+    float: left;
+    position: relative;
+    right: 107px;
+    color:#B0060F;
+    top:10px;
+}
+
+#signUp{
+
+    width: 570px;
+}
+
+#registrationFormHolder .regSelect{
+    width:179px;
+    border: 1px solid #95a861 !important;
+    height: 33px !important;
+    border-radius: 0;
+
+
+}
+#registrationFormHolder dt,#registrationFormHolder dd{
+    float:left;
+
+}
+#registrationFormHolder dt{
+    width:230px;
+}
+#registrationFormHolder dd{
+    position: relative;
+    right: 121px;
+    width: 180px;
+}
+#registrationFormHolder label{
+    width: 109px;
+    font:12px helvetica;
+    margin-top:10px;
+    color:#324503;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.7);
+}
+#registrationFormHolder .buttonBar input[type="radio"]{
+    display: none;
+}
+#registrationFormHolder .buttonBar{
+    margin: 0 0 15px 22px;
+}
+#registrationFormHolder .buttonBar label{
+    word-spacing: 2px;
+    width: 135px !important;
+    height:30px;
+    border: none;
+    font:12px dosis-semibold;
+    text-align: center;
+    display: inline-block;
+
+    margin:0 22px 15px 0;
+    line-height:31px !important;
+
+}
+#registrationFormHolder .buttonBar .checked{
+    background: url('../img/design/mainPage/buttons/teacherBut.png') no-repeat;
+    color:#fff;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.4);
+}
+#registrationFormHolder .buttonBar label:not(.checked){
+    background: url('../img/design/mainPage/buttons/studentBut.png') no-repeat;
+    color:#324a0c;
+    text-shadow: 1px 1px 0 rgba(222,236,182,0.9);
+    cursor: pointer;
+}
+#registrationFormHolder .buttonBar label:not(.checked):hover{
+    background: url('../img/design/mainPage/buttons/teacherButOver.png') no-repeat;
+    color:white;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.6);
+}
+#gender-element label{
+    float: left;
+    height: 19px;
+    line-height: 11px;
+    margin: 14px -1px 0 0;
+    width: 63px;
+}
+#lastname{
+    margin-bottom:5px;
+}
+#registrationFormHolder #gender-element input{
+    margin:0 4px 0 0;
+}
+#registrationFormHolder #gender-label{
+    bottom: 4px;
+    position: relative;
+}
+#registrationFormHolder #gender-element{
+    position: relative;
+    bottom: 5px;
+}
+
+#registrationFormHolder  #gender-element input[type="radio"]{
+    opacity: 0;
+}
+
+#registrationFormHolder #gender-element .checked{
+    background: url('../img/design/mainPage/buttons/genderChecked.png') no-repeat;
+
+}
+#registrationFormHolder #gender-element label:not(.checked){
+    background: url('../img/design/mainPage/buttons/gender.png') no-repeat;
+}
+
+
+.btnSignup{
+    background: url('../img/design/mainPage/buttons/signUpBut.png') no-repeat;
+    width: 85px !important;
+    height:30px;
+    border: none;
+    color:white;
+    font:12px dosis-semibold;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.4);
+}
+.btnSignup:hover{
+    background: url('../img/design/mainPage/buttons/signUpButOver.png') no-repeat;
+}
+.signup-element{
+    margin-left: 205px;
+    margin-top: 12px;
+}
+/*Social buttons*/
+
+.twitterIcon{
+    background-image: url('../img/design/socialButtons/social_icons.png');
+    background-position: 0 0;
+    height:18px;
+    width:18px;
+    left: 25px;
+    position: relative;
+    width: 18px;
+    bottom: 33px;
+}
+.facebookIcon{
+    background-image: url('../img/design/socialButtons/social_icons.png');
+    background-position: 50% 0;
+    height:18px;
+    width:18px;
+    bottom: 51px;
+    position: relative;
+    width: 18px;
+    left: 52px;
+}
+.linkedInIcon{
+    background-image: url('../img/design/socialButtons/social_icons.png');
+    background-position: 100% 0;
+    height:18px;
+    width:18px;
+    left: 79px;
+    position: relative;
+    width: 18px;
+    bottom: 69px;
+}
+.twitterIcon:hover{
+    background-position: 0 100%;
+}
+.facebookIcon:hover{
+    background-position: 50% 100%;
+}
+.linkedInIcon:hover{
+    background-position: 100% 100%;
+}

@@ -10,6 +10,9 @@ class Application_Form_Profile extends Zend_Form
         $identity =  Zend_Auth::getInstance()->getStorage()->read();
         $this->setName('profile');
         $this->setEnctype(Zend_Form::ENCTYPE_MULTIPART);
+        $idents = DateTimeZone::listIdentifiers();
+        $timeZonesDbModel = new Application_Model_DbTable_TimeZones();
+        $timeZones = $timeZonesDbModel->getTimeZones();//category from db
 
         $avatar = new Zend_Form_Element_File('avatar');
         $avatar
@@ -34,6 +37,21 @@ class Application_Form_Profile extends Zend_Form
             ->setAttrib('id', 'lastname')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
+
+        $gender = new Zend_Form_Element_Radio('gender');
+        $gender ->setAttrib('class', 'regRadio')
+            ->setAttrib('id', 'gender')
+            ->addFilters($this->basicFilters)
+            ->setSeparator('');
+        $gender->addMultiOptions(array(
+
+                'male' => 'Male',
+                'female' => 'Female'
+
+            )
+        )
+            ->setValue('male')
+         ->setDecorators($this->basicDecorators);
 
         $birthday = new Zend_Form_Element_Text('birthday');
         $birthday ->setAttrib('id', 'birthday')
@@ -62,9 +80,10 @@ class Application_Form_Profile extends Zend_Form
         $timeZone = new Zend_Form_Element_Select('timezone');
         $timeZone->setAttrib('id', 'timezone')
             ->addFilters($this->basicFilters)
-            ->setDecorators($this->basicDecorators)
-            ->addMultiOptions(array('0'   => 'time zone'));
-
+            ->setDecorators($this->basicDecorators);
+            foreach ($timeZones as  $value) {
+              $timeZone->addMultiOption($value['gmt'], $value['name']);
+            }
         $intro = new Zend_Form_Element_Textarea('add_info');
         $intro->setLabel('Introduce Yourself')
             ->setAttrib('id', 'intro')
@@ -73,13 +92,12 @@ class Application_Form_Profile extends Zend_Form
             -> setAttrib('rows', '7');
 
         $submit = new Zend_Form_Element_Submit('saveProfile');
-        $submit ->setLabel('Save and continue')
+        $submit ->setLabel('')
              ->setAttrib('id', 'saveProfile')
-             ->setAttrib('class', 'btn')
             ->setDecorators($this->basicDecorators);
 
 
-        $this->addElements(array($avatar, $firstName, $lastName, $birthday, $language, $email, $timeZone, $username, $intro, $submit));
+        $this->addElements(array($avatar, $firstName, $lastName, $gender, $birthday, $language, $email, $timeZone, $username, $intro, $submit));
 
     }
 }

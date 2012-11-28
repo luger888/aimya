@@ -13,8 +13,8 @@ class Application_Model_DbTable_Cms extends Application_Model_DbTable_Abstract
             'name' => $name,
             'uri' => preg_replace('# #' , '_' , trim($uri)),
             'content' => $wysiwyg,
-            'created_at' => date('Y-m-d H:m:s'),
-            'updated_at' => date('Y-m-d H:m:s')
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
 
         );
 

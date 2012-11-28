@@ -3,7 +3,8 @@ class UserController extends Zend_Controller_Action
 {
     public function init()
     {
-        $this   ->_helper->AjaxContext()
+        $this->_helper->layout->setLayout("layoutInside");
+        $this->_helper->AjaxContext()
             ->addActionContext('registration','json')
             ->addActionContext('login','json')
             ->initContext('json');
@@ -11,16 +12,17 @@ class UserController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $userId = $this->getRequest()->getParam('id');
+        $accountId = $this->getRequest()->getParam('id');
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
 
         $userModel = new Application_Model_DbTable_Users();
-
-        $user = $userModel->getFullData($userId);
+        $user = $userModel->getFullData($accountId);
         if($user) {
             $userData = $user;
         } else {
             $this->_helper->redirector('page404','error');
         }
+
         $this->view->userData = $userData;
     }
 
@@ -100,16 +102,16 @@ class UserController extends Zend_Controller_Action
                     $identity = $authAdapter->getResultRowObject();
                     $authStorage = $auth->getStorage();
                     $authStorage->write($identity);
-                    if ($identity->status == '0') {
-                        $this->_helper->flashMessenger->addMessage(array('failure'=>'Account is not confirmed. Please check you email and confirm registration'));
-                        $this->_helper->redirector('index', 'index');
-                    }else{
-                        $this->view->status = '1';
 
-                    }
+                    $this->view->status = $identity->status;
+
+
                 }else{
-                    $this->view->error = 'Authentication failed.';
+
+                    $this->view->confirmFlash = 'Authentication failed. Login or password are incorrect';
                 }
+            }else{
+                $this->view->errors = $login->getErrors();
             }
         }
     }
@@ -125,8 +127,11 @@ class UserController extends Zend_Controller_Action
             $this->view->data = $formData;
             if ($reg->isValid($formData)) {
                 $user = new Application_Model_DbTable_Users();
-                if ($user->checkByMail($formData['email']) || $user->checkByUsername($formData['username'])) {
-                    $this->view->confirmFlash = 'This email or username already exist';
+                if ($user->checkByMail($formData['email'])) {
+                    $this->view->confirmFlash = 'This email already exist';
+                }
+                else if($user->checkByUsername($formData['username'])){
+                    $this->view->confirmFlash = 'This username already exist';
 
                 } else {
                     $status = $modelUser->addNewUser($formData);
@@ -134,7 +139,7 @@ class UserController extends Zend_Controller_Action
                     if($status) {
                         $this->view->confirmFlash = 'Please confirm your email';
                     } else {
-                        $this->view->confirmFlash = 'Some tricky error';
+                        $this->view->confirmFlash = 'Technical issues with email. Please try again later';
                     }
                 }
             } else {

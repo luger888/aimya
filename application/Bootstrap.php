@@ -37,6 +37,17 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         return $request;
     }
 
+    protected function _initActivity() {
+
+        if(Zend_Auth::getInstance()->getIdentity()) {
+            $this->bootstrap('db');
+
+            $userId = Zend_Auth::getInstance()->getIdentity()->id;
+            $onlineUserTable = new Application_Model_DbTable_OnlineUsers();
+            $onlineUserTable->makeOnline($userId);
+        }
+    }
+
     /*protected function _initAcl()
     {
         $fc = Zend_Controller_Front::getInstance();

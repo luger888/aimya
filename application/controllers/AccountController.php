@@ -7,6 +7,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         $this->_helper->layout->setLayout("layoutInside");
         $this->_helper->AjaxContext()
             ->addActionContext('edit', 'json')
+            ->addActionContext('offline', 'json')
             ->initContext('json');
     }
 
@@ -19,7 +20,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         $profileForm = new Application_Form_Profile();
         $profileModel = new Application_Model_Profile();
         $this->view->profile = $profileForm->populate($profileModel->getProfileAccount($identity->id));
-
+        $this->view->avatarPath = $profileModel->getAvatarPath($identity->id); //path to avatar
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
 
@@ -80,8 +81,11 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
     public function availabilityAction()
     {
         $this->_helper->layout()->disableLayout();
-        $dbAvailability = new Application_Model_DbTable_Availability();
         $identity = Zend_Auth::getInstance()->getStorage()->read();
+        $dbAvailability = new Application_Model_DbTable_Availability();
+        $dbUser = new Application_Model_DbTable_Users();
+        $this->view->user = $dbUser->getUser($identity->id);
+
         $availabilityForm = new Application_Form_Availability();
         $this->view->availabilityForm = $availabilityForm->populate($dbAvailability->getAvailability($identity->id));
         if ($this->getRequest()->isPost()) {
@@ -192,6 +196,18 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
             $this->view->featured = $dbUserModel->getLatestFeatured();
         }
 
+    }
+
+    public function offlineAction() {
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+        $onlineUserTable = new Application_Model_DbTable_OnlineUsers();
+        $onlineUserTable->makeOffline($userId);
+    }
+
+    public function onlineAction() {
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+        $onlineUserTable = new Application_Model_DbTable_OnlineUsers();
+        $onlineUserTable->makeOnline($userId);
     }
 
 }

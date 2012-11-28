@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
 
+
     /* Button bar(radio)*/
     $('.buttonBar label').first().addClass('checked');
     $('.buttonBar input').first().prop('checked', true);
@@ -93,6 +94,35 @@ $(document).ready(function() {
         window.location.href = '/message/' . $('#singleactions').val();
     });*/
     /*  ACCOUNT SYSTEM   */
+
+    setInterval(imStillAlive, 60000);
+    function imStillAlive() {
+        activity = jQuery("#user_activity");
+        if(activity.val() == 1) {
+            jQuery.ajax({
+                url: "/account/offline",
+                type: "get",
+                success: function(result) {
+                    activity.val(0);
+                }
+            });
+            return false;
+        }
+    }
+
+    jQuery(window).unload( function () {
+        activity = jQuery("#user_activity");
+        if(activity.val() == 1) {
+            jQuery.ajax({
+                url: "/account/offline",
+                type: "get",
+                success: function(result) {
+                    activity.val(0);
+                }
+            });
+            return false;
+        }
+    })
 
 });
 function uploadify(){

@@ -26,8 +26,8 @@ class Application_Model_DbTable_UserRelations extends Application_Model_DbTable_
 
         $data = array(
 
-            'status'=> $array['status'],
-            'updated_at' => date('Y-m-d H:m:s')
+            'sender_status'=> $array['status'],
+            'updated_at' => date('Y-m-d H:i:s')
 
         );
         $where = array(
