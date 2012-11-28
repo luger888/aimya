@@ -34,11 +34,13 @@ $controllerName = $front->getRequest()->getControllerName();
     <div class="row-fluid header">
         <div class="mainHeader">
             <div class="logo">
-                <a href="index"><div class = "bigLogoImg"></div></a>
+                <a href="index">
+                    <div class="bigLogoImg"></div>
+                </a>
             </div>
-        <!-- LOGIN -->
-        <?php
-        echo "
+            <!-- LOGIN -->
+            <?php
+            echo "
 
         <div id='loginFormHolder'>
             <form id='signIn' action='user/login' name='signIn'  method='post'>
@@ -53,35 +55,23 @@ $controllerName = $front->getRequest()->getControllerName();
             <!-- END /LOGIN -->
         </div>
     <!-- /span3 -->";
-        ?>
+            ?>
         </div>
     </div>
     <!-- END of HEADER & NAVIGATION  -->
     <div class="mainContent">
-    <div class="messages">
-        <?php echo $this->flashMessages();?>
+        <div class="messages">
+            <?php echo $this->flashMessages();?>
+        </div>
+
+
+        <div class='push'></div>
     </div>
-    <!-- ACCOUNT LAYOUT -->
-    <?php
-
-    if ($controllerName == 'account' or $controllerName == 'lesson' or $controllerName == 'message' or $controllerName == 'resume') {
-        echo $this->partial('partials/account.phtml',
-            array('account' => $this->data));
-
-    } else {
-        echo $this->layout()->content;
-    }
-    ?> <!-- END ACCOUNT LAYOUT -->
-
-
-
-<div class = 'push'></div>
-</div>
 </div>
 <div class='footer'>
     <div class="copyright">
-    Copyright 2012 Aimya<br>
-    Created by Svitla.com
+        Copyright 2012 Aimya<br>
+        Created by Svitla.com
     </div>
 </div>
 
