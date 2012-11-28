@@ -966,8 +966,18 @@ width:100px;
 .userRelations table th, .userRelations table td{
     border:none;
 }
+/*Notifications tab*/
+.notificationsTab {
+    margin-left: 2px;
 
+}
 
+.notificationsTab .firstSeparator{
+    background: url('../img/design/accountLayout/1page_middle_separator.png') no-repeat;
+    height: 14px;
+    width: 800px;
+    margin-bottom: 12px;
+}
 /**** MESSAGES ****/
 
 /* Clearfix */
