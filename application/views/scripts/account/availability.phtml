@@ -18,8 +18,9 @@
             foreach ($daysOfWeek as $index => $value) {
                 $$availableFrom = 'from' . $daysOfWeek[$index];
                 $$day = 'checkbox' . $daysOfWeek[$index];
+
                 $$availableTo = 'to' . $daysOfWeek[$index];
-                echo "<tr><td>{$this->availabilityForm->$checkbox}</td><td>{$daysOfWeekFull[$index]}</td><td>{$this->availabilityForm->$selectFrom}</td> <td>to</td> <td>{$this->availabilityForm->$selectTo}</td></td></tr>";
+                echo "<tr><td>{$this->availabilityForm->$checkbox}<div class='dayCheckbox'></div></td><td>{$daysOfWeekFull[$index]}</td><td>{$this->availabilityForm->$selectFrom}</td> <td>to</td> <td>{$this->availabilityForm->$selectTo}</td></td></tr>";
             }
 
             ?>

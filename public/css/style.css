@@ -830,6 +830,23 @@ width:100px;
     word-spacing: 2px;
     height: 37px;
 }
+.availabilityTab input[type="checkbox"]{
+    bottom: 1px;
+    opacity: 0;
+    position: relative;
+    right: 17px;
+}
+.availabilityTab .dayCheckbox{
+    background: url('../img/design/accountLayout/checkbox.png') center center no-repeat;
+    float: left;
+    height: 15px;
+    margin: 1px 4px 0 0;
+    width: 13px;
+}
+.availabilityTab input[type="checkbox"]:checked + .dayCheckbox{
+    background: url('../img/design/accountLayout/checkbox.png') left center no-repeat;
+}
+
 
 /*Availability td widths */
 .availabilityTab table tr td:nth-child(1){width: 37px;}
@@ -885,6 +902,7 @@ width:100px;
     margin-left: 2px;
 
 }
+
 .userRelations .firstSeparator{
     background: url('../img/design/accountLayout/1page_middle_separator.png') no-repeat;
     height: 14px;
@@ -931,7 +949,7 @@ width:100px;
 .userRelations table th, .userRelations table td{
     border:none;
 }
-<<<<<<< HEAD
+
 
 /**** MESSAGES ****/
 
