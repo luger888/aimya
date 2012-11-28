@@ -497,8 +497,8 @@ width:100px;
 /*Account layout*/
 .accountWrapper {
     background-color: #f7f8f8;
-    height: 100%;
-
+    /* height: 100%; */
+    min-height: 100%;
 }
 .accountWrapper .leftBlockProfile{
     width:260px;
