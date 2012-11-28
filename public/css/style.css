@@ -1089,3 +1089,26 @@ ul.messageTabs{
 .userRelations table tr td:nth-child(1){ width:82px;}
 .userRelations table tr td:nth-child(2){ width:110px;}
 .userRelations table tr td:nth-child(4){width: 106px;}
+
+.clearfix {
+    display: inline-block;
+}
+
+.clearfix:after {
+    clear: both;
+    content: ' ';
+    display: block;
+    font-size: 0;
+    line-height: 0;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+}
+
+.clearfix {
+    display:block;
+}
+
+.clear {
+    clear: both;
+}
