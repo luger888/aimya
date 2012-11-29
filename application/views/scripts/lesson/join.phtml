@@ -1,6 +1,26 @@
 <?php echo $this->partial('partials/lesson.phtml')?>
 <div class= "messageContent">
     <div id="flash_element">
-        <?php echo $this->flashObj;?>
+        <?php if($this->flashObj == NULL):?>
+            <h4><?php echo 'There are no any active lessons'; ?></h4>
+        <?php else:?>
+            <?php echo $this->flashObj; ?>
+        <?php endif;?>
     </div>
 </div>
+<script type="text/javascript">
+    function changeFlashLayout(flashType) {
+        $.ajax({
+            'url': '<?php echo $this->baseLink() . "/lesson/join/";?>',
+            'dataType': 'json',
+            'type': 'post',
+            'data': ({full : flashType}),
+            success: function(data) {
+                console.log(data.screenType);
+            },
+            complete: function(xhr, textStatus) {
+                console.log(data.screenType);
+            }
+        });
+    }
+</script>

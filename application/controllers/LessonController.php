@@ -96,25 +96,32 @@ class LessonController extends Zend_Controller_Action
     public function joinAction()
     {
         //$this->_helper->layout()->disableLayout();
-        $studentId = Zend_Auth::getInstance()->getIdentity()->id;
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
         $lessonTable = new Application_Model_DbTable_Lesson();
 
-        $result = $lessonTable->checkAvailableLesson($studentId);
+        $result = $lessonTable->checkAvailableLesson($userId);
 
         if($result) {
             $broker = new Aimya_View_Helper_BaseLink();
             $baseLink = $broker->baseLink();
 
             $userModel = new Application_Model_DbTable_Users();
-            $teacher = $userModel->getItem($result['creator_id']);
+
+            if((Zend_Auth::getInstance()->getIdentity()->role == 2)) {
+                $teacher = $userModel->getItem($result['partner_id']);
+            } else {
+                $teacher = $userModel->getItem($result['creator_id']);
+            }
 
             $this->view->screenType = "simple";
             if ($this->getRequest()->isXmlHttpRequest()){
                 if($this->getRequest()->getParam('full')){
                     $this->_helper->layout()->disableLayout();
-                    $this->view->screenType = "full";
-                } else {
-                    $this->view->screenType = "simple";
+                    if($this->getRequest()->getParam('full') == 0) {
+                        $this->view->screenType = "simple";
+                    } else {
+                        $this->view->screenType = "full";
+                    }
                 }
             }
             $flashObj = '
