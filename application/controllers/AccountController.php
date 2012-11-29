@@ -15,6 +15,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
     {
         //basic tab
         $identity = Zend_Auth::getInstance()->getStorage()->read();
+        $this->view->role = $identity->role;
         $this->view->headScript()->appendFile('../../js/jquery/account/tabs/services.js');
         $this->view->headScript()->appendFile('../../js/jquery/account/tabs/users.js');
         $profileForm = new Application_Form_Profile();
@@ -112,6 +113,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         $dbNotifications = new Application_Model_DbTable_Notifications();
         $notificationForm = new Application_Form_Notifications();
         $this->view->notificationsForm = $notificationForm->populate($dbNotifications->getNotifications($identity->id));
+
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
 

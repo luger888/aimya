@@ -951,6 +951,19 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     width: 800px;
     margin-bottom: 18px;
 }
+.notificationsTab .middleSeparator{
+    background: url('../img/design/accountLayout/middle_double_separator.png') no-repeat;
+    height: 33px;
+    width: 800px;
+    margin-top: 70px;
+}
+
+.notificationsTab .middleSeparatorSecond{
+    background: url('../img/design/accountLayout/middle_double_separator.png') no-repeat;
+    height: 33px;
+    width: 800px;
+    margin-top: 18px;
+}
 .notificationsTab form{
     margin-left: 24px;
     margin-top: 29px;
@@ -968,15 +981,53 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
 .notificationsTab h5{
     font:12px helvetica;
     margin-bottom: 34px;
+    color:#3b4e22;
 }
-
+.notificationsTab .passwordRecoveryBlock{
+    font: 12px helvetica;
+    margin-top: 27px;
+    word-spacing: 5px;
+}
+.notificationsTab .passwordRecoveryBlock span{
+    bottom: 8px;
+    display: inline-block;
+    position: relative;
+    width: 146px;
+}
+.notificationsTab .passwordRecoveryBlock input{
+    height: 12px;
+    margin: 0 0 17px;
+    width: 166px;
+}
 .notificationsTab form h5{
     position: relative;
     right:23px;
-    margin-top:134px;
+    margin-top:31px;
     word-spacing: 2px;
+    margin-bottom: 10px;
 }
+.notificationsTab .notifyBlock{
+    margin-bottom: 36px;
+    margin-top: 64px;
+}
+.notificationsTab .notifyBlock h5{
+    bottom: 29px;
+    position: relative;
+    right: 24px !important;
+}
+.notificationsTab .notifyBlock label{
 
+}
+.notificationsTab #saveNotifications{
+    border: medium none;
+    bottom: 21px;
+    color: transparent;
+    height: 13px;
+    position: absolute;
+    right: 40px;
+    width: 46px;
+    background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat;
+}
 /**** MESSAGES ****/
 
 /* Clearfix */

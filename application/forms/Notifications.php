@@ -35,7 +35,6 @@ class Application_Form_Notifications extends Zend_Form
         /* Change password */
         $oldPassword = new Zend_Form_Element_Password('oldPassword');
         $oldPassword->addValidator('stringLength', false, array(6, 200))
-            ->setAttrib('placeholder', 'Old Password')
             ->setAttrib('class', 'clearInput required')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators)
@@ -43,7 +42,6 @@ class Application_Form_Notifications extends Zend_Form
 
         $newPassword = new Zend_Form_Element_Password('newPassword');
         $newPassword ->addValidator('stringLength', false, array(6, 200))
-            ->setAttrib('placeholder', ' New Password')
             ->setAttrib('class', 'clearInput required')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators)
@@ -51,7 +49,6 @@ class Application_Form_Notifications extends Zend_Form
 
         $newPasswordConfirm = new Zend_Form_Element_Password('newPasswordConfirm');
         $newPasswordConfirm->addValidator('stringLength', false, array(6, 200))
-            ->setAttrib('placeholder', 'Confirm Password')
             ->setAttrib('class', 'clearInput required')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators)
@@ -61,7 +58,6 @@ class Application_Form_Notifications extends Zend_Form
         $submit = new Zend_Form_Element_Submit('saveNotifications');
         $submit ->setLabel('Save')
             ->setAttrib('id', 'saveNotifications')
-            ->setAttrib('class', 'btn')
             ->setDecorators($this->basicDecorators);
 
 
