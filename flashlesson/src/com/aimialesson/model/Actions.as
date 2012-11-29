@@ -13,7 +13,7 @@ package com.aimialesson.model
 		private const ADD_NOTE_URL:String;
 		private const START_SESSION_URL:String = "/lesson/start/";
 		private const STOP_SESSION_URL:String = "/lesson/stop/";
-		private const RESIZE_URL:String = "/lesson/full/";
+		private const RESIZE_URL:String = "/lesson/join/";
 
 		
 		public function Actions()

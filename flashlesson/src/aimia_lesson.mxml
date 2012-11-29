@@ -50,11 +50,14 @@
 				debug( "toggleFullScreen" );
 				Main.getInstance().fsMode = !Main.getInstance().fsMode;
 				this.currentState = (this.currentState == "fullScreen") ? "notFullScreen" : "fullScreen";
+				var param:int = (Main.getInstance().fsMode)?1:0;
+				ExternalInterface.call("changeFlashLayout", param);
 			}
 			
 			private function connectInitComplete ( event : AppEvent ) : void {
 				debug("app:connectInitComplete");
 				mainUI.connectionInit();
+				
 				//UIEventHandling();
 			}
 			
@@ -67,9 +70,11 @@
 				mainUI.addEventListener(NotesEvent.ADD_NEW_LINE, seviceMap.onNotesEvent);
 				mainUI.addEventListener(AppEvent.START_SESSION, seviceMap.onAppEvent);
 				mainUI.addEventListener(AppEvent.STOP_SESSION, seviceMap.onAppEvent);
-				mainUI.addEventListener(AppEvent.CHANGE_SCREEN_STATE, seviceMap.onAppEvent);
+				//mainUI.addEventListener(AppEvent.CHANGE_SCREEN_STATE, seviceMap.onAppEvent);
 				mainUI.addEventListener(AppEvent.CHANGE_SCREEN_STATE, toggleFullScreen);
 			}
+			
+			
 			
 			private function debug ( str : String ) : void {
 				if (Main.getInstance().debugger != null)

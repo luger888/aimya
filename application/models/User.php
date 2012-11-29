@@ -24,7 +24,7 @@ class Application_Model_User
         $mail->token = $token;
         $mail->baseLink = "http://" . $_SERVER['HTTP_HOST'];
 
-        if($mail->send()){
+        //if($mail->send()){
 
             $user->createUser($array);
             $lastId = $user->getAdapter()->lastInsertId();
@@ -39,14 +39,17 @@ class Application_Model_User
             @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'uploads');
             @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $lastId);
             @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $lastId . DIRECTORY_SEPARATOR . 'avatar');
+            @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $lastId . DIRECTORY_SEPARATOR . 'avatar' . DIRECTORY_SEPARATOR . 'base');
+            @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $lastId . DIRECTORY_SEPARATOR . 'avatar' . DIRECTORY_SEPARATOR . 'medium');
+            @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $lastId . DIRECTORY_SEPARATOR . 'avatar' . DIRECTORY_SEPARATOR . 'thumbnail');
 
             return true;
 
-        }else{
+        //}else{
 
-            die('problem with email');
+            //die('problem with email');
 
-        }
+        //}
 
     }
 

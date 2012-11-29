@@ -11,7 +11,7 @@ package com.aimialesson.model
 	public class Presentation extends EventDispatcher
 	{
 		
-//		private var fakeImages:Array = ["images/IMG_1120.JPG","images/IMG_1121.JPG","images/IMG_1122.JPG","images/IMG_1123.JPG","images/IMG_1124.JPG"];
+		private var fakeImages:Array;// = ["images/IMG_1120.JPG","images/IMG_1121.JPG","images/IMG_1122.JPG","images/IMG_1123.JPG","images/IMG_1124.JPG"];
 		
 		private var presentationImageUrls:ArrayCollection;// = new ArrayCollection(fakeImages);
 		[Bindable]

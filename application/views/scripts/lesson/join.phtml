@@ -1,6 +1,27 @@
 <?php echo $this->partial('partials/lesson.phtml')?>
-<div class= "messageContent">
-    <div id="flash_element">
-        <?php echo $this->flashObj;?>
+<div class= "messageContent" style="height:1190px; width:850px">
+    <div id="flash_element" style="height:100%">
+        <?php if($this->flashObj == NULL):?>
+            <h4><?php echo 'There are no any active lessons'; ?></h4>
+        <?php else:?>
+            <?php echo $this->flashObj; ?>
+        <?php endif;?>
     </div>
 </div>
+<script type="text/javascript">
+    function changeFlashLayout(flashType) {
+
+        if(flashType == 1) {
+           flashObf = jQuery('#flash_element');
+           jQuery('.accountWrapper').hide();
+           jQuery('.footer').hide();
+           jQuery('body').append(flashObf);
+        } else if(flashType == 0) {
+            jQuery('#flash_element').remove();
+            jQuery('.accountWrapper').show();
+            jQuery('.footer').show();
+            jQuery('.messageContent').append(flashObf);
+        }
+
+    }
+</script>

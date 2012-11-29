@@ -13,12 +13,12 @@ class Application_Model_Profile
         return $accountUserArray;
     }
 
-    public function getAvatarPath($user_id)
+    public function getAvatarPath($user_id, $imageType = 'base')
     {
         $profileModel = new Application_Model_DbTable_Profile();
         $profile = $profileModel->getProfile($user_id);
         $avatarName = $profile['avatar'];
-        $avatarPath = '/img/uploads/'.$user_id.'/avatar/'. $avatarName;
+        $avatarPath = '/img/uploads/'.$user_id.'/avatar/'. $imageType . '/' .$avatarName;
 
         return $avatarPath;//path for avatar
     }

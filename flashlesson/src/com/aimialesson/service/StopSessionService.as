@@ -15,7 +15,7 @@ package com.aimialesson.service
 		{
 			super(target);
 			callUrl = Actions.getInstance().stopSessionUrl;
-			//			params.lesson_id = User.getInstance().lesson_id;
+			params.lesson_id = User.getInstance().lesson_id;
 		}
 		
 		public function addParams ( value : Object) : void {

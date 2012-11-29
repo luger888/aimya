@@ -14,12 +14,31 @@ class Application_Form_Profile extends Zend_Form
         $timeZonesDbModel = new Application_Model_DbTable_TimeZones();
         $timeZones = $timeZonesDbModel->getTimeZones();//category from db
 
+
+        $filterChain = new Zend_Filter();
+        // Create one big image with at most 143x300 pixel
+
+        $filterChain->appendFilter(new Aimya_Filter_File_Resize(array(
+            'directory' => './img/uploads/'.$identity->id.'/avatar/base/',
+            'width' => 143,
+            'height' => 300,
+            'keepRatio' => true,
+        )));
+        // Create a medium image with at most 104x220 pixels
+        $filterChain->appendFilter(new Aimya_Filter_File_Resize(array(
+            'directory' => './img/uploads/'.$identity->id.'/avatar/medium/',
+            'width' => 104,
+            'height' => 220,
+            'keepRatio' => true,
+        )));
+
         $avatar = new Zend_Form_Element_File('avatar');
         $avatar
              ->setAttrib('id', 'avatar')
              ->addValidator('Size', false, 1024000)
              ->addValidator('Extension', false, 'jpg,png,gif,jpeg')
-             ->setDestination('./img/uploads/'.$identity->id.'/avatar/')
+             ->addFilter($filterChain)
+             //->setDestination('./img/uploads/'.$identity->id.'/avatar/')
              ->removeDecorator('DtDdWrapper')
              ->removeDecorator('HtmlTag')
              ->removeDecorator('label');
