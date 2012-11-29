@@ -10,17 +10,18 @@
 </div>
 <script type="text/javascript">
     function changeFlashLayout(flashType) {
-        $.ajax({
-            'url': '<?php echo $this->baseLink() . "/lesson/join/";?>',
-            'dataType': 'json',
-            'type': 'post',
-            'data': ({full : flashType}),
-            success: function(data) {
-                console.log(data.screenType);
-            },
-            complete: function(xhr, textStatus) {
-                console.log(data.screenType);
-            }
-        });
+
+        if(flashType == 1) {
+           flashObf = jQuery('#flash_element');
+           jQuery('.accountWrapper').hide();
+           jQuery('.footer').hide();
+           jQuery('body').append(flashObf);
+        } else if(flashType == 0) {
+            jQuery('#flash_element').remove();
+            jQuery('.accountWrapper').show();
+            jQuery('.footer').show();
+            jQuery('.messageContent').append(flashObf);
+        }
+
     }
 </script>

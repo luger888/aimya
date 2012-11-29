@@ -9,7 +9,7 @@ class LessonController extends Zend_Controller_Action
         $this->_helper->AjaxContext()
             ->addActionContext('setup', 'json')
             ->addActionContext('index', 'json')
-            ->addActionContext('join', 'json')
+            //->addActionContext('join', 'json')
             ->addActionContext('upload', 'json')
             ->addActionContext('files', 'json')
             ->initContext('json');
@@ -118,17 +118,15 @@ class LessonController extends Zend_Controller_Action
                 $partnerStreamName = $result['creator_stream_name'];
             }
 
-            $this->view->screenType = "simple";
+            /*$this->view->screenType = "simple";
             if ($this->getRequest()->isXmlHttpRequest()){
-                if($this->getRequest()->getParam('full')){
-                    $this->_helper->layout()->disableLayout();
+                if($this->getRequest()->getParam('full') == 0){
+                    //$this->_helper->layout()->disableLayout();
                     if($this->getRequest()->getParam('full') == 0) {
                         $this->view->screenType = "simple";
-                    } else {
-                        $this->view->screenType = "full";
                     }
                 }
-            }
+            }*/
             $flashObj = '
                 <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="1000" height="1000" id="aimia_lesson">
                     <param name="movie" value="' . $baseLink . '/flash/aimia_lesson.swf" />
@@ -153,63 +151,6 @@ class LessonController extends Zend_Controller_Action
                     </object>
                 </object>
                 ';
-
-            $this->view->flashObj = $flashObj;
-            $this->view->responce = $result;
-            $this->view->result = true;
-        } else {
-            $this->view->result = false;
-        }
-
-    }
-
-    public function fullAction()
-    {
-        $this->_helper->layout()->disableLayout();
-
-
-        $studentId = Zend_Auth::getInstance()->getIdentity()->id;
-        $lessonTable = new Application_Model_DbTable_Lesson();
-
-        $result = $lessonTable->checkAvailableLesson($studentId);
-
-        if($result) {
-            $broker = new Aimya_View_Helper_BaseLink();
-            $baseLink = $broker->baseLink();
-
-            $userModel = new Application_Model_DbTable_Users();
-            //$student = $userModel->getItem(Zend_Auth::getInstance()->getIdentity()->id);
-            $teacher = $userModel->getItem($result['creator_id']);
-
-            //$lessonModel = new Application_Model_DbTable_Lesson();
-            //$lessonModel->changeStatus($result['id'], $status);
-
-            /*<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://active.macromedia.com/flash4/cabs/swflash.cab#version=4,0,0,0" id="name" width="800" height="800">
-                         <param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&myStreamName=' . $result['partner_stream_name'] . '&partnerStreamName=' . $result['creator_stream_name'] . '&soID=' . $result['so_id'] . '">
-                         <embed name="name" src="' . $baseLink . '/flash/aimia_lesson.swf" quality="high" wmode="transparent" width="800" height="800" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer"></embed>
-                         </object>*/
-            $flashObj = '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="100%" height="100%" id="aimia_lesson">
-                                <param name="movie" value="' . $baseLink . '/flash/aimia_lesson.swf" />
-                                <param name="quality" value="high" />
-                                <param name="bgcolor" value="#ffffff" />
-                                <param name="allowScriptAccess" value="sameDomain" />
-                                <param name="allowFullScreen" value="true" />
-                                <param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&partnerName=' . $teacher['username'] . '&userRole=' . Zend_Auth::getInstance()->getIdentity()->role . '&myStreamName=' . $result['partner_stream_name'] . '&partnerStreamName=' . $result['creator_stream_name'] . '&soID=' . $result['so_id'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink .'&lesson_id=' . $result['id'] .'">
-                                <object type="application/x-shockwave-flash" data="' . $baseLink . '/flash/aimia_lesson.swf" width="100%" height="100%">
-                                    <param name="quality" value="high" />
-                                    <param name="bgcolor" value="#ffffff" />
-                                    <param name="allowScriptAccess" value="sameDomain" />
-                                    <param name="allowFullScreen" value="true" />
-                                    <param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&partnerName=' . $teacher['username'] . '&userRole=' . Zend_Auth::getInstance()->getIdentity()->role . '&myStreamName=' . $result['partner_stream_name'] . '&partnerStreamName=' . $result['creator_stream_name'] . '&soID=' . $result['so_id'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink .'&lesson_id=' . $result['id'] .'">
-                                    <p>
-                                        Either scripts and active content are not permitted to run or Adobe Flash Player version
-                                        10.0.0 or greater is not installed.
-                                    </p>
-                                    <a href="http://www.adobe.com/go/getflashplayer">
-                                        <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash Player" />
-                                    </a>
-                                </object>
-                            </object>';
 
             $this->view->flashObj = $flashObj;
             $this->view->responce = $result;
