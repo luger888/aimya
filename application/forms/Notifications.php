@@ -64,13 +64,14 @@ class Application_Form_Notifications extends Zend_Form
             ->setAttrib('class', 'btn')
             ->setDecorators($this->basicDecorators);
 
+
+
+        $this->addElement($alert);
+        $this->addElements(array($oldPassword, $newPassword, $newPasswordConfirm));
         if($identity->role == $this->teacher){
             $this->addElement($notify);
         }
-
-        $this->addElements(array(/*$oldPassword, $newPassword, $newPasswordConfirm,*/ $alert, $submit));
-
-
+        $this->addElement($submit);
     }
 
 

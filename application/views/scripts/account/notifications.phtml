@@ -3,9 +3,23 @@
     <div class="firstSeparator"></div>
     <h5> I WANT TO:</h5>
 
-<form method = 'post' name='notifications' action='/account/notifications/'>
+<form method = 'post' name = 'notifications' action='/account/notifications/'>
 
     <?php
- echo $this->notificationsForm;?>
+        echo $this->notificationsForm->alert;
+    ?>
+
+<h5> CHANGE AIMYA PASSWORD:</h5>
+    <?php echo $this->notificationsForm->oldPassword; ?><br>
+    <?php echo $this->notificationsForm->newPassword; ?><br>
+    <?php echo $this->notificationsForm->newPasswordConfirm; ?>
+    <?php
+        if($this->notificationsForm->notify){
+            echo '<h5> I WANT TO:</h5>' .$this->notificationsForm->notify;
+        }
+    ?>
+    <?php
+    echo $this->notificationsForm->saveNotifications;
+    ?>
     </form>
     </div>
