@@ -128,14 +128,14 @@ class LessonController extends Zend_Controller_Action
                 }
             }*/
             $flashObj = '
-                <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="1000" height="1000" id="aimia_lesson">
+                <object style="height:100%;" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="870" height="1190" id="aimia_lesson">
                     <param name="movie" value="' . $baseLink . '/flash/aimia_lesson.swf" />
                     <param name="quality" value="high" />
                     <param name="bgcolor" value="#ffffff" />
                     <param name="allowScriptAccess" value="sameDomain" />
                     <param name="allowFullScreen" value="true" />
                     <param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&partnerName=' . $teacher['username'] . '&userRole=' . Zend_Auth::getInstance()->getIdentity()->role . '&myStreamName=' . $myStreamName . '&partnerStreamName=' . $partnerStreamName . '&soID=' . $result['so_id'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink .'&lesson_id=' . $result['id'] .'">
-                    <object type="application/x-shockwave-flash" data="' . $baseLink . '/flash/aimia_lesson.swf" width="1000" height="1000">
+                    <object style="height:100%;" type="application/x-shockwave-flash" data="' . $baseLink . '/flash/aimia_lesson.swf" width="870" height="1190">
                         <param name="quality" value="high" />
                         <param name="bgcolor" value="#ffffff" />
                         <param name="allowScriptAccess" value="sameDomain" />
