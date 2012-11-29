@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		xmlns:s="library://ns.adobe.com/flex/spark" 
-		xmlns:mx="library://ns.adobe.com/flex/mx">
+		xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:elements="com.aimialesson.UI.views.elements.*">
 	<!-- host component -->
 	<fx:Metadata>
 		[HostComponent("com.aimialesson.UI.views.PresentationUI")]
@@ -14,7 +14,7 @@
 	</fx:Script>
 
 	<mx:Image id="currentImage" source="{Presentation.getInstance().currentImageURL}" verticalCenter="0" horizontalCenter="0" maintainAspectRatio="false"/>
-
+	<!--elements:ImagePreloader id="imagePreloader" percent="50" verticalCenter="0" horizontalCenter="0" /-->
 	<s:Button id="previusBtn" label="Previus" skinClass="com.aimialesson.UI.skins.elements.PresentationArrowDownBtnSkin" right="10" bottom="10" useHandCursor="true"/>
 	<s:Button id="nextBtn" label="Next" skinClass="com.aimialesson.UI.skins.elements.PresentationArrowUpBtnSkin" right="10" top="10" useHandCursor="true"/>
 </s:Skin>
