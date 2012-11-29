@@ -107,6 +107,36 @@ return array(
                 'resource'      => 'message',
                 'privilege'     => 'trash',
             ),
+            array(
+                'label' => 'Scheduled',
+                'tag' => 'lessonMenu',
+                'route' => 'default',
+                'module' => 'default',
+                'controller' => 'lesson',
+                'action' => 'index',
+                'resource'      => 'lesson',
+                'privilege'     => 'index',
+            ),
+            array(
+                'label' => 'On The Air',
+                'tag' => 'lessonMenu',
+                'route' => 'default',
+                'module' => 'default',
+                'controller' => 'lesson',
+                'action' => 'join',
+                'resource'      => 'lesson',
+                'privilege'     => 'join',
+            ),
+            array(
+                'label' => 'Lesson Details',
+                'tag' => 'lessonMenu',
+                'route' => 'default',
+                'module' => 'default',
+                'controller' => 'lesson',
+                'action' => 'details',
+                'resource'      => 'lesson',
+                'privilege'     => 'details',
+            ),
         )
     )
 );

@@ -20,7 +20,7 @@ html{
 }
 body{
     font-family: helvetica;
-    min-width: 1200px;
+    min-width: 1292px;
     background-color: #f7f8f8;
     color:#446158;
     height: 100%;
@@ -45,6 +45,9 @@ form{
 
 
 }
+.accountWrapper{
+    background: url('../img/design/accountLayout/accountLayoutBackground.png') repeat-y  top center;
+}
 .mainHeader{
     width:1135px;
     margin: 0 auto;
@@ -52,25 +55,27 @@ form{
 
 .mainContent{
     margin: 0 auto;
-    width:1200px;
+    width:1292px;
 }
 
 .footer, .push {
-    height: 37px; /* .push must be the same height as .footer */
+    height: 33px; /* .push must be the same height as .footer */
 }
 
 .footer {
-    color: #A1B368;
-    font: 10px helvetica;
+    color:#bebba3;
+    font: 11px helvetica;
     padding: 0;
+    word-spacing: 2px;
     position: relative;
     clear:both;
     display: block;
     margin: 0 auto;
-    width: 1200px;
+    width: 1292px;
+    background: url('../img/design/accountLayout/accountLayoutBackground.png') repeat-y  top center;
 }
 .footer .copyright{
-    margin-left: 111px;
+    margin-left: 105px;
 }
 fieldset .mainText{
     font-size: 12px;
@@ -392,47 +397,7 @@ font:15px dosis-semibold-middle;
     margin-left: 205px;
     margin-top: 12px;
 }
-/*Social buttons*/
 
-.twitterIcon{
-    background-image: url('../img/design/socialButtons/social_icons.png');
-    background-position: 0 0;
-    height:18px;
-    width:18px;
-    left: 25px;
-    position: relative;
-    width: 18px;
-    bottom: 33px;
-}
-.facebookIcon{
-    background-image: url('../img/design/socialButtons/social_icons.png');
-    background-position: 50% 0;
-    height:18px;
-    width:18px;
-    bottom: 51px;
-    position: relative;
-    width: 18px;
-    left: 52px;
-}
-.linkedInIcon{
-    background-image: url('../img/design/socialButtons/social_icons.png');
-    background-position: 100% 0;
-    height:18px;
-    width:18px;
-    left: 79px;
-    position: relative;
-    width: 18px;
-    bottom: 69px;
-}
-.twitterIcon:hover{
-    background-position: 0 100%;
-}
-.facebookIcon:hover{
-    background-position: 50% 100%;
-}
-.linkedInIcon:hover{
-    background-position: 100% 100%;
-}
 /*account*/
 
 
@@ -499,10 +464,10 @@ width:100px;
     background-color: #f7f8f8;
     /* height: 100%; */
     min-height: 100%;
+    margin: 0 auto -39px !important;
 }
 .accountWrapper .leftBlockProfile{
     width:260px;
-    background-color: #eae5cf;
     height: 100%;
 
 }
@@ -513,24 +478,22 @@ width:100px;
 }
 .accountContent{
     margin: 0 auto;
-    width:1276px;
+    width:1292px;
     min-height: 100%;
-    background: url('../img/design/accountLayout/leftNavBackground.png') repeat-y;
+
     /*height: 100%;*/
 }
 /*Left Navigation Bar */
 
 .leftBlockProfile{
     height: 100%;
-    -webkit-box-shadow: -6px 9px 6px -6px #888888 inset;
-    box-shadow:  -6px 9px 6px -6px #888888 inset;
-    -moz-box-shadow: -6px 9px 6px -6px #888888 inset;
+
 }
 .leftBlockProfile .leftNavigation ul li:not(.active){
 
-    -webkit-box-shadow: -6px 0 6px -6px #888888 inset;
-    box-shadow:  -6px 0 6px -6px #888888 inset;
-    -moz-box-shadow: -6px 0 6px -6px #888888 inset;
+    -webkit-box-shadow: -5px 0 6px -6px #888888 inset;
+    box-shadow:  -5px 0 6px -6px #888888 inset;
+    -moz-box-shadow: -5px 0 6px -6px #888888 inset;
 }
 .leftBlockProfile img{
     margin-top: 10px;
@@ -550,8 +513,11 @@ width:100px;
     color: #4A4322;
     font: 700 15px helvetica !important;
     letter-spacing: 0.2pt;
+    margin-left: 36px;
     position: relative;
     right: 28px;
+    text-align: left;
+    width: 146px;
 }
 .profileTab h5{
     bottom: 14px;
@@ -585,7 +551,13 @@ width:100px;
 .leftBlockProfile .leftNavigation ul{
     float:right;
     width:175px;
+    position: relative;
+    right:0.3%;
 }
+noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
+    right:0.6%;
+}
+
 .leftBlockProfile .leftNavigation ul li{
     background-color:#f5f2e7;
     border-radius: 4px 0 0 4px;
@@ -977,7 +949,84 @@ width:100px;
     background: url('../img/design/accountLayout/1page_middle_separator.png') no-repeat;
     height: 14px;
     width: 800px;
-    margin-bottom: 12px;
+    margin-bottom: 18px;
+}
+.notificationsTab .middleSeparator{
+    background: url('../img/design/accountLayout/middle_double_separator.png') no-repeat;
+    height: 33px;
+    width: 800px;
+    margin-top: 70px;
+}
+
+.notificationsTab .middleSeparatorSecond{
+    background: url('../img/design/accountLayout/middle_double_separator.png') no-repeat;
+    height: 33px;
+    width: 800px;
+    margin-top: 18px;
+}
+.notificationsTab form{
+    margin-left: 24px;
+    margin-top: 29px;
+}
+.notificationsTab form input[type="checkbox"]{
+    margin-right:34px;
+    margin-top:0;
+}
+.notificationsTab label{
+    margin-bottom: 10px;
+    font: 12px helvetica;
+    word-spacing: 2px;
+}
+
+.notificationsTab h5{
+    font:12px helvetica;
+    margin-bottom: 34px;
+    color:#3b4e22;
+}
+.notificationsTab .passwordRecoveryBlock{
+    font: 12px helvetica;
+    margin-top: 27px;
+    word-spacing: 5px;
+}
+.notificationsTab .passwordRecoveryBlock span{
+    bottom: 8px;
+    display: inline-block;
+    position: relative;
+    width: 146px;
+}
+.notificationsTab .passwordRecoveryBlock input{
+    height: 12px;
+    margin: 0 0 17px;
+    width: 166px;
+}
+.notificationsTab form h5{
+    position: relative;
+    right:23px;
+    margin-top:31px;
+    word-spacing: 2px;
+    margin-bottom: 10px;
+}
+.notificationsTab .notifyBlock{
+    margin-bottom: 36px;
+    margin-top: 64px;
+}
+.notificationsTab .notifyBlock h5{
+    bottom: 29px;
+    position: relative;
+    right: 24px !important;
+}
+.notificationsTab .notifyBlock label{
+
+}
+.notificationsTab #saveNotifications{
+    border: medium none;
+    bottom: 21px;
+    color: transparent;
+    height: 13px;
+    position: absolute;
+    right: 40px;
+    width: 46px;
+    background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat;
 }
 /**** MESSAGES ****/
 
@@ -1040,7 +1089,7 @@ ul.messageTabs{
 /* MessageButtons */
 .messageButtons{
 	background: url('../img/design/messagePages/content_top_shadow.png') no-repeat center top;
-	padding: 34px 0px 21px;
+	padding: 34px 0 21px;
 	border-bottom: solid 1px black;
 	line-height: 13px;
 }
@@ -1190,4 +1239,48 @@ ul.messageTabs{
 
 .clear {
     clear: both;
+}
+/*Social buttons*/
+
+.twitterIcon{
+    background-image: url('../img/design/accountLayout/socialIcons.png');
+    background-position: 0 0;
+    height:18px;
+    width:18px;
+    width: 18px;
+    float:left;
+    position: relative;
+    left:105px;
+    bottom:29px;
+}
+.facebookIcon{
+    background-image: url('../img/design/accountLayout/socialIcons.png');
+    background-position: 50% 0;
+    height:18px;
+    width:18px;
+    width: 18px;
+    float:left;
+    position: relative;
+    left:110px;
+    bottom:29px;
+}
+.linkedInIcon{
+    background-image: url('../img/design/accountLayout/socialIcons.png');
+    background-position: 100% 0;
+    height:18px;
+    width:18px;
+    width: 18px;
+    float:left;
+    position: relative;
+    left:114px;
+    bottom:29px;
+}
+.twitterIcon:hover{
+    background-position: 0 100%;
+}
+.facebookIcon:hover{
+    background-position: 50% 100%;
+}
+.linkedInIcon:hover{
+    background-position: 100% 100%;
 }

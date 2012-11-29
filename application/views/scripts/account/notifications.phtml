@@ -3,9 +3,26 @@
     <div class="firstSeparator"></div>
     <h5> I WANT TO:</h5>
 
-<form method = 'post' name='notifications' action='/account/notifications/'>
+<form method = 'post' name = 'notifications' action='/account/notifications/'>
 
     <?php
- echo $this->notificationsForm;?>
+        echo $this->notificationsForm->alert;
+    ?>
+<div class = "middleSeparator"></div>
+<h5> CHANGE AIMYA PASSWORD:</h5>
+    <div class = "passwordRecoveryBlock">
+        <?php echo '<span>Old Password: </span>'. $this->notificationsForm->oldPassword; ?><br>
+        <?php echo '<span>New Password: </span>' . $this->notificationsForm->newPassword; ?><br>
+        <?php echo '<span>Confirm New Password: </span>' . $this->notificationsForm->newPasswordConfirm; ?>
+    </div>
+    <?php
+        if($this->notificationsForm->notify){
+            echo '<div class = "middleSeparatorSecond"></div><div class="notifyBlock"><h5> I WANT TO:</h5>' .$this->notificationsForm->notify .'</div>';
+        }
+    ?>
+
+    <?php
+    echo $this->notificationsForm->saveNotifications;
+    ?>
     </form>
     </div>
