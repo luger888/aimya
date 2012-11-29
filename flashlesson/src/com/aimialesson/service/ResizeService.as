@@ -17,6 +17,7 @@ package com.aimialesson.service
 			super(target);
 			callUrl = Actions.getInstance().resizeUrl;
 			params.full = Main.getInstance().fsMode?"1":"0";
+			trace("params.full:" + params.full);
 		}
 		
 		public function addParams ( value : Object) : void {
