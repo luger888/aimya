@@ -414,20 +414,149 @@ font:15px dosis-semibold-middle;
     margin-top: 10px;
     background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat;
 }
-
-.service {
-    margin: 0 5% 5% 5%;
-    border-bottom: 1px solid #ccc;
+/* Services tab */
+.servicesTab .service {
+    font:  12px arial;
 }
-#addService
+.servicesTab .firstSeparator{
+    background: url('../img/design/accountLayout/1page_middle_separator.png') no-repeat;
+    height: 14px;
+    width: 800px;
+    margin-bottom: 16px;
+}
+.servicesTab .middleSeparator{
+    background: url('../img/design/accountLayout/middle_double_separator.png') no-repeat;
+    height: 33px;
+    width: 800px;
+    margin-top: 40px;
+    margin-bottom: 22px;
+}
+.servicesTab .serviceTitle{
+    color:#1d3300;
+    font: 12px helvetica;
+    text-transform: uppercase;
+
+}
+.servicesTab form .serviceTitle{
+    margin-bottom: 19px;
+    margin-top: 33px;
+}
+.servicesTab .service .serviceBody{
+    font: 700 12px arial;
+    margin:11px 0 30px 3px;
+}
+.servicesTab .service #rate, .service #duration, .service #subcategory{
+    display: inline-block;
+}
+.servicesTab  #lesson_categoryInput, #lesson_categoryEditInput{
+    height: 24px;
+    width: 125px;
+    font:12px arial;
+    margin-right:19px;
+}
+.servicesTab  #subcategoryInput, #subcategoryEditInput{
+    font: 12px arial;
+    height: 12px;
+    width: 116px;
+    margin-right:15px;
+    margin-bottom: 9px;
+}
+.servicesTab  #rateInput, #rateEditInput{
+    font: 12px arial;
+    height: 12px;
+    width: 66px;
+    margin-right: 14px;
+    margin-bottom: 9px;
+}
+.servicesTab  .updateService{
+    background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat left center;
+    border:none;
+    width:65px;
+    float:right;
+    position: relative;
+    text-transform: uppercase;
+    font:12px dosis-semibold-middle;
+    color:#1d3300;
+    left: 17px;
+    top: 2px;
+}
+.servicesTab  #durationInput,  #durationEditInput{
+    font: 12px arial;
+    height: 25px;
+    margin-left: 39px;
+    width: 88px;
+
+}
+.servicesTab  #descriptionInput, #descriptionEditInput{
+     font: 12px arial;
+     height: 110px;
+     width: 787px;
+     resize: none;
+
+ }
+
+.servicesTab #addService
 {
+    font:12px arial;
     display: none;
 }
 
-#addMoreServices{
+.servicesTab #addMoreServices{
     margin: 1% 0 1%;
 }
+.servicesTab #description{
+    margin-left: 2px;
+    margin-top: 8px;
+}
+.servicesTab #editService{
+    background: url('../img/design/accountLayout/glyphicons/edit.png') no-repeat left center;
+    border:none;
+    width:60px;
+    float:right;
+    position: relative;
+    bottom:113px;
+    text-transform: uppercase;
+    font:12px dosis-semibold-middle;
+    color:#1d3300;
+    right: 65px;
+}
 
+.servicesTab #deleteService{
+    background: url('../img/design/accountLayout/glyphicons/delete.png') no-repeat left center;
+    border:none;
+    width:70px;
+    float:right;
+    position: relative;
+    bottom:113px;
+    text-transform: uppercase;
+    font:12px dosis-semibold-middle;
+    color:#1d3300;
+    left: 72px;
+}
+.servicesTab #addMoreServices{
+    background: url('../img/design/accountLayout/glyphicons/add.png') no-repeat left center;
+    border:none;
+    width:85px;
+    float:right;
+    position: relative;
+    text-transform: uppercase;
+    font:12px dosis-semibold-middle;
+    color:#1d3300;
+    left: 10px;
+    bottom:6px;
+}
+.servicesTab #saveService{
+    background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat left center;
+    border:none;
+    width:65px;
+    float:right;
+    position: relative;
+    text-transform: uppercase;
+    font:12px dosis-semibold-middle;
+    color:#1d3300;
+    left: 17px;
+    top: 2px;
+}
 /*Availability tab*/
 
 .availabilityTab .table td{
@@ -517,15 +646,17 @@ width:100px;
     position: relative;
     right: 28px;
     text-align: left;
-    width: 146px;
+    width: 148px;
 }
 .profileTab h5{
     bottom: 14px;
     color: #7F7867;
     font: 11px helvetica;
+    left: 8px;
     margin: 0;
     position: relative;
-    right: 58px;
+    text-align: left;
+    width: 148px;
 }
 .leftNavigation
 {
@@ -903,10 +1034,15 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     margin-left: 30px;
 }
 .userRelations .deleteUser{
-    background: url('../img/design/accountLayout/glyphicons/delete.png') no-repeat;
+    background: url('../img/design/accountLayout/glyphicons/delete.png') no-repeat left center;
     margin-left: 33px;
+    border:none;
+    width:70px;
+    font:12px dosis-semibold-middle;
+    position: relative;
+    bottom:2px;
 }
-.userRelations .blockUser, .userRelations .deleteUser{
+.userRelations .blockUser{
     display: inline-block;
     width:57px;
     height:12px;
@@ -1137,6 +1273,7 @@ ul.messageTabs{
 	box-shadow: 0 0 5px #e5e5e5;
 	-moz-box-shadow: 0 0 5px #e5e5e5; /* Firefox */
     -webkit-box-shadow: 0 0 5px #e5e5e5; /* Safari, Chrome */
+    min-height: 450px;
 }
 
 .userRelations table tr td{

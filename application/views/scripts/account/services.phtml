@@ -1,56 +1,51 @@
 <div id="tabs-2">
     <!--LIST OF SERVICES -->
-    <?php foreach($this->services as $value):?>
-        <div class = 'service'>
-        <div class = 'row-fluid'>
-            <div class='span12'>
-         <?php echo $value['lesson_category'];?> -
-                <?php echo $value['subcategory'];?>
-                $<?php echo $value['rate'];?> per
-                <?php echo $value['duration'];?>
-            </div>
-        </div>
-        <div class='row-fluid'>
-            <div class='span12'>
-                Service Description :<br>
-                <?php echo $value['description'];?>
-            </div>
-        </div>
-        <div class='row-fluid'>
-            <div class='span12 offset1'>
-                    <input type = 'button' id = 'editService' value = 'Edit' class = 'btn' onclick ='editService(this);return false;'>
-                    <input type = 'button' id = 'deleteService' value = 'Delete' class = 'btn' onclick ='deleteService(this);return false;'>
-                    <input type = 'hidden' value = " <?php echo $value['id'];?>">
-            </div>
-        </div>
-    </div>
-<?php endforeach;?>
-    <!-- END LIST OF SERVICES -->
+    <div class="servicesTab">
+        <div class="firstSeparator"></div>
+        <?php foreach ($this->services as $value): ?>
+        <div class='service'>
+            <div id="lesson_category" class="serviceTitle"><?php echo $value['lesson_category'];?></div>
+            <div class = "serviceBody">
+                <div id="subcategory"><?php echo $value['subcategory'];?></div>
 
-    <!-- SERVICE FORM -> ADD NEW: css display:none;-->
-    <div id ="addService">
-        <form method="post" name="serviceDetails" action="account/services" id="serviceForm">
-            <div class="row-fluid">
-                <div class="span12">
-                    <?php echo $this->servicesForm->lesson_category; ?>
-                    <?php echo $this->servicesForm->subcategory; ?>
-                    <?php echo $this->servicesForm->rate; ?> per
-                    <?php echo $this->servicesForm->duration; ?>
-                </div>
-            </div>
-            <div class="row-fluid">
-                <div class="span12">
-                    <?php echo $this->servicesForm->description; ?>
-                </div>
-            </div>
+                $ <div id="rate"> <?php echo $value['rate'];?></div>
 
-            <div class="row-fluid">
-                <div class="span12 offset4">
-                    <?php echo $this->servicesForm->saveService; ?>
-                </div>
+                per <div id="duration"> <?php echo $value['duration'];?></div>
             </div>
-        </form>
+            <div class="serviceTitle"> Service Description :</div>
+
+            <div id="description"><?php echo $value['description'];?></div>
+
+
+            <input type='button' id='editService' value='Edit'  onclick='editService(this);return false;'>
+            <input type='button' id='deleteService' value='Delete' onclick='deleteService(this);return false;'>
+            <input type='hidden' value=" <?php echo $value['id'];?>">
+
+        </div>
+        <?php endforeach;?>
+        <!-- END LIST OF SERVICES -->
+        <div class="middleSeparator"></div>
+        <!-- SERVICE FORM -> ADD NEW: css display:none;-->
+        <div id="addService">
+            <form method="post" name="serviceDetails" action="account/services" id="serviceForm">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <?php echo $this->servicesForm->lesson_category; ?>
+                        <?php echo $this->servicesForm->subcategory; ?>
+                        <?php echo $this->servicesForm->rate; ?> per
+                        <?php echo $this->servicesForm->duration; ?>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div class="serviceTitle">DESCRIBE YOUR SERVICE DETAILS:</div>
+                        <?php echo $this->servicesForm->description; ?>
+                    </div>
+                </div>
+                        <?php echo $this->servicesForm->saveService; ?>
+            </form>
+        </div>
+        <!-- END SERVICE FORM -> ADD NEW : display:block addService form-->
+        <input type="button" id="addMoreServices" value="Add More" onclick="addService();">
     </div>
-    <!-- END SERVICE FORM -> ADD NEW-->
-    <input type = "button" id = "addMoreServices" value = "Add More" class = "btn" onclick = "addService();">
 </div>
