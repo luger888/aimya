@@ -19,11 +19,11 @@ class Application_Form_Profile extends Zend_Form
         // Create one big image with at most 143x300 pixel
 
         $filterChain->appendFilter(new Aimya_Filter_File_Resize(array(
-            'directory' => './img/uploads/'.$identity->id.'/avatar/base/',
-            'width' => 143,
-            'height' => 300,
-            'keepRatio' => true,
-        )));
+        'directory' => './img/uploads/'.$identity->id.'/avatar/base/',
+        'width' => 143,
+        'height' => 300,
+        'keepRatio' => true,
+    )));
         // Create a medium image with at most 104x220 pixels
         $filterChain->appendFilter(new Aimya_Filter_File_Resize(array(
             'directory' => './img/uploads/'.$identity->id.'/avatar/medium/',
@@ -34,14 +34,14 @@ class Application_Form_Profile extends Zend_Form
 
         $avatar = new Zend_Form_Element_File('avatar');
         $avatar
-             ->setAttrib('id', 'avatar')
-             ->addValidator('Size', false, 1024000)
-             ->addValidator('Extension', false, 'jpg,png,gif,jpeg')
-             ->addFilter($filterChain)
-             //->setDestination('./img/uploads/'.$identity->id.'/avatar/')
-             ->removeDecorator('DtDdWrapper')
-             ->removeDecorator('HtmlTag')
-             ->removeDecorator('label');
+            ->setAttrib('id', 'avatar')
+            ->addValidator('Size', false, 1024000)
+            ->addValidator('Extension', false, 'jpg,png,gif,jpeg')
+            ->addFilter($filterChain)
+        //->setDestination('./img/uploads/'.$identity->id.'/avatar/')
+            ->removeDecorator('DtDdWrapper')
+            ->removeDecorator('HtmlTag')
+            ->removeDecorator('label');
 
         $firstName = new Zend_Form_Element_Text('firstname');
         $firstName ->setAttrib('placeholder', 'First Name')

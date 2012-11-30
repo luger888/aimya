@@ -1,12 +1,9 @@
 <?php
 // Aimya/Filter/File/Resize/Adapter/Abstract.php
 /**
- * Zend Framework addition by skoch
  *
  * @category   Aimya
  * @package    Aimya_Filter
- * @license    http://opensource.org/licenses/gpl-license.php GNU Public License
- * @author     Stefan Koch <cct@stefan-koch.name>
  */
 
 
