@@ -32,7 +32,7 @@ $profileModel = new Application_Model_Profile();
 $servicesModel  = new Application_Model_DbTable_ServiceDetail();
 $services = $servicesModel->getServiceByUser($identity->id);
 $username = $userModel->getUser($identity->id);
-$avatarPath = $profileModel->getAvatarPath($identity->id); //path to avatar
+$avatarPath = $profileModel->getAvatarPath($identity->id, 'base'); //path to avatar
 $role = ($username['role'] == '1' ? 'Student' : 'Instructor');
 if (Zend_Registry::isRegistered('username')) {
     $username = Zend_Registry::get('username');

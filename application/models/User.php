@@ -39,12 +39,15 @@ class Application_Model_User
             @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'uploads');
             @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $lastId);
             @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $lastId . DIRECTORY_SEPARATOR . 'avatar');
+            @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $lastId . DIRECTORY_SEPARATOR . 'avatar' . DIRECTORY_SEPARATOR . 'base');
+            @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $lastId . DIRECTORY_SEPARATOR . 'avatar' . DIRECTORY_SEPARATOR . 'medium');
+            @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $lastId . DIRECTORY_SEPARATOR . 'avatar' . DIRECTORY_SEPARATOR . 'thumbnail');
 
             return true;
 
         }else{
 
-            die('problem with email');
+            return false;
 
         }
 

@@ -38,7 +38,7 @@ class Application_Model_DbTable_ServiceDetail extends Application_Model_DbTable_
         );
         $where = array(
 
-            $this->getAdapter()->quoteInto('id=?', $array['hiddenId']),
+            $this->getAdapter()->quoteInto('id=?', $array['updateService']),
             $this->getAdapter()->quoteInto('user_id=?', $id)
 
         );

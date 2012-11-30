@@ -48,11 +48,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         }
     }
 
-    /*protected function _initAcl()
-    {
-        $fc = Zend_Controller_Front::getInstance();
-        $fc->registerPlugin(new Application_Plugin_AccessCheck());
-    }*/
 
     /*protected function _initRestRoute() {
 
@@ -127,6 +122,19 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             ->setRole(Zend_Registry::get('currentRole'));
     }
 
+   /* public function _initConfig(){
+        Zend_Registry::set('constants',
+            new Zend_Config_Ini(
+                APPLICATION_PATH . '/configs/application.ini',
+                'constants')
+        );
+    }*/
 
+    public function _initConfig(){
+        Zend_Registry::set('constants',
+            new Zend_Config_Ini(
+                APPLICATION_PATH . '/configs/application.ini')
+        );
+    }
 }
 
