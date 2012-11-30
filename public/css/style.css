@@ -410,13 +410,15 @@ font:15px dosis-semibold-middle;
 }
 
 #saveProfile{
+    width:65px;
+    text-transform: uppercase;
+    font:12px dosis-semibold-middle;
+    color:#1d3300;
     border:none;
-    width: 46px;
-    height: 13px;
     position: absolute;
     right:-32px;
     margin-top: 10px;
-    background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat;
+    background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat left center;
 }
 /* Services tab */
 .servicesTab .service {
@@ -1007,12 +1009,14 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
 }
 .availabilityTab #save{
     border:none !important;
-    width: 46px;
-    height: 13px;
     position: absolute;
     right: 38px;
     margin-top: 4px;
-    background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat;
+    width:65px;
+    text-transform: uppercase;
+    font:12px dosis-semibold-middle;
+    color:#1d3300;
+    background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat left center;
 }
 .availabilityTab .dateZoneBlock{
     float: right;
@@ -1171,12 +1175,13 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
 .notificationsTab #saveNotifications{
     border: medium none;
     bottom: 21px;
-    color: transparent;
-    height: 13px;
     position: absolute;
     right: 40px;
-    width: 46px;
-    background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat;
+    width:65px;
+    text-transform: uppercase;
+    font:12px dosis-semibold-middle;
+    color:#1d3300;
+    background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat left center;
 }
 /**** MESSAGES ****/
 

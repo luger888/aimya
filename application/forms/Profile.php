@@ -111,7 +111,7 @@ class Application_Form_Profile extends Zend_Form
             -> setAttrib('rows', '7');
 
         $submit = new Zend_Form_Element_Submit('saveProfile');
-        $submit ->setLabel('')
+        $submit ->setLabel('save')
              ->setAttrib('id', 'saveProfile')
             ->setDecorators($this->basicDecorators);
 
