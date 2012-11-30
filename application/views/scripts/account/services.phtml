@@ -17,17 +17,18 @@
             <div id="description"><?php echo $value['description'];?></div>
 
 
-            <input type='button' id='editService' value='Edit'  onclick='editService(this);return false;'>
-            <input type='button' id='deleteService' value='Delete' onclick='deleteService(this);return false;'>
+            <input type='button' id='editService' class = "buttonService edit" value='Edit'  onclick='editService(this);return false;'>
+            <input type='button' id='deleteService' class = "buttonService delete" value='Delete' onclick='deleteService(this);return false;'>
             <input type='hidden' value=" <?php echo $value['id'];?>">
+            <div class="middleSeparator"></div>
 
         </div>
         <?php endforeach;?>
         <!-- END LIST OF SERVICES -->
-        <div class="middleSeparator"></div>
+
         <!-- SERVICE FORM -> ADD NEW: css display:none;-->
         <div id="addService">
-            <form method="post" name="serviceDetails" action="account/services" id="serviceForm">
+            <form method="post" name="serviceDetails" action="/account/services" id="serviceForm">
                 <div class="row-fluid">
                     <div class="span12">
                         <?php echo $this->servicesForm->lesson_category; ?>
@@ -46,6 +47,6 @@
             </form>
         </div>
         <!-- END SERVICE FORM -> ADD NEW : display:block addService form-->
-        <input type="button" id="addMoreServices" value="Add More" onclick="addService();">
+        <input type="button" class = "buttonService add" id="addMoreServices" value="Add More" onclick="addService();">
     </div>
 </div>
