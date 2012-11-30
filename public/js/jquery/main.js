@@ -1,7 +1,9 @@
 $(document).ready(function() {
 
 
-
+    $('#uploadAvatar').click(function(){
+        $('#avatar').click();
+    });
     /* Button bar(radio)*/
     $('.buttonBar label').first().addClass('checked');
     $('.buttonBar input').first().prop('checked', true);

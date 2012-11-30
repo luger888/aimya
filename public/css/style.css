@@ -656,6 +656,7 @@ width:100px;
     width: 180px;
     margin-top: 42px;
 }
+
 .profileTab h3{
     bottom: 4px;
     color: #4A4322;
@@ -677,6 +678,11 @@ width:100px;
     text-align: left;
     width: 148px;
 }
+.profile .profileAvatar input[type="file"]{
+    visibility: hidden;
+    width: 1px;
+}
+
 .leftNavigation
 {
 
@@ -935,10 +941,18 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
 .profile .profileAvatar {
     bottom: 37px;
     float: right;
-    left: 132px;
+    left: 38px;
     overflow: hidden;
     position: relative;
 
+}
+.profile .profileAvatar #uploadAvatar{
+    background: url("../img/design/accountLayout/glyphicons/upload.png") no-repeat scroll left center transparent;
+    border: medium none;
+    bottom: 1px;
+    font: 12px dosis-semibold-middle;
+    position: relative;
+    width: 78px;
 }
 /*.profileAvatar input {
     opacity: 0;
