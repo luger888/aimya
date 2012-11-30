@@ -182,6 +182,12 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                 $dbServiceDetail->updateService($this->getRequest()->getPost(), $identity->id);
 
             }
+            if($this->getRequest()->getParam('deleteAvatar')){
+
+                $dbProfile = new Application_Model_DbTable_Profile();
+                $dbProfile->deleteAvatar($identity->id);
+
+            }
 
 
         }

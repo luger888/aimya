@@ -948,11 +948,20 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
 }
 .profile .profileAvatar #uploadAvatar{
     background: url("../img/design/accountLayout/glyphicons/upload.png") no-repeat scroll left center transparent;
-    border: medium none;
+    border:  none;
     bottom: 1px;
     font: 12px dosis-semibold-middle;
     position: relative;
     width: 78px;
+}
+.profile .profileAvatar #removeAvatar{
+    background: url("../img/design/accountLayout/glyphicons/delete.png") no-repeat scroll left center transparent;
+    border:  none;
+    bottom: 1px;
+    font: 12px dosis-semibold-middle;
+    position: relative;
+    width: 78px;
+    right: 7px;
 }
 /*.profileAvatar input {
     opacity: 0;
