@@ -24,7 +24,7 @@ class Application_Model_User
         $mail->token = $token;
         $mail->baseLink = "http://" . $_SERVER['HTTP_HOST'];
 
-        //if($mail->send()){
+        if($mail->send()){
 
             $user->createUser($array);
             $lastId = $user->getAdapter()->lastInsertId();
@@ -45,11 +45,11 @@ class Application_Model_User
 
             return true;
 
-        //}else{
+        }else{
 
-            //die('problem with email');
+            return false;
 
-        //}
+        }
 
     }
 
