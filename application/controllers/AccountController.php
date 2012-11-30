@@ -55,7 +55,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
 
         if ($this->getRequest()->isPost()) {
             $dbServiceDetail = new Application_Model_DbTable_ServiceDetail();
-            die($this->getRequest()->getParam('saveService'));
+
             if ($this->getRequest()->getParam('saveService')) {
 
                 $formData = $this->getRequest()->getPost();

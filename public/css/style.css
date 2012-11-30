@@ -45,6 +45,10 @@ form{
 
 
 }
+.disabled{
+    pointer-events: none;
+    cursor: default;
+}
 .accountWrapper{
     background: url('../img/design/accountLayout/accountLayoutBackground.png') repeat-y  top center;
 }
@@ -522,39 +526,49 @@ font:15px dosis-semibold-middle;
 }
 
 .servicesTab #deleteService{
-    background: url('../img/design/accountLayout/glyphicons/delete.png') no-repeat left center;
-    border:none;
-    width:70px;
-    float:right;
-    position: relative;
-    bottom:113px;
-    text-transform: uppercase;
-    font:12px dosis-semibold-middle;
-    color:#1d3300;
-    left: 72px;
+     background: url('../img/design/accountLayout/glyphicons/delete.png') no-repeat left center;
+     border:none;
+     width:70px;
+     float:right;
+     position: relative;
+     bottom:113px;
+     text-transform: uppercase;
+     font:12px dosis-semibold-middle;
+     color:#1d3300;
+     left: 72px;
+ }
+.servicesTab .delete.disabled{
+    background: url('../img/design/accountLayout/glyphicons/deleteDisabled.png') no-repeat left center !important;
+    color:grey;
+}
+.servicesTab .add.disabled{
+    background: url('../img/design/accountLayout/glyphicons/addDisabled.png') no-repeat left center !important;
+    color:grey;
+}
+.servicesTab .edit.disabled{
+    background: url('../img/design/accountLayout/glyphicons/editDisabled.png') no-repeat left center !important;
+    color:grey;
 }
 .servicesTab #addMoreServices{
     background: url('../img/design/accountLayout/glyphicons/add.png') no-repeat left center;
     border:none;
     width:85px;
-    float:right;
     position: relative;
     text-transform: uppercase;
     font:12px dosis-semibold-middle;
     color:#1d3300;
-    left: 10px;
+    left: 735px;
     bottom:6px;
 }
 .servicesTab #saveService{
     background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat left center;
     border:none;
     width:65px;
-    float:right;
     position: relative;
     text-transform: uppercase;
     font:12px dosis-semibold-middle;
     color:#1d3300;
-    left: 17px;
+    left: 755px;
     top: 2px;
 }
 /*Availability tab*/
