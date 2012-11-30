@@ -69,8 +69,8 @@ class Application_Form_Profile extends Zend_Form
 
             )
         )
-            ->setValue('male')
-         ->setDecorators($this->basicDecorators);
+            ->setValue('male');
+         #->setDecorators($this->basicDecorators);
 
         $birthday = new Zend_Form_Element_Text('birthday');
         $birthday ->setAttrib('id', 'birthday')

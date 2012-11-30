@@ -45,6 +45,7 @@ form{
 
 
 }
+
 .disabled{
     pointer-events: none;
     cursor: default;
@@ -350,7 +351,7 @@ font:15px dosis-semibold-middle;
     color:white;
     text-shadow: 1px 1px 0 rgba(0,0,0,0.6);
 }
-#gender-element label{
+#registrationFormHolder #gender-element label{
     float: left;
     height: 19px;
     line-height: 11px;
@@ -620,6 +621,8 @@ width:100px;
 .headerAccount{
     width:1135px;
     margin: 0 auto;
+    position: relative;
+    right: 10px;
 }
 .accountContent{
     margin: 0 auto;
@@ -851,23 +854,21 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     margin: 0 5px 2px 0;
 }
 .profile ul li label{
-    margin-top: 9px;
-    bottom: 5px;
+    top: 2px;
     display: inline-block !important;
     font: 12px helvetica;
     position: relative;
 }
-.profile ul li #gender-female{
-    margin-left: 22px;
-}
+
 .profile ul li span{
-    bottom: 5px;
+    top: 4px;
     display: inline-block;
     font: 12px helvetica;
     left: 2px;
     position: relative;
-    width: 93px;
+    width: 97px;
     word-spacing: 3px;
+    float:left;
 }
 .profile ul li #birthday{
     width:82px;
@@ -879,6 +880,27 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     display: inline-block;
     margin:0;
 
+}
+.profile #gender-element label{
+    margin-right:20px;
+    position: relative;
+    right: 5px;
+}
+.profile #gender-element input[type="radio"]{
+    opacity: 0;
+}
+
+.profile #gender-element .checked{
+    background: url('../img/design/mainPage/buttons/genderChecked.png') no-repeat;
+
+}
+.profile #gender-element label:not(.checked){
+    background: url('../img/design/mainPage/buttons/gender.png') no-repeat;
+}
+.profile  #gender-label{
+    bottom: 4px;
+    position: relative;
+    float: left;
 }
 .profile ul li #timezone{
     bottom: 7px;
@@ -990,6 +1012,8 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     height: 24px;
     padding: 2px 0 0 5px;
     width: 101px;
+    -webkit-appearance: none;
+
 }
 
 .styledSelect {
