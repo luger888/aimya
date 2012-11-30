@@ -3,3 +3,4 @@ library\Zend\
 library/Zend/
 public/img/uploads/
 public/presentation/
+public/.htaccess
