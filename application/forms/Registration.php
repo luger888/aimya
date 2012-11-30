@@ -80,11 +80,11 @@ class Application_Form_Registration extends Zend_Form
             ->setLabel('Password:');
 
         $password2 = new Zend_Form_Element_Password('password2');
-        $password2 ->setRequired(true)
-            ->addValidator('NotEmpty')
+        $password2 #->setRequired(true)
+            #->addValidator('NotEmpty')
            #->addValidator('stringLength', false, array(6, 200))
             #->setAttrib('placeholder', 'Confirm password')
-            ->setErrorMessages(array('Retype your password'))
+           # ->setErrorMessages(array('Retype your password'))
             ->setAttrib('class', 'clearInput regTextInput')
             ->addFilters($this->basicFilters)
             ->setLabel('Confirm password:');
