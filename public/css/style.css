@@ -933,13 +933,11 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     height: 24px;
 }
 .profile .profileAvatar {
-    cursor: pointer;
-
+    bottom: 37px;
     float: right;
-    position: relative;
-    bottom:31px;
+    left: 132px;
     overflow: hidden;
-    left:28px;
+    position: relative;
 
 }
 /*.profileAvatar input {
@@ -947,10 +945,7 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     overflow: hidden;
     margin-left: -500px;
 }*/
-.profileAvaImg img{
-    width:127px;
-    max-height: 126px;
-}
+
 /*Availability Tab*/
 
 .availabilityTab{
