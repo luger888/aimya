@@ -990,6 +990,7 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     height: 24px;
     padding: 2px 0 0 5px;
     width: 101px;
+    -webkit-appearance: none;
 }
 
 .styledSelect {
