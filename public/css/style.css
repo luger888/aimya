@@ -621,6 +621,8 @@ width:100px;
 .headerAccount{
     width:1135px;
     margin: 0 auto;
+    position: relative;
+    right: 10px;
 }
 .accountContent{
     margin: 0 auto;
