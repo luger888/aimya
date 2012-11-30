@@ -1248,11 +1248,13 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
  display: block;
 }
 .messageHeader{
+	padding-top: 7px;
 }
 /* messageTabs */
 ul.messageTabs{
 	float:left;
-	margin: 0px 0px 0px 22px;
+	margin: 0px 0px 0px 11px;
+	font: 13px dosis-semibold-middle;
 }
 .nav-tabs.messageTabs li{
 	float:left;
@@ -1286,8 +1288,8 @@ ul.messageTabs{
 /* MessageButtons */
 .messageButtons{
 	background: url('../img/design/messagePages/content_top_shadow.png') no-repeat center top;
-	padding: 34px 0 21px;
-	border-bottom: solid 1px black;
+	padding: 32px 0 17px;
+	border-bottom: solid 1px #dbdbde;
 	line-height: 13px;
 }
 .msgBtn{
@@ -1295,27 +1297,33 @@ ul.messageTabs{
 	font-size: 12px;
 	line-height: 13px;
 	text-transform: uppercase;
-	background: url('../img/design/messagePages/archived.png') no-repeat left top;
+	background: none;
 	color: #1d3300;
 	display: inline-block;
+	font: 12px dosis-semibold-middle;
 }
 .msgBtn.createNew{
+	margin-left: 9px;
 	padding-left: 24px;
 	background: url('../img/design/messagePages/envelope.png') no-repeat left top;
 }
 .msgBtn.archived{
+	margin-right: 26px;
 	padding-left: 19px;
 	background: url('../img/design/messagePages/archived.png') no-repeat left top;
 }
 .msgBtn.trash{
+	margin-right: 9px;
 	padding-left: 18px;
 	background: url('../img/design/messagePages/trash.png') no-repeat left top;
 }
 .msgBtn.delete{
+	margin-right: 26px;
 	padding-left: 18px;
 	background: url('../img/design/messagePages/delete.png') no-repeat left top;
 }
 .msgBtn.inbox{
+	margin-right: 26px;
 	padding-left: 18px;
 	background: url('../img/design/messagePages/inbox.png') no-repeat left top;
 }
@@ -1329,13 +1337,27 @@ ul.messageTabs{
 .messageContent{
 	background: #ffffff;
 	width: 805px;
-	margin: 0px 14px;
+	margin: 0px 2px;
 	padding: 20px 31px 0px;
 	box-shadow: 0 0 5px #e5e5e5;
 	-moz-box-shadow: 0 0 5px #e5e5e5; /* Firefox */
     -webkit-box-shadow: 0 0 5px #e5e5e5; /* Safari, Chrome */
     min-height: 450px;
 }
+.userMessages table tr td{
+    padding:6px;
+    height:18px;
+    word-spacing: 2px;
+    font:12px helvetica;
+}
+/*User Relations td widths */
+.userMessages table tr td:last-child{width: 157px;}
+.userMessages table tr td:nth-child(3){ width:126px;}
+.userMessages table tr td:nth-child(1){ width:82px;}
+.userMessages table tr td:nth-child(2){ width:110px;}
+.userMessages table tr td:nth-child(4){width: 106px;}
+
+
 
 .userRelations table tr td{
     padding:6px;

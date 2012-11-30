@@ -3,29 +3,34 @@
 <?php $sender = $this->sender; ?>
 <?php ?>
 <?php $form = $this->form;?>
-<form method="post" action="/message/reply/">
-    <table width="300px">
-        <tr>
-            <td><p style="display: none">
-                <?php echo $form->message_id->setValue(Zend_Controller_Front::getInstance()->getRequest()->getParam('message_id'));?>
-                <?php echo $form->username->setValue($sender['username']);?>
-            </p></td>
-            <td><p><?php echo $message['theme']?></p></td>
-        </tr>
-        <tr>
-            <td><p style="display: none"><?php echo $form->subject->setValue($message['theme'])?></p></td>
-            <td><p style="color:grey"><?php echo $sender['username']?> to me</p></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><p><?php echo $message['text']?></p></td>
-        </tr>
-        <tr>
-            <td>Content</td>
-            <td><?php echo $form->content?></td>
-        </tr>
-        <tr>
-            <td><?php echo $form->sendbutton?></td>
-        </tr>
-    </table>
-</form>
+<div class= "messageContent">
+	<div class="messageButtons clearfix">
+    	<span class="msgBtn">Create New Message</span>
+	</div>
+	<form method="post" action="/message/reply/">
+	    <table width="300px">
+	        <tr>
+	            <td><p style="display: none">
+	                <?php echo $form->message_id->setValue(Zend_Controller_Front::getInstance()->getRequest()->getParam('message_id'));?>
+	                <?php echo $form->username->setValue($sender['username']);?>
+	            </p></td>
+	            <td><p><?php echo $message['theme']?></p></td>
+	        </tr>
+	        <tr>
+	            <td><p style="display: none"><?php echo $form->subject->setValue($message['theme'])?></p></td>
+	            <td><p style="color:grey"><?php echo $sender['username']?> to me</p></td>
+	        </tr>
+	        <tr>
+	            <td></td>
+	            <td><p><?php echo $message['text']?></p></td>
+	        </tr>
+	        <tr>
+	            <td>Content</td>
+	            <td><?php echo $form->content?></td>
+	        </tr>
+	        <tr>
+	            <td><?php echo $form->sendbutton?></td>
+	        </tr>
+	    </table>
+	</form>
+</div>
