@@ -1360,11 +1360,11 @@ ul.messageTabs{
     margin: -6px 0 0;
 }
 
-.ui-widget-content .ui-icon{
+.userRelations .ui-widget-content .ui-icon{
     background: url('../img/design/accountLayout/dialogClose.png') no-repeat;
     padding: 10px 0 0 0 !important;
 }
-.ui-dialog  .ui-widget-content .ui-icon:hover{
+.userRelations .ui-dialog  .ui-widget-content .ui-icon:hover{
     background: url('../img/design/accountLayout/dialogClose.png') no-repeat;
 }
 .ui-dialog  .ui-state-hover{
