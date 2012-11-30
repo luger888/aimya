@@ -5,12 +5,12 @@
 <div class= "messageContent">
 	<div class="messageButtons clearfix">
     	<span class="msgBtn createNew" onclick="document.location='/message/send/'">Create New</span>
-    	<span class="msgBtn archived" onclick="document.location='/message/send/'">Move to Archived</span>
     	<span class="msgBtn trash" onclick="document.location='/message/send/'">Move to Trash</span>
+    	<span class="msgBtn archived" onclick="document.location='/message/send/'">Move to Archived</span>
 	</div>
-    <div class = "userRelations">
-<?php //    <table  class="table table-striped table-hover"> ?>
-		<table  class="">
+    <div class = "userMessages">
+    <table  class="">
+<?php /*    <table  class="table table-striped table-hover"> 
 	        <thead style="">
 	        <tr>
 	            <td> </td>
@@ -19,7 +19,7 @@
 	            <td> Message </td>
 	            <td> Action </td>
 	        </tr>
-	        </thead>
+	        </thead> */?>
 	        <tbody>
 	        <?php
 	        if($this->messages){
