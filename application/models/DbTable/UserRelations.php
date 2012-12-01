@@ -10,7 +10,7 @@ class Application_Model_DbTable_UserRelations extends Application_Model_DbTable_
         $sender_id = (int)$sender_id;
         $row = $this->fetchAll(
             $this->select()
-                ->where('sender_id=?' , $sender_id)
+                ->where('(' . $this->getAdapter()->quoteInto('sender_id=?' , $sender_id) . ') OR (' . $this->getAdapter()->quoteInto('friend_id=?' , $sender_id) . ')')
                 ->where('sender_status=?' , 1)
                 ->where('recipient_status=?' , 1)
         );
