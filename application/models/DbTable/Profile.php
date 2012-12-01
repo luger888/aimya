@@ -30,6 +30,17 @@ class Application_Model_DbTable_Profile extends Application_Model_DbTable_Abstra
 
     }
 
+    public function deleteAvatar($id)
+    {
+        $data = array(
+
+            'avatar'=> ''
+
+        );
+        $where = $this->getAdapter()->quoteInto('user_id = ?', (int)$id);
+        $this->update($data, $where);
+    }
+
     public function getProfile($user_id){
         $user_id = (int)$user_id;
         $row = $this->fetchRow($this->select()->where('user_id = ?', $user_id));
