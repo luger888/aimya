@@ -1504,3 +1504,18 @@ ul.messageTabs{
 .linkedInIcon:hover{
     background-position: 100% 100%;
 }
+
+.searchForm {
+    display: block;
+    left: 220px;
+    padding: 0;
+    position: absolute;
+    top: 13px;
+}
+
+.searchForm .btnSearch {
+    margin-bottom: 9px;
+}
+.searchForm .searchField {
+    height: 16px
+}

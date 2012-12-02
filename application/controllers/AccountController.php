@@ -70,7 +70,36 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
 
         }
 
-        $this->view->services = $servicesModel->getServiceByUser($identity->id);
+        $this->view->services = $servicesModel->getServiceByUser($identity->id, 1);
+        $this->view->servicesForm = $servicesForm;
+    }
+
+    public function requestservicesAction()
+    {
+        $this->_helper->layout()->disableLayout();
+
+        $identity = Zend_Auth::getInstance()->getStorage()->read();
+        $servicesForm = new Application_Form_ServiceDetails();
+        $servicesModel = new Application_Model_DbTable_ServiceDetail();
+
+        if ($this->getRequest()->isPost()) {
+            $dbServiceDetail = new Application_Model_DbTable_ServiceDetail();
+
+            if ($this->getRequest()->getParam('saveService')) {
+
+                $formData = $this->getRequest()->getPost();
+
+                if ($servicesForm->isValid($formData)) {
+                    $dbServiceDetail->addService($formData, $identity->id);
+                    $this->_helper->redirector('index', 'account');
+                }
+
+            }
+
+
+        }
+
+        $this->view->services = $servicesModel->getServiceByUser($identity->id, 2);
         $this->view->servicesForm = $servicesForm;
     }
 
@@ -141,7 +170,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         $identity = Zend_Auth::getInstance()->getStorage()->read();
 
         $servicesModel = new Application_Model_DbTable_ServiceDetail();
-        $this->view->services = $servicesModel->getServiceByUser($identity->id);
+        $this->view->services = $servicesModel->getServiceByUser($identity->id, 1);
 
         $profileModel = new Application_Model_Profile();
         $this->view->profile = $profileModel->getProfileAccount($identity->id);
