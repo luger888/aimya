@@ -26,6 +26,9 @@ class SearchController extends Aimya_Controller_BaseController
     {
 
         $serviceTable = new Application_Model_DbTable_ServiceDetail();
+        @mkdir(realpath(APPLICATION_PATH) . DIRECTORY_SEPARATOR . 'data');
+        @mkdir(realpath(APPLICATION_PATH) . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'search_indexes');
+        
         $index = Zend_Search_Lucene::create(realpath(APPLICATION_PATH . '/data/search_indexes'));
         $services = $serviceTable->getServices();
         foreach($services as $service)
