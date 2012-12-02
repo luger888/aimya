@@ -17,6 +17,21 @@ class Application_Form_ServiceDetails extends Zend_Form
         }
         $this->setName('serviceDetails');
 
+        $action = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
+        if($action == 'requestservices') {
+
+        }
+
+        $serviceType = new Zend_Form_Element_Hidden('service_type');
+        $serviceType->setAttrib('id', 'service_type')
+            ->addFilters($this->basicFilters)
+            ->setDecorators($this->basicDecorators);
+        if($action == 'requestservices') {
+            $serviceType->setValue(2);
+        } else {
+            $serviceType->setValue(1);
+        }
+
         $lesson_category = new Zend_Form_Element_Select('lesson_category');
         $lesson_category->setAttrib('id', 'lesson_categoryInput')
             ->addFilters($this->basicFilters)
@@ -61,7 +76,7 @@ class Application_Form_ServiceDetails extends Zend_Form
             ->setAttrib('id', 'saveService')
             ->setDecorators($this->basicDecorators);
 
-        $this->addElements(array($lesson_category, $subcategory, $rate, $duration, $description, $submit));
+        $this->addElements(array($serviceType, $lesson_category, $subcategory, $rate, $duration, $description, $submit));
 
     }
 }

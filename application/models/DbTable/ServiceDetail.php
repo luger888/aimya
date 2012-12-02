@@ -10,6 +10,7 @@ class Application_Model_DbTable_ServiceDetail extends Application_Model_DbTable_
 
             'user_id' => (int)$id,
             'lesson_category' => $array['lesson_category'],
+            'service_type' => $array['service_type'],
             'subcategory' => $array['subcategory'],
             'rate' => (int)$array['rate'],
             'duration' => $array['duration'],
@@ -27,7 +28,7 @@ class Application_Model_DbTable_ServiceDetail extends Application_Model_DbTable_
     {
 
         $data = array(
-
+            'service_type' => $array['service_type'],
             'lesson_category'=> $array['lesson_category'],
             'subcategory' => $array['subcategory'],
             'rate' => (int)$array['rate'],
@@ -58,10 +59,13 @@ class Application_Model_DbTable_ServiceDetail extends Application_Model_DbTable_
 
     }
 
-    public function getServiceByUser($user_id)
+    public function getServiceByUser($user_id, $serviceType)
     {
         $user_id = (int)$user_id;
-        $row = $this->fetchAll($this->select()->where('user_id=?' , (int)$user_id));
+        $row = $this->fetchAll(
+            $this->select()
+                ->where('(' . $this->getAdapter()->quoteInto('user_id=?' , (int)$user_id) . ') AND (' . $this->getAdapter()->quoteInto('service_type=?' , (int)$serviceType) . ')')
+        );
         if (!$row) {
             throw new Exception("There is no element with ID: $user_id");
         }
@@ -69,5 +73,16 @@ class Application_Model_DbTable_ServiceDetail extends Application_Model_DbTable_
         return $row->toArray();
     }
 
+    public function getServices()
+    {
+        $row = $this->fetchAll(
+            $this->select()
+        );
+        if (!$row) {
+            throw new Exception("There is no any services");
+        }
+
+        return $row->toArray();
+    }
 
 }

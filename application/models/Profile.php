@@ -21,7 +21,7 @@ class Application_Model_Profile
         $user = $userModel->getUser($user_id);
         $avatarName = $profile['avatar'];
         if($avatarName){
-            $avatarPath = 'img/uploads/'.$user_id.'/avatar/'. $imageType . '/' .$avatarName;
+            $avatarPath = '/img/uploads/'.$user_id.'/avatar/'. $imageType . '/' .$avatarName;
         }else{
             if($user['gender'] == 'male'){
                 $avatarPath ='/img/design/accountLayout/' . $imageType . '/maleDefault.png';
