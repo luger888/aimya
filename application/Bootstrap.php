@@ -80,7 +80,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
           return $cache;
 
          */
-        $frontendOptions = array(
+        /*$frontendOptions = array(
             'lifetime' => 10800,
             'automatic_serialization' => true,
             'debug_header' => true,
@@ -116,7 +116,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         );
         $cache = Zend_Cache::factory('Core', 'File', $cacheFrontendOptions, $cacheBackendOptions);
         Zend_Registry::set('cache', $cache);
-        return $cache;
+        return $cache;*/
     }
 
     /*protected function _initRestRoute() {
