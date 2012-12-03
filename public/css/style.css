@@ -143,7 +143,7 @@ font:15px dosis-semibold-middle;
     float: right;
     font: 12px dosis-semibold-middle;
     height: 5%;
-    margin-right: 4%;
+    margin-right: 38px;
     margin-top: 4px;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
 }
@@ -159,7 +159,7 @@ font:15px dosis-semibold-middle;
     margin-left: 19px;
     padding-bottom: 11px;
     padding-left: 23px;
-    padding-top: 14px;
+    padding-top: 11px;
 }
 #globalNav ul li:first-child {
     background: none;
@@ -1530,12 +1530,17 @@ ul.messageTabs{
     left: 220px;
     padding: 0;
     position: absolute;
-    top: 13px;
+    top: 9px;
 }
 
 .searchForm .btnSearch {
     margin-bottom: 9px;
 }
 .searchForm .searchField {
-    height: 16px
+    height: 18px;
+    width: 200px;
+    font-size: 13px;
+    padding-left: 22px !important;
+    background-color: white !important;
+    background:url('../img/design/accountLayout/glyphicons/search.png')no-repeat scroll 3% 64% transparent;
 }
