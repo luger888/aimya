@@ -26,31 +26,25 @@ package com.aimialesson.UI.views
 	[Event (name="changeScreenState", type="com.aimialesson.events.AppEvent")]
 	public class MainUI extends SkinnableComponent
 	{
-		[SkinPart (required="false")]
-		public var videoChatContainer:MainUIContainer;
-		[SkinPart (required="false")]
-		public var notesContainer:MainUIContainer;
-		[SkinPart (required="false")]
-		public var tPresentationContainer:MainUIContainer;
-/*		[SkinPart (required="false")]
-		public var presentationContainer:MainUIContainer;
-		[SkinPart (required="false")]
-		public var uploadContainer:MainUIContainer;
 		[SkinPart (required="true")]
-		public var headerContainer:MainUIContainer;*/
-		[SkinPart (required="false")]
+		public var videoChatContainer:MainUIContainer;
+		[SkinPart (required="true")]
+		public var notesContainer:MainUIContainer;
+		[SkinPart (required="true")]
+		public var tPresentationContainer:MainUIContainer;
+		[SkinPart (required="true")]
 		public var presentationTitleContainer:MainUIContainer;
-		[SkinPart (required="false")]
+		[SkinPart (required="true")]
 		public var remainingTimeContainer:MainUIContainer;
 		[SkinPart (required="false")]
 		public var totalTimeContainer:MainUIContainer;
-		[SkinPart (required="false")]
+		[SkinPart (required="true")]
 		public var onlineStudentContainer:MainUIContainer;
-		[SkinPart (required="false")]
+		[SkinPart (required="true")]
 		public var goFSBtn:Button;
-		[SkinPart (required="false")]
+		[SkinPart (required="true")]
 		public var startSessionBtn:Button;
-		[SkinPart (required="false")]
+		[SkinPart (required="true")]
 		public var stopSessionBtn:Button;
 		[SkinPart (required="false")]
 		public var debugger:TextArea;
@@ -74,10 +68,6 @@ package com.aimialesson.UI.views
 				tPresentationContainer.content = tPresentationUI;
 			} else if ( instance == notesContainer ) {
 				notesContainer.content = notesUI;				
-			//} else if ( instance == uploadContainer ) {
-				//uploadContainer.content = uploadUI;
-			//} else if ( instance == headerContainer ) {
-				//headerContainer.content = headerUI;
 			} else if ( instance == videoChatContainer ) {
 				videoChatContainer.content = videoChatUI;
 			} else if ( instance == presentationTitleContainer ) {
@@ -99,9 +89,6 @@ package com.aimialesson.UI.views
 		
 		override protected function partRemoved ( partName : String, instance : Object) : void {
 			trace("MainUI partRemoved:" + partName);
-			if ( instance == tPresentationContainer ) {
-				tPresentationUI.initSize();
-			}
 		}
 		
 		private function onAddedToStage(event:Event):void {
@@ -128,33 +115,6 @@ package com.aimialesson.UI.views
 			return notes;
 		}
 		
-		/*private var header:HeaderUI;
-		public function get headerUI () : HeaderUI {
-			if (!header) {
-				header = new HeaderUI();
-				header.addEventListener( AppEvent.CHANGE_SCREEN_STATE, onAppEvent );
-			}
-			return header;
-		}*/
-		
-		/*private var upload:UploadUI;
-		public function get uploadUI () : UploadUI {
-			if (!upload) {
-				upload = new UploadUI();
-				upload.addEventListener( PresentationEvent.PRESENTATION_UPLOADED, onPresentationEvent );
-			}
-			return upload;
-		}
-		
-		private var presentation:PresentationUI;
-		public function get presentationUI () : PresentationUI {
-			if (!presentation) {
-				presentation = new PresentationUI();
-				presentation.addEventListener( PresentationEvent.MOVE_TO_LEFT, onPresentationEvent );
-				presentation.addEventListener( PresentationEvent.MOVE_TO_RIGHT, onPresentationEvent );
-			}
-			return presentation;
-		}*/
 		private var tPresentation:TPresentationUI;
 		public function get tPresentationUI () : TPresentationUI {
 			if (!tPresentation) {

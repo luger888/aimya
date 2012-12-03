@@ -143,8 +143,9 @@ font:15px dosis-semibold-middle;
     float: right;
     font: 12px dosis-semibold-middle;
     height: 5%;
-    margin-right: 4%;
-    margin-top: 14px;
+    margin-right: 38px;
+    margin-top: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
 }
 #globalNav a{color:#d7e4b9;}
 #globalNav ul {
@@ -153,10 +154,12 @@ font:15px dosis-semibold-middle;
 }
 
 #globalNav ul li{
-    display: inline;
-    margin-left: 28px;
-    padding-left: 12px;
-    background: url('../img/design/mainPage/navSeparator.png') no-repeat 0 0;
+    background: url("../img/design/mainPage/navSeparator.png") no-repeat scroll 0 0 transparent;
+    display: inline-block;
+    margin-left: 19px;
+    padding-bottom: 11px;
+    padding-left: 23px;
+    padding-top: 11px;
 }
 #globalNav ul li:first-child {
     background: none;
@@ -408,6 +411,7 @@ font:15px dosis-semibold-middle;
 
 #intro, #description{
     width: 788px;
+    border-radius: 0 ;
 }
 
 #saveProfile{
@@ -417,9 +421,13 @@ font:15px dosis-semibold-middle;
     color:#1d3300;
     border:none;
     position: absolute;
-    right:-32px;
+    right:-49px;
     margin-top: 10px;
     background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat left center;
+}
+
+#saveProfile:hover, .availabilityTab #save:hover, .servicesTab .updateService:hover, .notificationsTab #saveNotifications:hover{
+    background: url('../img/design/accountLayout/glyphicons/saveHover.png') no-repeat left center;
 }
 /* Services tab */
 .servicesTab .service {
@@ -527,7 +535,9 @@ font:15px dosis-semibold-middle;
     color:#1d3300;
     right: 65px;
 }
-
+.servicesTab #editService:hover{
+    background: url('../img/design/accountLayout/glyphicons/editHover.png') no-repeat left center;
+}
 .servicesTab #deleteService{
      background: url('../img/design/accountLayout/glyphicons/delete.png') no-repeat left center;
      border:none;
@@ -562,6 +572,9 @@ font:15px dosis-semibold-middle;
     color:#1d3300;
     left: 735px;
     bottom:6px;
+}
+.servicesTab #addMoreServices:hover{
+    background: url('../img/design/accountLayout/glyphicons/addHover.png') no-repeat left center;
 }
 .servicesTab #saveService{
     background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat left center;
@@ -778,9 +791,10 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
 .mainBlockProfile  .ui-tabs-panel{
     padding: 20px 31px !important;
     background-color:white !important;
-    -webkit-box-shadow: 0 0 3px 0 #888888;
-    box-shadow: 0 0 3px 0 #888888;
-    -moz-box-shadow: 0 0 3px 0 #888888;
+    -webkit-box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 7px 3px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.1);
+    border-radius:0;
     min-height: 500px;
 }
 .mainBlockProfile .ui-tabs .ui-tabs-nav{
@@ -795,16 +809,20 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
 .mainBlockProfile .ui-tabs .ui-tabs-nav li a{
     padding: 7px 14px;
     margin-top:3px;
-}
+    color:#534b35;
 
+}
+.mainBlockProfile .ui-tabs .ui-tabs-nav:not(.ui-tabs-active)  a{
+    text-shadow: 1px 0 1px rgba(253, 252, 239, 1);
+}
 .mainBlockProfile .ui-tabs .ui-tabs-nav li:not(.ui-state-active){
     margin:0;
     border:none !important;
     border-radius: 2px 2px 0 0 !important;
     background: none !important;
-    -webkit-box-shadow: 4px -5px 5px -5px #888888 inset;
-    box-shadow: 4px -5px 5px -5px #888888 inset;
-    -moz-box-shadow: 4px -5px 5px -5px #888888 inset;
+    -webkit-box-shadow: 5px -5px 9px -8px #888888 inset;
+    box-shadow: 5px -5px 9px -8px #888888 inset;
+    -moz-box-shadow: 5px -5px 9px -8px #888888 inset;
     background: #f0eed9 !important; /* Old browsers */
     background: -moz-linear-gradient(top,  #f0eed9 0%, #d0cc9d 100%)!important; /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f0eed9), color-stop(100%,#d0cc9d)) !important; /* Chrome,Safari4+ */
@@ -824,6 +842,7 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
 .mainBlockProfile .ui-widget-header,.mainBlockProfile .ui-widget-content {
     border:none;
     background: none;
+    border-radius: 0;
 }
 
 
@@ -930,7 +949,7 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
 
 .profile ul li textarea{
     resize: none;
-    height: 190px !important;
+    height: 100px !important;
     font: 12px helvetica;
 
 }
@@ -954,6 +973,9 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     position: relative;
     width: 78px;
 }
+.profile .profileAvatar #uploadAvatar:hover{
+    background: url("../img/design/accountLayout/glyphicons/uploadHover.png") no-repeat scroll left center transparent;
+}
 .profile .profileAvatar #removeAvatar{
     background: url("../img/design/accountLayout/glyphicons/delete.png") no-repeat scroll left center transparent;
     border:  none;
@@ -962,6 +984,9 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     position: relative;
     width: 78px;
     right: 7px;
+}
+.profile .profileAvatar #removeAvatar:hover, .servicesTab #deleteService:hover, .userRelations .deleteUser:hover{
+    background: url("../img/design/accountLayout/glyphicons/deleteHover.png") no-repeat scroll left center transparent;
 }
 /*.profileAvatar input {
     opacity: 0;
@@ -1092,6 +1117,9 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
 .userRelations .blockUser{
     background: url('../img/design/accountLayout/glyphicons/block.png') no-repeat;
     margin-left: 30px;
+}
+.userRelations .blockUser:hover{
+    background: url('../img/design/accountLayout/glyphicons/blockHover.png') no-repeat;
 }
 .userRelations .deleteUser{
     background: url('../img/design/accountLayout/glyphicons/delete.png') no-repeat left center;
@@ -1481,7 +1509,7 @@ ul.messageTabs{
     width: 18px;
     float:left;
     position: relative;
-    left:110px;
+    left:109px;
     bottom:29px;
 }
 .linkedInIcon{
@@ -1492,7 +1520,7 @@ ul.messageTabs{
     width: 18px;
     float:left;
     position: relative;
-    left:114px;
+    left:113px;
     bottom:29px;
 }
 .twitterIcon:hover{
@@ -1510,12 +1538,34 @@ ul.messageTabs{
     left: 220px;
     padding: 0;
     position: absolute;
-    top: 13px;
+    top: 9px;
 }
 
 .searchForm .btnSearch {
     margin-bottom: 9px;
+    display: none;
 }
 .searchForm .searchField {
-    height: 16px
+    height: 18px;
+    width: 200px;
+    font-size: 13px;
+    padding-left: 22px !important;
+    background-color: white !important;
+    background:url('../img/design/accountLayout/glyphicons/search.png')no-repeat scroll 3% 64% transparent;
 }
+/*Latest featured*/
+
+.featuresTab .viewProfile{
+    font:12px dosis-semibold-middle;
+    text-decoration: none;
+    color:#1d3300;
+    background: url("../img/design/accountLayout/glyphicons/profileId.png") no-repeat scroll 0 52% transparent;
+    padding-left: 22px;
+}
+.featuresTab .viewProfile:hover{
+    background: url("../img/design/accountLayout/glyphicons/profileIdHover.png") no-repeat scroll 0 52% transparent;
+    padding-left: 22px;
+}
+
+
+

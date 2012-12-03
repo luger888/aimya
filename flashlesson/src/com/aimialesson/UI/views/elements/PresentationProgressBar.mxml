@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" creationComplete="group1_creationCompleteHandler(event)" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			private var fillShape:Shape;
+			[Bindable]
+			private var _percent:int;
+			public function set percent ( value : Number ) : void {
+				_percent = Math.round (value * 100);
+				fillShape.graphics.clear();
+				fillShape.graphics.beginFill( 0x000000);
+				fillShape.graphics.drawRect( 0, 0, value * maskFullWidth, maskFullHeight);
+				fillShape.graphics.endFill();
+			}
+			
+			public function get maskFullWidth () : Number {
+				return bg.width + 5;
+			}
+			public function get maskFullHeight () : Number {
+				return 20;
+			}
+
+			protected function group1_creationCompleteHandler(event:FlexEvent):void
+			{
+				// TODO Auto-generated method stub
+				fillShape = new Shape();
+				maskSVE.addChild(fillShape);
+			}
+
+		]]>
+	</fx:Script>
+	
+	<s:HGroup width="100%" height="20" gap="5">
+		<s:Group width="100%" height="20">
+			<s:BitmapImage id="bg" source="@Embed('flashassets/2white_background.png')" verticalCenter="0" />
+			<s:BitmapImage id="fillBG" source="@Embed('flashassets/1green_background.png')"  verticalCenter="0" mask="{maskSVE}"/>
+			<s:SpriteVisualElement id="maskSVE"  />
+		</s:Group>
+		<s:Group height="20">
+			<s:RichText id="percentRT" text="{_percent + '%'}" verticalCenter="0"/>
+		</s:Group>
+	</s:HGroup>
+</s:Group>

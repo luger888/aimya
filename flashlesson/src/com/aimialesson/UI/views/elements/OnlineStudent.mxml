@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 xmlns:elements="com.aimialesson.UI.views.elements.*">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>	
+	<fx:Script>
+		<![CDATA[
+			import com.aimialesson.UI.skins.elements.StartSessionBtnSkin;
+			import com.aimialesson.UI.skins.elements.EnterBtnSkin;
+			import com.aimialesson.model.User;
+		]]>
+	</fx:Script>
+	<s:HGroup>
+		<s:RichText text="{User.getInstance().partnerRole == User.STUDENT?'ONLINE STUDENT:':'ONLINE INSTRUCTOR:'}" styleName="HeaderStyle" />
+		<s:RichText id="partnerUserName" text="{User.getInstance().partnerName}" styleName="SmallNameStyle"/>
+		<elements:Lamp id="partnerLamp" />
+	</s:HGroup>
+</s:Group>
