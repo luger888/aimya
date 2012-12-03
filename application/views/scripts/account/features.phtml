@@ -1,12 +1,14 @@
-<?php echo $this->filters->author; ?>
-<?php echo $this->filters->lesson_category.'<br>'; ?>
-<?php $profileModel = new Application_Model_Profile(); ?>
-<div class= "messageContent">
-<?php //Zend_Debug::dump($this->featured); ?>
-<?php foreach($this->featured as $person): ?>
+<div class = "featuresTab">
+    <?php echo $this->filters->author; ?>
+    <?php echo $this->filters->lesson_category.'<br>'; ?>
+    <?php $profileModel = new Application_Model_Profile(); ?>
+    <div class= "messageContent">
+    <?php //Zend_Debug::dump($this->featured); ?>
+    <?php foreach($this->featured as $person): ?>
 
-    <?php $avatarPath = $profileModel->getAvatarPath($person['id'], 'medium') ?>
-    <img src="<?php echo $avatarPath;?>">
-    <?php echo $person['firstname'].' URL: <a href="/user/'.$person['id'].'">'.$person['username'].'</a><br>'; ?>
-<?php endforeach; ?>
+        <?php $avatarPath = $profileModel->getAvatarPath($person['id'], 'medium') ?>
+        <img src="<?php echo $avatarPath;?>">
+        <?php echo $person['firstname'].'<a class ="viewProfile" href="/user/'.$person['id'].'">VIEW PROFILE</a><br>'; ?>
+    <?php endforeach; ?>
+    </div>
 </div>
