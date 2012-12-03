@@ -1,0 +1,38 @@
+<div id="tabs-2">
+    <!--LIST OF SERVICES -->
+    <div class="servicesTab">
+        <div class="firstSeparator"></div>
+        <?php foreach ($this->services as $value): ?>
+        <div class='service'>
+            <div id="lesson_category" class="serviceTitle"><?php echo $value['lesson_category'];?></div>
+            <div class = "serviceBody">
+                <div id="subcategory"><?php echo $value['subcategory'];?></div>
+            </div>
+
+
+            <input type='button' id='editService' class = "buttonService edit" value='Edit'  onclick='editService(this);return false;'>
+            <input type='button' id='deleteService' class = "buttonService delete" value='Delete' onclick='deleteService(this);return false;'>
+            <input type='hidden' value=" <?php echo $value['id'];?>">
+            <input type='hidden' value=" <?php $value['service_type'];?>">
+            <div class="middleSeparator"></div>
+
+        </div>
+        <?php endforeach;?>
+        <!-- END LIST OF SERVICES -->
+
+        <!-- SERVICE FORM -> ADD NEW: css display:none;-->
+        <div id="addService">
+            <form method="post" name="serviceDetails" action="/account/services" id="serviceForm">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <?php echo $this->servicesForm->lesson_category; ?>
+                        <?php echo $this->servicesForm->subcategory; ?>
+                    </div>
+                </div>
+                <?php echo $this->servicesForm->saveService; ?>
+            </form>
+        </div>
+        <!-- END SERVICE FORM -> ADD NEW : display:block addService form-->
+        <input type="button" class = "buttonService add" id="addMoreServices" value="Add More" onclick="addService();">
+    </div>
+</div>

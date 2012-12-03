@@ -1,0 +1,19 @@
+<?php $hits = $this->hits; ?>
+<?php echo "Search result for: \"{$_GET['search_string']}\""?>
+<div class="messageContent">
+    <?php if(count($hits)):?>
+        <?php foreach ($hits as $hit) { ?>
+        <h3><?php echo "Lessun Category: " . $hit->lesson_category ?></h3>
+        <p>
+             <?php echo "Lessun Name: " . $hit->subcategory ?>
+        </p>
+        <p>
+            <a href="<?php echo "/user/" . $hit->user_id ?>">Read more…</a>
+        </p>
+        <?php }
+        //echo $this->paginationControl($hits, 'Sliding','partials/p.phtml');
+        ?>
+    <?php else: ?>
+        <?php echo "Your search returns no results."?>
+    <?endif; ?>
+</div>

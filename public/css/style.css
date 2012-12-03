@@ -45,6 +45,11 @@ form{
 
 
 }
+
+.disabled{
+    pointer-events: none;
+    cursor: default;
+}
 .accountWrapper{
     background: url('../img/design/accountLayout/accountLayoutBackground.png') repeat-y  top center;
 }
@@ -138,8 +143,9 @@ font:15px dosis-semibold-middle;
     float: right;
     font: 12px dosis-semibold-middle;
     height: 5%;
-    margin-right: 4%;
-    margin-top: 14px;
+    margin-right: 38px;
+    margin-top: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
 }
 #globalNav a{color:#d7e4b9;}
 #globalNav ul {
@@ -148,10 +154,12 @@ font:15px dosis-semibold-middle;
 }
 
 #globalNav ul li{
-    display: inline;
-    margin-left: 28px;
-    padding-left: 12px;
-    background: url('../img/design/mainPage/navSeparator.png') no-repeat 0 0;
+    background: url("../img/design/mainPage/navSeparator.png") no-repeat scroll 0 0 transparent;
+    display: inline-block;
+    margin-left: 19px;
+    padding-bottom: 11px;
+    padding-left: 23px;
+    padding-top: 11px;
 }
 #globalNav ul li:first-child {
     background: none;
@@ -346,7 +354,7 @@ font:15px dosis-semibold-middle;
     color:white;
     text-shadow: 1px 1px 0 rgba(0,0,0,0.6);
 }
-#gender-element label{
+#registrationFormHolder #gender-element label{
     float: left;
     height: 19px;
     line-height: 11px;
@@ -403,31 +411,177 @@ font:15px dosis-semibold-middle;
 
 #intro, #description{
     width: 788px;
+    border-radius: 0 ;
 }
 
 #saveProfile{
+    width:65px;
+    text-transform: uppercase;
+    font:12px dosis-semibold-middle;
+    color:#1d3300;
     border:none;
-    width: 46px;
-    height: 13px;
     position: absolute;
-    right:-32px;
+    right:-49px;
     margin-top: 10px;
-    background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat;
+    background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat left center;
 }
 
-.service {
-    margin: 0 5% 5% 5%;
-    border-bottom: 1px solid #ccc;
+#saveProfile:hover{
+    background: url('../img/design/accountLayout/glyphicons/saveHover.png') no-repeat left center;
 }
-#addService
+/* Services tab */
+.servicesTab .service {
+    font:  12px arial;
+}
+.servicesTab .firstSeparator{
+    background: url('../img/design/accountLayout/1page_middle_separator.png') no-repeat;
+    height: 14px;
+    width: 800px;
+    margin-bottom: 16px;
+}
+.servicesTab .middleSeparator{
+    background: url('../img/design/accountLayout/middle_double_separator.png') no-repeat;
+    height: 33px;
+    width: 800px;
+    margin-top: 40px;
+    margin-bottom: 22px;
+}
+.servicesTab .serviceTitle{
+    color:#1d3300;
+    font: 12px helvetica;
+    text-transform: uppercase;
+
+}
+.servicesTab form .serviceTitle{
+    margin-bottom: 19px;
+    margin-top: 33px;
+}
+.servicesTab .service .serviceBody{
+    font: 700 12px arial;
+    margin:11px 0 30px 3px;
+}
+.servicesTab .service #rate, .service #duration, .service #subcategory{
+    display: inline-block;
+}
+.servicesTab  #lesson_categoryInput, #lesson_categoryEditInput{
+    height: 24px;
+    width: 125px;
+    font:12px arial;
+    margin-right:19px;
+}
+.servicesTab  #subcategoryInput, #subcategoryEditInput{
+    font: 12px arial;
+    height: 12px;
+    width: 116px;
+    margin-right:15px;
+    margin-bottom: 9px;
+}
+.servicesTab  #rateInput, #rateEditInput{
+    font: 12px arial;
+    height: 12px;
+    width: 66px;
+    margin-right: 14px;
+    margin-bottom: 9px;
+}
+.servicesTab  .updateService{
+    background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat left center;
+    border:none;
+    width:65px;
+    float:right;
+    position: relative;
+    text-transform: uppercase;
+    font:12px dosis-semibold-middle;
+    color:#1d3300;
+    left: 17px;
+    top: 2px;
+}
+.servicesTab  #durationInput,  #durationEditInput{
+    font: 12px arial;
+    height: 25px;
+    margin-left: 39px;
+    width: 88px;
+
+}
+.servicesTab  #descriptionInput, #descriptionEditInput{
+     font: 12px arial;
+     height: 110px;
+     width: 787px;
+     resize: none;
+
+ }
+
+.servicesTab #addService
 {
+    font:12px arial;
     display: none;
 }
 
-#addMoreServices{
+.servicesTab #addMoreServices{
     margin: 1% 0 1%;
 }
+.servicesTab #description{
+    margin-left: 2px;
+    margin-top: 8px;
+}
+.servicesTab #editService{
+    background: url('../img/design/accountLayout/glyphicons/edit.png') no-repeat left center;
+    border:none;
+    width:60px;
+    float:right;
+    position: relative;
+    bottom:113px;
+    text-transform: uppercase;
+    font:12px dosis-semibold-middle;
+    color:#1d3300;
+    right: 65px;
+}
 
+.servicesTab #deleteService{
+     background: url('../img/design/accountLayout/glyphicons/delete.png') no-repeat left center;
+     border:none;
+     width:70px;
+     float:right;
+     position: relative;
+     bottom:113px;
+     text-transform: uppercase;
+     font:12px dosis-semibold-middle;
+     color:#1d3300;
+     left: 72px;
+ }
+.servicesTab .delete.disabled{
+    background: url('../img/design/accountLayout/glyphicons/deleteDisabled.png') no-repeat left center !important;
+    color:grey;
+}
+.servicesTab .add.disabled{
+    background: url('../img/design/accountLayout/glyphicons/addDisabled.png') no-repeat left center !important;
+    color:grey;
+}
+.servicesTab .edit.disabled{
+    background: url('../img/design/accountLayout/glyphicons/editDisabled.png') no-repeat left center !important;
+    color:grey;
+}
+.servicesTab #addMoreServices{
+    background: url('../img/design/accountLayout/glyphicons/add.png') no-repeat left center;
+    border:none;
+    width:85px;
+    position: relative;
+    text-transform: uppercase;
+    font:12px dosis-semibold-middle;
+    color:#1d3300;
+    left: 735px;
+    bottom:6px;
+}
+.servicesTab #saveService{
+    background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat left center;
+    border:none;
+    width:65px;
+    position: relative;
+    text-transform: uppercase;
+    font:12px dosis-semibold-middle;
+    color:#1d3300;
+    left: 755px;
+    top: 2px;
+}
 /*Availability tab*/
 
 .availabilityTab .table td{
@@ -475,6 +629,8 @@ width:100px;
 .headerAccount{
     width:1135px;
     margin: 0 auto;
+    position: relative;
+    right: 10px;
 }
 .accountContent{
     margin: 0 auto;
@@ -508,6 +664,7 @@ width:100px;
     width: 180px;
     margin-top: 42px;
 }
+
 .profileTab h3{
     bottom: 4px;
     color: #4A4322;
@@ -517,16 +674,23 @@ width:100px;
     position: relative;
     right: 28px;
     text-align: left;
-    width: 146px;
+    width: 148px;
 }
 .profileTab h5{
     bottom: 14px;
     color: #7F7867;
     font: 11px helvetica;
+    left: 8px;
     margin: 0;
     position: relative;
-    right: 58px;
+    text-align: left;
+    width: 148px;
 }
+.profile .profileAvatar input[type="file"]{
+    visibility: hidden;
+    width: 1px;
+}
+
 .leftNavigation
 {
 
@@ -622,9 +786,10 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
 .mainBlockProfile  .ui-tabs-panel{
     padding: 20px 31px !important;
     background-color:white !important;
-    -webkit-box-shadow: 0 0 3px 0 #888888;
-    box-shadow: 0 0 3px 0 #888888;
-    -moz-box-shadow: 0 0 3px 0 #888888;
+    -webkit-box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 7px 3px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.1);
+    border-radius:0;
     min-height: 500px;
 }
 .mainBlockProfile .ui-tabs .ui-tabs-nav{
@@ -639,16 +804,20 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
 .mainBlockProfile .ui-tabs .ui-tabs-nav li a{
     padding: 7px 14px;
     margin-top:3px;
-}
+    color:#534b35;
 
+}
+.mainBlockProfile .ui-tabs .ui-tabs-nav:not(.ui-tabs-active)  a{
+    text-shadow: 1px 0 1px rgba(253, 252, 239, 1);
+}
 .mainBlockProfile .ui-tabs .ui-tabs-nav li:not(.ui-state-active){
     margin:0;
     border:none !important;
     border-radius: 2px 2px 0 0 !important;
     background: none !important;
-    -webkit-box-shadow: 4px -5px 5px -5px #888888 inset;
-    box-shadow: 4px -5px 5px -5px #888888 inset;
-    -moz-box-shadow: 4px -5px 5px -5px #888888 inset;
+    -webkit-box-shadow: 5px -5px 9px -8px #888888 inset;
+    box-shadow: 5px -5px 9px -8px #888888 inset;
+    -moz-box-shadow: 5px -5px 9px -8px #888888 inset;
     background: #f0eed9 !important; /* Old browsers */
     background: -moz-linear-gradient(top,  #f0eed9 0%, #d0cc9d 100%)!important; /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f0eed9), color-stop(100%,#d0cc9d)) !important; /* Chrome,Safari4+ */
@@ -668,6 +837,7 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
 .mainBlockProfile .ui-widget-header,.mainBlockProfile .ui-widget-content {
     border:none;
     background: none;
+    border-radius: 0;
 }
 
 
@@ -704,23 +874,21 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     margin: 0 5px 2px 0;
 }
 .profile ul li label{
-    margin-top: 9px;
-    bottom: 5px;
+    top: 2px;
     display: inline-block !important;
     font: 12px helvetica;
     position: relative;
 }
-.profile ul li #gender-female{
-    margin-left: 22px;
-}
+
 .profile ul li span{
-    bottom: 5px;
+    top: 4px;
     display: inline-block;
     font: 12px helvetica;
     left: 2px;
     position: relative;
-    width: 93px;
+    width: 97px;
     word-spacing: 3px;
+    float:left;
 }
 .profile ul li #birthday{
     width:82px;
@@ -732,6 +900,27 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     display: inline-block;
     margin:0;
 
+}
+.profile #gender-element label{
+    margin-right:20px;
+    position: relative;
+    right: 5px;
+}
+.profile #gender-element input[type="radio"]{
+    opacity: 0;
+}
+
+.profile #gender-element .checked{
+    background: url('../img/design/mainPage/buttons/genderChecked.png') no-repeat;
+
+}
+.profile #gender-element label:not(.checked){
+    background: url('../img/design/mainPage/buttons/gender.png') no-repeat;
+}
+.profile  #gender-label{
+    bottom: 4px;
+    position: relative;
+    float: left;
 }
 .profile ul li #timezone{
     bottom: 7px;
@@ -755,7 +944,7 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
 
 .profile ul li textarea{
     resize: none;
-    height: 190px !important;
+    height: 100px !important;
     font: 12px helvetica;
 
 }
@@ -764,24 +953,42 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     height: 24px;
 }
 .profile .profileAvatar {
-    cursor: pointer;
-
+    bottom: 37px;
     float: right;
-    position: relative;
-    bottom:31px;
+    left: 38px;
     overflow: hidden;
-    left:28px;
+    position: relative;
 
+}
+.profile .profileAvatar #uploadAvatar{
+    background: url("../img/design/accountLayout/glyphicons/upload.png") no-repeat scroll left center transparent;
+    border:  none;
+    bottom: 1px;
+    font: 12px dosis-semibold-middle;
+    position: relative;
+    width: 78px;
+}
+.profile .profileAvatar #uploadAvatar:hover{
+    background: url("../img/design/accountLayout/glyphicons/uploadHover.png") no-repeat scroll left center transparent;
+}
+.profile .profileAvatar #removeAvatar{
+    background: url("../img/design/accountLayout/glyphicons/delete.png") no-repeat scroll left center transparent;
+    border:  none;
+    bottom: 1px;
+    font: 12px dosis-semibold-middle;
+    position: relative;
+    width: 78px;
+    right: 7px;
+}
+.profile .profileAvatar #removeAvatar:hover{
+    background: url("../img/design/accountLayout/glyphicons/deleteHover.png") no-repeat scroll left center transparent;
 }
 /*.profileAvatar input {
     opacity: 0;
     overflow: hidden;
     margin-left: -500px;
 }*/
-.profileAvaImg img{
-    width:127px;
-    max-height: 126px;
-}
+
 /*Availability Tab*/
 
 .availabilityTab{
@@ -843,6 +1050,8 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     height: 24px;
     padding: 2px 0 0 5px;
     width: 101px;
+    -webkit-appearance: none;
+
 }
 
 .styledSelect {
@@ -862,12 +1071,14 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
 }
 .availabilityTab #save{
     border:none !important;
-    width: 46px;
-    height: 13px;
     position: absolute;
     right: 38px;
     margin-top: 4px;
-    background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat;
+    width:65px;
+    text-transform: uppercase;
+    font:12px dosis-semibold-middle;
+    color:#1d3300;
+    background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat left center;
 }
 .availabilityTab .dateZoneBlock{
     float: right;
@@ -903,10 +1114,15 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     margin-left: 30px;
 }
 .userRelations .deleteUser{
-    background: url('../img/design/accountLayout/glyphicons/delete.png') no-repeat;
+    background: url('../img/design/accountLayout/glyphicons/delete.png') no-repeat left center;
     margin-left: 33px;
+    border:none;
+    width:70px;
+    font:12px dosis-semibold-middle;
+    position: relative;
+    bottom:2px;
 }
-.userRelations .blockUser, .userRelations .deleteUser{
+.userRelations .blockUser{
     display: inline-block;
     width:57px;
     height:12px;
@@ -1021,12 +1237,13 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
 .notificationsTab #saveNotifications{
     border: medium none;
     bottom: 21px;
-    color: transparent;
-    height: 13px;
     position: absolute;
     right: 40px;
-    width: 46px;
-    background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat;
+    width:65px;
+    text-transform: uppercase;
+    font:12px dosis-semibold-middle;
+    color:#1d3300;
+    background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat left center;
 }
 /**** MESSAGES ****/
 
@@ -1051,11 +1268,13 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
  display: block;
 }
 .messageHeader{
+	padding-top: 7px;
 }
 /* messageTabs */
 ul.messageTabs{
 	float:left;
-	margin: 0px 0px 0px 22px;
+	margin: 0px 0px 0px 11px;
+	font: 13px dosis-semibold-middle;
 }
 .nav-tabs.messageTabs li{
 	float:left;
@@ -1089,8 +1308,8 @@ ul.messageTabs{
 /* MessageButtons */
 .messageButtons{
 	background: url('../img/design/messagePages/content_top_shadow.png') no-repeat center top;
-	padding: 34px 0 21px;
-	border-bottom: solid 1px black;
+	padding: 32px 0 17px;
+	border-bottom: solid 1px #dbdbde;
 	line-height: 13px;
 }
 .msgBtn{
@@ -1098,27 +1317,33 @@ ul.messageTabs{
 	font-size: 12px;
 	line-height: 13px;
 	text-transform: uppercase;
-	background: url('../img/design/messagePages/archived.png') no-repeat left top;
+	background: none;
 	color: #1d3300;
 	display: inline-block;
+	font: 12px dosis-semibold-middle;
 }
 .msgBtn.createNew{
+	margin-left: 9px;
 	padding-left: 24px;
 	background: url('../img/design/messagePages/envelope.png') no-repeat left top;
 }
 .msgBtn.archived{
+	margin-right: 26px;
 	padding-left: 19px;
 	background: url('../img/design/messagePages/archived.png') no-repeat left top;
 }
 .msgBtn.trash{
+	margin-right: 9px;
 	padding-left: 18px;
 	background: url('../img/design/messagePages/trash.png') no-repeat left top;
 }
 .msgBtn.delete{
+	margin-right: 26px;
 	padding-left: 18px;
 	background: url('../img/design/messagePages/delete.png') no-repeat left top;
 }
 .msgBtn.inbox{
+	margin-right: 26px;
 	padding-left: 18px;
 	background: url('../img/design/messagePages/inbox.png') no-repeat left top;
 }
@@ -1132,12 +1357,27 @@ ul.messageTabs{
 .messageContent{
 	background: #ffffff;
 	width: 805px;
-	margin: 0px 14px;
+	margin: 0px 2px;
 	padding: 20px 31px 0px;
 	box-shadow: 0 0 5px #e5e5e5;
 	-moz-box-shadow: 0 0 5px #e5e5e5; /* Firefox */
     -webkit-box-shadow: 0 0 5px #e5e5e5; /* Safari, Chrome */
+    min-height: 450px;
 }
+.userMessages table tr td{
+    padding:6px;
+    height:18px;
+    word-spacing: 2px;
+    font:12px helvetica;
+}
+/*User Relations td widths */
+.userMessages table tr td:last-child{width: 157px;}
+.userMessages table tr td:nth-child(3){ width:126px;}
+.userMessages table tr td:nth-child(1){ width:82px;}
+.userMessages table tr td:nth-child(2){ width:110px;}
+.userMessages table tr td:nth-child(4){width: 106px;}
+
+
 
 .userRelations table tr td{
     padding:6px;
@@ -1180,11 +1420,11 @@ ul.messageTabs{
     margin: -6px 0 0;
 }
 
-.ui-widget-content .ui-icon{
+.userRelations .ui-widget-content .ui-icon{
     background: url('../img/design/accountLayout/dialogClose.png') no-repeat;
     padding: 10px 0 0 0 !important;
 }
-.ui-dialog  .ui-widget-content .ui-icon:hover{
+.userRelations .ui-dialog  .ui-widget-content .ui-icon:hover{
     background: url('../img/design/accountLayout/dialogClose.png') no-repeat;
 }
 .ui-dialog  .ui-state-hover{
@@ -1261,7 +1501,7 @@ ul.messageTabs{
     width: 18px;
     float:left;
     position: relative;
-    left:110px;
+    left:109px;
     bottom:29px;
 }
 .linkedInIcon{
@@ -1272,7 +1512,7 @@ ul.messageTabs{
     width: 18px;
     float:left;
     position: relative;
-    left:114px;
+    left:113px;
     bottom:29px;
 }
 .twitterIcon:hover{
@@ -1283,4 +1523,25 @@ ul.messageTabs{
 }
 .linkedInIcon:hover{
     background-position: 100% 100%;
+}
+
+.searchForm {
+    display: block;
+    left: 220px;
+    padding: 0;
+    position: absolute;
+    top: 9px;
+}
+
+.searchForm .btnSearch {
+    margin-bottom: 9px;
+    display: none;
+}
+.searchForm .searchField {
+    height: 18px;
+    width: 200px;
+    font-size: 13px;
+    padding-left: 22px !important;
+    background-color: white !important;
+    background:url('../img/design/accountLayout/glyphicons/search.png')no-repeat scroll 3% 64% transparent;
 }

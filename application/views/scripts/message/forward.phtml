@@ -3,26 +3,31 @@
 <?php $sender = $this->sender; ?>
 <?php ?>
 <?php $form = $this->form;?>
-<form method="post" action="/message/forward/">
-    <table width="300px">
-        <tr>
-
-            <td>To</td>
-            <td>
-                <?php echo $form->message_id->setValue(Zend_Controller_Front::getInstance()->getRequest()->getParam('message_id'));?>
-                <?php echo $form->username?>
-            </td>
-        </tr>
-        <tr>
-            <td>Subject</td>
-            <td><?php echo  $form->subject->setValue($message['theme'])?></td>
-        </tr>
-        <tr>
-            <td>Content</td>
-            <td><?php echo $form->content->setValue($message['text']); ?></td>
-        </tr>
-        <tr>
-            <td><?php echo $form->sendbutton?></td>
-        </tr>
-    </table>
-</form>
+<div class= "messageContent">
+	<div class="messageButtons clearfix">
+    	<span class="msgBtn">Create New Message</span>
+	</div>
+	<form method="post" action="/message/forward/">
+	    <table width="300px">
+	        <tr>
+	
+	            <td>To</td>
+	            <td>
+	                <?php echo $form->message_id->setValue(Zend_Controller_Front::getInstance()->getRequest()->getParam('message_id'));?>
+	                <?php echo $form->username?>
+	            </td>
+	        </tr>
+	        <tr>
+	            <td>Subject</td>
+	            <td><?php echo  $form->subject->setValue($message['theme'])?></td>
+	        </tr>
+	        <tr>
+	            <td>Content</td>
+	            <td><?php echo $form->content->setValue($message['text']); ?></td>
+	        </tr>
+	        <tr>
+	            <td><?php echo $form->sendbutton?></td>
+	        </tr>
+	    </table>
+	</form>
+</div>

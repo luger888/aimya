@@ -13,12 +13,24 @@ class Application_Model_Profile
         return $accountUserArray;
     }
 
-    public function getAvatarPath($user_id)
+    public function getAvatarPath($user_id, $imageType = 'base')
     {
         $profileModel = new Application_Model_DbTable_Profile();
+        $userModel = new Application_Model_DbTable_Users();
         $profile = $profileModel->getProfile($user_id);
+        $user = $userModel->getUser($user_id);
         $avatarName = $profile['avatar'];
-        $avatarPath = '/img/uploads/'.$user_id.'/avatar/'. $avatarName;
+        if($avatarName){
+            $avatarPath = '/img/uploads/'.$user_id.'/avatar/'. $imageType . '/' .$avatarName;
+        }else{
+            if($user['gender'] == 'male'){
+                $avatarPath ='/img/design/accountLayout/' . $imageType . '/maleDefault.png';
+            }else{
+                $avatarPath ='/img/design/accountLayout/' . $imageType . '/womanDefault.png';
+            }
+
+        }
+
 
         return $avatarPath;//path for avatar
     }

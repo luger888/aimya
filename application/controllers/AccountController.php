@@ -21,7 +21,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         $profileForm = new Application_Form_Profile();
         $profileModel = new Application_Model_Profile();
         $this->view->profile = $profileForm->populate($profileModel->getProfileAccount($identity->id));
-        $this->view->avatarPath = $profileModel->getAvatarPath($identity->id); //path to avatar
+        $this->view->avatarPath = $profileModel->getAvatarPath($identity->id, 'base'); //path to avatar
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
 
@@ -65,17 +65,41 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                     $this->_helper->redirector('index', 'account');
                 }
 
-            } else if ($this->getRequest()->getParam('updateService')) {
-                $updateData = $this->getRequest()->getPost();
-                if ($servicesForm->isValid($updateData)) {
-                    $dbServiceDetail->updateService($updateData, $identity->id);
-                    $this->_helper->redirector('index', 'account');
-                }
             }
+
 
         }
 
-        $this->view->services = $servicesModel->getServiceByUser($identity->id);
+        $this->view->services = $servicesModel->getServiceByUser($identity->id, 1);
+        $this->view->servicesForm = $servicesForm;
+    }
+
+    public function requestservicesAction()
+    {
+        $this->_helper->layout()->disableLayout();
+
+        $identity = Zend_Auth::getInstance()->getStorage()->read();
+        $servicesForm = new Application_Form_ServiceDetails();
+        $servicesModel = new Application_Model_DbTable_ServiceDetail();
+
+        if ($this->getRequest()->isPost()) {
+            $dbServiceDetail = new Application_Model_DbTable_ServiceDetail();
+
+            if ($this->getRequest()->getParam('saveService')) {
+
+                $formData = $this->getRequest()->getPost();
+
+                if ($servicesForm->isValid($formData)) {
+                    $dbServiceDetail->addService($formData, $identity->id);
+                    $this->_helper->redirector('index', 'account');
+                }
+
+            }
+
+
+        }
+
+        $this->view->services = $servicesModel->getServiceByUser($identity->id, 2);
         $this->view->servicesForm = $servicesForm;
     }
 
@@ -146,7 +170,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         $identity = Zend_Auth::getInstance()->getStorage()->read();
 
         $servicesModel = new Application_Model_DbTable_ServiceDetail();
-        $this->view->services = $servicesModel->getServiceByUser($identity->id);
+        $this->view->services = $servicesModel->getServiceByUser($identity->id, 1);
 
         $profileModel = new Application_Model_Profile();
         $this->view->profile = $profileModel->getProfileAccount($identity->id);
@@ -171,14 +195,34 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
 
                 $dbServiceDetail->deleteService($this->getRequest()->getParam('deleteService'), $identity->id);
 
-            } else if ($this->getRequest()->getParam('editService')) {
-                $this->view->editForm = $dbServiceDetail->getItem($this->getRequest()->getParam('editService'));
+            } else if ($this->getRequest()->getParam('getServiceCategories')) {
+                $servicesForm = new Application_Form_ServiceDetails();
+                $this->view->servicesForm = $servicesForm;
+                $lessonDbModel = new Application_Model_DbTable_LessonCategory();
+                $this->view->categories = $lessonDbModel->getLessonCategories();
 
             }
             /*  Users tab, update relations    */
             if($this->getRequest()->getParam('updateUserId')){
                 $dbUserRelations->updateUserStatus($this->getRequest()->getPost(), $identity->id);
             }
+            if($this->getRequest()->getParam('updateService')){
+
+                $dbServiceDetail->updateService($this->getRequest()->getPost(), $identity->id);
+
+            }
+            if($this->getRequest()->getParam('deleteAvatar')){
+
+                $dbProfile = new Application_Model_DbTable_Profile();
+                $profileModel = new Application_Model_Profile();
+                unlink($profileModel->getAvatarPath($identity->id, 'base'));
+                unlink($profileModel->getAvatarPath($identity->id, 'medium'));
+
+                $dbProfile->deleteAvatar($identity->id);
+
+
+            }
+
 
         }
     }

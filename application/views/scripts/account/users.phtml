@@ -21,7 +21,7 @@
         <td>'.$value['lastname'].'</td>
         <td>'.$value['username'].'</td>
         <td>UTC '.$value['timezone'].'</td>
-        <td><div class = "blockUser" onclick ="blockUser(this);return false;"></div><div class = "deleteUser" onclick ="deleteUser(this);return false;"></div><input type = "hidden" value = '. $value['id'].'</td>
+        <td><div class = "blockUser" onclick ="blockUser(this);return false;"></div><input type = "button" value = "DELETE" class="deleteUser" onclick="deleteUser(this);return false;"></div><input type = "hidden" value = '. $value['id'].'</td>
     </tr>';
         }
 

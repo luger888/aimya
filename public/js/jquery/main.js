@@ -1,7 +1,20 @@
 $(document).ready(function() {
 
 
+    $('#uploadAvatar').click(function(){
+        $('#avatar').click();
+    });
+    $('#removeAvatar').click(function(){
+        $.post(
 
+            '/account/edit/0/controller%3D%3Eaccount/1/action%3D%3Eedit', {'deleteAvatar': 1},
+            function(response){
+                window.location.reload();
+            }
+
+        );
+
+    });
     /* Button bar(radio)*/
     $('.buttonBar label').first().addClass('checked');
     $('.buttonBar input').first().prop('checked', true);

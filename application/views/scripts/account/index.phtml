@@ -2,8 +2,8 @@
 <div id="tabs">
     <ul>
         <li><a href="#tabs-1">GENERAL</a></li>
-
         <?php if($this->role !== '1'){echo  '<li><a href="/account/services">SERVICE DETAILS</a></li>';}?>
+        <li><a href="/account/requestservices">REQUEST SERVICES</a></li>
         <li><a href="/account/availability">AVAILABILITY</a></li>
         <li><a href="/account/notifications">NOTIFICATIONS/ACCOUNT SETTINGS</a></li>
         <li><a href="/account/users">USERS</a></li>
@@ -14,10 +14,13 @@
             <div class="firstSeparator"></div>
             <h3>YOUR BASIC INFORMATION:</h3>
             <form method="post" name="profile" action="" enctype="multipart/form-data">
-                <div class="profileAvatar"><div class="profileAvaImg"><img src="<?php echo $this->avatarPath;?>" alt="avatar"> </div>
+                <div class="profileAvatar"><div class="profileAvaImg"><img src="<?php echo $this->avatarPath;?>" alt="avatar">
+                    ​</div>
+                    <?php echo $this->profile->avatar; ?>
+                    <input type="button" id="uploadAvatar" value="UPLOAD" />
+                    <input type="button" id="removeAvatar" value="DELETE" />
+                </div>
 
-
-                    <?php echo $this->profile->avatar; ?></div>
                 <ul>
 
 
