@@ -1535,6 +1535,7 @@ ul.messageTabs{
 
 .searchForm .btnSearch {
     margin-bottom: 9px;
+    display: none;
 }
 .searchForm .searchField {
     height: 18px;
