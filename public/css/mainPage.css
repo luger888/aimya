@@ -145,7 +145,7 @@ li{
     outline:1px #fefcd7;
 }
 .header {
-    background-image: url('../img/design/mainPage/header.png');
+    background-image: url('../img/design/mainPage/mainHeader.png');
     background-repeat: repeat-x;
     height:85px;
     -moz-box-shadow: 0 0 6px rgba(0,0,0,0.6); /* Для Firefox */
