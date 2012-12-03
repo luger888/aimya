@@ -1026,7 +1026,7 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     float: left;
     height: 15px;
     margin: 1px 4px 0 0;
-    width: 13px;
+    width: 12px;
 }
 .availabilityTab input[type="checkbox"]:checked + .dayCheckbox{
     background: url('../img/design/accountLayout/checkbox.png') left center no-repeat;
@@ -1115,26 +1115,28 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     margin-bottom: 19px;
 }
 .userRelations .blockUser{
-    background: url('../img/design/accountLayout/glyphicons/block.png') no-repeat;
+    background: url('../img/design/accountLayout/glyphicons/block.png') no-repeat left center;
     margin-left: 30px;
 }
 .userRelations .blockUser:hover{
-    background: url('../img/design/accountLayout/glyphicons/blockHover.png') no-repeat;
+    background: url('../img/design/accountLayout/glyphicons/blockHover.png') no-repeat left center;
 }
 .userRelations .deleteUser{
     background: url('../img/design/accountLayout/glyphicons/delete.png') no-repeat left center;
     margin-left: 33px;
     border:none;
     width:70px;
+    margin-top: 2px;
+    position: relative;
     font:12px dosis-semibold-middle;
     position: relative;
     bottom:2px;
 }
 .userRelations .blockUser{
-    display: inline-block;
     width:57px;
-    height:12px;
+    font:12px dosis-semibold-middle;
     cursor: pointer;
+    border:none;
     margin-top: 2px;
 }
 .userRelations table{
@@ -1556,7 +1558,7 @@ ul.messageTabs{
     min-height: 450px;
 }
 .featuresTab .filters{
-    margin-left: 481px;
+    margin-left: 476px;
     margin-right: 38px;
     margin-top: 17px;
 }
@@ -1646,4 +1648,19 @@ ul.messageTabs{
     width: 800px;
     margin-top: 40px;
     margin-bottom: 22px;
+}
+
+.featuresTab .showMore{
+    background: url('../img/design/accountLayout/glyphicons/viewMore.png') no-repeat left center;
+    border: medium none;
+    color: #1D3300;
+    font: 12px dosis-semibold-middle;
+    left: 716px;
+    margin-bottom: 20px;
+    position: relative;
+    text-transform: uppercase;
+    width: 100px;
+}
+.featuresTab .showMore:hover{
+    background: url('../img/design/accountLayout/glyphicons/viewMoreHover.png') no-repeat left center;
 }
