@@ -35,7 +35,7 @@ package com.aimialesson.UI.views
 		[SkinPart (required="false")]
 		public var message:Label;
 		[SkinPart (required="true")]
-		public var progressBar:ProgressBar;
+		public var progressBar:PresentationProgressBar;
 		[SkinPart (required="true")]
 		public var presantationBG:BitmapImage;
 		[SkinPart (required="true")]
@@ -51,8 +51,8 @@ package com.aimialesson.UI.views
 		{ 
 			if (instance == uploadBtn){
 				uploadBtn.addEventListener(MouseEvent.CLICK,browseAndUpload);
-			} else {
-				
+			} else if (instance == progressBar) {
+				progressBar.visible = false;
 			}
 		}
 		
@@ -120,7 +120,7 @@ package com.aimialesson.UI.views
 		
 		private function fileRef_progress(evt:ProgressEvent):void {
 			progressBar.visible = true;
-			//if (evt.bytesTotal) progressBar.percent = evt.bytesLoaded / evt.bytesTotal;
+			if (evt.bytesTotal) progressBar.percent = evt.bytesLoaded / evt.bytesTotal;
 		}
 		
 		private function fileRef_complete(evt:Event):void {

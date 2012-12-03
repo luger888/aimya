@@ -39,8 +39,8 @@
 		]]>
 	</fx:Script>
 		<s:SkinnableContainer skinClass="com.aimialesson.UI.skins.elements.PresentationContainerSkin" width="100%" height="100%">
-			<!--views:PresentationUI id="presentation"  visible="{Presentation.getInstance().loaded}" includeInLayout="{Presentation.getInstance().loaded}" width="100%" height="100%"/-->
-			<!--views:UploadUI id="upload"  visible="{!Presentation.getInstance().loaded}" includeInLayout="{!Presentation.getInstance().loaded}" left="5" right="5" top="5" bottom="5"/-->
+			<views:PresentationUI id="presentation"  visible="{Presentation.getInstance().loaded}" includeInLayout="{Presentation.getInstance().loaded}" width="100%" height="100%"/>
+			<views:UploadUI id="upload"  visible="{!Presentation.getInstance().loaded}" includeInLayout="{!Presentation.getInstance().loaded}" left="10" right="10" top="10" bottom="10"/>
 		</s:SkinnableContainer> 
 										  
 		<!--elements:PresentationBG id="presentationBG" width="100%" height="100%" /-->
