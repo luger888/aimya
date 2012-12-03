@@ -108,7 +108,7 @@ class UserController extends Zend_Controller_Action
 
                 }else{
 
-                    $this->view->confirmFlash = 'Authentication failed. Login or password are incorrect';
+                    $this->view->alertFlash = 'Authentication failed. Login or password are incorrect';
                 }
             }else{
                 $this->view->errors = $login->getErrors();
@@ -128,10 +128,10 @@ class UserController extends Zend_Controller_Action
             if ($reg->isValid($formData)) {
                 $user = new Application_Model_DbTable_Users();
                 if ($user->checkByMail($formData['email'])) {
-                    $this->view->confirmFlash = 'This email already exist';
+                    $this->view->alertFlash = 'This email already exist';
                 }
                 else if($user->checkByUsername($formData['username'])){
-                    $this->view->confirmFlash = 'This username already exist';
+                    $this->view->alertFlash = 'This username already exist';
 
                 } else {
                     $status = $modelUser->addNewUser($formData);
@@ -139,7 +139,7 @@ class UserController extends Zend_Controller_Action
                     if($status) {
                         $this->view->confirmFlash = 'Please confirm your email';
                     } else {
-                        $this->view->confirmFlash = 'Technical issues with email. Please try again later';
+                        $this->view->alertFlash = 'Technical issues with email. Please try again later';
                     }
                 }
             } else {

@@ -483,3 +483,94 @@ li{
 .linkedInIcon:hover{
     background-position: 100% 100%;
 }
+
+/*JSMessenger, alert (red)*/
+.alertBlock{
+    margin: 0 auto;
+    position: relative;
+    top: 15px;
+    width: 800px;
+    -moz-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2); /* Для Firefox */
+    -webkit-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2); /* Для Safari и Chrome */
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
+}
+.alert{
+    font: 11px Arial !important;
+    color:#ad4c4c !important;
+    background-color: #fae9e9 !important;
+    border: 1px solid #ebb7b7 !important;
+    border-radius:2px;
+}
+
+.alert .flash-warning{
+    font: 700 11px Arial !important;
+    color: #981919 !important;
+}
+
+.alert .close{
+    background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat;
+    top: -17px !important;
+    left: 30px !important;
+    line-height: 20px;
+    position: relative;
+    width:12px;
+    height: 12px;
+    opacity: 1 !important;
+}
+
+/*JSMessenger, alert (red)*/
+.alertBlock{
+    margin: 0 auto;
+    position: relative;
+    top: 15px;
+    width: 800px;
+    -moz-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2); /* Для Firefox */
+    -webkit-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2); /* Для Safari и Chrome */
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
+}
+.alert{
+    font: 11px Arial !important;
+    color:#ad4c4c !important;
+    background-color: #fae9e9 !important;
+    border: 1px solid #ebb7b7 !important;
+    border-radius:2px;
+}
+
+.alert .flash-warning{
+    font: 700 11px Arial !important;
+    color: #981919 !important;
+}
+
+.alert .close{
+    background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat;
+    top: -17px !important;
+    left: 30px !important;
+    line-height: 20px;
+    position: relative;
+    width:12px;
+    height: 12px;
+    opacity: 1 !important;
+}
+/*JSMessenger, attention (yellow)*/
+.attention{
+    font: 11px Arial !important;
+    color:#a3a586 !important;
+    background-color: #fafcd9 !important;
+    border: 1px solid #d1d0a9 !important;
+    border-radius:2px;
+}
+
+.attention .flash-attention{
+    font: 700 11px Arial !important;
+    color: #83855e !important;
+}
+.attention .close {
+    background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat 100% 0;
+    top: -17px !important;
+    left: 30px !important;
+    line-height: 20px;
+    position: relative;
+    width:12px;
+    height: 12px;
+    opacity: 1 !important;
+}

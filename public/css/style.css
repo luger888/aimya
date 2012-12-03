@@ -426,7 +426,7 @@ font:15px dosis-semibold-middle;
     background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat left center;
 }
 
-#saveProfile:hover{
+#saveProfile:hover, .availabilityTab #save:hover, .servicesTab .updateService:hover, .notificationsTab #saveNotifications:hover{
     background: url('../img/design/accountLayout/glyphicons/saveHover.png') no-repeat left center;
 }
 /* Services tab */
@@ -535,7 +535,9 @@ font:15px dosis-semibold-middle;
     color:#1d3300;
     right: 65px;
 }
-
+.servicesTab #editService:hover{
+    background: url('../img/design/accountLayout/glyphicons/editHover.png') no-repeat left center;
+}
 .servicesTab #deleteService{
      background: url('../img/design/accountLayout/glyphicons/delete.png') no-repeat left center;
      border:none;
@@ -570,6 +572,9 @@ font:15px dosis-semibold-middle;
     color:#1d3300;
     left: 735px;
     bottom:6px;
+}
+.servicesTab #addMoreServices:hover{
+    background: url('../img/design/accountLayout/glyphicons/addHover.png') no-repeat left center;
 }
 .servicesTab #saveService{
     background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat left center;
@@ -980,7 +985,7 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     width: 78px;
     right: 7px;
 }
-.profile .profileAvatar #removeAvatar:hover{
+.profile .profileAvatar #removeAvatar:hover, .servicesTab #deleteService:hover, .userRelations .deleteUser:hover{
     background: url("../img/design/accountLayout/glyphicons/deleteHover.png") no-repeat scroll left center transparent;
 }
 /*.profileAvatar input {
@@ -1112,6 +1117,9 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
 .userRelations .blockUser{
     background: url('../img/design/accountLayout/glyphicons/block.png') no-repeat;
     margin-left: 30px;
+}
+.userRelations .blockUser:hover{
+    background: url('../img/design/accountLayout/glyphicons/blockHover.png') no-repeat;
 }
 .userRelations .deleteUser{
     background: url('../img/design/accountLayout/glyphicons/delete.png') no-repeat left center;
@@ -1545,3 +1553,19 @@ ul.messageTabs{
     background-color: white !important;
     background:url('../img/design/accountLayout/glyphicons/search.png')no-repeat scroll 3% 64% transparent;
 }
+/*Latest featured*/
+
+.featuresTab .viewProfile{
+    font:12px dosis-semibold-middle;
+    text-decoration: none;
+    color:#1d3300;
+    background: url("../img/design/accountLayout/glyphicons/profileId.png") no-repeat scroll 0 52% transparent;
+    padding-left: 22px;
+}
+.featuresTab .viewProfile:hover{
+    background: url("../img/design/accountLayout/glyphicons/profileIdHover.png") no-repeat scroll 0 52% transparent;
+    padding-left: 22px;
+}
+
+
+
