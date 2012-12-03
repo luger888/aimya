@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" creationComplete="init()" visible="false">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Image;
+			
+			import org.osmf.elements.SWFLoader;
+			private var circleR:int = 50;
+			private var shFill:Shape;
+			
+			private function init () : void {
+				
+				shFill = new Shape();
+				shFill.graphics.lineStyle(1,0x000000);
+				shFill.graphics.moveTo(0,0);
+				shFill.graphics.lineTo(0, circleR);
+				shFill.x = 0;
+				shFill.y = 0;
+				
+				spBoard.addChild(shFill);
+			}
+			
+			private var _target:Image;
+			public function set target ( value : Image ) : void {
+				_target = value;
+				_target.addEventListener(ProgressEvent.PROGRESS , onProgress);
+				_target.addEventListener(Event.COMPLETE, onComplete);
+				this.visible = true;
+			}
+			
+			private function onProgress ( event : ProgressEvent ) : void {
+				this.visible = true;
+				percent = event.bytesLoaded / event.bytesTotal;
+			}
+			
+			private function onComplete ( event : Event ) : void {
+				//_target.removeEventListener(ProgressEvent.PROGRESS , onProgress);
+				//_target.removeEventListener(Event.COMPLETE, onComplete);
+				this.visible = false;
+			}
+			
+			[Bindable]
+			private var _percent:int = 0;
+			public function set percent ( value : Number ) : void {
+				_percent = Math.round(value * 100);
+				var t:Number = value*360;
+				var angleR:Number = t*Math.PI/180.0;				
+				var i:int;
+				if (!shFill) return;
+				shFill.graphics.clear();								
+				shFill.graphics.lineStyle(1,0x000000);				
+				shFill.graphics.moveTo(0,0);				
+				shFill.graphics.beginFill(0xFF00FF);								
+				for (i=0; i<=t; i++) {
+					shFill.graphics.lineTo(circleR*Math.sin(i*Math.PI/180), -circleR*Math.cos(i*Math.PI/180) );
+				}
+				shFill.graphics.lineTo(0,0);			
+				shFill.graphics.endFill();
+			}
+		]]>
+	</fx:Script>
+	<s:SpriteVisualElement id="spBoard"  verticalCenter="0" horizontalCenter="0"/>
+	<s:BitmapImage id="bg" source="@Embed('flashassets/background.png')" verticalCenter="0" horizontalCenter="0"/>
+	<s:BitmapImage id="whiteBG" source="@Embed('flashassets/white_background.png')" verticalCenter="0" horizontalCenter="0"/>
+	<s:BitmapImage id="greenBG" mask="{spBoard}" source="@Embed('flashassets/green_background.png')" verticalCenter="0" horizontalCenter="0"/>
+	<s:RichText id="preloaderPercent" text="{_percent}" verticalCenter="0" horizontalCenter="0"/>
+</s:Group>

@@ -1,9 +1,9 @@
 package com.aimialesson.UI.views
 {
+	//import com.aimialesson.UI.views.elements.PresentationBG;
+	import com.aimialesson.events.PresentationEvent;
 	import com.aimialesson.model.Main;
 	import com.aimialesson.model.Presentation;
-	
-	import com.aimialesson.events.PresentationEvent;
 	
 	import mx.graphics.BitmapScaleMode;
 	
@@ -20,7 +20,8 @@ package com.aimialesson.UI.views
 		[SkinPart (required="false")]
 		public var upload:UploadUI
 		[SkinPart (required="false")]
-		public var presantationBG:BitmapImage;
+		public var presentationBG:BitmapImage;
+		//public var presentationBG:PresentationBG;
 		[Bindable]
 		public var prWidth:int;
 		[Bindable]
@@ -40,34 +41,38 @@ package com.aimialesson.UI.views
 			if ( instance == presentation ) {
 				presentation.addEventListener( PresentationEvent.MOVE_TO_LEFT, onPresentationEvent );
 				presentation.addEventListener( PresentationEvent.MOVE_TO_RIGHT, onPresentationEvent );
+				presentation.invalidateDisplayList();
 			} else if ( instance == upload ) {
 				upload.addEventListener( PresentationEvent.PRESENTATION_UPLOADED, onPresentationEvent );
-			} else if ( instance == presantationBG ) {
+			} else if ( instance == presentationBG ) {
 			}
 		}
 		
 		override protected function partRemoved ( partName : String, instance : Object) : void {
 			
 		}
-		
+		[Bindable]
+		public var bgWidth:Number;
+		[Bindable]
+		public var bgHeight:Number;
 		override protected function updateDisplayList ( unscaledWidth : Number, unscaledHeight : Number ) : void {
 			super.updateDisplayList(unscaledWidth, unscaledHeight);
-			if (!presantationBG) return;
-			if (unscaledHeight / unscaledWidth > presantationBG.sourceHeight / presantationBG.sourceWidth){
+			if (!presentationBG) return;
+/*			if (unscaledHeight / unscaledWidth > presantationBG.sourceHeight / presantationBG.sourceWidth){
 				presantationBG.percentWidth = 100;
 				presantationBG.height = presantationBG.sourceHeight * ( unscaledWidth / presantationBG.sourceWidth );
 			} else {
 				presantationBG.percentHeight = 100;
 				presantationBG.width = presantationBG.sourceWidth * ( unscaledHeight / presantationBG.sourceHeight );
-			}
+			}*/
 		}
 		
 		public function initSize () : void {
-			if (presantationBG){
-				presantationBG.percentHeight = 0;
-				presantationBG.percentWidth = 0;
-				presantationBG.height = 0;
-				presantationBG.width = 0;
+			if (presentationBG){
+				presentationBG.percentHeight = 0;
+				presentationBG.percentWidth = 0;
+				presentationBG.height = 0;
+				presentationBG.width = 0;
 			}
 			if (upload) upload.initSize();
 		}

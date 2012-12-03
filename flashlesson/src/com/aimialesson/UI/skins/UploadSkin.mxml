@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		xmlns:s="library://ns.adobe.com/flex/spark" 
-		xmlns:mx="library://ns.adobe.com/flex/mx" >
+		xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:elements="com.aimialesson.UI.views.elements.*" >
 	<!-- host component -->
 	<fx:Metadata>
 		[HostComponent("com.aimialesson.UI.views.UploadUI")]
@@ -16,10 +16,11 @@
 		<mx:NumberFormatter id="numberFormatter" />	
 	</fx:Declarations>
 	<s:Group  width="100%" height="100%">
-		<mx:ProgressBar id="progressBar" horizontalCenter="0" verticalCenter="0" indeterminate="true" visible="false" />
+		<!--mx:ProgressBar id="progressBar" horizontalCenter="0" verticalCenter="0" indeterminate="true" visible="false" /-->
 		<s:BitmapImage id="presantationBG" source="@Embed('flashassets/lesson_presentation_background.png')" left="0" />
 			<!--s:Label id="message" left="10"/-->
-		<s:Button id="uploadBtn" label="Upload file" x="{presantationBG.width - uploadBtn.width}" bottom="{-5 - uploadBtn.height}" skinClass="com.aimialesson.UI.skins.elements.PresentationUploadBtnSkin" useHandCursor="true"/>	
+		<s:Button id="uploadBtn" label="Upload file" x="{presantationBG.width - uploadBtn.width}" bottom="{-5 - uploadBtn.height}" skinClass="com.aimialesson.UI.skins.elements.PresentationUploadBtnSkin" useHandCursor="true"/>
+		<elements:PresentationProgressBar id="progressBar" left="0" bottom="{-5 - progressBar.height}"/>
 	</s:Group>
 	
 </s:Skin>
