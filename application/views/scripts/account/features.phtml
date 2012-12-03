@@ -1,14 +1,34 @@
 <div class = "featuresTab">
-    <?php echo $this->filters->author; ?>
-    <?php echo $this->filters->lesson_category.'<br>'; ?>
+
+    <div class="filters">
+        Display:
+        <?php echo $this->filters->author; ?>
+        <?php echo $this->filters->lesson_category; ?>
+    </div>
+    <div class="firstSeparator"></div>
     <?php $profileModel = new Application_Model_Profile(); ?>
     <div class= "messageContent">
     <?php //Zend_Debug::dump($this->featured); ?>
     <?php foreach($this->featured as $person): ?>
+                <div class = "featureItem">
+                    <?php $avatarPath = $profileModel->getAvatarPath($person['id'], 'base') ?>
+                    <div class="imageBlock"><img src="<?php echo $avatarPath;?>"></div>
+                    <?php echo '<a class ="viewProfile" href="/user/'.$person['id'].'">VIEW PROFILE</a>'; ?>
+                    <?php echo '<a class ="addAccount" href="/user/'.$person['id'].'">ADD TO MY ACCOUNT</a>'; ?>
+                    <ul>
+                        <li><span>Name:</span><?php echo $person['firstname'] . ' ' . $person['lastname'];?></li>
+                        <li><span>Services offered:</span><?php
+                            if($person['services']){
+                                echo $person['services'][0]['lesson_category'];
+                            }
+                            ?></li>
+                        <li><span>Services requested:</span></li>
+                        <li><span>About me:</span></li>
+                    </ul>
+                </div>
+        <div class="middleSeparator"></div>
 
-        <?php $avatarPath = $profileModel->getAvatarPath($person['id'], 'medium') ?>
-        <img src="<?php echo $avatarPath;?>">
-        <?php echo $person['firstname'].'<a class ="viewProfile" href="/user/'.$person['id'].'">VIEW PROFILE</a><br>'; ?>
     <?php endforeach; ?>
+
     </div>
 </div>

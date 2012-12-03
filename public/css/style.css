@@ -1362,16 +1362,7 @@ ul.messageTabs{
 	float:right;
 }
 
-.messageContent{
-	background: #ffffff;
-	width: 805px;
-	margin: 0px 2px;
-	padding: 20px 31px 0px;
-	box-shadow: 0 0 5px #e5e5e5;
-	-moz-box-shadow: 0 0 5px #e5e5e5; /* Firefox */
-    -webkit-box-shadow: 0 0 5px #e5e5e5; /* Safari, Chrome */
-    min-height: 450px;
-}
+
 .userMessages table tr td{
     padding:6px;
     height:18px;
@@ -1554,18 +1545,105 @@ ul.messageTabs{
     background:url('../img/design/accountLayout/glyphicons/search.png')no-repeat scroll 3% 64% transparent;
 }
 /*Latest featured*/
+.featuresTab{
+    background: #ffffff;
+    width: 805px;
+    margin: 0px 2px;
+    padding: 20px 31px 0px;
+    box-shadow: 0 0 5px #e5e5e5;
+    -moz-box-shadow: 0 0 5px #e5e5e5; /* Firefox */
+    -webkit-box-shadow: 0 0 5px #e5e5e5; /* Safari, Chrome */
+    min-height: 450px;
+}
+.featuresTab .filters{
+    margin-left: 481px;
+    margin-right: 38px;
+    margin-top: 17px;
+}
+.featuresTab #author{
+    bottom: 2px;
+    float: right;
+    height: 24px;
+    left: 34px;
+    position: relative;
+    width: 113px;
+}
+.featuresTab #lesson_category{
+    bottom: 2px;
+    float: right;
+    height: 24px;
+    left: 6px;
+    position: relative;
+    width: 123px;
+}
 
-.featuresTab .viewProfile{
-    font:12px dosis-semibold-middle;
-    text-decoration: none;
-    color:#1d3300;
+.featuresTab .messageContent{
+    margin-left:5px;
+}
+.featuresTab .firstSeparator{
+    background: url('../img/design/accountLayout/1page_middle_separator.png') no-repeat;
+    height: 14px;
+    width: 800px;
+    margin-bottom: 16px;
+    margin-top: 12px;
+}
+/* Feature Item */
+.featuresTab .featureItem {
+    clear: both;
+    font:12px arial;
+    margin-top: 30px;
+    min-height: 141px;
+}
+.featuresTab .featureItem ul{
+    margin-left: 19px;
+}
+.featuresTab .featureItem li{
+    margin-bottom: 14px;
+}
+.featuresTab .featureItem ul li span{
+    display: inline-block;
+    font: 700 11px arial;
+    width: 57px;
+}
+.featuresTab .featureItem .viewProfile{
     background: url("../img/design/accountLayout/glyphicons/profileId.png") no-repeat scroll 0 52% transparent;
+    color: #1D3300;
+    float: right;
+    font: 12px dosis-semibold-middle;
     padding-left: 22px;
+    position: relative;
+    right: 6px;
+    text-decoration: none;
+    top: -2px;
 }
-.featuresTab .viewProfile:hover{
+.featuresTab .featureItem  .viewProfile:hover{
     background: url("../img/design/accountLayout/glyphicons/profileIdHover.png") no-repeat scroll 0 52% transparent;
-    padding-left: 22px;
+}
+.featuresTab .featureItem .addAccount{
+    background: url("../img/design/accountLayout/glyphicons/add.png") no-repeat scroll 0 52% transparent;
+    color: #1D3300;
+    float: right;
+    font: 12px dosis-semibold-middle;
+    padding-left: 19px;
+    position: relative;
+    right: 28px;
+    text-decoration: none;
+    top: -2px;
+}
+.featuresTab .featureItem  .addAccount:hover{
+    background: url("../img/design/accountLayout/glyphicons/addHover.png") no-repeat scroll 0 52% transparent;
+}
+.featuresTab .featureItem ul{
+    float:left;
+}
+.featuresTab .featureItem  .imageBlock{
+    float:left;
 }
 
-
-
+.featuresTab .middleSeparator{
+    background: url('../img/design/accountLayout/middle_double_separator.png') no-repeat;
+    height: 33px;
+    width: 800px;
+    margin-top: 40px;
+    margin-bottom: 22px;
+}
