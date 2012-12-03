@@ -8,6 +8,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         $this->_helper->AjaxContext()
             ->addActionContext('edit', 'json')
             ->addActionContext('offline', 'json')
+            ->addActionContext('online', 'json')
             ->initContext('json');
     }
 
