@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			var fillShape:Shape;
+			[Bindable]
+			private var _percent:Number;
+			public function set percent ( value : Number ) : void {
+				_percent = Math.round (value * 100);
+				fillShape.graphics.clear();
+				fillShape.graphics.beginFill( 0x000000);
+				fillShape.graphics.drawRect( 0, 0, value * maskFullWidth, maskFullHeight);
+				fillShape.graphics.endFill();
+			}
+			
+			public function get maskFullWidth () : Number {
+				return bg.width;
+			}
+			public function get maskFullHeight () : Number {
+				return bg.height;
+			}
+		]]>
+	</fx:Script>
+	
+	<s:SpriteVisualElement id="maskSVE"  />
+	<s:BitmapImage id="bg" />
+	<s:BitmapImage id="fillBG" mask="{maskSVE}"/>
+	<s:RichText id="percentRT" text="{_percent + '%'}" />
+</s:Group>
