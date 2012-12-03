@@ -43,10 +43,6 @@
 
 		]]>
 	</fx:Script>
-	<s:states>
-		<s:State id="notFullScreenState" name="notFullScreen"/>
-		<s:State id="fullScreenState" name="fullScreen" />
-	</s:states>
 	<s:VGroup id="chatGroup" gap="20" width="100%">
 		<s:RichText text="VIDEO CHAT:" styleName="HeaderStyle" />
 		<views:AimiaVideoUI id="myAimiaVideo" userName="{User.getInstance().userName}" userRole="{User.getInstance().userRole}" userOnline="{User.getInstance().isOnline}" skinClass="com.aimialesson.UI.views.elements.AimiaVideoSkin" />

@@ -1,5 +1,6 @@
 package com.aimialesson.UI.views
 {
+	import com.aimialesson.UI.views.elements.PresentationProgressBar;
 	import com.aimialesson.events.PresentationEvent;
 	import com.aimialesson.model.Actions;
 	import com.aimialesson.model.Main;
@@ -119,6 +120,7 @@ package com.aimialesson.UI.views
 		
 		private function fileRef_progress(evt:ProgressEvent):void {
 			progressBar.visible = true;
+			//if (evt.bytesTotal) progressBar.percent = evt.bytesLoaded / evt.bytesTotal;
 		}
 		
 		private function fileRef_complete(evt:Event):void {

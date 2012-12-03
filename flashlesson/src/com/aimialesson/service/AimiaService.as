@@ -42,6 +42,7 @@ package com.aimialesson.service
 		}
 		
 		public function makeCall():void{
+			debug ("AimiaService:makeCall:" + callUrl);
 			aimiaService = new HTTPService();
 			aimiaService.request = params;
 			aimiaService.method = URLRequestMethod.POST;
@@ -50,7 +51,6 @@ package com.aimialesson.service
 			aimiaService.addEventListener(ResultEvent.RESULT, aimiaService_resultHandler);
 			aimiaService.addEventListener(FaultEvent.FAULT, aimiaService_faultHandler);
 			timer.addEventListener(TimerEvent.TIMER,aimiaService.send);
-			debug ("PresentationService:getImages");
 			aimiaService.send();
 		} 
 		
@@ -59,7 +59,7 @@ package com.aimialesson.service
 		
 		protected function aimiaService_resultHandler ( event : ResultEvent ) : void
 		{
-			debug ("getImageService_resultHandler:");
+			debug ("aimiaService_resultHandler:");
 			var result:Object = JSON.parse(event.result as String);
 			debug (result.answer);
 			

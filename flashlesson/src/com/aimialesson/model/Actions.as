@@ -5,6 +5,7 @@ package com.aimialesson.model
 		
 		private static var instance:Actions;
 		
+		//public var domain:String = "http://aimya.svitla.com";
 		public var domain:String = "";
 		
 		private const FILE_UPLOAD_URL:String = "/lesson/upload/";//"/test/upload.php";
