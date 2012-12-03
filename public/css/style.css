@@ -1603,7 +1603,7 @@ ul.messageTabs{
 .featuresTab .featureItem ul li span{
     display: inline-block;
     font: 700 11px arial;
-    width: 57px;
+    width: 73px;
 }
 .featuresTab .featureItem .viewProfile{
     background: url("../img/design/accountLayout/glyphicons/profileId.png") no-repeat scroll 0 52% transparent;
