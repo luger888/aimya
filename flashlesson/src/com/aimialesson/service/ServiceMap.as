@@ -35,6 +35,8 @@ package com.aimialesson.service
 			resizeService = new ResizeService();
 			startSessionService = new StartSessionService();
 			stopSessionService = new StopSessionService();
+			startSessionService.addEventListener(ServiceEvent.SESSION_IS_STARTED_RESULT, onServiceEvent);
+			stopSessionService.addEventListener(ServiceEvent.SESSION_IS_STOPPED_RESULT, onServiceEvent);
 			userIsOnlineService.makeCall();
 			partnerIsOnlineService.makeCall();
 		}
@@ -47,7 +49,7 @@ package com.aimialesson.service
 		}
 		
 		public function onNotesEvent ( event : NotesEvent ) : void {
-			debug ( "ServiceMap : onPresentationEvent : " + event.type );
+			debug ( "ServiceMap : onNotesEvent : " + event.type );
 			if (event.type == NotesEvent.ADD_NEW_LINE){
 				addNoteService.addParams(event.value);
 				addNoteService.makeCall();
@@ -55,12 +57,12 @@ package com.aimialesson.service
 		}
 		
 		public function onAppEvent ( event : AppEvent ) : void {
-			debug ( "ServiceMap : onPresentationEvent : " + event.type );
-			if (event.type == AppEvent.CHANGE_SCREEN_STATE)
+			debug ( "ServiceMap : onAppEvent : " + event.type );
 			switch (event.type) {
 				case (AppEvent.CHANGE_SCREEN_STATE):	resizeService.makeCall();
 														break;
-				case (AppEvent.START_SESSION):			startSessionService.makeCall();
+				case (AppEvent.START_SESSION):			debug ( AppEvent.START_SESSION );
+														startSessionService.makeCall();
 														break;
 				case (AppEvent.STOP_SESSION):			stopSessionService.makeCall();
 														break;

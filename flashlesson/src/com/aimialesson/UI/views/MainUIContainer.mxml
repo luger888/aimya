@@ -8,13 +8,17 @@
 	<fx:Script>
 		<![CDATA[
 			import mx.core.UIComponent;
+			
+			
+			private var _content:UIComponent;
 			public function set content (value:UIComponent) : void {
-				
+				_content = value;
 				this.addElement(value);
 				value.bottom = 0;
 				value.top = 0;
 				value.left = 0;
 				value.right = 0;
+		
 			}
 		]]>
 	</fx:Script>
