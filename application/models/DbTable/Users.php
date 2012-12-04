@@ -134,7 +134,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         $offset = 0;
         $data = $this->getAdapter()
         ->select()
-        ->from('user', array('id', 'firstname', 'lastname', 'username', 'role'))
+        ->from('user', array('id', 'firstname', 'lastname', 'username', 'role', 'timezone'))
         ->order($order)
         ->limit($count, $offset);
        if($role!=='0'){

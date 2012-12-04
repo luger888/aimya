@@ -2,8 +2,12 @@
 
     <div class="filters">
         Display:
-        <?php echo $this->filters->author; ?>
+        <div class = "styledSelect">
+            <?php echo $this->filters->author; ?>
+        </div>
+            <div class = "styledSelect category">
         <?php echo $this->filters->lesson_category; ?>
+        </div>
     </div>
     <div class="firstSeparator"></div>
     <?php $profileModel = new Application_Model_Profile(); ?>
@@ -11,13 +15,14 @@
         <?php //Zend_Debug::dump($this->featured); ?>
         <?php foreach ($this->featured as $person): ?>
         <div class="featureItem">
-            <?php $avatarPath = $profileModel->getAvatarPath($person['id'], 'base') ?>
+            <?php $avatarPath = $profileModel->getAvatarPath($person['id'], 'medium') ?>
             <div class="imageBlock"><img src="<?php echo $avatarPath;?>"></div>
-            <?php echo '<a class ="viewProfile" href="/user/' . $person['id'] . '">VIEW PROFILE</a>'; ?>
-            <?php echo '<a class ="addAccount" href="/user/' . $person['id'] . '">ADD TO MY ACCOUNT</a>'; ?>
+                <?php echo '<a class ="viewProfile" href="/user/' . $person['id'] . '">VIEW PROFILE</a>'; ?>
+                <?php echo '<a class ="addAccount" href="/user/' . $person['id'] . '">ADD TO MY ACCOUNT</a>'; ?>
             <ul>
-                <li><span>Name:</span><?php echo $person['firstname'] . ' ' . $person['lastname'];?></li>
-                <li><span>Services offered:</span>
+                <li><span>Name:</span><?php echo  ' ' .$person['firstname'] . ' ' . $person['lastname'];?></li>
+                <li><span>Time zone:</span><?php echo ' UTC ' . $person['timezone'];?></li>
+                <li><span>Service offered:</span>
                     <?php
                     if ($person['services']) {
                         foreach ($person['services'] as $index => $service) {
@@ -28,7 +33,7 @@
 
                     }
                     ?></li>
-                <li><span>Services requested:</span>
+                <li><span>Service requested:</span>
                     <?php
                     if ($person['services']) {
                         foreach ($person['services'] as $index => $service) {

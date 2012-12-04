@@ -1026,7 +1026,7 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     float: left;
     height: 15px;
     margin: 1px 4px 0 0;
-    width: 12px;
+    width: 13px;
 }
 .availabilityTab input[type="checkbox"]:checked + .dayCheckbox{
     background: url('../img/design/accountLayout/checkbox.png') left center no-repeat;
@@ -1048,11 +1048,12 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     /*font:12px helvetica;*/
     /*text-align: center;*/
 /*}*/
+
 .styledSelect select {
     background: none repeat scroll 0 0 transparent;
     border: 1px solid #CCCCCC;
     font: 12px helvetica;
-    height: 24px;
+    height: 23px;
     padding: 2px 0 0 5px;
     width: 101px;
     -webkit-appearance: none;
@@ -1563,20 +1564,21 @@ ul.messageTabs{
     margin-top: 17px;
 }
 .featuresTab #author{
-    bottom: 2px;
+    bottom: 0;
     float: right;
-    height: 24px;
-    left: 34px;
+    height: 23px;
+    left: 52px;
     position: relative;
-    width: 113px;
+    width: 165px;
+    padding-left: 2px;
 }
 .featuresTab #lesson_category{
-    bottom: 2px;
     float: right;
-    height: 24px;
-    left: 6px;
+    height: 23px;
+    left: 52px;
     position: relative;
-    width: 123px;
+    width: 175px;
+    padding-left: 2px;
 }
 
 .featuresTab .messageContent{
@@ -1597,15 +1599,15 @@ ul.messageTabs{
     min-height: 141px;
 }
 .featuresTab .featureItem ul{
-    margin-left: 19px;
+    margin-left: 24px;
 }
 .featuresTab .featureItem li{
-    margin-bottom: 14px;
+    margin-bottom: 1px;
 }
 .featuresTab .featureItem ul li span{
     display: inline-block;
     font: 700 11px arial;
-    width: 73px;
+    width: 113px;
 }
 .featuresTab .featureItem .viewProfile{
     background: url("../img/design/accountLayout/glyphicons/profileId.png") no-repeat scroll 0 52% transparent;
@@ -1663,4 +1665,22 @@ ul.messageTabs{
 }
 .featuresTab .showMore:hover{
     background: url('../img/design/accountLayout/glyphicons/viewMoreHover.png') no-repeat left center;
+}
+
+.filters .styledSelect select {
+    float:left;
+}
+.filters .styledSelect {
+    background: url("../img/design/accountLayout/selectArrow.png") no-repeat scroll right center transparent;
+    float: right;
+    height: 23px;
+    left: 34px;
+    overflow: hidden;
+    position: relative;
+    top: -2px;
+    width: 113px;
+}
+.filters .styledSelect.category {
+    left: 7px;
+    width: 125px;
 }
