@@ -656,11 +656,12 @@ width:100px;
     box-shadow:  -5px 0 6px -6px #888888 inset;
     -moz-box-shadow: -5px 0 6px -6px #888888 inset;
 }
-.leftBlockProfile img{
-    margin-top: 10px;
-    max-height: 140px;
-    width: 140px;
+
+.leftNavPhoto img{
+    margin-left: 2px;
+    margin-top: 9px;
 }
+
 .leftBlockProfile{
     text-align: center;
 }
@@ -958,32 +959,47 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     height: 24px;
 }
 .profile .profileAvatar {
-    bottom: 37px;
+    bottom: 31px;
     float: right;
-    left: 57px;
-    overflow: hidden;
+    left: 67px;
     position: relative;
 
 }
 .profile .profileAvatar #uploadAvatar{
     background: url("../img/design/accountLayout/glyphicons/upload.png") no-repeat scroll left center transparent;
-    border:  none;
-    bottom: 1px;
+    border: medium none;
+    bottom: 27px;
     font: 12px dosis-semibold-middle;
     position: relative;
+    right: 11px;
     width: 78px;
+}
+.profile .profileAvatar .profileAvaImg{
+    background: url("../img/design/accountLayout/profilePhoto.png") no-repeat;
+    height: 160px;
+    position: relative;
+    width: 160px;
+    right: 8px;
+    top: -8px;
+
+}
+.profile .profileAvatar img{
+    left: 8px;
+    position: relative;
+    top: 8px;
+
 }
 .profile .profileAvatar #uploadAvatar:hover{
     background: url("../img/design/accountLayout/glyphicons/uploadHover.png") no-repeat scroll left center transparent;
 }
 .profile .profileAvatar #removeAvatar{
     background: url("../img/design/accountLayout/glyphicons/delete.png") no-repeat scroll left center transparent;
-    border:  none;
-    bottom: 1px;
+    border: medium none;
+    bottom: 27px;
     font: 12px dosis-semibold-middle;
     position: relative;
+    right: 16px;
     width: 78px;
-    right: 7px;
 }
 .profile .profileAvatar #removeAvatar:hover, .servicesTab #deleteService:hover, .userRelations .deleteUser:hover{
     background: url("../img/design/accountLayout/glyphicons/deleteHover.png") no-repeat scroll left center transparent;
@@ -1857,3 +1873,4 @@ ul.messageTabs{
     margin-top: 16px;
     width: 800px;
 }
+
