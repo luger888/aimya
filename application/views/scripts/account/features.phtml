@@ -20,9 +20,12 @@
                 <?php echo '<a class ="viewProfile" href="/user/' . $person['id'] . '">VIEW PROFILE</a>'; ?>
                 <?php $friendTable = new Application_Model_DbTable_Friends(); ?>
                 <?php $isFriend = $friendTable->isFriend($person['id']); ?>
-                <?php  if(!$isFriend){
+                <?php  if(!$isFriend){ // if friend, dont show the add to account button
                 echo '<a class ="addAccount" href=#>ADD TO MY ACCOUNT</a>';
-             }
+             }else{
+
+            echo '<a class ="sendMessage" href=#>SEND MESSAGE</a>';
+        }
              ?>
             <?php echo '<input type="hidden" value = "' .$person["id"]. '">';?>
             <ul>
