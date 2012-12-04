@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+    $('#remember').checkRadio({
+        wrapperClass: 'checkboxWrapper',
+        chekedClass: 'checked'
+    });
 
     $('#uploadAvatar').click(function(){
         $('#avatar').click();

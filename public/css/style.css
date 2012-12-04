@@ -126,7 +126,6 @@ font:15px dosis-semibold-middle;
 .headerInside{
     background-image: url('../img/design/mainPage/header.png');
     background-repeat: repeat-x;
-
     -moz-box-shadow: 0 0 6px rgba(0,0,0,0.6); /* Для Firefox */
     -webkit-box-shadow: 0 0 6px rgba(0,0,0,0.6); /* Для Safari и Chrome */
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
@@ -183,7 +182,7 @@ font:15px dosis-semibold-middle;
     float: right;
     margin-right: 12%;
 }
-#loginFormHolder input{
+#loginFormHolder input {
     font-size:12px;
 }
 
@@ -207,11 +206,11 @@ font:15px dosis-semibold-middle;
     transition: none;
 }
 
+
 #loginFormHolder input[type="checkbox"]{
     float:left;
     margin: 1px -12px 0 0;
     position: relative;
-
     display: block;
     opacity: 0;
 }
