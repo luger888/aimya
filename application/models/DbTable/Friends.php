@@ -25,13 +25,15 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
     }
 
     public function addFriend($friendId) {
+        $request = Zend_Controller_Front::getInstance()->getRequest();
+        $url = $request->getScheme() . '://' . $request->getHttpHost();
         $status = false;
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
 
         $isInList = $this->isInList($friendId);
         $userTable = new Application_Model_DbTable_Users();
         $friend = $userTable->getItem($friendId);
-        $accountPage = $this->baseLink . "/user/{$userId}";
+        $accountPage = $url . "/user/{$userId}";
         if($isInList){
             if($isInList['recipient_status'] == 0 && $isInList['sender_status'] == 1) {
                 $where = $this->getAdapter()->quoteInto('id = ?', (int)$isInList['id']);

@@ -493,6 +493,7 @@ li{
     -moz-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2); /* Для Firefox */
     -webkit-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2); /* Для Safari и Chrome */
     box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
+    right: 40px;
 }
 .alert{
     font: 11px Arial !important;
