@@ -21,7 +21,7 @@ class Application_Model_DbTable_Lesson extends Application_Model_DbTable_Abstrac
 
     public function checkAvailableLesson($userId){
 
-        $identity =  Zend_Auth::getInstance()->getStorage()->read();
+        $identity = Zend_Auth::getInstance()->getIdentity();
         $data = $this->select()
             ->from($this->_name);
         if($identity->role == 1){
@@ -29,7 +29,7 @@ class Application_Model_DbTable_Lesson extends Application_Model_DbTable_Abstrac
         } else {
             $data->where('creator_id=?', (int)$userId);
         }
-            $data->where('status<?', 2);
+            $data->where('status=?', 1);
 
         $userData = $data->query();
         $row = $userData->fetch();
@@ -42,19 +42,28 @@ class Application_Model_DbTable_Lesson extends Application_Model_DbTable_Abstrac
 
     }
 
-    public function changeStatus($id)
+    public function changeStatus($lessonId)
     {
 
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
         $where   = array(
-            $this->getAdapter()->quoteInto('id=?', (int)$id),
+            $this->getAdapter()->quoteInto('id=?', (int)$lessonId),
+            '1' => "(creator_id={$userId} OR partner_id={$userId})"
         );
 
+        //Zend_Debug::dump($where);
         $data = array(
             'status'=> 2,
             'updated_at' => date('Y-m-d H:m:s')
         );
 
-        $this->update($data, $where);
+        $result = $this->update($data, $where);
+
+        if($result) {
+            return true;
+        } else {
+            return false;
+        }
 
     }
 
