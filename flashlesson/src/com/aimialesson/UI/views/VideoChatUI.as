@@ -34,14 +34,6 @@ package com.aimialesson.UI.views
 
 		override protected function partAdded(partName:String, instance:Object):void
 		{
-			/*if (instance == myVideoContainter){
-				myVideo = new Video(VIDEO_CHAT_WINDOW_WIDTH, VIDEO_CHAT_WINDOW_HEIGHT);
-				myVideoContainter.addChild(myVideo);
-			} else 	if (instance == partnerVideoContainter)
-			{
-				partnerVideo = new Video(VIDEO_CHAT_WINDOW_WIDTH, VIDEO_CHAT_WINDOW_HEIGHT);
-				partnerVideoContainter.addChild(partnerVideo);
-			} */
 		}
 		override protected function partRemoved(partName:String, instance:Object):void {
 			
@@ -77,6 +69,20 @@ package com.aimialesson.UI.views
 			debug("VideoChat:partnerVideoInit");
 			Media.getInstance().partnerNetStream.play(Media.getInstance().partnerStreamName);
 			partnerVideo.attachNetStream(Media.getInstance().partnerNetStream);
+			Main.getInstance().addEventListener( Main.SESSION_STARTED_CHANGED, onSessionStartedChange );
+		}
+		
+		public function onLessonFinished () : void {
+			debug("VideoChat:onStopSession");
+			myVideo.clear();
+			myVideo.attachCamera(null);
+			partnerVideo.clear();
+			partnerVideo.attachNetStream(null);
+		}
+		
+		private function onSessionStartedChange (event:Event) : void {
+			if (Main.getInstance().session_started) Media.getInstance().partnerNetStream.play(Media.getInstance().partnerStreamName);
+			else Media.getInstance().partnerNetStream.pause();
 		}
 		
 		private function debug (str:String):void {

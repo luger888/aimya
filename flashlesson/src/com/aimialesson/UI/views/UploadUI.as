@@ -34,7 +34,7 @@ package com.aimialesson.UI.views
 		public var uploadBtn:Button;
 		[SkinPart (required="false")]
 		public var message:Label;
-		[SkinPart (required="true")]
+		[SkinPart (required="false")]
 		public var progressBar:PresentationProgressBar;
 		[SkinPart (required="true")]
 		public var presantationBG:BitmapImage;

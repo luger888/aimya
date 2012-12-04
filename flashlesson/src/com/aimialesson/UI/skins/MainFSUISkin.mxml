@@ -23,25 +23,28 @@
 		<s:HGroup paddingTop="30" paddingBottom="30" height="{bgImage.height}" left="55" right="60" >
 			<s:Group width="100%" height="{bgImage.height - 60}"  >
 				<!--s:BitmapImage source="@Embed('flashassets/aimya_logo1.png')" top="8" left="0"/-->
-				<s:VGroup top="22" right="75">
+				<s:VGroup id="leftHeaderGroup" top="22" right="75">
 					<views:MainUIContainer id="remainingTimeContainer" />
-					<s:Button skinClass="com.aimialesson.UI.skins.elements.StartSessionBtnSkin" id="startSessionBtn" right="0" includeInLayout="{!Main.getInstance().session_started}" visible="{!Main.getInstance().session_started}" />
-					<s:Button skinClass="com.aimialesson.UI.skins.elements.StopSessionBtnSkin" id="stopSessionBtn" right="0" includeInLayout="{Main.getInstance().session_started}" visible="{Main.getInstance().session_started}"/>		
+					<s:Button skinClass="com.aimialesson.UI.skins.elements.StartSessionBtnSkin" id="startSessionBtn" right="0" includeInLayout="{!Main.getInstance().session_started}" visible="{!Main.getInstance().session_started}" buttonMode="true" useHandCursor="true"/>
+					<s:Button skinClass="com.aimialesson.UI.skins.elements.StopSessionBtnSkin" id="stopSessionBtn" right="0" includeInLayout="{Main.getInstance().session_started}" visible="{Main.getInstance().session_started}" buttonMode="true" useHandCursor="true"/>		
 				</s:VGroup>
 				<!--s:VGroup left="0" right="75" top="62" bottom="0"-->
-				<s:VGroup width="100%" height="100%" >
+				<s:VGroup left="0" right="75" top="{leftHeaderGroup.y + leftHeaderGroup.height}" bottom="0" >
 					<views:MainUIContainer id="videoChatContainer" top="0"/>
-					<views:MainUIContainer id="tPresentationContainer" width="100%" height="100%"/>
+					<views:MainUIContainer id="notesContainer"  width="100%" height="100%"/>					
 				</s:VGroup>
 			</s:Group>
 			
 			<s:Group id="rightGroup" width="100%" height="{bgImage.height - 60}" >
-				<s:Button skinClass="com.aimialesson.UI.skins.elements.MinimizeBtnSkin" id="goFSBtn" right="0" top="0"/>
+				<s:Button skinClass="com.aimialesson.UI.skins.elements.MinimizeBtnSkin" id="goFSBtn" right="0" top="0" buttonMode="true" useHandCursor="true"/>
 				<s:VGroup id="rightTitleGroup" top="22" left="75" right="0" >
 					<views:MainUIContainer id="onlineStudentContainer"  />
 					<views:MainUIContainer id="presentationTitleContainer" />	
 				</s:VGroup>
-				<views:MainUIContainer id="notesContainer"  bottom="0" left="75" right="0" top="{presentationTitleContainer.y + presentationTitleContainer.height}"/>
+					
+				<s:Group bottom="0" left="75" right="0" top="{rightTitleGroup.y + rightTitleGroup.height}">
+					<views:MainUIContainer id="tPresentationContainer" width="100%" height="100%" verticalCenter="0"/>
+				</s:Group>
 				<!--s:TextArea id="debugger"  width="100%" height="200"/-->
 			</s:Group>				
 		</s:HGroup>

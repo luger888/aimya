@@ -30,11 +30,15 @@ package com.aimialesson.model
 			this.dispatchEvent( new Event("partnerRoleChange") );
 		}
 		
+		public function get partnerRoleID () : String {
+			return _partnerRole;
+		}
+		
 		public function get userRole () : String {
 			return (_userRole == User.STUDENT) ? "Student" : "Instructor";
 		}
 		
-		private var _isOnline:Boolean = false;
+		private var _isOnline:Boolean = true;
 		public function set isOnline ( value : Boolean ) : void {
 			_isOnline = value;
 		}

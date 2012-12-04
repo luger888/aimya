@@ -47,6 +47,11 @@ package com.aimialesson.controllers
 			Media.getInstance().nc.client = new Client(); 
 			Media.getInstance().nc.connect(Media.getInstance().rtmp);
 		}
+		
+		public function closeConnect () : void {
+			debug("MediaController:closeConnection");
+			Media.getInstance().nc.close();
+		}
 				
 		private function netStatusHandler ( event : NetStatusEvent ) :void {
 			debug("netStatusHandler");		

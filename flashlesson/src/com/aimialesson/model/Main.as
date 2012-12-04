@@ -9,6 +9,8 @@ package com.aimialesson.model
 	{
 		public var debugger : TextArea;
 		public static var FS_MODE_CHANGED:String = "fsModeChange";
+		public static var SESSION_STARTED_CHANGED:String = "sessionStartedChange";
+		public static var LESSON_FINISHED_CHANGED:String = "lessonFinishedChange";
 		
 
 		private var _fsMode:Boolean = false;
@@ -20,8 +22,34 @@ package com.aimialesson.model
 		public function get fsMode () : Boolean {
 			return _fsMode;
 		}
+		
+		private var _session_started:Boolean = true;
+		[Bindable(Event=Main.SESSION_STARTED_CHANGED)]
+		public function set session_started ( value : Boolean ) : void {
+			_session_started = value;
+			dispatchEvent ( new Event ( Main.SESSION_STARTED_CHANGED ));
+		}
+		
+		public function get session_started ( ) : Boolean {
+			return _session_started;
+		}
+		
+		private var _lesson_finished:Boolean = true;
+		[Bindable(Event=Main.LESSON_FINISHED_CHANGED)]
+		public function set lesson_finished ( value : Boolean ) : void {
+			_lesson_finished = value;
+			dispatchEvent ( new Event ( Main.LESSON_FINISHED_CHANGED ));
+		}
+		
+		public function get lesson_finished ( ) : Boolean {
+			return _lesson_finished;
+		}
+		
 		[Bindable]
-		public var session_started:Boolean = false;
+		public var remainingTime:int = 0;
+		
+		[Bindable]
+		public var totalTime:int = 60;
 		
 		private static var instance : Main;
 		

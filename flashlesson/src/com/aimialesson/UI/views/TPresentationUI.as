@@ -58,13 +58,13 @@ package com.aimialesson.UI.views
 		override protected function updateDisplayList ( unscaledWidth : Number, unscaledHeight : Number ) : void {
 			super.updateDisplayList(unscaledWidth, unscaledHeight);
 			if (!presentationBG) return;
-/*			if (unscaledHeight / unscaledWidth > presantationBG.sourceHeight / presantationBG.sourceWidth){
-				presantationBG.percentWidth = 100;
-				presantationBG.height = presantationBG.sourceHeight * ( unscaledWidth / presantationBG.sourceWidth );
+			if (unscaledHeight / unscaledWidth > presentationBG.sourceHeight / presentationBG.sourceWidth){
+				presentationBG.percentWidth = 100;
+				presentationBG.height = presentationBG.sourceHeight * ( unscaledWidth / presentationBG.sourceWidth );
 			} else {
-				presantationBG.percentHeight = 100;
-				presantationBG.width = presantationBG.sourceWidth * ( unscaledHeight / presantationBG.sourceHeight );
-			}*/
+				presentationBG.percentHeight = 100;
+				presentationBG.width = presentationBG.sourceWidth * ( unscaledHeight / presentationBG.sourceHeight );
+			}
 		}
 		
 		public function initSize () : void {
