@@ -29,7 +29,7 @@ class Application_Model_DbTable_Lesson extends Application_Model_DbTable_Abstrac
         } else {
             $data->where('creator_id=?', (int)$userId);
         }
-            $data->where('status=?', 1);
+            $data->where('status>?', 2);
 
         $userData = $data->query();
         $row = $userData->fetch();

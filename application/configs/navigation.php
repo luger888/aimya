@@ -58,6 +58,17 @@ return array(
             ),
             array
             (
+                'label' => 'MY BOOKING',
+                'tag' => 'leftMenu',
+                'route' => 'default',
+                'module' => 'default',
+                'controller' => 'booking',
+                'action' => 'index',
+                'resource'      => 'booking',
+                'privilege'     => 'index',
+            ),
+            array
+            (
                 'label' => 'MY LESSONS',
                 'tag' => 'leftMenu',
                 'route' => 'default',
