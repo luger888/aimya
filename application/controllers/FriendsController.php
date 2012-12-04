@@ -5,6 +5,7 @@ class FriendsController extends Zend_Controller_Action
     {
         $this->_helper->layout->setLayout("layoutInside");
         $this   ->_helper->AjaxContext()
+            ->addActionContext('send', 'json')
             ->initContext('json');
     }
 
@@ -29,6 +30,19 @@ class FriendsController extends Zend_Controller_Action
                 } else {
                     $this->_helper->flashMessenger->addMessage(array('failure'=>'Problem with sending request, please try again later'));
                     $this->_redirect($url);
+                }
+            }
+            if($this->getRequest()->getParam('friend_id')){
+                $friendId = $this->getRequest()->getParam('friend_id');
+                $friendTable = new Application_Model_DbTable_Friends();
+
+
+                $result = $friendTable->addFriend($friendId);
+
+                if($result) {
+                    $this->view->successFlash = "Request successfully sent";
+                } else {
+                     $this->view->alertFlash = 'Problem with sending request, please try again later';
                 }
             }
         }

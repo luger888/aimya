@@ -1131,14 +1131,14 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     position: relative;
     font:12px dosis-semibold-middle;
     position: relative;
-    bottom:2px;
+    bottom:5px;
 }
 .userRelations .blockUser{
     width:57px;
     font:12px dosis-semibold-middle;
     cursor: pointer;
     border:none;
-    margin-top: 2px;
+    margin-top: -9px;
 }
 .userRelations table{
     width:799px;
@@ -1683,4 +1683,121 @@ ul.messageTabs{
 .filters .styledSelect.category {
     left: 7px;
     width: 125px;
+}
+
+
+
+/*JSMessenger, alert (red)*/
+.alertBlock{
+    margin: 0 auto;
+    position: relative;
+    top: 15px;
+    width: 800px;
+    -moz-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2); /* Для Firefox */
+    -webkit-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2); /* Для Safari и Chrome */
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
+}
+.alert{
+    font: 11px Arial !important;
+    color:#ad4c4c !important;
+    background-color: #fae9e9 !important;
+    border: 1px solid #ebb7b7 !important;
+    border-radius:2px;
+}
+
+.alert .flash-warning{
+    font: 700 11px Arial !important;
+    color: #981919 !important;
+}
+
+.alert .close{
+    background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat;
+    top: -17px !important;
+    left: 30px !important;
+    line-height: 20px;
+    position: relative;
+    width:12px;
+    height: 12px;
+    opacity: 1 !important;
+}
+
+/*JSMessenger, alert (red)*/
+.alertBlock{
+    margin: 0 auto;
+    position: relative;
+    top: 15px;
+    width: 800px;
+    -moz-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2); /* Для Firefox */
+    -webkit-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2); /* Для Safari и Chrome */
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
+}
+.alert{
+    font: 11px Arial !important;
+    color:#ad4c4c !important;
+    background-color: #fae9e9 !important;
+    border: 1px solid #ebb7b7 !important;
+    border-radius:2px;
+}
+
+.alert .flash-warning{
+    font: 700 11px Arial !important;
+    color: #981919 !important;
+}
+
+.alert .close{
+    background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat;
+    top: -17px !important;
+    left: 30px !important;
+    line-height: 20px;
+    position: relative;
+    width:12px;
+    height: 12px;
+    opacity: 1 !important;
+}
+/*JSMessenger, attention (yellow)*/
+.attention{
+    font: 11px Arial !important;
+    color:#a3a586 !important;
+    background-color: #fafcd9 !important;
+    border: 1px solid #d1d0a9 !important;
+    border-radius:2px;
+}
+
+.attention .flash-attention{
+    font: 700 11px Arial !important;
+    color: #83855e !important;
+}
+.attention .close {
+    background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat 0 25%;
+    top: -17px !important;
+    left: 30px !important;
+    line-height: 20px;
+    position: relative;
+    width:12px;
+    height: 12px;
+    opacity: 1 !important;
+}
+/*JSMessenger, success (green)*/
+
+.success{
+    font: 11px Arial !important;
+    color:#537e6a !important;
+    background-color: #cce8bf !important;
+    border: 1px solid #a0c58e !important;
+    border-radius:2px;
+}
+
+.success .flash-success{
+    font: 700 11px Arial !important;
+    color: #315b47 !important;
+}
+.success .close {
+    background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat 33% 0;
+    top: -17px !important;
+    left: 30px !important;
+    line-height: 20px;
+    position: relative;
+    width:12px;
+    height: 12px;
+    opacity: 1 !important;
 }
