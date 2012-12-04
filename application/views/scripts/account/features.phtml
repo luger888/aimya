@@ -1,14 +1,55 @@
-<div class = "featuresTab">
-    <?php echo $this->filters->author; ?>
-    <?php echo $this->filters->lesson_category.'<br>'; ?>
-    <?php $profileModel = new Application_Model_Profile(); ?>
-    <div class= "messageContent">
-    <?php //Zend_Debug::dump($this->featured); ?>
-    <?php foreach($this->featured as $person): ?>
+<div class="featuresTab">
 
-        <?php $avatarPath = $profileModel->getAvatarPath($person['id'], 'medium') ?>
-        <img src="<?php echo $avatarPath;?>">
-        <?php echo $person['firstname'].'<a class ="viewProfile" href="/user/'.$person['id'].'">VIEW PROFILE</a><br>'; ?>
-    <?php endforeach; ?>
+    <div class="filters">
+        Display:
+        <div class = "styledSelect">
+            <?php echo $this->filters->author; ?>
+        </div>
+            <div class = "styledSelect category">
+        <?php echo $this->filters->lesson_category; ?>
+        </div>
+    </div>
+    <div class="firstSeparator"></div>
+    <?php $profileModel = new Application_Model_Profile(); ?>
+    <div class="messageContent">
+        <?php //Zend_Debug::dump($this->featured); ?>
+        <?php foreach ($this->featured as $person): ?>
+        <div class="featureItem">
+            <?php $avatarPath = $profileModel->getAvatarPath($person['id'], 'medium') ?>
+            <div class="imageBlock"><img src="<?php echo $avatarPath;?>"></div>
+                <?php echo '<a class ="viewProfile" href="/user/' . $person['id'] . '">VIEW PROFILE</a>'; ?>
+                <?php echo '<a class ="addAccount" href="/user/' . $person['id'] . '">ADD TO MY ACCOUNT</a>'; ?>
+            <ul>
+                <li><span>Name:</span><?php echo  ' ' .$person['firstname'] . ' ' . $person['lastname'];?></li>
+                <li><span>Time zone:</span><?php echo ' UTC ' . $person['timezone'];?></li>
+                <li><span>Service offered:</span>
+                    <?php
+                    if ($person['services']) {
+                        foreach ($person['services'] as $index => $service) {
+                            if ($service['service_type'] == 1) {
+                                echo $service['subcategory'];
+                            }
+                        }
+
+                    }
+                    ?></li>
+                <li><span>Service requested:</span>
+                    <?php
+                    if ($person['services']) {
+                        foreach ($person['services'] as $index => $service) {
+                            if ($service['service_type'] == 2) {
+                                echo $service['subcategory'];
+                            }
+                        }
+
+                    }
+                    ?></li>
+                <li><span>About me:</span></li>
+            </ul>
+        </div>
+        <div class="middleSeparator"></div>
+
+        <?php endforeach; ?>
+<input class ="showMore" type="button" value = "SHOW MORE">
     </div>
 </div>

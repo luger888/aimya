@@ -82,7 +82,7 @@ function updateService(e){
     var description = serviceWrapper.find('#descriptionEditInput').val();
     $.post(
 
-        '/account/edit/0/controller%3D%3Eaccount/1/action%3D%3Eedit', {'updateService':id, 'lesson_category': lesson_category, 'subcategory': subcategory, 'rate': rate, 'duration': duration, 'description': description},
+        '/account/edit/0/controller%3D%3Eaccount/1/action%3D%3Eedit', {'updateService':id, 'lesson_category': lesson_category, 'subcategory': subcategory, 'rate': rate, 'duration': duration, 'description': description, 'service_type': 1},
         function (response){
             window.location.reload();
         }

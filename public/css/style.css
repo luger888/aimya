@@ -1048,11 +1048,12 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     /*font:12px helvetica;*/
     /*text-align: center;*/
 /*}*/
+
 .styledSelect select {
     background: none repeat scroll 0 0 transparent;
     border: 1px solid #CCCCCC;
     font: 12px helvetica;
-    height: 24px;
+    height: 23px;
     padding: 2px 0 0 5px;
     width: 101px;
     -webkit-appearance: none;
@@ -1115,26 +1116,28 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     margin-bottom: 19px;
 }
 .userRelations .blockUser{
-    background: url('../img/design/accountLayout/glyphicons/block.png') no-repeat;
+    background: url('../img/design/accountLayout/glyphicons/block.png') no-repeat left center;
     margin-left: 30px;
 }
 .userRelations .blockUser:hover{
-    background: url('../img/design/accountLayout/glyphicons/blockHover.png') no-repeat;
+    background: url('../img/design/accountLayout/glyphicons/blockHover.png') no-repeat left center;
 }
 .userRelations .deleteUser{
     background: url('../img/design/accountLayout/glyphicons/delete.png') no-repeat left center;
     margin-left: 33px;
     border:none;
     width:70px;
+    margin-top: 2px;
+    position: relative;
     font:12px dosis-semibold-middle;
     position: relative;
     bottom:2px;
 }
 .userRelations .blockUser{
-    display: inline-block;
     width:57px;
-    height:12px;
+    font:12px dosis-semibold-middle;
     cursor: pointer;
+    border:none;
     margin-top: 2px;
 }
 .userRelations table{
@@ -1362,16 +1365,7 @@ ul.messageTabs{
 	float:right;
 }
 
-.messageContent{
-	background: #ffffff;
-	width: 805px;
-	margin: 0px 2px;
-	padding: 20px 31px 0px;
-	box-shadow: 0 0 5px #e5e5e5;
-	-moz-box-shadow: 0 0 5px #e5e5e5; /* Firefox */
-    -webkit-box-shadow: 0 0 5px #e5e5e5; /* Safari, Chrome */
-    min-height: 450px;
-}
+
 .userMessages table tr td{
     padding:6px;
     height:18px;
@@ -1554,18 +1548,139 @@ ul.messageTabs{
     background:url('../img/design/accountLayout/glyphicons/search.png')no-repeat scroll 3% 64% transparent;
 }
 /*Latest featured*/
+.featuresTab{
+    background: #ffffff;
+    width: 805px;
+    margin: 0px 2px;
+    padding: 20px 31px 0px;
+    box-shadow: 0 0 5px #e5e5e5;
+    -moz-box-shadow: 0 0 5px #e5e5e5; /* Firefox */
+    -webkit-box-shadow: 0 0 5px #e5e5e5; /* Safari, Chrome */
+    min-height: 450px;
+}
+.featuresTab .filters{
+    margin-left: 476px;
+    margin-right: 38px;
+    margin-top: 17px;
+}
+.featuresTab #author{
+    bottom: 0;
+    float: right;
+    height: 23px;
+    left: 52px;
+    position: relative;
+    width: 165px;
+    padding-left: 2px;
+}
+.featuresTab #lesson_category{
+    float: right;
+    height: 23px;
+    left: 52px;
+    position: relative;
+    width: 175px;
+    padding-left: 2px;
+}
 
-.featuresTab .viewProfile{
-    font:12px dosis-semibold-middle;
-    text-decoration: none;
-    color:#1d3300;
+.featuresTab .messageContent{
+    margin-left:5px;
+}
+.featuresTab .firstSeparator{
+    background: url('../img/design/accountLayout/1page_middle_separator.png') no-repeat;
+    height: 14px;
+    width: 800px;
+    margin-bottom: 16px;
+    margin-top: 12px;
+}
+/* Feature Item */
+.featuresTab .featureItem {
+    clear: both;
+    font:12px arial;
+    margin-top: 30px;
+    min-height: 141px;
+}
+.featuresTab .featureItem ul{
+    margin-left: 24px;
+}
+.featuresTab .featureItem li{
+    margin-bottom: 1px;
+}
+.featuresTab .featureItem ul li span{
+    display: inline-block;
+    font: 700 11px arial;
+    width: 113px;
+}
+.featuresTab .featureItem .viewProfile{
     background: url("../img/design/accountLayout/glyphicons/profileId.png") no-repeat scroll 0 52% transparent;
+    color: #1D3300;
+    float: right;
+    font: 12px dosis-semibold-middle;
     padding-left: 22px;
+    position: relative;
+    right: 6px;
+    text-decoration: none;
+    top: -2px;
 }
-.featuresTab .viewProfile:hover{
+.featuresTab .featureItem  .viewProfile:hover{
     background: url("../img/design/accountLayout/glyphicons/profileIdHover.png") no-repeat scroll 0 52% transparent;
-    padding-left: 22px;
+}
+.featuresTab .featureItem .addAccount{
+    background: url("../img/design/accountLayout/glyphicons/add.png") no-repeat scroll 0 52% transparent;
+    color: #1D3300;
+    float: right;
+    font: 12px dosis-semibold-middle;
+    padding-left: 19px;
+    position: relative;
+    right: 28px;
+    text-decoration: none;
+    top: -2px;
+}
+.featuresTab .featureItem  .addAccount:hover{
+    background: url("../img/design/accountLayout/glyphicons/addHover.png") no-repeat scroll 0 52% transparent;
+}
+.featuresTab .featureItem ul{
+    float:left;
+}
+.featuresTab .featureItem  .imageBlock{
+    float:left;
 }
 
+.featuresTab .middleSeparator{
+    background: url('../img/design/accountLayout/middle_double_separator.png') no-repeat;
+    height: 33px;
+    width: 800px;
+    margin-top: 40px;
+    margin-bottom: 22px;
+}
 
+.featuresTab .showMore{
+    background: url('../img/design/accountLayout/glyphicons/viewMore.png') no-repeat left center;
+    border: medium none;
+    color: #1D3300;
+    font: 12px dosis-semibold-middle;
+    left: 716px;
+    margin-bottom: 20px;
+    position: relative;
+    text-transform: uppercase;
+    width: 100px;
+}
+.featuresTab .showMore:hover{
+    background: url('../img/design/accountLayout/glyphicons/viewMoreHover.png') no-repeat left center;
+}
 
+.filters .styledSelect select {
+    float:left;
+}
+.filters .styledSelect {
+    background: url("../img/design/accountLayout/selectArrow.png") no-repeat scroll right center transparent;
+    float: right;
+    height: 23px;
+    left: 34px;
+    overflow: hidden;
+    position: relative;
+    top: -2px;
+    width: 113px;
+}
+.filters .styledSelect.category {
+    left: 7px;
+    width: 125px;
+}
