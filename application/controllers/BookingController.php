@@ -18,5 +18,12 @@ class BookingController extends Zend_Controller_Action
 
     }
 
+    public function addAction() {
+        $form = new Application_Form_Booking();
+
+        $this->view->form = $form;
+
+    }
+
 }
 
