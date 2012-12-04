@@ -12,6 +12,7 @@
     <?php $this->headLink()->appendStylesheet('/twitter/css/bootstrap.css');?>
     <?php $this->headLink()->appendStylesheet('http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css');?>
     <?php $this->headScript()->appendFile('/js/jquery/jquery-ui-1.9.1.custom.min.js');?>
+    <?php $this->headScript()->appendFile('/js/jquery/customCheckboxRadio.js');?>
     <?php $this->headScript()->appendFile('/js/jquery/cookieJquery.js');?>
     <?php $this->headScript()->appendFile('/js/jquery/main.js');?>
     <?php $this->headLink()->appendStylesheet('/css/mainPage.css');?>
@@ -28,13 +29,13 @@ $controllerName = $front->getRequest()->getControllerName();
 ?>
 <!-- CONTENT -->
 
-<div id="wrapper">
+<div id="wrapper" class="clearfix">
 
     <!-- HEADER & NAVIGATION -->
-    <div class="row-fluid header">
-        <div class="mainHeader">
+    <div class="row-fluid header clearfix">
+        <div class="mainHeader clearfix">
             <div class="logo">
-                <a href="index"><div class = "bigLogoImg"></div></a>
+                <a href="index" class="bigLogoImg" title="Home"></a>
             </div>
         <!-- LOGIN -->
         <?php
@@ -42,13 +43,22 @@ $controllerName = $front->getRequest()->getControllerName();
 
         <div id='loginFormHolder'>
             <form id='signIn' action='user/login' name='signIn'  method='post'>
-            <span class='login'>Login or email:</span> <span class='pass'>Password:</span><br>
-                {$this->login['username']}
-                {$this->login['password']}
+            <div class='signInButton'>
                 {$this->login['login']}<br>
-                {$this->login['remember']}
-                <div class ='rememberMe'></div><label for='{$this->login['remember']->id}'>Keep me signed in</label>
+            </div><!--End signInButton-->
+            <div class='signInBox'>
+                <label class='title'>Password:</label>
+                {$this->login['password']}
                 <a href='#'>Forgot your password?</a>
+            </div><!--End signInBox-->
+            <div class='signInBox'>
+                <label class='title'>Login or email:</label>
+                {$this->login['username']}
+                <div class='loginRemember clearfix'>
+                    <span class='checkboxBox'>{$this->login['remember']}</span>
+                    <label>Keep me signed in</label>
+                </div><!--End loginRemember-->
+            </div><!--End signInBox-->
             </form>
             <!-- END /LOGIN -->
         </div>
@@ -65,8 +75,6 @@ $controllerName = $front->getRequest()->getControllerName();
       <?php  echo $this->layout()->content;?>
 
 
-
-<div class = 'push'></div>
 </div>
 </div>
 <div class='footer'>
