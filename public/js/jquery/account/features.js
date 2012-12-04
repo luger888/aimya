@@ -30,15 +30,19 @@ $(document).ready(function () {
 
                 if(response.alertFlash){
                     $('.alertBlock .alert').remove();
+
+
                     $('.alertBlock').append('<div class="alert"><div class = "flash-warning">Warning!</div>'+response.alertFlash+'<button type="button" class="close" data-dismiss="alert"></button></div>');
                     $('html, body').animate({scrollTop:0}, 'fast');
 
 
 
+
                 }else if(response.successFlash){
                     $('.alertBlock .alert').remove();
+                    $('.modal').css('visibility', 'visible');
                     $('.alertBlock').append('<div class="success alert"><div class = "flash-success">Success!</div>'+response.successFlash+'<button type="button" class="close" data-dismiss="alert"></button></div>');
-                    $('html, body').animate({scrollTop:0}, 'fast');
+                    $('.modal').fadeIn(1000).delay(800).fadeOut(1000);
                 }
 
             })

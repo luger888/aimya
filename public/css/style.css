@@ -960,7 +960,7 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
 .profile .profileAvatar {
     bottom: 37px;
     float: right;
-    left: 38px;
+    left: 57px;
     overflow: hidden;
     position: relative;
 
@@ -1624,18 +1624,33 @@ ul.messageTabs{
     background: url("../img/design/accountLayout/glyphicons/profileIdHover.png") no-repeat scroll 0 52% transparent;
 }
 .featuresTab .featureItem .addAccount{
-    background: url("../img/design/accountLayout/glyphicons/add.png") no-repeat scroll 0 52% transparent;
+     background: url("../img/design/accountLayout/glyphicons/add.png") no-repeat scroll 0 52% transparent;
+     color: #1D3300;
+     float: right;
+     font: 12px dosis-semibold-middle;
+     padding-left: 19px;
+     position: relative;
+     right: 28px;
+     text-decoration: none;
+     top: -2px;
+ }
+.featuresTab .featureItem  .addAccount:hover{
+    background: url("../img/design/accountLayout/glyphicons/addHover.png") no-repeat scroll 0 52% transparent;
+}
+
+.featuresTab .featureItem .sendMessage{
+    background: url("../img/design/accountLayout/glyphicons/send.png") no-repeat scroll 0 52% transparent;
     color: #1D3300;
     float: right;
     font: 12px dosis-semibold-middle;
-    padding-left: 19px;
+    padding-left: 24px;
     position: relative;
     right: 28px;
     text-decoration: none;
     top: -2px;
 }
-.featuresTab .featureItem  .addAccount:hover{
-    background: url("../img/design/accountLayout/glyphicons/addHover.png") no-repeat scroll 0 52% transparent;
+.featuresTab .featureItem  .sendMessage:hover{
+    background: url("../img/design/accountLayout/glyphicons/sendHover.png") no-repeat scroll 0 52% transparent;
 }
 .featuresTab .featureItem ul{
     float:left;
@@ -1731,6 +1746,20 @@ ul.messageTabs{
     -webkit-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2); /* Для Safari и Chrome */
     box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
 }
+.alertBlock.modal{
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
+    height: 46px;
+    left: 29%;
+    margin: 0 auto;
+    overflow: hidden;
+    position: fixed;
+    top: 40%;
+    visibility: hidden;
+    width: 800px;
+    z-index: 10002;
+
+}
+
 .alert{
     font: 11px Arial !important;
     color:#ad4c4c !important;
@@ -1800,4 +1829,31 @@ ul.messageTabs{
     width:12px;
     height: 12px;
     opacity: 1 !important;
+}
+/*User profile*/
+.userProfileTab{
+    background: #ffffff;
+    width: 805px;
+    margin: 0px 2px;
+    padding: 20px 31px 0px;
+    box-shadow: 0 0 5px #e5e5e5;
+    -moz-box-shadow: 0 0 5px #e5e5e5; /* Firefox */
+    -webkit-box-shadow: 0 0 5px #e5e5e5; /* Safari, Chrome */
+    min-height: 450px;
+}
+
+.userProfileTab .imageBlock{
+    float:left;
+    margin-left: 6px;
+    margin-right: 22px;
+}
+.userProfileTab .ul{
+    float:left;
+}
+.userProfileTab .firstSeparator{
+    background: url("../img/design/accountLayout/1page_middle_separator.png") no-repeat scroll 0 0 transparent;
+    height: 14px;
+    margin-bottom: 28px;
+    margin-top: 16px;
+    width: 800px;
 }
