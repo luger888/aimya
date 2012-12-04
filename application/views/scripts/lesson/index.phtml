@@ -1,3 +1,4 @@
+<?php $availableLesson = $this->availableLesson; ?>
 <?php echo $this->partial('partials/lesson.phtml')?>
 <div class= "messageContent">
     <?php $users = $this->userList; ?>
@@ -6,12 +7,14 @@
             <?php foreach($users as $user): ?>
             <?php if($user['id'] != Zend_Auth::getInstance()->getIdentity()->id):?>
                 <tr>
-                    <td><?php echo $user['username']?></td>
+                    <td><b><?php echo $user['username']?></b></td>
                     <td>
                         <form method="POST" id='start_session_<?php echo $user['id'];?>' action="<?php echo $this->baseLink() . '/lesson/setup/'?>">
                             <input name="student_id" type="hidden" value="<?php echo $user['id'];?>">
-                            <?php if(Zend_Auth::getInstance()->getIdentity()->role == 2):?>
-                                <a href="#" id="<?php echo $user['id'];?>" onclick="$('#start_session_<?php echo $user['id'];?>').submit()">Start Session</a>
+                            <?php if(Zend_Auth::getInstance()->getIdentity()->role > 1 && !$availableLesson):?>
+                                <a href="#" id="<?php echo $user['id'];?>" onclick="jQuery('#start_session_<?php echo $user['id'];?>').submit()">Start Session</a>
+                            <?php else:?>
+                                <?php echo "You can't start new lesson because you have active lesson. Go to \"On yhe Air Tab\" to end old lesson"?>
                             <?php endif;?>
                         </form>
                     </td>
