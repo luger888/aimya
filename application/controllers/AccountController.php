@@ -8,6 +8,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         $this->_helper->AjaxContext()
             ->addActionContext('edit', 'json')
             ->addActionContext('offline', 'json')
+            ->addActionContext('online', 'json')
             ->initContext('json');
     }
 
@@ -21,7 +22,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         $profileForm = new Application_Form_Profile();
         $profileModel = new Application_Model_Profile();
         $this->view->profile = $profileForm->populate($profileModel->getProfileAccount($identity->id));
-        $this->view->avatarPath = $profileModel->getAvatarPath($identity->id, 'base'); //path to avatar
+        $this->view->avatarPath = $profileModel->getAvatarPath($identity->id, 'medium'); //path to avatar
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
 

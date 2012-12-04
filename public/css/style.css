@@ -126,7 +126,6 @@ font:15px dosis-semibold-middle;
 .headerInside{
     background-image: url('../img/design/mainPage/header.png');
     background-repeat: repeat-x;
-
     -moz-box-shadow: 0 0 6px rgba(0,0,0,0.6); /* Для Firefox */
     -webkit-box-shadow: 0 0 6px rgba(0,0,0,0.6); /* Для Safari и Chrome */
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
@@ -183,7 +182,7 @@ font:15px dosis-semibold-middle;
     float: right;
     margin-right: 12%;
 }
-#loginFormHolder input{
+#loginFormHolder input {
     font-size:12px;
 }
 
@@ -207,11 +206,11 @@ font:15px dosis-semibold-middle;
     transition: none;
 }
 
+
 #loginFormHolder input[type="checkbox"]{
     float:left;
     margin: 1px -12px 0 0;
     position: relative;
-
     display: block;
     opacity: 0;
 }
@@ -426,7 +425,7 @@ font:15px dosis-semibold-middle;
     background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat left center;
 }
 
-#saveProfile:hover{
+#saveProfile:hover, .availabilityTab #save:hover, .servicesTab .updateService:hover, .notificationsTab #saveNotifications:hover{
     background: url('../img/design/accountLayout/glyphicons/saveHover.png') no-repeat left center;
 }
 /* Services tab */
@@ -535,7 +534,9 @@ font:15px dosis-semibold-middle;
     color:#1d3300;
     right: 65px;
 }
-
+.servicesTab #editService:hover{
+    background: url('../img/design/accountLayout/glyphicons/editHover.png') no-repeat left center;
+}
 .servicesTab #deleteService{
      background: url('../img/design/accountLayout/glyphicons/delete.png') no-repeat left center;
      border:none;
@@ -570,6 +571,9 @@ font:15px dosis-semibold-middle;
     color:#1d3300;
     left: 735px;
     bottom:6px;
+}
+.servicesTab #addMoreServices:hover{
+    background: url('../img/design/accountLayout/glyphicons/addHover.png') no-repeat left center;
 }
 .servicesTab #saveService{
     background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat left center;
@@ -651,11 +655,12 @@ width:100px;
     box-shadow:  -5px 0 6px -6px #888888 inset;
     -moz-box-shadow: -5px 0 6px -6px #888888 inset;
 }
-.leftBlockProfile img{
-    margin-top: 10px;
-    max-height: 140px;
-    width: 140px;
+
+.leftNavPhoto img{
+    margin-left: 2px;
+    margin-top: 9px;
 }
+
 .leftBlockProfile{
     text-align: center;
 }
@@ -953,34 +958,49 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     height: 24px;
 }
 .profile .profileAvatar {
-    bottom: 37px;
+    bottom: 31px;
     float: right;
-    left: 38px;
-    overflow: hidden;
+    left: 67px;
     position: relative;
 
 }
 .profile .profileAvatar #uploadAvatar{
     background: url("../img/design/accountLayout/glyphicons/upload.png") no-repeat scroll left center transparent;
-    border:  none;
-    bottom: 1px;
+    border: medium none;
+    bottom: 27px;
     font: 12px dosis-semibold-middle;
     position: relative;
+    right: 11px;
     width: 78px;
+}
+.profile .profileAvatar .profileAvaImg{
+    background: url("../img/design/accountLayout/profilePhoto.png") no-repeat;
+    height: 160px;
+    position: relative;
+    width: 160px;
+    right: 8px;
+    top: -8px;
+
+}
+.profile .profileAvatar img{
+    left: 8px;
+    position: relative;
+    top: 8px;
+
 }
 .profile .profileAvatar #uploadAvatar:hover{
     background: url("../img/design/accountLayout/glyphicons/uploadHover.png") no-repeat scroll left center transparent;
 }
 .profile .profileAvatar #removeAvatar{
     background: url("../img/design/accountLayout/glyphicons/delete.png") no-repeat scroll left center transparent;
-    border:  none;
-    bottom: 1px;
+    border: medium none;
+    bottom: 27px;
     font: 12px dosis-semibold-middle;
     position: relative;
+    right: 16px;
     width: 78px;
-    right: 7px;
 }
-.profile .profileAvatar #removeAvatar:hover{
+.profile .profileAvatar #removeAvatar:hover, .servicesTab #deleteService:hover, .userRelations .deleteUser:hover{
     background: url("../img/design/accountLayout/glyphicons/deleteHover.png") no-repeat scroll left center transparent;
 }
 /*.profileAvatar input {
@@ -1043,11 +1063,12 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     /*font:12px helvetica;*/
     /*text-align: center;*/
 /*}*/
+
 .styledSelect select {
     background: none repeat scroll 0 0 transparent;
     border: 1px solid #CCCCCC;
     font: 12px helvetica;
-    height: 24px;
+    height: 23px;
     padding: 2px 0 0 5px;
     width: 101px;
     -webkit-appearance: none;
@@ -1110,24 +1131,29 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     margin-bottom: 19px;
 }
 .userRelations .blockUser{
-    background: url('../img/design/accountLayout/glyphicons/block.png') no-repeat;
+    background: url('../img/design/accountLayout/glyphicons/block.png') no-repeat left center;
     margin-left: 30px;
+}
+.userRelations .blockUser:hover{
+    background: url('../img/design/accountLayout/glyphicons/blockHover.png') no-repeat left center;
 }
 .userRelations .deleteUser{
     background: url('../img/design/accountLayout/glyphicons/delete.png') no-repeat left center;
     margin-left: 33px;
     border:none;
     width:70px;
+    margin-top: 2px;
+    position: relative;
     font:12px dosis-semibold-middle;
     position: relative;
-    bottom:2px;
+    bottom:5px;
 }
 .userRelations .blockUser{
-    display: inline-block;
     width:57px;
-    height:12px;
+    font:12px dosis-semibold-middle;
     cursor: pointer;
-    margin-top: 2px;
+    border:none;
+    margin-top: -9px;
 }
 .userRelations table{
     width:799px;
@@ -1354,16 +1380,7 @@ ul.messageTabs{
 	float:right;
 }
 
-.messageContent{
-	background: #ffffff;
-	width: 805px;
-	margin: 0px 2px;
-	padding: 20px 31px 0px;
-	box-shadow: 0 0 5px #e5e5e5;
-	-moz-box-shadow: 0 0 5px #e5e5e5; /* Firefox */
-    -webkit-box-shadow: 0 0 5px #e5e5e5; /* Safari, Chrome */
-    min-height: 450px;
-}
+
 .userMessages table tr td{
     padding:6px;
     height:18px;
@@ -1545,3 +1562,314 @@ ul.messageTabs{
     background-color: white !important;
     background:url('../img/design/accountLayout/glyphicons/search.png')no-repeat scroll 3% 64% transparent;
 }
+/*Latest featured*/
+.featuresTab{
+    background: #ffffff;
+    width: 805px;
+    margin: 0px 2px;
+    padding: 20px 31px 0px;
+    box-shadow: 0 0 5px #e5e5e5;
+    -moz-box-shadow: 0 0 5px #e5e5e5; /* Firefox */
+    -webkit-box-shadow: 0 0 5px #e5e5e5; /* Safari, Chrome */
+    min-height: 450px;
+}
+.featuresTab .filters{
+    margin-left: 476px;
+    margin-right: 38px;
+    margin-top: 17px;
+}
+.featuresTab #author{
+    bottom: 0;
+    float: right;
+    height: 23px;
+    left: 52px;
+    position: relative;
+    width: 165px;
+    padding-left: 2px;
+}
+.featuresTab #lesson_category{
+    float: right;
+    height: 23px;
+    left: 52px;
+    position: relative;
+    width: 175px;
+    padding-left: 2px;
+}
+
+.featuresTab .messageContent{
+    margin-left:5px;
+}
+.featuresTab .firstSeparator{
+    background: url('../img/design/accountLayout/1page_middle_separator.png') no-repeat;
+    height: 14px;
+    width: 800px;
+    margin-bottom: 16px;
+    margin-top: 12px;
+}
+/* Feature Item */
+.featuresTab .featureItem {
+    clear: both;
+    font:12px arial;
+    margin-top: 30px;
+    min-height: 141px;
+}
+.featuresTab .featureItem ul{
+    margin-left: 24px;
+}
+.featuresTab .featureItem li{
+    margin-bottom: 1px;
+}
+.featuresTab .featureItem ul li span{
+    display: inline-block;
+    font: 700 11px arial;
+    width: 113px;
+}
+.featuresTab .featureItem .viewProfile{
+    background: url("../img/design/accountLayout/glyphicons/profileId.png") no-repeat scroll 0 52% transparent;
+    color: #1D3300;
+    float: right;
+    font: 12px dosis-semibold-middle;
+    padding-left: 22px;
+    position: relative;
+    right: 6px;
+    text-decoration: none;
+    top: -2px;
+}
+.featuresTab .featureItem  .viewProfile:hover{
+    background: url("../img/design/accountLayout/glyphicons/profileIdHover.png") no-repeat scroll 0 52% transparent;
+}
+.featuresTab .featureItem .addAccount{
+     background: url("../img/design/accountLayout/glyphicons/add.png") no-repeat scroll 0 52% transparent;
+     color: #1D3300;
+     float: right;
+     font: 12px dosis-semibold-middle;
+     padding-left: 19px;
+     position: relative;
+     right: 28px;
+     text-decoration: none;
+     top: -2px;
+ }
+.featuresTab .featureItem  .addAccount:hover{
+    background: url("../img/design/accountLayout/glyphicons/addHover.png") no-repeat scroll 0 52% transparent;
+}
+
+.featuresTab .featureItem .sendMessage{
+    background: url("../img/design/accountLayout/glyphicons/send.png") no-repeat scroll 0 52% transparent;
+    color: #1D3300;
+    float: right;
+    font: 12px dosis-semibold-middle;
+    padding-left: 24px;
+    position: relative;
+    right: 28px;
+    text-decoration: none;
+    top: -2px;
+}
+.featuresTab .featureItem  .sendMessage:hover{
+    background: url("../img/design/accountLayout/glyphicons/sendHover.png") no-repeat scroll 0 52% transparent;
+}
+.featuresTab .featureItem ul{
+    float:left;
+}
+.featuresTab .featureItem  .imageBlock{
+    float:left;
+}
+
+.featuresTab .middleSeparator{
+    background: url('../img/design/accountLayout/middle_double_separator.png') no-repeat;
+    height: 33px;
+    width: 800px;
+    margin-top: 40px;
+    margin-bottom: 22px;
+}
+
+.featuresTab .showMore{
+    background: url('../img/design/accountLayout/glyphicons/viewMore.png') no-repeat left center;
+    border: medium none;
+    color: #1D3300;
+    font: 12px dosis-semibold-middle;
+    left: 716px;
+    margin-bottom: 20px;
+    position: relative;
+    text-transform: uppercase;
+    width: 100px;
+}
+.featuresTab .showMore:hover{
+    background: url('../img/design/accountLayout/glyphicons/viewMoreHover.png') no-repeat left center;
+}
+
+.filters .styledSelect select {
+    float:left;
+}
+.filters .styledSelect {
+    background: url("../img/design/accountLayout/selectArrow.png") no-repeat scroll right center transparent;
+    float: right;
+    height: 23px;
+    left: 34px;
+    overflow: hidden;
+    position: relative;
+    top: -2px;
+    width: 113px;
+}
+.filters .styledSelect.category {
+    left: 7px;
+    width: 125px;
+}
+
+
+
+/*JSMessenger, alert (red)*/
+.alertBlock{
+    margin: 0 auto;
+    position: relative;
+    top: 15px;
+    width: 800px;
+    -moz-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2); /* Для Firefox */
+    -webkit-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2); /* Для Safari и Chrome */
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
+}
+.alert{
+    font: 11px Arial !important;
+    color:#ad4c4c !important;
+    background-color: #fae9e9 !important;
+    border: 1px solid #ebb7b7 !important;
+    border-radius:2px;
+}
+
+.alert .flash-warning{
+    font: 700 11px Arial !important;
+    color: #981919 !important;
+}
+
+.alert .close{
+    background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat;
+    top: -17px !important;
+    left: 30px !important;
+    line-height: 20px;
+    position: relative;
+    width:12px;
+    height: 12px;
+    opacity: 1 !important;
+}
+
+/*JSMessenger, alert (red)*/
+.alertBlock{
+    margin: 0 auto;
+    position: relative;
+    top: 15px;
+    width: 800px;
+    -moz-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2); /* Для Firefox */
+    -webkit-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2); /* Для Safari и Chrome */
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
+}
+.alertBlock.modal{
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
+    height: 46px;
+    left: 29%;
+    margin: 0 auto;
+    overflow: hidden;
+    position: fixed;
+    top: 40%;
+    visibility: hidden;
+    width: 800px;
+    z-index: 10002;
+
+}
+
+.alert{
+    font: 11px Arial !important;
+    color:#ad4c4c !important;
+    background-color: #fae9e9 !important;
+    border: 1px solid #ebb7b7 !important;
+    border-radius:2px;
+}
+
+.alert .flash-warning{
+    font: 700 11px Arial !important;
+    color: #981919 !important;
+}
+
+.alert .close{
+    background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat;
+    top: -17px !important;
+    left: 30px !important;
+    line-height: 20px;
+    position: relative;
+    width:12px;
+    height: 12px;
+    opacity: 1 !important;
+}
+/*JSMessenger, attention (yellow)*/
+.attention{
+    font: 11px Arial !important;
+    color:#a3a586 !important;
+    background-color: #fafcd9 !important;
+    border: 1px solid #d1d0a9 !important;
+    border-radius:2px;
+}
+
+.attention .flash-attention{
+    font: 700 11px Arial !important;
+    color: #83855e !important;
+}
+.attention .close {
+    background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat 0 25%;
+    top: -17px !important;
+    left: 30px !important;
+    line-height: 20px;
+    position: relative;
+    width:12px;
+    height: 12px;
+    opacity: 1 !important;
+}
+/*JSMessenger, success (green)*/
+
+.success{
+    font: 11px Arial !important;
+    color:#537e6a !important;
+    background-color: #cce8bf !important;
+    border: 1px solid #a0c58e !important;
+    border-radius:2px;
+}
+
+.success .flash-success{
+    font: 700 11px Arial !important;
+    color: #315b47 !important;
+}
+.success .close {
+    background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat 33% 0;
+    top: -17px !important;
+    left: 30px !important;
+    line-height: 20px;
+    position: relative;
+    width:12px;
+    height: 12px;
+    opacity: 1 !important;
+}
+/*User profile*/
+.userProfileTab{
+    background: #ffffff;
+    width: 805px;
+    margin: 0px 2px;
+    padding: 20px 31px 0px;
+    box-shadow: 0 0 5px #e5e5e5;
+    -moz-box-shadow: 0 0 5px #e5e5e5; /* Firefox */
+    -webkit-box-shadow: 0 0 5px #e5e5e5; /* Safari, Chrome */
+    min-height: 450px;
+}
+
+.userProfileTab .imageBlock{
+    float:left;
+    margin-left: 6px;
+    margin-right: 22px;
+}
+.userProfileTab .ul{
+    float:left;
+}
+.userProfileTab .firstSeparator{
+    background: url("../img/design/accountLayout/1page_middle_separator.png") no-repeat scroll 0 0 transparent;
+    height: 14px;
+    margin-bottom: 28px;
+    margin-top: 16px;
+    width: 800px;
+}
+

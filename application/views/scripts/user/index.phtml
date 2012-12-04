@@ -1,9 +1,37 @@
 <??>
-<div class="accountWrapper row-fluid no-space">
-    <div class="mainBlockProfile span9">
+<div class="userProfileTab">
+    <div class="firstSeparator"></div>
+        <div class="imageBlock"><img src="<?php echo $this->avatarPath;?>"></div>
+    <?php echo  ' ' .$this->userData['firstname'] . ' ' . $this->userData['lastname'];?>
+        <ul>
+            <li></li>
+            <li></li>
+            <li><span>Service offered:</span>
+                <?php
+                if ($this->userData['services']) {
+                    foreach ($this->userData['services'] as $index => $service) {
+                        if ($service['service_type'] == 1) {
+                            echo $service['subcategory'];
+                        }
+                    }
+
+                }
+                ?></li>
+            <li><span>Service requested:</span>
+                <?php
+                if ($this->userData['services']) {
+                    foreach ($this->userData['services'] as $index => $service) {
+                        if ($service['service_type'] == 2) {
+                            echo $service['subcategory'];
+                        }
+                    }
+
+                }
+                ?></li>
+            <li><span>About me:</span></li>
+        </ul>
+
         <?php $userData = $this->userData; ?>
-        <?php //$sendRequest = $this->send; ?>
-        <?php Zend_Debug::dump($userData); ?>
         <?php $friendTable = new Application_Model_DbTable_Friends(); ?>
         <?php $isFriend = $friendTable->isFriend($userData['id']); ?>
         <?php if(!$isFriend): ?>
@@ -16,5 +44,5 @@
             </form>
         <?php endif; ?>
     </div>
-</div>
+
 

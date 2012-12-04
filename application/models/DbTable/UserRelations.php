@@ -5,17 +5,17 @@ class Application_Model_DbTable_UserRelations extends Application_Model_DbTable_
 
 
 
-    public function getUserRelations($sender_id)
+    public function getUserRelations($userId)
     {
-        $sender_id = (int)$sender_id;
+        $userId = (int)$userId;
         $row = $this->fetchAll(
             $this->select()
-                ->where('(' . $this->getAdapter()->quoteInto('sender_id=?' , $sender_id) . ') OR (' . $this->getAdapter()->quoteInto('friend_id=?' , $sender_id) . ')')
+                ->where('(' . $this->getAdapter()->quoteInto('sender_id=?' , $userId) . ') OR (' . $this->getAdapter()->quoteInto('friend_id=?' , $userId) . ')')
                 ->where('sender_status=?' , 1)
                 ->where('recipient_status=?' , 1)
         );
         if (!$row) {
-            throw new Exception("There is no element with ID: $sender_id");
+            throw new Exception("There is no element with ID: $userId");
         }
 
         return $row->toArray();
