@@ -565,7 +565,7 @@ li{
     color: #83855e !important;
 }
 .attention .close {
-    background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat 100% 0;
+    background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat 0 25%;
     top: -17px !important;
     left: 30px !important;
     line-height: 20px;
