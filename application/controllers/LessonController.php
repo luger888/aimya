@@ -12,17 +12,25 @@ class LessonController extends Zend_Controller_Action
             //->addActionContext('join', 'json')
             ->addActionContext('upload', 'json')
             ->addActionContext('files', 'json')
+            ->addActionContext('end', 'json')
             ->initContext('json');
     }
 
     public function indexAction()
     {
+
         $this->_helper->layout->setLayout("layoutInside");
         $this->_helper->layout()->getView()->headTitle('Friends');
+
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+        $lessonTable = new Application_Model_DbTable_Lesson();
+
+        $lesson = $lessonTable->checkAvailableLesson($userId);
 
         $userModel = new Application_Model_DbTable_Users();
         $userList = $userModel->getItemsList();
 
+        $this->view->availableLesson = $lesson;
         $this->view->userList = $userList;
 
     }
@@ -231,6 +239,25 @@ class LessonController extends Zend_Controller_Action
 
         if ($this->getRequest()->isXmlHttpRequest()) {
             $this->view->answer = 'success';
+        }
+    }
+
+    public function endAction() {
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        if ($this->getRequest()->isXmlHttpRequest()) {
+            if($this->getRequest()->getParam('lesson_id')){
+                $lessonId = $this->getRequest()->getParam('lesson_id');
+                $lessonTable = new Application_Model_DbTable_Lesson();
+                $status = $lessonTable->changeStatus($lessonId);
+                if($status) {
+                    $this->view->answer = 'success';
+                } else {
+                    $this->view->answer = 'failure';
+                }
+
+            }
         }
     }
 
