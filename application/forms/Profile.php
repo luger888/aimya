@@ -21,14 +21,14 @@ class Application_Form_Profile extends Zend_Form
         $filterChain->appendFilter(new Aimya_Filter_File_Resize(array(
         'directory' => './img/uploads/'.$identity->id.'/avatar/base/',
         'width' => 143,
-        'height' => 300,
+        'height' => 270,
         'keepRatio' => true,
     )));
         // Create a medium image with at most 104x220 pixels
         $filterChain->appendFilter(new Aimya_Filter_File_Resize(array(
             'directory' => './img/uploads/'.$identity->id.'/avatar/medium/',
-            'width' => 104,
-            'height' => 220,
+            'width' => 127,
+            'height' => 240,
             'keepRatio' => true,
         )));
 
