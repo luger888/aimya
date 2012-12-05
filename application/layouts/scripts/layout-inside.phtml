@@ -34,8 +34,14 @@ $profileModel = new Application_Model_Profile();
 $servicesModel  = new Application_Model_DbTable_ServiceDetail();
 $username = $userModel->getUser($identity->id);
 $avatarPath = $profileModel->getAvatarPath($identity->id, 'base'); //path to avatar
-$role = ($username['role'] == '1' ? 'Student' : 'Instructor');
-if($role == 1) {
+if($username['role'] == '1'){
+    $role = 'Student';
+}else if($username['role'] == '2'){
+    $role = 'Instructor';
+}else if($username['role'] == '3'){
+    $role = 'Admin';
+}
+if($username['role'] == 1) {
     $services = $servicesModel->getServiceByUser($identity->id, 2);
 } else {
     $services = $servicesModel->getServiceByUser($identity->id, 1);
