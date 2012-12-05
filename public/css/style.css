@@ -604,6 +604,15 @@ font:15px dosis-semibold-middle;
     left: 755px;
     top: 2px;
 }
+.servicesTab  .lastSeparator{
+    background: url("../img/design/accountLayout/2page_middle_separator.png") no-repeat scroll 0 0 transparent;
+    bottom: -42px;
+    height: 33px;
+    margin-bottom: 25px;
+    margin-top: 30px;
+    position: relative;
+    width: 800px;
+}
 /*Availability tab*/
 
 .availabilityTab .table td{
@@ -1040,6 +1049,16 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
 .profile .profileAvatar #removeAvatar:hover, .servicesTab #deleteService:hover, .userRelations .deleteUser:hover{
     background: url("../img/design/accountLayout/glyphicons/deleteHover.png") no-repeat scroll left center transparent;
 }
+
+.profile  .lastSeparator{
+    background: url("../img/design/accountLayout/2page_middle_separator.png") no-repeat scroll 0 0 transparent;
+    bottom: -42px;
+    height: 33px;
+    margin-bottom: 25px;
+    margin-top: 30px;
+    position: relative;
+    width: 800px;
+}
 /*.profileAvatar input {
     opacity: 0;
     overflow: hidden;
@@ -1153,6 +1172,15 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     top: 4px;
     word-spacing: 2px;
 }
+.availabilityTab  .lastSeparator{
+    background: url("../img/design/accountLayout/2page_middle_separator.png") no-repeat scroll 0 0 transparent;
+    bottom: -42px;
+    height: 33px;
+    margin-bottom: 25px;
+    margin-top: 30px;
+    position: relative;
+    width: 800px;
+}
 /*Users tab*/
 
 
@@ -1221,7 +1249,6 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
 /*Notifications tab*/
 .notificationsTab {
     margin-left: 2px;
-
 }
 
 .notificationsTab .firstSeparator{
@@ -1307,6 +1334,16 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     font:12px dosis-semibold-middle;
     color:#1d3300;
     background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat left center;
+}
+
+.notificationsTab  .lastSeparator{
+    background: url("../img/design/accountLayout/2page_middle_separator.png") no-repeat scroll 0 0 transparent;
+    bottom: -42px;
+    height: 33px;
+    margin-bottom: 25px;
+    margin-top: 30px;
+    position: relative;
+    width: 800px;
 }
 /**** MESSAGES ****/
 
@@ -1441,12 +1478,15 @@ ul.messageTabs{
 
 
 }
-/*User Relations td widths */
-.userRelations table tr td:last-child{width: 157px;}
-.userRelations table tr td:nth-child(3){ width:126px;}
-.userRelations table tr td:nth-child(1){ width:82px;}
-.userRelations table tr td:nth-child(2){ width:110px;}
-.userRelations table tr td:nth-child(4){width: 106px;}
+.userRelations  .lastSeparator{
+    background: url("../img/design/accountLayout/2page_middle_separator.png") no-repeat scroll 0 0 transparent;
+    bottom: -42px;
+    height: 33px;
+    margin-bottom: 25px;
+    margin-top: 30px;
+    position: relative;
+    width: 800px;
+}
 
 
 /*Dialog jquery*/
@@ -2070,11 +2110,16 @@ ul.messageTabs{
 .userProfileTab .availability .dayWrap{
     background-color: #fbfcfc;
 }
-
+.userProfileTab .availability .timezone{
+    float:right;
+    font:11px arial;
+    position: relative;
+    right: 29px;
+}
 .userProfileTab  .lastSeparator{
-    background: url('../img/design/accountLayout/2page_middle_separator.png') no-repeat;
+    background: url("../img/design/accountLayout/2page_middle_separator.png") no-repeat scroll 0 0 transparent;
     height: 33px;
-    width: 800px;
-    margin-top: 30px;
     margin-bottom: 25px;
+    margin-top: 30px;
+    width: 800px;
 }

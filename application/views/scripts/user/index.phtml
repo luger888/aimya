@@ -37,11 +37,13 @@ if($this->userData['role'] == '1'){
             <?php if($this->profile['language'])echo '<li class = "language">'. $this->profile["language"]. '</li><br>';?>
         </ul>
     <div class="middleSeparator"></div>
+<?php if($this->profile['add_info']): ?>
     <div class="aboutBlock">
         <span class="title">ABOUT ME:</span>
         <div class="aboutMe"><?php echo $this->profile['add_info'];?></div>
     </div>
     <div class="middleSeparatorSecond"></div>
+    <?php endif;?>
     <div class ="services">
                 <!--SERVICES OFFERED BLOCK -->
                 <?php
@@ -94,6 +96,7 @@ if($this->userData['role'] == '1'){
     <?php if($this->availability):?>
     <div class ="availability">
         <span class="title">AVAILABLE:</span>
+        <div class = "timezone">Time Zone: <?php echo $this->userData['timezone']?> UTC</div>
         <?php ?>
         <ul>
             <li><span class ="day">Monday</span><span class ="from"><?php echo $this->availability['fromMon'];?></span>to<span class ="to"><?php echo $this->availability['toMon'];?></span></li>
