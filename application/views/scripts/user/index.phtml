@@ -20,11 +20,11 @@
     </form>
     <?php endif; ?>
         <ul>
-            <li class ="birthday"><?php echo $this->userData['birthday'];?></li><br>
-            <li class = "gender"><?php echo $this->userData['gender'];?></li><br>
-            <li class = "education"><?php echo $this->profile['education'];?></li><br>
-            <li class = "degree"><?php echo $this->profile['degree'];?></li><br>
-            <li class = "language"><?php echo $this->profile['language'];?></li><br>
+            <?php if($this->profile['birthday'])echo '<li class = "birthday">'. $this->profile["birthday"]. '</li><br>';?>
+            <?php if($this->userData['gender'])echo '<li class = "gender">'. $this->userData["gender"]. '</li><br>';?>
+            <?php if($this->profile['education'])echo '<li class = "education">'. $this->profile["education"]. '</li><br>';?>
+            <?php if($this->profile['degree'])echo '<li class = "degree">'. $this->profile["degree"]. '</li><br>';?>
+            <?php if($this->profile['language'])echo '<li class = "language">'. $this->profile["language"]. '</li><br>';?>
         </ul>
     <div class="middleSeparator"></div>
     <div class="aboutBlock">
@@ -81,7 +81,7 @@
 
 
 
-
+    <div class="lastSeparator"></div>
 
     </div>
 
