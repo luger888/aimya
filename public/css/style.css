@@ -63,7 +63,7 @@ form{
     width:1292px;
 }
 
-.footer, .push {
+.push {
     height: 33px; /* .push must be the same height as .footer */
 }
 
@@ -78,6 +78,7 @@ form{
     margin: 0 auto;
     width: 1292px;
     background: url('../img/design/accountLayout/accountLayoutBackground.png') repeat-y  top center;
+    margin-top: -47px;
 }
 .footer .copyright{
     margin-left: 105px;
@@ -116,59 +117,76 @@ font:15px dosis-semibold-middle;
     margin-left: 0;
 }
 
-
-
  .logo {
-   display: inline-block;
-
+   float: left;
+   margin-top: 9px;
 }
 
 .headerInside{
-    background-image: url('../img/design/mainPage/header.png');
-    background-repeat: repeat-x;
+    background: url('../img/design/mainPage/header.png') repeat-x 0 0;
     -moz-box-shadow: 0 0 6px rgba(0,0,0,0.6); /* Для Firefox */
     -webkit-box-shadow: 0 0 6px rgba(0,0,0,0.6); /* Для Safari и Chrome */
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+    height: 58px;
 }
 
 .headerInside .logo .smallLogoImg{
     background-image: url('../img/design/mainPage/small_aimya_logo.png');
-    height: 44px;
-    margin-top: 5px;
-    width: 144px;
-    margin-left: 7%;
-}
-#globalNav {
-    float: right;
-    font: 12px dosis-semibold-middle;
-    height: 5%;
-    margin-right: 38px;
-    margin-top: 4px;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
-}
-#globalNav a{color:#d7e4b9;}
-#globalNav ul {
-    margin: 0;
-    padding: 0;
+    height: 47px;
+    width: 146px;
+    display: block;
 }
 
-#globalNav ul li{
-    background: url("../img/design/mainPage/navSeparator.png") no-repeat scroll 0 0 transparent;
-    display: inline-block;
-    margin-left: 19px;
-    padding-bottom: 11px;
-    padding-left: 23px;
-    padding-top: 11px;
+/*-----global nav------------------------------------*/
+
+#globalNav {
+    float: right;
 }
+
+#globalNav ul {
+    float: right;
+    margin-right: -20px;
+}
+
+#globalNav ul li {
+    float: left;
+    background: url(../img/design/mainPage/navSeparator.png) no-repeat 0 center;
+    padding-left: 2px;
+}
+
+#globalNav ul li, #globalNav ul li a {
+    font-size: 12px;
+    line-height: 56px;
+    color: #d7e4b9;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-family: 'dosissemibold';
+    text-shadow: 0 1px 1px #333;
+} 
+
+#globalNav ul li a {
+    display: block;
+    height: 58px;
+    padding: 0 20px 0 20px;
+}
+
+#globalNav ul li a.current, #globalNav ul li a:hover{
+    background: url(../img/design/mainPage/nav-hover.png) repeat-x 0 0;
+}
+
 #globalNav ul li:first-child {
     background: none;
 }
+
+
+
 .shadowSeparator{
     background: url('../img/design/mainPage/shadow_separator.png') no-repeat;
     width:100%;
     height: 10px;
     margin-bottom: 15px;
 }
+
 .galleryMain{
     background: url('../img/design/mainPage/background_slider.png') no-repeat;
     width:400px;
@@ -618,27 +636,47 @@ width:100px;
 
 
 /*Account layout*/
-.accountWrapper {
-    background-color: #f7f8f8;
-    /* height: 100%; */
-    min-height: 100%;
-    margin: 0 auto -39px !important;
+
+.leftBg {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: #eae5cf;
 }
+
+.accountWrapper {
+    margin: 0 auto !important;
+    position: relative;
+    min-height: 100%;
+    left: 0;
+    width: 100%;
+}
+
+.globalWrapper {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    min-height: 100%;
+    background: url("../img/design/accountLayout/accountLayoutBackground.png") repeat-y center top;
+}
+
 .accountWrapper .leftBlockProfile{
-    width:260px;
+    width:180px;
     height: 100%;
 
 }
 
 .headerAccount{
-    width:1135px;
+    width:1075px;
     margin: 0 auto;
     position: relative;
-    right: 10px;
 }
 .accountContent{
     margin: 0 auto;
-    width:1292px;
+    width:1075px;
     min-height: 100%;
 
     /*height: 100%;*/
@@ -665,7 +703,6 @@ width:100px;
     text-align: center;
 }
 .profileTab{
-    margin-left: 80px;
     width: 180px;
     margin-top: 42px;
 }
@@ -751,7 +788,8 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
 }
 
 .accountWrapper .rightBlockProfile {
-    width:926px;
+    width:870px;
+    float: right;
 }
 .profileTab .leftNavPhoto{
     background-image: url("../img/design/accountLayout/leftNavPhoto.png");
@@ -771,7 +809,6 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     width:170px;
 }
 .mainBlockProfile{
-    margin:27px 26px !important
 }
 .fill{
     background-color: #f7f8f8;
@@ -1542,26 +1579,37 @@ ul.messageTabs{
     background-position: 100% 100%;
 }
 
-.searchForm {
-    display: block;
-    left: 220px;
-    padding: 0;
-    position: absolute;
-    top: 9px;
+/*--Header search-----------------------------------------------------*/
+
+.headerSearch {
+    float: left;
+    background: url(../img/design/mainPage/header-search-bg.png) repeat-x 0 0;
+    height: 30px;
+    width: 229px;
+    border-radius: 2px;
+    margin: 13px 0 0 64px;
 }
 
-.searchForm .btnSearch {
-    margin-bottom: 9px;
+.headerSearch .btnSearch {
     display: none;
 }
-.searchForm .searchField {
-    height: 18px;
-    width: 200px;
-    font-size: 13px;
-    padding-left: 22px !important;
-    background-color: white !important;
-    background:url('../img/design/accountLayout/glyphicons/search.png')no-repeat scroll 3% 64% transparent;
+
+.headerSearch .searchField {
+    height: 30px;
+    width: 195px;
+    padding: 0 10px 0 24px !important;
+    border: 0;
+    margin: 0 !important;
+    background: none !important;
+    background: url('../img/design/accountLayout/glyphicons/search.png') no-repeat 7px 8px !important;
+    font-size: 15px;
+    line-height: 30px;
+    color: #8e8e8e;
+    text-decoration: none;
+    font-weight:  normal;
 }
+
+
 /*Latest featured*/
 .featuresTab{
     background: #ffffff;

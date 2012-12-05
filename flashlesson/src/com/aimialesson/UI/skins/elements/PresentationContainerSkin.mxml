@@ -38,9 +38,9 @@
              *  @private
              */
 			[Bindable]
-			private var w:int;
+			public var w:int;
 			[Bindable]
-			private var h:int;
+			public var h:int;
 
             override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number) : void
             {
@@ -50,7 +50,7 @@
 				} else {
 					bg.percentHeight = 100;
 					bg.width = bg.sourceWidth * ( unscaledHeight / bg.sourceHeight );
-				}			
+				}		
                 super.updateDisplayList(unscaledWidth, unscaledHeight);
             }
 

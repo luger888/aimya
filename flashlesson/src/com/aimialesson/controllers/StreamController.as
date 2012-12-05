@@ -32,6 +32,12 @@ package com.aimialesson.controllers
 			Media.getInstance().partnerNetStream.addEventListener( AsyncErrorEvent.ASYNC_ERROR, netASyncError );
 		}
 		
+		public function closeConnect() : void {
+			debug("StreamController:closeConnect");
+			Media.getInstance().myNetStream.close();
+			Media.getInstance().partnerNetStream.close();
+		}
+		
 		protected function netStatusHandler( event : NetStatusEvent ) : void {
 			debug("netStatusHandler");
 			

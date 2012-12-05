@@ -14,7 +14,7 @@
 		]]>
 	</fx:Script>
 	<s:HGroup>
-		<s:RichText text="{User.getInstance().partnerRole == User.STUDENT?'ONLINE STUDENT:':'ONLINE INSTRUCTOR:'}" styleName="HeaderStyle" />
+		<s:RichText text="{User.getInstance().partnerRoleID == User.STUDENT?'ONLINE STUDENT:':'ONLINE INSTRUCTOR:'}" styleName="HeaderStyle" />
 		<s:RichText id="partnerUserName" text="{User.getInstance().partnerName}" styleName="SmallNameStyle"/>
 		<elements:Lamp id="partnerLamp" />
 	</s:HGroup>

@@ -10,10 +10,10 @@ package com.aimialesson.model
 		
 		private const FILE_UPLOAD_URL:String = "/lesson/upload/";//"/test/upload.php";
 		private const PRESENTATION_IMAGES_URL:String = "/lesson/files/";
-		private const GET_IS_ONLINE_URL:String;
+		private const GET_IS_ONLINE_URL:String = "/account/online/";
 		private const ADD_NOTE_URL:String;
 		private const START_SESSION_URL:String = "/lesson/start/";
-		private const STOP_SESSION_URL:String = "/lesson/stop/";
+		private const STOP_SESSION_URL:String = "/lesson/end/";
 		private const RESIZE_URL:String = "/lesson/join/";
 
 		

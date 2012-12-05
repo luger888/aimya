@@ -18,11 +18,11 @@ package com.aimialesson.UI.views
 	[Event (name="moveToRight", type="com.aimialesson.events.PresentationEvent")]
 	public class PresentationUI extends SkinnableComponent
 	{
-		[SkinPart (required="true")]
+		[SkinPart (required="false")]
 		public var previusBtn:Button;
-		[SkinPart (required="true")]
+		[SkinPart (required="false")]
 		public var nextBtn:Button;
-		[SkinPart (required="true")]
+		[SkinPart (required="false")]
 		public var currentImage:Image;
 		
 		public function PresentationUI()

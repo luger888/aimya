@@ -3,6 +3,7 @@ package com.aimialesson.controllers
 	import com.aimialesson.UI.views.MainUI;
 	import com.aimialesson.events.*;
 	import com.aimialesson.model.Main;
+	import com.aimialesson.model.Notes;
 	import com.aimialesson.model.Presentation;
 	
 	import flash.events.EventDispatcher;
@@ -35,6 +36,7 @@ package com.aimialesson.controllers
 			presentationController = new PresentationController();
 			soController = new SharedObjectController();
 			soController.addEventListener(SharedObjectEvent.SHARED_PRESENTATION_UPLOADED, onSharedObjectEvent);
+			soController.addEventListener(SharedObjectEvent.LESSON_IS_FINISHED, onSharedObjectEvent);
 			soController.initSO();
 			this.mainUI = mainUI;
 			/*recorderController = new RecorderController();
@@ -55,6 +57,24 @@ package com.aimialesson.controllers
 					
 			}
 		}
+
+		public function onAppEvent ( event : AppEvent ) : void {
+			debug("MainController:onAppEvent");
+			switch (event.type){
+				case (AppEvent.STOP_SESSION):	endLesson();	
+												break;
+			}
+		}
+		
+		private function endLesson() : void {
+			soController.closeConnect();
+			streamController.closeConnect();
+			// the sharedobject can not send the end lesson message that fast. need to close netconnect somehow later...
+		//	mediaController.closeConnect();
+			presentationController.clearImages();
+			Notes.getInstance().clear();
+			Main.getInstance().lesson_finished = true;
+		}
 		
 		public function onTextChatEvent ( event : NotesEvent ) : void {
 			debug("MainController:onTextChatEvent");
@@ -70,6 +90,8 @@ package com.aimialesson.controllers
 																		break;
 				case (ServiceEvent.SESSION_IS_STOPPED_RESULT) : 		Main.getInstance().session_started = false;
 																		break;
+				case (ServiceEvent.GET_CURRENT_TIME_RESULT) :	 		Main.getInstance().remainingTime = event.value.data as int;
+																		break;
 				case (ServiceEvent.RESIZE_RESULT) :				 		break;
 			}
 		}
@@ -77,10 +99,12 @@ package com.aimialesson.controllers
 		public function onSharedObjectEvent ( event : SharedObjectEvent ) : void {
 			debug("MainController:onSOEvent");
 			dispatchEvent(event);
-			/*switch (event.type) {
-				case (SOEvent.SHARED_PRESENTATION_UPLOADED) : 	presentationController.setImages(event.value as ArrayCollection);
-																break;
-			}*/
+			switch (event.type) {
+				/*case (SOEvent.SHARED_PRESENTATION_UPLOADED) : 	presentationController.setImages(event.value as ArrayCollection);
+																break;*/
+				case (SharedObjectEvent.LESSON_IS_FINISHED) : 	endLesson();
+					break;
+			}
 		}
 		
 		private function appNetConnectHandler ( event : AppEvent ) : void {
