@@ -12,17 +12,15 @@ package com.aimialesson.model
 	{
 		
 		//private var fakeImages:Array = ["images/IMG_1120.JPG","images/IMG_1121.JPG","images/IMG_1122.JPG","images/IMG_1123.JPG","images/IMG_1124.JPG"];
-//		private var fakeImages:Array = ["http://www.phlmetropolis.com/Cats.jpg","http://www.i-love-cats.com/software/Adorable-Cats-Screensaver.jpg","http://muslimmedianetwork.com/mmn/windows-live-pictures/CatsandIslam_C53D/cats_012.jpg","http://pages.swcp.com/~jamii/OtherCats/924174b-500x375.jpg"];
+		private var fakeImages:Array = ["http://www.phlmetropolis.com/Cats.jpg","http://www.i-love-cats.com/software/Adorable-Cats-Screensaver.jpg","http://muslimmedianetwork.com/mmn/windows-live-pictures/CatsandIslam_C53D/cats_012.jpg","http://pages.swcp.com/~jamii/OtherCats/924174b-500x375.jpg"];
 		private var presentationImageUrls:ArrayCollection;// = new ArrayCollection(fakeImages);
 		[Bindable]
 		public var defaultImageURL:String;// = "images/IMG_1120.JPG";
 		
 		public function set imageUrls ( value : ArrayCollection ) : void {
-			if (value) {
-				presentationImageUrls = value;
-				dispatchEvent( new Event ( "loadedChange" ) );
-				dispatchEvent( new Event ( "currentImageURLChange" ) );
-			}
+			presentationImageUrls = value;
+			dispatchEvent( new Event ( "loadedChange" ) );
+			dispatchEvent( new Event ( "currentImageURLChange" ) );
 		}
 		
 		[Bindable(Event="loadedChange")]

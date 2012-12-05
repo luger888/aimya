@@ -37,8 +37,9 @@ package com.aimialesson.UI.views
 		{
 			if ( instance == videoContainter ) {
 				_video = new Video(VIDEO_CHAT_WINDOW_WIDTH, VIDEO_CHAT_WINDOW_HEIGHT);
-				videoContainter.addChild(_video);
-				
+				_video.scaleX = -1;
+				_video.x = _video.width;
+				videoContainter.addChild(_video);				
 			} 
 		}
 		
@@ -69,7 +70,7 @@ package com.aimialesson.UI.views
 		}
 		
 		private var _userOnline:Boolean;
-		[Bindable(Event="userRoleChange")]
+		[Bindable(Event="userOnlineChange")]
 		public function set userOnline ( value : Boolean ) : void {
 			_userOnline = value;
 			dispatchEvent( new Event("userOnlineChange") );

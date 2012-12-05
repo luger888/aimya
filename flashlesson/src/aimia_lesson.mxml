@@ -38,6 +38,7 @@
 				seviceMap.addEventListener(ServiceEvent.RESIZE_RESULT, mainController.onServiceEvent);
 				seviceMap.addEventListener(ServiceEvent.SESSION_IS_STARTED_RESULT, mainController.onServiceEvent);
 				seviceMap.addEventListener(ServiceEvent.SESSION_IS_STOPPED_RESULT, mainController.onServiceEvent);
+				seviceMap.addEventListener(ServiceEvent.GET_CURRENT_TIME_RESULT, mainController.onServiceEvent);
 				UIEventHandling();
 
 				
@@ -70,6 +71,7 @@
 				mainUI.addEventListener(NotesEvent.ADD_NEW_LINE, seviceMap.onNotesEvent);
 				mainUI.addEventListener(AppEvent.START_SESSION, seviceMap.onAppEvent);
 				mainUI.addEventListener(AppEvent.STOP_SESSION, seviceMap.onAppEvent);
+				mainUI.addEventListener(AppEvent.STOP_SESSION, mainController.onAppEvent);
 				//mainUI.addEventListener(AppEvent.CHANGE_SCREEN_STATE, seviceMap.onAppEvent);
 				mainUI.addEventListener(AppEvent.CHANGE_SCREEN_STATE, toggleFullScreen);
 			}

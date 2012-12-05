@@ -38,6 +38,10 @@ package com.aimialesson.controllers
 				User.getInstance().userID = parameters.userID;
 				debug ("userID:" + parameters.userID);
 			}
+			if (parameters.partnerID){
+				User.getInstance().partnerID = parameters.partnerID;
+				debug ("partnerID:" + parameters.partnerID);
+			}
 		}
 		
 

@@ -10,6 +10,7 @@ package com.aimialesson.events
 		public static const GET_PRESENTATION_IMAGES_RESULT:String = "getPresentationImagesResult";
 		public static const SESSION_IS_STARTED_RESULT:String = "sessionIsStartedResult";
 		public static const SESSION_IS_STOPPED_RESULT:String = "sessionIsStoppedResult";
+		public static const GET_CURRENT_TIME_RESULT:String = "getCurrentTimeResult";
 		public static const RESIZE_RESULT:String = "resizeResult";
 		
 		public var value:Object;
