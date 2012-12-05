@@ -1,4 +1,12 @@
-<?php $role = ($this->userData['role'] == '1' ? 'Student' : 'Instructor');?>
+<?php if($this->userData['role'] == '1'){
+    $role = 'Student';
+}else if($this->userData['role'] == '2'){
+    $role = 'Instructor';
+}else if($this->userData['role'] == '3'){
+    $role = 'Admin';
+}else{
+    $role = 'Unknown';
+}?>
 <div class="userProfileTab">
     <div class="firstSeparator"></div>
 
