@@ -15,6 +15,10 @@ class UserController extends Zend_Controller_Action
         $accountId = $this->getRequest()->getParam('id');
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
         $profileModel = new Application_Model_Profile();
+        $dbProfile = new Application_Model_DbTable_Profile();
+        $this->view->profile = $dbProfile->getProfile($accountId);
+        $dbAvailability = new Application_Model_DbTable_Availability();
+        $this->view->availability = $dbAvailability->getAvailability($accountId);
         $this->view->avatarPath = $profileModel->getAvatarPath($accountId, 'base');
         $userModel = new Application_Model_DbTable_Users();
         $user = $userModel->getFullData($accountId);

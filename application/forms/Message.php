@@ -37,7 +37,7 @@ class Application_Form_Message extends Zend_Form
         $send = new Zend_Form_Element_Submit('sendbutton');
         $send ->setLabel('Send')
             ->setAttrib('id', 'sendbutton')
-            ->setAttrib('class', 'btn')
+            ->setAttrib('class', 'addAccount')
             ->setDecorators($this->basicDecorators);
 
         $this->addElements(array($messageId, $email, $subject, $content, $send));

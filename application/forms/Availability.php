@@ -14,11 +14,14 @@ class Application_Form_Availability extends Zend_Form
         foreach (range(1,24) as $fullhour) {
             $parthour = $fullhour > 12 ? $fullhour - 12 : $fullhour;
             $parthour .= $fullhour > 12 ? " pm" : " am";
-            $hours["$fullhour:00"] = $parthour;
+            $hours[$parthour] = $parthour;
         }
+        $addon =array('...' => '...');
+        $hours=$addon+$hours;
         /*--END: HOURS array for SELECT */
 
         $daysOfWeek = array('Mon' => 'Mon', 'Tue' => 'Tue', 'Wed' => 'Wed', 'Thu' => 'Thu', 'Fri' => 'Fri', 'Sat' => 'Sat', 'Sun' => 'Sun');
+
         /* DropDowns 'FROM' and 'TO' for every day of week */
         foreach($daysOfWeek as  $day) {
 
