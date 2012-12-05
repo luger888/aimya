@@ -94,6 +94,7 @@ if($this->userData['role'] == '1'){
     <?php if($this->availability):?>
     <div class ="availability">
         <span class="title">AVAILABLE:</span>
+        <div class = "timezone">Time Zone: <?php echo $this->userData['timezone']?> UTC</div>
         <?php ?>
         <ul>
             <li><span class ="day">Monday</span><span class ="from"><?php echo $this->availability['fromMon'];?></span>to<span class ="to"><?php echo $this->availability['toMon'];?></span></li>
