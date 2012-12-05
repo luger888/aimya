@@ -34,13 +34,11 @@
     <div class="middleSeparatorSecond"></div>
     <div class ="services">
                 <?php
-
                 if ($this->userData['services']) {
+                    echo  '<span class="title">SERVICES OFFERED:</span>';
                     foreach ($this->userData['services'] as $index => $service) {
-                        if($index == 0){
-                            echo  '<span class="title">SERVICES OFFERED:</span>';
-                        }
-                        if ($service['service_type'] == 1) {
+
+                        if ($service['service_type'] == 1) { //if offered service
                             echo '<div class="serviceItem"><span class = "mainCategory">'.$service['lesson_category'] . ':</span><span class="subCategory">'.$service['subcategory'] . '</span><span class ="rate"> $ ' .$service['rate']. ' / ' .$service['duration'] .'</span>
                             </div><div class ="serviceInfo">'.$service['description'] . '</div>';
                         }
@@ -55,7 +53,7 @@
                         if($index == 0){
                             echo  '<span class="title">SERVICES REQUESTED:</span>';
                         }
-                        if ($service['service_type'] == 2) {
+                        if ($service['service_type'] == 2) { //if requested service
                             echo '<div class="serviceItem"><span class = "mainCategory">'.$service['lesson_category'] . ':</span><span class="subCategory">'.$service['subcategory'] . '</span><span class ="rate"> $ ' .$service['rate']. ' / ' .$service['duration'] .'</span>
                             </div>';
                         }
@@ -64,6 +62,7 @@
                 }
                 ?>
         </div>
+    <?php if($this->availability):?>
     <div class ="availability">
         <span class="title">AVAILABLE:</span>
         <?php ?>
@@ -77,7 +76,7 @@
             <li><span class ="day">Sunday</span><span class ="from"><?php echo $this->availability['fromSun'];?></span>to<span class ="to"><?php echo $this->availability['toSun'];?></span></li>
         </ul>
     </div>
-
+<?php endif;?>
 
 
 
