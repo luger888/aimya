@@ -10,6 +10,7 @@
     ?>
     <?php  echo $this->jQuery(); ?>
     <?php $this->headLink()->appendStylesheet('/twitter/css/bootstrap.css');?>
+    <?php $this->headLink()->appendStylesheet('/css/fonts.css');?>
     <?php $this->headLink()->appendStylesheet('http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css');?>
     <?php $this->headScript()->appendFile('/js/jquery/jquery-ui-1.9.1.custom.min.js');?>
     <?php $this->headScript()->appendFile('/js/jquery/customCheckboxRadio.js');?>
@@ -47,20 +48,18 @@ if (Zend_Registry::isRegistered('username')) {
     Zend_Registry::set('username', $username);
 }
 ?>
-
-    <div class="accountWrapper row-fluid no-space">
+<div class="leftBg"></div>
+<div id="wrap" class="accountWrapper row-fluid no-space clearfix">
 
         <!-- HEADER & NAVIGATION -->
-        <div class="row-fluid headerInside">
-            <div class="headerAccount">
+        <div class="row-fluid headerInside clearfix">
+            <div class="headerAccount clearfix">
                 <div class="logo">
-                    <a href="index">
-                        <div class="smallLogoImg"></div>
-                    </a>
+                    <a href="index" class="smallLogoImg"></a>
                 </div>
                 <input id="user_activity" type="hidden" value="1">
 
-                <div class="searchForm" >
+                <div class="searchForm headerSearch">
                     <form id="search_form" method="get" action="/search/search/">
                         <?php $searchForm = $this->addSearchForm();?>
                         <?php echo $searchForm->search_string?>
@@ -74,7 +73,7 @@ if (Zend_Registry::isRegistered('username')) {
                         <li><a href="#">PRIVACY POLICY</a></li>
                         <li><a href="#">ABOUT AIMYA</a></li>
                         <li><a href="#">HELP</a></li>
-                        <li><a href="/user/logout/">SIGN OUT</a></li>
+                        <li class="last"><a href="/user/logout/">SIGN OUT</a></li>
 
                     </ul>
                 </nav>
@@ -120,8 +119,7 @@ if (Zend_Registry::isRegistered('username')) {
                 </div>
             </div>
         </div>
-        <div class = 'push'></div>
-</div>
+</div><!--end wrapper-->
 
 <div class="footer">
     <div class ="twitterIcon"></div><div class ="facebookIcon"></div><div class = "linkedInIcon"></div>
