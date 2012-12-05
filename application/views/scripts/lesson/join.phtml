@@ -15,11 +15,13 @@
            flashObf = jQuery('#flash_element');
            jQuery('.accountWrapper').hide();
            jQuery('.footer').hide();
+           jQuery('.leftBg').hide();
            jQuery('body').append(flashObf);
         } else if(flashType == 0) {
             jQuery('#flash_element').remove();
             jQuery('.accountWrapper').show();
             jQuery('.footer').show();
+            jQuery('.leftBg').show();
             jQuery('.messageContent').append(flashObf);
         }
 
