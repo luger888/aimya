@@ -8,9 +8,15 @@
         var y = date.getFullYear();
         jQuery('#calendar').fullCalendar({
             editable: true,
+            header:{
+                left:   'title',
+                center: ' agendaDay, agendaWeek, month',
+                right:  'today,  prev, next'
+            },
             dayClick: function(date, allDay, jsEvent, view) {
+                jQuery('#calendar').fullCalendar( 'changeView', 'agendaWeek' )
                 var event=prompt('New event');
-
+                if(event)
                 $('#calendar').fullCalendar('renderEvent',
                     {
                         title : event,
@@ -19,7 +25,8 @@
                     });
             },
             eventClick: function(event, element) {
-                event.title = prompt('edit event');
+                event.title = prompt('edit event', event.title);
+                if(event.title)
                 $('#calendar').fullCalendar('updateEvent', event);
 
             }
