@@ -216,8 +216,8 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
 
                 $dbProfile = new Application_Model_DbTable_Profile();
                 $profileModel = new Application_Model_Profile();
-                unlink($profileModel->getAvatarPath($identity->id, 'base'));
-                unlink($profileModel->getAvatarPath($identity->id, 'medium'));
+                unlink(substr($profileModel->getAvatarPath($identity->id, 'base'), 1 ));//substr first slah
+                unlink(substr($profileModel->getAvatarPath($identity->id, 'medium'), 1 ));
 
                 $dbProfile->deleteAvatar($identity->id);
 
