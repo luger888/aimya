@@ -12,7 +12,7 @@ package com.aimialesson.model
 		//public var rtmp:String = "rtmp://localhost/savelive1";
 		public var nc:NetConnection;
 		public var myStreamName:String = "streamAlex";
-		public var partnerStreamName:String = "streamArtem";
+		public var partnerStreamName:String = "streamAlex";
 		public var myNetStream:NetStream;
 		public var partnerNetStream:NetStream;
 		public var soID:String = "SampleSO";

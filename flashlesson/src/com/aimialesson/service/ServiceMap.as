@@ -30,6 +30,7 @@ package com.aimialesson.service
 			presentationService = new PresentationService();
 			presentationService.addEventListener(ServiceEvent.GET_PRESENTATION_IMAGES_RESULT, onServiceEvent);
 			userIsOnlineService = new UserIsOnlineService();
+			userIsOnlineService.addEventListener(ServiceEvent.GET_CURRENT_TIME_RESULT, onServiceEvent);
 			partnerIsOnlineService = new PartnerIsOnlineService();
 			addNoteService = new AddNoteService();
 			resizeService = new ResizeService();
@@ -38,7 +39,7 @@ package com.aimialesson.service
 			startSessionService.addEventListener(ServiceEvent.SESSION_IS_STARTED_RESULT, onServiceEvent);
 			stopSessionService.addEventListener(ServiceEvent.SESSION_IS_STOPPED_RESULT, onServiceEvent);
 			userIsOnlineService.makeCall();
-			partnerIsOnlineService.makeCall();
+			//partnerIsOnlineService.makeCall();
 		}
 		
 		public function onPresentationEvent ( event : PresentationEvent ) : void {

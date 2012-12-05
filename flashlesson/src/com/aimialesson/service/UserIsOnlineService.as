@@ -9,6 +9,7 @@ package com.aimialesson.service
 	
 	import mx.collections.ArrayCollection;
 	
+	[Event (name="getCurrentTimeResult", type="com.aimialesson.events.ServiceEvent")]
 	public class UserIsOnlineService extends AimiaService
 	{
 		
@@ -21,14 +22,14 @@ package com.aimialesson.service
 		}
 		
 		override protected function onSuccess ( result : Object ) : void {
-			var o:Object = new Object();
-			if (result.data == "true") {
+			var o:Object = result;
+			/*if (result.data == "true") {
 				User.getInstance().isOnline = true;
 			} else {
 				User.getInstance().isOnline = false;
-			}
+			}*/
 			makeCall();
-			//this.dispatchEvent( new ServiceEvent ( ServiceEvent.USER_ISONLINE__RESULT, o));
+			this.dispatchEvent( new ServiceEvent ( ServiceEvent.GET_CURRENT_TIME_RESULT, o));
 		}		
 	}
 }

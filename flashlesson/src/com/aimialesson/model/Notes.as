@@ -66,6 +66,10 @@ package com.aimialesson.model
 			return instance;
 		}
 		
+		public function clear () : void {
+			notesAC = null;
+		}
+		
 		private function isEven() : Boolean {
 			debug (String(Math.abs(notesAC.length / 2 - Math.ceil(notesAC.length / 2))));
 			return (Math.abs(notesAC.length / 2 - Math.ceil(notesAC.length / 2)) == 1 / 2);

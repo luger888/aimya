@@ -44,6 +44,10 @@ package com.aimialesson.controllers
 			Presentation.getInstance().imageUrls = images;
 		}
 		
+		public function clearImages ( ) : void {
+			Presentation.getInstance().imageUrls = null;
+		}
+		
 		private function debug ( str : String ) : void {
 			if (Main.getInstance().debugger != null)
 				Main.getInstance().debugger.text += str + "\n";

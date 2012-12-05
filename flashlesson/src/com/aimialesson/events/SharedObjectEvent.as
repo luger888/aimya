@@ -5,6 +5,7 @@ package com.aimialesson.events
 	public class SharedObjectEvent extends Event
 	{
 		public static const SHARED_PRESENTATION_UPLOADED:String = "sharedPresentationUploaded";
+		public static const LESSON_IS_FINISHED:String = "lessonIsFinished";
 		
 		public function SharedObjectEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
 		{

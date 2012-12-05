@@ -11,9 +11,11 @@ package com.aimialesson.UI.views
 	import flash.events.EventDispatcher;
 	import flash.events.MouseEvent;
 	
+	import mx.controls.Alert;
 	import mx.core.Container;
 	import mx.core.FlexGlobals;
 	import mx.core.UIComponent;
+	import mx.events.CloseEvent;
 	
 	import spark.components.Button;
 	import spark.components.TextArea;
@@ -26,25 +28,25 @@ package com.aimialesson.UI.views
 	[Event (name="changeScreenState", type="com.aimialesson.events.AppEvent")]
 	public class MainUI extends SkinnableComponent
 	{
-		[SkinPart (required="true")]
+		[SkinPart (required="false")]
 		public var videoChatContainer:MainUIContainer;
-		[SkinPart (required="true")]
+		[SkinPart (required="false")]
 		public var notesContainer:MainUIContainer;
-		[SkinPart (required="true")]
+		[SkinPart (required="false")]
 		public var tPresentationContainer:MainUIContainer;
-		[SkinPart (required="true")]
+		[SkinPart (required="false")]
 		public var presentationTitleContainer:MainUIContainer;
-		[SkinPart (required="true")]
+		[SkinPart (required="false")]
 		public var remainingTimeContainer:MainUIContainer;
 		[SkinPart (required="false")]
 		public var totalTimeContainer:MainUIContainer;
-		[SkinPart (required="true")]
+		[SkinPart (required="false")]
 		public var onlineStudentContainer:MainUIContainer;
-		[SkinPart (required="true")]
+		[SkinPart (required="false")]
 		public var goFSBtn:Button;
-		[SkinPart (required="true")]
+		[SkinPart (required="false")]
 		public var startSessionBtn:Button;
-		[SkinPart (required="true")]
+		[SkinPart (required="false")]
 		public var stopSessionBtn:Button;
 		[SkinPart (required="false")]
 		public var debugger:TextArea;
@@ -58,6 +60,7 @@ package com.aimialesson.UI.views
 		{
 			super();
 			this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+			this.addEventListener(Main.LESSON_FINISHED_CHANGED, onLessonFinished);
 		}
 		
 		override protected function partAdded ( partName : String, instance : Object) : void
@@ -164,6 +167,7 @@ package com.aimialesson.UI.views
 		private var totalTime:TotalTime;
 		public function get totalTimeUI () : TotalTime {
 			if (!totalTime) {
+				debug("MainUI:totalTimeUI");
 				totalTime = new TotalTime();
 			}
 			return totalTime;
@@ -178,13 +182,26 @@ package com.aimialesson.UI.views
 		
 		private function onBtnClick ( event : MouseEvent ) : void {
 			switch (event.target) {
-				case (goFSBtn):		dispatchEvent( new AppEvent ( AppEvent.CHANGE_SCREEN_STATE ) );
-									break;
-				case (startSessionBtn):	dispatchEvent( new AppEvent ( AppEvent.START_SESSION ) );
-									break;
-				case (stopSessionBtn):		dispatchEvent( new AppEvent ( AppEvent.STOP_SESSION ) );
-									break;
+				case (goFSBtn):				dispatchEvent( new AppEvent ( AppEvent.CHANGE_SCREEN_STATE ) );
+											break;
+				case (startSessionBtn):		dispatchEvent( new AppEvent ( AppEvent.START_SESSION ) );
+											break;
+				case (stopSessionBtn):		Alert.show("Are you sure you want to end the lesson?", "Alert",Alert.OK | Alert.CANCEL, this,	alertListener, null, Alert.OK);
+											//dispatchEvent( new AppEvent ( AppEvent.STOP_SESSION ) );
+											break;
 			}			
+		}
+		
+		// Check to see if the OK button was pressed.
+		private function alertListener(eventObj:CloseEvent):void {
+			if (eventObj.detail==Alert.OK) {
+				dispatchEvent( new AppEvent ( AppEvent.STOP_SESSION ) );
+				onLessonFinished();
+			}
+		}
+		
+		private function onLessonFinished ( event : Event = null ) : void {
+			videoChat.onLessonFinished();
 		}
 		
 		private function onPresentationEvent ( event : PresentationEvent ) : void {
