@@ -1,5 +1,12 @@
 $(document).ready(function() {
 
+    $('.leftBg').css('min-height', $('#wrap').height());
+    console.log($('#wrap').height());
+
+    $(window).resize(function(){
+        $('.leftBg').css('min-height', $('#wrap').height());
+    });
+
     $('#remember').checkRadio({
         wrapperClass: 'checkboxWrapper',
         chekedClass: 'checked'

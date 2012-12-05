@@ -52,6 +52,7 @@ form{
 .mainContent{
     margin: 0 auto;
     width: 934px;
+    padding-bottom: 55px;
 }
 
 .footer {
@@ -63,7 +64,7 @@ form{
     display: block;
     margin: 0 auto;
     width: 934px;
-    padding-bottom: 10px;
+    margin-top: -44px;
 }
 
 fieldset .mainText{
