@@ -451,7 +451,7 @@ font:15px dosis-semibold-middle;
     font:  12px arial;
 }
 .servicesTab .firstSeparator{
-    background: url('../img/design/accountLayout/1page_middle_separator.png') no-repeat;
+    background: url("../img/design/accountLayout/1page_middle_separator.png") no-repeat scroll 0 0 transparent;
     height: 14px;
     width: 800px;
     margin-bottom: 16px;
@@ -1663,7 +1663,7 @@ ul.messageTabs{
 }
 .featuresTab .filters{
     margin-left: 476px;
-    margin-right: 38px;
+    margin-right: 35px;
     margin-top: 17px;
 }
 .featuresTab #author{

@@ -19,7 +19,7 @@ class BookingController extends Zend_Controller_Action
         $this->view->headScript()->appendFile('../../js/fullcalendar/fullcalendar.min.js');
         $identity = Zend_Auth::getInstance()->getIdentity();
         $bookingDbTable = new Application_Model_DbTable_Booking();
-
+        $this->view->bookingForm = new Application_Form_Booking();
         $this->view->booking = $bookingDbTable->getBookingByUser($identity->id);
 
     }
