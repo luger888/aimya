@@ -190,7 +190,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         $identity = Zend_Auth::getInstance()->getStorage()->read();
         if ($this->getRequest()->isPost()) {
             $dbServiceDetail = new Application_Model_DbTable_ServiceDetail();
-            $dbUserRelations = new Application_Model_DbTable_UserRelations();
+            $dbUserRelations = new Application_Model_DbTable_Friends();
             /*Service Details tab*/
             if ($this->getRequest()->getParam('deleteService')) {
 

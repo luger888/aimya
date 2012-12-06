@@ -12,7 +12,7 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
         $data = array(
 
             'sender_id' => (int)$id,
-            'recipient_id' => (int)$id,
+            'recipient_id' => (int)$array['recipient_id'],
             'started_at' => $array['started_at'],
             'focus_name' => $array['focus_name'],
             'duration' => $array['duration'],

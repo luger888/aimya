@@ -37,7 +37,7 @@ class Application_Model_Profile
 
     public function getFriends($user_id)
     {
-        $dbUserRelations = new Application_Model_DbTable_UserRelations();
+        $dbUserRelations = new Application_Model_DbTable_Friends();
         $userRelations = $dbUserRelations->getUserRelations($user_id);
         $UserModel = new Application_Model_DbTable_Users();
         $friends = array();
