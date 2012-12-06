@@ -13,3 +13,27 @@
     font-style: normal;
 
 }
+
+@font-face {
+    font-family: 'helveticabold';
+    src: url('fonts/helvetica_bold/helvetica_bold-webfont.eot');
+    src: url('fonts/helvetica_bold/helvetica_bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/helvetica_bold/helvetica_bold-webfont.woff') format('woff'),
+         url('fonts/helvetica_bold/helvetica_bold-webfont.ttf') format('truetype'),
+         url('fonts/helvetica_bold/helvetica_bold-webfont.svg#helveticabold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'helveticaroman';
+    src: url('fonts/helvetica/helvetica-webfont.eot');
+    src: url('fonts/helvetica/helvetica-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/helvetica/helvetica-webfont.woff') format('woff'),
+         url('fonts/helvetica/helvetica-webfont.ttf') format('truetype'),
+         url('fonts/helvetica/helvetica-webfont.svg#helveticaroman') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}

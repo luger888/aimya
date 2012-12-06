@@ -9,15 +9,12 @@ class Application_Form_Booking extends Zend_Form
     {
         $identity = Zend_Auth::getInstance()->getStorage()->read();//user identity
 
-        $lessonDbModel = new Application_Model_DbTable_LessonCategory();
-        $lessonCategories = $lessonDbModel->getLessonCategories();//pull lesson categories from db
-
         $profileModel = new Application_Model_Profile();
         $friendsArray = $profileModel->getFriends($identity->id);//pull friends from db
 
         $friends = array();
         foreach($friendsArray as $value){
-            $friends[$value['username']] = $value['username'];
+            $friends[$value['id']] = $value['username'];
         }
 
         /*  BOOKING FORM */
@@ -28,7 +25,7 @@ class Application_Form_Booking extends Zend_Form
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
         foreach ($friendsArray as  $value) {
-            $recipiend_id->addMultiOption($value['username'], $value['username']);
+            $recipiend_id->addMultiOption($value['id'], $value['username']);
         }
         $start_at = new Zend_Form_Element_Text('started_at');
         $start_at ->setAttrib('id', 'started_at')

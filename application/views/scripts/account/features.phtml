@@ -31,29 +31,33 @@
             <ul>
                 <li><span>Name:</span><?php echo  ' ' .$person['firstname'] . ' ' . $person['lastname'];?></li>
                 <li><span>Time zone:</span><?php echo ' UTC ' . $person['timezone'];?></li>
-                <li><span>Service offered:</span>
+                <?php if (count($person['service_offered']) > 0):?>
+                <li>
+                    <span>Service offered:</span>
                     <?php
-                    if ($person['services']) {
-                        foreach ($person['services'] as $index => $service) {
-                            if ($service['service_type'] == 1) {
-                                echo $service['subcategory'];
-                            }
+                        $i = 0;
+                        foreach ($person['service_offered'] as $index => $service) {
+                            echo $service['subcategory'];
+                            if(count($person['service_offered']) - 1 != $i) echo ', ';
+                            $i++;
                         }
-
-                    }
-                    ?></li>
-                <li><span>Service requested:</span>
+                    ?>
+                    <?php endif; ?>
+                </li>
+                <?php if (count($person['service_requested']) > 0):?>
+                <li>
+                    <span>Service requested:</span>
                     <?php
-                    if ($person['services']) {
-                        foreach ($person['services'] as $index => $service) {
-                            if ($service['service_type'] == 2) {
-                                echo $service['subcategory'];
-                            }
-                        }
-
+                    $i = 0;
+                    foreach ($person['service_requested'] as $index => $service) {
+                        echo $service['subcategory'];
+                        if(count($person['service_requested']) - 1 != $i) echo ', ';
+                        $i++;
                     }
-                    ?></li>
-                <li><span>About me:</span></li>
+                    ?>
+                    <?php endif; ?>
+                </li>
+                <li><span>About me:</span><?php echo $person['add_info'];?></li>
             </ul>
         </div>
         <div class="middleSeparator"></div>
