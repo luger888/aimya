@@ -1,13 +1,34 @@
 <script type='text/javascript'>
-
     jQuery(document).ready(function() {
-
+//        $.post(
+//
+//            "/booking/index/0/controller%3D%3Ebooking/1/action%3D%3Eindex", {
+//
+//                "getBooking": 1
+//
+//
+//            },
+//            function(response){
+//
+//                jQuery('#calendar').fullCalendar({
+//                    events: [
+//                        {
+//                            title: response.booking[0].focus_name,
+//                            start:response.booking[0].started_at
+//                        }
+//                        // more events here
+//                    ]
+//                });
+//
+//            });
+//        jQuery("body").append('<div class="loadingIcon"></div>');
         var date = new Date();
         var d = date.getDate();
         var m = date.getMonth();
         var y = date.getFullYear();
         jQuery('#calendar').fullCalendar({
             editable: true,
+            disableDragging:true,
             header:{
                 left:   'title',
                 center: ' agendaDay, agendaWeek, month',
@@ -16,18 +37,49 @@
             dayClick: function(date, allDay, jsEvent, view) {
                 var event=prompt('New event');
                 if(event)
+                    jQuery("body").append('<div class="loadingIcon"></div>');
                 $('#calendar').fullCalendar('renderEvent',
                     {
                         title : event,
                         start : date,
                         end   : date
                     });
+
+                $.post(
+
+                    "/booking/add/0/controller%3D%3Ebooking/1/action%3D%3Eadd", {
+
+                        "focus_name": event,
+                        "started_at" :date
+
+                    },
+
+                    function (response) {
+                        jQuery('.loadingIcon').remove();
+                    });
             },
             eventClick: function(event, element) {
                 event.title = prompt('edit event', event.title);
                 if(event.title)
                 $('#calendar').fullCalendar('updateEvent', event);
+            },
+            events: function(start, end, callback) {
+                $.ajax({
+                    cache: false,
+                    url: 'booking/index',
+                    success: function(msg) {
 
+                            var events = [];
+                            for(var c = 0; c < msg.booking.length; c++){
+                                events.push({
+                                    title: msg.booking[c].focus_name,
+                                    start: msg.booking[c].started_at
+                                });
+                            }
+                            callback(events);
+
+                    }
+                });
             }
 
 
