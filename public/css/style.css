@@ -2123,3 +2123,8 @@ ul.messageTabs{
     margin-top: 30px;
     width: 800px;
 }
+
+.loadingIcon {
+    position:fixed;top:0;right:0;bottom:0;left:0;
+    background: rgba(255,255,255,0.5) url(../img/design/accountLayout/glyphicons/aimya_ajax_loader.gif) no-repeat 50% 50%;
+}
