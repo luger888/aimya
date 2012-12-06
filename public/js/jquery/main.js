@@ -18,7 +18,7 @@ $(document).ready(function() {
     $('#uploadAvatar').click(function(){
         $('#avatar').click();
     });
-    $('#removeAvatar').click(function(){
+    $('#removeAvatar').click(function(){//deleting avatar from profile
         $.post(
 
             '/account/edit/0/controller%3D%3Eaccount/1/action%3D%3Eedit', {'deleteAvatar': 1},
