@@ -60,8 +60,10 @@
             },
             eventClick: function(event, element) {
                 event.title = prompt('edit event', event.title);
-                if(event.title)
-                $('#calendar').fullCalendar('updateEvent', event);
+                if(event.title){
+                    $('#calendar').fullCalendar('updateEvent', event);
+                }
+
             },
             events: function(start, end, callback) {
                 $.ajax({
