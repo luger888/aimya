@@ -1,10 +1,13 @@
 $(document).ready(function() {
 
+    $('#wrap').css('background-position', $('.accountContent').offset().left + 4 + 'px 0');
+
     $('.leftBg').css('min-height', $('#wrap').height());
     console.log($('#wrap').height());
 
     $(window).resize(function(){
         $('.leftBg').css('min-height', $('#wrap').height());
+        $('#wrap').css('background-position', $('.accountContent').offset().left + 4 + 'px 0');
     });
 
     $('#remember').checkRadio({
@@ -15,7 +18,7 @@ $(document).ready(function() {
     $('#uploadAvatar').click(function(){
         $('#avatar').click();
     });
-    $('#removeAvatar').click(function(){
+    $('#removeAvatar').click(function(){//deleting avatar from profile
         $.post(
 
             '/account/edit/0/controller%3D%3Eaccount/1/action%3D%3Eedit', {'deleteAvatar': 1},

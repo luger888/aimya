@@ -69,20 +69,25 @@ form{
 
 .footer {
     color:#bebba3;
-    font: 11px helvetica;
+    font-family: 'helveticaroman';
+    font-size: 11px;
+    line-height: 13px;
     padding: 0;
     word-spacing: 2px;
     position: relative;
     clear:both;
     display: block;
     margin: 0 auto;
-    width: 1292px;
-    background: url('../img/design/accountLayout/accountLayoutBackground.png') repeat-y  top center;
-    margin-top: -47px;
+    width: 1075px;
+    text-align: left;
+    margin-top: -72px;
 }
-.footer .copyright{
-    margin-left: 105px;
+
+.footer .copyright {
+    padding-left: 21px;
 }
+
+
 fieldset .mainText{
     font-size: 12px;
     line-height: 18px;
@@ -451,7 +456,7 @@ font:15px dosis-semibold-middle;
     font:  12px arial;
 }
 .servicesTab .firstSeparator{
-    background: url('../img/design/accountLayout/1page_middle_separator.png') no-repeat;
+    background: url("../img/design/accountLayout/1page_middle_separator.png") no-repeat scroll 0 0 transparent;
     height: 14px;
     width: 800px;
     margin-bottom: 16px;
@@ -692,10 +697,7 @@ width:100px;
 }
 /*Left Navigation Bar */
 
-.leftBlockProfile{
-    height: 100%;
 
-}
 .leftBlockProfile .leftNavigation ul li:not(.active){
 
     -webkit-box-shadow: -5px 0 6px -6px #888888 inset;
@@ -703,51 +705,42 @@ width:100px;
     -moz-box-shadow: -5px 0 6px -6px #888888 inset;
 }
 
-.leftNavPhoto img{
-    margin-left: 2px;
-    margin-top: 9px;
+.profileTab {
+    margin-top: 38px;
 }
 
-.leftBlockProfile{
-    text-align: center;
-}
-.profileTab{
-    width: 180px;
-    margin-top: 42px;
-}
-
-.profileTab h3{
-    bottom: 4px;
-    color: #4A4322;
-    font: 700 15px helvetica !important;
-    letter-spacing: 0.2pt;
-    margin-left: 36px;
-    position: relative;
-    right: 28px;
+.profileTab h3 {
+    font-family: 'helveticabold';
     text-align: left;
-    width: 148px;
-}
-.profileTab h5{
-    bottom: 14px;
-    color: #7F7867;
-    font: 11px helvetica;
-    left: 8px;
+    font-size: 15px;
+    line-height: 17px;
+    color: #4a4322;
+    text-decoration: none;
+    padding: 0 0 1px 8px;
+    font-weight: normal;
     margin: 0;
-    position: relative;
+}
+.profileTab h5 {
+    padding: 0 0 4px 8px;
+    margin: 0;
+    font-family: 'helveticaroman';
+    font-size: 11px;
+    line-height: 13px;
+    color: #7f7867;
+    text-decoration: none;
     text-align: left;
-    width: 148px;
+    font-weight: normal;
 }
 .profile .profileAvatar input[type="file"]{
     visibility: hidden;
     width: 1px;
 }
 
-.leftNavigation
-{
-
-    margin-top: 10.5%;
+.leftNavigation {
+    padding-top: 22px;
 }
-.leftBlockProfile .leftNavigation a{
+
+/*.leftBlockProfile .leftNavigation a {
     border:none !important;
     font:14px dosis-semibold-middle;
     text-align: left;
@@ -755,25 +748,68 @@ width:100px;
     border-radius: 0;
     background:none;
     padding-left: 21px;
-}
-.leftBlockProfile .leftNavigation  a:hover{
+}*/
+
+/*.leftBlockProfile .leftNavigation  a:hover{
     background:none;
-}
+}*/
 
-.leftBlockProfile .leftNavigation li:hover{
+/*.leftBlockProfile .leftNavigation li:hover{
     background-color:#f6f4ea;
-}
-.leftBlockProfile .leftNavigation ul{
+}*/
+
+.leftBlockProfile .leftNavigation ul {
     float:right;
-    width:175px;
-    position: relative;
-    right:0.3%;
-}
-noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
-    right:0.6%;
+    width:180px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-.leftBlockProfile .leftNavigation ul li{
+.leftBlockProfile .leftNavigation ul li, .leftBlockProfile .leftNavigation ul a {
+    display: block;
+    font-size: 14px;
+    line-height: 36px;
+    color: #69675c;
+    text-decoration: none;
+    font-family: 'dosissemibold';
+    padding: 0;
+    margin: 0;
+    border: 0 !important;
+    background: none;
+}
+
+.leftBlockProfile .leftNavigation ul a:hover {
+    background: none;
+}
+
+.leftBlockProfile .leftNavigation ul a {
+    height: 35px;
+    padding: 0 15px 0 21px;
+}
+
+.leftBlockProfile .leftNavigation ul li {
+    background: #f5f2e7;
+    margin-bottom: 2px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.leftBlockProfile .leftNavigation ul li:hover {
+    background:#f6f4ea;
+}
+
+.leftBlockProfile .leftNavigation ul li.active {
+    background: url(../img/design/accountLayout/left-nav-active-right.png) no-repeat right 0 #fff;
+}
+
+.leftBlockProfile .leftNavigation ul li.active a {
+    color: #4a4322;
+    padding-left: 34px;
+    background: url('../img/design/accountLayout/glyphicons/leftNavArrow.png')  25px center  no-repeat;
+}
+
+/*.leftBlockProfile .leftNavigation ul li{
     background-color:#f5f2e7;
     border-radius: 4px 0 0 4px;
     margin:2px 0;
@@ -788,26 +824,31 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     background: linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(247, 248, 248) 100%);
 
 
-}
-.leftBlockProfile .leftNavigation ul  .active a{
+}*/
+/*.leftBlockProfile .leftNavigation ul  .active a{
     margin-left: 12px;
-    background: url('../img/design/accountLayout/glyphicons/leftNavArrow.png')  8% 50%  no-repeat;
     color:#4a4322;
 
-}
+}*/
 
 .accountWrapper .rightBlockProfile {
     width:870px;
     float: right;
 }
-.profileTab .leftNavPhoto{
+.profileTab .leftNavPhoto {
     background-image: url("../img/design/accountLayout/leftNavPhoto.png");
-    bottom: 10px;
-    height: 160px;
-    margin: 0 -1px;
-    position: relative;
-    width: 160px;
+    height: 151px;
+    width: 153px;
+    padding-left: 9px;
+    padding-top: 9px;
+    overflow: hidden;
 }
+
+.leftNavPhoto img {
+    width: 143px;
+    max-height: 142px;
+}
+
 .profileTab .leftServices{
     bottom: 8px;
     color: #554D3A;
@@ -1576,6 +1617,11 @@ ul.messageTabs{
 }
 /*Social buttons*/
 
+.footerIcons {
+    padding-bottom: 10px;
+    padding-left: 22px;
+}
+
 .twitterIcon{
     background-image: url('../img/design/accountLayout/socialIcons.png');
     background-position: 0 0;
@@ -1583,9 +1629,7 @@ ul.messageTabs{
     width:18px;
     width: 18px;
     float:left;
-    position: relative;
-    left:105px;
-    bottom:29px;
+    margin-right: 5px;
 }
 .facebookIcon{
     background-image: url('../img/design/accountLayout/socialIcons.png');
@@ -1594,9 +1638,7 @@ ul.messageTabs{
     width:18px;
     width: 18px;
     float:left;
-    position: relative;
-    left:109px;
-    bottom:29px;
+    margin-right: 5px;
 }
 .linkedInIcon{
     background-image: url('../img/design/accountLayout/socialIcons.png');
@@ -1605,9 +1647,7 @@ ul.messageTabs{
     width:18px;
     width: 18px;
     float:left;
-    position: relative;
-    left:113px;
-    bottom:29px;
+    margin-right: 5px;
 }
 .twitterIcon:hover{
     background-position: 0 100%;
@@ -1663,7 +1703,7 @@ ul.messageTabs{
 }
 .featuresTab .filters{
     margin-left: 476px;
-    margin-right: 38px;
+    margin-right: 35px;
     margin-top: 17px;
 }
 .featuresTab #author{

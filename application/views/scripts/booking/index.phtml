@@ -1,27 +1,8 @@
+<div id="dialog-form" title="Booking">
+    <?php echo $this->bookingForm;?>
+</div>
 <script type='text/javascript'>
     jQuery(document).ready(function() {
-//        $.post(
-//
-//            "/booking/index/0/controller%3D%3Ebooking/1/action%3D%3Eindex", {
-//
-//                "getBooking": 1
-//
-//
-//            },
-//            function(response){
-//
-//                jQuery('#calendar').fullCalendar({
-//                    events: [
-//                        {
-//                            title: response.booking[0].focus_name,
-//                            start:response.booking[0].started_at
-//                        }
-//                        // more events here
-//                    ]
-//                });
-//
-//            });
-//        jQuery("body").append('<div class="loadingIcon"></div>');
         var date = new Date();
         var d = date.getDate();
         var m = date.getMonth();
@@ -35,28 +16,10 @@
                 right:  'today,  prev, next'
             },
             dayClick: function(date, allDay, jsEvent, view) {
-                var event=prompt('New event');
-                if(event)
-                    jQuery("body").append('<div class="loadingIcon"></div>');
-                $('#calendar').fullCalendar('renderEvent',
-                    {
-                        title : event,
-                        start : date,
-                        end   : date
-                    });
+                $("#dialog-form").dialog( "open" );
+                $('#started_at').val(date);
 
-                $.post(
 
-                    "/booking/add/0/controller%3D%3Ebooking/1/action%3D%3Eadd", {
-
-                        "focus_name": event,
-                        "started_at" :date
-
-                    },
-
-                    function (response) {
-                        jQuery('.loadingIcon').remove();
-                    });
             },
             eventClick: function(event, element) {
                 event.title = prompt('edit event', event.title);
@@ -66,11 +29,12 @@
 
             },
             events: function(start, end, callback) {
+                jQuery("body").append('<div class="loadingIcon"></div>');
                 $.ajax({
                     cache: false,
                     url: 'booking/index',
                     success: function(msg) {
-
+                        jQuery('.loadingIcon').remove();
                             var events = [];
                             for(var c = 0; c < msg.booking.length; c++){
                                 events.push({
@@ -87,7 +51,61 @@
 
         });
 
-    });
+//FORM DIALOG JQUERY
+
+        $( "#dialog-form" ).dialog({
+            autoOpen: false,
+            height: 450,
+            width: 400,
+            modal: true,
+            resizable:false,
+            close: function() {
+
+            }
+        });
+
+
+
+        $('#started_at').datepicker({
+            dateFormat: 'yy-mm-dd',
+            yearRange: "1910:2012" }).val();
+        $('#started_at').datepicker({
+            onSelect: function(dateText, inst) {
+                $("input[name='started_at']").val(dateText);
+            }
+        });
+        $('#sendBooking').click(function(){
+            $.post(
+
+                "/booking/add/0/controller%3D%3Ebooking/1/action%3D%3Eadd", {
+                    "focus_name": $('#focus_name').val(),
+                    "started_at" : $('#started_at').val(),
+                    "duration" : $('#duration').val(),
+                    "rate" : $('#rate').val(),
+                    "add_info" : $('#add_info').val()
+
+
+                },
+                function(response){
+                    $('#calendar').fullCalendar('renderEvent',
+                        {
+                            title : $('#focus_name').val(),
+                            start : $('#started_at').val(),
+                            end   : $('#started_at').val()
+                        });
+                    $("#dialog-form").dialog( "close" );
+                    $("#dialog-form form").get(0).reset();
+                });
+
+        return false;
+        });
+    });//END JQUERY
+
+
+
+
 
 </script>
+
 <div id='calendar'></div>
+
