@@ -233,15 +233,16 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         $this->view->headScript()->appendFile('../../js/jquery/account/features.js');
         $dbUserModel = new Application_Model_DbTable_Users();
         $this->view->filters = new Application_Form_FeaturesFilter();
-
-        if ($this->getRequest()->getParam('user')) {
-            $userType = $this->getRequest()->getParam('user');// Teacher or students only
-            $lessonCat = $this->getRequest()->getParam('category');
+            $userType = '0';
+            if( $this->getRequest()->getParam('user')) {
+                $userType = $this->getRequest()->getParam('user');
+            }
+            $lessonCat = 'All';
+            if( $this->getRequest()->getParam('category')) {
+                $userType = $this->getRequest()->getParam('category');
+            }
 
             $this->view->featured = $dbUserModel->getLatestFeatured($userType, $lessonCat);
-        }else{
-            $this->view->featured = $dbUserModel->getLatestFeatured();
-        }
 
     }
 

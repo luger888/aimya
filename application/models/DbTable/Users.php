@@ -129,35 +129,59 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
     }
     public function getLatestFeatured($role='0', $category = 'All'){
-        $order = 'created_at';
+
+
         $count  = 5;
         $offset = 0;
-        $data = $this->getAdapter()
-        ->select()
-        ->from('user', array('id', 'firstname', 'lastname', 'username', 'role', 'timezone'))
-        ->order($order)
-        ->limit($count, $offset);
-       if($role!=='0'){
-           $data  ->where('role=?', $role);
-       }
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+
+        $subQuery = $this->getAdapter()->select()
+            ->from(array('service_detail'), array('MAX(updated_at)'))
+            ->group('user_id')
+            ->having('user_id = sd.user_id');
+
+        $data = $this->getAdapter()->select()
+            ->from(array('sd'=>'service_detail'), array('sd.lesson_category', 'sd.updated_at'))
+            ->joinLeft('user', 'user.id = sd.user_id', array('user.id', 'user.firstname', 'user.lastname', 'user.username', 'user.role', 'user.timezone'))
+            ->joinLeft('account', 'account.user_id = sd.user_id', array('account.add_info'))
+            ->where('sd.updated_at=?', $subQuery)
+            ->where('user.id<>?', $userId);
+            if($role !== '0'){
+                $data  ->where('user.role=?', $role);
+            }
+            if($category!=='All'){
+                $data->where('sd.lesson_category=?', $category);
+            }
+            $data->order('sd.updated_at desc')
+            ->limit($count, $offset);
+
         $author = $data->query()->fetchAll();
 
         foreach($author as $index=>$value){
-            $services = $this->getAdapter()
+            $serviceOffered = $this->getAdapter()
                 ->select()
                 ->from('service_detail')
-                ->where('user_id=?', $value['id']);
-            if($category!=='All'){
-                $services->where('lesson_category=?', $category);
-            }
-            $servicesResult = $services->query()->fetchAll();
+                ->where('user_id=?', $value['id'])
+                ->where('service_type=?', 1);
 
-            $author[$index]['services'] = $servicesResult;
+            $serviceRequested = $this->getAdapter()
+                ->select()
+                ->from('service_detail')
+                ->where('user_id=?', $value['id'])
+                ->where('service_type=?', 2);
+
+
+            $servicesOffered = $serviceOffered->query()->fetchAll();
+            $servicesRequested = $serviceRequested->query()->fetchAll();
+
+            $author[$index]['service_offered'] = $servicesOffered;
+            $author[$index]['service_requested'] = $servicesRequested;
 
         }
 
-     return $author;
+        return $author;
     }
+
     public function getFullData($id){
 
         $data = $this->getAdapter()
