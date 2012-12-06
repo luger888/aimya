@@ -87,17 +87,17 @@ if (Zend_Registry::isRegistered('username')) {
         </div>
         <div class = "alertBlock modal"></div>
         <div class="accountContent clearfix">
-            <div class="accountPage">
+            <div class="accountPage clearfix">
                 <div class="messages">
                     <?php echo $this->flashMessages();?>
                 </div>
                 <div class="leftBlockProfile span2">
-                    <div class="profileTab">
+                    <div class="profileTab clearfix">
                         <h3> <?php echo $username;?></h3>
                         <h5> <?php echo $role;?></h5>
 
-                        <div class = "leftNavPhoto"><img src="<?php echo $avatarPath;?>"><br></div>
-                        <div class = "leftServices">
+                        <div class = "leftNavPhoto clearfix"><img src="<?php echo $avatarPath;?>"><br></div>
+                        <div class = "leftServices clearfix">
                             <?php
                             if($services){
                                 foreach($services as $value){
@@ -106,7 +106,7 @@ if (Zend_Registry::isRegistered('username')) {
                             }
                             ?>
                         </div>
-                        <div class="leftNavigation">
+                        <div class="leftNavigation clearfixaccountPage">
                             <?php
                             echo $this->navigation()
                                 ->menu()
@@ -127,10 +127,13 @@ if (Zend_Registry::isRegistered('username')) {
         </div>
 </div><!--end wrapper-->
 
-<div class="footer">
-    <div class ="twitterIcon"></div><div class ="facebookIcon"></div><div class = "linkedInIcon"></div>
-    <div class="copyright">
-
+<div class="footer clearfix">
+    <div class="footerIcons clearfix">
+        <div class ="twitterIcon"></div>
+        <div class ="facebookIcon"></div>
+        <div class = "linkedInIcon"></div>
+    </div><!--End footerIcons-->
+    <div class="copyright clearfix">
         Copyright 2012 Aimya<br>
         Created by Svitla.com
     </div>
