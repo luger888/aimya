@@ -50,18 +50,24 @@ class Application_Form_Booking extends Zend_Form
             ->setAttrib('class', 'input-small')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators)
-            ->addMultiOptions(array('15 min'   => '15 min',
-            '45 min'   => '45 min',
-            'hour'   => 'hour',
-            'lesson'   => 'lesson'
+            ->addMultiOptions(array('15'   => '15 min',
+            '45'   => '45 min',
+            '60'   => 'hour',
+            '0'   => 'lesson'
         ));
 
         $video = new Zend_Form_Element_Checkbox('video');
-        $video->setDecorators($this->basicDecorators);
+        $video->setAttrib('class', 'checkboxlist')
+            ->setAttrib('id', 'video')
+            ->setDecorators($this->basicDecorators);
         $feedback = new Zend_Form_Element_Checkbox('feedback');
-        $feedback->setDecorators($this->basicDecorators);
+        $feedback->setAttrib('class', 'checkboxlist')
+            ->setAttrib('id', 'feedback')
+            ->setDecorators($this->basicDecorators);
         $notes = new Zend_Form_Element_Checkbox('notes');
-        $notes->setDecorators($this->basicDecorators);
+        $notes->setAttrib('class', 'checkboxlist')
+            ->setAttrib('id', 'notes')
+            ->setDecorators($this->basicDecorators);
 
         $info = new Zend_Form_Element_Textarea('add_info');
         $info->setAttrib('id', 'add_info')
