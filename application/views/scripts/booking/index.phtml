@@ -1,6 +1,7 @@
 <div id="dialog-form" title="Booking">
     <?php echo $this->bookingForm;?>
 </div>
+    <input type = "button" id = "bookLesson" value = "book lesson">
 <script type='text/javascript'>
     jQuery(document).ready(function() {
         var date = new Date();
@@ -10,21 +11,30 @@
         jQuery('#calendar').fullCalendar({
             editable: true,
             disableDragging:true,
+            allDay:false,
+
             header:{
                 left:   'title',
                 center: ' agendaDay, month',
                 right:  'today,  prev, next'
             },
             dayClick: function(date, allDay, jsEvent, view) {
-                $("#dialog-form").dialog( "open" );
-                $('#started_at').val(date);
-
+//                $("#dialog-form").dialog( "open" );
+//                $('#started_at').val(date);
+               jQuery('#calendar').fullCalendar('changeView', 'agendaDay');
+               jQuery('#calendar').fullCalendar('gotoDate', date);
 
             },
             eventClick: function(event, element) {
-                event.title = prompt('edit event', event.title);
-                if(event.title){
-                    $('#calendar').fullCalendar('updateEvent', event);
+                var view =  jQuery('#calendar').fullCalendar('getView');
+                if(view.name == 'agendaDay'){
+
+                    $("#dialog-form").dialog( "open" );
+                    $('#started_at').val(date);
+
+                }else{
+                    jQuery('#calendar').fullCalendar('changeView', 'agendaDay');
+                    jQuery('#calendar').fullCalendar('gotoDate', date);
                 }
 
             },
@@ -39,7 +49,8 @@
                             for(var c = 0; c < msg.booking.length; c++){
                                 events.push({
                                     title: msg.booking[c].focus_name,
-                                    start: msg.booking[c].started_at
+                                    start: msg.booking[c].started_at,
+                                    allDay: false
                                 });
                             }
                             callback(events);
@@ -82,6 +93,9 @@
                     "focus_name": $('#focus_name').val(),
                     "started_at" : $('#started_at').val(),
                     "duration" : $('#duration').val(),
+                    "feedback":$('#feedback:checked').val()||0,
+                    "video":$('#video:checked').val()||0,
+                    "notes":$('#notes:checked').val()||0,
                     "rate" : $('#rate').val(),
                     "add_info" : $('#add_info').val()
 
@@ -99,6 +113,11 @@
                 });
 
         return false;
+        });
+        $('#bookLesson').click(function(){
+
+            $("#dialog-form").dialog( "open" );
+
         });
     });//END JQUERY
 

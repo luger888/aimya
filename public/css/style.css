@@ -537,7 +537,9 @@ font:15px dosis-semibold-middle;
     font:12px arial;
     display: none;
 }
-
+.servicesTab #addRequestService{
+    display: none;
+}
 .servicesTab #addMoreServices{
     margin: 1% 0 1%;
 }
@@ -584,7 +586,7 @@ font:15px dosis-semibold-middle;
     background: url('../img/design/accountLayout/glyphicons/editDisabled.png') no-repeat left center !important;
     color:grey;
 }
-.servicesTab #addMoreServices{
+.servicesTab #addMoreServices,.servicesTab #addMoreRequestServices {
     background: url('../img/design/accountLayout/glyphicons/add.png') no-repeat left center;
     border:none;
     width:85px;
@@ -595,10 +597,10 @@ font:15px dosis-semibold-middle;
     left: 735px;
     bottom:6px;
 }
-.servicesTab #addMoreServices:hover{
+.servicesTab #addMoreServices:hover, .servicesTab #addMoreRequestServices:hover {
     background: url('../img/design/accountLayout/glyphicons/addHover.png') no-repeat left center;
 }
-.servicesTab #saveService{
+.servicesTab #saveService, .servicesTab #saveRequestedService{
     background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat left center;
     border:none;
     width:65px;
@@ -609,6 +611,8 @@ font:15px dosis-semibold-middle;
     left: 755px;
     top: 2px;
 }
+
+
 .servicesTab  .lastSeparator{
     background: url("../img/design/accountLayout/2page_middle_separator.png") no-repeat scroll 0 0 transparent;
     bottom: -42px;

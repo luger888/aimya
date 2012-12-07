@@ -20,6 +20,11 @@ class Application_Form_Booking extends Zend_Form
         /*  BOOKING FORM */
         $this->setName('booking');
 
+        $senderId = new Zend_Form_Element_Hidden('sender_id');
+        $senderId ->setAttrib('id', 'sender_id')
+            ->addFilters($this->basicFilters)
+            ->setDecorators($this->basicDecorators);
+
         $recipiend_id = new Zend_Form_Element_Select('recipiend_id');
         $recipiend_id->setAttrib('id', 'recipiend_id')
             ->addFilters($this->basicFilters)
@@ -80,7 +85,7 @@ class Application_Form_Booking extends Zend_Form
             ->setAttrib('id', 'sendBooking')
             ->setDecorators($this->basicDecorators);
 
-        $this->addElements(array($recipiend_id, $start_at,  $focus_name, $rate, $duration, $video, $feedback, $notes, $info, $submit ));
+        $this->addElements(array($recipiend_id, $senderId, $start_at,  $focus_name, $rate, $duration, $video, $feedback, $notes, $info, $submit ));
 
     }
 }
