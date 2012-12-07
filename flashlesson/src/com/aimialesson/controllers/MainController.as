@@ -5,6 +5,7 @@ package com.aimialesson.controllers
 	import com.aimialesson.model.Main;
 	import com.aimialesson.model.Notes;
 	import com.aimialesson.model.Presentation;
+	import com.aimialesson.model.User;
 	
 	import flash.events.EventDispatcher;
 	
@@ -63,6 +64,8 @@ package com.aimialesson.controllers
 			switch (event.type){
 				case (AppEvent.STOP_SESSION):	endLesson();	
 												break;
+				case (AppEvent.CHANGE_SCREEN_STATE):	soController.setSOProperty('screenMode' + User.getInstance().userID, (!Main.getInstance().fsMode).toString());	
+														break;
 			}
 		}
 		
@@ -85,6 +88,7 @@ package com.aimialesson.controllers
 			debug("MainController:onServiceEvent");
 			switch (event.type) {
 				case (ServiceEvent.GET_PRESENTATION_IMAGES_RESULT) : 	presentationController.setImages(event.value as ArrayCollection);
+																		soController.setSOProperty("imagesUrls", event.value as ArrayCollection);
 																		break;
 				case (ServiceEvent.SESSION_IS_STARTED_RESULT) : 		Main.getInstance().session_started = true;
 																		break;

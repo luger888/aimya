@@ -46,7 +46,8 @@
 					<views:MainUIContainer id="tPresentationContainer" width="100%" height="100%" verticalCenter="0"/>
 				</s:Group>
 				<!--s:TextArea id="debugger"  width="100%" height="200"/-->
-			</s:Group>				
+			</s:Group>			
 		</s:HGroup>
+		<elements:EndLesson id="endLesson" width="100%" height="100%" />
 	</s:Group>
 </s:Skin>
