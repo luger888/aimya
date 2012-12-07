@@ -1675,18 +1675,19 @@ ul.messageTabs{
 }
 
 .headerSearch .searchField {
-    height: 30px;
+    height: 15px;
     width: 195px;
-    padding: 0 10px 0 24px !important;
+    padding: 8px 10px 7px 24px !important;
     border: 0;
     margin: 0 !important;
     background: none !important;
     background: url('../img/design/accountLayout/glyphicons/search.png') no-repeat 7px 8px !important;
     font-size: 15px;
-    line-height: 30px;
+    line-height: 15px;
     color: #8e8e8e;
     text-decoration: none;
     font-weight:  normal;
+    font-family: 'helveticaroman';
 }
 
 
