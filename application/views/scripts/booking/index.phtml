@@ -30,11 +30,11 @@
                 if(view.name == 'agendaDay'){
 
                     $("#dialog-form").dialog( "open" );
-                    $('#started_at').val(date);
+                    $('#started_at').val(event.start);
 
                 }else{
                     jQuery('#calendar').fullCalendar('changeView', 'agendaDay');
-                    jQuery('#calendar').fullCalendar('gotoDate', date);
+                    jQuery('#calendar').fullCalendar('gotoDate', event.start);
                 }
 
             },
@@ -77,14 +77,8 @@
 
 
 
-        $('#started_at').datepicker({
-            dateFormat: 'yy-mm-dd',
-            yearRange: "1910:2012" }).val();
-        $('#started_at').datepicker({
-            onSelect: function(dateText, inst) {
-                $("input[name='started_at']").val(dateText);
-            }
-        });
+        $('#started_at').datetimepicker();
+
         $('#sendBooking').click(function(){
             $.post(
 
