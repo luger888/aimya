@@ -18,6 +18,7 @@ $(document).ready(function() {
     $('#uploadAvatar').click(function(){
         $('#avatar').click();
     });
+
     $('#removeAvatar').click(function(){//deleting avatar from profile
         $.post(
 
