@@ -1,63 +1,112 @@
+<div id="dialog-form" title="Booking">
+    <?php echo $this->bookingForm;?>
+</div>
 <script type='text/javascript'>
-
     jQuery(document).ready(function() {
-
         var date = new Date();
         var d = date.getDate();
         var m = date.getMonth();
         var y = date.getFullYear();
-
         jQuery('#calendar').fullCalendar({
             editable: true,
-            /*events: [
-                {
-                    title: 'All Day Event',
-                    start: new Date(y, m, 1)
-                },
-                {
-                    title: 'Long Event',
-                    start: new Date(y, m, d-5),
-                    end: new Date(y, m, d-2)
-                },
-                {
-                    id: 999,
-                    title: 'Repeating Event',
-                    start: new Date(y, m, d-3, 16, 0),
-                    allDay: false
-                },
-                {
-                    id: 999,
-                    title: 'Repeating Event',
-                    start: new Date(y, m, d+4, 16, 0),
-                    allDay: false
-                },
-                {
-                    title: 'Meeting',
-                    start: new Date(y, m, d, 10, 30),
-                    allDay: false
-                },
-                {
-                    title: 'Lunch',
-                    start: new Date(y, m, d, 12, 0),
-                    end: new Date(y, m, d, 14, 0),
-                    allDay: false
-                },
-                {
-                    title: 'Birthday Party',
-                    start: new Date(y, m, d+1, 19, 0),
-                    end: new Date(y, m, d+1, 22, 30),
-                    allDay: false
-                },
-                {
-                    title: 'Click for Google',
-                    start: new Date(y, m, 28),
-                    end: new Date(y, m, 29),
-                    url: 'http://google.com/'
+            disableDragging:true,
+            header:{
+                left:   'title',
+                center: ' agendaDay, month',
+                right:  'today,  prev, next'
+            },
+            dayClick: function(date, allDay, jsEvent, view) {
+                $("#dialog-form").dialog( "open" );
+                $('#started_at').val(date);
+
+
+            },
+            eventClick: function(event, element) {
+                event.title = prompt('edit event', event.title);
+                if(event.title){
+                    $('#calendar').fullCalendar('updateEvent', event);
                 }
-            ]*/
+
+            },
+            events: function(start, end, callback) {
+                jQuery("body").append('<div class="loadingIcon"></div>');
+                $.ajax({
+                    cache: false,
+                    url: 'booking/index',
+                    success: function(msg) {
+                        jQuery('.loadingIcon').remove();
+                            var events = [];
+                            for(var c = 0; c < msg.booking.length; c++){
+                                events.push({
+                                    title: msg.booking[c].focus_name,
+                                    start: msg.booking[c].started_at
+                                });
+                            }
+                            callback(events);
+
+                    }
+                });
+            }
+
+
         });
 
-    });
+//FORM DIALOG JQUERY
+
+        $( "#dialog-form" ).dialog({
+            autoOpen: false,
+            height: 450,
+            width: 400,
+            modal: true,
+            resizable:false,
+            close: function() {
+
+            }
+        });
+
+
+
+        $('#started_at').datepicker({
+            dateFormat: 'yy-mm-dd',
+            yearRange: "1910:2012" }).val();
+        $('#started_at').datepicker({
+            onSelect: function(dateText, inst) {
+                $("input[name='started_at']").val(dateText);
+            }
+        });
+        $('#sendBooking').click(function(){
+            $.post(
+
+                "/booking/add/0/controller%3D%3Ebooking/1/action%3D%3Eadd", {
+                    "recipient_id": $('#recipiend_id').val(),
+                    "focus_name": $('#focus_name').val(),
+                    "started_at" : $('#started_at').val(),
+                    "duration" : $('#duration').val(),
+                    "rate" : $('#rate').val(),
+                    "add_info" : $('#add_info').val()
+
+
+                },
+                function(response){
+                    $('#calendar').fullCalendar('renderEvent',
+                        {
+                            title : $('#focus_name').val(),
+                            start : $('#started_at').val(),
+                            end   : $('#started_at').val()
+                        });
+                    $("#dialog-form").dialog( "close" );
+                    $("#dialog-form form").get(0).reset();
+                });
+
+        return false;
+        });
+    });//END JQUERY
+
+
+
+
 
 </script>
+
 <div id='calendar'></div>
+

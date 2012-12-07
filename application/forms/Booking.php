@@ -7,120 +7,80 @@ class Application_Form_Booking extends Zend_Form
 
     public function init()
     {
-        $identity =  Zend_Auth::getInstance()->getStorage()->read();
+        $identity = Zend_Auth::getInstance()->getStorage()->read();//user identity
+
+        $profileModel = new Application_Model_Profile();
+        $friendsArray = $profileModel->getFriends($identity->id);//pull friends from db
+
+        $friends = array();
+        foreach($friendsArray as $value){
+            $friends[$value['id']] = $value['username'];
+        }
+
+        /*  BOOKING FORM */
         $this->setName('booking');
 
-        $friendTable = new Application_Model_DbTable_UserRelations();
-
-        $friends = $friendTable->getUserRelations($identity->id);
-
-        foreach($friends as $friend) {
-            print_r($friend);
+        $recipiend_id = new Zend_Form_Element_Select('recipiend_id');
+        $recipiend_id->setAttrib('id', 'recipiend_id')
+            ->addFilters($this->basicFilters)
+            ->setDecorators($this->basicDecorators);
+        foreach ($friendsArray as  $value) {
+            $recipiend_id->addMultiOption($value['id'], $value['username']);
         }
-        die;
-
-        $filterChain = new Zend_Filter();
-        // Create one big image with at most 143x300 pixel
-
-        $filterChain->appendFilter(new Aimya_Filter_File_Resize(array(
-        'directory' => './img/uploads/'.$identity->id.'/avatar/base/',
-        'width' => 143,
-        'height' => 300,
-        'keepRatio' => true,
-    )));
-        // Create a medium image with at most 104x220 pixels
-        $filterChain->appendFilter(new Aimya_Filter_File_Resize(array(
-            'directory' => './img/uploads/'.$identity->id.'/avatar/medium/',
-            'width' => 104,
-            'height' => 220,
-            'keepRatio' => true,
-        )));
-
-        $avatar = new Zend_Form_Element_File('avatar');
-        $avatar
-            ->setAttrib('id', 'avatar')
-            ->addValidator('Size', false, 1024000)
-            ->addValidator('Extension', false, 'jpg,png,gif,jpeg')
-            ->addFilter($filterChain)
-        //->setDestination('./img/uploads/'.$identity->id.'/avatar/')
-            ->removeDecorator('DtDdWrapper')
-            ->removeDecorator('HtmlTag')
-            ->removeDecorator('label');
-
-        $firstName = new Zend_Form_Element_Text('firstname');
-        $firstName ->setAttrib('placeholder', 'First Name')
-            ->setAttrib('class', 'required')
-            ->setAttrib('id', 'firstname')
+        $start_at = new Zend_Form_Element_Text('started_at');
+        $start_at ->setAttrib('id', 'started_at')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 
-        $lastName = new Zend_Form_Element_Text('lastname');
-        $lastName ->setAttrib('class', 'required')
-            ->setAttrib('placeholder', 'Last Name')
-            ->setAttrib('id', 'lastname')
+
+        $focus_name = new Zend_Form_Element_Text('focus_name');
+        $focus_name ->setAttrib('id', 'focus_name')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 
-        $gender = new Zend_Form_Element_Radio('gender');
-        $gender ->setAttrib('class', 'regRadio')
-            ->setAttrib('id', 'gender')
-            ->addFilters($this->basicFilters)
-            ->setSeparator('');
-        $gender->addMultiOptions(array(
-
-                'male' => 'Male',
-                'female' => 'Female'
-
-            )
-        )
-            ->setValue('male');
-         #->setDecorators($this->basicDecorators);
-
-        $birthday = new Zend_Form_Element_Text('birthday');
-        $birthday ->setAttrib('id', 'birthday')
+        $rate = new Zend_Form_Element_Text('rate');
+        $rate ->setAttrib('class', 'required input-small')
+            ->setAttrib('placeholder', 'rate')
+            ->setAttrib('id', 'rate')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 
-        $language = new Zend_Form_Element_Text('language');
-        $language ->setAttrib('placeholder', 'Language Spoken')
-            ->setAttrib('id', 'language')
-            ->addFilters($this->basicFilters)
-            ->setDecorators($this->basicDecorators);
-
-        $username = new Zend_Form_Element_Text('username');
-        $username ->setAttrib('id', 'username')
-            ->setAttrib('placeholder', 'username')
-            ->addFilters($this->basicFilters)
-            ->setDecorators($this->basicDecorators);
-
-        $email = new Zend_Form_Element_Text('email');
-        $email->addValidator(new Zend_Validate_EmailAddress())
-            ->setAttrib('placeholder', 'E-mail')
-            ->setAttrib('placeholder', 'email address')
-            ->setAttrib('class', 'clearInput required email')
-            ->setDecorators($this->basicDecorators);
-
-        $timeZone = new Zend_Form_Element_Select('timezone');
-        $timeZone->setAttrib('id', 'timezone')
-            ->addFilters($this->basicFilters)
-            ->setDecorators($this->basicDecorators);
-            foreach ($timeZones as  $value) {
-              $timeZone->addMultiOption($value['gmt'], $value['name']);
-            }
-        $intro = new Zend_Form_Element_Textarea('add_info');
-        $intro->setLabel('Introduce Yourself')
-            ->setAttrib('id', 'intro')
+        $duration = new Zend_Form_Element_Select('duration');
+        $duration->setAttrib('id', 'duration')
+            ->setAttrib('class', 'input-small')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators)
-            -> setAttrib('rows', '7');
+            ->addMultiOptions(array('15'   => '15 min',
+            '45'   => '45 min',
+            '60'   => 'hour',
+            '0'   => 'lesson'
+        ));
 
-        $submit = new Zend_Form_Element_Submit('saveProfile');
-        $submit ->setLabel('save')
-             ->setAttrib('id', 'saveProfile')
+        $video = new Zend_Form_Element_Checkbox('video');
+        $video->setAttrib('class', 'checkboxlist')
+            ->setAttrib('id', 'video')
+            ->setDecorators($this->basicDecorators);
+        $feedback = new Zend_Form_Element_Checkbox('feedback');
+        $feedback->setAttrib('class', 'checkboxlist')
+            ->setAttrib('id', 'feedback')
+            ->setDecorators($this->basicDecorators);
+        $notes = new Zend_Form_Element_Checkbox('notes');
+        $notes->setAttrib('class', 'checkboxlist')
+            ->setAttrib('id', 'notes')
             ->setDecorators($this->basicDecorators);
 
+        $info = new Zend_Form_Element_Textarea('add_info');
+        $info->setAttrib('id', 'add_info')
+            ->addFilters($this->basicFilters)
+            ->setDecorators($this->basicDecorators)
+            -> setAttrib('rows', '2');
 
-        $this->addElements(array($avatar, $firstName, $lastName, $gender, $birthday, $language, $email, $timeZone, $username, $intro, $submit));
+        $submit = new Zend_Form_Element_Submit('sendBooking');
+        $submit ->setLabel('Send for verification')
+            ->setAttrib('id', 'sendBooking')
+            ->setDecorators($this->basicDecorators);
+
+        $this->addElements(array($recipiend_id, $start_at,  $focus_name, $rate, $duration, $video, $feedback, $notes, $info, $submit ));
 
     }
 }

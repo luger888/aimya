@@ -63,25 +63,31 @@ form{
     width:1292px;
 }
 
-.footer, .push {
+.push {
     height: 33px; /* .push must be the same height as .footer */
 }
 
 .footer {
     color:#bebba3;
-    font: 11px helvetica;
+    font-family: 'helveticaroman';
+    font-size: 11px;
+    line-height: 13px;
     padding: 0;
     word-spacing: 2px;
     position: relative;
     clear:both;
     display: block;
     margin: 0 auto;
-    width: 1292px;
-    background: url('../img/design/accountLayout/accountLayoutBackground.png') repeat-y  top center;
+    width: 1075px;
+    text-align: left;
+    margin-top: -72px;
 }
-.footer .copyright{
-    margin-left: 105px;
+
+.footer .copyright {
+    padding-left: 21px;
 }
+
+
 fieldset .mainText{
     font-size: 12px;
     line-height: 18px;
@@ -116,59 +122,76 @@ font:15px dosis-semibold-middle;
     margin-left: 0;
 }
 
-
-
  .logo {
-   display: inline-block;
-
+   float: left;
+   margin-top: 9px;
 }
 
 .headerInside{
-    background-image: url('../img/design/mainPage/header.png');
-    background-repeat: repeat-x;
+    background: url('../img/design/mainPage/header.png') repeat-x 0 0;
     -moz-box-shadow: 0 0 6px rgba(0,0,0,0.6); /* Для Firefox */
     -webkit-box-shadow: 0 0 6px rgba(0,0,0,0.6); /* Для Safari и Chrome */
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+    height: 58px;
 }
 
 .headerInside .logo .smallLogoImg{
     background-image: url('../img/design/mainPage/small_aimya_logo.png');
-    height: 44px;
-    margin-top: 5px;
-    width: 144px;
-    margin-left: 7%;
-}
-#globalNav {
-    float: right;
-    font: 12px dosis-semibold-middle;
-    height: 5%;
-    margin-right: 38px;
-    margin-top: 4px;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
-}
-#globalNav a{color:#d7e4b9;}
-#globalNav ul {
-    margin: 0;
-    padding: 0;
+    height: 47px;
+    width: 146px;
+    display: block;
 }
 
-#globalNav ul li{
-    background: url("../img/design/mainPage/navSeparator.png") no-repeat scroll 0 0 transparent;
-    display: inline-block;
-    margin-left: 19px;
-    padding-bottom: 11px;
-    padding-left: 23px;
-    padding-top: 11px;
+/*-----global nav------------------------------------*/
+
+#globalNav {
+    float: right;
 }
+
+#globalNav ul {
+    float: right;
+    margin-right: -20px;
+}
+
+#globalNav ul li {
+    float: left;
+    background: url(../img/design/mainPage/navSeparator.png) no-repeat 0 center;
+    padding-left: 2px;
+}
+
+#globalNav ul li, #globalNav ul li a {
+    font-size: 12px;
+    line-height: 56px;
+    color: #d7e4b9;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-family: 'dosissemibold';
+    text-shadow: 0 1px 1px #333;
+} 
+
+#globalNav ul li a {
+    display: block;
+    height: 58px;
+    padding: 0 20px 0 20px;
+}
+
+#globalNav ul li a.current, #globalNav ul li a:hover{
+    background: url(../img/design/mainPage/nav-hover.png) repeat-x 0 0;
+}
+
 #globalNav ul li:first-child {
     background: none;
 }
+
+
+
 .shadowSeparator{
     background: url('../img/design/mainPage/shadow_separator.png') no-repeat;
     width:100%;
     height: 10px;
     margin-bottom: 15px;
 }
+
 .galleryMain{
     background: url('../img/design/mainPage/background_slider.png') no-repeat;
     width:400px;
@@ -433,7 +456,7 @@ font:15px dosis-semibold-middle;
     font:  12px arial;
 }
 .servicesTab .firstSeparator{
-    background: url('../img/design/accountLayout/1page_middle_separator.png') no-repeat;
+    background: url("../img/design/accountLayout/1page_middle_separator.png") no-repeat scroll 0 0 transparent;
     height: 14px;
     width: 800px;
     margin-bottom: 16px;
@@ -586,6 +609,15 @@ font:15px dosis-semibold-middle;
     left: 755px;
     top: 2px;
 }
+.servicesTab  .lastSeparator{
+    background: url("../img/design/accountLayout/2page_middle_separator.png") no-repeat scroll 0 0 transparent;
+    bottom: -42px;
+    height: 33px;
+    margin-bottom: 25px;
+    margin-top: 30px;
+    position: relative;
+    width: 800px;
+}
 /*Availability tab*/
 
 .availabilityTab .table td{
@@ -618,37 +650,54 @@ width:100px;
 
 
 /*Account layout*/
-.accountWrapper {
-    background-color: #f7f8f8;
-    /* height: 100%; */
-    min-height: 100%;
-    margin: 0 auto -39px !important;
+
+.leftBg {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: #eae5cf;
 }
+
+.accountWrapper {
+    margin: 0 auto !important;
+    position: relative;
+    min-height: 100%;
+    left: 0;
+    width: 100%;
+}
+
+.globalWrapper {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    min-height: 100%;
+    background: url("../img/design/accountLayout/accountLayoutBackground.png") repeat-y center top;
+}
+
 .accountWrapper .leftBlockProfile{
-    width:260px;
+    width:180px;
     height: 100%;
 
 }
 
 .headerAccount{
-    width:1135px;
+    width:1075px;
     margin: 0 auto;
     position: relative;
-    right: 10px;
 }
 .accountContent{
     margin: 0 auto;
-    width:1292px;
+    width:1075px;
     min-height: 100%;
 
     /*height: 100%;*/
 }
 /*Left Navigation Bar */
 
-.leftBlockProfile{
-    height: 100%;
 
-}
 .leftBlockProfile .leftNavigation ul li:not(.active){
 
     -webkit-box-shadow: -5px 0 6px -6px #888888 inset;
@@ -656,52 +705,42 @@ width:100px;
     -moz-box-shadow: -5px 0 6px -6px #888888 inset;
 }
 
-.leftNavPhoto img{
-    margin-left: 2px;
-    margin-top: 9px;
+.profileTab {
+    margin-top: 38px;
 }
 
-.leftBlockProfile{
-    text-align: center;
-}
-.profileTab{
-    margin-left: 80px;
-    width: 180px;
-    margin-top: 42px;
-}
-
-.profileTab h3{
-    bottom: 4px;
-    color: #4A4322;
-    font: 700 15px helvetica !important;
-    letter-spacing: 0.2pt;
-    margin-left: 36px;
-    position: relative;
-    right: 28px;
+.profileTab h3 {
+    font-family: 'helveticabold';
     text-align: left;
-    width: 148px;
-}
-.profileTab h5{
-    bottom: 14px;
-    color: #7F7867;
-    font: 11px helvetica;
-    left: 8px;
+    font-size: 15px;
+    line-height: 17px;
+    color: #4a4322;
+    text-decoration: none;
+    padding: 0 0 1px 8px;
+    font-weight: normal;
     margin: 0;
-    position: relative;
+}
+.profileTab h5 {
+    padding: 0 0 4px 8px;
+    margin: 0;
+    font-family: 'helveticaroman';
+    font-size: 11px;
+    line-height: 13px;
+    color: #7f7867;
+    text-decoration: none;
     text-align: left;
-    width: 148px;
+    font-weight: normal;
 }
 .profile .profileAvatar input[type="file"]{
     visibility: hidden;
     width: 1px;
 }
 
-.leftNavigation
-{
-
-    margin-top: 10.5%;
+.leftNavigation {
+    padding-top: 22px;
 }
-.leftBlockProfile .leftNavigation a{
+
+/*.leftBlockProfile .leftNavigation a {
     border:none !important;
     font:14px dosis-semibold-middle;
     text-align: left;
@@ -709,25 +748,68 @@ width:100px;
     border-radius: 0;
     background:none;
     padding-left: 21px;
-}
-.leftBlockProfile .leftNavigation  a:hover{
+}*/
+
+/*.leftBlockProfile .leftNavigation  a:hover{
     background:none;
-}
+}*/
 
-.leftBlockProfile .leftNavigation li:hover{
+/*.leftBlockProfile .leftNavigation li:hover{
     background-color:#f6f4ea;
-}
-.leftBlockProfile .leftNavigation ul{
+}*/
+
+.leftBlockProfile .leftNavigation ul {
     float:right;
-    width:175px;
-    position: relative;
-    right:0.3%;
-}
-noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
-    right:0.6%;
+    width:180px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-.leftBlockProfile .leftNavigation ul li{
+.leftBlockProfile .leftNavigation ul li, .leftBlockProfile .leftNavigation ul a {
+    display: block;
+    font-size: 14px;
+    line-height: 36px;
+    color: #69675c;
+    text-decoration: none;
+    font-family: 'dosissemibold';
+    padding: 0;
+    margin: 0;
+    border: 0 !important;
+    background: none;
+}
+
+.leftBlockProfile .leftNavigation ul a:hover {
+    background: none;
+}
+
+.leftBlockProfile .leftNavigation ul a {
+    height: 35px;
+    padding: 0 15px 0 21px;
+}
+
+.leftBlockProfile .leftNavigation ul li {
+    background: #f5f2e7;
+    margin-bottom: 2px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.leftBlockProfile .leftNavigation ul li:hover {
+    background:#f6f4ea;
+}
+
+.leftBlockProfile .leftNavigation ul li.active {
+    background: url(../img/design/accountLayout/left-nav-active-right.png) no-repeat right 0 #fff;
+}
+
+.leftBlockProfile .leftNavigation ul li.active a {
+    color: #4a4322;
+    padding-left: 34px;
+    background: url('../img/design/accountLayout/glyphicons/leftNavArrow.png')  25px center  no-repeat;
+}
+
+/*.leftBlockProfile .leftNavigation ul li{
     background-color:#f5f2e7;
     border-radius: 4px 0 0 4px;
     margin:2px 0;
@@ -742,25 +824,31 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     background: linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(247, 248, 248) 100%);
 
 
-}
-.leftBlockProfile .leftNavigation ul  .active a{
+}*/
+/*.leftBlockProfile .leftNavigation ul  .active a{
     margin-left: 12px;
-    background: url('../img/design/accountLayout/glyphicons/leftNavArrow.png')  8% 50%  no-repeat;
     color:#4a4322;
 
-}
+}*/
 
 .accountWrapper .rightBlockProfile {
-    width:926px;
+    width:870px;
+    float: right;
 }
-.profileTab .leftNavPhoto{
+.profileTab .leftNavPhoto {
     background-image: url("../img/design/accountLayout/leftNavPhoto.png");
-    bottom: 10px;
-    height: 160px;
-    margin: 0 -1px;
-    position: relative;
-    width: 160px;
+    height: 151px;
+    width: 153px;
+    padding-left: 9px;
+    padding-top: 9px;
+    overflow: hidden;
 }
+
+.leftNavPhoto img {
+    width: 143px;
+    max-height: 142px;
+}
+
 .profileTab .leftServices{
     bottom: 8px;
     color: #554D3A;
@@ -771,7 +859,6 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     width:170px;
 }
 .mainBlockProfile{
-    margin:27px 26px !important
 }
 .fill{
     background-color: #f7f8f8;
@@ -1003,6 +1090,16 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
 .profile .profileAvatar #removeAvatar:hover, .servicesTab #deleteService:hover, .userRelations .deleteUser:hover{
     background: url("../img/design/accountLayout/glyphicons/deleteHover.png") no-repeat scroll left center transparent;
 }
+
+.profile  .lastSeparator{
+    background: url("../img/design/accountLayout/2page_middle_separator.png") no-repeat scroll 0 0 transparent;
+    bottom: -42px;
+    height: 33px;
+    margin-bottom: 25px;
+    margin-top: 30px;
+    position: relative;
+    width: 800px;
+}
 /*.profileAvatar input {
     opacity: 0;
     overflow: hidden;
@@ -1116,6 +1213,15 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     top: 4px;
     word-spacing: 2px;
 }
+.availabilityTab  .lastSeparator{
+    background: url("../img/design/accountLayout/2page_middle_separator.png") no-repeat scroll 0 0 transparent;
+    bottom: -42px;
+    height: 33px;
+    margin-bottom: 25px;
+    margin-top: 30px;
+    position: relative;
+    width: 800px;
+}
 /*Users tab*/
 
 
@@ -1184,7 +1290,6 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
 /*Notifications tab*/
 .notificationsTab {
     margin-left: 2px;
-
 }
 
 .notificationsTab .firstSeparator{
@@ -1270,6 +1375,16 @@ noindex:-o-prefocus, .leftBlockProfile .leftNavigation ul {/*hack for opera*/
     font:12px dosis-semibold-middle;
     color:#1d3300;
     background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat left center;
+}
+
+.notificationsTab  .lastSeparator{
+    background: url("../img/design/accountLayout/2page_middle_separator.png") no-repeat scroll 0 0 transparent;
+    bottom: -42px;
+    height: 33px;
+    margin-bottom: 25px;
+    margin-top: 30px;
+    position: relative;
+    width: 800px;
 }
 /**** MESSAGES ****/
 
@@ -1404,12 +1519,15 @@ ul.messageTabs{
 
 
 }
-/*User Relations td widths */
-.userRelations table tr td:last-child{width: 157px;}
-.userRelations table tr td:nth-child(3){ width:126px;}
-.userRelations table tr td:nth-child(1){ width:82px;}
-.userRelations table tr td:nth-child(2){ width:110px;}
-.userRelations table tr td:nth-child(4){width: 106px;}
+.userRelations  .lastSeparator{
+    background: url("../img/design/accountLayout/2page_middle_separator.png") no-repeat scroll 0 0 transparent;
+    bottom: -42px;
+    height: 33px;
+    margin-bottom: 25px;
+    margin-top: 30px;
+    position: relative;
+    width: 800px;
+}
 
 
 /*Dialog jquery*/
@@ -1499,6 +1617,11 @@ ul.messageTabs{
 }
 /*Social buttons*/
 
+.footerIcons {
+    padding-bottom: 10px;
+    padding-left: 22px;
+}
+
 .twitterIcon{
     background-image: url('../img/design/accountLayout/socialIcons.png');
     background-position: 0 0;
@@ -1506,9 +1629,7 @@ ul.messageTabs{
     width:18px;
     width: 18px;
     float:left;
-    position: relative;
-    left:105px;
-    bottom:29px;
+    margin-right: 5px;
 }
 .facebookIcon{
     background-image: url('../img/design/accountLayout/socialIcons.png');
@@ -1517,9 +1638,7 @@ ul.messageTabs{
     width:18px;
     width: 18px;
     float:left;
-    position: relative;
-    left:109px;
-    bottom:29px;
+    margin-right: 5px;
 }
 .linkedInIcon{
     background-image: url('../img/design/accountLayout/socialIcons.png');
@@ -1528,9 +1647,7 @@ ul.messageTabs{
     width:18px;
     width: 18px;
     float:left;
-    position: relative;
-    left:113px;
-    bottom:29px;
+    margin-right: 5px;
 }
 .twitterIcon:hover{
     background-position: 0 100%;
@@ -1542,31 +1659,42 @@ ul.messageTabs{
     background-position: 100% 100%;
 }
 
-.searchForm {
-    display: block;
-    left: 220px;
-    padding: 0;
-    position: absolute;
-    top: 9px;
+/*--Header search-----------------------------------------------------*/
+
+.headerSearch {
+    float: left;
+    background: url(../img/design/mainPage/header-search-bg.png) repeat-x 0 0;
+    height: 30px;
+    width: 229px;
+    border-radius: 2px;
+    margin: 13px 0 0 64px;
 }
 
-.searchForm .btnSearch {
-    margin-bottom: 9px;
+.headerSearch .btnSearch {
     display: none;
 }
-.searchForm .searchField {
-    height: 18px;
-    width: 200px;
-    font-size: 13px;
-    padding-left: 22px !important;
-    background-color: white !important;
-    background:url('../img/design/accountLayout/glyphicons/search.png')no-repeat scroll 3% 64% transparent;
+
+.headerSearch .searchField {
+    height: 30px;
+    width: 195px;
+    padding: 0 10px 0 24px !important;
+    border: 0;
+    margin: 0 !important;
+    background: none !important;
+    background: url('../img/design/accountLayout/glyphicons/search.png') no-repeat 7px 8px !important;
+    font-size: 15px;
+    line-height: 30px;
+    color: #8e8e8e;
+    text-decoration: none;
+    font-weight:  normal;
 }
+
+
 /*Latest featured*/
 .featuresTab{
     background: #ffffff;
     width: 805px;
-    margin: 0px 2px;
+    margin: 30px 5px 0;
     padding: 20px 31px 0px;
     box-shadow: 0 0 5px #e5e5e5;
     -moz-box-shadow: 0 0 5px #e5e5e5; /* Firefox */
@@ -1575,7 +1703,7 @@ ul.messageTabs{
 }
 .featuresTab .filters{
     margin-left: 476px;
-    margin-right: 38px;
+    margin-right: 35px;
     margin-top: 17px;
 }
 .featuresTab #author{
@@ -1849,27 +1977,194 @@ ul.messageTabs{
 .userProfileTab{
     background: #ffffff;
     width: 805px;
-    margin: 0px 2px;
+    margin: 30px 5px 0;
     padding: 20px 31px 0px;
     box-shadow: 0 0 5px #e5e5e5;
     -moz-box-shadow: 0 0 5px #e5e5e5; /* Firefox */
     -webkit-box-shadow: 0 0 5px #e5e5e5; /* Safari, Chrome */
     min-height: 450px;
 }
-
+.userProfileTab .addAccount{
+    background: url("../img/design/accountLayout/glyphicons/add.png") no-repeat scroll 0 52% transparent;
+    border: medium none;
+    color: #1D3300;
+    float: right;
+    font: 12px dosis-semibold-middle;
+    padding-left: 19px;
+    position: relative;
+    right: -13px;
+    text-decoration: none;
+    top: -35px;
+    width: 140px;
+}
 .userProfileTab .imageBlock{
     float:left;
     margin-left: 6px;
     margin-right: 22px;
 }
-.userProfileTab .ul{
-    float:left;
+.userProfileTab ul{
+    margin-top:28px;
+    font: 12px helvetica;
+    min-height: 89px;
+}
+.userProfileTab ul li{
+    margin-bottom:-3px;
+}
+.userProfileTab .availability ul{
+    margin-top:28px;
+    font: 12px helvetica;
+    min-height: 89px;
+    margin-left:0;
+}
+.userProfileTab .availability ul li{
+    margin-bottom:-3px;
+    padding-left: 24px;
+    height: 33px;
+    padding-top: 8px;
+}
+.userProfileTab .availability ul li:nth-child(odd){
+    background-color: #FBFCFC;
 }
 .userProfileTab .firstSeparator{
-    background: url("../img/design/accountLayout/1page_middle_separator.png") no-repeat scroll 0 0 transparent;
+    background: url("../img/design/accountLayout/1page_middle_separator.png") no-repeat scroll 0 51% transparent;
     height: 14px;
     margin-bottom: 28px;
-    margin-top: 16px;
+    margin-top: 2px;
     width: 800px;
 }
 
+.userProfileTab .services{
+    clear:both;
+}
+.userProfileTab .profileName{
+    position: relative;
+    top: 6px;
+    right: 1px;
+    font: 13px helvetica;
+
+}
+.userProfileTab .profileRole{
+    font: 11px helvetica;
+    right: 1px;
+    top: 9px;
+    position: relative;
+}
+
+.userProfileTab  .birthday{
+    background: url("../img/design/accountLayout/glyphicons/gift.png") no-repeat scroll 0 42% transparent;
+    display: inline-block;
+    padding-left: 15px;
+}
+
+.userProfileTab  .gender{
+    background: url("../img/design/accountLayout/glyphicons/gift.png") no-repeat scroll 0 42% transparent;
+    display: inline-block;
+    padding-left: 15px;
+}
+.userProfileTab  .education{
+    background: url("../img/design/accountLayout/glyphicons/university.png") no-repeat scroll 0 42% transparent;
+    display: inline-block;
+    padding-left: 15px;
+}
+.userProfileTab  .degree{
+    background: url("../img/design/accountLayout/glyphicons/degree.png") no-repeat scroll 0 42% transparent;
+    display: inline-block;
+    padding-left: 15px;
+}
+.userProfileTab .language{
+    background: url("../img/design/accountLayout/glyphicons/language.png") no-repeat scroll 0 42% transparent;
+    display: inline-block;
+    padding-left: 15px;
+}
+.userProfileTab .middleSeparator{
+    background: url('../img/design/accountLayout/middle_double_separator.png') no-repeat;
+    height: 33px;
+    width: 800px;
+    margin-top: 25px;
+    margin-bottom: 13px;
+
+}
+.userProfileTab .middleSeparatorSecond{
+    background: url('../img/design/accountLayout/middle_double_separator.png') no-repeat;
+    height: 33px;
+    width: 800px;
+    margin-top: 32px;
+    margin-bottom: 22px;
+}
+.userProfileTab .title{
+    color:#1d3300;
+    font:12px helvetica;
+}
+.userProfileTab .aboutBlock .aboutMe{
+    font:12px helvetica;
+    margin-top: 11px;
+
+}
+.userProfileTab .services .serviceItem{
+    background-color: #FBFCFC;
+    margin-top: 12px;
+    padding: 6px;
+}
+
+.userProfileTab .services .subCategory{
+    display: inline-block;
+    width:140px;
+    font:12px arial;
+}
+.userProfileTab .services .rate{
+    font:12px helvetica;
+}
+.userProfileTab .services .mainCategory{
+    display: inline-block;
+    font: 700 13px arial;
+    margin-left: 16px;
+    width: 132px;
+}
+.userProfileTab .services .serviceInfo{
+    font:12px helvetica;
+    margin: 12px 0 33px 21px;
+
+}
+
+.userProfileTab .availability{
+    margin-top: 36px;
+}
+
+.userProfileTab .availability .day{
+    display: inline-block;
+    margin-bottom: 21px;
+    width: 168px;
+}
+.userProfileTab .availability .from{
+    display: inline-block;
+    width: 50px;
+    text-align: center;
+    margin-right: 82px;
+}
+.userProfileTab .availability .to{
+    display: inline-block;
+    margin-left: 74px;
+    width: 50px;
+    text-align: center;
+}
+.userProfileTab .availability .dayWrap{
+    background-color: #fbfcfc;
+}
+.userProfileTab .availability .timezone{
+    float:right;
+    font:11px arial;
+    position: relative;
+    right: 29px;
+}
+.userProfileTab  .lastSeparator{
+    background: url("../img/design/accountLayout/2page_middle_separator.png") no-repeat scroll 0 0 transparent;
+    height: 33px;
+    margin-bottom: 25px;
+    margin-top: 30px;
+    width: 800px;
+}
+
+.loadingIcon {
+    position:fixed;top:0;right:0;bottom:0;left:0;
+    background: rgba(255,255,255,0.5) url(../img/design/accountLayout/glyphicons/aimya_ajax_loader.gif) no-repeat 50% 50%;
+}

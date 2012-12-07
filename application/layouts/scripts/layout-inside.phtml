@@ -10,6 +10,7 @@
     ?>
     <?php  echo $this->jQuery(); ?>
     <?php $this->headLink()->appendStylesheet('/twitter/css/bootstrap.css');?>
+    <?php $this->headLink()->appendStylesheet('/css/fonts.css');?>
     <?php $this->headLink()->appendStylesheet('http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css');?>
     <?php $this->headScript()->appendFile('/js/jquery/jquery-ui-1.9.1.custom.min.js');?>
     <?php $this->headScript()->appendFile('/js/jquery/customCheckboxRadio.js');?>
@@ -33,8 +34,14 @@ $profileModel = new Application_Model_Profile();
 $servicesModel  = new Application_Model_DbTable_ServiceDetail();
 $username = $userModel->getUser($identity->id);
 $avatarPath = $profileModel->getAvatarPath($identity->id, 'base'); //path to avatar
-$role = ($username['role'] == '1' ? 'Student' : 'Instructor');
-if($role == 1) {
+if($username['role'] == '1'){
+    $role = 'Student';
+}else if($username['role'] == '2'){
+    $role = 'Instructor';
+}else if($username['role'] == '3'){
+    $role = 'Admin';
+}
+if($username['role'] == 1) {
     $services = $servicesModel->getServiceByUser($identity->id, 2);
 } else {
     $services = $servicesModel->getServiceByUser($identity->id, 1);
@@ -47,20 +54,18 @@ if (Zend_Registry::isRegistered('username')) {
     Zend_Registry::set('username', $username);
 }
 ?>
-
-    <div class="accountWrapper row-fluid no-space">
+<div class="leftBg"></div>
+<div id="wrap" class="accountWrapper row-fluid no-space clearfix">
 
         <!-- HEADER & NAVIGATION -->
-        <div class="row-fluid headerInside">
-            <div class="headerAccount">
+        <div class="row-fluid headerInside clearfix">
+            <div class="headerAccount clearfix">
                 <div class="logo">
-                    <a href="index">
-                        <div class="smallLogoImg"></div>
-                    </a>
+                    <a href="index" class="smallLogoImg"></a>
                 </div>
                 <input id="user_activity" type="hidden" value="1">
 
-                <div class="searchForm" >
+                <div class="searchForm headerSearch">
                     <form id="search_form" method="get" action="/search/search/">
                         <?php $searchForm = $this->addSearchForm();?>
                         <?php echo $searchForm->search_string?>
@@ -74,7 +79,7 @@ if (Zend_Registry::isRegistered('username')) {
                         <li><a href="#">PRIVACY POLICY</a></li>
                         <li><a href="#">ABOUT AIMYA</a></li>
                         <li><a href="#">HELP</a></li>
-                        <li><a href="/user/logout/">SIGN OUT</a></li>
+                        <li class="last"><a href="/user/logout/">SIGN OUT</a></li>
 
                     </ul>
                 </nav>
@@ -82,17 +87,17 @@ if (Zend_Registry::isRegistered('username')) {
         </div>
         <div class = "alertBlock modal"></div>
         <div class="accountContent clearfix">
-            <div class="accountPage">
+            <div class="accountPage clearfix">
                 <div class="messages">
                     <?php echo $this->flashMessages();?>
                 </div>
                 <div class="leftBlockProfile span2">
-                    <div class="profileTab">
+                    <div class="profileTab clearfix">
                         <h3> <?php echo $username;?></h3>
                         <h5> <?php echo $role;?></h5>
 
-                        <div class = "leftNavPhoto"><img src="<?php echo $avatarPath;?>"><br></div>
-                        <div class = "leftServices">
+                        <div class = "leftNavPhoto clearfix"><img src="<?php echo $avatarPath;?>"><br></div>
+                        <div class = "leftServices clearfix">
                             <?php
                             if($services){
                                 foreach($services as $value){
@@ -101,7 +106,7 @@ if (Zend_Registry::isRegistered('username')) {
                             }
                             ?>
                         </div>
-                        <div class="leftNavigation">
+                        <div class="leftNavigation clearfixaccountPage">
                             <?php
                             echo $this->navigation()
                                 ->menu()
@@ -120,13 +125,15 @@ if (Zend_Registry::isRegistered('username')) {
                 </div>
             </div>
         </div>
-        <div class = 'push'></div>
-</div>
+</div><!--end wrapper-->
 
-<div class="footer">
-    <div class ="twitterIcon"></div><div class ="facebookIcon"></div><div class = "linkedInIcon"></div>
-    <div class="copyright">
-
+<div class="footer clearfix">
+    <div class="footerIcons clearfix">
+        <div class ="twitterIcon"></div>
+        <div class ="facebookIcon"></div>
+        <div class = "linkedInIcon"></div>
+    </div><!--End footerIcons-->
+    <div class="copyright clearfix">
         Copyright 2012 Aimya<br>
         Created by Svitla.com
     </div>

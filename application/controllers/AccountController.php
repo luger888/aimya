@@ -190,7 +190,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         $identity = Zend_Auth::getInstance()->getStorage()->read();
         if ($this->getRequest()->isPost()) {
             $dbServiceDetail = new Application_Model_DbTable_ServiceDetail();
-            $dbUserRelations = new Application_Model_DbTable_UserRelations();
+            $dbUserRelations = new Application_Model_DbTable_Friends();
             /*Service Details tab*/
             if ($this->getRequest()->getParam('deleteService')) {
 
@@ -216,8 +216,8 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
 
                 $dbProfile = new Application_Model_DbTable_Profile();
                 $profileModel = new Application_Model_Profile();
-                unlink($profileModel->getAvatarPath($identity->id, 'base'));
-                unlink($profileModel->getAvatarPath($identity->id, 'medium'));
+                unlink(substr($profileModel->getAvatarPath($identity->id, 'base'), 1 ));//substr first slah
+                unlink(substr($profileModel->getAvatarPath($identity->id, 'medium'), 1 ));
 
                 $dbProfile->deleteAvatar($identity->id);
 
@@ -233,15 +233,16 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         $this->view->headScript()->appendFile('../../js/jquery/account/features.js');
         $dbUserModel = new Application_Model_DbTable_Users();
         $this->view->filters = new Application_Form_FeaturesFilter();
-
-        if ($this->getRequest()->getParam('user')) {
-            $userType = $this->getRequest()->getParam('user');// Teacher or students only
-            $lessonCat = $this->getRequest()->getParam('category');
+            $userType = '0';
+            if( $this->getRequest()->getParam('user')) {
+                $userType = $this->getRequest()->getParam('user');
+            }
+            $lessonCat = 'All';
+            if( $this->getRequest()->getParam('category')) {
+                $userType = $this->getRequest()->getParam('category');
+            }
 
             $this->view->featured = $dbUserModel->getLatestFeatured($userType, $lessonCat);
-        }else{
-            $this->view->featured = $dbUserModel->getLatestFeatured();
-        }
 
     }
 
