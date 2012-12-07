@@ -1,6 +1,7 @@
 <div id="dialog-form" title="Booking">
     <?php echo $this->bookingForm;?>
 </div>
+    <input type = "button" id = "bookLesson" value = "book lesson">
 <script type='text/javascript'>
     jQuery(document).ready(function() {
         var date = new Date();
@@ -102,6 +103,11 @@
                 });
 
         return false;
+        });
+        $('#bookLesson').click(function(){
+
+            $("#dialog-form").dialog( "open" );
+            
         });
     });//END JQUERY
 
