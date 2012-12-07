@@ -11,15 +11,17 @@
         jQuery('#calendar').fullCalendar({
             editable: true,
             disableDragging:true,
+            allDay:false,
             header:{
                 left:   'title',
                 center: ' agendaDay, month',
                 right:  'today,  prev, next'
             },
             dayClick: function(date, allDay, jsEvent, view) {
-                $("#dialog-form").dialog( "open" );
-                $('#started_at').val(date);
-
+//                $("#dialog-form").dialog( "open" );
+//                $('#started_at').val(date);
+               jQuery('#calendar').fullCalendar('changeView', 'agendaDay');
+               jQuery('#calendar').fullCalendar('gotoDate', date);
 
             },
             eventClick: function(event, element) {
@@ -40,7 +42,8 @@
                             for(var c = 0; c < msg.booking.length; c++){
                                 events.push({
                                     title: msg.booking[c].focus_name,
-                                    start: msg.booking[c].started_at
+                                    start: msg.booking[c].started_at,
+                                    allDay: false
                                 });
                             }
                             callback(events);
