@@ -78,6 +78,7 @@
             $.post(
 
                 "/booking/add/0/controller%3D%3Ebooking/1/action%3D%3Eadd", {
+                    "recipient_id": $('#recipiend_id').val(),
                     "focus_name": $('#focus_name').val(),
                     "started_at" : $('#started_at').val(),
                     "duration" : $('#duration').val(),

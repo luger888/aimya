@@ -13,6 +13,7 @@ package com.aimialesson.UI.views
 	import mx.controls.VideoDisplay;
 	import mx.core.UIComponent;
 	
+	import spark.components.Button;
 	import spark.components.Group;
 	import spark.components.TextArea;
 	import spark.components.supportClasses.SkinnableComponent;
@@ -23,6 +24,11 @@ package com.aimialesson.UI.views
 		public var myAimiaVideo:AimiaVideoUI;
 		[SkinPart (required="true")]
 		public var partnerAimiaVideo:AimiaVideoUI;
+		[SkinPart (required="true")]
+		public var muteMicBtn:Button;
+		[SkinPart (required="true")]
+		public var muteCamBtn:Button;
+
 		private var myNS:NetStream;
 		private var partnerNS:NetStream;
 		private var cam:Camera;
@@ -34,10 +40,25 @@ package com.aimialesson.UI.views
 
 		override protected function partAdded(partName:String, instance:Object):void
 		{
+			if ( instance == muteMicBtn || instance == muteCamBtn ) {
+				(instance as Button).addEventListener(MouseEvent.CLICK, onBtnClick);
+			}
 		}
 		override protected function partRemoved(partName:String, instance:Object):void {
-			
+			if ( instance == muteMicBtn || instance == muteCamBtn ) {
+				(instance as Button).removeEventListener(MouseEvent.CLICK, onBtnClick);
+			}
 		}
+		
+		private function onBtnClick ( event : MouseEvent ) : void {
+			switch (event.target) {
+				case muteMicBtn	:	muteMic();
+					break;
+				case muteCamBtn	:	muteCam();
+					break;
+			}
+		}
+		
 		
 		private function get partnerVideo():Video {
 			return partnerAimiaVideo.video;
@@ -79,6 +100,33 @@ package com.aimialesson.UI.views
 			partnerVideo.clear();
 			partnerVideo.attachNetStream(null);
 		}
+		
+		public function muteMic() : void {
+			debug("VideoChat:muteMic");
+			Media.getInstance().micPaused = !Media.getInstance().micPaused;
+			if (Media.getInstance().micPaused){
+				Media.getInstance().myNetStream.attachAudio(null);
+			} else {
+				Media.getInstance().myNetStream.attachAudio(mic);
+			}
+		}
+		
+		public function muteCam() : void {
+			debug("VideoChat:muteCam");
+			Media.getInstance().camPaused = !Media.getInstance().camPaused;
+			if (Media.getInstance().camPaused){
+				Media.getInstance().myNetStream.attachCamera(null);
+				myVideo.attachCamera(null);
+				myVideo.visible = false;
+				myVideo.clear();
+			} else {
+				myVideo.visible = true;
+				myVideo.attachCamera(cam);
+				Media.getInstance().myNetStream.attachCamera(cam);
+			}
+			
+		}
+
 		
 		private function onSessionStartedChange (event:Event) : void {
 			if (Main.getInstance().session_started) Media.getInstance().partnerNetStream.play(Media.getInstance().partnerStreamName);

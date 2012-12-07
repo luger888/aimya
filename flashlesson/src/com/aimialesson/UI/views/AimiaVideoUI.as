@@ -3,10 +3,12 @@ package com.aimialesson.UI.views
 	import com.aimialesson.UI.views.elements.Lamp;
 	
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 	import flash.media.Video;
 	
 	import mx.core.UIComponent;
 	
+	import spark.components.Button;
 	import spark.components.RichText;
 	import spark.components.supportClasses.SkinnableComponent;
 	
@@ -44,7 +46,7 @@ package com.aimialesson.UI.views
 		}
 		
 		override protected function partRemoved ( partName : String, instance : Object) : void {
-			
+		
 		}
 		
 		private var _userName:String;
@@ -83,5 +85,6 @@ package com.aimialesson.UI.views
 		public function get video () : Video {
 			return _video;
 		}
+		
 	}
 }

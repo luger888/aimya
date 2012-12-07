@@ -50,6 +50,8 @@ package com.aimialesson.UI.views
 		public var stopSessionBtn:Button;
 		[SkinPart (required="false")]
 		public var debugger:TextArea;
+		[SkinPart (required="false")]
+		public var endLesson:EndLesson;
 		
 		[Bindable]
 		public var stage_width:int;
@@ -60,7 +62,7 @@ package com.aimialesson.UI.views
 		{
 			super();
 			this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
-			this.addEventListener(Main.LESSON_FINISHED_CHANGED, onLessonFinished);
+			Main.getInstance().addEventListener(Main.LESSON_FINISHED_CHANGED, onLessonFinished);
 		}
 		
 		override protected function partAdded ( partName : String, instance : Object) : void
@@ -87,7 +89,9 @@ package com.aimialesson.UI.views
 				startSessionBtn.addEventListener(MouseEvent.CLICK, onBtnClick);
 			} else if ( instance == stopSessionBtn ) {
 				stopSessionBtn.addEventListener(MouseEvent.CLICK, onBtnClick);
-			} 
+			} else if ( instance == endLesson ) {
+				endLesson.visible = false;
+			}
 		}
 		
 		override protected function partRemoved ( partName : String, instance : Object) : void {
@@ -196,12 +200,13 @@ package com.aimialesson.UI.views
 		private function alertListener(eventObj:CloseEvent):void {
 			if (eventObj.detail==Alert.OK) {
 				dispatchEvent( new AppEvent ( AppEvent.STOP_SESSION ) );
-				onLessonFinished();
+		//		onLessonFinished();
 			}
 		}
 		
-		private function onLessonFinished ( event : Event = null ) : void {
+		private function onLessonFinished ( event : Event  ) : void {
 			videoChat.onLessonFinished();
+			endLesson.visible = true;
 		}
 		
 		private function onPresentationEvent ( event : PresentationEvent ) : void {

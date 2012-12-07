@@ -23,6 +23,15 @@
 			<s:BitmapImage id="bg" source="@Embed('flashassets/video_background.png')" />
 			<mx:UIComponent id="videoContainter"  left="8" right="8" top="8" bottom="8"/>
 		</s:Group>
-		
 	</s:VGroup>
+	<fx:Script>
+		<![CDATA[
+			import com.aimialesson.UI.skins.elements.MuteCamBtnSkin;
+		]]>
+	</fx:Script>
+	<fx:Script>
+		<![CDATA[
+			import com.aimialesson.UI.skins.elements.MuteMicBtnSkin;
+		]]>
+	</fx:Script>
 </s:Skin>
