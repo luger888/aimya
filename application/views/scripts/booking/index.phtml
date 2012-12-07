@@ -12,6 +12,7 @@
             editable: true,
             disableDragging:true,
             allDay:false,
+
             header:{
                 left:   'title',
                 center: ' agendaDay, month',
@@ -25,9 +26,15 @@
 
             },
             eventClick: function(event, element) {
-                event.title = prompt('edit event', event.title);
-                if(event.title){
-                    $('#calendar').fullCalendar('updateEvent', event);
+                var view =  jQuery('#calendar').fullCalendar('getView');
+                if(view.name == 'agendaDay'){
+
+                    $("#dialog-form").dialog( "open" );
+                    $('#started_at').val(date);
+
+                }else{
+                    jQuery('#calendar').fullCalendar('changeView', 'agendaDay');
+                    jQuery('#calendar').fullCalendar('gotoDate', date);
                 }
 
             },
