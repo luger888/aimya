@@ -34,5 +34,31 @@ class BookingController extends Zend_Controller_Action
         }
     }
 
+    public function approveAction() {
+        $identity = Zend_Auth::getInstance()->getIdentity();
+        if ($this->getRequest()->isPost()) {
+
+            if($this->getRequest()->getParam('sender_id')){
+
+                $bookingDbTable = new Application_Model_DbTable_Booking();
+                $bookingDbTable->approveBooking($this->getRequest()->getParams(), $identity->id);
+
+            }
+        }
+    }
+
+    public function rejectAction() {
+        $identity = Zend_Auth::getInstance()->getIdentity();
+        if ($this->getRequest()->isPost()) {
+
+            if($this->getRequest()->getParam('sender_id')){
+
+                $bookingDbTable = new Application_Model_DbTable_Booking();
+                $bookingDbTable->rejectBooking($this->getRequest()->getParams(), $identity->id);
+
+            }
+        }
+    }
+
 }
 

@@ -21,9 +21,9 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
             'video' => (int)$array['video'],
             'feedback' => (int)$array['feedback'],
             'notes' => (int)$array['notes'],
-            'sender_status' => (int)$userId,
-            'recipient_status' => (int)$userId,
-            'booking_status' => (int)$userId,
+            'sender_status' => 1,
+            'recipient_status' => 0,
+            'booking_status' => 0,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
 
@@ -33,18 +33,49 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
 
     }
 
-    public function getBookingByUser($user_id)
+    public function getBookingByUser($userId)
     {
-        $user_id = (int)$user_id;
+        $userId = (int)$userId;
         $row = $this->fetchAll(
             $this->select()
-                ->where($this->getAdapter()->quoteInto('sender_id=?' , (int)$user_id))
+                ->where($this->getAdapter()->quoteInto('sender_id=?' , (int)$userId))
+                ->orWhere($this->getAdapter()->quoteInto('recipient_id=?' , (int)$userId))
         );
         if (!$row) {
-            throw new Exception("There is no element with ID: $user_id");
+            throw new Exception("There is no element with ID: $userId");
         }
 
         return $row->toArray();
+    }
+
+    public function rejectBooking($id, $recipientId)
+    {
+        $where = array(
+
+            $this->getAdapter()->quoteInto('id =?', (int)$id),
+            $this->getAdapter()->quoteInto('recipient_id=?', (int)$recipientId)
+
+        );
+        $this->delete($where);
+
+    }
+
+    public function approveBooking($array = array(), $recipientId)
+    {
+
+        $data = array(
+            'recipient_status' => 1,
+            'booking_status' => 1,
+            'updated_at' => date('Y-m-d H:i:s')
+        );
+        $where = array(
+
+            $this->getAdapter()->quoteInto('id=?', $array['booking_id']),
+            $this->getAdapter()->quoteInto('recipient_id=?', $recipientId)
+
+        );
+        $this->update($data, $where);
+
     }
 
 }
