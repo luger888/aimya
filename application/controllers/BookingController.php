@@ -38,10 +38,10 @@ class BookingController extends Zend_Controller_Action
         $identity = Zend_Auth::getInstance()->getIdentity();
         if ($this->getRequest()->isPost()) {
 
-            if($this->getRequest()->getParam('sender_id')){
+            if($this->getRequest()->getParam('booking_id')){
 
                 $bookingDbTable = new Application_Model_DbTable_Booking();
-                $bookingDbTable->approveBooking($this->getRequest()->getParams(), $identity->id);
+                $bookingDbTable->approveBooking($this->getRequest()->getParam('booking_id'), $identity->id);
 
             }
         }
@@ -51,10 +51,10 @@ class BookingController extends Zend_Controller_Action
         $identity = Zend_Auth::getInstance()->getIdentity();
         if ($this->getRequest()->isPost()) {
 
-            if($this->getRequest()->getParam('sender_id')){
+            if($this->getRequest()->getParam('booking_id')){
 
                 $bookingDbTable = new Application_Model_DbTable_Booking();
-                $bookingDbTable->rejectBooking($this->getRequest()->getParams(), $identity->id);
+                $bookingDbTable->rejectBooking($this->getRequest()->getParam('booking_id'), $identity->id);
 
             }
         }

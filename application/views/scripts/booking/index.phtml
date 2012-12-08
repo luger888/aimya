@@ -1,79 +1,81 @@
 <div id="dialog-form" title="Booking">
     <?php echo $this->bookingForm;?>
 </div>
-    <input type = "button" id = "bookLesson" value = "book lesson">
+<input type="button" id="bookLesson" value="book lesson">
 <script type='text/javascript'>
-    jQuery(document).ready(function() {
+    jQuery(document).ready(function () {
         var date = new Date();
         var d = date.getDate();
         var m = date.getMonth();
         var y = date.getFullYear();
 
         jQuery('#calendar').fullCalendar({
-            editable: true,
+            editable:true,
             disableDragging:true,
             allDay:false,
 
             header:{
-                left:   'title',
-                center: ' agendaDay, month',
-                right:  'today,  prev, next'
+                left:'title',
+                center:' agendaDay, month',
+                right:'today,  prev, next'
             },
-            dayClick: function(date, allDay, jsEvent, view) {
+            dayClick:function (date, allDay, jsEvent, view) {
 //                $("#dialog-form").dialog( "open" );
 //                $('#started_at').val(date);
-               jQuery('#calendar').fullCalendar('changeView', 'agendaDay');
-               jQuery('#calendar').fullCalendar('gotoDate', date);
+                jQuery('#calendar').fullCalendar('changeView', 'agendaDay');
+                jQuery('#calendar').fullCalendar('gotoDate', date);
 
             },
-            eventClick: function(event, element) {
-                var view =  jQuery('#calendar').fullCalendar('getView');
-                if(view.name == 'agendaDay'){ // if clicked on event while in agendaDay
+            eventClick:function (event, element) {
+                var view = jQuery('#calendar').fullCalendar('getView');
+                if (view.name == 'agendaDay') { // if clicked on event while in agendaDay
                     jQuery('#booking').css('display', 'block');
                     jQuery('#sendBooking').remove();
-                    $("#dialog-form").dialog( "open" );
+                    $("#dialog-form").dialog("open");
                     $('#started_at').val(event.start);
                     $('#focus_name').val(event.title);
                     $('#add_info').val(event.add_info);
                     $('#rate').val(event.rate);
                     $('#duration').val(event.duration);
                     $('#recipiend_id').val(event.recipient_id + "");
-                    if (event.recipient_status == '0' && event.user_id == event.recipient_id){
+                    if (event.recipient_status == '0' && event.user_id == event.recipient_id) {
 
-                        $("#dialog-form").append('<input type = "button" id = "confirmBooking" value = "confirm" >');
-                        $("#dialog-form").append('<input type = "button" id = "rejectBooking" value = "reject" >');
-                        $("#dialog-form").append('<input type = "hidden"  value = '+event.booking_id+'" >');
+                        $("#dialog-form").append('<input type = "button" onclick="confirmBooking()"  value = "confirm" >');
+                        $("#dialog-form").append('<input type = "button" onclick="rejectBooking()"  value = "reject" >');
+                        $("#dialog-form").append('<input type = "hidden" id = "booking_id"  value = ' + event.booking_id + ' >');
+                        $("#dialog-form").append('<input type = "hidden" id = "sender_id"  value = ' + event.sender_id + ' >');
                     }
 
-                }else{
+                } else {
                     jQuery('#calendar').fullCalendar('changeView', 'agendaDay');
                     jQuery('#calendar').fullCalendar('gotoDate', event.start);
                 }
 
             },
-            events: function(start, end, callback) {
+            events:function (start, end, callback) {
                 jQuery("body").append('<div class="loadingIcon"></div>');
                 $.ajax({
-                    cache: false,
-                    url: 'booking/index',
-                    success: function(msg) {
+                    cache:false,
+                    url:'booking/index',
+                    success:function (msg) {
                         jQuery('.loadingIcon').remove();
-                            var events = [];
-                            for(var c = 0; c < msg.booking.length; c++){
-                                events.push({
-                                    title: msg.booking[c].focus_name,
-                                    start: msg.booking[c].started_at,
-                                    recipient_id:  msg.booking[c].recipient_id,
-                                    recipient_status:  msg.booking[c].recipient_status,
-                                    add_info:  msg.booking[c].add_info,
-                                    rate:  msg.booking[c].rate,
-                                    duration:  msg.booking[c].duration,
-                                    booking_id:  msg.booking[c].id,
-                                    user_id : msg.id,
-                                    allDay: false
-                                });
-                            }
-                            callback(events);
+                        var events = [];
+                        for (var c = 0; c < msg.booking.length; c++) {
+                            events.push({
+                                title:msg.booking[c].focus_name,
+                                start:msg.booking[c].started_at,
+                                recipient_id:msg.booking[c].recipient_id,
+                                recipient_status:msg.booking[c].recipient_status,
+                                add_info:msg.booking[c].add_info,
+                                rate:msg.booking[c].rate,
+                                duration:msg.booking[c].duration,
+                                sender_id:msg.booking[c].sender_id+ "",
+                                booking_id:msg.booking[c].id+ "",
+                                user_id:msg.id,
+                                allDay:false
+                            });
+                        }
+                        callback(events);
 
                     }
                 });
@@ -84,83 +86,78 @@
 
 //FORM DIALOG JQUERY
 
-        $( "#dialog-form" ).dialog({
-            autoOpen: false,
-            height: 450,
-            width: 400,
-            modal: true,
+        $("#dialog-form").dialog({
+            autoOpen:false,
+            height:450,
+            width:400,
+            modal:true,
             resizable:false,
-            close: function() {
+            close:function () {
                 $('#confirmBooking').remove();
                 $('#rejectBooking').remove();
             }
         });
 
 
-
         $('#started_at').datetimepicker();
 
-        $('#sendBooking').click(function(){
+        $('#sendBooking').click(function () {
             $.post(
 
                 "/booking/add/0/controller%3D%3Ebooking/1/action%3D%3Eadd", {
-                    "recipient_id": $('#recipiend_id').val(),
-                    "focus_name": $('#focus_name').val(),
-                    "started_at" : $('#started_at').val(),
-                    "duration" : $('#duration').val(),
-                    "feedback":$('#feedback:checked').val()||0,
-                    "video":$('#video:checked').val()||0,
-                    "notes":$('#notes:checked').val()||0,
-                    "rate" : $('#rate').val(),
-                    "add_info" : $('#add_info').val()
+                    "recipient_id":$('#recipiend_id').val(),
+                    "focus_name":$('#focus_name').val(),
+                    "started_at":$('#started_at').val(),
+                    "duration":$('#duration').val(),
+                    "feedback":$('#feedback:checked').val() || 0,
+                    "video":$('#video:checked').val() || 0,
+                    "notes":$('#notes:checked').val() || 0,
+                    "rate":$('#rate').val(),
+                    "add_info":$('#add_info').val()
 
 
                 },
-                function(response){
+                function (response) {
                     $('#calendar').fullCalendar('renderEvent',
                         {
-                            title : $('#focus_name').val(),
-                            start : $('#started_at').val(),
-                            end   : $('#started_at').val()
+                            title:$('#focus_name').val(),
+                            start:$('#started_at').val(),
+                            end:$('#started_at').val()
                         });
-                    $("#dialog-form").dialog( "close" );
+                    $("#dialog-form").dialog("close");
                     $("#dialog-form form").get(0).reset();
                 });
 
-        return false;
+            return false;
         });
-        $('#bookLesson').click(function(){
+        $('#bookLesson').click(function () {
             jQuery('#booking').css('display', 'block');
-            $("#dialog-form").dialog( "open" );
+            $("#dialog-form").dialog("open");
 
         });
     });//END JQUERY
 
-
-    $('#confirmBooking').click(function(){
+    function confirmBooking() {
         $.post(
 
-            "/booking/confirm/0/controller%3D%3Ebooking/1/action%3D%3Econfirm", {
-                "sender_id": $('#recipiend_id').val(),
-                "booking_id": $(this).nextAll('input[type=hidden]:first').val()
+            "/booking/approve/0/controller%3D%3Ebooking/1/action%3D%3Eapprove", {
+                "booking_id": $('#booking_id').val()
             },
-            function(response){
+            function (response) {
 
             });
-
-    });
-
-    $('#rejectBooking').click(function(){
+    }
+    function rejectBooking() {
         $.post(
 
             "/booking/reject/0/controller%3D%3Ebooking/1/action%3D%3Ereject", {
-                "sender_id": $('#recipiend_id').val(),
-                "booking_id": $(this).nextAll('input[type=hidden]:first').val()
+                "booking_id":$('#booking_id').val()
             },
-            function(response){
+            function (response) {
 
             });
-    });
+    }
+
 </script>
 
 <div id='calendar'></div>

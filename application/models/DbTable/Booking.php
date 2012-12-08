@@ -60,7 +60,7 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
 
     }
 
-    public function approveBooking($array = array(), $recipientId)
+    public function approveBooking($id, $recipientId)
     {
 
         $data = array(
@@ -70,8 +70,8 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
         );
         $where = array(
 
-            $this->getAdapter()->quoteInto('id=?', $array['booking_id']),
-            $this->getAdapter()->quoteInto('recipient_id=?', $recipientId)
+            $this->getAdapter()->quoteInto('id=?', (int)$id),
+            $this->getAdapter()->quoteInto('recipient_id=?', (int)$recipientId)
 
         );
         $this->update($data, $where);
