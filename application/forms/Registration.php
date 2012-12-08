@@ -93,11 +93,13 @@ class Application_Form_Registration extends Zend_Form
         $type = new Zend_Form_Element_Radio('type');
         $type->addMultiOptions(array(
 
-                '2' => 'TEACHING MEMBER',
-                '1' => 'LEARNING MEMBER'
+                '2' => '<span>TEACHING MEMBER</span>',
+                '1' => '<span>LEARNING MEMBER</span>'
 
             )
+
         );
+        $type->setAttrib('escape',false);
         $type
             ->setDecorators($this->basicDecorators)
             ->setSeparator('');
