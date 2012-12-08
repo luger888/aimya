@@ -2189,7 +2189,7 @@ ul.messageTabs{
     display:none;
 }
 
-.leftNavigation .nav .newMessagesCount {
+.leftBlockProfile .leftNavigation .nav .newMessagesCount {
     background: url("../img/design/accountLayout/glyphicons/alertMessage.png") no-repeat scroll 0 53% transparent;
     color: white;
     display: inline-block;
