@@ -27,10 +27,15 @@
             },
             eventClick: function(event, element) {
                 var view =  jQuery('#calendar').fullCalendar('getView');
-                if(view.name == 'agendaDay'){
+                if(view.name == 'agendaDay'){ // if clicked on event while in agendaDay
 
                     $("#dialog-form").dialog( "open" );
                     $('#started_at').val(event.start);
+                    $('#focus_name').val(event.title);
+                    $('#add_info').val(event.add_info);
+                    $('#rate').val(event.rate);
+                    $('#duration').val(event.duration);
+                    $('#recipiend_id').val(event.recipient_id + "");
 
                 }else{
                     jQuery('#calendar').fullCalendar('changeView', 'agendaDay');
@@ -50,6 +55,10 @@
                                 events.push({
                                     title: msg.booking[c].focus_name,
                                     start: msg.booking[c].started_at,
+                                    recipient_id:  msg.booking[c].recipient_id,
+                                    add_info:  msg.booking[c].add_info,
+                                    rate:  msg.booking[c].rate,
+                                    duration:  msg.booking[c].duration,
                                     allDay: false
                                 });
                             }

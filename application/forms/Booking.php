@@ -80,10 +80,18 @@ class Application_Form_Booking extends Zend_Form
             ->setDecorators($this->basicDecorators)
             -> setAttrib('rows', '2');
 
+    if($recipiend_id == $identity->id){// if recipient
+        $submit = new Zend_Form_Element_Submit('sendBooking');
+        $submit ->setLabel('Confirm')
+            ->setAttrib('id', 'sendBooking')
+            ->setDecorators($this->basicDecorators);
+    }else{
         $submit = new Zend_Form_Element_Submit('sendBooking');
         $submit ->setLabel('Send for verification')
             ->setAttrib('id', 'sendBooking')
             ->setDecorators($this->basicDecorators);
+    }
+
 
         $this->addElements(array($recipiend_id, $senderId, $start_at,  $focus_name, $rate, $duration, $video, $feedback, $notes, $info, $submit ));
 
