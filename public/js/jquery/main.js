@@ -150,7 +150,7 @@ $(document).ready(function() {
         }
     })
 
-    setInterval(getNewMessagesCount, 10000);
+    setInterval(getNewMessagesCount, 60000);
     getNewMessagesCount();
     function getNewMessagesCount() {
         jQuery.ajax({
