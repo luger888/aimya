@@ -31,17 +31,24 @@
                 if (view.name == 'agendaDay') { // if clicked on event while in agendaDay
                     jQuery('#booking').css('display', 'block');
                     jQuery('#sendBooking').remove();
+                    $("#dialog-form :input").attr("disabled", true);
                     $("#dialog-form").dialog("open");
-                    $('#started_at').val(event.start);
+                    $('#started_at').val(event.started_at);
                     $('#focus_name').val(event.title);
                     $('#add_info').val(event.add_info);
                     $('#rate').val(event.rate);
                     $('#duration').val(event.duration);
+                    if(event.video == 1)
+                    $('#video').prop('checked', 'true');
+                    if(event.feedback == 1)
+                        $('#feedback').prop('checked', 'true');
+                    if(event.notes == 1)
+                        $('#notes').prop('checked', 'true');
                     $('#recipiend_id').val(event.recipient_id + "");
                     if (event.recipient_status == '0' && event.user_id == event.recipient_id) {
 
-                        $("#dialog-form").append('<input type = "button" onclick="confirmBooking()"  value = "confirm" >');
-                        $("#dialog-form").append('<input type = "button" onclick="rejectBooking()"  value = "reject" >');
+                        $("#dialog-form").append('<input type = "button" id ="confirmBooking" onclick="confirmBooking()"  value = "confirm" >');
+                        $("#dialog-form").append('<input type = "button" id ="rejectBooking" onclick="rejectBooking()"  value = "reject" >');
                         $("#dialog-form").append('<input type = "hidden" id = "booking_id"  value = ' + event.booking_id + ' >');
                         $("#dialog-form").append('<input type = "hidden" id = "sender_id"  value = ' + event.sender_id + ' >');
                     }
@@ -64,11 +71,15 @@
                             events.push({
                                 title:msg.booking[c].focus_name,
                                 start:msg.booking[c].started_at,
+                                started_at:msg.booking[c].started_at,
                                 recipient_id:msg.booking[c].recipient_id,
                                 recipient_status:msg.booking[c].recipient_status,
                                 add_info:msg.booking[c].add_info,
                                 rate:msg.booking[c].rate,
                                 duration:msg.booking[c].duration,
+                                video:msg.booking[c].video,
+                                feedback:msg.booking[c].feedback,
+                                notes:msg.booking[c].notes,
                                 sender_id:msg.booking[c].sender_id+ "",
                                 booking_id:msg.booking[c].id+ "",
                                 user_id:msg.id,
@@ -92,7 +103,7 @@
             width:400,
             modal:true,
             resizable:false,
-            close:function () {
+            close: function() {
                 $('#confirmBooking').remove();
                 $('#rejectBooking').remove();
             }
@@ -125,13 +136,15 @@
                             end:$('#started_at').val()
                         });
                     $("#dialog-form").dialog("close");
-                    $("#dialog-form form").get(0).reset();
+
                 });
 
             return false;
         });
         $('#bookLesson').click(function () {
             jQuery('#booking').css('display', 'block');
+            $("#dialog-form :input").attr("disabled", false);
+            $("#dialog-form form").get(0).reset();
             $("#dialog-form").dialog("open");
 
         });
@@ -144,7 +157,7 @@
                 "booking_id": $('#booking_id').val()
             },
             function (response) {
-
+                $("#dialog-form").dialog("close");
             });
     }
     function rejectBooking() {
@@ -154,7 +167,7 @@
                 "booking_id":$('#booking_id').val()
             },
             function (response) {
-
+                $("#dialog-form").dialog("close");
             });
     }
 
