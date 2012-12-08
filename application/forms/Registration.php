@@ -93,19 +93,22 @@ class Application_Form_Registration extends Zend_Form
         $type = new Zend_Form_Element_Radio('type');
         $type->addMultiOptions(array(
 
-                '2' => 'TEACHING MEMBER',
-                '1' => 'LEARNING MEMBER'
+                '2' => '<span class="txt">TEACHING MEMBER</span>',
+                '1' => '<span class="txt">LEARNING MEMBER</span>'
 
             )
+
         );
+        $type->setAttrib('escape',false);
         $type
             ->setDecorators($this->basicDecorators)
             ->setSeparator('');
+        $type->setAttrib('escape',false);
 
         $submit = new Zend_Form_Element_Submit('signup');
         $submit ->setAttrib('id', 'signup')
                 ->setLabel('SIGN UP')
-                ->setAttrib('class', 'btnSignup signup-element')
+                ->setAttrib('class', 'btnSignup signup-element button')
                 ->setDecorators($this->basicDecorators);
 
         $this->addElements(array($firstName, $lastName, $gender, $userName, $email, $password, $password2, $type, $submit));
