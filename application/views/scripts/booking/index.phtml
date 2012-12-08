@@ -12,6 +12,7 @@
         jQuery('#calendar').fullCalendar({
             editable:true,
             disableDragging:true,
+            disableResizing:true,
             allDay:false,
 
             header:{
@@ -59,6 +60,7 @@
                 }
 
             },
+
             events:function (start, end, callback) {
                 jQuery("body").append('<div class="loadingIcon"></div>');
                 $.ajax({
@@ -83,7 +85,9 @@
                                 sender_id:msg.booking[c].sender_id+ "",
                                 booking_id:msg.booking[c].id+ "",
                                 user_id:msg.id,
-                                allDay:false
+                                allDay:false,
+                                color: '#7da028'
+
                             });
                         }
                         callback(events);
@@ -91,6 +95,7 @@
                     }
                 });
             }
+
 
 
         });
