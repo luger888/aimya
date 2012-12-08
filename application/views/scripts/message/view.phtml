@@ -1,0 +1,17 @@
+<?php echo $this->partial('partials/message.phtml')?>
+<?php $message = $this->message?>
+<?php $user = $this->user?>
+<div class= "messageContent">
+
+	    <table width="300px">
+	        <tr>
+	            <td><?php echo $user['firstname'] . ' ' . $user['lastname']?></td>
+	        </tr>
+	        <tr>
+	            <td><?php echo $message['theme']?></td>
+	        </tr>
+	        <tr>
+	            <td><?php echo $message['text']?></td>
+	        </tr>
+	    </table>
+</div>

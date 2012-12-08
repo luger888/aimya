@@ -5,6 +5,7 @@ class MessageController extends Zend_Controller_Action
     {
         $this->_helper->layout->setLayout("layoutInside");
         $this   ->_helper->AjaxContext()
+            ->addActionContext('count', 'json')
             ->initContext('json');
     }
 
@@ -226,5 +227,40 @@ class MessageController extends Zend_Controller_Action
             $this->_helper->flashMessenger->addMessage(array('failure'=>'Please try again later'));
         }
         //$this->_redirect($url, array('prependBase' => false));
+    }
+
+    public function viewAction()
+    {
+        $this->_helper->layout()->getView()->headTitle('View Message');
+        if($this->getRequest()->getParam('message_id')) {
+            $userId = Zend_Auth::getInstance()->getIdentity()->id;
+            $messageTable = new Application_Model_DbTable_Message();
+            if($this->getRequest()->getParam('new')) {
+                $messageTable->readMessage($this->getRequest()->getParam('message_id'), $userId);
+            }
+
+            $message = $messageTable->getMessage($this->getRequest()->getParam('message_id'), $userId);
+            $userTable = new Application_Model_DbTable_Users();
+            $sender = $userTable->getItem($message['sender_id']);
+
+            $this->view->user = $sender;
+            $this->view->message = $message;
+
+        } else {
+            $this->_helper->flashMessenger->addMessage(array('failure'=>'Please try again later'));
+        }
+    }
+
+    public function countAction()
+    {
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+        $messageTable = new Application_Model_DbTable_Message();
+        $messageCount = $messageTable->getNewMessagesCount($userId);
+
+        $this->view->messageCount = $messageCount;
+
     }
 }

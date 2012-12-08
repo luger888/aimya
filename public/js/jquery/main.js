@@ -150,6 +150,25 @@ $(document).ready(function() {
         }
     })
 
+    setInterval(getNewMessagesCount, 10000);
+    getNewMessagesCount();
+    function getNewMessagesCount() {
+        jQuery.ajax({
+            url: "/message/count",
+            type: "get",
+            success: function(result) {
+                messagesCount = parseInt(result.messageCount.id);
+
+                if(messagesCount > 0) {
+                    if($(".newMessagesCount").length) $(".newMessagesCount").remove();
+                    inboxLi = $('a[href="/message/inbox"]').parent();
+                    inboxLi.append('<span class="newMessagesCount">' + messagesCount + '</span>')
+                }
+            }
+        });
+        return false;
+    }
+
 });
 function uploadify(){
     //$(function() {

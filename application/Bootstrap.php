@@ -176,6 +176,23 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     }
 
+    protected function _initMesageRouter(){
+        $frontController = Zend_Controller_Front::getInstance();
+        $router = $frontController->getRouter();
+        $route = new Zend_Controller_Router_Route_Regex(
+            'message/view/(\d+)/(\w+)',
+            array(
+                'controller' => 'message',
+                'action'     => 'view'
+            ),
+            array(
+                1 => 'message_id',
+                2 => 'new'
+            )
+        );
+        $router->addRoute('message/view/(\d+)/(\w+)', $route);
+    }
+
     public function _initNavigation()
     {
 
