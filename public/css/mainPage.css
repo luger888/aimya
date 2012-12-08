@@ -1,49 +1,5 @@
 
-/* FONTS*/
-@font-face {
-    font-family: helvetica;
-    src: url('fonts/Helvetica.ttf');
-}
-@font-face {
-    font-family: dosis-semibold;
-    src: url('fonts/Dosis-Light.ttf');
-}
-@font-face {
-    font-family: dosis-semibold-middle;
-    src: url('fonts/Dosis-SemiBold.ttf');
-}
-/*global*/
-html{
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-body{
-    font-family: helvetica;
-    min-width: 1200px;
-    background: url('../img/design/mainPage/background.png') no-repeat center top;
-    background-color: #d5e4ad;
-    color:#446158;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-input{
-    padding:5px !important;
-}
-input:focus{
-    outline: 0;
-}
-form{
 
-    margin-bottom:0;
-}
-#wrapper{
-    min-height: 100%!important;
-    margin: 0 auto;
-
-
-}
 .mainHeader{
     width: 934px;
     margin: 0 auto;
@@ -65,18 +21,6 @@ form{
     margin: 0 auto;
     width: 934px;
     margin-top: -44px;
-}
-
-fieldset .mainText{
-    font-size: 12px;
-    line-height: 18px;
-    text-align: justify;
-    width: 400px;
-    color:#2e3911;
-}
-fieldset legend{
-    margin-bottom: 10px;
-    border: none !important;
 }
 
 li{
@@ -137,14 +81,6 @@ li{
 /*header*/
 #loginFormHolder input {
     outline:1px #fefcd7;
-}
-.header {
-    background-image: url('../img/design/mainPage/mainHeader.png');
-    background-repeat: repeat-x;
-    height:88px;
-    -moz-box-shadow: 0 0 6px rgba(0,0,0,0.6); /* Для Firefox */
-    -webkit-box-shadow: 0 0 6px rgba(0,0,0,0.6); /* Для Safari и Chrome */
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
 }
 
 .logo {
@@ -267,12 +203,8 @@ li{
 #loginFormHolder input[type="text"], #loginFormHolder input[type="password"]{
     border: 1px solid #536e10;
     width: 156px;
-    height: 22px !important;
-    padding: 0 5px !important;
-    -moz-transition: none;
-    -webkit-transition: none;
-    -o-transition: none;
-    transition: none;
+    height: 22px;
+    padding: 0 5px;
     margin: 0;
     box-shadow: 0 0 4px #a9c067;
     font-size: 12px;
