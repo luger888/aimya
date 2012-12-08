@@ -6,6 +6,7 @@
     min-height: 100%;
     background: url(../images/bg/home-light.jpg) no-repeat center 0 #d5e4ad;
     min-width: 980px;
+    position: relative;
 }
 
 #globalWrapper {
@@ -343,4 +344,14 @@ input.btnLogin {
 .buttonRow .socialIcons {
     float: left;
     padding-top: 11px;
+}
+
+.error {
+    clear: both;
+    padding-left: 123px;
+    padding-top: 5px;
+    font-size: 11px;
+    line-height: 13px;
+    color: #9e4444;
+    text-decoration: none;
 }
