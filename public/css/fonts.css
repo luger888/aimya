@@ -37,3 +37,14 @@
     font-style: normal;
 
 }
+
+@font-face {
+    font-family: 'HelveticaR';
+    src: url('fonts/helvetica-roman/helveticaroman.eot');
+    src: url('fonts/helvetica-roman/helveticaroman.eot?#iefix') format('embedded-opentype'),
+             url('fonts/helvetica-roman/helveticaroman.woff') format('woff'),
+             url('fonts/helvetica-roman/helveticaroman.ttf') format('truetype'),
+             url('fonts/helvetica-roman/helveticaroman.svg#helveticaroman') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
