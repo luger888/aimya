@@ -9,6 +9,7 @@ class BookingController extends Zend_Controller_Action
         $this->_helper->AjaxContext()
             ->addActionContext('index', 'json')
             ->addActionContext('add', 'json')
+            ->addActionContext('count', 'json')
             ->initContext('json');
     }
 
@@ -57,6 +58,19 @@ class BookingController extends Zend_Controller_Action
 
             }
         }
+    }
+
+    public function countAction()
+    {
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+        $bookingTable = new Application_Model_DbTable_Booking();
+        $bookingCount = $bookingTable->getNewBookingCount($userId);
+
+        $this->view->bookingCount = $bookingCount;
+
     }
 
 }

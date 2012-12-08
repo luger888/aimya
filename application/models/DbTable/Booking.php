@@ -78,4 +78,15 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
 
     }
 
+    public function getNewBookingCount($userId) {
+        $userId = (int)$userId;
+
+        $data = $this->select()
+            ->from($this->_name, array('id'=>'COUNT(*)'))
+            ->where('recipient_status=?' , 0)
+            ->where('recipient_id=?', $userId);
+
+        return $data->query()->fetch();
+    }
+
 }

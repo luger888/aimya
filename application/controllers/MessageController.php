@@ -247,7 +247,7 @@ class MessageController extends Zend_Controller_Action
             $this->view->message = $message;
 
         } else {
-            $this->_helper->flashMessenger->addMessage(array('failure'=>'Please try again later'));
+            //$this->_helper->flashMessenger->addMessage(array('failure'=>'Please try again later'));
         }
     }
 

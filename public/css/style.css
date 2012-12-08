@@ -2201,3 +2201,16 @@ ul.messageTabs{
     position: absolute;
     width: 20px;
 }
+
+.leftBlockProfile .leftNavigation .nav .newBookingCount {
+    background: url("../img/design/accountLayout/glyphicons/alertMessage.png") no-repeat scroll 0 53% transparent;
+    color: white;
+    display: inline-block;
+    float: left;
+    font-size: 9px;
+    margin-left: 6px;
+    margin-top: -36px;
+    padding-left: 4px;
+    position: absolute;
+    width: 20px;
+}

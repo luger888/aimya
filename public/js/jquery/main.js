@@ -161,8 +161,26 @@ $(document).ready(function() {
 
                 if(messagesCount > 0) {
                     if($(".newMessagesCount").length) $(".newMessagesCount").remove();
-                    inboxLi = $('a[href="/message/inbox"]').parent();
+                    inboxLi = $('.leftNavigation').find($('a[href="/message/inbox"]')).parent();
                     inboxLi.append('<span class="newMessagesCount">' + messagesCount + '</span>')
+                }
+            }
+        });
+        return false;
+    }
+
+    setInterval(getNewBookingCount, 60000);
+    getNewBookingCount();
+    function getNewBookingCount() {
+        jQuery.ajax({
+            url: "/booking/count",
+            type: "get",
+            success: function(result) {
+                bookingCount = parseInt(result.bookingCount.id);
+                if(bookingCount > 0) {
+                    if($(".newBookingCount").length) $(".newBookingCount").remove();
+                    inboxLi = $('.leftNavigation').find($('a[href="/booking"]')).parent();
+                    inboxLi.append('<span class="newBookingCount">' + bookingCount + '</span>')
                 }
             }
         });
