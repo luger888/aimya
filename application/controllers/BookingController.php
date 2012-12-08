@@ -21,7 +21,7 @@ class BookingController extends Zend_Controller_Action
         $bookingDbTable = new Application_Model_DbTable_Booking();
         $this->view->bookingForm = new Application_Form_Booking();
         $this->view->booking = $bookingDbTable->getBookingByUser($identity->id);
-
+        $this->view->id = $identity->id;
     }
 
     public function addAction() {

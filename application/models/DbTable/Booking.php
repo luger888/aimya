@@ -44,8 +44,8 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
         if (!$row) {
             throw new Exception("There is no element with ID: $userId");
         }
-
-        return $row->toArray();
+        $row = $row->toArray();
+        return $row;
     }
 
     public function rejectBooking($id, $recipientId)

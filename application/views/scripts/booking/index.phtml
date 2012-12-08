@@ -8,6 +8,7 @@
         var d = date.getDate();
         var m = date.getMonth();
         var y = date.getFullYear();
+
         jQuery('#calendar').fullCalendar({
             editable: true,
             disableDragging:true,
@@ -28,7 +29,10 @@
             eventClick: function(event, element) {
                 var view =  jQuery('#calendar').fullCalendar('getView');
                 if(view.name == 'agendaDay'){ // if clicked on event while in agendaDay
-
+                    if(event.user_id != event.recipient_id + ""){
+                        jQuery('#sendBooking').remove();
+                        
+                    }
                     $("#dialog-form").dialog( "open" );
                     $('#started_at').val(event.start);
                     $('#focus_name').val(event.title);
@@ -36,6 +40,7 @@
                     $('#rate').val(event.rate);
                     $('#duration').val(event.duration);
                     $('#recipiend_id').val(event.recipient_id + "");
+                    console.log(event.user_id)
 
                 }else{
                     jQuery('#calendar').fullCalendar('changeView', 'agendaDay');
@@ -59,6 +64,7 @@
                                     add_info:  msg.booking[c].add_info,
                                     rate:  msg.booking[c].rate,
                                     duration:  msg.booking[c].duration,
+                                    user_id : msg.id,
                                     allDay: false
                                 });
                             }
