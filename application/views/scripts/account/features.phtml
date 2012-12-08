@@ -20,13 +20,15 @@
                 <?php echo '<a class ="viewProfile" href="/user/' . $person['id'] . '">VIEW PROFILE</a>'; ?>
                 <?php $friendTable = new Application_Model_DbTable_Friends(); ?>
                 <?php $isFriend = $friendTable->isFriend($person['id']); ?>
-                <?php  if(!$isFriend){ // if friend, dont show the add to account button
-                echo '<a class ="addAccount" href=#>ADD TO MY ACCOUNT</a>';
-             }else{
-
-            echo '<a class ="sendMessage" href=#>SEND MESSAGE</a>';
-        }
-             ?>
+                <?php $isPending = $friendTable->isPending($person['id']); ?>
+                <?php  if($isFriend){ // if friend, dont show the add to account button
+                    echo '<a class ="sendMessage" href=#>SEND MESSAGE</a>';
+                }elseif($isPending){
+                    echo '<p class ="request_sent">REQUEST SENT</p>';
+                }else{
+                    echo '<a class ="addAccount" href=#>ADD TO MY ACCOUNT</a>';
+                }
+                ?>
             <?php echo '<input type="hidden" value = "' .$person["id"]. '">';?>
             <ul>
                 <li><span>Name:</span><?php echo  ' ' .$person['firstname'] . ' ' . $person['lastname'];?></li>
@@ -66,3 +68,15 @@
 <input class ="showMore" type="button" value = "SHOW MORE">
     </div>
 </div>
+<style type="text/css">
+    .featureItem .request_sent {
+        color: #1D3300;
+        float: right;
+        font: 12px dosis-semibold-middle;
+        padding-left: 19px;
+        position: relative;
+        right: 28px;
+        text-decoration: none;
+        top: -2px;
+    }
+</style>
