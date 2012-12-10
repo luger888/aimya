@@ -16,7 +16,7 @@ class BookingController extends Zend_Controller_Action
     public function indexAction()
     {
         $this->view->headLink()->appendStylesheet('../../js/fullcalendar/fullcalendar.css');
-        $this->view->headScript()->appendFile('../../js/fullcalendar/fullcalendar.min.js');
+        $this->view->headScript()->appendFile('../../js/fullcalendar/fullcalendar.js');
         $identity = Zend_Auth::getInstance()->getIdentity();
         $bookingDbTable = new Application_Model_DbTable_Booking();
         $this->view->bookingForm = new Application_Form_Booking();
