@@ -164,7 +164,7 @@ body {
 =============================================*/
 
 #content {
-    padding: 30px 0 40px 0;
+    padding: 30px 0 90px 0;
 }
 
 #leftSideBar {
@@ -427,6 +427,7 @@ input.button-2 {
     margin-bottom: 2px;
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
+    position: relative;
 }
 
 .leftNavigation ul li:hover {
@@ -471,6 +472,22 @@ input.button-2 {
 
 .leftServices p {
     padding: 0;
+}
+
+.newMessagesCount {
+    position: absolute;
+    left: 4px;
+    top: 12px;
+    display: block;
+    width: 13px;
+    height: 12px;
+    background: url(../images/elem/inbox.png) no-repeat 0 0;
+    text-align: center;
+    font-size: 9px;
+    line-height: 12px;
+    color: #ffffff;
+    font-family: 'helvetica-light-rnormal';
+    text-decoration: none;
 }
 
 /*-----Tabs---------------------------------------------*/
@@ -877,4 +894,8 @@ input.button-2 {
 .servicesTab .buttonsRow .button-2 {
     float: right;
     margin-left: 16px;
+}
+
+#addRequestService .buttonsRow {
+    padding-top: 0;
 }
