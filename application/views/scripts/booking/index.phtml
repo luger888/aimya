@@ -66,7 +66,6 @@
                                 booking_id:msg.booking[c].id+ "",
                                 user_id:msg.id,
                                 allDay:false,
-
                                 color: eventColor
 
                             });
@@ -92,7 +91,7 @@
                     }else if(event.recipient_status == '1'){
                         element.find(".fc-event-content").append('<div class="fc-event-content-confirm">Approved</div>');
                     }
-                    }
+                }
             }
 
 
@@ -131,13 +130,7 @@
 
                 },
                 function (response) {
-                    $('#calendar').fullCalendar('renderEvent',
-                        {
-                            title:$('#focus_name').val(),
-                            start:$('#started_at').val(),
-                            end:$('#started_at').val()
-                        });
-                    $("#dialog-form").dialog("close");
+                    window.location.reload();
 
                 });
 
@@ -145,7 +138,6 @@
         });
         $('#bookLesson').click(function () {
             jQuery('#booking').css('display', 'block');
-            $("#dialog-form :input").attr("disabled", false);
             $("#dialog-form form").get(0).reset();
             $("#dialog-form").dialog("open");
 

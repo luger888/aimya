@@ -17,7 +17,6 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
         if (!$row) {
             throw new Exception("There is no element with ID: $userId");
         }
-
         return $row->toArray();
     }
 
