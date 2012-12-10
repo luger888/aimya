@@ -77,6 +77,7 @@ class Application_Form_ServiceDetails extends Zend_Form
         $submitReq = new Zend_Form_Element_Submit('saveService');
         $submitReq ->setLabel('Save')
             ->setAttrib('id', 'saveRequestedService')
+            ->setAttrib('class', 'button-2 save')
             ->setDecorators($this->basicDecorators);
 
         if($action == 'requestservices') {
