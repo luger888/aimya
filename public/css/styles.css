@@ -182,7 +182,7 @@ body {
 #content .mainContainer {
     box-shadow: 0 0 9px #ccc;
     background: #fff;
-    padding: 20px 32px 0 32px;
+    padding: 20px 32px 22px 32px;
     position: relative;
     z-index: 2;
 }
@@ -242,7 +242,7 @@ body {
 } 
 
 .formRow select {
-    height: 22px;
+    height: 24px;
     border: 1px solid #b6b5b5;
     line-height: 18px;
 }
@@ -252,7 +252,7 @@ body {
     text-align: left;
     border: 0;
     background: none;
-    color: pointer;
+    cursor: pointer;
     padding-left: 17px;
     font-size: 12px !important;
     line-height: 20px !important;
@@ -340,6 +340,18 @@ input.button-2 {
 
 .button-2.more.disable {
     background-position: 0 -42px;
+}
+
+.button-2.edit {
+    background: url(../images/icons/edit.png) no-repeat 0 2px;
+}
+
+.button-2.edit:hover {
+    background-position: 0 -19px;
+}
+
+.button-2.edit.disable {
+    background-position: 0 -39px;
 }
 
 /*------left Side Bar ------------------------------------------------*/
@@ -759,4 +771,106 @@ input.button-2 {
 
 .feauteresButtons .button-2 {
     float: right;
+}
+
+/*---Services tab-----------------------------------------------------------------*/
+
+.service {
+    padding: 0;
+}
+
+.titleRow {
+    padding: 0;
+}
+
+.titleRow h2 {
+    float: left;
+}
+
+.titleRow .buttons {
+    float: right;
+}
+
+.buttons .button-2 {
+    float: right;
+    margin-left: 10px;
+}
+
+.serviceBody {
+    padding: 6px 0 29px 0;
+    font-size: 12px;
+    line-height: 18px;
+    color: #000000;
+    text-decoration: none;
+    font-family: 'helvetica-light-rnormal';
+}
+
+.serviceBody #subcategory {
+    font-family: Arial;
+    font-weight: bold;
+    padding-right: 15px;
+}
+
+.servicesTab #description {
+    font-family: Arial;
+    color: #000000;
+    text-decoration: none;
+    padding-top: 5px;
+    padding-bottom: 25px;
+}
+
+#addService {
+    padding-top: 2px;
+}
+
+#addService .formRow span {
+    float: left;
+    margin-right: 20px;
+}
+
+#addService .formRow .s-116 {
+    margin-right: 30px;
+}
+
+.s-116 select {
+    width: 116px;
+}
+
+.s-86 select {
+    width: 86px;
+}
+
+.field-116 input {
+    width: 116px;
+}
+
+.field-66 input {
+    width: 66px;
+}
+
+#addService .formRow .txt {
+    line-height: 24px;
+    margin-right: 32px;
+}
+
+.serviceDesc {
+    padding-top: 29px;
+}
+
+.serviceDesc h2 {
+    padding-bottom: 16px;
+}
+
+.serviceDesc textarea {
+    width: 789px;
+    height: 109px;
+}
+
+.servicesTab .buttonsRow {
+    padding-top: 16px;
+}
+
+.servicesTab .buttonsRow .button-2 {
+    float: right;
+    margin-left: 16px;
 }
