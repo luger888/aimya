@@ -9,7 +9,7 @@
 
     <div class="homeLeftCol">
         <fieldset>
-            <legend class="strictFont">ABOUT AIMYA</legend>
+            <legend class="strictFont"><?php echo $this->translate('ABOUT AIMYA');?></legend>
             <div class = "shadowSeparator"></div>
             <div class="mainText">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.</div>
         </fieldset>
@@ -22,7 +22,7 @@
         <div id="registrationFormHolder">
             <form id="signUp" action="/user/registration/" name="signUp" method="post" class="strictFont">
                 <fieldset>
-                    <legend class="strictFont">REGISTER</legend>
+                    <legend class="strictFont"><?php echo $this->translate('REGISTER');?></legend>
                          <div class = "shadowSeparator"></div>
                     <div class='buttonBar'>
                         <?php echo $this->reg['type'] . '<br>';?>
