@@ -164,7 +164,7 @@ body {
 =============================================*/
 
 #content {
-    padding: 30px 0 40px 0;
+    padding: 30px 0 90px 0;
 }
 
 #leftSideBar {
@@ -877,4 +877,8 @@ input.button-2 {
 .servicesTab .buttonsRow .button-2 {
     float: right;
     margin-left: 16px;
+}
+
+#addRequestService .buttonsRow {
+    padding-top: 0;
 }
