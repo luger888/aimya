@@ -68,13 +68,11 @@
                     success:function (msg) {
                         jQuery('.loadingIcon').remove();
                         var events = [];
-
                         for (var c = 0; c < msg.booking.length; c++) {
-                            console.log(msg.booking[c].recipient_id);
                             if(msg.booking[c].recipient_status == '1' ){
                                 var eventColor = '#7da028';
                             }else{
-                                eventColor = '#643FA8';
+                                eventColor = '#F1D93C';
                             }
 
 
