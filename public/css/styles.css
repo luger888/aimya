@@ -805,6 +805,10 @@ input.button-2 {
     font-family: 'helvetica-light-rnormal';
 }
 
+.serviceBody.short {
+    padding-bottom: 19px;
+}
+
 .serviceBody #subcategory {
     font-family: Arial;
     font-weight: bold;
@@ -823,12 +827,12 @@ input.button-2 {
     padding-top: 2px;
 }
 
-#addService .formRow span {
+#serviceForm .formRow span {
     float: left;
     margin-right: 20px;
 }
 
-#addService .formRow .s-116 {
+#serviceForm .formRow .s-116 {
     margin-right: 30px;
 }
 
@@ -848,7 +852,7 @@ input.button-2 {
     width: 66px;
 }
 
-#addService .formRow .txt {
+#serviceForm .formRow .txt {
     line-height: 24px;
     margin-right: 32px;
 }
