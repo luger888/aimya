@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta CHARSET="UTF-8">
+    <title></title>
+    <?php
+    $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=utf-8');
+    $this->addHelperPath("ZendX/JQuery/View/Helper", "ZendX_JQuery_View_Helper");
+    ?>
+    <?php  echo $this->jQuery(); ?>
+    <?php $this->headLink()->appendStylesheet('/css/reset.css');?>
+    <?php $this->headLink()->appendStylesheet('/css/fonts.css');?>
+    <?php $this->headLink()->appendStylesheet('/css/styles.css');?>
+
+    <?php $this->headLink()->appendStylesheet('http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css');?>
+    <?php $this->headScript()->appendFile('/js/jquery/jquery-ui-1.9.1.custom.min.js');?>
+    <?php $this->headScript()->appendFile('/js/jquery/customCheckboxRadio.js');?>
+    <?php $this->headScript()->appendFile('/js/jquery/cookieJquery.js');?>
+    <?php #$this->headScript()->appendFile('/js/jquery/jquery.uploadifive.js');?>
+    <?php $this->headScript()->appendFile('/js/jquery/main.js');?>
+    <?php $this->headScript()->appendFile('/js/jquery/jquery-ui-timepicker-addon.js');?>
+
+    <?php echo $this->headScript();?>
+    <?php echo $this->headLink();?>
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="/css/ie.css" type="text/css" media="all" />
+    <![endif]-->
+    <!--[if lt IE 9]>
+     <script type="text/javascript" src="/js/jquery/PIE.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+<?php
+//information in left block of account:
+//  firstname, lastname, avatar, member since, services
+$identity = Zend_Auth::getInstance()->getStorage()->read();
+$userModel = new Application_Model_DbTable_Users();
+$profileModel = new Application_Model_Profile();
+$servicesModel  = new Application_Model_DbTable_ServiceDetail();
+$username = $userModel->getUser($identity->id);
+$avatarPath = $profileModel->getAvatarPath($identity->id, 'base'); //path to avatar
+if($username['role'] == '1'){
+    $role = 'Student';
+}else if($username['role'] == '2'){
+    $role = 'Instructor';
+}else if($username['role'] == '3'){
+    $role = 'Admin';
+}
+if($username['role'] == 1) {
+    $services = $servicesModel->getServiceByUser($identity->id, 2);
+} else {
+    $services = $servicesModel->getServiceByUser($identity->id, 1);
+}
+if (Zend_Registry::isRegistered('username')) {
+    $username = Zend_Registry::get('username');
+} else {
+
+    $username = "{$username['firstname']} {$username['lastname']}";
+    Zend_Registry::set('username', $username);
+}
+?>
+
+<div id="leftBg"></div>
+<div id="page" class="clearfix">
+
+    <div id="globalWrapper" class="clearfix">
+        
+        <div id="wrapper" class="clearfix">
+
+                <div id="header" class="clearfix">
+                    
+                    <a href="index" id="logo"></a>
+                    <input id="user_activity" type="hidden" value="1">
+                    <div class="searchForm headerSearch">
+                        <form id="search_form" method="get" action="/search/search/">
+                            <?php $searchForm = $this->addSearchForm();?>
+                            <?php echo $searchForm->search_string?>
+                            <?php echo $searchForm->searchbtn ?>
+                        </form>
+                    </div>
+
+                    <nav id="globalNav">
+                        <ul>
+                            <li><a href="#">HOME</a></li>
+                            <li><a href="#">PRIVACY POLICY</a></li>
+                            <li><a href="#">ABOUT AIMYA</a></li>
+                            <li><a href="#">HELP</a></li>
+                            <li class="last"><a href="/user/logout/">SIGN OUT</a></li>
+
+                        </ul>
+                    </nav>
+
+                </div><!--End header-->
+
+                
+                <div id="content" class="clearfix">
+                    
+                    <div id="leftSideBar" class="clearfix">
+                        <div class="profileTab clearfix">
+                            <h3> <?php echo $username;?></h3>
+                            <h5> <?php echo $role;?></h5>
+
+                            <div class = "leftNavPhoto clearfix"><img src="<?php echo $avatarPath;?>"></div>
+                                <?php
+                                if($services){
+                                    echo '<div class = "leftServices clearfix">';
+                                    foreach($services as $value){
+                                        echo '<p>$ '.$value['rate']. ' / ' .$value['duration'] . '  ' . $value['subcategory'].'</p>';
+                                    }
+                                    echo '</div>';
+                                }
+                                ?>
+                            
+                            <div class="leftNavigation clearfix">
+                                <?php
+                                echo $this->navigation()
+                                    ->menu()
+                                    ->setMaxDepth(0)
+                                    ->setUlClass('nav nav-tabs nav-stacked')
+                                    ->render(new Aimya_Navigation($this->navigation()->findAllBy('tag', 'leftMenu', true)));
+                                ?>
+                            </div>
+                        </div>
+                    </div><!--End leftSideBar-->
+
+                    <div id="mainContent" class="clearfix">
+                         <div class="alertBlock modal"></div>
+                         <div class="messages">
+                            <?php echo $this->flashMessages();?>
+                        </div>
+
+                        <?php echo $this->layout()->content; ?>
+
+                    </div><!--End mainContent-->
+
+                </div><!--End content-->
+
+        </div><!--end wrapper-->
+
+    </div><!--End globalWrapper-->
+
+    <div id="footer" class="clearfix">
+        <div class="footerWrapper clearfix">
+            <div class="socialIcons inner clearfix">
+                <a href="#" title="Follow Us on Facebook" class="facebook" target="_blank"></a>
+                <a href="#" title="Follow Us on Twitter" class="twitter" target="_blank"></a>
+                <a href="#" title="Follow Us on Linked In" class="linkedin" target="_blank"></a>
+            </div><!--End socialIcons-->
+            <div class="copyright clearfix">
+                Copyright 2012 Aimya<br>
+                Created by Svitla.com
+            </div>
+        </div><!--End footerWrapper-->
+    </div><!--End page-->
+
+</div><!--End page-->
+
+</body>
+</html>

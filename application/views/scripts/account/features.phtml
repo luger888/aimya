@@ -1,41 +1,57 @@
-<div class="featuresTab">
+<div class="featuresTab mainContainer clearfix">
 
-    <div class="filters">
-        Display:
-        <div class = "styledSelect">
-            <?php echo $this->filters->author; ?>
-        </div>
-            <div class = "styledSelect category">
-        <?php echo $this->filters->lesson_category; ?>
-        </div>
-    </div>
-    <div class="firstSeparator"></div>
+    <div class="filters clearfix">
+
+        <span class="selectBox s-111"><?php echo $this->filters->author; ?></span>
+        <span class="selectBox s-123"><?php echo $this->filters->lesson_category; ?></span>
+        <p>Display:</p>
+
+    </div><!--End filters-->
+
     <?php $profileModel = new Application_Model_Profile(); ?>
-    <div class="messageContent">
+    <div class="messageContent clearfix">
+
         <?php //Zend_Debug::dump($this->featured); ?>
         <?php foreach ($this->featured as $person): ?>
-        <div class="featureItem">
+
+        <div class="shadowSeparator clearfix">
+        <div class="shadowSeparatorBox clearfix">
+        <div class="featureItem clearfix">
+
             <?php $avatarPath = $profileModel->getAvatarPath($person['id'], 'medium') ?>
-            <div class="imageBlock"><img src="<?php echo $avatarPath;?>"></div>
-                <?php echo '<a class ="viewProfile" href="/user/' . $person['id'] . '">VIEW PROFILE</a>'; ?>
+            <div class="imageBlock boxShadow"><img src="<?php echo $avatarPath;?>"></div>
+            <div class="featuredButtonsTop clearfix">
+                
+                <?php echo '<a class ="button-2 view viewProfile" href="/user/' . $person['id'] . '">VIEW PROFILE</a>'; ?>
                 <?php $friendTable = new Application_Model_DbTable_Friends(); ?>
                 <?php $isFriend = $friendTable->isFriend($person['id']); ?>
                 <?php $isPending = $friendTable->isPending($person['id']); ?>
                 <?php  if($isFriend){ // if friend, dont show the add to account button
                     echo '<a class ="sendMessage" href=#>SEND MESSAGE</a>';
                 }elseif($isPending){
-                    echo '<p class ="request_sent">REQUEST SENT</p>';
+                    echo '<span class ="request_sent">REQUEST SENT</span>';
                 }else{
-                    echo '<a class ="addAccount" href=#>ADD TO MY ACCOUNT</a>';
+                    echo '<a class ="button-2 add addAccount" href=#>ADD TO MY ACCOUNT</a>';
                 }
                 ?>
-            <?php echo '<input type="hidden" value = "' .$person["id"]. '">';?>
-            <ul>
-                <li><span>Name:</span><?php echo  ' ' .$person['firstname'] . ' ' . $person['lastname'];?></li>
-                <li><span>Time zone:</span><?php echo ' UTC ' . $person['timezone'];?></li>
+                <?php echo '<input type="hidden" value = "' .$person["id"]. '">';?>
+
+            </div><!--End featuredButtonsTop-->
+            <ul class="featuredInfo">
+                <li class="clearfix">
+                    <span class="title">Name:</span>
+                    <div class="featuredTxt"><?php echo  ' ' .$person['firstname'] . ' ' . $person['lastname'];?></div>
+                </li>
+
+                <li class="clearfix">
+                    <span class="title">Time zone:</span>
+                    <div class="featuredTxt"><?php echo ' UTC ' . $person['timezone'];?></div>
+                </li>
+
                 <?php if (count($person['service_offered']) > 0):?>
-                <li>
-                    <span>Service offered:</span>
+                <li class="clearfix">
+                    <span class="title">Service offered:</span>
+                    <div class="featuredTxt">
                     <?php
                         $i = 0;
                         foreach ($person['service_offered'] as $index => $service) {
@@ -44,11 +60,13 @@
                             $i++;
                         }
                     ?>
-                    <?php endif; ?>
+                    </div>
                 </li>
+                <?php endif; ?>
                 <?php if (count($person['service_requested']) > 0):?>
-                <li>
-                    <span>Service requested:</span>
+                <li class="clearfix">
+                    <span class="title">Service requested:</span>
+                    <div class="featuredTxt">
                     <?php
                     $i = 0;
                     foreach ($person['service_requested'] as $index => $service) {
@@ -57,26 +75,27 @@
                         $i++;
                     }
                     ?>
-                    <?php endif; ?>
+                    </div>
                 </li>
-                <li><span>About me:</span><?php echo $person['add_info'];?></li>
-            </ul>
-        </div>
-        <div class="middleSeparator"></div>
+                <?php endif; ?>
+                <?php if (count($person['add_info']) > 0):?>
+                <li class="clearfix">
+                    <span class="title">About me:</span>
+                    <div class="featuredTxt"><?php echo $person['add_info'];?></div>
+                </li>
+                <?php endif; ?>
+            </ul><!--End featuredInfo -->
+
+        </div><!--End featureItem -->
+        </div><!--End shadowSeparatorBox-->
+        </div><!--End shadowSeparator-->
+        
 
         <?php endforeach; ?>
-<input class ="showMore" type="button" value = "SHOW MORE">
-    </div>
-</div>
-<style type="text/css">
-    .featureItem .request_sent {
-        color: #1D3300;
-        float: right;
-        font: 12px dosis-semibold-middle;
-        padding-left: 19px;
-        position: relative;
-        right: 28px;
-        text-decoration: none;
-        top: -2px;
-    }
-</style>
+        <div class="feauteresButtons clearfix">
+            <input class ="showMore button-2 more" type="button" value = "SHOW MORE">
+        </div><!--End feauteresButtons-->
+    </div><!--End messageContent -->
+
+
+</div><!--End featuresTab -->

@@ -1,14 +1,5 @@
 $(document).ready(function() {
 
-    //$('#wrap').css('background-position', $('.accountContent').offset().left + 4 + 'px 0');
-
-    $('.leftBg').css('min-height', $('#wrap').height());
-
-    $(window).resize(function(){
-        $('.leftBg').css('min-height', $('#wrap').height());
-        //$('#wrap').css('background-position', $('.accountContent').offset().left + 4 + 'px 0');
-    });
-
     //---Home page member buttons--------------------------------------------------------------------------------
 
     $('.memberButtons input:first').attr('checked', 'checked');
@@ -225,7 +216,7 @@ function messageAction(element_id, action) {
 
 $(function() {
     if (window.PIE) {
-      $('#username-login, #password-login, .button').each(function() {
+      $('.boxShadow, #username-login, #password-login, .button, #tabsNavigation ul, #tabsNavigation ul li, .mainContainer').each(function() {
       PIE.attach(this);
     });//each
   }//if

@@ -13,16 +13,14 @@
 1 Reset
 ===============================*/
 html {
-    height: 100%;
-    max-height: 100%;
     padding: 0;
     margin: 0;
     border: 0;
+    min-height: 100%;
 }
 
 body {
     height: 100%;
-    max-height: 100%;
     padding: 0;
     margin: 0;
     border: 0;
@@ -95,6 +93,12 @@ textarea {
     height: auto;
     padding-top: 5px;
     padding-bottom: 5px;
+}
+
+select {
+    border: 1px solid #B6B5B5;
+    height: 22px;
+    line-height: 18px;
 }
 
 input:focus, textarea:focus { outline: none }
@@ -182,12 +186,12 @@ a:hover, a:visited:hover { text-decoration: none; }
     position: relative;
 }
 
-/*.boxShadow {
-    -webkit-box-shadow: 0px 3px 5px rgba(170, 170, 170, 0.75);
-    -moz-box-shadow:    0px 3px 5px rgba(170, 170, 170, 0.75);
-    box-shadow:         0px 3px 5px rgba(170, 170, 170, 0.75);
+.boxShadow {
+    -webkit-box-shadow: 0 0 5px #ccc;
+    -moz-box-shadow:    0 0 5px #ccc;
+    box-shadow:         0 0 5px #ccc;
     position: relative;
-}*/
+}
 
 .checkboxWrapper {
     width: 12px;
@@ -214,11 +218,11 @@ a:hover, a:visited:hover { text-decoration: none; }
     width: 12px;
     height: 14px;
     display: inline-block;
-    background: url('../images/elem/redoibox.png') no-repeat -14px 1px;
+    background: url('../images/elem/redoibox.png') no-repeat -14px -12px;
 }
 
 .radioBoxWrapper.checked {
-    background-position: 0px 1px;
+    background-position: 0px -12px;
 }
 
 .button, a.button {
@@ -250,6 +254,10 @@ input.button {
     padding: 0;
 }
 
+.socialIcons.inner {
+    padding-left: 22px;
+}
+
 .socialIcons a {
     display: inline-block;
     float: left;
@@ -263,6 +271,9 @@ input.button {
     background-position: 0 0;
 }
 
+.socialIcons.inner .facebook {
+    background-position: 0 -38px;
+}
 
 .socialIcons .facebook:hover {
     background-position: 0 -19px;
@@ -270,6 +281,10 @@ input.button {
 
 .socialIcons .twitter {
     background-position: -29px 0;
+}
+
+.socialIcons.inner .twitter {
+    background-position: -29px -38px;
 }
 
 
@@ -281,6 +296,9 @@ input.button {
     background-position: -58px 0;
 }
 
+.socialIcons.inner .linkedin {
+    background-position: -58px -38px;
+}
 
 .socialIcons .linkedin:hover {
     background-position: -58px -19px;
