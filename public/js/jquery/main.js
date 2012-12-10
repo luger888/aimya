@@ -1,19 +1,28 @@
 $(document).ready(function() {
 
-    $('#wrap').css('background-position', $('.accountContent').offset().left + 4 + 'px 0');
+    //---Home page member buttons--------------------------------------------------------------------------------
 
-    $('.leftBg').css('min-height', $('#wrap').height());
-    console.log($('#wrap').height());
+    $('.memberButtons input:first').attr('checked', 'checked');
 
-    $(window).resize(function(){
-        $('.leftBg').css('min-height', $('#wrap').height());
-        $('#wrap').css('background-position', $('.accountContent').offset().left + 4 + 'px 0');
-    });
+
+    //---Styling radio and checkbox buttons--------------------------------------------------------------------------------
 
     $('#remember').checkRadio({
         wrapperClass: 'checkboxWrapper',
         chekedClass: 'checked'
     });
+
+    $('input[type="radio"]').checkRadio({
+        wrapperClass: 'radioBoxWrapper',
+        chekedClass: 'checked'
+    });
+
+    $('.memberButtons label').each(function(){
+        $(this).find( '.txt' ).appendTo($(this).find('.radioBoxWrapper'));
+    });
+    
+
+
 
     $('#uploadAvatar').click(function(){
         $('#avatar').click();
@@ -30,27 +39,7 @@ $(document).ready(function() {
         );
 
     });
-    /* Button bar(radio)*/
-    $('.buttonBar label').first().addClass('checked');
-    $('.buttonBar input').first().prop('checked', true);
-    $('.buttonBar input[type="radio"]').change(function(){
-
-        if($(this).is(":checked")){
-            $('.buttonBar label').removeClass('checked');
-            $(this).parent().addClass('checked');
-        }
-    });
-
-    /* END Button bar(radio)*/
-    /* Gender bar(radio)*/
-    $('#gender-element label').first().addClass('checked');
-    $('#gender-element input[type="radio"]').change(function(){
-
-        if($(this).is(":checked")){
-            $('#gender-element label').removeClass('checked');
-            $(this).parent().addClass('checked');
-        }
-    });
+    
 
     /* END Gender bar(radio)*/
     /* DatePicker jquery UI */
@@ -152,6 +141,43 @@ $(document).ready(function() {
         }
     })
 
+    setInterval(getNewMessagesCount, 60000);
+    getNewMessagesCount();
+    function getNewMessagesCount() {
+        jQuery.ajax({
+            url: "/message/count",
+            type: "get",
+            success: function(result) {
+                messagesCount = parseInt(result.messageCount.id);
+
+                if(messagesCount > 0) {
+                    if($(".newMessagesCount").length) $(".newMessagesCount").remove();
+                    inboxLi = $('.leftNavigation').find($('a[href="/message/inbox"]')).parent();
+                    inboxLi.append('<span class="newMessagesCount">' + messagesCount + '</span>')
+                }
+            }
+        });
+        return false;
+    }
+
+    setInterval(getNewBookingCount, 60000);
+    getNewBookingCount();
+    function getNewBookingCount() {
+        jQuery.ajax({
+            url: "/booking/count",
+            type: "get",
+            success: function(result) {
+                bookingCount = parseInt(result.bookingCount.id);
+                if(bookingCount > 0) {
+                    if($(".newBookingCount").length) $(".newBookingCount").remove();
+                    inboxLi = $('.leftNavigation').find($('a[href="/booking"]')).parent();
+                    inboxLi.append('<span class="newBookingCount">' + bookingCount + '</span>')
+                }
+            }
+        });
+        return false;
+    }
+
 });
 function uploadify(){
     //$(function() {
@@ -185,4 +211,14 @@ function messageAction(element_id, action) {
 
     return false;
 }
+
+/*---PIE - add css3 to ie 7 and ie8 -----------------------------------------------------*/
+
+$(function() {
+    if (window.PIE) {
+      $('.boxShadow, #username-login, #password-login, .button, #tabsNavigation ul, #tabsNavigation ul li, .mainContainer').each(function() {
+      PIE.attach(this);
+    });//each
+  }//if
+});
 

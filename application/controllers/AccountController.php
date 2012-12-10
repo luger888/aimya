@@ -4,7 +4,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
 
     public function init()
     {
-        $this->_helper->layout->setLayout("layoutInside");
+        $this->_helper->layout->setLayout("layoutInner");
         $this->_helper->AjaxContext()
             ->addActionContext('edit', 'json')
             ->addActionContext('offline', 'json')

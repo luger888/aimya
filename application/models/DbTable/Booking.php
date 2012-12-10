@@ -44,8 +44,8 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
         if (!$row) {
             throw new Exception("There is no element with ID: $userId");
         }
-
-        return $row->toArray();
+        $row = $row->toArray();
+        return $row;
     }
 
     public function rejectBooking($id, $recipientId)
@@ -60,7 +60,7 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
 
     }
 
-    public function approveBooking($array = array(), $recipientId)
+    public function approveBooking($id, $recipientId)
     {
 
         $data = array(
@@ -70,12 +70,23 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
         );
         $where = array(
 
-            $this->getAdapter()->quoteInto('id=?', $array['booking_id']),
-            $this->getAdapter()->quoteInto('recipient_id=?', $recipientId)
+            $this->getAdapter()->quoteInto('id=?', (int)$id),
+            $this->getAdapter()->quoteInto('recipient_id=?', (int)$recipientId)
 
         );
         $this->update($data, $where);
 
+    }
+
+    public function getNewBookingCount($userId) {
+        $userId = (int)$userId;
+
+        $data = $this->select()
+            ->from($this->_name, array('id'=>'COUNT(*)'))
+            ->where('recipient_status=?' , 0)
+            ->where('recipient_id=?', $userId);
+
+        return $data->query()->fetch();
     }
 
 }

@@ -5,48 +5,67 @@
 
 </div>
 
-<div class="row-fluid layout-body clearfix">
 
-    <div class="homeLeftCol">
-        <fieldset>
-            <legend class="strictFont"><?php echo $this->translate('ABOUT AIMYA');?></legend>
-            <div class = "shadowSeparator"></div>
-            <div class="mainText">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.</div>
-        </fieldset>
-        <div class = "galleryMain"></div>
-    </div>
+<div class="homeLeftCol">
+    <h2>about aimya</h2>
 
-   <div class="homeRightCol regBlock">
+    <div class="homeTxt clearfix">        
+        <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.</p>
+    </div><!--End homeTxt-->
 
-        <!-- REGISTRATION -->
-        <div id="registrationFormHolder">
-            <form id="signUp" action="/user/registration/" name="signUp" method="post" class="strictFont">
-                <fieldset>
-                    <legend class="strictFont"><?php echo $this->translate('REGISTER');?></legend>
-                         <div class = "shadowSeparator"></div>
-                    <div class='buttonBar'>
-                        <?php echo $this->reg['type'] . '<br>';?>
-                    </div>
-                    <ul>
-                        <li><?php echo $this->reg['firstname'];?></li>
-                        <li><?php echo $this->reg['lastname'];?></li>
-                        <li><?php echo $this->reg['gender'];?></li>
-                        <li><?php echo $this->reg['username'];?></li>
-                        <li><?php echo $this->reg['email'];?></li>
-                        <li><?php echo $this->reg['password'];?></li>
-                        <li><?php echo $this->reg['password2'];?></li>
-                      <li> <?php echo $this->reg['signup'];?></li>
-                    </ul>
-                    <div class ="twitterIcon"></div><div class ="facebookIcon"></div><div class = "linkedInIcon"></div>
-                </fieldset>
-            </form>
+    <div class="homeGalleryHold clearfix">
+        <div class="homeGalleryBox clearfix">
+            <img src="/images/content/home-gal-1.jpg" alt="">
+        </div><!--End homeGalleryBox-->
+    </div><!--End homeGalleryHold-->
+    
+</div><!--End homeLeftCol-->
 
-        </div>
+<div class="homeRightCol regBlock">
 
-       <!-- END of REGISTRATION -->
-    </div>
+    <h2 class="strictFont">REGISTER</h2>
 
-</div>
+    <div id="registrationFormHolder">
+        <form id="signUp" action="/user/registration/" name="signUp" method="post"> 
+
+                <div class='memberButtons clearfix'>
+                    <?php echo $this->reg['type'];?>
+                </div>
+                <div class="formRow clearfix">
+                    <?php echo $this->reg['firstname'];?>  
+                </div><!--End formRow-->
+                <div class="formRow clearfix">
+                    <?php echo $this->reg['lastname'];?>  
+                </div><!--End formRow-->
+                <div class="formRow radio clearfix">
+                    <?php echo $this->reg['gender'];?>  
+                </div><!--End formRow-->
+                <div class="formRow clearfix">
+                    <?php echo $this->reg['username'];?>  
+                </div><!--End formRow-->
+                <div class="formRow clearfix">
+                    <?php echo $this->reg['email'];?>  
+                </div><!--End formRow-->
+                <div class="formRow clearfix">
+                    <?php echo $this->reg['password'];?>  
+                </div><!--End formRow-->
+                <div class="formRow clearfix">
+                    <?php echo $this->reg['password2'];?>  
+                </div><!--End formRow-->
+                <div class="formRow buttonRow clearfix">
+                    <div class="socialIcons clearfix">
+                        <a href="#" title="Follow Us on Facebook" class="facebook" target="_blank"></a>
+                        <a href="#" title="Follow Us on Twitter" class="twitter" target="_blank"></a>
+                        <a href="#" title="Follow Us on Linked In" class="linkedin" target="_blank"></a>
+                    </div><!--End socialIcons-->
+                    <?php echo $this->reg['signup'];?>  
+                </div><!--End formRow-->           
+        </form>
+
+    </div><!--End registrationFormHolder-->
+
+</div><!--End homeRightCol-->
+
 
 
 

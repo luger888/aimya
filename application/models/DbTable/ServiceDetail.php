@@ -12,13 +12,16 @@ class Application_Model_DbTable_ServiceDetail extends Application_Model_DbTable_
             'lesson_category' => $array['lesson_category'],
             'service_type' => $array['service_type'],
             'subcategory' => $array['subcategory'],
-            'rate' => (int)$array['rate'],
-            'duration' => $array['duration'],
-            'description' => $array['description'],
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
 
         );
+
+        if($array['service_type'] == 1) {
+            $data['rate'] = (int)$array['rate'];
+            $data['duration'] = (int)$array['duration'];
+            $data['description'] = (int)$array['description'];
+        }
 
         $this->insert($data);
 
@@ -31,12 +34,15 @@ class Application_Model_DbTable_ServiceDetail extends Application_Model_DbTable_
             'service_type' => $array['service_type'],
             'lesson_category'=> $array['lesson_category'],
             'subcategory' => $array['subcategory'],
-            'rate' => (int)$array['rate'],
-            'duration' => $array['duration'],
-            'description' => $array['description'],
             'updated_at' => date('Y-m-d H:i:s')
 
         );
+
+        if($array['service_type'] == 1) {
+            $data['rate'] = (int)$array['rate'];
+            $data['duration'] = (int)$array['duration'];
+            $data['description'] = (int)$array['description'];
+        }
         $where = array(
 
             $this->getAdapter()->quoteInto('id=?', $array['updateService']),
