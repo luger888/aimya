@@ -1,4 +1,4 @@
- <?php
+<?php
 class Application_Model_DbTable_Availability extends Application_Model_DbTable_Abstract
 {
     protected $_name = 'user_availability';

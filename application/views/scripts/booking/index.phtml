@@ -20,8 +20,6 @@
                 right:'today,  prev, next'
             },
             dayClick:function (date, allDay, jsEvent, view) {
-//                $("#dialog-form").dialog( "open" );
-//                $('#started_at').val(date);
                 jQuery('#calendar').fullCalendar('changeView', 'agendaDay');
                 jQuery('#calendar').fullCalendar('gotoDate', date);
 
@@ -29,30 +27,6 @@
             eventClick:function (event, element) {
                 var view = jQuery('#calendar').fullCalendar('getView');
                 if (view.name == 'agendaDay') { // if clicked on event while in agendaDay
-                    jQuery('#booking').css('display', 'block');
-                    jQuery('#sendBooking').remove();
-                    $("#dialog-form :input").attr("disabled", true);
-                    $("#dialog-form").dialog("open");
-                    $('#started_at').val(event.started_at);
-                    $('#focus_name').val(event.title);
-                    $('#add_info').val(event.add_info);
-                    $('#rate').val(event.rate);
-                    $('#duration').val(event.duration);
-                    if(event.video == 1)
-                    $('#video').prop('checked', 'true');
-                    if(event.feedback == 1)
-                        $('#feedback').prop('checked', 'true');
-                    if(event.notes == 1)
-                        $('#notes').prop('checked', 'true');
-                    $('#recipiend_id').val(event.recipient_id + "");
-                    if (event.recipient_status == '0' && event.user_id == event.recipient_id) {
-
-                        $("#dialog-form").append('<input type = "button" id ="confirmBooking" onclick="confirmBooking()"  value = "confirm" >');
-                        $("#dialog-form").append('<input type = "button" id ="rejectBooking" onclick="rejectBooking()"  value = "reject" >');
-                        $("#dialog-form").append('<input type = "hidden" id = "booking_id"  value = ' + event.booking_id + ' >');
-                        $("#dialog-form").append('<input type = "hidden" id = "sender_id"  value = ' + event.sender_id + ' >');
-                    }
-
                 } else {
                     jQuery('#calendar').fullCalendar('changeView', 'agendaDay');
                     jQuery('#calendar').fullCalendar('gotoDate', event.start);
@@ -101,8 +75,25 @@
 
                     }
                 });
-            }
+            },
+            eventRender: function(event){
+                var view = jQuery('#calendar').fullCalendar('getView');
+                if (view.name == 'agendaDay') { // render event in agendaDay
+                    $(".fc-event-head").append('<div class ="fc-event-focusName"> ' + event.title + '</div>');
+                    $(".fc-event-head").append('<div class = "fc-event-rate">$' +event.rate + ' / '+ event.duration +'</div>');
+                    $(".fc-event-content").append('<div class = "fc-event-content-description">' +event.add_info + '</div>');
+                    $(".fc-event-content").append('<div class = "fc-event-content-requested">Requested:' +event.sender_id + '</div>');
 
+                    if (event.recipient_status == '0' && event.user_id == event.recipient_id) {
+                        $(".fc-event-content").append('<div id ="rejectBooking" onclick="rejectBooking()"  class="fc-event-content-reject">Reject</div>');
+                        $(".fc-event-content").append('<div id ="confirmBooking" onclick="confirmBooking()"  class = "fc-event-content-confirm">Confirm</div>');
+                        $(".fc-event-content").append('<input type = "hidden" id = "booking_id"  value = ' + event.booking_id + ' >');
+                        $(".fc-event-content").append('<input type = "hidden" id = "sender_id"  value = ' + event.sender_id + ' >');
+                    }else if(event.recipient_status == '1'){
+                        $(".fc-event-content").append('<div class="fc-event-content-confirm">Approved</div>');
+                    }
+                    }
+            }
 
 
         });

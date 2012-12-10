@@ -2214,3 +2214,10 @@ ul.messageTabs{
     position: absolute;
     width: 20px;
 }
+/* FULL CALENDAR JQUERY CSS*/
+.fc-event-focusName, .fc-event-time{
+    float:left;
+}
+.fc-event-rate, .fc-event-content-confirm, .fc-event-content-reject{
+    float:right;
+}
