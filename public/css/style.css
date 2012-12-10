@@ -2185,9 +2185,7 @@ ul.messageTabs{
 .ui-timepicker-rtl{ direction: rtl; }
 .ui-timepicker-rtl dl { text-align: right; }
 .ui-timepicker-rtl dl dd { margin: 0 65px 10px 10px; }
-#booking{
-    display:none;
-}
+
 
 .profileTab .leftNavigation .newMessagesCount {
     background: url("../img/design/accountLayout/glyphicons/alertMessage.png") no-repeat scroll 0 53% transparent;
@@ -2213,11 +2211,4 @@ ul.messageTabs{
     padding-left: 4px;
     position: absolute;
     width: 20px;
-}
-/* FULL CALENDAR JQUERY CSS*/
-.fc-event-focusName, .fc-event-time{
-    float:left;
-}
-.fc-event-rate, .fc-event-content-confirm, .fc-event-content-approve, .fc-event-content-reject{
-    float:right;
 }
