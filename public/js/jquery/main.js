@@ -169,9 +169,9 @@ $(document).ready(function() {
             success: function(result) {
                 bookingCount = parseInt(result.bookingCount.id);
                 if(bookingCount > 0) {
-                    if($(".newBookingCount").length) $(".newBookingCount").remove();
+                    if($(".newMessagesCount").length) $(".newMessagesCount").remove();
                     inboxLi = $('.leftNavigation').find($('a[href="/booking"]')).parent();
-                    inboxLi.append('<span class="newBookingCount">' + bookingCount + '</span>')
+                    inboxLi.append('<span class="newMessagesCount">' + bookingCount + '</span>')
                 }
             }
         });

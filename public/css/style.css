@@ -2189,7 +2189,7 @@ ul.messageTabs{
     display:none;
 }
 
-.leftBlockProfile .leftNavigation .nav .newMessagesCount {
+.profileTab .leftNavigation .newMessagesCount {
     background: url("../img/design/accountLayout/glyphicons/alertMessage.png") no-repeat scroll 0 53% transparent;
     color: white;
     display: inline-block;
@@ -2202,7 +2202,7 @@ ul.messageTabs{
     width: 20px;
 }
 
-.leftBlockProfile .leftNavigation .nav .newBookingCount {
+.profileTab .leftNavigation .newBookingCount {
     background: url("../img/design/accountLayout/glyphicons/alertMessage.png") no-repeat scroll 0 53% transparent;
     color: white;
     display: inline-block;

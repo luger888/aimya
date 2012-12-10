@@ -184,6 +184,7 @@ body {
     background: #fff;
     padding: 20px 32px 22px 32px;
     position: relative;
+    min-height: 480px;
     z-index: 2;
 }
 
@@ -877,4 +878,17 @@ input.button-2 {
 .servicesTab .buttonsRow .button-2 {
     float: right;
     margin-left: 16px;
+}
+
+.profileTab .leftNavigation .newMessagesCount {
+    background: url("../img/design/accountLayout/glyphicons/alertMessage.png") no-repeat scroll 0 53% transparent;
+    color: white;
+    display: inline-block;
+    float: left;
+    font-size: 9px;
+    margin-left: 6px;
+    margin-top: -36px;
+    padding-left: 4px;
+    position: absolute;
+    width: 20px;
 }
