@@ -76,21 +76,21 @@
                     }
                 });
             },
-            eventRender: function(event){
+            eventRender: function(event, element){
                 var view = jQuery('#calendar').fullCalendar('getView');
                 if (view.name == 'agendaDay') { // render event in agendaDay
-                    $(".fc-event-head").append('<div class ="fc-event-focusName"> ' + event.title + '</div>');
-                    $(".fc-event-head").append('<div class = "fc-event-rate">$' +event.rate + ' / '+ event.duration +'</div>');
-                    $(".fc-event-content").append('<div class = "fc-event-content-description">' +event.add_info + '</div>');
-                    $(".fc-event-content").append('<div class = "fc-event-content-requested">Requested:' +event.sender_id + '</div>');
+                    element.find(".fc-event-head").append('<div class ="fc-event-focusName"> ' + event.title + '</div>');
+                    element.find(".fc-event-head").append('<div class = "fc-event-rate">$' +event.rate + ' / '+ event.duration +'</div>');
+                    element.find(".fc-event-content").append('<div class = "fc-event-content-description">' +event.add_info + '</div>');
+                    element.find(".fc-event-content").append('<div class = "fc-event-content-requested">Requested:' +event.sender_id + '</div>');
 
                     if (event.recipient_status == '0' && event.user_id == event.recipient_id) {
-                        $(".fc-event-content").append('<div id ="rejectBooking" onclick="rejectBooking()"  class="fc-event-content-reject">Reject</div>');
-                        $(".fc-event-content").append('<div id ="confirmBooking" onclick="confirmBooking()"  class = "fc-event-content-confirm">Confirm</div>');
-                        $(".fc-event-content").append('<input type = "hidden" id = "booking_id"  value = ' + event.booking_id + ' >');
-                        $(".fc-event-content").append('<input type = "hidden" id = "sender_id"  value = ' + event.sender_id + ' >');
+                        element.find(".fc-event-content").append('<div id ="rejectBooking" onclick="rejectBooking(this)"  class="fc-event-content-reject">Reject</div>');
+                        element.find(".fc-event-content").append('<div id ="confirmBooking" onclick="confirmBooking(this)"  class = "fc-event-content-confirm">Confirm</div>');
+                        element.find(".fc-event-content").append('<input type = "hidden" id = "booking_id"  value = ' + event.booking_id + ' >');
+                        element.find(".fc-event-content").append('<input type = "hidden" id = "sender_id"  value = ' + event.sender_id + ' >');
                     }else if(event.recipient_status == '1'){
-                        $(".fc-event-content").append('<div class="fc-event-content-confirm">Approved</div>');
+                        element.find(".fc-event-content").append('<div class="fc-event-content-confirm">Approved</div>');
                     }
                     }
             }
@@ -107,8 +107,7 @@
             modal:true,
             resizable:false,
             close: function() {
-                $('#confirmBooking').remove();
-                $('#rejectBooking').remove();
+
             }
         });
 
@@ -153,24 +152,33 @@
         });
     });//END JQUERY
 
-    function confirmBooking() {
+    function confirmBooking(e) {
         $.post(
 
             "/booking/approve/0/controller%3D%3Ebooking/1/action%3D%3Eapprove", {
                 "booking_id": $('#booking_id').val()
             },
             function (response) {
-                $("#dialog-form").dialog("close");
+                $(e).parents('.fc-event-inner').find('.fc-event-head').css('background-color', 'green');
+                $(e).parents('.fc-event-inner').css('background-color', 'green');
+                $(e).parents('.fc-event').css('border-color', 'green');
+                $(e).parents('.fc-event-inner').css('border-color', 'green');
+                $(e).parent().append('<div class="fc-event-content-approve">Approved</div>');
+                $(e).parents('.fc-event').find('.fc-event-content-reject').remove();
+                $(e).parents('.fc-event').find('.fc-event-content-confirm').remove();
+
+
+
             });
     }
-    function rejectBooking() {
+    function rejectBooking(e) {
         $.post(
 
             "/booking/reject/0/controller%3D%3Ebooking/1/action%3D%3Ereject", {
                 "booking_id":$('#booking_id').val()
             },
             function (response) {
-                $("#dialog-form").dialog("close");
+                e.parentNode.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode.parentNode);
             });
     }
 
