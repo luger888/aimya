@@ -65,7 +65,7 @@ $(document).ready(function() {
             {cache:true,
                 load: function (e, ui) {
                     $(ui.panel).find(".tab-loading").remove();
-                    uploadify();
+//                    uploadify();
                 },
                 select: function( e, ui )
                 {
@@ -179,18 +179,18 @@ $(document).ready(function() {
     }
 
 });
-function uploadify(){
-    //$(function() {
-    $('#file_upload').uploadifive({
-        'auto'         : false,
-        'formData'     : {'experienceUpload' : 'certificate'},
-        'queueID'      : 'queue',
-        'folder'        : '/img/uploads/' + $(this).attr('id'),
-        'uploadScript' : '/resume/upload',
-        'onUploadComplete' : function(file, data) {
-        }
-    });
-}
+//function uploadify(){
+//    //$(function() {
+//    $('#file_upload').uploadifive({
+//        'auto'         : false,
+//        'formData'     : {'experienceUpload' : 'certificate'},
+//        'queueID'      : 'queue',
+//        'folder'        : '/img/uploads/' + $(this).attr('id'),
+//        'uploadScript' : '/resume/upload',
+//        'onUploadComplete' : function(file, data) {
+//        }
+//    });
+//}
 
 function messageAction(element_id, action) {
     tmpArr = element_id.split('_');

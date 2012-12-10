@@ -14,7 +14,6 @@
             disableDragging:true,
             disableResizing:true,
             allDay:false,
-
             header:{
                 left:'title',
                 center:' agendaDay, month',
@@ -69,7 +68,16 @@
                     success:function (msg) {
                         jQuery('.loadingIcon').remove();
                         var events = [];
+
                         for (var c = 0; c < msg.booking.length; c++) {
+                            console.log(msg.booking[c].recipient_id);
+                            if(msg.booking[c].recipient_status == '1' ){
+                                var eventColor = '#7da028';
+                            }else{
+                                eventColor = '#643FA8';
+                            }
+
+
                             events.push({
                                 title:msg.booking[c].focus_name,
                                 start:msg.booking[c].started_at,
@@ -86,7 +94,8 @@
                                 booking_id:msg.booking[c].id+ "",
                                 user_id:msg.id,
                                 allDay:false,
-                                color: '#7da028'
+
+                                color: eventColor
 
                             });
                         }
