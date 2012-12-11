@@ -20,7 +20,7 @@ class Application_Model_DbTable_ServiceDetail extends Application_Model_DbTable_
         if($array['service_type'] == 1) {
             $data['rate'] = (int)$array['rate'];
             $data['duration'] = (int)$array['duration'];
-            $data['description'] = (int)$array['description'];
+            $data['description'] = $array['description'];
         }
 
         $this->insert($data);
@@ -41,7 +41,7 @@ class Application_Model_DbTable_ServiceDetail extends Application_Model_DbTable_
         if($array['service_type'] == 1) {
             $data['rate'] = (int)$array['rate'];
             $data['duration'] = (int)$array['duration'];
-            $data['description'] = (int)$array['description'];
+            $data['description'] = $array['description'];
         }
         $where = array(
 

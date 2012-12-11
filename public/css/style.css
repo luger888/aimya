@@ -482,29 +482,9 @@ font:15px dosis-semibold-middle;
     font: 700 12px arial;
     margin:11px 0 30px 3px;
 }
-.servicesTab .service #rate, .service #duration, .service #subcategory{
-    display: inline-block;
-}
-.servicesTab  #lesson_categoryInput, #lesson_categoryEditInput{
-    height: 24px;
-    width: 125px;
-    font:12px arial;
-    margin-right:19px;
-}
-.servicesTab  #subcategoryInput, #subcategoryEditInput{
-    font: 12px arial;
-    height: 12px;
-    width: 116px;
-    margin-right:15px;
-    margin-bottom: 9px;
-}
-.servicesTab  #rateInput, #rateEditInput{
-    font: 12px arial;
-    height: 12px;
-    width: 66px;
-    margin-right: 14px;
-    margin-bottom: 9px;
-}
+
+
+
 .servicesTab  .updateService{
     background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat left center;
     border:none;
