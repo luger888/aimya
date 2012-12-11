@@ -18,12 +18,12 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
             'duration' => $array['duration'],
             'rate' => $array['rate'],
             'add_info' => $array['add_info'],
-            'video' => (int)$userId,
-            'feedback' => (int)$userId,
-            'notes' => (int)$userId,
-            'sender_status' => (int)$userId,
-            'recipient_status' => (int)$userId,
-            'booking_status' => (int)$userId,
+            'video' => (int)$array['video'],
+            'feedback' => (int)$array['feedback'],
+            'notes' => (int)$array['notes'],
+            'sender_status' => 1,
+            'recipient_status' => 0,
+            'booking_status' => 0,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
 
@@ -33,18 +33,60 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
 
     }
 
-    public function getBookingByUser($user_id)
+    public function getBookingByUser($userId)
     {
-        $user_id = (int)$user_id;
+        $userId = (int)$userId;
         $row = $this->fetchAll(
             $this->select()
-                ->where($this->getAdapter()->quoteInto('sender_id=?' , (int)$user_id))
+                ->where($this->getAdapter()->quoteInto('sender_id=?' , (int)$userId))
+                ->orWhere($this->getAdapter()->quoteInto('recipient_id=?' , (int)$userId))
         );
         if (!$row) {
-            throw new Exception("There is no element with ID: $user_id");
+            throw new Exception("There is no element with ID: $userId");
         }
+        $row = $row->toArray();
+        return $row;
+    }
 
-        return $row->toArray();
+    public function rejectBooking($id, $recipientId)
+    {
+        $where = array(
+
+            $this->getAdapter()->quoteInto('id =?', (int)$id),
+            $this->getAdapter()->quoteInto('recipient_id=?', (int)$recipientId)
+
+        );
+        $this->delete($where);
+
+    }
+
+    public function approveBooking($id, $recipientId)
+    {
+
+        $data = array(
+            'recipient_status' => 1,
+            'booking_status' => 1,
+            'updated_at' => date('Y-m-d H:i:s')
+        );
+        $where = array(
+
+            $this->getAdapter()->quoteInto('id=?', (int)$id),
+            $this->getAdapter()->quoteInto('recipient_id=?', (int)$recipientId)
+
+        );
+        $this->update($data, $where);
+
+    }
+
+    public function getNewBookingCount($userId) {
+        $userId = (int)$userId;
+
+        $data = $this->select()
+            ->from($this->_name, array('id'=>'COUNT(*)'))
+            ->where('recipient_status=?' , 0)
+            ->where('recipient_id=?', $userId);
+
+        return $data->query()->fetch();
     }
 
 }

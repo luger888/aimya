@@ -65,9 +65,7 @@ package com.aimialesson.UI.views
 		
 		override protected function updateDisplayList ( unscaledWidth : Number, unscaledHeight : Number ) : void {
 			super.updateDisplayList(unscaledWidth, unscaledHeight);
-			debug ("PresentationUI:updateDisplayList");
 			if (!currentImage || !currentImage.loaderInfo) return;
-			debug ("PresentationUI:updateDisplayList1");
 			if (this.height / this.width > currentImage.loaderInfo.height / currentImage.loaderInfo.width){
 				currentImage.width = this.width - 20;
 				currentImage.height = currentImage.loaderInfo.height * ( ( this.width - 20 ) / currentImage.loaderInfo.width );				 

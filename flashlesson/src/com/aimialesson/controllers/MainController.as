@@ -5,6 +5,7 @@ package com.aimialesson.controllers
 	import com.aimialesson.model.Main;
 	import com.aimialesson.model.Notes;
 	import com.aimialesson.model.Presentation;
+	import com.aimialesson.model.User;
 	
 	import flash.events.EventDispatcher;
 	
@@ -61,18 +62,36 @@ package com.aimialesson.controllers
 		public function onAppEvent ( event : AppEvent ) : void {
 			debug("MainController:onAppEvent");
 			switch (event.type){
-				case (AppEvent.STOP_SESSION):	endLesson();	
+				case (AppEvent.STOP_SESSION):	soController.setSOProperty('endLesson' + User.getInstance().userID, "true");
+												//endLesson();	
 												break;
+				case (AppEvent.CHANGE_SCREEN_STATE):	soController.setSOProperty('screenMode' + User.getInstance().userID, (!Main.getInstance().fsMode).toString());	
+														break;
 			}
 		}
 		
-		private function endLesson() : void {
+		public function onMediaEvent ( event : MediaEvent ) : void {
+			debug("MainController:onAppEvent");
+			switch (event.type){
+				case (MediaEvent.MY_CAM_PAUSE_TOGGLE ):	streamController.myVideoMute();	
+														break;
+				case (MediaEvent.MY_MIC_PAUSE_TOGGLE ):	streamController.myAudioMute();	
+														break;
+				case (MediaEvent.PARTNER_CAM_PAUSE_TOGGLE ):	streamController.partnerVideoMute();	
+																break;
+				case (MediaEvent.PARTNER_MIC_PAUSE_TOGGLE ):	streamController.partnerAudioMute();	
+																break;
+			}
+		}
+		
+		private function endLesson(initiator_id:String) : void {
 			soController.closeConnect();
 			streamController.closeConnect();
 			// the sharedobject can not send the end lesson message that fast. need to close netconnect somehow later...
-		//	mediaController.closeConnect();
+			mediaController.closeConnect();
 			presentationController.clearImages();
 			Notes.getInstance().clear();
+			Main.getInstance().lesson_finished_by = initiator_id;
 			Main.getInstance().lesson_finished = true;
 		}
 		
@@ -85,6 +104,7 @@ package com.aimialesson.controllers
 			debug("MainController:onServiceEvent");
 			switch (event.type) {
 				case (ServiceEvent.GET_PRESENTATION_IMAGES_RESULT) : 	presentationController.setImages(event.value as ArrayCollection);
+																		soController.setSOProperty("imagesUrls", event.value as ArrayCollection);
 																		break;
 				case (ServiceEvent.SESSION_IS_STARTED_RESULT) : 		Main.getInstance().session_started = true;
 																		break;
@@ -102,7 +122,7 @@ package com.aimialesson.controllers
 			switch (event.type) {
 				/*case (SOEvent.SHARED_PRESENTATION_UPLOADED) : 	presentationController.setImages(event.value as ArrayCollection);
 																break;*/
-				case (SharedObjectEvent.LESSON_IS_FINISHED) : 	endLesson();
+				case (SharedObjectEvent.LESSON_IS_FINISHED) : 	endLesson(event.value);
 					break;
 			}
 		}

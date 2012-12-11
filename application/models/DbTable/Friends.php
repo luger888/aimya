@@ -8,16 +8,17 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
     public function getUserRelations($userId)
     {
         $userId = (int)$userId;
+
         $row = $this->fetchAll(
             $this->select()
-                ->where('(' . $this->getAdapter()->quoteInto('sender_id=?' , $userId) . ') OR (' . $this->getAdapter()->quoteInto('friend_id=?' , $userId) . ')')
+                ->where($this->getAdapter()->quoteInto('sender_id=?' , $userId) . ' OR ' . $this->getAdapter()->quoteInto('friend_id=?' , $userId))
                 ->where('sender_status=?' , 1)
                 ->where('recipient_status=?' , 1)
+                ->group('id')
         );
         if (!$row) {
             throw new Exception("There is no element with ID: $userId");
         }
-
         return $row->toArray();
     }
 
@@ -47,6 +48,23 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
             ->from($this->_name)
             ->where('(' . $this->getAdapter()->quoteInto('sender_id=?' , $userId) . ' AND ' . $this->getAdapter()->quoteInto('friend_id=?' , $friendId) . ') OR (' . $this->getAdapter()->quoteInto('sender_id=?' , $friendId) . ' AND ' . $this->getAdapter()->quoteInto('friend_id=?' , $userId) . ')')
             ->where('(' . $this->getAdapter()->quoteInto('sender_status=?' , 1) . ') AND (' . $this->getAdapter()->quoteInto('recipient_status=?' , 1) . ')');
+        $result = $data->query()->fetch();
+
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public function isPending($friendId)
+    {
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+
+        $data = $this->select()
+            ->from($this->_name)
+            ->where($this->getAdapter()->quoteInto('sender_id=?' , $userId) . ' AND ' . $this->getAdapter()->quoteInto('friend_id=?' , $friendId) . ' AND ' . $this->getAdapter()->quoteInto('sender_status=?' , 1) . ' AND ' . $this->getAdapter()->quoteInto('recipient_status=?' , 0));
         $result = $data->query()->fetch();
 
         if ($result) {

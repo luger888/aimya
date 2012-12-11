@@ -15,8 +15,8 @@
 		]]>
 	</fx:Script>
 	<!--s:Scroller  height="100%" width="100%" horizontalScrollPolicy="off" verticalScrollPolicy="on"-->
-		<s:Group  width="870" height="1190">
-			<s:Rect width="870" height="1190">
+		<s:Group  width="{Main.NORMAL_WIDTH}" height="{Main.NORMAL_HEIGHT}">
+			<s:Rect width="{Main.NORMAL_WIDTH}" height="{Main.NORMAL_HEIGHT}">
 				<s:fill>
 					<s:SolidColor color="0xffffff" />
 				</s:fill>
@@ -49,8 +49,8 @@
 					<s:BitmapImage source="@Embed('flashassets/1page_middle_separator.png')" width="100%" />
 					<s:BitmapImage source="@Embed('flashassets/2page_middle_separator.png')" width="100%" />
 				</s:VGroup>
-				<views:MainUIContainer id="notesContainer" width="100%" height="100%" />
-				<!--s:TextArea id="debugger"  width="100%" height="200"/-->
+				<!--views:MainUIContainer id="notesContainer" width="100%" height="100%" /-->
+				<s:TextArea id="debugger"  width="100%" height="200"/>
 			</s:VGroup>
 		</s:Group>
 	<!--/s:Scroller-->

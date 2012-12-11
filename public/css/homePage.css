@@ -1,0 +1,371 @@
+/*==============================
+  Page
+===============================*/
+body {
+    background: #d5e4ad;
+}
+
+#page {
+    min-height: 100%;
+    background: url(../images/bg/home-light.jpg) no-repeat center 0 #d5e4ad;
+    min-width: 980px;
+    position: relative;
+}
+
+#globalWrapper {
+    min-height: 100px;
+    background: url(../images/bg/top.png) repeat-x 0 0;
+}
+
+#wrapper{
+    margin: 0 auto;
+    width: 935px;
+    position: relative;
+}
+
+/*=================================================
+  header
+=================================================*/
+
+#header {
+    height: 88px;
+}
+
+#logo {
+    float: left;
+    background-image: url('../images/logo/home-logo.png');
+    width: 196px;
+    height: 61px;
+    display: block;
+    margin-top: 15px;
+}
+
+#loginFormHolder {
+    float: right;
+}
+
+.signInButton {
+    float: right;
+    margin-top: 30px;
+}
+
+.signInBox {
+    float: right;
+    width: 185px;
+    margin-top: 14px;
+    margin-left: 0px;
+}
+
+.btnLogin {
+    background: url(../images/elem/buttons-grid-1.png) no-repeat 0 0;
+    width: 65px;
+    height: 30px;
+    line-height: 32px;
+    font-size: 12px;
+    color: #fff;
+    text-decoration: none;
+    border: 0;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-family: 'dosissemibold';
+    text-align: center;
+    display: inline-block;
+}
+
+input.btnLogin {
+    padding-bottom: 2px;
+}
+
+.btnLogin:hover {
+    background-position: 0 -30px;
+}
+
+#loginFormHolder label.title {
+    display: block;
+    font-size: 11px;
+    line-height: 13px;
+    color: #fffefe;
+    text-decoration: none;
+    text-shadow: 1px 1px 1px #555;
+    padding-left: 1px;
+    padding-bottom: 6px;
+}
+
+#loginFormHolder a {
+    font-size: 11px;
+    line-height: 14px;
+    color: #bedf6d;
+    text-decoration: none;
+    text-shadow: 1px 1px 1px #555;
+}
+
+.loginRemember {
+    padding: 3px 0 0 0;
+}
+
+.loginRemember .checkboxBox {
+    float: left;
+}
+
+.loginRemember label {
+    float: left;
+    font-size: 11px;
+    line-height: 14px;
+    color: #d0e4a0;
+    text-decoration: none;
+    padding-left: 6px;
+}
+
+
+#loginFormHolder input[type="text"], #loginFormHolder input[type="password"]{
+    border: 1px solid #536e10;
+    width: 156px;
+    height: 22px;
+    padding: 0 5px;
+    margin: 0;
+    border: 1px solid #536e10;
+    box-shadow: 0 0 3px #a9c067;
+    background: #fff;
+    font-size: 12px;
+    line-height: 22px;
+    color: #000;
+    text-decoration: none;
+    display: block;
+    position: relative;
+    margin-bottom: 3px;
+}
+
+/*=================================================
+  Footer
+=================================================*/
+
+#footer {
+    position: absolute;
+    bottom: 17px;
+    left: 0;
+    width: 100%;
+}
+
+#footer, #footer div, #footer p, #footer a {
+    font-size: 11px;
+    line-height: 16px;
+    color: #aab786;
+    text-decoration: none;
+}
+
+#footer p {
+    padding: 0;
+}
+
+#footer a:hover {
+    text-decoration: underline;
+}
+
+.copyright {
+
+    width: 935px;
+    margin: 0 auto;
+}
+
+/*=================================================
+  Content
+=================================================*/
+
+#content {
+    padding: 65px 0 60px 0;
+}
+
+.homeLeftCol {
+    float: left;
+    width: 430px;
+}
+
+.homeRightCol {
+    float: right;
+    width: 364px;
+}
+
+.radioBoxWrapper {
+    width: 12px;
+    height: 14px;
+    display: inline-block;
+    background: url('../images/elem/redoibox.png') no-repeat -14px 1px;
+}
+
+.radioBoxWrapper.checked {
+    background-position: 0px 1px;
+}
+
+.homePage h2 {
+    font-size: 15px;
+    line-height: 18px;
+    color: #3e5602;
+    text-decoration: none;
+    font-family: 'dosissemibold';
+    text-transform: uppercase;
+    text-shadow: 0px 1px 2px #fff;
+    background: url(../images/elem/home-title-line.png) no-repeat 0 bottom;
+    padding: 0 0 27px 5px;
+    margin-bottom: 11px;
+}
+
+.homeTxt {
+    padding: 0 0 25px 7px;
+}
+
+.homeTxt, .homeTxt p, .homeTxt a {
+    font-size: 12px;
+    line-height: 18px;
+    color: #2e3911;
+    text-decoration: none;
+}
+
+.homeTxt p {
+    padding-bottom: 0;
+}
+
+.homeGalleryHold {
+    width: 373px;
+    height: 262px;
+    padding: 14px 13px 14px 14px;
+    background: url(../images/bg/home-gallery-bg.png) no-repeat 0 0;
+}
+
+.homeGalleryBox {
+    overflow: hidden;
+    width: 373px;
+    height: 262px; 
+}
+
+#registrationFormHolder {
+    padding: 0 0 0 37px;
+}
+
+.memberButtons {
+    padding: 4px 0 32px 0;
+}
+
+.memberButtons label {
+    display: inline-block;
+    width: 135px;
+    height: 30px;
+    position: relative;
+    float: left;
+    margin-right: 22px;
+}
+
+.memberButtons .radioBoxWrapper {
+    width: 135px;
+    height: 30px;
+    display: inline-block;
+    position: relative;
+    background: url(../images/elem/buttons-grid-1.png) no-repeat 0 -121px;
+}
+
+.memberButtons .radioBoxWrapper.checked {
+    background-position: 0 -61px;
+}
+
+.memberButtons .radioBoxWrapper:hover {
+    background-position: 0 -91px;
+}
+
+.memberButtons label .txt {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 135px;
+    height: 30px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 30px;
+    color: #324a0c;
+    text-decoration: none;
+    font-family: 'dosissemibold';
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.memberButtons label .checked .txt, .memberButtons label:hover .txt {
+    color: #fff;
+    text-shadow: 1px 1px 1px #666;
+}
+
+.formRow {
+    padding-bottom: 14px;
+}
+
+.formRow dt {
+    float: left;
+    width: 113px;
+    padding-right: 10px;
+}
+
+.formRow dd {
+    float: left;
+    width: 168px;
+}
+
+.formRow dt label {
+    font-size: 12px;
+    line-height: 34px;
+    color: #324503;
+    text-decoration: none;
+    text-shadow: 1px 1px 1px #fff;
+}
+
+.formRow  input[type="text"], .formRow input[type="password"]{
+    border: 1px solid #95a861;
+    width: 156px;
+    height: 31px;
+    background: #fff;
+    font-size: 12px;
+    line-height: 30px;
+    color: #000;
+    display: block;
+}
+
+.formRow.radio dt label {
+    line-height: 14px;
+}
+
+.formRow.radio dd {
+    line-height: 14px;
+}
+
+.formRow.radio dd label {
+    font-size: 12px;
+    line-height: 16px;
+    color: #1b2602;
+    text-decoration: none;
+    text-shadow: 1px 1px 1px #fff;
+    padding-right: 20px;
+    text-transform: capitalize;
+    float: left;
+}
+
+.formRow.radio .radioBoxWrapper {
+    float: left;
+    margin-right: 5px;
+}
+
+.buttonRow .button {
+    width: 83px;
+    float: right;
+    margin-right: 37px;
+}
+
+.buttonRow .socialIcons {
+    float: left;
+    padding-top: 11px;
+}
+
+.error {
+    clear: both;
+    padding-left: 123px;
+    padding-top: 5px;
+    font-size: 11px;
+    line-height: 13px;
+    color: #9e4444;
+    text-decoration: none;
+}

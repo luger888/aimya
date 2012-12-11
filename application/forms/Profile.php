@@ -113,6 +113,7 @@ class Application_Form_Profile extends Zend_Form
         $submit = new Zend_Form_Element_Submit('saveProfile');
         $submit ->setLabel('save')
              ->setAttrib('id', 'saveProfile')
+             ->setAttrib('class', 'button-2 save')
             ->setDecorators($this->basicDecorators);
 
 

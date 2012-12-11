@@ -21,7 +21,8 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
         $this->view->headScript()->appendFile('../../js/jquery/resume/objective.js');
         $this->view->headScript()->appendFile('../../js/jquery/jquery.uploadifive.js');
         $servicesModel = new Application_Model_DbTable_ServiceDetail();
-        $this->view->services = $servicesModel->getServiceByUser($identity->id);
+        $this->view->services = $servicesModel->getServiceByUser($identity->id, 1);
+        $this->view->servicesOffered = $servicesModel->getServiceByUser($identity->id, 2);
 
         $profileModel = new Application_Model_Profile();
         $this->view->profile = $profileModel->getProfileAccount($identity->id);

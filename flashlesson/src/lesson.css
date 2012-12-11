@@ -54,6 +54,22 @@
 	fontSize: 12;
 }
 
+.ButtonYesLabelStyle {
+	fontFamily: Dosis;
+	fontStyle: normal;
+	fontWeight: normal;
+	color: #334911;
+	fontSize: 12;
+}
+
+.ButtonNoLabelStyle {
+	fontFamily: Dosis;
+	fontStyle: normal;
+	fontWeight: normal;
+	color: #FFFFFF;
+	fontSize: 12;
+}
+
 .HeaderStyle {
 	fontFamily: Arial;
 	fontStyle: normal;
@@ -95,7 +111,7 @@
 }
 
 .TimeValueStyle {
-	fontFamily: Times New Roman;
+	fontFamily: Arial;
 	fontStyle: normal;
 	fontWeight: normal;
 	color: #C24040;
@@ -150,6 +166,23 @@
 	fontSize: 12;
 }
 
+.PopUpTitleStyle {
+	fontFamily: Arial;
+	fontStyle: normal;
+	fontWeight: normal;
+	color: #fefefe;
+	fontSize: 12;
+}
+
+.PopUpTextStyle {
+	fontFamily: Arial;
+	fontStyle: normal;
+	fontWeight: normal;
+	color: #000000;
+	fontSize: 12;
+}
+
+
 views|NotesUI {
 	skinClass: ClassReference("com.aimialesson.UI.skins.NotesSkin");
 }
@@ -167,4 +200,11 @@ views|PresentationUI {
 }
 views|UploadUI {
 	skinClass: ClassReference("com.aimialesson.UI.skins.UploadSkin");
+}
+
+.title{
+	font-family :Verdana;
+	font-size :10;
+	font-weight :bold;
+	color :#ffffff;
 }
