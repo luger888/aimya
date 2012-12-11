@@ -26,9 +26,10 @@ class Application_Model_DbTable_Message extends Application_Model_DbTable_Abstra
 
     }
 
-    public function readMessage($messageId){
+    public function readMessage($messageId, $recipientId){
         $where   = array(
             $this->getAdapter()->quoteInto('id=?', (int)$messageId),
+            $this->getAdapter()->quoteInto('recipient_id=?', (int)$recipientId)
         );
         $data = array(
             'recipient_status'=> 1,
@@ -124,6 +125,29 @@ class Application_Model_DbTable_Message extends Application_Model_DbTable_Abstra
         $data = $this->select()
             ->from($this->_name)
             ->where('id=?' , $messageId)
+            ->where('recipient_id=?', $userId);
+
+        return $data->query()->fetch();
+    }
+
+    public function getMessage($messageId, $userId) {
+        $userId = (int)$userId;
+        $messageId = (int)$messageId;
+
+        $data = $this->select()
+            ->from($this->_name)
+            ->where('id=?' , $messageId)
+            ->where('recipient_id=?', $userId);
+
+        return $data->query()->fetch();
+    }
+
+    public function getNewMessagesCount($userId) {
+        $userId = (int)$userId;
+
+        $data = $this->select()
+            ->from($this->_name, array('id'=>'COUNT(*)'))
+            ->where('recipient_status=?' , 0)
             ->where('recipient_id=?', $userId);
 
         return $data->query()->fetch();

@@ -3,7 +3,7 @@
 function saveExperience(){
         var id = $(this).nextAll('input[type=hidden]:first').val();
 
-    $('#file_upload').uploadifive('upload');
+//    $('#file_upload').uploadifive('upload');
    var experience = $('#experience').val();
     $.post(
 

@@ -42,8 +42,8 @@ class Application_Model_Profile
         $UserModel = new Application_Model_DbTable_Users();
         $friends = array();
         foreach($userRelations as $value){
-
-           $friends[]= $UserModel->getUserInfo($value['friend_id']);
+           $friendId = ($user_id == $value['friend_id']) ? $value['sender_id'] : $value['friend_id'];
+           $friends[]= $UserModel->getUserInfo($friendId);
         }
         return $friends;//get friends firstname, lastname,username, id
 

@@ -9,17 +9,24 @@
     $this->addHelperPath("ZendX/JQuery/View/Helper", "ZendX_JQuery_View_Helper");
     ?>
     <?php  echo $this->jQuery(); ?>
-    <?php $this->headLink()->appendStylesheet('/twitter/css/bootstrap.css');?>
+
+    <?php $this->headLink()->appendStylesheet('/css/reset.css');?>
+    <?php $this->headLink()->appendStylesheet('/css/fonts.css');?>
+    <?php $this->headLink()->appendStylesheet('/css/homePage.css');?>
     <?php $this->headLink()->appendStylesheet('http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css');?>
+
     <?php $this->headScript()->appendFile('/js/jquery/jquery-ui-1.9.1.custom.min.js');?>
     <?php $this->headScript()->appendFile('/js/jquery/customCheckboxRadio.js');?>
     <?php $this->headScript()->appendFile('/js/jquery/cookieJquery.js');?>
     <?php $this->headScript()->appendFile('/js/jquery/main.js');?>
-    <?php $this->headLink()->appendStylesheet('/css/mainPage.css');?>
-    <?php $this->headScript()->appendFile('/twitter/js/bootstrap.js');?>
-
     <?php echo $this->headScript();?>
     <?php echo $this->headLink();?>
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="/css/ie.css" type="text/css" media="all" />
+    <![endif]-->
+    <!--[if lt IE 9]>
+     <script type="text/javascript" src="/js/jquery/PIE.js"></script>
+    <![endif]-->
 </head>
 <body>
 <?php
@@ -29,61 +36,67 @@ $controllerName = $front->getRequest()->getControllerName();
 ?>
 <!-- CONTENT -->
 
-<div id="wrapper" class="clearfix">
+<div id="page" class="clearfix">
+<div id="globalWrapper" class="clearfix">
+    
+    <div id="wrapper" class="clearfix">
 
-    <!-- HEADER & NAVIGATION -->
-    <div class="row-fluid header clearfix">
-        <div class="mainHeader clearfix">
-            <div class="logo">
-                <a href="index" class="bigLogoImg" title="Home"></a>
-            </div>
-        <!-- LOGIN -->
-        <?php
-        echo "
+        <div id="header" class="clearfix">
+            <a href="index" id="logo" title="Home page"></a>
 
-        <div id='loginFormHolder'>
-            <form id='signIn' action='user/login' name='signIn'  method='post'>
-            <div class='signInButton'>
-                {$this->login['login']}<br>
-            </div><!--End signInButton-->
-            <div class='signInBox'>
-                <label class='title'>Password:</label>
-                {$this->login['password']}
-                <a href='#'>Forgot your password?</a>
-            </div><!--End signInBox-->
-            <div class='signInBox'>
-                <label class='title'>Login or email:</label>
-                {$this->login['username']}
-                <div class='loginRemember clearfix'>
-                    <span class='checkboxBox'>{$this->login['remember']}</span>
-                    <label>Keep me signed in</label>
-                </div><!--End loginRemember-->
-            </div><!--End signInBox-->
-            </form>
+            <!-- LOGIN -->
+            <?php
+            echo "
+            <div id='loginFormHolder'>
+                <form id='signIn' action='user/login' name='signIn'  method='post'>
+                <div class='signInButton'>
+                    {$this->login['login']}
+                </div><!--End signInButton-->
+                <div class='signInBox'>
+                    <label class='title'>Password:</label>
+                    {$this->login['password']}
+                    <a href='#'>Forgot your password?</a>
+                </div><!--End signInBox-->
+                <div class='signInBox'>
+                    <label class='title'>Login or email:</label>
+                    {$this->login['username']}
+                    <div class='loginRemember clearfix'>
+                        <span class='checkboxBox'>{$this->login['remember']}</span>
+                        <label>Keep me signed in</label>
+                    </div><!--End loginRemember-->
+                </div><!--End signInBox-->
+                </form>
+            </div>";
+            ?>
             <!-- END /LOGIN -->
-        </div>
-    <!-- /span3 -->";
-        ?>
-        </div>
-    </div>
-    <!-- END of HEADER & NAVIGATION  -->
-    <div class="mainContent">
-    <div class="messages">
-        <?php echo $this->flashMessages();?>
-    </div>
+        </div><!--End header-->
 
-      <?php  echo $this->layout()->content;?>
+        
+        <div id="content" class="homePage clearfix">
+            
+            <div class="messages clearfix">
+                <?php echo $this->flashMessages();?>
+            </div><!--End messages-->
+
+              <?php  echo $this->layout()->content;?>
 
 
-</div>
-</div><!--end wrapper-->
-<div class='footer'>
+        </div><!--End content-->
+
+    </div><!--End wrapper-->
+
+</div><!--End globalWrapper-->
+
+<div id='footer' class="clearfix">
     <div class="copyright">
-    Copyright 2012 Aimya<br>
-    Created by Svitla.com
-    </div>
-</div>
+        <p>Copyright 2012 Aimya</p>
+        <p>Created by <a href="#" title="Svitla Systems">Svitla.com</a></p>
+    </div><!--End copyright-->
+</div><!--End footer--> 
+   
+</div><!--End page-->
 
-<!--END of CONTENT-->
+
+
 </body>
 </html>
