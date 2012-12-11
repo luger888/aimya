@@ -24,11 +24,19 @@
             success: function(result) {
                 //flashObf = jQuery('#flash_element');
                 if(result.flashSize == 1) {
-                    //jQuery('#flash_element').remove();
+                    $('#flash_element').html('');
                     jQuery('.accountWrapper').hide();
                     jQuery('.footer').hide();
                     jQuery('.leftBg').hide();
+                    $('#flash_div').show();
                     jQuery('#flash_div').append(element);
+                } else {
+                    $('#flash_div').html('');
+                    $('#flash_div').hide();
+                    jQuery('.accountWrapper').show();
+                    jQuery('.footer').show();
+                    jQuery('.leftBg').show();
+                    jQuery('#flash_element').append(element);
                 }
             }
         });
@@ -53,11 +61,11 @@
         //flashObf = jQuery('#flash_element');
         if(flashType == 1) {
             $('#flash_element').html('');
-           jQuery('.accountWrapper').hide();
-           jQuery('.footer').hide();
-           jQuery('.leftBg').hide();
+            jQuery('.accountWrapper').hide();
+            jQuery('.footer').hide();
+            jQuery('.leftBg').hide();
             $('#flash_div').show();
-           jQuery('#flash_div').append(element);
+            jQuery('#flash_div').append(element);
         } else{
             $('#flash_div').html('');
             $('#flash_div').hide();
