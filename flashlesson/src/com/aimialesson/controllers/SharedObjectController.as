@@ -46,7 +46,6 @@ package com.aimialesson.controllers
 		
 		public function initStates () : void {
 			debug("initModels:");
-			
 			for (var prop:String in so.data) 
 			{
 				debug("prop "+prop+" = "+so.data[prop]);
@@ -76,8 +75,13 @@ package com.aimialesson.controllers
 				partnerIsOnlineTimer.reset();
 				partnerIsOnlineTimer.start();
 			}*/
-			if (so.data['endLesson'] == "true"){
-				dispatchEvent( new SharedObjectEvent ( SharedObjectEvent.LESSON_IS_FINISHED ) );
+			if (so.data['endLesson' + User.getInstance().partnerID] == "true"){
+				//setSOProperty('endLesson', "false");
+				dispatchEvent( new SharedObjectEvent ( SharedObjectEvent.LESSON_IS_FINISHED, User.getInstance().partnerName  ) );
+			}
+			if (so.data['endLesson' + User.getInstance().userID] == "true"){
+				//setSOProperty('endLesson', "false");
+				dispatchEvent( new SharedObjectEvent ( SharedObjectEvent.LESSON_IS_FINISHED, User.getInstance().userName  ) );
 			}
 			if (so.data['screenMode' + User.getInstance().userID] == "true"){
 				// hack for usual case (not for refreshing on maximize mode in webkit based browsers etc...)
@@ -91,11 +95,13 @@ package com.aimialesson.controllers
 		
 		public function closeConnect():void {
 //			
-			setSOProperty('endLesson', "true");
-//			so.clear();
-//			so.close();
+//			setSOProperty('endLesson', "true");
 			userIsOnlineTimer.stop();
 			partnerIsOnlineTimer.stop();
+			User.getInstance().partnerIsOnline = false;
+			User.getInstance().isOnline = false;
+			so.clear();
+			so.close();
 		}
 
 		public function setSOProperty(name:String, value:Object):void {
@@ -133,17 +139,21 @@ package com.aimialesson.controllers
 												break;
 					case "imageN"			:	Presentation.getInstance().currentImageNumber = so.data['imageN'];
 												break;
-					case 'User' + User.getInstance().partnerID + 'isOnline' : if (so.data[changedList[i].name] == "true"){
+					case 'User' + User.getInstance().partnerID + 'isOnline' : if (so.data[changedList[i].namez] == "true"){
 																					setSOProperty('User' + User.getInstance().partnerID + 'isOnline', "false");
 																					User.getInstance().partnerIsOnline = true;
 																					partnerIsOnlineTimer.reset();
 																					partnerIsOnlineTimer.start();
 																				}
 																				break;
-					case 'endLesson'		:	if (so.data['endLesson'] == "true"){
-													dispatchEvent( new SharedObjectEvent ( SharedObjectEvent.LESSON_IS_FINISHED ) );
-												}
-												break;
+					case 'endLesson'  + User.getInstance().partnerID		:	if (so.data[changedList[i].name] == "true"){
+																					dispatchEvent( new SharedObjectEvent ( SharedObjectEvent.LESSON_IS_FINISHED, User.getInstance().partnerName ) );
+																				}
+																				break;
+					case 'endLesson'  + User.getInstance().userID		:	if (so.data[changedList[i].name] == "true"){
+																					dispatchEvent( new SharedObjectEvent ( SharedObjectEvent.LESSON_IS_FINISHED, User.getInstance().userName ) );
+																				}
+																				break;
 					case 'screenMode' + User.getInstance().userID	:	if (so.data[changedList[i].name] == "true"){
 																			Main.getInstance().fsMode = true;   
 																		} else {

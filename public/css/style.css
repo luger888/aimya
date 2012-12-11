@@ -482,29 +482,9 @@ font:15px dosis-semibold-middle;
     font: 700 12px arial;
     margin:11px 0 30px 3px;
 }
-.servicesTab .service #rate, .service #duration, .service #subcategory{
-    display: inline-block;
-}
-.servicesTab  #lesson_categoryInput, #lesson_categoryEditInput{
-    height: 24px;
-    width: 125px;
-    font:12px arial;
-    margin-right:19px;
-}
-.servicesTab  #subcategoryInput, #subcategoryEditInput{
-    font: 12px arial;
-    height: 12px;
-    width: 116px;
-    margin-right:15px;
-    margin-bottom: 9px;
-}
-.servicesTab  #rateInput, #rateEditInput{
-    font: 12px arial;
-    height: 12px;
-    width: 66px;
-    margin-right: 14px;
-    margin-bottom: 9px;
-}
+
+
+
 .servicesTab  .updateService{
     background: url('../img/design/accountLayout/glyphicons/save.png') no-repeat left center;
     border:none;
@@ -2185,9 +2165,7 @@ ul.messageTabs{
 .ui-timepicker-rtl{ direction: rtl; }
 .ui-timepicker-rtl dl { text-align: right; }
 .ui-timepicker-rtl dl dd { margin: 0 65px 10px 10px; }
-#booking{
-    display:none;
-}
+
 
 .profileTab .leftNavigation .newMessagesCount {
     background: url("../img/design/accountLayout/glyphicons/alertMessage.png") no-repeat scroll 0 53% transparent;
@@ -2213,11 +2191,4 @@ ul.messageTabs{
     padding-left: 4px;
     position: absolute;
     width: 20px;
-}
-/* FULL CALENDAR JQUERY CSS*/
-.fc-event-focusName, .fc-event-time{
-    float:left;
-}
-.fc-event-rate, .fc-event-content-confirm, .fc-event-content-approve, .fc-event-content-reject{
-    float:right;
 }

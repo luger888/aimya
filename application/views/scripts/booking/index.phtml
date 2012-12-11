@@ -1,180 +1,282 @@
-<div id="dialog-form" title="Booking">
-    <?php echo $this->bookingForm;?>
-</div>
-<input type="button" id="bookLesson" value="book lesson">
-<script type='text/javascript'>
-    jQuery(document).ready(function () {
-        var date = new Date();
-        var d = date.getDate();
-        var m = date.getMonth();
-        var y = date.getFullYear();
+<style>
+        /* FULL CALENDAR JQUERY CSS*/
+    #booking {
+        display: none;
+    }
 
-        jQuery('#calendar').fullCalendar({
-            editable:true,
-            disableDragging:true,
-            disableResizing:true,
-            allDay:false,
-            header:{
-                left:'title',
-                center:' agendaDay, month',
-                right:'today,  prev, next'
-            },
-            dayClick:function (date, allDay, jsEvent, view) {
-                jQuery('#calendar').fullCalendar('changeView', 'agendaDay');
-                jQuery('#calendar').fullCalendar('gotoDate', date);
+    .fc-event-focusName, .fc-event-time {
+        float: left;
+    }
 
-            },
-            eventClick:function (event, element) {
-                var view = jQuery('#calendar').fullCalendar('getView');
-                if (view.name == 'agendaDay') { // if clicked on event while in agendaDay
-                } else {
+    .fc-event-rate, .fc-event-content-confirm, .fc-event-content-approve, .fc-event-content-reject {
+        float: right;
+    }
+
+    .fc-widget-header, .fc-widget-content {
+        border: 1px solid #9EB668;
+    }
+
+    .fc-border-separate thead {
+        text-transform: uppercase;
+    }
+
+    .fc-border-separate thead tr th {
+        padding: 5px;
+        background-color: #f0f9e6;
+        font: 12px 'dosissemibold';
+        color: #2e3a12;
+    }
+
+    .fc-border-separate tbody td {
+        background-color: #FCFFF6;
+    }
+
+    .fc-border-separate tbody td.fc-other-month {
+        background-color: white;
+    }
+
+    .fc-today {
+        background-color: #E5F9C8 !important;
+    }
+
+    .fc-today .fc-day-number {
+        color: #719511;
+    }
+
+    .fc-button-prev {
+        background: url('../../../../public/img/design/accountLayout/glyphicons/fc-button-next.png');
+    }
+
+    .ui-dialog-titlebar {
+        display: none
+    }
+
+    ul li {
+        text-decoration: none;
+    }
+
+    #dialog-form .mainBooking {
+        padding: 15px;
+    }
+    .formRow div{
+        float:left;
+    }
+    #started_at{
+        width:150px;
+    }
+    .formRow .label{
+        width:100px;
+    }
+    .formRow textarea{
+        width:269px;
+    }
+</style>
+<div class="mainCalendar mainContainer clearfix">
+    <div class="shadowSeparator"></div>
+    <div id="dialog-form">
+        <div class="mainBooking">
+            <div class="shadowSeparator"></div>
+            <div class="header">BOOKING:</div>
+            <form method="post" action="" id = "booking">
+                <div class="formRow clearfix">
+                    <div class = "label">Select User:</div>  <div><?php echo $this->bookingForm->recipiend_id;?></div></div>
+                <div class="formRow clearfix">
+                    <div class = "label">Select Date:</div> <div><?php echo $this->bookingForm->started_at;?></div></div>
+                <div class="formRow clearfix">
+                    <div class = "label">Focus Name:</div> <div><?php echo $this->bookingForm->focus_name;?></div></div>
+                <div class="formRow clearfix">
+                    <div class = "label">Lesson Time:</div> <div><?php echo $this->bookingForm->duration;?></div><div>Rate:</div><div><?php echo $this->bookingForm->rate;?></div></div>
+                <div class="formRow clearfix">
+                    <div class = "label">Video Recording:</div> <div><?php echo $this->bookingForm->video;?></div></div>
+                <div class="formRow clearfix">
+                    <div class = "label">Feedback:</div> <div><?php echo $this->bookingForm->feedback;?></div></div>
+                <div class="formRow clearfix">
+                    <div class = "label">Notes Copy:</div> <div><?php echo $this->bookingForm->notes;?></div></div>
+                <div class="formRow clearfix">
+                    <div class = "label">Info:</div> <div><?php echo $this->bookingForm->add_info;?></div></div>
+                <?php echo $this->bookingForm->sendBooking;?>
+            </form>
+
+        </div>
+    </div>
+    <input type="button" id="bookLesson" value="book lesson">
+    <script type='text/javascript'>
+        jQuery(document).ready(function () {
+            var date = new Date();
+            var d = date.getDate();
+            var m = date.getMonth();
+            var y = date.getFullYear();
+
+            jQuery('#calendar').fullCalendar({
+                editable:true,
+                disableDragging:true,
+                disableResizing:true,
+                allDay:false,
+                header:{
+                    left:'title',
+                    center:' agendaDay, month',
+                    right:'today,  prev, next'
+                },
+                dayClick:function (date, allDay, jsEvent, view) {
                     jQuery('#calendar').fullCalendar('changeView', 'agendaDay');
-                    jQuery('#calendar').fullCalendar('gotoDate', event.start);
-                }
+                    jQuery('#calendar').fullCalendar('gotoDate', date);
 
-            },
+                },
+                eventClick:function (event, element) {
+                    var view = jQuery('#calendar').fullCalendar('getView');
+                    if (view.name == 'agendaDay') { // if clicked on event while in agendaDay
+                    } else {
+                        jQuery('#calendar').fullCalendar('changeView', 'agendaDay');
+                        jQuery('#calendar').fullCalendar('gotoDate', event.start);
+                    }
 
-            events:function (start, end, callback) {
-                jQuery("body").append('<div class="loadingIcon"></div>');
-                $.ajax({
-                    cache:false,
-                    url:'booking/index',
-                    success:function (msg) {
-                        jQuery('.loadingIcon').remove();
-                        var events = [];
-                        for (var c = 0; c < msg.booking.length; c++) {
-                            if(msg.booking[c].recipient_status == '1' ){
-                                var eventColor = '#7da028';
-                            }else{
-                                eventColor = '#F1D93C';
+                },
+
+                events:function (start, end, callback) {
+                    jQuery("body").append('<div class="loadingIcon"></div>');
+                    $.ajax({
+                        cache:false,
+                        url:'booking/index',
+                        success:function (msg) {
+                            jQuery('.loadingIcon').remove();
+                            var events = [];
+                            for (var c = 0; c < msg.booking.length; c++) {
+                                if (msg.booking[c].recipient_status == '1') {
+                                    var eventColor = '#7da028';
+                                } else {
+                                    eventColor = '#F1D93C';
+                                }
+
+
+                                events.push({
+                                    title:msg.booking[c].focus_name,
+                                    start:msg.booking[c].started_at,
+                                    started_at:msg.booking[c].started_at,
+                                    recipient_id:msg.booking[c].recipient_id,
+                                    recipient_status:msg.booking[c].recipient_status,
+                                    add_info:msg.booking[c].add_info,
+                                    rate:msg.booking[c].rate,
+                                    duration:msg.booking[c].duration,
+                                    video:msg.booking[c].video,
+                                    feedback:msg.booking[c].feedback,
+                                    notes:msg.booking[c].notes,
+                                    sender_id:msg.booking[c].sender_id + "",
+                                    booking_id:msg.booking[c].id + "",
+                                    user_id:msg.id,
+                                    allDay:false,
+                                    color:eventColor
+
+                                });
                             }
+                            callback(events);
 
-
-                            events.push({
-                                title:msg.booking[c].focus_name,
-                                start:msg.booking[c].started_at,
-                                started_at:msg.booking[c].started_at,
-                                recipient_id:msg.booking[c].recipient_id,
-                                recipient_status:msg.booking[c].recipient_status,
-                                add_info:msg.booking[c].add_info,
-                                rate:msg.booking[c].rate,
-                                duration:msg.booking[c].duration,
-                                video:msg.booking[c].video,
-                                feedback:msg.booking[c].feedback,
-                                notes:msg.booking[c].notes,
-                                sender_id:msg.booking[c].sender_id+ "",
-                                booking_id:msg.booking[c].id+ "",
-                                user_id:msg.id,
-                                allDay:false,
-                                color: eventColor
-
-                            });
                         }
-                        callback(events);
+                    });
+                },
+                eventRender:function (event, element) {
+                    var view = jQuery('#calendar').fullCalendar('getView');
+                    if (view.name == 'agendaDay') { // render event in agendaDay
+                        if (event.duration == '0') {
+                            var duration = 'lesson';
+                        } else {
+                            duration = event.duration + ' min';
+                        }
+                        element.find(".fc-event-head").append('<div class ="fc-event-focusName"> ' + event.title + '</div>');
+                        element.find(".fc-event-head").append('<div class = "fc-event-rate">$' + event.rate + ' / ' + duration + '</div>');
+                        element.find(".fc-event-content").append('<div class = "fc-event-content-description">' + event.add_info + '</div>');
+                        element.find(".fc-event-content").append('<div class = "fc-event-content-requested">Requested:' + event.sender_id + '</div>');
 
-                    }
-                });
-            },
-            eventRender: function(event, element){
-                var view = jQuery('#calendar').fullCalendar('getView');
-                if (view.name == 'agendaDay') { // render event in agendaDay
-                    element.find(".fc-event-head").append('<div class ="fc-event-focusName"> ' + event.title + '</div>');
-                    element.find(".fc-event-head").append('<div class = "fc-event-rate">$' +event.rate + ' / '+ event.duration +'</div>');
-                    element.find(".fc-event-content").append('<div class = "fc-event-content-description">' +event.add_info + '</div>');
-                    element.find(".fc-event-content").append('<div class = "fc-event-content-requested">Requested:' +event.sender_id + '</div>');
-
-                    if (event.recipient_status == '0' && event.user_id == event.recipient_id) {
-                        element.find(".fc-event-content").append('<div id ="rejectBooking" onclick="rejectBooking(this)"  class="fc-event-content-reject">Reject</div>');
-                        element.find(".fc-event-content").append('<div id ="confirmBooking" onclick="confirmBooking(this)"  class = "fc-event-content-confirm">Confirm</div>');
-                        element.find(".fc-event-content").append('<input type = "hidden" id = "booking_id"  value = ' + event.booking_id + ' >');
-                        element.find(".fc-event-content").append('<input type = "hidden" id = "sender_id"  value = ' + event.sender_id + ' >');
-                    }else if(event.recipient_status == '1'){
-                        element.find(".fc-event-content").append('<div class="fc-event-content-confirm">Approved</div>');
+                        if (event.recipient_status == '0' && event.user_id == event.recipient_id) {
+                            element.find(".fc-event-content").append('<div id ="rejectBooking" onclick="rejectBooking(this)"  class="fc-event-content-reject">Reject</div>');
+                            element.find(".fc-event-content").append('<div id ="confirmBooking" onclick="confirmBooking(this)"  class = "fc-event-content-confirm">Confirm</div>');
+                            element.find(".fc-event-content").append('<input type = "hidden" id = "booking_id"  value = ' + event.booking_id + ' >');
+                            element.find(".fc-event-content").append('<input type = "hidden" id = "sender_id"  value = ' + event.sender_id + ' >');
+                        } else if (event.recipient_status == '1') {
+                            element.find(".fc-event-content").append('<div class="fc-event-content-confirm">Approved</div>');
+                        }
                     }
                 }
-            }
 
 
-        });
+            });
 
 //FORM DIALOG JQUERY
 
-        $("#dialog-form").dialog({
-            autoOpen:false,
-            height:450,
-            width:400,
-            modal:true,
-            resizable:false,
-            close: function() {
+            $("#dialog-form").dialog({
+                autoOpen:false,
+                height:550,
+                width:450,
+                modal:true,
+                resizable:false,
+                close:function () {
 
-            }
-        });
+                }
+            });
 
 
-        $('#started_at').datetimepicker();
+            $('#started_at').datetimepicker();
 
-        $('#sendBooking').click(function () {
+            $('#sendBooking').click(function () {
+                $.post(
+
+                    "/booking/add/0/controller%3D%3Ebooking/1/action%3D%3Eadd", {
+                        "recipient_id":$('#recipiend_id').val(),
+                        "focus_name":$('#focus_name').val(),
+                        "started_at":$('#started_at').val(),
+                        "duration":$('#duration').val(),
+                        "feedback":$('#feedback:checked').val() || 0,
+                        "video":$('#video:checked').val() || 0,
+                        "notes":$('#notes:checked').val() || 0,
+                        "rate":$('#rate').val(),
+                        "add_info":$('#add_info').val()
+
+
+                    },
+                    function (response) {
+                        window.location.reload();
+
+                    });
+
+                return false;
+            });
+            $('#bookLesson').click(function () {
+                jQuery('#booking').css('display', 'block');
+                $("#dialog-form form").get(0).reset();
+                $("#dialog-form").dialog("open");
+
+            });
+        });//END JQUERY
+
+        function confirmBooking(e) {
             $.post(
 
-                "/booking/add/0/controller%3D%3Ebooking/1/action%3D%3Eadd", {
-                    "recipient_id":$('#recipiend_id').val(),
-                    "focus_name":$('#focus_name').val(),
-                    "started_at":$('#started_at').val(),
-                    "duration":$('#duration').val(),
-                    "feedback":$('#feedback:checked').val() || 0,
-                    "video":$('#video:checked').val() || 0,
-                    "notes":$('#notes:checked').val() || 0,
-                    "rate":$('#rate').val(),
-                    "add_info":$('#add_info').val()
-
-
+                "/booking/approve/0/controller%3D%3Ebooking/1/action%3D%3Eapprove", {
+                    "booking_id":$('#booking_id').val()
                 },
                 function (response) {
-                    window.location.reload();
+                    $(e).parents('.fc-event-inner').find('.fc-event-head').css('background-color', 'green');
+                    $(e).parents('.fc-event-inner').css('background-color', 'green');
+                    $(e).parents('.fc-event').css('border-color', 'green');
+                    $(e).parents('.fc-event-inner').css('border-color', 'green');
+                    $(e).parent().append('<div class="fc-event-content-approve">Approved</div>');
+                    $(e).parents('.fc-event').find('.fc-event-content-reject').remove();
+                    $(e).parents('.fc-event').find('.fc-event-content-confirm').remove();
+
 
                 });
+        }
+        function rejectBooking(e) {
+            $.post(
 
-            return false;
-        });
-        $('#bookLesson').click(function () {
-            jQuery('#booking').css('display', 'block');
-            $("#dialog-form form").get(0).reset();
-            $("#dialog-form").dialog("open");
+                "/booking/reject/0/controller%3D%3Ebooking/1/action%3D%3Ereject", {
+                    "booking_id":$('#booking_id').val()
+                },
+                function (response) {
+                    e.parentNode.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode.parentNode);
+                });
+        }
 
-        });
-    });//END JQUERY
+    </script>
 
-    function confirmBooking(e) {
-        $.post(
-
-            "/booking/approve/0/controller%3D%3Ebooking/1/action%3D%3Eapprove", {
-                "booking_id": $('#booking_id').val()
-            },
-            function (response) {
-                $(e).parents('.fc-event-inner').find('.fc-event-head').css('background-color', 'green');
-                $(e).parents('.fc-event-inner').css('background-color', 'green');
-                $(e).parents('.fc-event').css('border-color', 'green');
-                $(e).parents('.fc-event-inner').css('border-color', 'green');
-                $(e).parent().append('<div class="fc-event-content-approve">Approved</div>');
-                $(e).parents('.fc-event').find('.fc-event-content-reject').remove();
-                $(e).parents('.fc-event').find('.fc-event-content-confirm').remove();
-
-
-
-            });
-    }
-    function rejectBooking(e) {
-        $.post(
-
-            "/booking/reject/0/controller%3D%3Ebooking/1/action%3D%3Ereject", {
-                "booking_id":$('#booking_id').val()
-            },
-            function (response) {
-                e.parentNode.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode.parentNode);
-            });
-    }
-
-</script>
-
-<div id='calendar'></div>
-
+    <div id='calendar'></div>
+</div>

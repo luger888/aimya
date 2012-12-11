@@ -49,10 +49,9 @@
 					<s:BitmapImage source="@Embed('flashassets/1page_middle_separator.png')" width="100%" />
 					<s:BitmapImage source="@Embed('flashassets/2page_middle_separator.png')" width="100%" />
 				</s:VGroup>
-				<views:MainUIContainer id="notesContainer" width="100%" height="100%" />
-				<!--s:TextArea id="debugger"  width="100%" height="200"/-->
+				<!--views:MainUIContainer id="notesContainer" width="100%" height="100%" /-->
+				<s:TextArea id="debugger"  width="100%" height="200"/>
 			</s:VGroup>
-			<elements:EndLesson id="endLesson" width="100%" height="100%" />
 		</s:Group>
 	<!--/s:Scroller-->
 </s:Skin>

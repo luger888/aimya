@@ -14,14 +14,20 @@
 	name=userName, type=spark.components.RichText, required=true
 	-->
 	<s:VGroup width="100%" gap="5">
-		<s:HGroup gap="10" >
-			<s:RichText id="userNameField" text="{hostComponent.userName}" styleName="NameStyle" width="100"/>
+		<s:HGroup gap="10" verticalAlign="middle" >
+			<s:RichText id="userNameField" text="{hostComponent.userName}" styleName="NameStyle"/>
 			<elements:Lamp online="{hostComponent.userOnline}" id="lamp" />
 		</s:HGroup>
 		<s:RichText id="userRoleField" text="{hostComponent.userRole}" styleName="RoleStyle"/>
-		<s:Group width="{bg.width}" height="{bg.height}">
-			<s:BitmapImage id="bg" source="@Embed('flashassets/video_background.png')" />
-			<mx:UIComponent id="videoContainter"  left="8" right="8" top="8" bottom="8"/>
+		<s:Group width="{bg.width - 8}" height="{bg.height - 8}">
+			<s:Group top="-15"  right="0" width="30">
+				<s:Button verticalCenter="0" left="0" id="muteMicBtn" visible="{!hostComponent.muteMic}" includeInLayout="{!hostComponent.muteMic}" skinClass="com.aimialesson.UI.skins.elements.MuteMicBtnSkin" useHandCursor="true" buttonMode="true" />
+				<s:Button verticalCenter="0" left="0" id="unMuteMicBtn" visible="{hostComponent.muteMic}" includeInLayout="{hostComponent.muteMic}" skinClass="com.aimialesson.UI.skins.elements.UnMuteMicBtnSkin" useHandCursor="true" buttonMode="true" />
+				<s:Button verticalCenter="0" right="0" id="muteCamBtn" visible="{!hostComponent.muteCam}" includeInLayout="{!hostComponent.muteCam}" skinClass="com.aimialesson.UI.skins.elements.MuteCamBtnSkin" useHandCursor="true" buttonMode="true" />
+				<s:Button verticalCenter="0" right="0" id="unMuteCamBtn" visible="{hostComponent.muteCam}" includeInLayout="{hostComponent.muteCam}" skinClass="com.aimialesson.UI.skins.elements.UnMuteCamBtnSkin" useHandCursor="true" buttonMode="true" />
+			</s:Group>
+			<s:BitmapImage id="bg" source="@Embed('flashassets/video_background.png')" left="-4" top="-4"/>
+			<mx:UIComponent id="videoContainter"  left="4" right="4" top="4" bottom="4" visible="{!hostComponent.muteCam}"/>
 		</s:Group>
 	</s:VGroup>
 	<fx:Script>

@@ -354,7 +354,10 @@ input.button-2 {
 .button-2.edit.disable {
     background-position: 0 -39px;
 }
-
+.disable{
+    pointer-events: none;
+    cursor: default;
+}
 /*------left Side Bar ------------------------------------------------*/
 
 .profileTab {
@@ -843,14 +846,17 @@ input.button-2 {
 
 #addService {
     padding-top: 2px;
-}
 
-#serviceForm .formRow span {
+}
+#serviceForm, #serviceRequestForm{
+    display:none;
+}
+.serviceForm .formRow span {
     float: left;
     margin-right: 20px;
 }
 
-#serviceForm .formRow .s-116 {
+.serviceForm .formRow .s-116 {
     margin-right: 30px;
 }
 
@@ -870,7 +876,7 @@ input.button-2 {
     width: 66px;
 }
 
-#serviceForm .formRow .txt {
+.serviceForm .formRow .txt {
     line-height: 24px;
     margin-right: 32px;
 }
