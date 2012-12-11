@@ -83,9 +83,9 @@ class Application_Model_DbTable_Lesson extends Application_Model_DbTable_Abstrac
         );
 
         if($isCreator) {
-            $data[] = $this->getAdapter()->quoteInto('creator_flash_size=?', (int)$flashSize);
+            $data['creator_flash_size'] = (int)$flashSize;
         } else {
-            $data[] = $this->getAdapter()->quoteInto('partner_flash_size=?', (int)$flashSize);
+            $data['partner_flash_size'] = (int)$flashSize;
         }
 
         $result = $this->update($data, $where);

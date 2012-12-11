@@ -6,7 +6,7 @@
             <?php if($this->flashObj == NULL):?>
                 <h4><?php echo 'There are no any active lessons'; ?></h4>
             <?php else:?>
-                <?php echo $this->flashObj; ?>
+                <?php //echo $this->flashObj; ?>
             <?php endif;?>
         </div>
     </div>
@@ -14,6 +14,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
 
+        var element = '<?php echo $this->flashObj; ?>';
         $.ajax({
             url: "/lesson/getsize",
             type: "post",
@@ -21,13 +22,13 @@
                 'lesson_id' : '<?php echo $this->responce['id']?>'
             },
             success: function(result) {
-                flashObf = jQuery('#flash_element');
+                //flashObf = jQuery('#flash_element');
                 if(result.flashSize == 1) {
                     //jQuery('#flash_element').remove();
                     jQuery('.accountWrapper').hide();
                     jQuery('.footer').hide();
                     jQuery('.leftBg').hide();
-                    jQuery('#flash_div').append(flashObf);
+                    jQuery('#flash_div').append(element);
                 }
             }
         });
@@ -35,29 +36,35 @@
 
     function changeFlashLayout(flashType) {
 
+        var element = '<?php echo $this->flashObj; ?>';
         $.ajax({
             url: "/lesson/updatesize",
             type: "post",
             data: {
-                'lesson_id' : '<?php echo $this->responce['id']?>',
-                'flash_size': flashType
+                'flash_size': flashType,
+                'lesson_id': '<?php echo $this->responce['id']?>'
+
             },
             success: function(result) {
-                
+
             }
         });
-        flashObf = jQuery('#flash_element');
+
+        //flashObf = jQuery('#flash_element');
         if(flashType == 1) {
+            $('#flash_element').html('');
            jQuery('.accountWrapper').hide();
            jQuery('.footer').hide();
            jQuery('.leftBg').hide();
-           jQuery('#flash_div').append(flashObf);
-        } else if(flashType == 0) {
-            jQuery('#flash_element').remove();
+            $('#flash_div').show();
+           jQuery('#flash_div').append(element);
+        } else{
+            $('#flash_div').html('');
+            $('#flash_div').hide();
             jQuery('.accountWrapper').show();
             jQuery('.footer').show();
             jQuery('.leftBg').show();
-            jQuery('#flashContainer').append(flashObf);
+            jQuery('#flash_element').append(element);
         }
 
     }
