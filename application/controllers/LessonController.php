@@ -13,6 +13,8 @@ class LessonController extends Zend_Controller_Action
             ->addActionContext('upload', 'json')
             ->addActionContext('files', 'json')
             ->addActionContext('end', 'json')
+            ->addActionContext('updatesize', 'json')
+            ->addActionContext('getsize', 'json')
             ->initContext('json');
     }
 
@@ -82,6 +84,7 @@ class LessonController extends Zend_Controller_Action
             $baseLink = $broker->baseLink();
 
             $userModel = new Application_Model_DbTable_Users();
+            $lessonTable = new Application_Model_DbTable_Users();
             $myStreamName = '';
             $partnerStreamName = '';
             $teacherId = '';
@@ -262,6 +265,41 @@ class LessonController extends Zend_Controller_Action
                     $this->view->answer = 'failure';
                 }
 
+            }
+        }
+    }
+
+    public function updatesizeAction() {
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        if ($this->getRequest()->isXmlHttpRequest()) {
+            if($this->getRequest()->getParam('lesson_id') && $this->getRequest()->getParam('flash_size')){
+                $flashSize = $this->getRequest()->getParam('flash_size');
+                $lessonId = $this->getRequest()->getParam('lesson_id');
+                $lessonTable = new Application_Model_DbTable_Lesson();
+                $status = $lessonTable->changeFlashSize($lessonId, $flashSize);
+                if($status) {
+                    $this->view->answer = 'success';
+                } else {
+                    $this->view->answer = 'failure';
+                }
+
+            }
+        }
+    }
+
+    public function getsizeAction() {
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        if ($this->getRequest()->isXmlHttpRequest()) {
+            if($this->getRequest()->getParam('lesson_id')){
+                $lessonId = $this->getRequest()->getParam('lesson_id');
+                $lessonTable = new Application_Model_DbTable_Lesson();
+                $size = $lessonTable->getFlashSize($lessonId);
+
+                $this->view->flashSize = $size;
             }
         }
     }

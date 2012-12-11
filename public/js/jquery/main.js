@@ -226,7 +226,7 @@ function massDelete(current_action) {
             'message_ids' : idsString,
             'current_action' : current_action
         },
-        complete: function(result) {
+        success: function(result) {
             jQuery('.loadingIcon').remove();
             //alert(result.messageCount.toSource())
             //window.location.href = "/message/" + action + "/current_action/" + action;
