@@ -5,7 +5,7 @@ class LessonController extends Zend_Controller_Action
 
     public function init()
     {
-        $this->_helper->layout->setLayout("layoutInner");
+        $this->_helper->layout->setLayout("layoutInside");
         $this->_helper->AjaxContext()
             ->addActionContext('setup', 'json')
             ->addActionContext('index', 'json')
@@ -84,12 +84,18 @@ class LessonController extends Zend_Controller_Action
             $userModel = new Application_Model_DbTable_Users();
             $myStreamName = '';
             $partnerStreamName = '';
-            if((Zend_Auth::getInstance()->getIdentity()->role == 2)) {
+            $teacherId = '';
+            $studentId = '';
+            if((Zend_Auth::getInstance()->getIdentity()->role > 1)) {
                 $teacher = $userModel->getItem($result['partner_id']);
+                $teacherId = $result['creator_id'];
+                $studentId = $result['partner_id'];
                 $myStreamName = $result['creator_stream_name'];
                 $partnerStreamName = $result['partner_stream_name'];
             } else {
                 $teacher = $userModel->getItem($result['creator_id']);
+                $teacherId = $result['partner_id'];
+                $studentId = $result['creator_id'];
                 $myStreamName = $result['partner_stream_name'];
                 $partnerStreamName = $result['creator_stream_name'];
             }
@@ -110,13 +116,13 @@ class LessonController extends Zend_Controller_Action
                     <param name="bgcolor" value="#ffffff" />
                     <param name="allowScriptAccess" value="sameDomain" />
                     <param name="allowFullScreen" value="true" />
-                    <param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&partnerName=' . $teacher['username'] . '&userRole=' . Zend_Auth::getInstance()->getIdentity()->role . '&myStreamName=' . $myStreamName . '&partnerStreamName=' . $partnerStreamName . '&soID=' . $result['so_id'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink .'&lesson_id=' . $result['id'] .'">
+                    <param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&partnerName=' . $teacher['username'] . '&teacherId=' . $teacherId . '&studentId=' . $studentId . '&userRole=' . Zend_Auth::getInstance()->getIdentity()->role . '&myStreamName=' . $myStreamName . '&partnerStreamName=' . $partnerStreamName . '&soID=' . $result['so_id'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink .'&lesson_id=' . $result['id'] .'">
                     <object type="application/x-shockwave-flash" data="' . $baseLink . '/flash/aimia_lesson.swf" width="100%" height="100%">
                         <param name="quality" value="high" />
                         <param name="bgcolor" value="#ffffff" />
                         <param name="allowScriptAccess" value="sameDomain" />
                         <param name="allowFullScreen" value="true" />
-                        <param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&partnerName=' . $teacher['username'] . '&userRole=' . Zend_Auth::getInstance()->getIdentity()->role . '&myStreamName=' . $myStreamName . '&partnerStreamName=' . $partnerStreamName . '&soID=' . $result['so_id'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink .'&lesson_id=' . $result['id'] .'">
+                        <param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&partnerName=' . $teacher['username'] . '&teacherId=' . $teacherId . '&studentId=' . $studentId . '&userRole=' . Zend_Auth::getInstance()->getIdentity()->role . '&myStreamName=' . $myStreamName . '&partnerStreamName=' . $partnerStreamName . '&soID=' . $result['so_id'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink .'&lesson_id=' . $result['id'] .'">
                         <p>
                             Either scripts and active content are not permitted to run or Adobe Flash Player version
                             10.0.0 or greater is not installed.

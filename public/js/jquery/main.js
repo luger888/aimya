@@ -169,15 +169,14 @@ $(document).ready(function() {
             success: function(result) {
                 bookingCount = parseInt(result.bookingCount.id);
                 if(bookingCount > 0) {
-                    if($(".newMessagesCount").length) $(".newMessagesCount").remove();
+                    if($(".newBookingCount").length) $(".newBookingCount").remove();
                     inboxLi = $('.leftNavigation').find($('a[href="/booking"]')).parent();
-                    inboxLi.append('<span class="newMessagesCount">' + bookingCount + '</span>')
+                    inboxLi.append('<span class="newBookingCount">' + bookingCount + '</span>')
                 }
             }
         });
         return false;
     }
-
 });
 //function uploadify(){
 //    //$(function() {
@@ -210,6 +209,34 @@ function messageAction(element_id, action) {
 
 
     return false;
+}
+
+function massDelete(current_action) {
+    jQuery("body").append('<div class="loadingIcon"></div>');
+    ids = [];
+    $('.messageCheckboxes:checkbox:checked').each(function() {
+        ids.push($(this).val());
+    });
+
+    idsString = ids.toString();
+    $.ajax({
+        url: "/message/massdelete",
+        type: "post",
+        data: {
+            'message_ids' : idsString,
+            'current_action' : current_action
+        },
+        complete: function(result) {
+            jQuery('.loadingIcon').remove();
+            //alert(result.messageCount.toSource())
+            //window.location.href = "/message/" + action + "/current_action/" + action;
+        }
+    });
+
+}
+
+function massArchive() {
+
 }
 
 /*---PIE - add css3 to ie 7 and ie8 -----------------------------------------------------*/
