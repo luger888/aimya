@@ -2,8 +2,12 @@ package com.aimialesson.UI.views
 {
 	import com.aimialesson.UI.skins.NotesSkin;
 	import com.aimialesson.UI.views.elements.*;
+	import com.aimialesson.UI.views.windows.FinishPopUpWindow;
+	import com.aimialesson.UI.views.windows.PopUpWindow;
 	import com.aimialesson.events.AppEvent;
+	import com.aimialesson.events.MediaEvent;
 	import com.aimialesson.events.NotesEvent;
+	import com.aimialesson.events.PopUpEvent;
 	import com.aimialesson.events.PresentationEvent;
 	import com.aimialesson.model.Main;
 	
@@ -11,14 +15,17 @@ package com.aimialesson.UI.views
 	import flash.events.EventDispatcher;
 	import flash.events.MouseEvent;
 	
+	import mx.containers.Tile;
 	import mx.controls.Alert;
 	import mx.core.Container;
 	import mx.core.FlexGlobals;
 	import mx.core.UIComponent;
 	import mx.events.CloseEvent;
+	import mx.managers.PopUpManager;
 	
 	import spark.components.Button;
 	import spark.components.TextArea;
+	import spark.components.TitleWindow;
 	import spark.components.supportClasses.SkinnableComponent;
 	
 	[Event (name="moveToLeft", type="com.aimialesson.events.PresentationEvent")]
@@ -26,6 +33,10 @@ package com.aimialesson.UI.views
 	[Event (name="presentationUploaded", type="com.aimialesson.events.PresentationEvent")]
 	[Event (name="addNewLine", type="com.aimialesson.events.NotesEvent")]
 	[Event (name="changeScreenState", type="com.aimialesson.events.AppEvent")]
+	[Event (name="myCamPauseToggle", type="com.aimialesson.events.MediaEvent")]
+	[Event (name="myMicPauseToggle", type="com.aimialesson.events.MediaEvent")]
+	[Event (name="partnerCamPauseToggle", type="com.aimialesson.events.MediaEvent")]
+	[Event (name="partnerMicPauseToggle", type="com.aimialesson.events.MediaEvent")]
 	public class MainUI extends SkinnableComponent
 	{
 		[SkinPart (required="false")]
@@ -52,11 +63,11 @@ package com.aimialesson.UI.views
 		public var debugger:TextArea;
 		[SkinPart (required="false")]
 		public var endLesson:EndLesson;
-		
 		[Bindable]
 		public var stage_width:int;
 		[Bindable]
 		public var stage_height:int;
+		
 		
 		public function MainUI()
 		{
@@ -140,6 +151,10 @@ package com.aimialesson.UI.views
 		public function get videoChatUI () : VideoChatUI {
 			if (!videoChat) {
 				videoChat = new VideoChatUI();
+				videoChat.addEventListener( MediaEvent.MY_CAM_PAUSE_TOGGLE, onMediaEvent );
+				videoChat.addEventListener( MediaEvent.MY_MIC_PAUSE_TOGGLE, onMediaEvent );
+				videoChat.addEventListener( MediaEvent.PARTNER_CAM_PAUSE_TOGGLE, onMediaEvent );
+				videoChat.addEventListener( MediaEvent.PARTNER_MIC_PAUSE_TOGGLE, onMediaEvent );
 			}
 			return videoChat;
 		}
@@ -160,10 +175,10 @@ package com.aimialesson.UI.views
 			return remainingTime;
 		}
 		
-		private var onlineStudent:OnlineStudent;
-		public function get onlineStudentUI () : OnlineStudent {
+		private var onlineStudent:OnlineUser;
+		public function get onlineStudentUI () : OnlineUser {
 			if (!onlineStudent) {
-				onlineStudent = new OnlineStudent();
+				onlineStudent = new OnlineUser();
 			}
 			return onlineStudent;
 		}
@@ -175,6 +190,24 @@ package com.aimialesson.UI.views
 				totalTime = new TotalTime();
 			}
 			return totalTime;
+		}
+		
+		private var popup:PopUpWindow;
+		public function get popupUI () : PopUpWindow {
+			if (!popup) {
+				popup = new PopUpWindow();
+				popup.addEventListener(PopUpEvent.YES_POP_UP_BTN, onPopUpEvent);
+				popup.addEventListener(PopUpEvent.NO_POP_UP_BTN, onPopUpEvent);
+			}
+			return popup; 
+		}
+		
+		private var finishpopup:FinishPopUpWindow;
+		public function get finishpopupUI () : FinishPopUpWindow {
+			if (!finishpopup) {
+				finishpopup = new FinishPopUpWindow();
+			}
+			return finishpopup; 
 		}
 		
 		
@@ -190,23 +223,36 @@ package com.aimialesson.UI.views
 											break;
 				case (startSessionBtn):		dispatchEvent( new AppEvent ( AppEvent.START_SESSION ) );
 											break;
-				case (stopSessionBtn):		Alert.show("Are you sure you want to end the lesson?", "Alert",Alert.OK | Alert.CANCEL, this,	alertListener, null, Alert.OK);
+				case (stopSessionBtn):		//Alert.show("Are you sure you want to end the lesson?", "Alert",Alert.OK | Alert.CANCEL, this,	alertListener, null, Alert.OK);
+											//popup =  PopUpManager.createPopUp(this,PopUpWindow,true) as PopUpWindow;
+											
+											PopUpManager.addPopUp(popupUI,this, true);
+											PopUpManager.centerPopUp(popupUI);
+											
 											//dispatchEvent( new AppEvent ( AppEvent.STOP_SESSION ) );
 											break;
 			}			
 		}
 		
 		// Check to see if the OK button was pressed.
-		private function alertListener(eventObj:CloseEvent):void {
+		/*private function alertListener(eventObj:CloseEvent):void {
 			if (eventObj.detail==Alert.OK) {
 				dispatchEvent( new AppEvent ( AppEvent.STOP_SESSION ) );
-		//		onLessonFinished();
 			}
+		}*/
+		
+		private function onPopUpEvent ( event : PopUpEvent ) : void {
+			switch (event.type) {
+				case (PopUpEvent.YES_POP_UP_BTN)	:	dispatchEvent( new AppEvent ( AppEvent.STOP_SESSION ) );
+														break;
+			}
+			PopUpManager.removePopUp(popupUI);
 		}
 		
 		private function onLessonFinished ( event : Event  ) : void {
 			videoChat.onLessonFinished();
-			endLesson.visible = true;
+			PopUpManager.addPopUp(finishpopupUI, this, true);
+			PopUpManager.centerPopUp(finishpopupUI);
 		}
 		
 		private function onPresentationEvent ( event : PresentationEvent ) : void {
@@ -221,6 +267,11 @@ package com.aimialesson.UI.views
 		
 		private function onAppEvent ( event : AppEvent ) : void {
 			debug("MainUI:onAppEvent " + event.type);
+			this.dispatchEvent ( event );
+		}
+		
+		private function onMediaEvent ( event : MediaEvent ) : void {
+			debug("MainUI:onMediaEvent " + event.type);
 			this.dispatchEvent ( event );
 		}
 		
