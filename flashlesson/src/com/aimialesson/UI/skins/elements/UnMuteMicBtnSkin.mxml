@@ -44,6 +44,6 @@
         <s:State name="disabled" />
     </s:states>
 
-	<s:BitmapImage source="@Embed('flashassets/microphone.png')" y="-3" />
+	<s:BitmapImage source="@Embed('flashassets/microphone_active.png')" y="-3" />
 	
 </s:SparkSkin>

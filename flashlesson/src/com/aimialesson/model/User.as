@@ -15,7 +15,7 @@ package com.aimialesson.model
 		public function User() {
 		}
 		
-		private var _userName:String = "";
+		private var _userName:String = "Test User";
 		public function set userName ( value : String ) : void {
 			_userName = value;
 		}
@@ -47,7 +47,7 @@ package com.aimialesson.model
 			return _isOnline;
 		}
 		
-		private var _partnerName:String = "";
+		private var _partnerName:String = "Test Partner";
 		public function set partnerName ( value : String ) : void {
 			_partnerName = value;
 		}

@@ -62,6 +62,9 @@ package com.aimialesson.model
 		}
 		
 		[Bindable]
+		public var lesson_finished_by:String = "";
+		
+		[Bindable]
 		public var remainingTime:int = 0;
 		
 		[Bindable]

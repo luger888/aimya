@@ -1,5 +1,7 @@
 package com.aimialesson.model
 {
+	import flash.media.Camera;
+	import flash.media.Microphone;
 	import flash.net.NetConnection;
 	import flash.net.NetStream;
 
@@ -20,8 +22,16 @@ package com.aimialesson.model
 		public var videoSocketHost:String;
 		public var audioSocketPort:int;
 		public var videoSocketPort:int;
+		public var cam:Camera;
+		public var mic:Microphone;
+		[Bindable]
 		public var camPaused:Boolean = false;
+		[Bindable]
 		public var micPaused:Boolean = false;
+		[Bindable]
+		public var partnerCamPaused:Boolean = false;
+		[Bindable]
+		public var partnerMicPaused:Boolean = false;
 				
 		private static var instance:Media;
 		

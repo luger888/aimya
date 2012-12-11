@@ -86,6 +86,10 @@
 				mainUI.addEventListener(AppEvent.START_SESSION, seviceMap.onAppEvent);
 				mainUI.addEventListener(AppEvent.STOP_SESSION, seviceMap.onAppEvent);
 				mainUI.addEventListener(AppEvent.STOP_SESSION, mainController.onAppEvent);
+				mainUI.addEventListener(MediaEvent.MY_CAM_PAUSE_TOGGLE, mainController.onMediaEvent);
+				mainUI.addEventListener(MediaEvent.MY_MIC_PAUSE_TOGGLE, mainController.onMediaEvent);
+				mainUI.addEventListener(MediaEvent.PARTNER_CAM_PAUSE_TOGGLE, mainController.onMediaEvent);
+				mainUI.addEventListener(MediaEvent.PARTNER_MIC_PAUSE_TOGGLE, mainController.onMediaEvent);
 				//mainUI.addEventListener(AppEvent.CHANGE_SCREEN_STATE, seviceMap.onAppEvent);
 				mainUI.addEventListener(AppEvent.CHANGE_SCREEN_STATE, toggleFullScreen);
 			}

@@ -9,7 +9,11 @@
         [HostComponent("spark.components.Button")]
         ]]>
     </fx:Metadata>
-    
+    <fx:Script>
+		<![CDATA[
+			import com.aimialesson.model.Media;
+		]]>
+	</fx:Script>
     <fx:Script fb:purpose="styling">
         <![CDATA[         
             /* Define the skin elements that should not be colorized. 
@@ -27,7 +31,7 @@
                 
                 super.updateDisplayList(unscaledWidth, unscaledHeight);
             }
-            
+			            
         ]]>        
     </fx:Script>
     
@@ -39,6 +43,5 @@
         <s:State name="disabled" />
     </s:states>
 
-	<s:BitmapImage source="@Embed('flashassets/cam_sample.jpeg')" y="-3" width="30" height="30" scaleMode="letterbox"/>
-    
+	<s:BitmapImage source="@Embed('flashassets/camera.png')"  y="-3" />    
 </s:SparkSkin>

@@ -1,11 +1,10 @@
 package com.aimialesson.UI.views
 {
+	import com.aimialesson.events.MediaEvent;
 	import com.aimialesson.model.Main;
 	import com.aimialesson.model.Media;
 	
 	import flash.events.*;
-	import flash.media.Camera;
-	import flash.media.Microphone;
 	import flash.media.Video;
 	import flash.net.NetConnection;
 	import flash.net.NetStream;
@@ -18,21 +17,19 @@ package com.aimialesson.UI.views
 	import spark.components.TextArea;
 	import spark.components.supportClasses.SkinnableComponent;
 	
+	[Event (name="myCamPauseToggle", type="com.aimialesson.events.MediaEvent")]
+	[Event (name="myMicPauseToggle", type="com.aimialesson.events.MediaEvent")]
+	[Event (name="partnerCamPauseToggle", type="com.aimialesson.events.MediaEvent")]
+	[Event (name="partnerMicPauseToggle", type="com.aimialesson.events.MediaEvent")]
 	public class VideoChatUI extends SkinnableComponent
 	{
 		[SkinPart (required="true")]
 		public var myAimiaVideo:AimiaVideoUI;
 		[SkinPart (required="true")]
 		public var partnerAimiaVideo:AimiaVideoUI;
-		[SkinPart (required="true")]
-		public var muteMicBtn:Button;
-		[SkinPart (required="true")]
-		public var muteCamBtn:Button;
 
 		private var myNS:NetStream;
 		private var partnerNS:NetStream;
-		private var cam:Camera;
-		private var mic:Microphone;
 		public function VideoChatUI()
 		{
 			super();
@@ -40,23 +37,13 @@ package com.aimialesson.UI.views
 
 		override protected function partAdded(partName:String, instance:Object):void
 		{
-			if ( instance == muteMicBtn || instance == muteCamBtn ) {
-				(instance as Button).addEventListener(MouseEvent.CLICK, onBtnClick);
+			if ( instance == myAimiaVideo || instance == partnerAimiaVideo ){
+				(instance as AimiaVideoUI).addEventListener(MediaEvent.CAM_PAUSE_TOGGLE, onCamPause);
+				(instance as AimiaVideoUI).addEventListener(MediaEvent.MIC_PAUSE_TOGGLE, onMicPause);
 			}
 		}
 		override protected function partRemoved(partName:String, instance:Object):void {
-			if ( instance == muteMicBtn || instance == muteCamBtn ) {
-				(instance as Button).removeEventListener(MouseEvent.CLICK, onBtnClick);
-			}
-		}
 		
-		private function onBtnClick ( event : MouseEvent ) : void {
-			switch (event.target) {
-				case muteMicBtn	:	muteMic();
-					break;
-				case muteCamBtn	:	muteCam();
-					break;
-			}
 		}
 		
 		
@@ -69,70 +56,65 @@ package com.aimialesson.UI.views
 		}
 		
 		public function myVideoInit():void {
-			cam = Camera.getCamera();
-			mic = Microphone.getMicrophone();
-			if ( cam != null ) 
+			if ( Media.getInstance().cam != null ) 
 			{
-				cam.setMode(320, 240, 32);
-				cam.setQuality(0, 80);
-				Media.getInstance().myNetStream.attachCamera(cam);
-				myVideo.attachCamera(cam);
+				myVideo.attachCamera(Media.getInstance().cam);
 			}
-			if ( mic != null) 
-			{
-				Media.getInstance().myNetStream.attachAudio(mic);
-			}
-			//Media.getInstance().myNetStream.bufferTime = 3;
-			Media.getInstance().myNetStream.publish(Media.getInstance().myStreamName, "record");
 		}
 		
 		public function partnerVideoInit():void {
 			debug("VideoChat:partnerVideoInit");
-			Media.getInstance().partnerNetStream.play(Media.getInstance().partnerStreamName);
 			partnerVideo.attachNetStream(Media.getInstance().partnerNetStream);
-			Main.getInstance().addEventListener( Main.SESSION_STARTED_CHANGED, onSessionStartedChange );
 		}
 		
 		public function onLessonFinished () : void {
-			debug("VideoChat:onStopSession");
+			debug("VideoChat:onLessonFinished");
 			myVideo.clear();
 			myVideo.attachCamera(null);
 			partnerVideo.clear();
 			partnerVideo.attachNetStream(null);
 		}
 		
-		public function muteMic() : void {
-			debug("VideoChat:muteMic");
-			Media.getInstance().micPaused = !Media.getInstance().micPaused;
-			if (Media.getInstance().micPaused){
-				Media.getInstance().myNetStream.attachAudio(null);
-			} else {
-				Media.getInstance().myNetStream.attachAudio(mic);
+		private function onCamPause ( event : MediaEvent ) : void {
+			switch (event.target) {
+				case myAimiaVideo		:	this.dispatchEvent( new MediaEvent ( MediaEvent.MY_CAM_PAUSE_TOGGLE ) );
+											muteMyVideo();
+											break;
+				case partnerAimiaVideo	:	this.dispatchEvent( new MediaEvent ( MediaEvent.PARTNER_CAM_PAUSE_TOGGLE ) );
+											mutePartnerVideo();
+											break;
 			}
 		}
 		
-		public function muteCam() : void {
-			debug("VideoChat:muteCam");
-			Media.getInstance().camPaused = !Media.getInstance().camPaused;
+		private function onMicPause ( event : MediaEvent ) : void {
+			switch (event.target) {
+				case myAimiaVideo		:	this.dispatchEvent( new MediaEvent ( MediaEvent.MY_MIC_PAUSE_TOGGLE ) );
+											break;
+				case partnerAimiaVideo	:	this.dispatchEvent( new MediaEvent ( MediaEvent.PARTNER_MIC_PAUSE_TOGGLE ) );
+											break;
+			}
+		}
+		
+		public function muteMyVideo() : void {
+			debug("VideoChat:muteMyCam");
 			if (Media.getInstance().camPaused){
-				Media.getInstance().myNetStream.attachCamera(null);
 				myVideo.attachCamera(null);
-				myVideo.visible = false;
 				myVideo.clear();
 			} else {
-				myVideo.visible = true;
-				myVideo.attachCamera(cam);
-				Media.getInstance().myNetStream.attachCamera(cam);
+				myVideo.attachCamera(Media.getInstance().cam);
 			}
-			
 		}
 
-		
-		private function onSessionStartedChange (event:Event) : void {
-			if (Main.getInstance().session_started) Media.getInstance().partnerNetStream.play(Media.getInstance().partnerStreamName);
-			else Media.getInstance().partnerNetStream.pause();
+		public function mutePartnerVideo() : void {
+			debug("VideoChat:muteMyCam");
+			if (Media.getInstance().partnerCamPaused ){
+				partnerVideo.clear();
+				partnerVideo.attachNetStream(null);
+			} else {
+				partnerVideo.attachNetStream(Media.getInstance().partnerNetStream);
+			}
 		}
-		
+
 		private function debug (str:String):void {
 			if (Main.getInstance().debugger != null)
 				Main.getInstance().debugger.text += str + "\n";

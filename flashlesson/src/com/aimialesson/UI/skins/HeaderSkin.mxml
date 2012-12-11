@@ -19,7 +19,7 @@
 			<s:HorizontalLayout verticalAlign="top" />
 		</s:layout-->
 		<s:VGroup left="0" gap="15">
-			<elements:OnlineStudent />
+			<elements:OnlineUser />
 			<elements:RemainingTime />	
 		</s:VGroup>
 		<!--mx:Spacer width="50%" /-->

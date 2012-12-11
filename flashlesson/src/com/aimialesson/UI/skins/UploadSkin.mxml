@@ -16,10 +16,10 @@
 	<fx:Declarations>
 		<mx:NumberFormatter id="numberFormatter" />	
 	</fx:Declarations>
-	<s:Group  width="100%" height="100%">
+	<s:Group  width="100%" height="100%" >
 		<s:BitmapImage id="presantationBG" source="@Embed('flashassets/lesson_presentation_background.png')" left="0" />
-		<s:Button id="uploadBtn" label="Upload file" x="{presantationBG.width - uploadBtn.width}" y="{presantationBG.y + presantationBG.height + 5}" skinClass="com.aimialesson.UI.skins.elements.PresentationUploadBtnSkin" useHandCursor="true" buttonMode="true" enabled="{Main.getInstance().session_started}"/>
-		<elements:PresentationProgressBar id="progressBar" left="0" y="{presantationBG.y + presantationBG.height + 5}" width="{presantationBG.width - uploadBtn.width}"/>
+		<s:Button id="uploadBtn" label="Upload file" right="-3" bottom="-30" skinClass="com.aimialesson.UI.skins.elements.PresentationUploadBtnSkin" useHandCursor="true" buttonMode="true" enabled="{Main.getInstance().session_started}"/>
+		<elements:PresentationProgressBar id="progressBar" left="0" bottom="-30" width="{presantationBG.width - uploadBtn.width}"/>
 	</s:Group>
 	
 </s:Skin>
