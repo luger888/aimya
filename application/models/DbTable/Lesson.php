@@ -67,4 +67,73 @@ class Application_Model_DbTable_Lesson extends Application_Model_DbTable_Abstrac
 
     }
 
+    public function changeFlashSize($lessonId, $flashSize)
+    {
+
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+        $where   = array(
+            $this->getAdapter()->quoteInto('id=?', (int)$lessonId),
+        );
+        $isCreator = $this->isCreator($lessonId, $userId);
+
+
+        //Zend_Debug::dump($where);
+        $data = array(
+            'updated_at' => date('Y-m-d H:m:s')
+        );
+
+        if($isCreator) {
+            $data[] = $this->getAdapter()->quoteInto('creator_flash_size=?', (int)$flashSize);
+        } else {
+            $data[] = $this->getAdapter()->quoteInto('partner_flash_size=?', (int)$flashSize);
+        }
+
+        $result = $this->update($data, $where);
+
+        if($result) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public function getFlashSize($lessonId) {
+        $userId = (int)Zend_Auth::getInstance()->getIdentity()->id;
+        $lessonId = (int)$lessonId;
+        $field = '';
+        if($this->isCreator($lessonId, $userId)) {
+            $field = 'creator_flash_size';
+        } else {
+            $field = 'partner_flash_size';
+        }
+
+        $data = $this->select()
+            ->from($this->_name, array($field))
+            ->where('id=?' , $lessonId);
+
+        $result = $data->query()->fetch();
+
+        return $result[$field];
+    }
+
+    public function isCreator($lessonId, $userId) {
+        $userId = (int)$userId;
+        $lessonId = (int)$lessonId;
+
+        $data = $this->select()
+            ->from($this->_name)
+            ->where('id=?' , $lessonId)
+            ->where('(' . $this->getAdapter()->quoteInto('creator_id=?' , $userId) . ' OR ' . $this->getAdapter()->quoteInto('partner_id=?' , $userId) .') ')
+            ->where($this->getAdapter()->quoteInto('status=?' , 1));
+
+        $result = $data->query()->fetch();
+
+        if($result['creator_id'] == $userId) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
