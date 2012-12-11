@@ -19,7 +19,7 @@
         <s:State name="disabled" />
     </s:states>
     
-	<s:BitmapImage source="@Embed('flashassets/х.png')" x="0" y="0" />
-	<s:BitmapImage includeIn="over" source="@Embed('flashassets/х_active.png')" x="0" y="0" />
+	<s:BitmapImage source="@Embed('flashassets/x.png')" x="0" y="0" />
+	<s:BitmapImage includeIn="over" source="@Embed('flashassets/x_active.png')" x="0" y="0" />
     
 </s:SparkSkin>
