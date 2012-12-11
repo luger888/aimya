@@ -5,8 +5,8 @@
 <div class= "messageContent">
 	<div class="messageButtons clearfix">
     	<span class="msgBtn createNew" onclick="document.location='/message/send/'">Create New</span>
-    	<span class="msgBtn trash" onclick="document.location='/message/send/'">Move to Trash</span>
-    	<span class="msgBtn archived" onclick="document.location='/message/send/'">Move to Archived</span>
+    	<span class="msgBtn trash" onclick="massDelete('<?php echo $action ?>')">Move to Trash</span>
+    	<span class="msgBtn archived" onclick="massArchive('<?php echo $action ?>')" >Move to Archived</span>
 	</div>
     <div class = "userMessages">
     <table  class="">
@@ -34,7 +34,7 @@
                     }
 	                echo '
 	                    <tr>
-	                        <td style="width:800px"><input type="checkbox" id="' . $message['id'] . '">
+	                        <td style="width:800px"><input type="checkbox" class="messageCheckboxes" value="' . $message['id'] . '">
                                 <a href="/message/view/' . $message['id'] . $isNew . '">
                                     <span' . $classNew. '>'.$message['sender_id'].'</span>
                                     <span' . $classNew. '>'.$message['theme'].'</span>
