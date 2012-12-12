@@ -7,7 +7,7 @@ $(document).ready(function() {
 
     //---Styling radio and checkbox buttons--------------------------------------------------------------------------------
 
-    $('#remember').checkRadio({
+    $('input[type="checkbox"]').checkRadio({
         wrapperClass: 'checkboxWrapper',
         chekedClass: 'checked'
     });
@@ -20,7 +20,7 @@ $(document).ready(function() {
     $('.memberButtons label').each(function(){
         $(this).find( '.txt' ).appendTo($(this).find('.radioBoxWrapper'));
     });
-    
+
 
 
 

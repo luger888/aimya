@@ -1,29 +1,48 @@
+<script type="text/javascript">
+    $('input[type="checkbox"]').checkRadio({
+        wrapperClass:'checkboxWrapper',
+        chekedClass:'checked'
+    });
+</script>
+<div class="notificationsTab clearfix">
+    <form method='post' name='notifications' action='/account/notifications/'>
+    <div class="shadowSeparator clearfix">
+        <div class="shadowSeparatorBox clearfix">
+            <h1> I WANT TO:</h1>
+            <div class = 'notificationsAlertsBlock'>
+                <?php
+                echo $this->notificationsForm->alert;
+                ?>
+            </div>
+        </div>
+    </div>
+    <div class="shadowSeparator clearfix">
+        <div class="shadowSeparatorBox clearfix">
+            <h1> CHANGE AIMYA PASSWORD:</h1>
 
-<div class = "notificationsTab">
-    <div class="firstSeparator"></div>
-    <h5> I WANT TO:</h5>
-
-<form method = 'post' name = 'notifications' action='/account/notifications/'>
-
-    <?php
-        echo $this->notificationsForm->alert;
-    ?>
-<div class = "middleSeparator"></div>
-<h5> CHANGE AIMYA PASSWORD:</h5>
-    <div class = "passwordRecoveryBlock">
-        <?php echo '<span>Old Password: </span>'. $this->notificationsForm->oldPassword; ?><br>
-        <?php echo '<span>New Password: </span>' . $this->notificationsForm->newPassword; ?><br>
-        <?php echo '<span>Confirm New Password: </span>' . $this->notificationsForm->newPasswordConfirm; ?>
+            <div class="passwordRecoveryBlock">
+                <?php echo '<span>Old Password: </span>' . $this->notificationsForm->oldPassword; ?><br>
+                <?php echo '<span>New Password: </span>' . $this->notificationsForm->newPassword; ?><br>
+                <?php echo '<span>Confirm New Password: </span>' . $this->notificationsForm->newPasswordConfirm; ?>
+            </div>
+        </div>
     </div>
     <?php
-        if($this->notificationsForm->notify){
-            echo '<div class = "middleSeparatorSecond"></div><div class="notifyBlock"><h5> I WANT TO:</h5>' .$this->notificationsForm->notify .'</div>';
-        }
+    if ($this->notificationsForm->notify) {
+        echo '
+        <div class="shadowSeparator clearfix">
+             <div class="shadowSeparatorBox clearfix">
+                <h1> I WANT TO:</h1> <div class="notificationsAlertsBlock">' . $this->notificationsForm->notify . '</div>
+             </div>
+        </div>';
+    }
     ?>
+    <div class="buttonsRow clearfix">
+        <?php
+        echo $this->notificationsForm->saveNotifications;
+        ?>
+    </div>
 
-    <?php
-    echo $this->notificationsForm->saveNotifications;
-    ?>
     </form>
-    <div class="lastSeparator"></div>
-    </div>
+
+</div>
