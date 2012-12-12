@@ -4,7 +4,7 @@
         display: none;
     }
 
-    .fc-event-focusName, .fc-event-time {
+    .fc-event-head .fc-event-focusName, .fc-event-head .fc-event-time {
         float: left;
     }
 
@@ -25,6 +25,9 @@
         background-color: #f0f9e6;
         font: 12px 'dosissemibold';
         color: #2e3a12;
+        -webkit-box-shadow:  0 0 0 1px rgba(255, 255, 255, 1) inset;
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 1) inset;
+        -moz-box-shadow: 0 0 0 1px rgba(255, 255, 255, 1) inset;
     }
 
     .fc-border-separate tbody td {
@@ -34,18 +37,18 @@
     .fc-border-separate tbody td.fc-other-month {
         background-color: white;
     }
-
-    .fc-today {
+    .fc-header-title h2{
+        font:18px 'dosissemibold' !important;
+        color: #344608 !important;
+    }
+    table:not(.fc-agenda-days) .fc-today {
         background-color: #E5F9C8 !important;
     }
 
-    .fc-today .fc-day-number {
+    .fc-border-separate .fc-today .fc-day-number {
         color: #719511;
     }
 
-    .fc-button-prev {
-        background: url('../../../../public/img/design/accountLayout/glyphicons/fc-button-next.png');
-    }
 
     .ui-dialog-titlebar {
         display: none
@@ -67,16 +70,84 @@
     .formRow .label{
         width:100px;
     }
+    .fc-button-prev, .fc-button-next{
+        width: 15px !important;
+    }
+    .fc-button-today{
+        margin: 0 7px !important;
+    }
     .formRow textarea{
         width:269px;
     }
 
-    .fc-event-inner{
-        -webkit-box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.5) inset;
-        box-shadow: 0 0 7px 3px rgba(0, 0, 0, 0.5) inset;
-        -moz-box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.5) inset;
-        border
+    .fc-event{
+
+        height:auto !important;
+        font:10px arial !important;
+
     }
+
+    .fc-event-time, .fc-event-focusName, .fc-event-rate, .fc-event-content-description, .fc-event-content-requested, .fc-event-title{
+
+        font:10px arial !important;
+    }
+    .fc-event-head .fc-event-time, .fc-event-focusName, .fc-event-rate{
+        padding-right: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .fc-event-content-description{
+        padding-top:10px;
+    }
+    .fc-event-head .fc-event-time, .fc-event-content-description, .fc-event-content-requested{
+        padding-left:10px;
+
+    }
+    .fc-corner-left .fc-button-inner, .fc-corner-left .fc-event-inner{ margin-left:0 !important;}
+    .fc-event-skin{color:#474940;}
+    .fc-event-inner{
+
+        color:#474940;
+        -webkit-box-shadow:  0 0 3px 0 rgba(0, 0, 0, 0.22) inset;
+        box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.22) inset;
+        -moz-box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.22) inset;
+
+        overflow: visible;
+    }
+    .fc-event-content-requested{
+        float:left;
+        padding-top: 4px;
+    }
+    .fc-event-head{
+       /* background-color: #fedbdb !important;*/
+        /*border: 1px solid #c18989 !important;*/
+        width: auto !important;
+
+    }
+    .fc-event:hover{
+        z-index:9 !important;
+    }
+    .fc-agenda .fc-agenda-axis {
+        width: 34px;
+        padding: 0 4px;
+        vertical-align: middle;
+        text-align: center;
+        white-space: nowrap;
+        font-weight: normal;
+    }
+    .fc-event-hori{
+        border: none !important;
+    }
+    .fc-event-content{
+        /*border: 1px solid #c18989 !important;*/
+        width: auto !important;
+        padding-bottom: 5px;
+    }
+    .fc-header .fc-button{
+        margin: 0;
+        width: 66px;
+    }
+
 
 </style>
 <div class="mainCalendar mainContainer clearfix">
@@ -117,12 +188,17 @@
 
             jQuery('#calendar').fullCalendar({
                 editable:true,
+                timeFormat: '(h:mm)tt -',
+                buttonIcons:{
+                    day: ''
+                },
                 disableDragging:true,
                 disableResizing:true,
                 allDay:false,
+                allDaySlot:false,
                 header:{
                     left:'title',
-                    center:'agendaDay, month',
+                    center:'month, agendaDay',
                     right:'prev,today,next'
                 },
                 dayClick:function (date, allDay, jsEvent, view) {
@@ -150,9 +226,11 @@
                             var events = [];
                             for (var c = 0; c < msg.booking.length; c++) {
                                 if (msg.booking[c].recipient_status == '1') {
-                                    var eventColor = '#eeffbb';
+                                    var eventColor = '#effad0';
+                                    var borderColor = '#7e954c';
                                 } else {
                                     eventColor = '#ffe8e8';
+                                    borderColor = '#c18989';
                                 }
 
 
@@ -172,7 +250,9 @@
                                     booking_id:msg.booking[c].id + "",
                                     user_id:msg.id,
                                     allDay:false,
-                                    color:eventColor
+                                    color:eventColor,
+                                    backgroundColor:eventColor,
+                                    borderColor:borderColor
 
                                 });
                             }
@@ -181,7 +261,8 @@
                         }
                     });
                 },
-                eventRender:function (event, element) {
+
+            eventRender:function (event, element) {
                     var view = jQuery('#calendar').fullCalendar('getView');
                     if (view.name == 'agendaDay') { // render event in agendaDay
                         if (event.duration == '0') {
@@ -192,15 +273,17 @@
                         element.find(".fc-event-head").append('<div class ="fc-event-focusName"> ' + event.title + '</div>');
                         element.find(".fc-event-head").append('<div class = "fc-event-rate">$' + event.rate + ' / ' + duration + '</div>');
                         element.find(".fc-event-content").append('<div class = "fc-event-content-description">' + event.add_info + '</div>');
-                        element.find(".fc-event-content").append('<div class = "fc-event-content-requested">Requested:' + event.sender_id + '</div>');
+                        element.find(".fc-event-content").append('<div class = "fc-event-content-requested">Subscriber:' + event.sender_id + '</div>');
 
                         if (event.recipient_status == '0' && event.user_id == event.recipient_id) {
-                            element.find(".fc-event-content").append('<div id ="rejectBooking" onclick="rejectBooking(this)"  class="fc-event-content-reject">Reject</div>');
-                            element.find(".fc-event-content").append('<div id ="confirmBooking" onclick="confirmBooking(this)"  class = "fc-event-content-confirm">Confirm</div>');
+                            element.find(".fc-event-content").append('<input type = "button"  id ="rejectBooking" onclick="rejectBooking(this)" value = "Reject"  class="fc-event-content-reject fc-button reject">');
+                            element.find(".fc-event-content").append('<input type = "button" id ="confirmBooking" onclick="confirmBooking(this)" value = "Confirm" class = "fc-event-content-confirm fc-button">');
                             element.find(".fc-event-content").append('<input type = "hidden" id = "booking_id"  value = ' + event.booking_id + ' >');
                             element.find(".fc-event-content").append('<input type = "hidden" id = "sender_id"  value = ' + event.sender_id + ' >');
                         } else if (event.recipient_status == '1') {
-                            element.find(".fc-event-content").append('<div class="fc-event-content-confirm">Approved</div>');
+                            element.find(".fc-event-content").append('<div class="fc-event-content-approve"><span>Approved</span></div>');
+                        }else{
+                            element.find(".fc-event-content").append('<div class="fc-event-content-approve pending"><span>Pending</span></div>');
                         }
                     }
                 }
@@ -209,7 +292,7 @@
             });
 
 //FORM DIALOG JQUERY
-            $('.fc-header tbody').append('<tr><td><input type="button" id="bookLesson" value="book lesson"><td></tr>');
+            $('.fc-header tbody').append('<tr><td><input type="button" id="bookLesson" class = "button-2 book" value="book lesson"><td></tr>');
 
             $("#dialog-form").dialog({
                 autoOpen:false,
@@ -263,11 +346,11 @@
                     "booking_id":$('#booking_id').val()
                 },
                 function (response) {
-                    $(e).parents('.fc-event-inner').find('.fc-event-head').css('background-color', 'green');
-                    $(e).parents('.fc-event-inner').css('background-color', 'green');
-                    $(e).parents('.fc-event').css('border-color', 'green');
-                    $(e).parents('.fc-event-inner').css('border-color', 'green');
-                    $(e).parent().append('<div class="fc-event-content-approve">Approved</div>');
+                    $(e).parents('.fc-event-inner').find('.fc-event-head').css('background-color', '#effad0');
+                    $(e).parents('.fc-event-inner').css('background-color', '#effad0');
+                    $(e).parents('.fc-event').css('border-color', '#7e954c');
+                    $(e).parents('.fc-event-inner').css('border-color', '#7e954c');
+                    $(e).parent().append('<div class="fc-event-content-approve"><span>Approved</span></div>');
                     $(e).parents('.fc-event').find('.fc-event-content-reject').remove();
                     $(e).parents('.fc-event').find('.fc-event-content-confirm').remove();
 
