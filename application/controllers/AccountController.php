@@ -239,7 +239,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
             }
             $lessonCat = 'All';
             if( $this->getRequest()->getParam('category')) {
-                $userType = $this->getRequest()->getParam('category');
+                $lessonCat = $this->getRequest()->getParam('category');
             }
 
             $this->view->featured = $dbUserModel->getLatestFeatured($userType, $lessonCat);
