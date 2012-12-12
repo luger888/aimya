@@ -46,7 +46,9 @@ class Application_Form_Availability extends Zend_Form
         $this->addElements($days);
 
         $submit = new Zend_Form_Element_Submit('save');
-        $submit ->setAttrib('id', 'save');
+        $submit ->setAttrib('id', 'save')
+        ->setAttrib('class', 'button-2 save')
+        ->setDecorators($this->basicDecorators);
           $this->addElement($submit);
     }
 }

@@ -120,8 +120,7 @@ package com.aimialesson.controllers
 			Media.getInstance().partnerCamPaused = !Media.getInstance().partnerCamPaused;
 			Media.getInstance().partnerNetStream.receiveVideo(!Media.getInstance().partnerCamPaused);
 			//not sure why i need to do it, but other way receiveVideo works buggly
-			if (!Media.getInstance().partnerCamPaused)
-				Media.getInstance().partnerNetStream.resume();
+			//if (!Media.getInstance().partnerCamPaused)	Media.getInstance().partnerNetStream.resume();
 		}
 		
 		public function partnerAudioMute():void {
@@ -129,8 +128,7 @@ package com.aimialesson.controllers
 			debug ("partnerAudioMute:" + Media.getInstance().partnerMicPaused);
 			Media.getInstance().partnerNetStream.receiveAudio(!Media.getInstance().partnerMicPaused);
 			//not sure why i need to do it, but other way receiveAudio works buggly
-			if (!Media.getInstance().partnerMicPaused)
-				Media.getInstance().partnerNetStream.resume();
+			//if (!Media.getInstance().partnerMicPaused)	Media.getInstance().partnerNetStream.resume();
 		}
 		
 		private function debug(str:String):void {

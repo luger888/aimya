@@ -51,6 +51,14 @@
 	fontStyle: normal;
 	fontWeight: normal;
 	color: #1D3300;
+	fontSize: 11;
+}
+
+.StopButtonLabelStyle {
+	fontFamily: Dosis;
+	fontStyle: normal;
+	fontWeight: normal;
+	color: #FFFFFF;
 	fontSize: 12;
 }
 
@@ -67,7 +75,15 @@
 	fontStyle: normal;
 	fontWeight: normal;
 	color: #FFFFFF;
-	fontSize: 12;
+	fontSize: 11;
+}
+
+.PreloaderImageTextStyle {
+	fontFamily: Dosis;
+	fontStyle: normal;
+	fontWeight: normal;
+	color: #5A5A5A;
+	fontSize: 24;
 }
 
 .HeaderStyle {
@@ -123,7 +139,7 @@
 	fontStyle: italic;
 	fontWeight: normal;
 	color: #1E1E1E;
-	fontSize: 15;
+	fontSize: 13;
 }
 
 .RoleStyle {
@@ -139,7 +155,7 @@
 	fontStyle: normal;
 	fontWeight: normal;
 	color: #434343;
-	fontSize: 12;
+	fontSize: 11;
 }
 
 .NoteBodyStyle {
@@ -180,6 +196,14 @@
 	fontWeight: normal;
 	color: #000000;
 	fontSize: 12;
+}
+
+.PresentationProgressTextStyle {
+	fontFamily: Arial;
+	fontStyle: normal;
+	fontWeight: normal;
+	color: #000000;
+	fontSize: 11;
 }
 
 

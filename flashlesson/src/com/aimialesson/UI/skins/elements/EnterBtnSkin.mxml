@@ -19,7 +19,7 @@
         <s:State name="disabled" />
     </s:states>
     
-		<s:BitmapImage source="@Embed('flashassets/enter_icon.png')" x="0" y="-3" />
-		<s:RichText text="ENTER" x="24" styleName="ButtonLabelStyle" y="-3"/>
+		<s:BitmapImage source="@Embed('flashassets/enter_icon.png')" x="0" y="-2" />
+		<s:RichText text="ENTER" x="24" styleName="ButtonLabelStyle" y="-2"/>
     
 </s:SparkSkin>
