@@ -298,6 +298,7 @@ input.button-2 {
     background: url(../images/icons/delete.png) no-repeat 0 3px;
 }
 
+
 .button-2.delete:hover {
     background-position: 0 -16px;
 }
@@ -310,6 +311,12 @@ input.button-2 {
     background: url(../images/icons/add.png) no-repeat 0 3px;
 }
 
+.button-2.block {
+    background: url(../images/icons/block.png) no-repeat 0 3px;
+}
+.button-2.block:hover {
+    background-position: 0 -16px;
+}
 .button-2.add:hover {
     background-position: 0 -20px;
 }
@@ -619,7 +626,7 @@ input.button-2 {
 
 .profileGeneral textarea {
     width: 779px;
-    height: 268px;
+    /*height: 268px;*/
     padding: 10px 10px;
 }
 
@@ -918,4 +925,164 @@ input.button-2 {
 
 #addRequestService .buttonsRow {
     padding-top: 0;
+}
+
+/*---Availability tab-----------------------------------------------------------------*/
+.availabilityTab .topBox{
+    padding-bottom: 26px;
+}
+.availabilityTab .dateZoneBlock{
+    float: right;
+    text-align: right;
+    font-size: 11px;
+}
+.availabilityTab .dateZoneBlock .dateHint{
+    color: #8d8d8d;
+}
+.availabilityTab .topBox h1{
+    float:left;
+}
+.availabilityTab table tr td {
+    padding: 14px 0;
+
+}
+.availabilityTab table tr td:nth-child(1){
+    padding-left: 26px;
+}
+.availabilityTab table tr{
+    padding-left: 25px;
+}
+.availabilityTab table tr:nth-child(odd){
+    background-color: #FBFCFC;
+}
+/*Availability td padding-right */
+.availabilityTab table tr td:nth-child(1){padding-right: 34px;}
+.availabilityTab table tr td:nth-child(2){padding-right: 290px; font-family: 'helvetica-light-rnormal';}
+.availabilityTab table tr td:nth-child(3){padding-right: 40px;}
+.availabilityTab table tr td:nth-child(4){padding-right: 39px; }
+.availabilityTab table tr td:nth-child(5){padding-right: 150px;}
+
+.availabilityTab select{
+    width:69px;
+}
+.availabilityTab .buttonRow {
+    padding-bottom: 6px;
+    padding-top: 60px;
+}
+
+.availabilityTab .buttonRow input {
+    float: right;
+}
+
+/*---USERS RELATIONS-----------------------------------------------------------------*/
+
+.userRelationsTab .shadowSeparatorBox {
+    min-height: 415px;
+}
+.userRelationsTab .blockUser{
+    background: url('../img/design/accountLayout/glyphicons/block.png') no-repeat left center;
+    margin-left: 30px;
+}
+.userRelationsTab .blockUser:hover{
+    background: url('../img/design/accountLayout/glyphicons/blockHover.png') no-repeat left center;
+}
+.userRelationsTab table thead{
+    border:1px solid #dbdbde;
+}
+.userRelationsTab table thead td {
+    background-color: #f3f3f4 !important;
+    font-family: 'helvetica-light-rnormal';
+}
+.userRelationsTab table{
+    border:1px solid #dbdbde;
+}
+.userRelationsTab  table tbody tr{
+    height:35px;
+}
+
+.userRelationsTab table td{
+    border-right: 1px solid #dbdbde;
+}
+
+.userRelationsTab table tr:nth-child(2n+1) td, .userRelations table tr:nth-child(2n+1) th{
+    background-color: #fbfcfc;
+}
+.userRelationsTab table thead tr td{
+    padding: 7px;
+}
+.userRelationsTab  .button-2{
+    padding-right: 30px;
+}
+#block-confirm, #delete-confirm{
+    display: none;
+}
+/*Availability td padding-right */
+.userRelationsTab table tr td:nth-child(1){padding-right: 52px; padding-left: 5px;}
+.userRelationsTab table tr td:nth-child(2){padding-right: 86px; padding-left: 5px;}
+.userRelationsTab table tr td:nth-child(3){padding-right: 98px; padding-left: 5px;}
+.userRelationsTab table tr td:nth-child(4){padding-right: 92px;  padding-left: 5px;}
+.userRelationsTab table tr td:nth-child(5){padding-right: 97px;}
+.userRelationsTab table tbody td:nth-child(5){  padding-left: 36px; padding-right: 0;}
+
+/*Dialog jquery*/
+.ui-dialog{
+    display: block ;
+    height: auto !important;
+    left: 615.5px ;
+    outline: 0 none;
+    top: 388px;
+    width: 360px !important;
+    z-index: 1002 ;
+    padding:0 !important;
+    border-top:none !important;
+}
+.ui-dialog-titlebar{
+    font:12px helvetica !important;
+    border-radius: 0 !important;
+    height: 19px !important;
+    padding-top: 10px !important;
+    color:white !important;
+    border:none !important;
+    background: url('../img/design/accountLayout/dialogHeader.png') repeat-x !important;
+}
+.ui-dialog  .ui-dialog-titlebar-close{
+    margin: -8px 0 0 !important;
+}
+
+.ui-dialog  .ui-dialog-titlebar-close .ui-icon{
+    background: url('../img/design/accountLayout/dialogClose.png') no-repeat !important;
+    padding: 10px 0 0 0 !important;
+}
+ .ui-dialog  .ui-dialog-titlebar-close .ui-icon:hover{
+    background: url('../img/design/accountLayout/dialogClose.png') no-repeat !important;
+}
+.ui-dialog  .ui-state-hover{
+    background: none !important;
+    border:none !important;
+    padding: 1px !important;
+}
+.ui-dialog-content{
+    font: 12px arial;
+    height: auto;
+    min-height: 49px !important;
+    width: auto;
+    padding: 21px 0 0 13px !important;
+}
+#block-confirm, #delete-confirm{
+    display: none;
+}
+.ui-dialog-buttonset button{
+    border:none !important;
+    color:transparent !important;
+    height: 31px !important;
+    width: 80px !important;
+}
+.ui-dialog-buttonset button:first-child{
+    background: url('../img/design/accountLayout/dialogBtnYes.png') no-repeat !important;
+}
+.ui-dialog-buttonset button:nth-child(2){
+    background: url('../img/design/accountLayout/dialogBtnNo.png') no-repeat !important;
+}
+.ui-dialog-buttonpane{
+    border:none !important;
 }

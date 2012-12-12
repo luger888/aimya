@@ -1,41 +1,42 @@
-<script type="text/javascript">//dialog jquery ui customized
-    </script>
-<div class = "userRelations">
-    <div class="firstSeparator"></div>
-    <table  class="table table-striped table-hover">
-    <thead style="background: #ccc">
-    <tr>
-        <td> First Name </td>
-        <td> Last Name </td>
-        <td> User Name </td>
-        <td> Time Zone </td>
-        <td> Block / Delete </td>
-    </tr>
-    </thead>
-    <tbody>
-    <?php
-    if($this->friends){
-        foreach($this->friends as $value){
-            echo '<tr>
-        <td>'.$value['firstname'].'</td>
-        <td>'.$value['lastname'].'</td>
-        <td>'.$value['username'].'</td>
-        <td>UTC '.$value['timezone'].'</td>
-        <td><input type = "button" value="BLOCK" class = "blockUser"  onclick ="blockUser(this);return false;"></div><input type = "button" value = "DELETE" class="deleteUser" onclick="deleteUser(this);return false;"></div><input type = "hidden" value = '. $value['id'].'</td>
+<div class="userRelationsTab clearfix">
+    <div class="shadowSeparator clearfix">
+        <div class="shadowSeparatorBox clearfix">
+            <table class="table">
+                <thead>
+                <tr>
+                    <td> First Name</td>
+                    <td> Last Name</td>
+                    <td> User Name</td>
+                    <td> Time Zone</td>
+                    <td> Block / Delete</td>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                if ($this->friends) {
+                    foreach ($this->friends as $value) {
+                        echo '<tr>
+        <td>' . $value['firstname'] . '</td>
+        <td>' . $value['lastname'] . '</td>
+        <td>' . $value['username'] . '</td>
+        <td>UTC ' . $value['timezone'] . '</td>
+        <td><input type = "button" value="BLOCK" class = "button-2 block"  onclick ="blockUser(this);return false;"></div><input type = "button" value = "DELETE" class="button-2 delete" onclick="deleteUser(this);return false;"></div><input type = "hidden" value = ' . $value['id'] . '</td>
     </tr>';
-        }
+                    }
 
-    }
+                }
 
-    ?>
+                ?>
 
 
-    </tbody>
-</table>
-    <div class="lastSeparator"></div>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 <div id="delete-confirm" title="DELETE USER:">
-    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>By deleting user, he will be erased from your user list permanently. Are you sure you want to proceed?</p>
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>By deleting user, he will
+        be erased from your user list permanently. Are you sure you want to proceed?</p>
 </div>
 
 <div id="block-confirm" title="BLOCK USER:">
