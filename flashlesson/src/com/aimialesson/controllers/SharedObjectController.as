@@ -137,7 +137,7 @@ package com.aimialesson.controllers
 												break;
 					case "imageN"			:	Presentation.getInstance().currentImageNumber = so.data['imageN'];
 												break;
-					case 'User' + User.getInstance().partnerID + 'isOnline' : if (so.data[changedList[i].namez] == "true"){
+					case 'User' + User.getInstance().partnerID + 'isOnline' : if (so.data[changedList[i].name] == "true"){
 																					setSOProperty('User' + User.getInstance().partnerID + 'isOnline', "false");
 																					User.getInstance().partnerIsOnline = true;
 																					partnerIsOnlineTimer.reset();

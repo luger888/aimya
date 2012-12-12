@@ -28,8 +28,10 @@ package com.aimialesson.model
 		public function set userRole ( value : String ) : void {
 			_userRole = value;
 			this.dispatchEvent( new Event("partnerRoleChange") );
+			this.dispatchEvent( new Event("partnerRoleIdChange") );
 		}
 		
+		[Bindable(Event="partnerRoleIdChange")]
 		public function get partnerRoleID () : String {
 			//return _partnerRole;
 			return (_userRole == User.STUDENT) ? User.TEACHER : User.STUDENT;
@@ -76,6 +78,7 @@ package com.aimialesson.model
 			return _partnerIsOnline;
 		}
 
+		/*
 		public function get userID () : String {
 			return (_userRole == User.TEACHER) ? _teacherID : _studentID;
 		}
@@ -92,6 +95,24 @@ package com.aimialesson.model
 		private var _studentID:String = "";
 		public function set studentID ( value : String ) : void {
 			_studentID = value;
+		}*/
+		
+		public function get userID () : String {
+			return _userID;
+		}
+		
+		public function get partnerID () : String {
+			return _partnerID;
+		}
+		
+		private var _partnerID:String = "";
+		public function set partnerID ( value : String ) : void {
+			_partnerID = value;
+		}
+		
+		private var _userID:String = "";
+		public function set userID ( value : String ) : void {
+			_userID = value;
 		}
 		
 		private var _sessionID:String = "";
