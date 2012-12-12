@@ -1,6 +1,8 @@
 $(document).ready(function() {
     $("#signup").click(function(){
+        var myDate = new Date();
 
+        var UTC = myDate.getTimezoneOffset()/60*(-1);
         $.post(
 
             "/user/registration/0/controller%3D%3Euser/1/action%3D%3Eregistration",{
