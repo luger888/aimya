@@ -280,7 +280,7 @@ class LessonController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender(true);
 
         if ($this->getRequest()->isXmlHttpRequest()) {
-
+            $this->view->answer = 'success';
         }
     }
 
