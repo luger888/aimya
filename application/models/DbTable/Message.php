@@ -104,6 +104,28 @@ class Application_Model_DbTable_Message extends Application_Model_DbTable_Abstra
         return $this->update($array , $where);
     }
 
+    public function massDelete($messageIds, $userId, $action) {
+
+        $array = array();
+        $where = array();
+        $messageIds = '(' . $messageIds . ')';
+
+        if($action == 'sent') {
+            $array['sender_status'] = 2;
+            $where[] = $this->getAdapter()->quoteInto('sender_id=?', $userId);
+        } elseif ($action == 'inbox') {
+            $where[] = $this->getAdapter()->quoteInto('recipient_id=?', $userId);
+            $array['recipient_status'] = 2;
+        } else {
+            return 1;
+        }
+
+        $where[] = $this->getAdapter()->quoteInto('id in ?', $messageIds);
+
+        return $where;
+        //return $this->update($array , $where);
+    }
+
     public function checkNewMessage($userId) {
         $userId = (int)$userId;
         $row = $this->fetchAll(

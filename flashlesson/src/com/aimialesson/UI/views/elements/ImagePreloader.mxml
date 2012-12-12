@@ -68,5 +68,5 @@
 	<s:BitmapImage id="bg" source="@Embed('flashassets/background.png')" verticalCenter="0" horizontalCenter="0"/>
 	<s:BitmapImage id="whiteBG" source="@Embed('flashassets/white_background.png')" verticalCenter="0" horizontalCenter="0"/>
 	<s:BitmapImage id="greenBG" mask="{spBoard}" source="@Embed('flashassets/green_background.png')" verticalCenter="0" horizontalCenter="0"/>
-	<s:RichText id="preloaderPercent" text="{_percent}" verticalCenter="0" horizontalCenter="0"/>
+	<s:RichText id="preloaderPercent" text="{_percent}" verticalCenter="0" horizontalCenter="0" styleName="PreloaderImageTextStyle"/>
 </s:Group>

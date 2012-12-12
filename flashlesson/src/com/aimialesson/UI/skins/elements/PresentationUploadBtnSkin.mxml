@@ -38,6 +38,11 @@
         <s:State name="down" />
         <s:State name="disabled" />
     </s:states>
+	<s:Rect top="0" left="0" right="0" bottom="0">
+		<s:fill>
+			<s:SolidColor alpha="0" color="0xffffff"/>
+		</s:fill>
+	</s:Rect>
 	<s:BitmapImage source="@Embed('flashassets/upload_icon.png')" verticalCenter="0"/>
 	<s:Label id="lbl" text="UPLOAD" x="24"  verticalCenter="0"  styleName="ButtonLabelStyle"/>
     

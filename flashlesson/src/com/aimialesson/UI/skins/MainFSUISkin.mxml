@@ -29,7 +29,7 @@
 					<s:Button skinClass="com.aimialesson.UI.skins.elements.StopSessionBtnSkin" id="stopSessionBtn" right="0" includeInLayout="{Main.getInstance().session_started}" visible="{Main.getInstance().session_started}" buttonMode="true" useHandCursor="true"/>		
 				</s:VGroup>
 				<!--s:VGroup left="0" right="75" top="62" bottom="0"-->
-				<s:VGroup left="0" right="40" top="{leftHeaderGroup.y + leftHeaderGroup.height}" bottom="0" >
+				<s:VGroup left="0" right="40" top="{leftHeaderGroup.y + leftHeaderGroup.height}" bottom="0" gap="20">
 					<views:MainUIContainer id="videoChatContainer" top="0"/>
 					<views:MainUIContainer id="notesContainer"  width="100%" height="100%"/>					
 				</s:VGroup>

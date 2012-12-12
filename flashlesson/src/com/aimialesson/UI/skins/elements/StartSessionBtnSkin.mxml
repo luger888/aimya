@@ -40,6 +40,6 @@
     </s:states>
 
 	<s:BitmapImage source="@Embed('flashassets/start_session_icon.png')" y="-3"/>
-	<s:Label text="START SESSION" x="17" styleName="ButtonLabelStyle" y="-3"/>
+	<s:Label text="START SESSION" x="17" styleName="ButtonLabelStyle" y="-3" />
     
 </s:SparkSkin>
