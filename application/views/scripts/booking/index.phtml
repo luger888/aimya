@@ -71,6 +71,13 @@
         width:269px;
     }
 
+    .fc-event-inner{
+        -webkit-box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.5) inset;
+        box-shadow: 0 0 7px 3px rgba(0, 0, 0, 0.5) inset;
+        -moz-box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.5) inset;
+        border
+    }
+
 </style>
 <div class="mainCalendar mainContainer clearfix">
     <div class="shadowSeparator"></div>
@@ -143,9 +150,9 @@
                             var events = [];
                             for (var c = 0; c < msg.booking.length; c++) {
                                 if (msg.booking[c].recipient_status == '1') {
-                                    var eventColor = '#7da028';
+                                    var eventColor = '#eeffbb';
                                 } else {
-                                    eventColor = '#F1D93C';
+                                    eventColor = '#ffe8e8';
                                 }
 
 
