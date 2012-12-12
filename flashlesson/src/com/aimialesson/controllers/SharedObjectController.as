@@ -76,11 +76,9 @@ package com.aimialesson.controllers
 				partnerIsOnlineTimer.start();
 			}*/
 			if (so.data['endLesson' + User.getInstance().partnerID] == "true"){
-				//setSOProperty('endLesson', "false");
 				dispatchEvent( new SharedObjectEvent ( SharedObjectEvent.LESSON_IS_FINISHED, User.getInstance().partnerName  ) );
 			}
 			if (so.data['endLesson' + User.getInstance().userID] == "true"){
-				//setSOProperty('endLesson', "false");
 				dispatchEvent( new SharedObjectEvent ( SharedObjectEvent.LESSON_IS_FINISHED, User.getInstance().userName  ) );
 			}
 			if (so.data['screenMode' + User.getInstance().userID] == "true"){

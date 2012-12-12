@@ -34,13 +34,13 @@ package com.aimialesson.controllers
 				User.getInstance().lesson_id = parameters.lesson_id;
 				debug ("lessonID:" + parameters.lesson_id);
 			}
-			if (parameters.userID){
-				User.getInstance().userID = parameters.userID;
-				debug ("userID:" + parameters.userID);
+			if (parameters.teacherId){
+				User.getInstance().teacherID = parameters.teacherId;
+				debug ("teacherId:" + parameters.teacherId);
 			}
-			if (parameters.partnerID){
-				User.getInstance().partnerID = parameters.partnerID;
-				debug ("partnerID:" + parameters.partnerID);
+			if (parameters.studentId){
+				User.getInstance().studentID = parameters.studentId;
+				debug ("studentId:" + parameters.studentId);
 			}
 		}
 		

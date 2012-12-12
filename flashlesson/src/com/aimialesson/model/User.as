@@ -15,7 +15,7 @@ package com.aimialesson.model
 		public function User() {
 		}
 		
-		private var _userName:String = "Test User";
+		private var _userName:String = "ITest User";
 		public function set userName ( value : String ) : void {
 			_userName = value;
 		}
@@ -31,7 +31,8 @@ package com.aimialesson.model
 		}
 		
 		public function get partnerRoleID () : String {
-			return _partnerRole;
+			//return _partnerRole;
+			return (_userRole == User.STUDENT) ? User.TEACHER : User.STUDENT;
 		}
 		
 		public function get userRole () : String {
@@ -47,7 +48,7 @@ package com.aimialesson.model
 			return _isOnline;
 		}
 		
-		private var _partnerName:String = "Test Partner";
+		private var _partnerName:String = "ITest Partner";
 		public function set partnerName ( value : String ) : void {
 			_partnerName = value;
 		}
@@ -74,23 +75,23 @@ package com.aimialesson.model
 		public function get partnerIsOnline () : Boolean {
 			return _partnerIsOnline;
 		}
-		
-		private var _partnerID:String = "";
-		public function set partnerID ( value : String ) : void {
-			_partnerID = value;
-		}
-		
-		public function get partnerID () : String {
-			return _partnerID;
-		}
-		
-		private var _userID:String = "";
-		public function set userID ( value : String ) : void {
-			_userID = value;
-		}
-		
+
 		public function get userID () : String {
-			return _userID;
+			return (_userRole == User.TEACHER) ? _teacherID : _studentID;
+		}
+				
+		public function get partnerID () : String {
+			return (_userRole == User.TEACHER) ? _studentID : _teacherID;
+		}
+		
+		private var _teacherID:String = "";
+		public function set teacherID ( value : String ) : void {
+			_teacherID = value;
+		}
+		
+		private var _studentID:String = "";
+		public function set studentID ( value : String ) : void {
+			_studentID = value;
 		}
 		
 		private var _sessionID:String = "";

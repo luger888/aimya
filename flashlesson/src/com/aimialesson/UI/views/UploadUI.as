@@ -38,8 +38,7 @@ package com.aimialesson.UI.views
 		public var progressBar:PresentationProgressBar;
 		[SkinPart (required="true")]
 		public var presantationBG:BitmapImage;
-		[SkinPart (required="true")]
-		public var numberFormatter:NumberFormatter;
+		
 		private var fileRef:FileReference;
 		
 		public function UploadUI()
