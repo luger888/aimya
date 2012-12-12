@@ -50,6 +50,10 @@ package com.aimialesson.controllers
 				User.getInstance().userID = parameters.userId;
 				debug ("userId:" + parameters.userId);
 			}
+			if (parameters.userTZ){
+				User.getInstance().timeZone = Number(parameters.userTZ);
+				debug ("timeZone:" + parameters.userTZ);
+			}
 		}
 		
 

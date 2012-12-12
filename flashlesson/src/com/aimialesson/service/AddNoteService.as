@@ -16,6 +16,7 @@ package com.aimialesson.service
 			super(target);
 			callUrl = Actions.getInstance().addNoteUrl;
 			params.lesson_id = User.getInstance().lesson_id;
+			params.user_id = User.getInstance().userID;
 		}
 		
 		public function addParams ( value : Object) : void {

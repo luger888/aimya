@@ -50,6 +50,16 @@ package com.aimialesson.model
 			return _isOnline;
 		}
 		
+		private var _timeZone:Number = 0;
+		public function set timeZone ( value : Number ) : void {
+			_timeZone = value;
+		}
+		
+		public function get timeZone () : Number {
+			return _timeZone;
+		}
+		
+		
 		private var _partnerName:String = "ITest Partner";
 		public function set partnerName ( value : String ) : void {
 			_partnerName = value;

@@ -229,15 +229,32 @@ function massDelete(current_action) {
         },
         success: function(result) {
             jQuery('.loadingIcon').remove();
-            //alert(result.messageCount.toSource())
-            //window.location.href = "/message/" + action + "/current_action/" + action;
+            window.location.href = "/message/" + current_action + "/current_action/" + current_action;
         }
     });
 
 }
 
-function massArchive() {
+function massArchive(current_action) {
+    jQuery("body").append('<div class="loadingIcon"></div>');
+    ids = [];
+    $('.messageCheckboxes:checkbox:checked').each(function() {
+        ids.push($(this).val());
+    });
 
+    idsString = ids.toString();
+    $.ajax({
+        url: "/message/massarchive",
+        type: "post",
+        data: {
+            'message_ids' : idsString,
+            'current_action' : current_action
+        },
+        success: function(result) {
+            jQuery('.loadingIcon').remove();
+            window.location.href = "/message/" + current_action + "/current_action/" + current_action;
+        }
+    });
 }
 
 /*---PIE - add css3 to ie 7 and ie8 -----------------------------------------------------*/
