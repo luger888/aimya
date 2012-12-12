@@ -13,6 +13,8 @@ class LessonController extends Zend_Controller_Action
             ->addActionContext('upload', 'json')
             ->addActionContext('files', 'json')
             ->addActionContext('end', 'json')
+            ->addActionContext('updatesize', 'json')
+            ->addActionContext('getsize', 'json')
             ->initContext('json');
     }
 
@@ -82,6 +84,7 @@ class LessonController extends Zend_Controller_Action
             $baseLink = $broker->baseLink();
 
             $userModel = new Application_Model_DbTable_Users();
+            $lessonTable = new Application_Model_DbTable_Users();
             $myStreamName = '';
             $partnerStreamName = '';
             $teacherId = '';
@@ -109,30 +112,7 @@ class LessonController extends Zend_Controller_Action
                     }
                 }
             }*/
-            $flashObj = '
-                <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="100%" height="100%" id="aimia_lesson">
-                    <param name="movie" value="' . $baseLink . '/flash/aimia_lesson.swf" />
-                    <param name="quality" value="high" />
-                    <param name="bgcolor" value="#ffffff" />
-                    <param name="allowScriptAccess" value="sameDomain" />
-                    <param name="allowFullScreen" value="true" />
-                    <param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&partnerName=' . $teacher['username'] . '&teacherId=' . $teacherId . '&studentId=' . $studentId . '&userRole=' . Zend_Auth::getInstance()->getIdentity()->role . '&myStreamName=' . $myStreamName . '&partnerStreamName=' . $partnerStreamName . '&soID=' . $result['so_id'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink .'&lesson_id=' . $result['id'] .'">
-                    <object type="application/x-shockwave-flash" data="' . $baseLink . '/flash/aimia_lesson.swf" width="100%" height="100%">
-                        <param name="quality" value="high" />
-                        <param name="bgcolor" value="#ffffff" />
-                        <param name="allowScriptAccess" value="sameDomain" />
-                        <param name="allowFullScreen" value="true" />
-                        <param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&partnerName=' . $teacher['username'] . '&teacherId=' . $teacherId . '&studentId=' . $studentId . '&userRole=' . Zend_Auth::getInstance()->getIdentity()->role . '&myStreamName=' . $myStreamName . '&partnerStreamName=' . $partnerStreamName . '&soID=' . $result['so_id'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink .'&lesson_id=' . $result['id'] .'">
-                        <p>
-                            Either scripts and active content are not permitted to run or Adobe Flash Player version
-                            10.0.0 or greater is not installed.
-                        </p>
-                        <a href="http://www.adobe.com/go/getflashplayer">
-                            <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash Player" />
-                        </a>
-                    </object>
-                </object>
-                ';
+            $flashObj = '<object clsid:d27cdb6e-ae6d-11cf-96b8-444553540000 width="100%" height="100%" id="aimia_lesson"><param name="movie" value="' . $baseLink . '/flash/aimia_lesson.swf" /><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" /><param name="allowScriptAccess" value="sameDomain" /><param name="allowFullScreen" value="true" /><param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&partnerName=' . $teacher['username'] . '&teacherId=' . $teacherId . '&studentId=' . $studentId . '&userRole=' . Zend_Auth::getInstance()->getIdentity()->role . '&myStreamName=' . $myStreamName . '&partnerStreamName=' . $partnerStreamName . '&soID=' . $result['so_id'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink .'&lesson_id=' . $result['id'] .'"><object type="application/x-shockwave-flash" data="' . $baseLink . '/flash/aimia_lesson.swf" width="100%" height="100%"><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" /><param name="allowScriptAccess" value="sameDomain" /><param name="allowFullScreen" value="true" /><param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&partnerName=' . $teacher['username'] . '&teacherId=' . $teacherId . '&studentId=' . $studentId . '&userRole=' . Zend_Auth::getInstance()->getIdentity()->role . '&myStreamName=' . $myStreamName . '&partnerStreamName=' . $partnerStreamName . '&soID=' . $result['so_id'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink .'&lesson_id=' . $result['id'] .'"><p>Either scripts and active content are not permitted to run or Adobe Flash Player version10.0.0 or greater is not installed.</p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash Player" /></a></object></object>';
 
             $this->view->flashObj = $flashObj;
             $this->view->responce = $result;
@@ -262,6 +242,42 @@ class LessonController extends Zend_Controller_Action
                     $this->view->answer = 'failure';
                 }
 
+            }
+        }
+    }
+
+    public function updatesizeAction() {
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        if ($this->getRequest()->isXmlHttpRequest()) {
+            if($this->getRequest()->getParam('lesson_id')){
+                $flashSize = $this->getRequest()->getParam('flash_size');
+                $lessonId = $this->getRequest()->getParam('lesson_id');
+                $lessonTable = new Application_Model_DbTable_Lesson();
+                $status = $lessonTable->changeFlashSize($lessonId, $flashSize);
+
+                if($status) {
+                    $this->view->answer = 'success';
+                } else {
+                    $this->view->answer = 'failure';
+                }
+
+            }
+        }
+    }
+
+    public function getsizeAction() {
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        if ($this->getRequest()->isXmlHttpRequest()) {
+            if($this->getRequest()->getParam('lesson_id')){
+                $lessonId = $this->getRequest()->getParam('lesson_id');
+                $lessonTable = new Application_Model_DbTable_Lesson();
+                $size = $lessonTable->getFlashSize($lessonId);
+
+                $this->view->flashSize = $size;
             }
         }
     }
