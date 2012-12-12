@@ -1023,8 +1023,39 @@ input.button-2 {
 .userRelationsTab table tr td:nth-child(4){padding-right: 92px;  padding-left: 5px;}
 .userRelationsTab table tr td:nth-child(5){padding-right: 97px;}
 .userRelationsTab table tbody td:nth-child(5){  padding-left: 36px; padding-right: 0;}
+/*---NOTIFICATIONS/CHANGE PASSWORD-----------------------------------------------------------------*/
+.notificationsTab label, .notificationsTab .passwordRecoveryBlock{
+  font-family: 'helvetica-light-rnormal';
+}
+.notificationsTab .buttonsRow input {
+    float: right;
+}
 
-/*Dialog jquery*/
+.notificationsTab .notificationsAlertsBlock{
+    padding: 35px 0 0 25px;
+}
+.notificationsTab .notificationsAlertsBlock label{
+    display: block;
+    padding-bottom: 10px;
+}
+.notificationsTab .notificationsAlertsBlock span{
+    margin-right: 35px;
+}
+.notificationsTab .passwordRecoveryBlock{
+    padding: 25px 0 0 26px;
+}
+.notificationsTab .passwordRecoveryBlock span{
+    display: inline-block;
+    padding-bottom: 21px;
+    width: 150px;
+}
+.notificationsTab .notifyBlock{
+    padding:5px;
+}
+.notificationsTab  input[type='text'], .notificationsTab  input[type='password']{
+    width: 166px;
+}
+/*---DIALOG JQUERY-----------------------------------------------------------------*/
 .ui-dialog{
     display: block ;
     height: auto !important;
@@ -1085,4 +1116,10 @@ input.button-2 {
 }
 .ui-dialog-buttonpane{
     border:none !important;
+}
+
+.loadingIcon {
+    position:fixed;top:0;right:0;bottom:0;left:0;
+    background: rgba(255,255,255,0.5) url(../img/design/accountLayout/glyphicons/aimya_ajax_loader.gif) no-repeat 50% 50%;
+    z-index: 10000;
 }
