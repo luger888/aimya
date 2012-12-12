@@ -108,7 +108,7 @@ class Application_Model_DbTable_Message extends Application_Model_DbTable_Abstra
 
         $array = array();
         $where = array();
-        $messageIds = '(' . $messageIds . ')';
+        $idsArray = explode(',', $messageIds);
 
         if($action == 'sent') {
             $array['sender_status'] = 2;
@@ -116,14 +116,30 @@ class Application_Model_DbTable_Message extends Application_Model_DbTable_Abstra
         } elseif ($action == 'inbox') {
             $where[] = $this->getAdapter()->quoteInto('recipient_id=?', $userId);
             $array['recipient_status'] = 2;
-        } else {
-            return 1;
         }
 
-        $where[] = $this->getAdapter()->quoteInto('id in ?', $messageIds);
+        $where[] = $this->getAdapter()->quoteInto('id IN (?)', $idsArray);
 
-        return $where;
-        //return $this->update($array , $where);
+        return $this->update($array , $where);
+    }
+
+    public function massArchive($messageIds, $userId, $action) {
+
+        $array = array();
+        $where = array();
+        $idsArray = explode(',', $messageIds);
+
+        if($action == 'sent') {
+            $array['sender_status'] = 3;
+            $where[] = $this->getAdapter()->quoteInto('sender_id=?', $userId);
+        } elseif ($action == 'inbox') {
+            $where[] = $this->getAdapter()->quoteInto('recipient_id=?', $userId);
+            $array['recipient_status'] = 3;
+        }
+
+        $where[] = $this->getAdapter()->quoteInto('id IN (?)', $idsArray);
+
+        return $this->update($array , $where);
     }
 
     public function checkNewMessage($userId) {
