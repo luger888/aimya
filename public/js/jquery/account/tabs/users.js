@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
 });
     /* USER RELATIONS STATUSES: */
 var blockedUser = 2;

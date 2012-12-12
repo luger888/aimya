@@ -1,31 +1,45 @@
-<div class = "availabilityTab">
-    <div class="firstSeparator"></div>
-    <h5> I AM AVAILABLE:</h5>
-    <div class ="dateZoneBlock">
-        You are currently at UTC <?php echo $this->user['timezone']; ?><br>
-        <span>to change time zone go to General tab</span>
+<script type="text/javascript">
+    $('input[type="checkbox"]').checkRadio({
+        wrapperClass: 'checkboxWrapper',
+        chekedClass: 'checked'
+    });
+</script>
+
+<div class="availabilityTab clearfix">
+    <div class="shadowSeparator clearfix">
+        <div class="shadowSeparatorBox clearfix">
+            <div class = "topBox clearfix">
+                <h1> I AM AVAILABLE:</h1>
+
+                <div class="dateZoneBlock">
+                    <span class ="dateUTC">You are currently at UTC <?php echo $this->user['timezone']; ?></span>
+                    <p><span class ="dateHint">to change time zone go to General tab</span></p>
+                </div>
+            </div>
+            <div class = "bottomBox clearfix">
+                <?php
+                $daysOfWeek = array('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun');
+                $daysOfWeekFull = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
+                ?>
+                <form method='post' name='availability' action='/account/availability/'>
+                    <table class='table table-striped table-condensed'>
+                        <?php
+                        $day = 'checkbox';
+                        $availableFrom = 'selectFrom';
+                        $availableTo = 'selectTo';
+                        foreach ($daysOfWeek as $index => $value) {
+                            $$availableFrom = 'from' . $daysOfWeek[$index];
+                            $$day = 'checkbox' . $daysOfWeek[$index];
+
+                            $$availableTo = 'to' . $daysOfWeek[$index];
+                            echo "<tr><td>{$this->availabilityForm->$checkbox}<div class='dayCheckbox'></div></td><td>{$daysOfWeekFull[$index]}</td><td><div class='styledSelect'>{$this->availabilityForm->$selectFrom}</div></td> <td>to</td> <td><div class='styledSelect'>{$this->availabilityForm->$selectTo}</div></td></td></tr>";
+                        }
+
+                        ?>
+                    </table>
+                    <div class="buttonRow clearfix"><?php  echo $this->availabilityForm->save;?></div><!--End buttonRow-->
+                </form>
+            </div>
+        </div>
     </div>
-    <?php
-    $daysOfWeek = array('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun');
-    $daysOfWeekFull = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
-    ?>
-    <form method='post' name='availability' action='/account/availability/'>
-        <table class='table table-striped table-condensed'>
-            <?php
-            $day = 'checkbox';
-            $availableFrom = 'selectFrom';
-            $availableTo = 'selectTo';
-            foreach ($daysOfWeek as $index => $value) {
-                $$availableFrom = 'from' . $daysOfWeek[$index];
-                $$day = 'checkbox' . $daysOfWeek[$index];
-
-                $$availableTo = 'to' . $daysOfWeek[$index];
-                echo "<tr><td>{$this->availabilityForm->$checkbox}<div class='dayCheckbox'></div></td><td>{$daysOfWeekFull[$index]}</td><td><div class='styledSelect'>{$this->availabilityForm->$selectFrom}</div></td> <td>to</td> <td><div class='styledSelect'>{$this->availabilityForm->$selectTo}</div></td></td></tr>";
-            }
-
-            ?>
-        </table>
-        <?php  echo $this->availabilityForm->save;?>
-    </form>
-    <div class="lastSeparator"></div>
 </div>
