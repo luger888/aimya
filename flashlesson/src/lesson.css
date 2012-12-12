@@ -210,9 +210,6 @@
 views|NotesUI {
 	skinClass: ClassReference("com.aimialesson.UI.skins.NotesSkin");
 }
-views|HeaderUI {
-	skinClass: ClassReference("com.aimialesson.UI.skins.HeaderSkin");
-}
 views|VideoChatUI {
 	skinClass: ClassReference("com.aimialesson.UI.skins.VideoChatSkin");
 }
