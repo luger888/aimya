@@ -367,6 +367,29 @@ input.button-2 {
 .button-2.edit.disable {
     background-position: 0 -39px;
 }
+.button-2.createMessage {
+    background: url("../images/icons/createMessage.png") no-repeat scroll 0 4px transparent;
+    padding-left: 25px;
+}
+
+.button-2.createMessage:hover {
+    background-position: 0 -17px;
+}
+.button-2.trash {
+    background: url(../images/icons/trash.png) no-repeat 0 3px;
+}
+
+.button-2.trash:hover {
+    background-position: 0 -18px;
+}
+.button-2.archived {
+    background: url(../images/icons/archived.png) no-repeat 0 3px;
+}
+
+.button-2.archived:hover {
+    background-position: 0 -17px;
+}
+
 .disable{
     pointer-events: none;
     cursor: default;
@@ -1198,4 +1221,22 @@ input.button-2 {
     text-shadow: 1px 1px 1px black;
 
 }
+/*---MESSAGES (INBOX)-----------------------------------------------------------------*/
+#content .messageTab{
+    box-shadow: 0 0 9px #ccc;
+    background: #fff;
+    padding: 20px 32px 22px 32px;
+    position: relative;
+    min-height: 480px;
+    z-index: 2;
+}
 
+.messageTab .shadowSeparatorBox{
+    min-height: 416px;
+}
+.messageTab .messageButtons .trash, .messageTab .messageButtons .archived{
+    float:right;
+}
+.messageTab .messageButtons .archived{
+    padding-right:9px;
+}
