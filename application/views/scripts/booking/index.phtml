@@ -3,6 +3,9 @@
     #booking {
         display: none;
     }
+    .mainCalendar{
+        background-color: #f6f3e4;
+    }
 
     .fc-event-head .fc-event-focusName, .fc-event-head .fc-event-time {
         float: left;
@@ -49,27 +52,53 @@
         color: #719511;
     }
 
-
-    .ui-dialog-titlebar {
-        display: none
-    }
-
     ul li {
         text-decoration: none;
     }
 
     #dialog-form .mainBooking {
-        padding: 15px;
+        padding: 18px 42px 0 18px;
     }
-    .formRow div{
+    .mainBooking .formRow div{
         float:left;
     }
-    #started_at{
-        width:150px;
+
+    .mainBooking .formRow .t-165{
+        width:165px;
     }
-    .formRow .label{
-        width:100px;
+    .mainBooking .txt{
+        padding: 2px 9px 0 20px;
     }
+    .mainBooking #recipiend_id{
+        width:177px;
+    }
+    .mainBooking #duration{
+        width: 68px;
+    }
+     .mainBooking #rate{
+         width: 40px;
+     }
+    .mainBooking  .button{
+         font-family: 'dosissemibold' !important;
+         font-size: 12px !important;
+        float:right;
+     }
+
+    .mainBooking  .formRow .label{
+        width:95px;
+        padding-top: 2px;
+    }
+    .mainBooking .checkBoxRow div{
+        padding-top: 5px;
+    }
+    .mainBooking .checkBoxRow .label{
+        width: 114px;
+    }
+    .mainBooking .formRow {
+        padding-bottom: 19px;
+    }
+
+
     .fc-button-prev, .fc-button-next{
         width: 15px !important;
     }
@@ -108,9 +137,9 @@
     .fc-event-inner{
 
         color:#474940;
-        -webkit-box-shadow:  0 0 3px 0 rgba(0, 0, 0, 0.22) inset;
-        box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.22) inset;
-        -moz-box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.22) inset;
+        -webkit-box-shadow:  0 0 10px -7px rgba(0, 0, 0, 0.66) inset;
+        box-shadow: 0 0 10px -7px rgba(0, 0, 0, 0.66) inset;
+        -moz-box-shadow:  0 0 10px -7px rgba(0, 0, 0, 0.66) inset;
 
         overflow: visible;
     }
@@ -151,11 +180,8 @@
 
 </style>
 <div class="mainCalendar mainContainer clearfix">
-    <div class="shadowSeparator"></div>
-    <div id="dialog-form">
+    <div id="dialog-form" title="BOOKING DETAILS">
         <div class="mainBooking">
-            <div class="shadowSeparator"></div>
-            <div class="header">BOOKING:</div>
             <form method="post" action="" id = "booking">
                 <div class="formRow clearfix">
                     <div class = "label">Select User:</div>  <div><?php echo $this->bookingForm->recipiend_id;?></div></div>
@@ -164,16 +190,18 @@
                 <div class="formRow clearfix">
                     <div class = "label">Focus Name:</div> <div><?php echo $this->bookingForm->focus_name;?></div></div>
                 <div class="formRow clearfix">
-                    <div class = "label">Lesson Time:</div> <div><?php echo $this->bookingForm->duration;?></div><div>Rate:</div><div><?php echo $this->bookingForm->rate;?></div></div>
-                <div class="formRow clearfix">
+                    <div class = "label">Lesson Time:</div> <div><?php echo $this->bookingForm->duration;?></div><div class ="txt">Rate:</div><div><?php echo $this->bookingForm->rate;?></div></div>
+                <div class="formRow clearfix checkBoxRow">
                     <div class = "label">Video Recording:</div> <div><?php echo $this->bookingForm->video;?></div></div>
-                <div class="formRow clearfix">
+                <div class="formRow clearfix checkBoxRow">
                     <div class = "label">Feedback:</div> <div><?php echo $this->bookingForm->feedback;?></div></div>
-                <div class="formRow clearfix">
+                <div class="formRow clearfix checkBoxRow">
                     <div class = "label">Notes Copy:</div> <div><?php echo $this->bookingForm->notes;?></div></div>
                 <div class="formRow clearfix">
                     <div class = "label">Info:</div> <div><?php echo $this->bookingForm->add_info;?></div></div>
+                <div class ="buttonRow clearfix">
                 <?php echo $this->bookingForm->sendBooking;?>
+                </div>
             </form>
 
         </div>
@@ -296,7 +324,7 @@
 
             $("#dialog-form").dialog({
                 autoOpen:false,
-                height:550,
+                height:560,
                 width:450,
                 modal:true,
                 resizable:false,

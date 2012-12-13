@@ -1075,14 +1075,13 @@ input.button-2 {
     width: 166px;
 }
 /*---DIALOG JQUERY-----------------------------------------------------------------*/
-.ui-dialog{
+ .ui-dialog{
     display: block ;
     height: auto !important;
     left: 615.5px ;
     outline: 0 none;
     top: 388px;
-    width: 360px !important;
-    z-index: 1002 ;
+    z-index: 1002;
     padding:0 !important;
     border-top:none !important;
 }
