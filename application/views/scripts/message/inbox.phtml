@@ -5,7 +5,7 @@
 <div class= "messageContent">
 	<div class="messageButtons clearfix">
     	<span class="msgBtn createNew" onclick="document.location='/message/send/'">Create New</span>
-    	<span class="msgBtn trash" onclick="massDelete('<?php echo $action ?>')">Move to Trash</span>
+    	<span class="msgBtn trash" onclick="massTrash('<?php echo $action ?>')">Move to Trash</span>
     	<span class="msgBtn archived" onclick="massArchive('<?php echo $action ?>')" >Move to Archived</span>
 	</div>
     <div class = "userMessages">
@@ -29,7 +29,7 @@
                     $classNew = '';
                     $isNew = '';
                     if($message['recipient_status'] == 0) {
-                        $isNew = "/new";
+                        $isNew = "?status=new";
                         $classNew = ' class="newMessage"';
                     }
 	                echo '
@@ -39,7 +39,8 @@
                                     <span' . $classNew. '>'.$message['sender_id'].'</span>
                                     <span' . $classNew. '>'.$message['theme'].'</span>
                                     <span>'.$message['text'].'</span></a>
-                                <span class="actions">'. $singleAction .'</span>
+                                    <span><a href="/message/reply/message_id/' . $message['id'] . '/current_action/"'. $action .'>reply</a></span>
+                                    <span><a href="/message/forward/message_id/' . $message['id'] . '/current_action/"'. $action .'>reply</a></span>
 	                        </td>
 	                    </tr>
 	                    ';

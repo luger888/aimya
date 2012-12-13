@@ -212,6 +212,29 @@ function messageAction(element_id, action) {
     return false;
 }
 
+function massTrash(current_action) {
+    jQuery("body").append('<div class="loadingIcon"></div>');
+    ids = [];
+    $('.messageCheckboxes:checkbox:checked').each(function() {
+        ids.push($(this).val());
+    });
+
+    idsString = ids.toString();
+    $.ajax({
+        url: "/message/masstrash",
+        type: "post",
+        data: {
+            'message_ids' : idsString,
+            'current_action' : current_action
+        },
+        success: function(result) {
+            jQuery('.loadingIcon').remove();
+            window.location.href = "/message/" + current_action + "/current_action/" + current_action;
+        }
+    });
+
+}
+
 function massDelete(current_action) {
     jQuery("body").append('<div class="loadingIcon"></div>');
     ids = [];

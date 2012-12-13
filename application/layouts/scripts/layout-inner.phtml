@@ -83,9 +83,9 @@ if (Zend_Registry::isRegistered('username')) {
 
                     <nav id="globalNav">
                         <ul>
-                            <li><a href="#">HOME</a></li>
+                            <li><a href="#"><?php echo $this->translate("HOME"); ?></a></li>
                             <li><a href="#">PRIVACY POLICY</a></li>
-                            <li><a href="#">ABOUT AIMYA</a></li>
+                            <li><a href="<?php //echo $this->baseUrl() ?>">ABOUT AIMYA</a></li>
                             <li><a href="#">HELP</a></li>
                             <li class="last"><a href="/user/logout/">SIGN OUT</a></li>
 
