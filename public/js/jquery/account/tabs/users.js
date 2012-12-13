@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
 });
     /* USER RELATIONS STATUSES: */
 var blockedUser = 2;
@@ -10,6 +11,7 @@ var removedUser = 3;
             $( "#block-confirm" ).dialog({
                 resizable: false,
                 height:140,
+                width:360,
                 modal: true,
                 buttons: {
                     "Yes": function() {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <s:SparkSkin xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" 
-             xmlns:fb="http://ns.adobe.com/flashbuilder/2009" alpha.disabled="0.5" width="{lbl.x + lbl.width - 5}">
+             xmlns:fb="http://ns.adobe.com/flashbuilder/2009" alpha.disabled="0.5">
     
     <!-- host component -->
     <fx:Metadata>
@@ -12,6 +12,7 @@
     
     <fx:Script fb:purpose="styling">
         <![CDATA[         
+			import com.aimialesson.model.Presentation;
             /* Define the skin elements that should not be colorized. 
             For button, the graphics are colorized but the label is not. */
             static private const exclusions:Array = ["labelDisplay"];
@@ -39,6 +40,7 @@
         <s:State name="disabled" />
     </s:states>
 	<s:BitmapImage source="@Embed('flashassets/upload_icon.png')" verticalCenter="0"/>
-	<s:Label id="lbl" text="UPLOAD" x="24"  verticalCenter="0"  styleName="ButtonLabelStyle"/>
-    
+	<s:Label id="lbl" visible="{!Presentation.getInstance().loaded}" includeInLayout="{!Presentation.getInstance().loaded}" text="UPLOAD" x="24"  verticalCenter="0"  styleName="ButtonLabelStyle"/>
+	<s:Label id="lbl1" visible="{Presentation.getInstance().loaded}" includeInLayout="{Presentation.getInstance().loaded}" text="UPLOAD MORE" x="24"  verticalCenter="0"  styleName="ButtonLabelStyle"/>
+	
 </s:SparkSkin>

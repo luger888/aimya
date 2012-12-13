@@ -51,7 +51,39 @@
 	fontStyle: normal;
 	fontWeight: normal;
 	color: #1D3300;
+	fontSize: 11;
+}
+
+.StopButtonLabelStyle {
+	fontFamily: Dosis;
+	fontStyle: normal;
+	fontWeight: normal;
+	color: #FFFFFF;
 	fontSize: 12;
+}
+
+.ButtonYesLabelStyle {
+	fontFamily: Dosis;
+	fontStyle: normal;
+	fontWeight: normal;
+	color: #334911;
+	fontSize: 12;
+}
+
+.ButtonNoLabelStyle {
+	fontFamily: Dosis;
+	fontStyle: normal;
+	fontWeight: normal;
+	color: #FFFFFF;
+	fontSize: 11;
+}
+
+.PreloaderImageTextStyle {
+	fontFamily: Dosis;
+	fontStyle: normal;
+	fontWeight: normal;
+	color: #5A5A5A;
+	fontSize: 24;
 }
 
 .HeaderStyle {
@@ -95,7 +127,7 @@
 }
 
 .TimeValueStyle {
-	fontFamily: Times New Roman;
+	fontFamily: Arial;
 	fontStyle: normal;
 	fontWeight: normal;
 	color: #C24040;
@@ -107,7 +139,7 @@
 	fontStyle: italic;
 	fontWeight: normal;
 	color: #1E1E1E;
-	fontSize: 15;
+	fontSize: 13;
 }
 
 .RoleStyle {
@@ -123,7 +155,7 @@
 	fontStyle: normal;
 	fontWeight: normal;
 	color: #434343;
-	fontSize: 12;
+	fontSize: 11;
 }
 
 .NoteBodyStyle {
@@ -150,11 +182,33 @@
 	fontSize: 12;
 }
 
+.PopUpTitleStyle {
+	fontFamily: Arial;
+	fontStyle: normal;
+	fontWeight: normal;
+	color: #fefefe;
+	fontSize: 12;
+}
+
+.PopUpTextStyle {
+	fontFamily: Arial;
+	fontStyle: normal;
+	fontWeight: normal;
+	color: #000000;
+	fontSize: 12;
+}
+
+.PresentationProgressTextStyle {
+	fontFamily: Arial;
+	fontStyle: normal;
+	fontWeight: normal;
+	color: #000000;
+	fontSize: 11;
+}
+
+
 views|NotesUI {
 	skinClass: ClassReference("com.aimialesson.UI.skins.NotesSkin");
-}
-views|HeaderUI {
-	skinClass: ClassReference("com.aimialesson.UI.skins.HeaderSkin");
 }
 views|VideoChatUI {
 	skinClass: ClassReference("com.aimialesson.UI.skins.VideoChatSkin");
@@ -167,4 +221,11 @@ views|PresentationUI {
 }
 views|UploadUI {
 	skinClass: ClassReference("com.aimialesson.UI.skins.UploadSkin");
+}
+
+.title{
+	font-family :Verdana;
+	font-size :10;
+	font-weight :bold;
+	color :#ffffff;
 }

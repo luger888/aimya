@@ -5,17 +5,18 @@ class BookingController extends Zend_Controller_Action
 
     public function init()
     {
-        $this->_helper->layout->setLayout("layoutInside");
+        $this->_helper->layout->setLayout("layoutInner");
         $this->_helper->AjaxContext()
             ->addActionContext('index', 'json')
             ->addActionContext('add', 'json')
+            ->addActionContext('count', 'json')
             ->initContext('json');
     }
 
     public function indexAction()
     {
         $this->view->headLink()->appendStylesheet('../../js/fullcalendar/fullcalendar.css');
-        $this->view->headScript()->appendFile('../../js/fullcalendar/fullcalendar.min.js');
+        $this->view->headScript()->appendFile('../../js/fullcalendar/fullcalendar.js');
         $identity = Zend_Auth::getInstance()->getIdentity();
         $bookingDbTable = new Application_Model_DbTable_Booking();
         $this->view->bookingForm = new Application_Form_Booking();
@@ -57,6 +58,19 @@ class BookingController extends Zend_Controller_Action
 
             }
         }
+    }
+
+    public function countAction()
+    {
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+        $bookingTable = new Application_Model_DbTable_Booking();
+        $bookingCount = $bookingTable->getNewBookingCount($userId);
+
+        $this->view->bookingCount = $bookingCount;
+
     }
 
 }

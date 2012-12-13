@@ -1,37 +1,55 @@
-    <!--LIST OF SERVICES -->
-    <div class="servicesTab">
-        <div class="firstSeparator"></div>
-        <?php foreach ($this->services as $value): ?>
-        <div class='service'>
-            <div id="lesson_category" class="serviceTitle"><?php echo $value['lesson_category'];?></div>
-            <div class = "serviceBody">
-                <div id="subcategory"><?php echo $value['subcategory'];?></div>
-            </div>
 
+<div class="servicesTab clearfix">
 
-            <input type='button' id='editService' class = "buttonService edit" value='Edit'  onclick='editService(this, 2);return false;'>
-            <input type='button' id='deleteService' class = "buttonService delete" value='Delete' onclick='deleteService(this);return false;'>
-            <input type='hidden' value=" <?php echo $value['id'];?>">
-            <input type='hidden' value=" <?php $value['service_type'];?>">
-            <div class="middleSeparator"></div>
+    <?php foreach ($this->services as $value): ?>
 
+    <div class='service clearfix'>
+    <div class="shadowSeparator clearfix">
+    <div class="shadowSeparatorBox clearfix">
+
+        <div class="titleRow clearfix">
+            <h2 id="lesson_category"><?php echo $value['lesson_category'];?></h2>
+            <div class="buttons clearfix">
+                <input type='button' id='deleteService' class = "button-2 delete" value='Delete' onclick='deleteService(this);return false;'>
+                <input type='button' id='editService' class = "button-2 edit" value='Edit'  onclick='editService(this, 2);return false;'>
+
+                <input type='hidden' value=" <?php echo $value['id'];?>">
+            </div><!--End buttons-->
+        </div><!--End titleRow-->
+
+        <div class = "serviceBody short clearfix">
+            <span id="subcategory"><?php echo $value['subcategory'];?></span>
         </div>
-        <?php endforeach;?>
-        <!-- END LIST OF SERVICES -->
 
-        <!-- SERVICE FORM -> ADD NEW: css display:none;-->
-        <div id="addRequestService">
-            <form method="post" name="serviceDetails" action="/account/services" id="serviceForm">
-                <div class="row-fluid">
-                    <div class="span12">
-                        <?php echo $this->servicesForm->service_type; ?>
-                        <?php echo $this->servicesForm->lesson_category; ?>
-                        <?php echo $this->servicesForm->subcategory; ?>
-                    </div>
-                </div>
+
+        
+
+    </div><!--End shadowSeparatorBox-->
+    </div><!--End shadowSeparator-->
+    </div><!--End service -->
+
+    <?php endforeach;?>
+    <!-- END LIST OF SERVICES -->
+
+    <div id="addRequestService">
+    <div class="shadowSeparator clearfix">
+    <div class="shadowSeparatorBox bg-none clearfix">
+        <form method="post" name="serviceDetails" action="/account/services" id="serviceRequestForm" class = "serviceForm">
+            <div class="formRow clearfix">
+                    <?php echo $this->servicesForm->service_type; ?>
+                    <span class="s-116"><?php echo $this->servicesForm->lesson_category; ?></span>
+                    <span class="field-116"><?php echo $this->servicesForm->subcategory; ?></span>
+            </div><!--End formRow -->
+            <div class="buttonsRow clearfix">
                 <?php echo $this->servicesForm->saveService; ?>
-            </form>
-        </div>
-        <!-- END SERVICE FORM -> ADD NEW : display:block addService form-->
-        <input type="button" class = "buttonService add" id="addMoreRequestServices" value="Add More" onclick="addRequestService();">
-    </div>
+            </div><!--End buttonsRow-->
+        </form>
+        <div class="buttonsRow clearfix">
+            <input type="button" class = "button-2 add" id="addMoreRequestServices" value="Add More" onclick="addRequestService();">
+        </div><!--End buttonsRow-->
+    </div><!--End shadowSeparatorBox-->
+    </div><!--End shadowSeparator-->    
+    </div><!--End addRequestService -->
+
+
+</div>

@@ -62,7 +62,7 @@ package com.aimialesson.UI.views
 	//		messageInput.text = Media.getInstance().userName + ": " + messageInput.text;
 			var date:Date = new Date();
 			debug ("date.getTime():" + date.getTime());
-			this.dispatchEvent( new NotesEvent ( NotesEvent.ADD_NEW_LINE,  {message:messageInput.text, name:User.getInstance().userName, date:date.getTime()}) );
+			this.dispatchEvent( new NotesEvent ( NotesEvent.ADD_NEW_LINE,  {message:messageInput.text, name:User.getInstance().userName, date:date.getTime() + User.getInstance().timeZone}) );
 			messageInput.text = "";
 		}
 		
@@ -78,4 +78,3 @@ package com.aimialesson.UI.views
 		}
 	}
 }
-class SingletonEnforcer{}

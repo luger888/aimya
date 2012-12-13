@@ -5,6 +5,8 @@ package com.aimialesson.controllers
 	import com.aimialesson.model.Media;
 	
 	import flash.events.*;
+	import flash.media.Camera;
+	import flash.media.Microphone;
 	import flash.net.NetStream;
 
 //	[Event (name="myStreamInitComplete", type="com.aimialesson.events.AppEvent")]
@@ -21,6 +23,7 @@ package com.aimialesson.controllers
 			Media.getInstance().myNetStream.addEventListener( NetStatusEvent.NET_STATUS, netStatusHandler );
 			Media.getInstance().myNetStream.addEventListener( IOErrorEvent.IO_ERROR, netIOError );
 			Media.getInstance().myNetStream.addEventListener( AsyncErrorEvent.ASYNC_ERROR, netASyncError );
+			myVideoInit();
 		}
 		
 		public function initPartnerNetStream () : void {
@@ -30,6 +33,7 @@ package com.aimialesson.controllers
 			Media.getInstance().partnerNetStream.addEventListener( NetStatusEvent.NET_STATUS, netStatusHandler );
 			Media.getInstance().partnerNetStream.addEventListener( IOErrorEvent.IO_ERROR, netIOError );
 			Media.getInstance().partnerNetStream.addEventListener( AsyncErrorEvent.ASYNC_ERROR, netASyncError );
+			Media.getInstance().partnerNetStream.play(Media.getInstance().partnerStreamName);
 		}
 		
 		public function closeConnect() : void {
@@ -37,7 +41,7 @@ package com.aimialesson.controllers
 			Media.getInstance().myNetStream.close();
 			Media.getInstance().partnerNetStream.close();
 		}
-		
+				
 		protected function netStatusHandler( event : NetStatusEvent ) : void {
 			debug("netStatusHandler");
 			
@@ -54,6 +58,31 @@ package com.aimialesson.controllers
 			}
 		}
 		
+		public function myVideoInit():void {
+			debug("StreamController:myVideoInit");
+			Media.getInstance().cam = Camera.getCamera();
+			Media.getInstance().mic = Microphone.getMicrophone();
+			if ( Media.getInstance().cam != null ) 
+			{
+				Media.getInstance().cam.setMode(320, 240, 32);
+				Media.getInstance().cam.setQuality(0, 80);
+				Media.getInstance().myNetStream.attachCamera(Media.getInstance().cam);
+			}
+			if ( Media.getInstance().mic != null) 
+			{
+				Media.getInstance().myNetStream.attachAudio(Media.getInstance().mic);
+			}
+			//Media.getInstance().myNetStream.bufferTime = 3;
+			Media.getInstance().myNetStream.publish(Media.getInstance().myStreamName, "live");
+		}
+		
+
+
+		/*private function onSessionStartedChange (event:Event) : void {
+			if (Main.getInstance().session_started) Media.getInstance().partnerNetStream.play(Media.getInstance().partnerStreamName);
+			else Media.getInstance().partnerNetStream.pause();
+		}*/
+
 		/*protected function netSecurityError( event : SecurityErrorEvent ) : void 
 		{
 		// Pass SecurityErrorEvent to Command.
@@ -69,9 +98,43 @@ package com.aimialesson.controllers
 			debug("Asynchronous code error - <i>" + event.error + "</i>");
 		}
 		
+		public function myVideoMute():void {
+			Media.getInstance().camPaused = !Media.getInstance().camPaused;
+			if (Media.getInstance().camPaused){
+				Media.getInstance().myNetStream.attachCamera(null);
+			} else {
+				Media.getInstance().myNetStream.attachCamera(Media.getInstance().cam);
+			}
+		}
+		
+		public function myAudioMute():void {
+			Media.getInstance().micPaused = !Media.getInstance().micPaused;
+			if (Media.getInstance().micPaused){
+				Media.getInstance().myNetStream.attachAudio(null);
+			} else {
+				Media.getInstance().myNetStream.attachAudio(Media.getInstance().mic);
+			}
+		}
+		
+		public function partnerVideoMute():void {
+			Media.getInstance().partnerCamPaused = !Media.getInstance().partnerCamPaused;
+			Media.getInstance().partnerNetStream.receiveVideo(!Media.getInstance().partnerCamPaused);
+			//not sure why i need to do it, but other way receiveVideo works buggly
+			//if (!Media.getInstance().partnerCamPaused)	Media.getInstance().partnerNetStream.resume();
+		}
+		
+		public function partnerAudioMute():void {
+			Media.getInstance().partnerMicPaused = !Media.getInstance().partnerMicPaused;
+			debug ("partnerAudioMute:" + Media.getInstance().partnerMicPaused);
+			Media.getInstance().partnerNetStream.receiveAudio(!Media.getInstance().partnerMicPaused);
+			//not sure why i need to do it, but other way receiveAudio works buggly
+			//if (!Media.getInstance().partnerMicPaused)	Media.getInstance().partnerNetStream.resume();
+		}
+		
 		private function debug(str:String):void {
 			if (Main.getInstance().debugger != null)
 				Main.getInstance().debugger.text += str + "\n";
 		}
+
 	}
 }

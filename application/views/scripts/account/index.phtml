@@ -1,66 +1,117 @@
-<div id="tabs">
-    <ul>
-        <li><a href="#tabs-1">GENERAL</a></li>
-        <?php if($this->role !== '1'){echo  '<li><a href="/account/services">SERVICE DETAILS</a></li>';}?>
-        <li><a href="/account/requestservices">REQUEST SERVICES</a></li>
-        <li><a href="/account/availability">AVAILABILITY</a></li>
-        <li><a href="/account/notifications">NOTIFICATIONS/ACCOUNT SETTINGS</a></li>
-        <li><a href="/account/users">USERS</a></li>
-        <li><a href="/account/metrics">MY METRICS</a></li>
-    </ul>
-    <div id="tabs-1">
-        <div class="profile">
-            <div class="firstSeparator"></div>
-            <h3>YOUR BASIC INFORMATION:</h3>
-            <form method="post" name="profile" action="" enctype="multipart/form-data">
-                <div class="profileAvatar"><div class="profileAvaImg"><img src="<?php echo $this->avatarPath;?>" alt="avatar">
-                    ​</div>
-                    <?php echo $this->profile->avatar; ?>
-                    <input type="button" id="uploadAvatar" value="UPLOAD" />
-                    <input type="button" id="removeAvatar" value="DELETE" />
-                </div>
+<div id="tabs" class="tabsHolder clearfix">
+    
+    <div id="tabsNavigation" class="clearfix">
 
-                <ul>
+        <ul>
+            <li><a href="#tabs-1">GENERAL</a></li>
+            <?php if($this->role !== '1'){echo  '<li><a href="' . $this->baseUrl() . '/account/services">SERVICE DETAILS</a></li>';}?>
+            <li><a href="<?php echo $this->baseUrl()?>/account/requestservices">REQUEST SERVICES</a></li>
+            <li><a href="<?php echo $this->baseUrl()?>/account/availability">AVAILABILITY</a></li>
+            <li><a href="<?php echo $this->baseUrl()?>/account/notifications">NOTIFICATIONS/ACCOUNT SETTINGS</a></li>
+            <li><a href="<?php echo $this->baseUrl()?>/account/users">USERS</a></li>
+            <li><a href="<?php echo $this->baseUrl()?>/account/metrics">MY METRICS</a></li>
+        </ul>
+
+    </div><!--End tabsNavigation-->
+
+    <div class="mainContainer clearfix">
+        
+    
+        <div id="tabs-1" class="clearfix">
+
+            <div class="profileGeneral">
+                
+
+                <form method="post" name="profile" action="" enctype="multipart/form-data">
+
+                    <div class="shadowSeparator clearfix">
+                    <div class="shadowSeparatorBox clearfix">
+
+                        <div class="leftCol">
+
+                            <h1>YOUR BASIC INFORMATION:</h1>
+
+                            
+                            <div class="formRow clearfix"> 
+                                <label class="title">First Name:</label>
+                                <div class="formElem"><?php echo $this->profile->firstname; ?></div>
+                            </div><!--End formRow-->
+
+                            <div class="formRow clearfix"> 
+                                <label class="title">Last Name:</label> 
+                                <div class="formElem"><?php echo $this->profile->lastname; ?></div>
+                            </div><!--End formRow-->
+
+                            <div class="formRow radio clearfix"> 
+                                <label class="title">Gender:</label> 
+                                <div class="formElem"><?php echo $this->profile->gender; ?></div>
+                            </div><!--End formRow-->
+
+                            <div class="formRow clearfix"> 
+                                <label class="title">Login:</label> 
+                                <div class="formElem"><?php echo $this->profile->username; ?></div>
+                            </div><!--End formRow-->
+
+                            <div class="formRow clearfix"> 
+                                <label class="title">DOB:</label>
+                                <div class="formElem"><?php echo $this->profile->birthday; ?> <span class="add-on"></span> </div>
+                            </div><!--End formRow-->
+
+                            <div class="formRow clearfix"> 
+                                <label class="title">Language:</label> 
+                                <div class="formElem"><?php echo $this->profile->language; ?></div>
+                            </div><!--End formRow-->
+
+                            <div class="formRow clearfix"> 
+                                <label class="title">Email:</label> 
+                                <div class="formElem"><?php echo $this->profile->email; ?></div>
+                            </div><!--End formRow-->
+
+                            <div class="formRow clearfix"> 
+                                <label class="title">Time Zone:</label>
+                                <div class="formElem"><?php echo $this->profile->timezone; ?></div>
+                            </div><!--End formRow--> 
+                            
+                        </div><!--End leftCol-->
+
+                        <div class="rightCol">
+
+                            <div class="profileAvatar">
+                                <div class="profileAvaBox clearfix">
+                                    <div class="profileAvaImg"><img src="<?php echo $this->avatarPath;?>" alt="avatar"></div>
+                                </div><!--End profileAvaBox-->
+                                <div class="profileAvaButtons clearfix">
+                                    <?php echo $this->profile->avatar; ?>
+                                    <input type="button" id="uploadAvatar" class="button-2 upload" value="UPLOAD" />
+                                    <input type="button" id="removeAvatar" class="button-2 delete disable" value="DELETE" />
+                                </div><!--End profileAvaButtons-->
+                            </div>
+                            
+                        </div><!--End rightCol-->
 
 
-                    <li> <span>First Name:</span>  <?php echo $this->profile->firstname; ?></li>
+                    </div><!--End shadowSeparatorBox-->
+                    </div><!--End shadowSeparator--> 
 
-                    <li> <span>Last Name:</span> <?php echo $this->profile->lastname; ?></li>
+                    <div class="shadowSeparator clearfix">
+                    <div class="shadowSeparatorBox clearfix"> 
 
-                    <li> <span>Gender:</span> <?php echo $this->profile->gender; ?></li>
+                        <h2>INTRODUCE YOURSELF:</h2>
+                        <div class="formRow clearfix"><?php echo $this->profile->add_info; ?></div><!--End formRow-->
+                        <div class="buttonRow clearfix"><?php echo $this->profile->saveProfile; ?></div><!--End buttonRow-->
 
-                    <li> <span>Login:</span> <?php echo $this->profile->username; ?></li>
+                    </div><!--End shadowSeparatorBox-->
+                    </div><!--End shadowSeparator--> 
 
-                    <li> <span>DOB:</span> <?php echo $this->profile->birthday; ?> <span class="add-on"></span> </li>
+                </form>    
+                    
+            </div><!--End profileGeneral-->  
 
-                    <li> <span>Language:</span> <?php echo $this->profile->language; ?></li>
+        </div><!--End Tab-->
 
-                    <li> <span>Email:</span> <?php echo $this->profile->email; ?></li>
+    </div><!--End mainContainer-->
 
-                    <li> <span>Time Zone:</span><?php echo $this->profile->timezone; ?></li>
-                    <li> <div class="introduceLabel">INTRODUCE YOURSELF:</div></li>
-                    <li> <?php echo $this->profile->add_info; ?></li>
-                </ul>
-
-                <div class="row-fluid">
-                    <div class="span12 offset3">
-                        <?php echo $this->profile->saveProfile; ?>
-                    </div>
-                </div>
-            </form>
-            <div class="lastSeparator"></div>
-        </div>
-        <!--End PROFILE  -->
-    </div>
-
-    <div id="tabs-3">
-    </div>
-    <div id="tabs-4">
-    </div>
-    <div id="tabs-5">
-    </div>
-
-</div>
+</div><!--End tabs-->
 
 
 

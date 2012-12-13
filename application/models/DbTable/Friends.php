@@ -8,16 +8,17 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
     public function getUserRelations($userId)
     {
         $userId = (int)$userId;
+
         $row = $this->fetchAll(
             $this->select()
-                ->where('(' . $this->getAdapter()->quoteInto('sender_id=?' , $userId) . ') OR (' . $this->getAdapter()->quoteInto('friend_id=?' , $userId) . ')')
+                ->where($this->getAdapter()->quoteInto('sender_id=?' , $userId) . ' OR ' . $this->getAdapter()->quoteInto('friend_id=?' , $userId))
                 ->where('sender_status=?' , 1)
                 ->where('recipient_status=?' , 1)
+                ->group('id')
         );
         if (!$row) {
             throw new Exception("There is no element with ID: $userId");
         }
-
         return $row->toArray();
     }
 

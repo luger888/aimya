@@ -9,6 +9,11 @@
         [HostComponent("spark.components.Button")]
         ]]>
     </fx:Metadata>
+	<fx:Script>
+		<![CDATA[
+			import com.aimialesson.model.Media;
+		]]>
+	</fx:Script>
     
     <fx:Script fb:purpose="styling">
         <![CDATA[         
@@ -39,6 +44,6 @@
         <s:State name="disabled" />
     </s:states>
 
-	<s:BitmapImage source="@Embed('flashassets/mic_sample.jpeg')" y="-3" width="30" height="30" scaleMode="letterbox"/>
-    
+	<s:BitmapImage source="@Embed('flashassets/microphone.png')" y="-3" />
+	
 </s:SparkSkin>

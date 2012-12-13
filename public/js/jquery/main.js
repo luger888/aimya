@@ -1,13 +1,5 @@
 $(document).ready(function() {
 
-    //$('#wrap').css('background-position', $('.accountContent').offset().left + 4 + 'px 0');
-
-    $('.leftBg').css('min-height', $('#wrap').height());
-
-    $(window).resize(function(){
-        $('.leftBg').css('min-height', $('#wrap').height());
-        //$('#wrap').css('background-position', $('.accountContent').offset().left + 4 + 'px 0');
-    });
 
     //---Home page member buttons--------------------------------------------------------------------------------
 
@@ -16,7 +8,7 @@ $(document).ready(function() {
 
     //---Styling radio and checkbox buttons--------------------------------------------------------------------------------
 
-    $('#remember').checkRadio({
+    $('input[type="checkbox"]').checkRadio({
         wrapperClass: 'checkboxWrapper',
         chekedClass: 'checked'
     });
@@ -29,7 +21,7 @@ $(document).ready(function() {
     $('.memberButtons label').each(function(){
         $(this).find( '.txt' ).appendTo($(this).find('.radioBoxWrapper'));
     });
-    
+
 
 
 
@@ -74,7 +66,7 @@ $(document).ready(function() {
             {cache:true,
                 load: function (e, ui) {
                     $(ui.panel).find(".tab-loading").remove();
-                    uploadify();
+//                    uploadify();
                 },
                 select: function( e, ui )
                 {
@@ -161,7 +153,7 @@ $(document).ready(function() {
 
                 if(messagesCount > 0) {
                     if($(".newMessagesCount").length) $(".newMessagesCount").remove();
-                    inboxLi = $('a[href="/message/inbox"]').parent();
+                    inboxLi = $('.leftNavigation').find($('a[href="/message/inbox"]')).parent();
                     inboxLi.append('<span class="newMessagesCount">' + messagesCount + '</span>')
                 }
             }
@@ -169,19 +161,36 @@ $(document).ready(function() {
         return false;
     }
 
+    setInterval(getNewBookingCount, 60000);
+    getNewBookingCount();
+    function getNewBookingCount() {
+        jQuery.ajax({
+            url: "/booking/count",
+            type: "get",
+            success: function(result) {
+                bookingCount = parseInt(result.bookingCount.id);
+                if(bookingCount > 0) {
+                    if($(".newBookingCount").length) $(".newBookingCount").remove();
+                    inboxLi = $('.leftNavigation').find($('a[href="/booking"]')).parent();
+                    inboxLi.append('<span class="newBookingCount">' + bookingCount + '</span>')
+                }
+            }
+        });
+        return false;
+    }
 });
-function uploadify(){
-    //$(function() {
-    $('#file_upload').uploadifive({
-        'auto'         : false,
-        'formData'     : {'experienceUpload' : 'certificate'},
-        'queueID'      : 'queue',
-        'folder'        : '/img/uploads/' + $(this).attr('id'),
-        'uploadScript' : '/resume/upload',
-        'onUploadComplete' : function(file, data) {
-        }
-    });
-}
+//function uploadify(){
+//    //$(function() {
+//    $('#file_upload').uploadifive({
+//        'auto'         : false,
+//        'formData'     : {'experienceUpload' : 'certificate'},
+//        'queueID'      : 'queue',
+//        'folder'        : '/img/uploads/' + $(this).attr('id'),
+//        'uploadScript' : '/resume/upload',
+//        'onUploadComplete' : function(file, data) {
+//        }
+//    });
+//}
 
 function messageAction(element_id, action) {
     tmpArr = element_id.split('_');
@@ -203,11 +212,79 @@ function messageAction(element_id, action) {
     return false;
 }
 
+function massTrash(current_action, url) {
+    jQuery("body").append('<div class="loadingIcon"></div>');
+    ids = [];
+    $('.messageCheckboxes:checkbox:checked').each(function() {
+        ids.push($(this).val());
+    });
+
+    idsString = ids.toString();
+    $.ajax({
+        url: url + "/message/masstrash",
+        type: "post",
+        data: {
+            'message_ids' : idsString,
+            'current_action' : current_action
+        },
+        success: function(result) {
+            jQuery('.loadingIcon').remove();
+            window.location.href = url+ "/message/" + current_action + "/current_action/" + current_action;
+        }
+    });
+
+}
+
+function massDelete(current_action, url) {
+    jQuery("body").append('<div class="loadingIcon"></div>');
+    ids = [];
+    $('.messageCheckboxes:checkbox:checked').each(function() {
+        ids.push($(this).val());
+    });
+
+    idsString = ids.toString();
+    $.ajax({
+        url: url + "/message/massdelete",
+        type: "post",
+        data: {
+            'message_ids' : idsString,
+            'current_action' : current_action
+        },
+        success: function(result) {
+            jQuery('.loadingIcon').remove();
+            window.location.href = url + "/message/" + current_action + "/current_action/" + current_action;
+        }
+    });
+
+}
+
+function massArchive(current_action, url) {
+    jQuery("body").append('<div class="loadingIcon"></div>');
+    ids = [];
+    $('.messageCheckboxes:checkbox:checked').each(function() {
+        ids.push($(this).val());
+    });
+
+    idsString = ids.toString();
+    $.ajax({
+        url: url + "/message/massarchive",
+        type: "post",
+        data: {
+            'message_ids' : idsString,
+            'current_action' : current_action
+        },
+        success: function(result) {
+            jQuery('.loadingIcon').remove();
+            window.location.href = url + "/message/" + current_action + "/current_action/" + current_action;
+        }
+    });
+}
+
 /*---PIE - add css3 to ie 7 and ie8 -----------------------------------------------------*/
 
 $(function() {
     if (window.PIE) {
-      $('#username-login, #password-login, .button').each(function() {
+      $('.boxShadow, #username-login, #password-login, .button, #tabsNavigation ul, #tabsNavigation ul li, .mainContainer').each(function() {
       PIE.attach(this);
     });//each
   }//if

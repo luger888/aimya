@@ -40,9 +40,9 @@
 	</fx:Script>
 		<!--s:SkinnableContainer id="cont" skinClass="com.aimialesson.UI.skins.elements.PresentationContainerSkin" width="100%" height="100%"-->
 		<s:Group width="100%" height="100%">
-			<s:BitmapImage id="presentationBG" source="@Embed('flashassets/presentation_background.png')"  left="0" />
-			<views:PresentationUI id="presentation"  visible="{Presentation.getInstance().loaded}" includeInLayout="{Presentation.getInstance().loaded}" width="{presentationBG.width}" height="{presentationBG.height}"/>
-			<views:UploadUI id="upload"  visible="{!Presentation.getInstance().loaded}"  top="10" bottom="10" left="10" right="10"/>
+			<s:BitmapImage id="presentationBG" source="@Embed('flashassets/presentation_background.png')" horizontalCenter="0" verticalCenter="0"/>
+			<views:PresentationUI id="presentation"  visible="{Presentation.getInstance().loaded}" includeInLayout="{Presentation.getInstance().loaded}" x="{presentationBG.x}" y="{presentationBG.y}"  width="{presentationBG.width}" height="{presentationBG.height}"/>
+			<views:UploadUI id="upload"   x="{presentationBG.x + 10}" y="{presentationBG.y + 10 }" width="{presentationBG.width - 20}" height="{presentationBG.height - 20}"/>
 		</s:Group>	
 			
 		<!--/s:SkinnableContainer--> 

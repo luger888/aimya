@@ -6,3 +6,7 @@ input.button {
 	line-height: 27px;
     border: 0;
 }
+
+input.button-2 {
+	line-height: 18px;
+}

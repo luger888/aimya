@@ -13,9 +13,11 @@
 			import com.aimialesson.model.User;
 		]]>
 	</fx:Script>
-	<s:HGroup>
-		<s:RichText text="{User.getInstance().partnerRoleID == User.STUDENT?'ONLINE STUDENT:':'ONLINE INSTRUCTOR:'}" styleName="HeaderStyle" />
-		<s:RichText id="partnerUserName" text="{User.getInstance().partnerName}" styleName="SmallNameStyle"/>
-		<elements:Lamp id="partnerLamp" />
+	<s:HGroup verticalAlign="middle">
+		<s:HGroup verticalAlign="bottom">
+			<s:RichText text="{User.getInstance().partnerRoleID == User.STUDENT?'ONLINE STUDENT:':'ONLINE INSTRUCTOR:'}" styleName="HeaderStyle" />
+			<s:RichText id="partnerUserName" text="{User.getInstance().partnerName}" styleName="SmallNameStyle"/>
+		</s:HGroup>
+		<elements:Lamp id="partnerLamp"  online="{User.getInstance().partnerIsOnline}"/>
 	</s:HGroup>
 </s:Group>

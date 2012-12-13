@@ -38,7 +38,7 @@ $controllerName = $front->getRequest()->getControllerName();
 
 <div id="page" class="clearfix">
 <div id="globalWrapper" class="clearfix">
-    
+
     <div id="wrapper" class="clearfix">
 
         <div id="header" class="clearfix">
@@ -48,14 +48,14 @@ $controllerName = $front->getRequest()->getControllerName();
             <?php
             echo "
             <div id='loginFormHolder'>
-                <form id='signIn' action='user/login' name='signIn'  method='post'>
+                <form id='signIn' action='" . $this->baseUrl() . "/user/login' name='signIn'  method='post'>
                 <div class='signInButton'>
                     {$this->login['login']}
                 </div><!--End signInButton-->
                 <div class='signInBox'>
                     <label class='title'>Password:</label>
                     {$this->login['password']}
-                    <a href='#'>Forgot your password?</a>
+                    <a href='" . $this->baseUrl() . "'>Forgot your password?</a>
                 </div><!--End signInBox-->
                 <div class='signInBox'>
                     <label class='title'>Login or email:</label>
@@ -71,9 +71,9 @@ $controllerName = $front->getRequest()->getControllerName();
             <!-- END /LOGIN -->
         </div><!--End header-->
 
-        
+
         <div id="content" class="homePage clearfix">
-            
+
             <div class="messages clearfix">
                 <?php echo $this->flashMessages();?>
             </div><!--End messages-->
@@ -86,12 +86,14 @@ $controllerName = $front->getRequest()->getControllerName();
     </div><!--End wrapper-->
 
 </div><!--End globalWrapper-->
+
 <div id='footer' class="clearfix">
     <div class="copyright">
         <p>Copyright 2012 Aimya</p>
         <p>Created by <a href="#" title="Svitla Systems">Svitla.com</a></p>
     </div><!--End copyright-->
-</div><!--End footer-->    
+</div><!--End footer-->
+
 </div><!--End page-->
 
 

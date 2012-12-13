@@ -1,6 +1,9 @@
 /*==============================
   Page
 ===============================*/
+body {
+    background: #d5e4ad;
+}
 
 #page {
     min-height: 100%;
@@ -180,6 +183,17 @@ input.btnLogin {
 .homeRightCol {
     float: right;
     width: 364px;
+}
+
+.radioBoxWrapper {
+    width: 12px;
+    height: 14px;
+    display: inline-block;
+    background: url('../images/elem/redoibox.png') no-repeat -14px 1px;
+}
+
+.radioBoxWrapper.checked {
+    background-position: 0px 1px;
 }
 
 .homePage h2 {
