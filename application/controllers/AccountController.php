@@ -17,8 +17,8 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         //basic tab
         $identity = Zend_Auth::getInstance()->getStorage()->read();
         $this->view->role = $identity->role;
-        $this->view->headScript()->appendFile('../../js/jquery/account/tabs/services.js');
-        $this->view->headScript()->appendFile('../../js/jquery/account/tabs/users.js');
+        $this->view->headScript()->appendFile('../../../js/jquery/account/tabs/services.js');
+        $this->view->headScript()->appendFile('../../../js/jquery/account/tabs/users.js');
         $profileForm = new Application_Form_Profile();
         $profileModel = new Application_Model_Profile();
         $this->view->profile = $profileForm->populate($profileModel->getProfileAccount($identity->id));

@@ -1,12 +1,12 @@
 $(document).ready(function() {
-    $("#signup").click(function(){
+    $("#signUp").click(function(){
         var myDate = new Date();
 
         var UTC = myDate.getTimezoneOffset()/60*(-1);
-        $.post(
-
-            "/user/registration/0/controller%3D%3Euser/1/action%3D%3Eregistration",{
-
+        $.ajax({
+            url: $('#signUn').attr('action'),
+            type: "post",
+            data: {
                 "firstname" : $("#firstname").val(),
                 "lastname" : $("#lastname").val(),
                 "username" : $("#username").val(),
@@ -14,10 +14,8 @@ $(document).ready(function() {
                 "email" : $("#email").val(),
                 "password" : $("#password").val(),
                 "role" : $('input[name=type]:checked').val()
-
             },
-
-            function(response){
+            success: function(response){
                     $('.error').remove();
 
                 for (key in response.errors){
@@ -49,7 +47,7 @@ $(document).ready(function() {
 
             }
 
-        );
+        });
 
         return false;
 
@@ -58,16 +56,14 @@ $(document).ready(function() {
         $('.alertBlock .alert').remove();
         $("input").removeClass("input-error");
 
-        $.post(
-
-            "/user/login/0/controller%3D%3Euser/1/action%3D%3Elogin",{
-
+        $.ajax({
+            url: $('#signIn').attr('action'),
+            type: "post",
+            data: {
                 "username" : $("#username-login").val(),
                 "password" : $("#password-login").val()
-
             },
-
-            function(response){
+            success: function(response){
                 for (key in response.errors){
 
                     if(response.errors[key].length>0){
@@ -95,8 +91,7 @@ $(document).ready(function() {
                 }
 
             }
-
-        );
+    });
 
         return false;
 

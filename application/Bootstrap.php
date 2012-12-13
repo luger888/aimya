@@ -209,6 +209,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $frontController = Zend_Controller_Front::getInstance();
         $uri = ltrim($_SERVER["REQUEST_URI"], "/");
         $module = substr($uri, 0, strpos($uri, "/"));
+        if($module == "") {
+            $module = "en";
+        }
 
         $frontController->setBaseUrl('/' . $module);
     }
