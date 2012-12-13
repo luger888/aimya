@@ -25,7 +25,6 @@ package com.aimialesson.model
 		
 		[Bindable(Event="loadedChange")]
 		public function set loaded ( value : Boolean) : void {
-			
 		}
 		
 		public function get loaded () : Boolean {

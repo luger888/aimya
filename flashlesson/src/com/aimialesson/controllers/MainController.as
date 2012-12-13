@@ -62,7 +62,7 @@ package com.aimialesson.controllers
 		public function onAppEvent ( event : AppEvent ) : void {
 			debug("MainController:onAppEvent");
 			switch (event.type){
-				case (AppEvent.STOP_SESSION):	soController.setSOProperty('endLesson' + User.getInstance().userID, "true");
+				case (AppEvent.STOP_SESSION):	//soController.setSOProperty('endLesson' + User.getInstance().userID, "true");
 												//endLesson();	
 												break;
 				case (AppEvent.CHANGE_SCREEN_STATE):	soController.setSOProperty('screenMode' + User.getInstance().userID, (!Main.getInstance().fsMode).toString());	
@@ -109,6 +109,7 @@ package com.aimialesson.controllers
 				case (ServiceEvent.SESSION_IS_STARTED_RESULT) : 		Main.getInstance().session_started = true;
 																		break;
 				case (ServiceEvent.SESSION_IS_STOPPED_RESULT) : 		Main.getInstance().session_started = false;
+																		soController.setSOProperty('endLesson' + User.getInstance().userID, "true");
 																		break;
 				case (ServiceEvent.GET_CURRENT_TIME_RESULT) :	 		Main.getInstance().remainingTime = event.value.data as int;
 																		break;

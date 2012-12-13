@@ -69,12 +69,12 @@ package com.aimialesson.controllers
 				so.data['uploaded'] = "false";
 				dispatchEvent( new SharedObjectEvent ( SharedObjectEvent.SHARED_PRESENTATION_UPLOADED ) );
 			}*/
-		/*	if (so.data['User' + User.getInstance().partnerID + 'isOnline'] == "true"){
+			if (so.data['User' + User.getInstance().partnerID + 'isOnline'] == "true"){
 				setSOProperty('User' + User.getInstance().partnerID + 'isOnline', "false");
 				User.getInstance().partnerIsOnline = true;
 				partnerIsOnlineTimer.reset();
 				partnerIsOnlineTimer.start();
-			}*/
+			}
 			if (so.data['endLesson' + User.getInstance().partnerID] == "true"){
 				dispatchEvent( new SharedObjectEvent ( SharedObjectEvent.LESSON_IS_FINISHED, User.getInstance().partnerName  ) );
 			}

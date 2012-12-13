@@ -324,7 +324,13 @@ input.button-2 {
 .button-2.add.disable {
     background-position: 0 -43px;
 }
-
+.button-2.book{
+    background: url(../images/icons/book.png) no-repeat 0 3px;
+    margin-bottom: 7px;
+}
+.button-2.book:hover{
+    background-position: 0 -18px;
+}
 .button-2.view {
     background: url(../images/icons/view.png) no-repeat 0 3px;
     padding-left: 22px;
@@ -361,6 +367,29 @@ input.button-2 {
 .button-2.edit.disable {
     background-position: 0 -39px;
 }
+.button-2.createMessage {
+    background: url("../images/icons/createMessage.png") no-repeat scroll 0 4px transparent;
+    padding-left: 25px;
+}
+
+.button-2.createMessage:hover {
+    background-position: 0 -17px;
+}
+.button-2.trash {
+    background: url(../images/icons/trash.png) no-repeat 0 3px;
+}
+
+.button-2.trash:hover {
+    background-position: 0 -18px;
+}
+.button-2.archived {
+    background: url(../images/icons/archived.png) no-repeat 0 3px;
+}
+
+.button-2.archived:hover {
+    background-position: 0 -17px;
+}
+
 .disable{
     pointer-events: none;
     cursor: default;
@@ -1069,14 +1098,13 @@ input.button-2 {
     width: 166px;
 }
 /*---DIALOG JQUERY-----------------------------------------------------------------*/
-.ui-dialog{
+ .ui-dialog{
     display: block ;
     height: auto !important;
     left: 615.5px ;
     outline: 0 none;
     top: 388px;
-    width: 360px !important;
-    z-index: 1002 ;
+    z-index: 1002;
     padding:0 !important;
     border-top:none !important;
 }
@@ -1135,4 +1163,80 @@ input.button-2 {
     position:fixed;top:0;right:0;bottom:0;left:0;
     background: rgba(255,255,255,0.5) url(../img/design/accountLayout/glyphicons/aimya_ajax_loader.gif) no-repeat 50% 50%;
     z-index: 10000;
+}
+/*---FULL CALENDAR jquery-----------------------------------------------------------------*/
+.fc-event .fc-button{
+    background: url("../images/elem/fc-button.png") repeat-x scroll 0 0 transparent;
+    border: 1px solid #9B6B6B;
+    border-radius: 4px 4px 4px 4px;
+    color: #FFFFFF;
+    display: inline-block;
+    font-family: 'dosissemibold';
+    font-size: 12px;
+    height: 23px;
+    line-height: 28px;
+    margin-right: 10px;
+    padding-bottom: 2px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 1px 1px 1px #666666;
+    text-transform: uppercase;
+    width: 76px;
+}
+
+.fc-event .fc-button.reject{
+    background-position: 0 -22px;
+    color:#7c5757;
+    text-shadow: 1px 1px 1px #ffffff;
+    border: 1px solid #c8b4b4;
+}
+.fc-event-content-approve span{
+    background: url("../images/icons/approve.png") no-repeat scroll 0 0 transparent;
+    display: inline-block;
+    font: 12px/13px 'dosissemibold';
+    padding-left: 19px;
+    text-transform: uppercase;
+    padding-right: 10px;
+}
+.fc-event-content-approve.pending span{
+    background-position: 0 -41px;
+}
+
+.fc-state-default, .fc-state-default .fc-button-inner{
+    background: url("../images/elem/buttons-grid-1.png") no-repeat scroll -6px -123px !important;
+    text-transform: uppercase;
+    border-radius:  4px;
+    border: 1px solid #a2b477;
+    color: #324a0c;
+    text-shadow: 1px 1px 1px #ffffff;
+}
+.fc-state-default:hover, .fc-state-default .fc-button-inner:hover{
+    background-position: -3px -92px !important;
+}
+.fc-state-active, .fc-state-active .fc-button-inner{
+    background-position: -2px -62px !important;
+    border: 1px solid #65821e;
+    color:white;
+    text-shadow: 1px 1px 1px black;
+
+}
+/*---MESSAGES (INBOX)-----------------------------------------------------------------*/
+#content .messageTab{
+    box-shadow: 0 0 9px #ccc;
+    background: #fff;
+    padding: 20px 32px 22px 32px;
+    position: relative;
+    min-height: 480px;
+    z-index: 2;
+}
+
+.messageTab .shadowSeparatorBox{
+    min-height: 416px;
+}
+.messageTab .messageButtons .trash, .messageTab .messageButtons .archived{
+    float:right;
+}
+.messageTab .messageButtons .archived{
+    padding-right:9px;
 }

@@ -212,7 +212,7 @@ function messageAction(element_id, action) {
     return false;
 }
 
-function massTrash(current_action) {
+function massTrash(current_action, url) {
     jQuery("body").append('<div class="loadingIcon"></div>');
     ids = [];
     $('.messageCheckboxes:checkbox:checked').each(function() {
@@ -221,7 +221,7 @@ function massTrash(current_action) {
 
     idsString = ids.toString();
     $.ajax({
-        url: "/message/masstrash",
+        url: url + "/message/masstrash",
         type: "post",
         data: {
             'message_ids' : idsString,
@@ -229,13 +229,13 @@ function massTrash(current_action) {
         },
         success: function(result) {
             jQuery('.loadingIcon').remove();
-            window.location.href = "/message/" + current_action + "/current_action/" + current_action;
+            window.location.href = url+ "/message/" + current_action + "/current_action/" + current_action;
         }
     });
 
 }
 
-function massDelete(current_action) {
+function massDelete(current_action, url) {
     jQuery("body").append('<div class="loadingIcon"></div>');
     ids = [];
     $('.messageCheckboxes:checkbox:checked').each(function() {
@@ -244,7 +244,7 @@ function massDelete(current_action) {
 
     idsString = ids.toString();
     $.ajax({
-        url: "/message/massdelete",
+        url: url + "/message/massdelete",
         type: "post",
         data: {
             'message_ids' : idsString,
@@ -252,13 +252,13 @@ function massDelete(current_action) {
         },
         success: function(result) {
             jQuery('.loadingIcon').remove();
-            window.location.href = "/message/" + current_action + "/current_action/" + current_action;
+            window.location.href = url + "/message/" + current_action + "/current_action/" + current_action;
         }
     });
 
 }
 
-function massArchive(current_action) {
+function massArchive(current_action, url) {
     jQuery("body").append('<div class="loadingIcon"></div>');
     ids = [];
     $('.messageCheckboxes:checkbox:checked').each(function() {
@@ -267,7 +267,7 @@ function massArchive(current_action) {
 
     idsString = ids.toString();
     $.ajax({
-        url: "/message/massarchive",
+        url: url + "/message/massarchive",
         type: "post",
         data: {
             'message_ids' : idsString,
@@ -275,7 +275,7 @@ function massArchive(current_action) {
         },
         success: function(result) {
             jQuery('.loadingIcon').remove();
-            window.location.href = "/message/" + current_action + "/current_action/" + current_action;
+            window.location.href = url + "/message/" + current_action + "/current_action/" + current_action;
         }
     });
 }

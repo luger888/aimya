@@ -746,9 +746,9 @@ function Header(calendar, options) {
 							var icon = options.theme ? smartProperty(options.buttonIcons, buttonName) : null; // why are we using smartProperty here?
 							var text = smartProperty(options.buttonText, buttonName); // why are we using smartProperty here?
 							var button = $(
-								"<span class='fc-button fc-button-" + buttonName + " " + tm + "-state-default'>" +
-									"<span class='fc-button-inner'>" +
-										"<span class='fc-button-content'>" +
+								"<span class='fc-button button fc-button-" + buttonName + " " + tm + "-state-default'>" +
+									"<span class=''>" +
+										"<span class=''>" +
 											(icon ?
 												"<span class='fc-icon-wrap'>" +
 													"<span class='ui-icon ui-icon-" + icon + "'/>" +
@@ -756,7 +756,7 @@ function Header(calendar, options) {
 												text
 												) +
 										"</span>" +
-										"<span class='fc-button-effect'><span></span></span>" +
+//										"<span class='fc-button-effect'><span></span></span>" +
 									"</span>" +
 								"</span>"
 							);
@@ -2973,7 +2973,7 @@ function AgendaView(element, calendar, viewName) {
 			"<table style='width:100%' class='fc-agenda-days fc-border-separate' cellspacing='0'>" +
 			"<thead>" +
 			"<tr>" +
-			"<th class='fc-agenda-axis " + headerClass + "'>&nbsp;</th>";
+			"<th class='fc-agenda-axis " + headerClass + "'>Time</th>";
 		for (i=0; i<colCnt; i++) {
 			s +=
 				"<th class='fc- fc-col" + i + ' ' + headerClass + "'/>"; // fc- needed for setDayID
@@ -3863,7 +3863,7 @@ function AgendaEventRenderer() {
 				if (seg.contentTop !== undefined && height - seg.contentTop < 10) {
 					// not enough room for title, put it in the time header
 					eventElement.find('div.fc-event-time')
-						.text(formatDate(event.start, opt('timeFormat')) + ' - ' + event.title);
+						.text(formatDate(event.start, opt('timeFormat')));
 					eventElement.find('div.fc-event-title')
 						.remove();
 				}
@@ -4648,7 +4648,7 @@ function DayEventRenderer() {
 				" style='position:absolute;z-index:8;left:"+left+"px;" + skinCss + "'" +
 				">" +
 				"<div" +
-				" class='fc-event-inner fc-event-skin'" +
+				" class='fc-event-inner fc-event-hori fc-event-skin'" +
 				(skinCss ? " style='" + skinCss + "'" : '') +
 				">";
 			if (!event.allDay && seg.isStart) {
