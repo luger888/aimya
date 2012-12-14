@@ -105,7 +105,7 @@ class Application_Form_Registration extends Zend_Form
             ->setSeparator('');
 
         $submit = new Zend_Form_Element_Submit('signup');
-        $submit ->setAttrib('id', 'signup')
+        $submit ->setAttrib('id', 'signupBtn')
                 ->setLabel('sign up')
                 ->setAttrib('class', 'btnSignup signup-element button')
                 ->setDecorators($this->basicDecorators);

@@ -119,9 +119,67 @@ body {
 #globalNav ul li a.current, #globalNav ul li a:hover{
     background: url(../images/elem/nav-hover.png) repeat-x 0 0;
 }
-
+#globalNav .liHover{
+    background: url(../images/elem/nav-hover.png) repeat-x 0 0;
+}
 #globalNav ul li:first-child {
     background: none;
+}
+
+
+nav ul ul {
+    display: none;
+    position: absolute;
+    z-index: 1000;
+    background-color: #EAF4CF;
+    -webkit-box-shadow: 0 0 5px #ccc;
+    -moz-box-shadow:    0 0 5px #ccc;
+    box-shadow:         0 0 5px #ccc;
+}
+
+nav ul ul li{
+    width: 100%;
+    height:27px;
+    background: none !important;
+}
+nav ul ul li a:hover{
+   background: none !important;
+    color:#719418 !important;
+}
+nav ul ul:hover .last{
+    background-color: white !important;
+}
+nav ul ul li a{
+    color: #4F6711 !important;
+    height: 10px !important;
+    line-height: 25px !important;
+    text-shadow: none !important;
+    text-transform: none !important;
+    font:11px arial !important;
+    margin-top: 8px;
+
+}
+nav ul ul li .language{
+    text-transform: capitalize;
+    padding-left:15px;
+}
+nav ul ul li .language.english{
+    background: url('../images/icons/lang/english.png') no-repeat 0 2px;
+}
+nav ul ul li .language.chinese{
+    background: url('../images/icons/lang/chinese.png') no-repeat 0 2px;
+}
+nav ul ul li .language.japanese{
+    background: url('../images/icons/lang/japanese.png') no-repeat 0 2px;
+}
+nav ul .last{
+    width: 104px;
+}
+nav ul li:hover > ul {
+    display: block;
+}
+nav ul:after {
+    content: ""; clear: both; display: block;
 }
 
 /*=============================================
@@ -289,7 +347,14 @@ input.button-2 {
 .button-2.upload:hover {
     background-position: 0 -18px;
 }
+.button-2.reply {
+    background: url("../images/icons/reply.png") no-repeat scroll 0 3px transparent;
+    padding-left: 25px;
+}
 
+.button-2.reply:hover {
+    background-position: 0 -17px;
+}
 .button-2.upload.disable {
     background-position: 0 -41px;
 }
@@ -1346,6 +1411,9 @@ input.button-2 {
     display: inline-block;
     height: 12px;
     width: 9px;
+}
+.messageTab .messageViewTime{
+    float:right;
 }
 /*---JSMessenger, alert (red)-----------------------------------------------------------------*/
 .alertBlock{

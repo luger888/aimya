@@ -43,7 +43,12 @@ body {
 #loginFormHolder {
     float: right;
 }
-
+#loginFormHolder label:first-letter, #loginFormHolder .signInBox a:first-letter {
+    text-transform: uppercase;
+}
+ #registrationFormHolder label{
+     text-transform: capitalize;
+ }
 .signInButton {
     float: right;
     margin-top: 30px;
