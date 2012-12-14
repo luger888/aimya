@@ -3,7 +3,12 @@
 class Aimya_Controller_Plugin_LangSelector extends Zend_Controller_Plugin_Abstract {
 
     public function preDispatch(Zend_Controller_Request_Abstract $request) {
-        $lang = $request->getParam('lang', '');
+        $uri = ltrim($_SERVER["REQUEST_URI"], "/");
+        $lang = substr($uri, 0, strpos($uri, "/"));
+        if($lang == "") {
+            $lang = "en";
+        }
+
         try {
             $locale = new Zend_Locale(Zend_Locale::BROWSER);
         } catch (Exception $e) {
@@ -15,6 +20,8 @@ class Aimya_Controller_Plugin_LangSelector extends Zend_Controller_Plugin_Abstra
             $loc = 'en_US';
         else if ($lang == 'ja')
             $loc = 'ja_JP';
+        else if ($lang == 'zh')
+            $loc = 'zh_CN';
         else {
             //$lang = $locale->getLanguage();
             $lang = 'en';
