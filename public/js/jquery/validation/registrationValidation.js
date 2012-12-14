@@ -101,7 +101,7 @@ $(document).ready(function() {
 
                 if(response.status == 1){
 
-                    window.location.href = pathName+"/account/index/";
+                    window.location.href = pathName + "/account/index/";
 
                 }else if(response.status == 0){
                     $('.alertBlock').append('<div class="alert">Account is not confirmed. Please check you email and confirm registration</div>');

@@ -116,12 +116,13 @@ $(document).ready(function() {
     setInterval(imStillAlive, 60000);
     function imStillAlive() {
         activity = jQuery("#user_activity");
+        pathName = $('#current_url').val();
         if(activity.val() == 1) {
             jQuery.ajax({
                 url: pathName + "/account/offline",
                 type: "get",
                 success: function(result) {
-                    activity.val(0);
+                    //activity.val(0);
                 }
             });
             return false;

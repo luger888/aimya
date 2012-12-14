@@ -29,7 +29,13 @@ class Application_Model_DbTable_OnlineUsers extends Application_Model_DbTable_Ab
         $where = array(
             $this->getAdapter()->quoteInto('user_id=?', $userId)
         );
-        $this->update($data, $where);
+        $status = $this->update($data, $where);
+
+        if($status) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function createLine($id){
