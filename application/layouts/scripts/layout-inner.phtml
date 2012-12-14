@@ -88,8 +88,13 @@ if (Zend_Registry::isRegistered('username')) {
                             <li><a href="<?php echo $this->baseUrl() ?>#">PRIVACY POLICY</a></li>
                             <li><a href="<?php echo $this->baseUrl() ?>/about.thml">ABOUT AIMYA</a></li>
                             <li><a href="<?php echo $this->baseUrl() ?>#">HELP</a></li>
-                            <li class="last"><a href="<?php echo $this->baseUrl() ?>/user/logout/">SIGN OUT</a></li>
-
+                            <li><a href="<?php echo $this->baseUrl() ?>/user/logout/">SIGN OUT</a></li>
+                            <li class="last"><a href="#"><?php echo $this->translate('Languages')?></a>
+                            <ul>
+                                <li><a href="#"><span class = "language english"><?php echo $this->translate('english')?></span></a></li>
+                                <li><a href="#"><span class = "language japanese"><?php echo $this->translate('japanese')?></span></a></li>
+                                <li><a href="#"><span class = "language chinese"><?php echo $this->translate('chinese')?></span></a></li>
+                            </ul></li>
                         </ul>
                     </nav>
 

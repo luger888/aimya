@@ -22,7 +22,7 @@ $(document).ready(function() {
         $(this).find( '.txt' ).appendTo($(this).find('.radioBoxWrapper'));
     });
 
-    $("#signUp").click(function(){
+    $("#signupBtn").click(function(){
         var myDate = new Date();
 
         var UTC = myDate.getTimezoneOffset()/60*(-1);

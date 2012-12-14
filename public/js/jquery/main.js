@@ -1,6 +1,11 @@
 $(document).ready(function() {
 
-
+    $("nav ul li >ul").hover( function() {
+        $('.last>a').addClass('liHover');
+    });
+    $("nav ul li >ul").mouseleave( function() {
+        $('.last>a').removeClass('liHover');
+    });
     //---Home page member buttons--------------------------------------------------------------------------------
 
     $('.memberButtons input:first').attr('checked', 'checked');
