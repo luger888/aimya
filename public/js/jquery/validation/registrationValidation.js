@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     $("#signUp").click(function(){
         var myDate = new Date();
 
@@ -34,21 +35,20 @@ $(document).ready(function() {
 
                 if(response.alertFlash){
                     $('.alertBlock .alert').remove();
-                    $('.alertBlock').append('<div class="alert"><div class = "flash-warning">Warning!</div>'+response.alertFlash+'<button type="button" class="close" data-dismiss="alert"></button></div>');
+                    $('.alertBlock').append('<div class="alert"><div class = "flash-warning">Warning!</div>'+response.alertFlash+'<button type="button" class="close" id = "closeAlert"></button></div>');
                     $('html, body').animate({scrollTop:0}, 'fast');
 
 
 
                 }else if(response.confirmFlash){
                     $('.alertBlock .alert').remove();
-                    $('.alertBlock').append('<div class="attention alert"><div class = "flash-attention">Attention!</div>'+response.confirmFlash+'<button type="button" class="close" data-dismiss="attention"></button></div>');
+                    $('.alertBlock').append('<div class="attention alert"><div class = "flash-attention">Attention!</div>'+response.confirmFlash+'<button type="button" class="close" id = "closeAlert"></button></div>');
                     $('html, body').animate({scrollTop:0}, 'fast');
                 }
 
             }
 
         });
-
         return false;
 
     });
@@ -86,7 +86,7 @@ $(document).ready(function() {
                 }
                 if(response.alertFlash){
 
-                    $('.alertBlock').append('<div class="alert"><div class = "flash-warning">Warning!</div>'+response.alertFlash+'<button type="button" class="close" data-dismiss="alert"></button></div>');
+                    $('.alertBlock').append('<div class="alert"><div class = "flash-warning">Warning!</div>'+response.alertFlash+'<button type="button" class="close" id = "closeAlert"></button></div>');
 
                 }
 

@@ -40,8 +40,9 @@
                                 $originalTime = $message['created_at'];
                                 $time = date("H:i", strtotime($originalTime));
                                 if ($message['recipient_status'] == 0) {
-                                    $isNew = "/new";
+                                    $isNew = "?status=new";
                                     $classNew = 'newMessage';
+
                                 }
                                 echo '
 	                    <tr>
