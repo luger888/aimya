@@ -2,27 +2,32 @@
 <?php $form = $this->form; ?>
 <div id="mainContent" class="clearfix">
     <div class="messageTab">
-        <div class="messageButtons clearfix">
-            <span class="msgBtn">Create New Message</span>
+        <div class="shadowSeparator clearfix">
+            <div class="shadowSeparatorBox clearfix">
+                <div class="messageButtons clearfix">
+                    <h1>Create New Message</h1>
+                </div>
+                <form method="post" action="/message/send/">
+
+                    <div class="sendMessageBox clearfix">
+                        <div class="formRow clearfix">
+                            <div class="label">To:</div><?php echo $form->username?></div>
+                        <div class="formRow clearfix">
+                            <div class="label">Subject:</div><?php echo $form->subject?></div>
+                        <div class="formRow clearfix">
+                            <div class="label">Text:</div><?php echo $form->content?></div>
+                        <div class="buttonsRow clearfix">
+                            <?php echo $form->sendbutton?>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <!-- END shadowSeparatorBox -->
         </div>
-        <form method="post" action="/message/send/">
-            <table width="300px">
-                <tr>
-                    <td>To</td>
-                    <td><?php echo $form->username?></td>
-                </tr>
-                <tr>
-                    <td>Subject</td>
-                    <td><?php echo $form->subject?></td>
-                </tr>
-                <tr>
-                    <td>Content</td>
-                    <td><?php echo $form->content?></td>
-                </tr>
-                <tr>
-                    <td><?php echo $form->sendbutton?></td>
-                </tr>
-            </table>
-        </form>
+        <!-- END shadowSeparator -->
     </div>
+    <!-- END messageTab -->
 </div>
+<!-- END mainContent -->
+

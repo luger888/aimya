@@ -295,12 +295,12 @@ input.button-2 {
 }
 
 .button-2.delete {
-    background: url(../images/icons/delete.png) no-repeat 0 3px;
+    background: url(../images/icons/delete.png) no-repeat 0 4px;
 }
 
 
 .button-2.delete:hover {
-    background-position: 0 -16px;
+    background-position: 0 -15px;
 }
 
 .button-2.delete.disable {
@@ -374,6 +374,14 @@ input.button-2 {
 
 .button-2.createMessage:hover {
     background-position: 0 -17px;
+}
+.button-2.inbox{
+    background: url("../images/icons/moveInbox.png") no-repeat scroll 0 2px transparent;
+    padding-left: 15px;
+    margin: 0 15px;
+}
+.button-2.inbox:hover{
+    background-position: 0 -21px;
 }
 .button-2.trash {
     background: url(../images/icons/trash.png) no-repeat 0 3px;
@@ -1236,7 +1244,100 @@ input.button-2 {
 }
 .messageTab .messageButtons .trash, .messageTab .messageButtons .archived{
     float:right;
+    margin-right: 5px;
 }
 .messageTab .messageButtons .archived{
     padding-right:9px;
 }
+#mainContent ul li {
+    list-style-type:none;
+    float:left;
+}
+
+.messageTab .userMessages{
+    padding-top:11px;
+}
+.messageTab .userMessages tbody tr td{
+    height: 34px;
+    border-top: 1px solid #DBDADF;
+}
+.messageTab .userMessages tbody tr td:last-child{
+    border-bottom: 1px solid #DBDADF;
+}
+.messageTab .userMessages a{
+    font:11px arial;
+}
+.messageTab a {
+    text-decoration: none;
+}
+.messageTab .messageSender{
+    display: inline-block;
+    padding-left: 34px;
+    width: 90px;
+}
+.messageTab .messageTheme{
+    display: inline-block;
+    width: 125px;
+}
+.messageTab .messageText{
+    display: inline-block;
+    width: 337px;
+    color:#3e3e3e;
+}
+.messageTab .messageReply{
+    background: url("../images/icons/reply.png") no-repeat scroll 0 -40px transparent;
+    height: 14px;
+    display: inline-block;
+    width: 20px;
+    margin-left: 16px;
+}
+.messageTab .messageForward{
+    background: url("../images/icons/forward.png") no-repeat scroll 0 -40px transparent;
+    height: 14px;
+    display: inline-block;
+    width: 20px;
+    margin-left: 10px;
+}
+.messageTab .messageTime{
+    color:#858585;
+}
+
+.messageTab .rightMessageBlock{
+    float:right;
+}
+.messageTab  .messageButtons.trashBox{
+    float:right;
+}
+.sendMessageBox {
+    padding-top:24px;
+}
+.sendMessageBox .formRow input, .sendMessageBox .formRow textarea{
+    width:729px;
+    resize: none;
+}
+.sendMessageBox .formRow .label, .sendMessageBox .formRow input{
+    float:left;
+}
+.sendMessageBox .formRow{
+    padding-bottom:10px;
+}
+.sendMessageBox .formRow .label{
+    margin-top: 3px;
+    width:60px;
+    font-family: 'helvetica-light-rnormal';
+    font-weight: 500;
+}
+.sendMessageBox .buttonsRow{
+    float:right;
+}
+.sendMessageBox .buttonsRow .sendMessageButton{
+    width:100px;
+}
+.sendMessageBox .messageForwardInbox{
+    background: url("../images/icons/forward.png") no-repeat scroll 27px -37px transparent;
+}
+
+.sendMessageBox .messageReplyInbox{
+    background: url("../images/icons/reply.png") no-repeat scroll 27px -37px transparent;
+}
+
