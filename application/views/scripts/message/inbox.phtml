@@ -21,20 +21,26 @@
                                 $singleAction->setAttrib('onchange', "messageAction(this.id, '{$action}')");
                                 $classNew = '';
                                 $isNew = '';
+                                $originalTime = $message['created_at'];
+                                $time = date("H:i", strtotime($originalTime));
                                 if ($message['recipient_status'] == 0) {
                                     $isNew = "/new";
-                                    $classNew = ' class="newMessage"';
+                                    $classNew = 'newMessage';
                                 }
                                 echo '
 	                    <tr>
-	                        <td style="width:800px"><input type="checkbox" class="messageCheckboxes" value="' . $message['id'] . '">
+	                        <td style="width:804px"><input type="checkbox" class="messageCheckboxes" value="' . $message['id'] . '">
                                 <a href="' . $this->baseUrl() . '/message/view/' . $message['id'] . $isNew . '">
-                                    <span' . $classNew . '>' . $message['sender_id'] . '</span>
-                                    <span' . $classNew . '>' . $message['theme'] . '</span>
-                                    <span>' . $message['text'] . '</span></a>
-                                    <span><a href="' . $this->baseUrl() . '/message/reply/message_id/' . $message['id'] . '/current_action/"'. $action .'>reply</a></span>
-                                    <span><a href="' . $this->baseUrl() . '/message/forward/message_id/' . $message['id'] . '/current_action/"'. $action .'>reply</a></span>
-	                        </td>
+                                    <span class ="' . $classNew . ' messageSender">' . $message['sender_id'] . '</span>
+                                    <span class ="' . $classNew . ' messageTheme">' . $message['theme'] . '</span>
+                                    <span class = "messageText">' . $message['text'] . '</span></a>
+
+                                    <div class = "rightMessageBlock">
+                                        <span class = "messageTime">' . $time . '</span>
+                                        <a href="' . $this->baseUrl() . '/message/reply/message_id/' . $message['id'] . '/current_action/"'. $action .'><span class="messageReply"></span></a>
+                                        <a href="' . $this->baseUrl() . '/message/forward/message_id/' . $message['id'] . '/current_action/"'. $action .'><span class="messageForward"></span></a>
+                                    </div>
+
 	                    </tr>
 	                    ';
                             }
