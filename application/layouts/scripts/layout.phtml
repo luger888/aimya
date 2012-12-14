@@ -18,7 +18,7 @@
     <?php $this->headScript()->appendFile('/js/jquery/jquery-ui-1.9.1.custom.min.js');?>
     <?php $this->headScript()->appendFile('/js/jquery/customCheckboxRadio.js');?>
     <?php $this->headScript()->appendFile('/js/jquery/cookieJquery.js');?>
-    <?php $this->headScript()->appendFile('/js/jquery/main.js');?>
+
     <?php echo $this->headScript();?>
     <?php echo $this->headLink();?>
     <!--[if lte IE 8]>
@@ -70,7 +70,9 @@ $controllerName = $front->getRequest()->getControllerName();
             <!-- END /LOGIN -->
         </div><!--End header-->
 
+        <div class="alertBlock">
 
+        </div>
         <div id="content" class="homePage clearfix">
 
             <div class="messages clearfix">

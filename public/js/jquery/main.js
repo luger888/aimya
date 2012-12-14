@@ -1,6 +1,11 @@
 $(document).ready(function() {
 
-
+    $("nav ul li >ul").hover( function() {
+        $('.last>a').addClass('liHover');
+    });
+    $("nav ul li >ul").mouseleave( function() {
+        $('.last>a').removeClass('liHover');
+    });
     //---Home page member buttons--------------------------------------------------------------------------------
 
     $('.memberButtons input:first').attr('checked', 'checked');
@@ -116,12 +121,13 @@ $(document).ready(function() {
     setInterval(imStillAlive, 60000);
     function imStillAlive() {
         activity = jQuery("#user_activity");
+        pathName = $('#current_url').val();
         if(activity.val() == 1) {
             jQuery.ajax({
-                url: "/account/offline",
+                url: pathName + "/account/offline",
                 type: "get",
                 success: function(result) {
-                    activity.val(0);
+                    console.log(result.userStatus);
                 }
             });
             return false;
@@ -283,13 +289,5 @@ function massArchive(current_action, url) {
     });
 }
 
-/*---PIE - add css3 to ie 7 and ie8 -----------------------------------------------------*/
 
-$(function() {
-    if (window.PIE) {
-      $('.boxShadow, #username-login, #password-login, .button, #tabsNavigation ul, #tabsNavigation ul li, .mainContainer').each(function() {
-      PIE.attach(this);
-    });//each
-  }//if
-});
 

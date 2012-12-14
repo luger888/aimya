@@ -249,7 +249,7 @@
                     jQuery("body").append('<div class="loadingIcon"></div>');
                     $.ajax({
                         cache:false,
-                        url: pathName + 'booking/index',
+                        url: pathName + '/booking/index',
                         success:function (msg) {
                             jQuery('.loadingIcon').remove();
                             var events = [];

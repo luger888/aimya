@@ -153,7 +153,7 @@ function updateService(e, service_type, url){
                 'description': '',
                 'service_type': 2
             },
-            succes: function (response){
+            success: function (response){
                 window.location.reload();
             }
         });
