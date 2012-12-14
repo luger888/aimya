@@ -11,13 +11,13 @@
                 echo '<td>' . $value['id'] . '</td>'
                     .'<td>' . $value['name'] . '</td>'
                     .'<td>' . $value['uri'] . '</td>'
-                    .'<td><a href = "/cms/edit/id/'.$value['id'].'">edit</a></td>'
-                    .'<td><a href = "/cms/delete/id/'.$value['id'].'">delete</a></td>';
+                    .'<td><a href = "' . $this->baseUrl() . '/cms/edit/id/'.$value['id'].'">edit</a></td>'
+                    .'<td><a href = "' . $this->baseUrl() . '/cms/delete/id/'.$value['id'].'">delete</a></td>';
             echo '</tr>';
 
         }
 
         ?>
     </table>
-    <a href = "/cms/new">Add new</a>
+    <a href = "<?php echo $this->baseUrl() ?>/cms/new">add new</a>
 </div>
