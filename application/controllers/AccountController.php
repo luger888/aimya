@@ -250,7 +250,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
         $onlineUserTable = new Application_Model_DbTable_OnlineUsers();
         $status = $onlineUserTable->makeOffline($userId);
-        $this->view->userStatus = $status;
+        $this->view->userStatus = $userId;
     }
 
     public function onlineAction() {
