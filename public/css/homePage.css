@@ -369,3 +369,40 @@ input.btnLogin {
     color: #9e4444;
     text-decoration: none;
 }
+
+/*JSMessenger, alert (red)*/
+.alertBlock{
+    margin: 0 auto;
+    position: relative;
+    top: 15px;
+    width: 800px;
+    -moz-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2); /* Для Firefox */
+    -webkit-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2); /* Для Safari и Chrome */
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
+    right: 40px;
+}
+.alert{
+    font: 11px Arial !important;
+    color:#ad4c4c !important;
+    background-color: #fae9e9 !important;
+    border: 1px solid #ebb7b7 !important;
+    border-radius:2px;
+    padding: 8px;
+}
+
+.alert .flash-warning{
+    font: 700 11px Arial !important;
+    color: #981919 !important;
+}
+
+.alert .close{
+    background: url("../img/design/accountLayout/glyphicons/alertClose.png") no-repeat scroll 0 0 transparent;
+    float: right;
+    height: 12px;
+    left: 1px !important;
+    opacity: 1 !important;
+    position: relative;
+    top: -16px !important;
+    width: 12px;
+}
+

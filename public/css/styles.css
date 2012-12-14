@@ -1264,16 +1264,17 @@ input.button-2 {
 .messageTab .userMessages tbody tr td:last-child{
     border-bottom: 1px solid #DBDADF;
 }
-.messageTab .userMessages a{
+.messageTab .userMessages td >  a{
     font:11px arial;
+    padding-left: 24px;
 }
 .messageTab a {
     text-decoration: none;
 }
 .messageTab .messageSender{
     display: inline-block;
-    padding-left: 34px;
-    width: 90px;
+    padding-left: 3px;
+    width: 101px;
 }
 .messageTab .messageTheme{
     display: inline-block;
@@ -1281,7 +1282,7 @@ input.button-2 {
 }
 .messageTab .messageText{
     display: inline-block;
-    width: 337px;
+    width: 301px;
     color:#3e3e3e;
 }
 .messageTab .messageReply{
@@ -1340,4 +1341,137 @@ input.button-2 {
 .sendMessageBox .messageReplyInbox{
     background: url("../images/icons/reply.png") no-repeat scroll 27px -37px transparent;
 }
+.messageTab .activity{
+    background: url("../images/icons/activity.png") no-repeat scroll 0 -13px transparent;
+    display: inline-block;
+    height: 12px;
+    width: 9px;
+}
+/*---JSMessenger, alert (red)-----------------------------------------------------------------*/
+.alertBlock{
+    margin: 0 auto;
+    position: relative;
+    top: 15px;
+    width: 800px;
+    -moz-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2); /* Для Firefox */
+    -webkit-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2); /* Для Safari и Chrome */
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
+}
+.alert{
+    font: 11px Arial !important;
+    color:#ad4c4c !important;
+    background-color: #fae9e9 !important;
+    border: 1px solid #ebb7b7 !important;
+    border-radius:2px;
+}
 
+.alert .flash-warning{
+    font: 700 11px Arial !important;
+    color: #981919 !important;
+}
+
+.alert .close{
+    background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat;
+    top: -17px !important;
+    left: 30px !important;
+    line-height: 20px;
+    position: relative;
+    width:12px;
+    height: 12px;
+    opacity: 1 !important;
+}
+
+/*JSMessenger, alert (red)*/
+.alertBlock{
+    margin: 0 auto;
+    position: relative;
+    top: 15px;
+    width: 800px;
+    -moz-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2); /* Для Firefox */
+    -webkit-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2); /* Для Safari и Chrome */
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
+}
+.alertBlock.modal{
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
+    height: 46px;
+    left: 29%;
+    margin: 0 auto;
+    overflow: hidden;
+    position: fixed;
+    top: 40%;
+    visibility: hidden;
+    width: 800px;
+    z-index: 10002;
+
+}
+
+.alert{
+    font: 11px Arial !important;
+    color:#ad4c4c !important;
+    background-color: #fae9e9 !important;
+    border: 1px solid #ebb7b7 !important;
+    border-radius:2px;
+}
+
+.alert .flash-warning{
+    font: 700 11px Arial !important;
+    color: #981919 !important;
+}
+
+.alert .close{
+    background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat;
+    top: -17px !important;
+    left: 30px !important;
+    line-height: 20px;
+    position: relative;
+    width:12px;
+    height: 12px;
+    opacity: 1 !important;
+}
+/*JSMessenger, attention (yellow)*/
+.attention{
+    font: 11px Arial !important;
+    color:#a3a586 !important;
+    background-color: #fafcd9 !important;
+    border: 1px solid #d1d0a9 !important;
+    border-radius:2px;
+}
+
+.attention .flash-attention{
+    font: 700 11px Arial !important;
+    color: #83855e !important;
+}
+.attention .close {
+    background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat 0 25%;
+    top: -17px !important;
+    left: 30px !important;
+    line-height: 20px;
+    position: relative;
+    width:12px;
+    height: 12px;
+    opacity: 1 !important;
+}
+/*JSMessenger, success (green)*/
+
+.success{
+    font: 11px Arial !important;
+    color:#537e6a !important;
+    background-color: #cce8bf !important;
+    border: 1px solid #a0c58e !important;
+    border-radius:2px;
+}
+
+.success .flash-success{
+    font: 700 11px Arial !important;
+    color: #315b47 !important;
+}
+.success .close {
+    background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat 33% 0;
+    top: -17px !important;
+    left: 30px !important;
+    line-height: 20px;
+    position: relative;
+    width:12px;
+    height: 12px;
+    opacity: 1 !important;
+}
