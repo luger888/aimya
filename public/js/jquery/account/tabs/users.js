@@ -62,7 +62,7 @@ var removedUser = 3;
                                 'status': removedUser
                             },
                             success: function(response){
-                                //window.location.reload();
+                                window.location.reload();
                             }
                         });
                     },

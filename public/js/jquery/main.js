@@ -283,13 +283,5 @@ function massArchive(current_action, url) {
     });
 }
 
-/*---PIE - add css3 to ie 7 and ie8 -----------------------------------------------------*/
 
-$(function() {
-    if (window.PIE) {
-      $('.boxShadow, #username-login, #password-login, .button, #tabsNavigation ul, #tabsNavigation ul li, .mainContainer').each(function() {
-      PIE.attach(this);
-    });//each
-  }//if
-});
 

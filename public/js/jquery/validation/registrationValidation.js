@@ -1,11 +1,33 @@
 $(document).ready(function() {
 
+    var pathName = $('#current_url').val();
+    //---Home page member buttons--------------------------------------------------------------------------------
+
+    $('.memberButtons input:first').attr('checked', 'checked');
+
+
+    //---Styling radio and checkbox buttons--------------------------------------------------------------------------------
+
+    $('input[type="checkbox"]').checkRadio({
+        wrapperClass: 'checkboxWrapper',
+        chekedClass: 'checked'
+    });
+
+    $('input[type="radio"]').checkRadio({
+        wrapperClass: 'radioBoxWrapper',
+        chekedClass: 'checked'
+    });
+
+    $('.memberButtons label').each(function(){
+        $(this).find( '.txt' ).appendTo($(this).find('.radioBoxWrapper'));
+    });
+
     $("#signUp").click(function(){
         var myDate = new Date();
 
         var UTC = myDate.getTimezoneOffset()/60*(-1);
         $.ajax({
-            url: $('#signUn').attr('action'),
+            url: $('#signUp').attr('action'),
             type: "post",
             data: {
                 "firstname" : $("#firstname").val(),
@@ -79,7 +101,7 @@ $(document).ready(function() {
 
                 if(response.status == 1){
 
-                    window.location.href = "/account/index/";
+                    window.location.href = pathName+"/account/index/";
 
                 }else if(response.status == 0){
                     $('.alertBlock').append('<div class="alert">Account is not confirmed. Please check you email and confirm registration</div>');
@@ -97,4 +119,14 @@ $(document).ready(function() {
 
     });
 
+});
+
+/*---PIE - add css3 to ie 7 and ie8 -----------------------------------------------------*/
+
+$(function() {
+    if (window.PIE) {
+        $('.boxShadow, #username-login, #password-login, .button, #tabsNavigation ul, #tabsNavigation ul li, .mainContainer').each(function() {
+            PIE.attach(this);
+        });//each
+    }//if
 });
