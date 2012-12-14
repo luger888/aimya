@@ -118,7 +118,7 @@ $(document).ready(function() {
         activity = jQuery("#user_activity");
         if(activity.val() == 1) {
             jQuery.ajax({
-                url: "/account/offline",
+                url: pathName + "/account/offline",
                 type: "get",
                 success: function(result) {
                     activity.val(0);
