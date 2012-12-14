@@ -3,11 +3,12 @@ class MessageController extends Zend_Controller_Action
 {
     public function init()
     {
-        $this->_helper->layout->setLayout("layoutInside");
+        $this->_helper->layout->setLayout("layoutInner");
         $this   ->_helper->AjaxContext()
             ->addActionContext('count', 'json')
             ->addActionContext('massdelete', 'json')
             ->addActionContext('massarchive', 'json')
+            ->addActionContext('masstrash', 'json')
             ->initContext('json');
     }
 
@@ -237,10 +238,9 @@ class MessageController extends Zend_Controller_Action
         if($this->getRequest()->getParam('message_id')) {
             $userId = Zend_Auth::getInstance()->getIdentity()->id;
             $messageTable = new Application_Model_DbTable_Message();
-            if($this->getRequest()->getParam('new')) {
+            if($this->getRequest()->getParam('status')) {
                 $messageTable->readMessage($this->getRequest()->getParam('message_id'), $userId);
             }
-
             $message = $messageTable->getMessage($this->getRequest()->getParam('message_id'), $userId);
             $userTable = new Application_Model_DbTable_Users();
             $sender = $userTable->getItem($message['sender_id']);
@@ -283,17 +283,37 @@ class MessageController extends Zend_Controller_Action
 
     }
 
+    public function masstrashAction()
+    {
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        if($this->getRequest()->getParam('message_ids') && $this->getRequest()->getParam('action')) {
+
+            $userId = Zend_Auth::getInstance()->getIdentity()->id;
+            $messageTable = new Application_Model_DbTable_Message();
+            $messageCount = $messageTable->massTrash($this->getRequest()->getParam('message_ids'), $userId, $this->getRequest()->getParam('current_action'));
+
+            $this->view->messageCount = $messageCount;
+        } else {
+            $this->view->messageCount = "Bad parameters";
+        }
+
+    }
+
     public function massarchiveAction()
     {
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
+        if($this->getRequest()->getParam('message_ids') && $this->getRequest()->getParam('action')) {
 
-        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+            $userId = Zend_Auth::getInstance()->getIdentity()->id;
+            $messageTable = new Application_Model_DbTable_Message();
+            $messageCount = $messageTable->massArchive($this->getRequest()->getParam('message_ids'), $userId, $this->getRequest()->getParam('current_action'));
 
-        $messageTable = new Application_Model_DbTable_Message();
-        $messageCount = $messageTable->getNewMessagesCount($userId);
-
-        $this->view->messageCount = $messageCount;
+            $this->view->messageCount = $messageCount;
+        } else {
+            $this->view->messageCount = "Bad parameters";
+        }
 
     }
 }

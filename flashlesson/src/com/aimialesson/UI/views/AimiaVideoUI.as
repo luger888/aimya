@@ -52,7 +52,7 @@ package com.aimialesson.UI.views
 				_video = new Video(VIDEO_CHAT_WINDOW_WIDTH, VIDEO_CHAT_WINDOW_HEIGHT);
 				_video.scaleX = -1;
 				_video.x = _video.width;
-				videoContainter.addChild(_video);				
+				videoContainter.addChild(_video);
 			} else 	if ( instance == muteMicBtn || instance == muteCamBtn || instance == unMuteMicBtn || instance == unMuteCamBtn ) {
 				(instance as Button).addEventListener(MouseEvent.CLICK, onBtnClick);
 			} 

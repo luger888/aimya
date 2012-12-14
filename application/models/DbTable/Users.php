@@ -203,4 +203,15 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
         return $result;
     }
+
+    public function getTimeZone()
+    {
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+        $data = $this->select()
+            ->from('user', array('timezone'))
+            ->where('id=?', (int)$userId);
+
+        return $data->query()->fetch();
+
+    }
 }

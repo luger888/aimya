@@ -9,8 +9,8 @@
             <div class="titleRow clearfix">
                 <h2 id="lesson_category"><?php echo $value['lesson_category'];?></h2>
                 <div class="buttons clearfix">
-                    <input type='button' id='deleteService' class = "button-2 delete" value='Delete' onclick='deleteService(this);return false;'>
-                    <input type='button' id='editService' class = "button-2 edit" value='Edit'  onclick='editService(this, 1);return false;'>
+                    <input type='button' id='deleteService' class = "button-2 delete" value='Delete' onclick="deleteService(this, '<?php echo $this->baseUrl()?>/account/edit');return false;">
+                    <input type='button' id='editService' class = "button-2 edit" value='Edit'  onclick="editService(this, 1, '<?php echo $this->baseUrl()?>/account/edit');return false;">
                     <input type='hidden' value=" <?php echo $value['id'];?>">
                 </div><!--End buttons-->
             </div><!--End titleRow-->
@@ -37,7 +37,7 @@
         <div class="shadowSeparator clearfix">
         <div class="shadowSeparatorBox bg-none clearfix">
 
-            <form method="post" name="serviceDetails" action="/account/services" id="serviceForm" class = "serviceForm">
+            <form method="post" name="serviceDetails" action="<?php echo $this->baseUrl()?>/account/services" id="serviceForm" class = "serviceForm">
                 <div class="formRow clearfix">
                     <?php echo $this->servicesForm->service_type; ?>
                     <span class="s-116"><?php echo $this->servicesForm->lesson_category; ?></span>

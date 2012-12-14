@@ -41,7 +41,7 @@ package com.aimialesson.controllers
 			Media.getInstance().myNetStream.close();
 			Media.getInstance().partnerNetStream.close();
 		}
-		
+				
 		protected function netStatusHandler( event : NetStatusEvent ) : void {
 			debug("netStatusHandler");
 			

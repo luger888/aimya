@@ -22,7 +22,7 @@
             <div class="imageBlock boxShadow"><img src="<?php echo $avatarPath;?>"></div>
             <div class="featuredButtonsTop clearfix">
                 
-                <?php echo '<a class ="button-2 view viewProfile" href="/user/' . $person['id'] . '">VIEW PROFILE</a>'; ?>
+                <?php echo '<a class ="button-2 view viewProfile" href="' . $this->baseUrl() . '/user/' . $person['id'] . '">VIEW PROFILE</a>'; ?>
                 <?php $friendTable = new Application_Model_DbTable_Friends(); ?>
                 <?php $isFriend = $friendTable->isFriend($person['id']); ?>
                 <?php $isPending = $friendTable->isPending($person['id']); ?>

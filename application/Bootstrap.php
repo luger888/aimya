@@ -3,6 +3,8 @@
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
 
+
+
     function _initViewRes() {
 
         $this->bootstrap('view');
@@ -130,37 +132,42 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $front->getRouter()->addRoute('user', $restRoute );
     }*/
 
-    protected function _initCMSRouter(){
+    protected function _initRoutes(){
 
         $frontController = Zend_Controller_Front::getInstance();
         $router = $frontController->getRouter();
-        $route = new Zend_Controller_Router_Route_Regex(
 
-            '([a-zA-Z0-9_&\-]+)\.html',
-
+        $langRoute = new Zend_Controller_Router_Route(
+            ':lang/',
             array(
+                'lang' => 'en'
+            ),
+            array('lang' => '[a-z]{2}')
+        );
 
+        $defaultRoute = new Zend_Controller_Router_Route(
+            ':controller/:action',
+            array(
+                'module'=>'default',
+                'controller'=>'index',
+                'action'=>'index'
+            )
+        );
+
+        $cmsRoute = new Zend_Controller_Router_Route_Regex(
+            '([a-zA-Z0-9_&\-]+)\.html',
+            array(
                 'controller' => 'cms',
                 'action'     => 'view'
-
             ),
             array(
-
                 1 => 'uri'
-
             )
 
         );
+        //$router->addRoute('([a-zA-Z0-9_&\-]+)\.html', $cmsRoute);
 
-        $router->addRoute('([a-zA-Z0-9_&\-]+)\.html', $route);
-
-    }
-
-    protected function _initUserRouter(){
-
-        $frontController = Zend_Controller_Front::getInstance();
-        $router = $frontController->getRouter();
-        $route = new Zend_Controller_Router_Route_Regex(
+        $userRoute = new Zend_Controller_Router_Route_Regex(
             'user/(\d+)',
             array(
                 'controller' => 'user',
@@ -169,28 +176,44 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             array(
                 1 => 'id'
             )
-
         );
+        //$router->addRoute('user/(\d+)', $userRoute);
 
-        $router->addRoute('user/(\d+)', $route);
-
-    }
-
-    protected function _initMesageRouter(){
-        $frontController = Zend_Controller_Front::getInstance();
-        $router = $frontController->getRouter();
-        $route = new Zend_Controller_Router_Route_Regex(
-            'message/view/(\d+)/(\w+)',
+        $messageRoute = new Zend_Controller_Router_Route_Regex(
+            'message/view/(\d+)',
             array(
                 'controller' => 'message',
                 'action'     => 'view'
             ),
             array(
                 1 => 'message_id',
-                2 => 'new'
+                //2 => 'new'
             )
         );
-        $router->addRoute('message/view/(\d+)/(\w+)', $route);
+
+        $cmsRoute = $langRoute->chain($cmsRoute);
+        $userRoute = $langRoute->chain($userRoute);
+        $messageRoute = $langRoute->chain($messageRoute);
+        $defaultRoute = $langRoute->chain($defaultRoute);
+
+        $router->addRoute('langRoute', $langRoute);
+        $router->addRoute('defaultRoute', $defaultRoute);
+        $router->addRoute('cmsRoute', $cmsRoute);
+        $router->addRoute('userRoute', $userRoute);
+        $router->addRoute('messageRoute', $messageRoute);
+
+        //$router->addRoute('message/view/(\d+)', $messageRoute);
+    }
+
+    protected function _initSetupBaseUrl() {
+        $frontController = Zend_Controller_Front::getInstance();
+        $uri = ltrim($_SERVER["REQUEST_URI"], "/");
+        $module = substr($uri, 0, strpos($uri, "/"));
+        if($module == "") {
+            $module = "en";
+        }
+
+        $frontController->setBaseUrl('/' . $module);
     }
 
     public function _initNavigation()

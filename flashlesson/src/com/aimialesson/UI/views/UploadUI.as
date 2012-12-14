@@ -33,6 +33,8 @@ package com.aimialesson.UI.views
 		[SkinPart (required="false")]
 		public var uploadBtn:Button;
 		[SkinPart (required="false")]
+		public var uploadMoreBtn:Button;
+		[SkinPart (required="false")]
 		public var message:Label;
 		[SkinPart (required="false")]
 		public var progressBar:PresentationProgressBar;
@@ -48,7 +50,7 @@ package com.aimialesson.UI.views
 		
 		override protected function partAdded ( partName : String, instance : Object) : void
 		{ 
-			if (instance == uploadBtn){
+			if (instance == uploadBtn || instance == uploadMoreBtn){
 				uploadBtn.addEventListener(MouseEvent.CLICK,browseAndUpload);
 			} else if (instance == progressBar) {
 				progressBar.visible = false;

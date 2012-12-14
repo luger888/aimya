@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+
     //---Home page member buttons--------------------------------------------------------------------------------
 
     $('.memberButtons input:first').attr('checked', 'checked');
@@ -7,7 +8,7 @@ $(document).ready(function() {
 
     //---Styling radio and checkbox buttons--------------------------------------------------------------------------------
 
-    $('#remember').checkRadio({
+    $('input[type="checkbox"]').checkRadio({
         wrapperClass: 'checkboxWrapper',
         chekedClass: 'checked'
     });
@@ -20,7 +21,7 @@ $(document).ready(function() {
     $('.memberButtons label').each(function(){
         $(this).find( '.txt' ).appendTo($(this).find('.radioBoxWrapper'));
     });
-    
+
 
 
 
@@ -29,9 +30,9 @@ $(document).ready(function() {
     });
 
     $('#removeAvatar').click(function(){//deleting avatar from profile
+        pathName = $('#current_url').val();
         $.post(
-
-            '/account/edit/0/controller%3D%3Eaccount/1/action%3D%3Eedit', {'deleteAvatar': 1},
+            pathName + '/account/edit/0/controller%3D%3Eaccount/1/action%3D%3Eedit', {'deleteAvatar': 1},
             function(response){
                 window.location.reload();
             }
@@ -128,10 +129,11 @@ $(document).ready(function() {
     }
 
     jQuery(window).unload( function () {
+        pathName = $('#current_url').val();
         activity = jQuery("#user_activity");
         if(activity.val() == 1) {
             jQuery.ajax({
-                url: "/account/offline",
+                url: pathName + "/account/offline",
                 type: "get",
                 success: function(result) {
                     activity.val(0);
@@ -144,8 +146,9 @@ $(document).ready(function() {
     setInterval(getNewMessagesCount, 60000);
     getNewMessagesCount();
     function getNewMessagesCount() {
+        pathName = $('#current_url').val();
         jQuery.ajax({
-            url: "/message/count",
+            url: pathName + "/message/count",
             type: "get",
             success: function(result) {
                 messagesCount = parseInt(result.messageCount.id);
@@ -163,8 +166,9 @@ $(document).ready(function() {
     setInterval(getNewBookingCount, 60000);
     getNewBookingCount();
     function getNewBookingCount() {
+        pathName = $('#current_url').val();
         jQuery.ajax({
-            url: "/booking/count",
+            url: pathName + "/booking/count",
             type: "get",
             success: function(result) {
                 bookingCount = parseInt(result.bookingCount.id);
@@ -211,7 +215,7 @@ function messageAction(element_id, action) {
     return false;
 }
 
-function massDelete(current_action) {
+function massTrash(current_action, url) {
     jQuery("body").append('<div class="loadingIcon"></div>');
     ids = [];
     $('.messageCheckboxes:checkbox:checked').each(function() {
@@ -220,7 +224,7 @@ function massDelete(current_action) {
 
     idsString = ids.toString();
     $.ajax({
-        url: "/message/massdelete",
+        url: url + "/message/masstrash",
         type: "post",
         data: {
             'message_ids' : idsString,
@@ -228,15 +232,55 @@ function massDelete(current_action) {
         },
         success: function(result) {
             jQuery('.loadingIcon').remove();
-            //alert(result.messageCount.toSource())
-            //window.location.href = "/message/" + action + "/current_action/" + action;
+            window.location.href = url+ "/message/" + current_action + "/current_action/" + current_action;
         }
     });
 
 }
 
-function massArchive() {
+function massDelete(current_action, url) {
+    jQuery("body").append('<div class="loadingIcon"></div>');
+    ids = [];
+    $('.messageCheckboxes:checkbox:checked').each(function() {
+        ids.push($(this).val());
+    });
 
+    idsString = ids.toString();
+    $.ajax({
+        url: url + "/message/massdelete",
+        type: "post",
+        data: {
+            'message_ids' : idsString,
+            'current_action' : current_action
+        },
+        success: function(result) {
+            jQuery('.loadingIcon').remove();
+            window.location.href = url + "/message/" + current_action + "/current_action/" + current_action;
+        }
+    });
+
+}
+
+function massArchive(current_action, url) {
+    jQuery("body").append('<div class="loadingIcon"></div>');
+    ids = [];
+    $('.messageCheckboxes:checkbox:checked').each(function() {
+        ids.push($(this).val());
+    });
+
+    idsString = ids.toString();
+    $.ajax({
+        url: url + "/message/massarchive",
+        type: "post",
+        data: {
+            'message_ids' : idsString,
+            'current_action' : current_action
+        },
+        success: function(result) {
+            jQuery('.loadingIcon').remove();
+            window.location.href = url + "/message/" + current_action + "/current_action/" + current_action;
+        }
+    });
 }
 
 /*---PIE - add css3 to ie 7 and ie8 -----------------------------------------------------*/
