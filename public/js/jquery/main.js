@@ -30,9 +30,9 @@ $(document).ready(function() {
     });
 
     $('#removeAvatar').click(function(){//deleting avatar from profile
+        pathName = $('#current_url').val();
         $.post(
-
-            '/account/edit/0/controller%3D%3Eaccount/1/action%3D%3Eedit', {'deleteAvatar': 1},
+            pathName + '/account/edit/0/controller%3D%3Eaccount/1/action%3D%3Eedit', {'deleteAvatar': 1},
             function(response){
                 window.location.reload();
             }
@@ -129,10 +129,11 @@ $(document).ready(function() {
     }
 
     jQuery(window).unload( function () {
+        pathName = $('#current_url').val();
         activity = jQuery("#user_activity");
         if(activity.val() == 1) {
             jQuery.ajax({
-                url: "/account/offline",
+                url: pathName + "/account/offline",
                 type: "get",
                 success: function(result) {
                     activity.val(0);
@@ -145,8 +146,9 @@ $(document).ready(function() {
     setInterval(getNewMessagesCount, 60000);
     getNewMessagesCount();
     function getNewMessagesCount() {
+        pathName = $('#current_url').val();
         jQuery.ajax({
-            url: "/message/count",
+            url: pathName + "/message/count",
             type: "get",
             success: function(result) {
                 messagesCount = parseInt(result.messageCount.id);
@@ -164,8 +166,9 @@ $(document).ready(function() {
     setInterval(getNewBookingCount, 60000);
     getNewBookingCount();
     function getNewBookingCount() {
+        pathName = $('#current_url').val();
         jQuery.ajax({
-            url: "/booking/count",
+            url: pathName + "/booking/count",
             type: "get",
             success: function(result) {
                 bookingCount = parseInt(result.bookingCount.id);

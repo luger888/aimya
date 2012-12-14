@@ -14,7 +14,7 @@ class Application_Form_Login extends Zend_Form
             ->setRequired(true)
             ->addValidator('NotEmpty')
             ->setAttrib('id', 'username-login')
-            ->setErrorMessages(array('Insert your login'))
+            ->setErrorMessages(array('insert your login'))
             ->setAttrib('class', 'customInput logTextInput login clearInput')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
@@ -23,7 +23,7 @@ class Application_Form_Login extends Zend_Form
         $password->setRequired(true)
             ->addValidator('NotEmpty')
             #->setAttrib('placeholder', 'password')
-            ->setErrorMessages(array('Insert your password'))
+            ->setErrorMessages(array('insert your password'))
             ->setAttrib('class', 'customInput logTextInput clearInput')
             ->setAttrib('id', 'password-login')
             ->addFilters($this->basicFilters)
@@ -35,7 +35,7 @@ class Application_Form_Login extends Zend_Form
 
         $submit = new Zend_Form_Element_Submit('login');
         $submit->setAttrib('id', 'login')
-               ->setLabel('LOGIN')
+               ->setLabel('login')
             ->setAttrib('class', 'btnLogin')
             ->setDecorators($this->basicDecorators);
 

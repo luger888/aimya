@@ -16,17 +16,20 @@ function addRequestService(){
     $('#addMoreRequestServices').remove();
 }
 /* Picking ID of service from hidden input and sending on controller to DELETE service*/
-function deleteService(e) {
+function deleteService(e, url) {
     var id = $(e).nextAll('input[type=hidden]:first').val();
     var answer = confirm("Delete service?");
 
     if (answer) {
         $(e).parents('.service').remove();
-        $.post(
+        $.ajax({
+            url: url,
+            type: "post",
+            data: {
+                'deleteService':id
+            }
 
-            '/account/edit/0/controller%3D%3Eaccount/1/action%3D%3Eedit', {'deleteService':id}
-
-        );
+        });
 
     }
 
@@ -34,12 +37,16 @@ function deleteService(e) {
 
 }
 /* Picking ID of service from hidden input and sending on controller to EDIT service*/
-function editService(e, service_type){
+function editService(e, service_type, url){
     //taking values for populating from DOM
-    $.post(
-
-        '/account/edit/0/controller%3D%3Eaccount/1/action%3D%3Eedit', {'getServiceCategories':1},
-        function(response){
+    $.ajax({
+        url: url,
+        type: "post",
+        data: {
+            'getServiceCategories':1
+        },
+        success: function(response){
+            url = "'" + url + "'";
             var lesson_categories = response.categories;//lesson categories from DB
             var options = [];
             for(var key in lesson_categories) {
@@ -71,8 +78,8 @@ function editService(e, service_type){
                             '<textarea  id="descriptionEditInput">'+description+'</textarea>'+
                         '</div>' +
                         '<div class="buttonsRow clearfix">'+
-                            '<input type = "button" value ="save" class="updateService button-2 save"  onclick="updateService(this, 1)";>'+
-                            '<input type = "hidden" value ="'+ id +'">'+
+                            '<input type = "button" value="save" class="updateService button-2 save"  onclick="updateService(this, 1, ' + url + ')";>'+
+                            '<input type = "hidden" value="'+ id +'">'+
                         '</div>'+
                     '</div>';
             }else if(service_type == 2){ //SERVICE TYPE = REQUESTED
@@ -84,8 +91,8 @@ function editService(e, service_type){
                             '<span class = "field-116"> <input id="subcategoryEditInput" value ="'+subcategory+'"></span>' +
                         '</div>'+
                         '<div class="buttonsRow clearfix">'+
-                            '<input type = "button" value ="save" class="updateService button-2 save"  onclick="updateService(this, 2)";>'+
-                            '<input type = "hidden" value ="'+ id +'">'+
+                            '<input type = "button" value="save" class="updateService button-2 save" onclick="updateService(this, 2, ' + url + ')";>'+
+                            '<input type = "hidden" value="'+ id +'">'+
                         '</div>'+
                     '</div>';
             }
@@ -99,13 +106,14 @@ function editService(e, service_type){
             serviceWrapper.html(serviceItem);//insert edit form with populated values
             serviceWrapper.find('#lesson_categoryEditInput').val(lesson_category);
             serviceWrapper.find('#durationEditInput').val($.trim(duration));
-        });
+        }
+    });
 
 
 
 }
 
-function updateService(e, service_type){
+function updateService(e, service_type, url){
     var id = $(e).nextAll('input[type=hidden]:first').val();//id of service
     var serviceWrapper  = $(e).parents('.shadowSeparatorBox'); //parent div
     /* getting values to post */
@@ -115,9 +123,10 @@ function updateService(e, service_type){
     var duration = serviceWrapper.find('#durationEditInput').val();
     var description = serviceWrapper.find('#descriptionEditInput').val();
     if(service_type == 1){
-        $.post(
-
-            '/account/edit/0/controller%3D%3Eaccount/1/action%3D%3Eedit', {
+        $.ajax({
+            url: url,
+            type: "post",
+            data: {
                 'updateService':id,
                 'lesson_category': lesson_category,
                 'subcategory': subcategory,
@@ -126,15 +135,16 @@ function updateService(e, service_type){
                 'description': description,
                 'service_type': 1
             },
-            function (response){
+            success: function (response){
                 window.location.reload();
             }
 
-        );
+        });
     }else{
-        $.post(
-
-            '/account/edit/0/controller%3D%3Eaccount/1/action%3D%3Eedit', {
+        $.ajax({
+            url: url,
+            type: "post",
+            data: {
                 'updateService':id,
                 'lesson_category': lesson_category,
                 'subcategory': subcategory,
@@ -143,11 +153,10 @@ function updateService(e, service_type){
                 'description': '',
                 'service_type': 2
             },
-            function (response){
+            succes: function (response){
                 window.location.reload();
             }
-
-        );
+        });
     }
 
 

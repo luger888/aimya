@@ -5,7 +5,7 @@ $(document).ready(function() {
 var blockedUser = 2;
 var removedUser = 3;
 
-    function blockUser(e) {
+    function blockUser(e, url) {
         var id = $(e).nextAll('input[type=hidden]:first').val();
         $(function() {
             $( "#block-confirm" ).dialog({
@@ -16,14 +16,16 @@ var removedUser = 3;
                 buttons: {
                     "Yes": function() {
                         $( this ).dialog( "close" );
-                        $.post(
-
-                            '/account/edit/0/controller%3D%3Eaccount/1/action%3D%3Eedit', {'updateUserId':id, 'status': blockedUser},
-                            function(response){
-                                window.location.reload();
+                        $.ajax({
+                            url: url,
+                            type: "post",
+                            data: {
+                                'updateUserId':id, 'status': blockedUser
+                            },
+                            success: function(response){
+                                //window.location.reload();
                             }
-
-                        );
+                        });
                     },
                     No: function() {
                         $( this ).dialog( "close" );
@@ -42,7 +44,7 @@ var removedUser = 3;
 
     }
 
-    function deleteUser(e) {
+    function deleteUser(e, url) {
 
         var id = $(e).nextAll('input[type=hidden]:first').val();
             $( "#delete-confirm" ).dialog({
@@ -52,16 +54,17 @@ var removedUser = 3;
                 buttons: {
                     "Yes": function() {
                         $( this ).dialog( "close" );
-                        $.post(
-
-                            '/account/edit/0/controller%3D%3Eaccount/1/action%3D%3Eedit', {'updateUserId': id, 'status': removedUser},
-                            function(response){
-                                window.location.reload();
+                        $.ajax({
+                            url: url,
+                            type: "post",
+                            data: {
+                                'updateUserId': id,
+                                'status': removedUser
+                            },
+                            success: function(response){
+                                //window.location.reload();
                             }
-
-                        );
-
-
+                        });
                     },
                     No: function() {
                         $( this ).dialog( "close" );
