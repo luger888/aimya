@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    var baseUrl = $('#current_url').val();
+
     /*  FILTER SYSTEM   */
     $.urlParam = function (name) {
         var results = new RegExp('[\\?\&]' + name + '=([^\&#]*)').exec(window.location.href);//getting params from url
@@ -20,7 +22,7 @@ $(document).ready(function () {
 
         $.post(
 
-            "/friends/send/0/controller%3D%3Efriends/1/action%3D%3Esend", {
+            baseUrl + "/friends/send/0/controller%3D%3Efriends/1/action%3D%3Esend", {
 
                 "friend_id": id
 
@@ -50,36 +52,65 @@ $(document).ready(function () {
 
     });
 
-    var showChar = 100;
-    var ellipsestext = "...";
-    var moretext = "more";
-    var lesstext = "less";
-    $('.more').each(function() {
-        var content = $(this).html();
+    jQuery.fn.shorten = function(settings) {
+        var config = {
+            showChars : 100,
+            ellipsesText : "...",
+            moreText : "more",
+            lessText : "less"
+        };
 
-        if(content.length > showChar) {
-
-            var c = content.substr(0, showChar);
-            var h = content.substr(showChar-1, content.length - showChar);
-
-            var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
-
-            $(this).html(html);
+        if (settings) {
+            $.extend(config, settings);
         }
 
-    });
+        $('.morelink').live('click', function() {
+            var $this = $(this);
+            if ($this.hasClass('less')) {
+                $this.removeClass('less');
+                $this.html(config.moreText);
+            } else {
+                $this.addClass('less');
+                $this.html(config.lessText);
+            }
+            $this.parent().prev().toggle();
+            $this.prev().toggle();
+            return false;
+        });
 
-    $(".morelink").click(function(){
-        if($(this).hasClass("less")) {
-            $(this).removeClass("less");
-            $(this).html(moretext);
-        } else {
-            $(this).addClass("less");
-            $(this).html(lesstext);
-        }
-        $(this).parent().prev().toggle();
-        $(this).prev().toggle();
-        return false;
+        return this.each(function() {
+            var $this = $(this);
+
+            var content = $this.html();
+            if (content.length > config.showChars) {
+                var c = content.substr(0, config.showChars);
+                var h = content.substr(config.showChars , content.length - config.showChars);
+                var html = c + '<span class="moreellipses">' + config.ellipsesText + '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="javascript:void(0)" class="morelink">' + config.moreText + '</a></span>';
+                $this.html(html);
+                $(".morecontent span").hide();
+            }
+        });
+    };
+
+    $('.showMore').click(function () {
+        var baseUrl = $('#current_url').val();
+        var elementCount = $('.shadowSeparator').length;
+        jQuery("body").append('<div class="loadingIcon"></div>');
+
+        $.ajax({
+            url: baseUrl +"/account/features",
+            type: "post",
+            data: {
+                'offset': elementCount,
+                'count': 5
+
+            },
+            success: function(result) {
+                alert(result.featured.toSource());
+                jQuery('.loadingIcon').remove();
+            }
+        });
+
     });
 
 });
