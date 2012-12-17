@@ -807,6 +807,15 @@ input.button-2 {
     margin-left: 27px;
 }
 
+.featuresTab .featuredItem .featuredInfo .morelink a{
+    color: #0254EB
+}
+
+.featuresTab .featuredItem .featuredInfo .morecontent {
+    display: none;
+}
+
+
 .s-111 select {
     width: 111px;
 }
