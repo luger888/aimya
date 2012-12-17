@@ -12,7 +12,9 @@
     });*/
 </script>
 
-
+<div class="resumeGeneral clearfix">
+    <div class="shadowSeparator clearfix">
+        <div class="shadowSeparatorBox clearfix">
 <?php
 foreach ($this->experienceList as $value):?>
 <div class="experienceItem">
@@ -35,3 +37,9 @@ foreach ($this->experienceList as $value):?>
 <input id="file_upload" name="file_upload" type="file" multiple="true">
 
 <input type="button" value="save" class="btn" onclick=saveExperience();>
+
+        </div>
+
+    </div>
+    <?php echo $this->partial('partials/resumeFooter.phtml') ?>
+</div>

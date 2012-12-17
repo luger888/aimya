@@ -645,7 +645,7 @@ input.button-2 {
     padding-right: 9px;
     background: url(../images/bg/right-tabs-nav-shadow.png) no-repeat right 0;
     position: relative;
-    z-index: 1;
+    z-index: 10;
 
 }
 
@@ -663,6 +663,7 @@ input.button-2 {
     padding-bottom: 5px;
     border-radius: 3px;
     position: relative;
+    text-transform: uppercase;
 }
 
 #tabsNavigation ul li a {
@@ -672,11 +673,11 @@ input.button-2 {
     background: url(../images/bg/tabs-nav-item-shadow.png) no-repeat 0 0;
 }
 
-#tabsNavigation ul li:first-child a, #tabsNavigation ul li.ui-tabs-active a {
+#tabsNavigation ul li:first-child a, #tabsNavigation ul li.ui-tabs-active a, #tabsNavigation ul li.active a {
     background: none;
 }
  
-#tabsNavigation ul li.ui-tabs-active {
+#tabsNavigation ul li.ui-tabs-active, #tabsNavigation ul li.active {
     background: #fff ;
 }
 
@@ -1569,4 +1570,31 @@ input.button-2 {
     width:12px;
     height: 12px;
     opacity: 1 !important;
+}
+
+/*--- RESUME -----------------------------------------------------------------*/
+.resumeGeneral .shadowSeparatorBox{
+    min-height: 416px;
+}
+.resumeGeneral .headRow h1{
+    float:left;
+}
+.resumeGeneral .headRow{
+    padding-bottom:15px;
+}
+.resumeGeneral .headRow .buttonRow{
+    float:right;
+}
+.resumeGeneral .formRow textarea{
+    width: 98.5%;
+    resize: vertical;
+    min-height: 210px;
+}
+.resumeFooter .buttonRow .button{
+    margin: 0 5px;
+    padding: 0 10px;
+}
+.resumeFooter{
+    margin: 0 auto;
+    width: 420px;
 }

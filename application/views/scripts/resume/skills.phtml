@@ -1,12 +1,18 @@
+<div class="resumeGeneral clearfix">
+    <div class="shadowSeparator clearfix">
+        <div class="shadowSeparatorBox clearfix">
+            <h1>UploadiFive Demo</h1>
 
-<h1>UploadiFive Demo</h1>
-<form>
-    <div id="queue"></div>
-    <input id="file_upload" name="file_upload" type="file" multiple="true">
-</form>
+            <form>
+                <div id="queue"></div>
+                <input id="file_upload" name="file_upload" type="file" multiple="true">
+            </form>
 
 
+            <input type="button" onclick="saveSkills();" value="save">
 
+        </div>
 
-    <input type = "button" onclick="saveSkills();" value ="save">
-
+    </div>
+    <?php echo $this->partial('partials/resumeFooter.phtml') ?>
+</div>
