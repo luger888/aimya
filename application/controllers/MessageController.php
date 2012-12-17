@@ -25,9 +25,13 @@ class MessageController extends Zend_Controller_Action
         $messageTable = new Application_Model_DbTable_Message();
         $messageActionsForm = new Application_Form_MessageActions();
         $activity = new Application_Model_DbTable_OnlineUsers();
+        $user = new Application_Model_DbTable_Users();
+
         $messages = $messageTable->getInbox($userId);
         foreach ($messages as $index => $value){
+            $username = $user->getUser($value['sender_id']);
             $messages[$index]['isActive'] = $activity->isOnline($value['sender_id']);//check if user online
+            $messages[$index]['username'] = $username['username'];//check if user online
         }
         $this->view->messageActions = $messageActionsForm;
         $this->view->messages = $messages;
@@ -88,7 +92,13 @@ class MessageController extends Zend_Controller_Action
         $messageActionsForm = new Application_Form_MessageActions();
 
         $messages = $messageTable->getSent($userId);
-
+        $activity = new Application_Model_DbTable_OnlineUsers();
+        $user = new Application_Model_DbTable_Users();
+        foreach ($messages as $index => $value){
+            $username = $user->getUser($value['sender_id']);
+            $messages[$index]['isActive'] = $activity->isOnline($value['sender_id']);//check if user online
+            $messages[$index]['username'] = $username['username'];//check if user online
+        }
         $this->view->messageActions = $messageActionsForm;
         $this->view->messages = $messages;
     }

@@ -17,6 +17,14 @@
                             <?php
                             if ($this->messages) {
                                 foreach ($this->messages as $message) {
+                                    $activity = $message['isActive'];
+                                    $activity = ($message['isActive'] == '1' ? ' online' : '');//check if online
+                                    $length = strripos(substr($message['text'], 0, 58), ' ');//cutting text if more then 60 chars
+                                    if(strlen($message['text'])>56){
+                                        $text = substr($message['text'], 0, $length) . '...';
+                                    }else{
+                                        $text = $message['text'];
+                                    }
                                     $originalTime = $message['created_at'];
                                     $time = date("H:i", strtotime($originalTime));
                                     $singleAction->setAttrib('id', 'singleactions_' . $message['id']);
@@ -25,9 +33,9 @@
 	                    <tr>
 	                        <td style="width:804px"><input type="checkbox" class="messageCheckboxes" value="' . $message['id'] . '">
                                 <a href="' . $this->baseUrl() . '/message/view/' . $message['id'] . '">
-                                    <span class =" messageSender">' . $message['sender_id'] . '</span>
+                                     <span class="activity'. $activity.'"></span><span class =" messageSender">' . $message['username'] . '</span>
                                     <span class =" messageTheme">' . $message['theme'] . '</span>
-                                    <span class = "messageText">' . $message['text'] . '</span></a>
+                                    <span class = "messageText">' . $text . '</span></a>
 
                                     <div class = "rightMessageBlock">
                                         <span class = "messageTime">' . $time . '</span>
