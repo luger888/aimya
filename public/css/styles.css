@@ -645,7 +645,7 @@ input.button-2 {
     padding-right: 9px;
     background: url(../images/bg/right-tabs-nav-shadow.png) no-repeat right 0;
     position: relative;
-    z-index: 1;
+    z-index: 10;
 
 }
 
