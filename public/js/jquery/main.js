@@ -161,7 +161,7 @@ $(document).ready(function() {
 
                 if(messagesCount > 0) {
                     if($(".newMessagesCount").length) $(".newMessagesCount").remove();
-                    inboxLi = $('.leftNavigation').find($('a[href="/message/inbox"]')).parent();
+                    inboxLi = $('.leftNavigation').find($('a[href="' + pathName + '/message/inbox"]')).parent();
                     inboxLi.append('<span class="newMessagesCount">' + messagesCount + '</span>')
                 }
             }
@@ -180,7 +180,7 @@ $(document).ready(function() {
                 bookingCount = parseInt(result.bookingCount.id);
                 if(bookingCount > 0) {
                     if($(".newBookingCount").length) $(".newBookingCount").remove();
-                    inboxLi = $('.leftNavigation').find($('a[href="/booking"]')).parent();
+                    inboxLi = $('.leftNavigation').find($('a[href="' + pathName + '/booking"]')).parent();
                     inboxLi.append('<span class="newBookingCount">' + bookingCount + '</span>')
                 }
             }
