@@ -32,7 +32,7 @@ function saveExperience(){
                               '<input type = "button" value ="delete" class = "btn" onclick=deleteExperience(this);>'+
                               '<input type = "hidden" value="' + response.lastId + '">'+
                               '</div>';
-                $('.experienceItem:last').after(content);
+                $('.experienceList').append(content);
             }
 
         }
@@ -62,7 +62,9 @@ function deleteExperience(e){
 }
 function editExperience(e){
 
-    var experience = $(e).prev().text();
+    var experienceWrapper  = $(e).parents('.experienceItem'); //parent div
+    var experience = experienceWrapper.children('.experienceBody:first').text();
+    alert(experience);
     var content = '<textarea rows="2" class = "experienceEditInput">';
     $(e).prev().html(content);
     $(e).prev().children().val($.trim(experience));

@@ -360,12 +360,12 @@ input.button-2 {
 }
 
 .button-2.delete {
-    background: url(../images/icons/delete.png) no-repeat 0 4px;
+    background: url(../images/icons/delete.png) no-repeat 0 3px;
 }
 
 
 .button-2.delete:hover {
-    background-position: 0 -15px;
+    background-position: 0 -16px;
 }
 
 .button-2.delete.disable {

@@ -2,8 +2,7 @@
 <?php $singleAction = $messageActions->singleactions; ?>
 <?php $action = Zend_Controller_Front::getInstance()->getRequest()->getActionName() ?>
 <?php echo $this->partial('partials/message.phtml') ?>
-<div id="mainContent" class="clearfix">
-    <div class="messageTab">
+    <div class="messageTab clearfix">
         <div class="shadowSeparator clearfix">
             <div class="shadowSeparatorBox clearfix">
                 <div class="messageButtons clearfix">
@@ -65,7 +64,6 @@
             </div><!-- END shadowSeparatorBox -->
         </div><!-- END shadowSeparator -->
     </div><!-- END messageTab -->
-</div><!-- END mainContent -->
 <style type="text/css">
     .userMessages .newMessage {
         font-weight: bold;
