@@ -2,13 +2,13 @@
 <?php $message = $this->message ?>
 <?php $user = $this->user ?>
 <div id="mainContent" class="clearfix">
-    <div class="messageTab">
+    <div class="messageTab viewMessageBlock">
         <div class="shadowSeparator clearfix">
             <div class="shadowSeparatorBox clearfix">
-                <div class="formRow clearfix"><?php echo $user['firstname'] . ' ' . $user['lastname']?><div class="messageViewTime"><?php echo $message['created_at']?></div></div>
-                <div class="formRow clearfix"><?php echo $message['theme']?></div>
-                <div class="formRow clearfix"><?php echo $message['text']?></div>
-                <div class="buttonRow clearfix"><span class = "button-2 reply"><?php echo $this->translate('reply')?></span></div>
+                <div class="formRow clearfix viewSender"><span class = "messageViewSender"><?php echo $user['firstname'] . ' ' . $user['lastname']?></span><div class="messageTime view"><?php echo $message['created_at']?></div></div>
+                <div class="formRow clearfix viewTheme"><span class = "messageViewTheme"><?php echo $message['theme']?></span></div>
+                <div class="formRow clearfix viewText"><span class = "messageViewText"><?php echo $message['text']?></span></div>
+                <div class="buttonRow clearfix viewReply"><span class = "button-2 reply"><?php echo $this->translate('reply')?></span></div>
 
             </div>
             <!-- END shadowSeparatorBox -->

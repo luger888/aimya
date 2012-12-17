@@ -12,22 +12,15 @@
                     <span class="button-2 archived" onclick="massArchive('<?php echo $action ?>', '<?php echo $this->baseUrl()?>')">Move to Archived</span>
                 </div>
                 <div class="userMessages">
-                    <?
-                    function substrCool($text, $length)
-                    {
-                        $length = strripos(substr($text, 0, $length), ' ');
-                        return substr($text, 0, $length);
-                    }
-
-                    ?>
                     <table class="">
                         <tbody>
                         <?php
                         if ($this->messages) {
-
                             foreach ($this->messages as $message) {
-                                $length = strripos(substr($message['text'], 0, 62), ' ');//cutting text if more then 60 chars
-                                if(strlen($message['text'])>60){
+                                $activity = $message['isActive'];
+                                $activity = ($message['isActive'] == '1' ? ' online' : '');//check if online
+                                $length = strripos(substr($message['text'], 0, 58), ' ');//cutting text if more then 60 chars
+                                if(strlen($message['text'])>56){
                                     $text = substr($message['text'], 0, $length) . '...';
                                 }else{
                                     $text = $message['text'];
@@ -48,7 +41,7 @@
 	                    <tr>
 	                        <td style="width:804px"><input type="checkbox" class="messageCheckboxes" value="' . $message['id'] . '">
                                 <a href="' . $this->baseUrl() . '/message/view/' . $message['id'] . $isNew . '">
-                                    <span class="activity"></span><span class ="' . $classNew . ' messageSender">' . $message['sender_id'] . '</span>
+                                    <span class="activity'. $activity.'"></span><span class ="' . $classNew . ' messageSender">' . $message['username'] . '</span>
                                     <span class ="' . $classNew . ' messageTheme">' . $message['theme'] . '</span>
                                     <span class = "messageText">' . $text . '</span></a>
 
