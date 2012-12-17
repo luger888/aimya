@@ -24,9 +24,11 @@ class MessageController extends Zend_Controller_Action
         //$this->_helper->layout()->disableLayout();
         $messageTable = new Application_Model_DbTable_Message();
         $messageActionsForm = new Application_Form_MessageActions();
-
+        $activity = new Application_Model_DbTable_OnlineUsers();
         $messages = $messageTable->getInbox($userId);
-
+        foreach ($messages as $index => $value){
+            $messages[$index]['isActive'] = $activity->isOnline($value['sender_id']);//check if user online
+        }
         $this->view->messageActions = $messageActionsForm;
         $this->view->messages = $messages;
     }

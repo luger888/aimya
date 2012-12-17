@@ -1412,9 +1412,36 @@ input.button-2 {
     height: 12px;
     width: 9px;
 }
-.messageTab .messageViewTime{
+.messageTab .activity.online{
+    background-position: 0 4px;
+}
+.messageTab .messageTime.view{
     float:right;
 }
+.messageTab.viewMessageBlock .formRow.viewSender{
+    padding-bottom:13px;
+}
+.messageTab.viewMessageBlock .formRow.viewTheme{
+    padding-bottom: 7px;
+    padding-left: 16px;
+}
+.messageTab.viewMessageBlock .formRow.viewText{
+    padding-bottom: 32px;
+    padding-left: 16px;
+}
+.messageTab.viewMessageBlock .buttonRow.viewReply{
+    padding-left: 16px;
+}
+.messageTab.viewMessageBlock .messageViewSender{
+    font:600 12px arial;
+}
+.messageTab.viewMessageBlock .messageViewTheme{
+    font:600 13px arial;
+}
+.messageTab.viewMessageBlock .messageViewText, .messageTab.viewMessageBlock a{
+    font: 11px arial;
+}
+
 /*---JSMessenger, alert (red)-----------------------------------------------------------------*/
 .alertBlock{
     margin: 0 auto;
