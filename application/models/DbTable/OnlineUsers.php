@@ -56,7 +56,7 @@ class Application_Model_DbTable_OnlineUsers extends Application_Model_DbTable_Ab
             ->where('user_id=?', $userId);
         $result = $data->query()->fetch();
 
-        if ($result) {
+        if ($result['status']) {
             return true;
         } else {
             return false;
