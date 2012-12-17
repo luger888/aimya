@@ -93,9 +93,18 @@
 
         <?php endforeach; ?>
         <div class="feauteresButtons clearfix">
-            <input class ="showMore button-2 more" type="button" value = "<?php echo $this->translate('SHOW MORE') ?>">
+            <input class ="showMore button-2 more" type="button" value = "<?php echo $this->translate('VIEW MORE') ?>">
         </div><!--End feauteresButtons-->
     </div><!--End messageContent -->
 
 
 </div><!--End featuresTab -->
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $(".more").shorten({
+            "showChars" : 200
+        });
+
+    });
+</script>
