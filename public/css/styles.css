@@ -1588,7 +1588,7 @@ input.button-2 {
 .resumeGeneral .formRow textarea{
     width: 98.5%;
     resize: vertical;
-    min-height: 210px;
+
 }
 .resumeFooter .buttonRow .button{
     margin: 0 5px;
@@ -1597,4 +1597,8 @@ input.button-2 {
 .resumeFooter{
     margin: 0 auto;
     width: 420px;
+}
+.resumeGeneral .uploadWrapper input[type="file"]{
+    width:1px;
+    visibility: hidden;
 }

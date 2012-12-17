@@ -29,10 +29,11 @@ $(document).ready(function() {
 
 
 
-
+//---Styling uploads--------------------------------------------------------------------------------
     $('#uploadAvatar').click(function(){
         $('#avatar').click();
     });
+
 
     $('#removeAvatar').click(function(){//deleting avatar from profile
         pathName = $('#current_url').val();

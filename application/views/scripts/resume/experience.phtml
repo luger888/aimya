@@ -1,29 +1,17 @@
-<script type="text/javascript">
-    /*$(function() {
-        $('#file_upload').uploadifive({
-            'auto'         : false,
-            'formData'     : {'experienceUpload' : 'certificate'},
-            'queueID'      : 'queue',
-            'uploadScript' : '/resume/upload',
-            'onUploadComplete' : function(file, data) {
-                console.log(data);
-            }
-        });
-    });*/
-</script>
-
 <div class="resumeGeneral clearfix">
     <div class="shadowSeparator clearfix">
         <div class="shadowSeparatorBox clearfix">
-            <div class="experienceList clearfix">
+            <div class="resumeList clearfix">
                 <?php
                 foreach ($this->experienceList as $value):?>
-                    <div class="experienceItem clearfix">
+                    <div class="resumeItem clearfix">
                         <div class="headRow clearfix">
                             <h1>experience:</h1>
+
                             <div class="buttonRow clearfix">
-                                <input type="button" value="edit" class="button-2 edit" onclick=editExperience(this);>
-                                <input type="button" value="delete" class="button-2 delete" onclick=deleteExperience(this);>
+                                <input type="button" value="edit" class="button-2 edit" onclick="editResumeItem(this, 'experience');">
+                                <input type="button" value="delete" class="button-2 delete"
+                                       onclick="deleteResumeItem(this, 'experience');">
                                 <input type="hidden" value="<?php echo $value['id'];?>">
                             </div>
                         </div>
@@ -38,13 +26,17 @@
             </div>
             <div class="experienceForm">
                 <div>Add new experience:</div>
-                <?php
-                echo $this->experienceForm->getElement('experience');
-                ?>
-                <div id="queue"></div>
-                <input id="file_upload" name="file_upload" type="file" multiple="true">
-
-                <input type="button" value="save" class="btn" onclick=saveExperience();>
+                <div class="formRow clearfix">
+                    <?php
+                    echo $this->experienceForm->getElement('experience');
+                    ?>
+                </div>
+                <div class = "uploadWrapper">
+                    <div id="queue"></div>
+                    <input id="file_upload" name="file_upload" type="file" multiple="true">
+                    <input id="uploadExperience" class="button-2 upload" type="button"  value="upload file" onclick=uploadExperienceFile();>
+                    <input type="button" value="save" class="button-2 save floatRight" onclick="saveResumeItem('experience');">
+                </div>
             </div>
         </div>
 
