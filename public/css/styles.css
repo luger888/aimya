@@ -645,7 +645,7 @@ input.button-2 {
     padding-right: 9px;
     background: url(../images/bg/right-tabs-nav-shadow.png) no-repeat right 0;
     position: relative;
-    z-index: 1;
+    z-index: 10;
 
 }
 
@@ -673,11 +673,11 @@ input.button-2 {
     background: url(../images/bg/tabs-nav-item-shadow.png) no-repeat 0 0;
 }
 
-#tabsNavigation ul li:first-child a, #tabsNavigation ul li.ui-tabs-active a {
+#tabsNavigation ul li:first-child a, #tabsNavigation ul li.ui-tabs-active a, #tabsNavigation ul li.active a {
     background: none;
 }
  
-#tabsNavigation ul li.ui-tabs-active {
+#tabsNavigation ul li.ui-tabs-active, #tabsNavigation ul li.active {
     background: #fff ;
 }
 
