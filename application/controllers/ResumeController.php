@@ -31,10 +31,12 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
 
     public function objectiveAction()
     {
+        $identity = Zend_Auth::getInstance()->getStorage()->read();
         $this->_helper->layout()->disableLayout();
+        $profile = new Application_Model_DbTable_Profile();
 
         $objectiveForm = new Application_Form_ResumeObjective();
-        $this->view->objectiveForm = $objectiveForm;
+        $this->view->objectiveForm = $objectiveForm->populate($profile->getProfile($identity->id));
     }
 
     public function experienceAction()

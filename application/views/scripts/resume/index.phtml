@@ -1,25 +1,43 @@
-<div id="tabs">
-    <ul>
-        <li><a href="#tabs-1">Basic</a></li>
-        <li><a href="/resume/objective">Describe Objective</a></li>
-        <li><a href="/resume/experience">Describe Experience</a></li>
-        <li><a href="/resume/education">Describe Education</a></li>
-        <li><a href="/resume/skills">Describe Skills</a></li>
-    </ul>
-    <div id="tabs-1">
-        <img class ="resumePhoto" src="<?php echo$this->avatarPath;?>">
-        <?php
-
-        echo $this->profile['firstname'] . ' ' . $this->profile['lastname'] . '<br>';
-        foreach($this->services as $value):
-            echo $value['subcategory'] . ' ';
-        endforeach;
-        echo  '<br>' . $this->profile['email'];
-        ?>
+<div id="tabs" class="tabsHolder clearfix">
+    <div id="tabsNavigation" class="clearfix">
+        <ul>
+            <li><a href="#tabs-1">basic</a></li>
+            <li><a href="<?php echo $this->baseUrl()?>/resume/objective">objective</a></li>
+            <li><a href="<?php echo $this->baseUrl()?>/resume/experience">experience</a></li>
+            <li><a href="<?php echo $this->baseUrl()?>/resume/education">education</a></li>
+            <li><a href="<?php echo $this->baseUrl()?>/resume/skills">skills</a></li>
+        </ul>
     </div>
+    <!--End tabsNavigation-->
+    <div class="mainContainer clearfix">
+        <div id="tabs-1" class="clearfix">
+            <div class="resumeGeneral">
+                <div class="shadowSeparator clearfix">
+                    <div class="shadowSeparatorBox clearfix">
+                        <img class="resumePhoto" src="<?php echo$this->avatarPath;?>">
+                        <?php
 
+                        echo $this->profile['firstname'] . ' ' . $this->profile['lastname'] . '<br>';
+                        foreach ($this->services as $value):
+                            echo $value['subcategory'] . ' ';
+                        endforeach;
+                        echo  '<br>' . $this->profile['email'];
+                        ?>
+                    </div>
+                    <!--End shadowSeparatorBox-->
+                </div>
+                <!--End shadowSeparator-->
+                <?php echo $this->partial('partials/resumeFooter.phtml') ?>
+            </div>
+            <!--End profileGeneral-->
 
-</div>
+        </div>
+        <!--End Tab-->
+
+    </div>
+    <!--End mainContainer-->
+
+</div><!--End tabs-->
 
 
 

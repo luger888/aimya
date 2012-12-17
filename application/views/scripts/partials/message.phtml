@@ -1,4 +1,6 @@
 <div class="messageHeader clearfix">
+
+        <div id="tabsNavigation" class="clearfix">
     <?php
     echo $this->navigation()
         ->menu()
@@ -7,3 +9,4 @@
         ->render(new Aimya_Navigation($this->navigation()->findAllBy('tag', 'messageMenu', true)));
     ?>
 </div>
+    </div>
