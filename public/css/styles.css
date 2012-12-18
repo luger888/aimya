@@ -1633,3 +1633,18 @@ input.button-2 {
 .resumeGeneral .delete {
     margin-left: 15px;
 }
+/*--- UPLOADIFIVE -----------------------------------------------------------------*/
+#queue{
+    display: inline-block;
+    min-width: 92px;
+}
+.uploadifive-queue-item{
+     margin-top:5px;
+     padding: 2px;
+ }
+.uploadifive-queue-item:nth-child(odd){
+    background-color: #ECF4D7;
+}
+.uploadifive-queue-item .close{
+float:right;
+}

@@ -81,10 +81,10 @@ function editResumeItem(e, tab) {
     experienceWrapper.children('.resumeItemBody').html(content);
     experienceWrapper.children('.resumeItemBody').children('.formRow').children('.resumeEditInput').val($.trim(resumeContent));
     experienceWrapper.children('.resumeItemBody').after('<div class = "uploadWrapper">' +
-        '<div id="queue"></div>' +
         '<input id="file_upload" name="file_upload" type="file" multiple="true">' +
         '<input type="button" value="save" class="button-2 save floatRight" onclick=updateResumeItem(this,"' + tab + '");>' +
-        '</div>');
+        '</div>'+
+        '<div id="queue"></div>');
     $('.button-2:not(".save, .upload")').addClass("disable");
     uploadify();
 }
@@ -157,7 +157,7 @@ function uploadify() {
 
             },
             'onUploadComplete':function (file, data) {
-                window.location.reload();
+                //window.location.reload();
             }
         }
     )

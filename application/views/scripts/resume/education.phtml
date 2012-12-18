@@ -1,3 +1,6 @@
+<script type="text/javascript">
+    uploadify();
+</script>
 <div class="resumeGeneral clearfix">
         <div class="shadowSeparatorBox clearfix">
             <div class="resumeList clearfix">
@@ -38,13 +41,12 @@
                     ?>
                 </div>
                 <div class="uploadWrapper">
-                    <div id="queue"></div>
+
                     <input id="file_upload" name="file_upload" type="file" multiple="true">
-                    <input id="uploadExperience" class="button-2 upload" type="button" value="upload file"
-                           onclick=uploadExperienceFile();>
                     <input type="button" value="save" class="button-2 save floatRight"
                            onclick="saveResumeItem('education');">
                 </div>
+                <div id="queue"></div>
             </div>
         </div>
 
