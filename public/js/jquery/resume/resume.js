@@ -86,27 +86,7 @@ function editResumeItem(e, tab) {
         '<input type="button" value="save" class="button-2 save floatRight" onclick=updateResumeItem(this,"' + tab + '");>' +
         '</div>');
     $('.button-2:not(".save, .upload")').addClass("disable");
-    $(function () {
-        var baseUrl = $('#current_url').val();
-        $('#file_upload').uploadifive({
-                'auto':false,
-                'formData':{'resumeType':'skills', 'resumeTypeId': '1'},
-                'queueID':'queue',
-                'uploadScript':baseUrl+'/resume/upload',
-                'buttonText':'upload file',
-                'height':20,
-                'width':70,
-                'buttonClass': 'button-2 upload',
-                'onSelect'    : function(event) {
-
-
-                },
-                'onUploadComplete':function (file, data) {
-                    window.location.reload();
-                }
-            }
-        )
-    });
+    uploadify();
 }
 
 function updateResumeItem(e, tab) {
@@ -157,6 +137,27 @@ function updateObjective() {
 
                 $("#" + key).attr("placeholder", response.errors[key]);
 
+            }
+        }
+    )
+}
+function uploadify() {
+    var baseUrl = $('#current_url').val();
+    $('#file_upload').uploadifive({
+            'auto':false,
+            'formData':{'resumeType':'skills', 'resumeTypeId': '1'},
+            'queueID':'queue',
+            'uploadScript':baseUrl+'/resume/upload',
+            'buttonText':'upload file',
+            'height':20,
+            'width':70,
+            'buttonClass': 'button-2 upload',
+            'onSelect'    : function(event) {
+
+
+            },
+            'onUploadComplete':function (file, data) {
+                window.location.reload();
             }
         }
     )

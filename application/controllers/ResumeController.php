@@ -173,7 +173,7 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
         // Set the upload directory
         // $_POST['resumeType']  == experience, education or skill
         $uploadDir = '/img/uploads/' .$identity->id .'/certificate/' . $_POST['resumeType'] .'/'. $_POST['resumeTypeId'] .'/';
-        //mkdir('/img/uploads/' .$identity->id .'/' . $_POST['resumeType'] .'/'. $_POST['resumeTypeId'] .'/');
+        @mkdir('/img/uploads/' .$identity->id .'/' . $_POST['resumeType'] .'/'. $_POST['resumeTypeId'] .'/');
         // Set the allowed file extensions
         $fileTypes = array('jpg', 'jpeg', 'gif', 'png'); // Allowed file extensions
 
