@@ -169,20 +169,12 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
         $identity = Zend_Auth::getInstance()->getStorage()->read();
 
 
-
+        $folderModel = new Application_Model_Folder();
+        $folderModel->createFolderChain('/img/uploads/' .$identity->id .'/certificate/' . $_POST['resumeType'] .'/'. $_POST['resumeTypeId'] .'/');//creating chain of folders
         // Set the upload directory
         // $_POST['resumeType']  == experience, education or skill
         $uploadDir = '/img/uploads/' .$identity->id .'/certificate/' . $_POST['resumeType'] .'/'. $_POST['resumeTypeId'] .'/';
 
-        if(!file_exists('./img/uploads/' .$identity->id .'/certificate') OR !is_dir('./img/uploads/' .$identity->id .'/certificate')){
-            mkdir('./img/uploads/' .$identity->id .'/certificate');
-        }
-        if(!file_exists('./img/uploads/' .$identity->id .'/certificate/' . $_POST['resumeType']) OR !is_dir('./img/uploads/' .$identity->id .'/certificate/' . $_POST['resumeType'])){
-            mkdir('./img/uploads/' .$identity->id .'/certificate/' . $_POST['resumeType']);
-        }
-        if(!file_exists('./img/uploads/' .$identity->id .'/certificate/' . $_POST['resumeType'] .'/'. $_POST['resumeTypeId']) OR !is_dir('./img/uploads/' .$identity->id .'/certificate/' . $_POST['resumeType'] .'/'. $_POST['resumeTypeId'])){
-            mkdir('./img/uploads/' .$identity->id .'/certificate/' . $_POST['resumeType'] .'/'. $_POST['resumeTypeId']);
-        }
 
         // Set the allowed file extensions
         $fileTypes = array('jpg', 'jpeg', 'gif', 'png'); // Allowed file extensions
