@@ -1,12 +1,57 @@
+<script type="text/javascript">
+    uploadify();
+</script>
 
-<h1>UploadiFive Demo</h1>
-<form>
-    <div id="queue"></div>
-    <input id="file_upload" name="file_upload" type="file" multiple="true">
-</form>
+<div class="resumeGeneral clearfix">
+    <div class="shadowSeparatorBox clearfix">
+        <div class="experienceList clearfix">
+            <?php
+            foreach ($this->skillList as $value):?>
+                <div class="shadowSeparator clearfix">
+                    <div class="shadowSeparatorBot clearfix">
+                        <div class="resumeItem clearfix">
+                            <div class="headRow clearfix">
+                                <h1>skill:</h1>
+
+                                <div class="buttonRow clearfix">
+                                    <input type="button" value="edit" class="button-2 edit"
+                                           onclick="editResumeItem(this,'skill');">
+                                    <input type="button" value="delete" class="button-2 delete"
+                                           onclick="deleteResumeItem(this, 'skill')";>
+                                    <input type="hidden" value="<?php echo $value['id'];?>">
+                                </div>
+                            </div>
+                            <div class="resumeItemBody clearfix">
+                                <?php echo $value['content'];?>
+                            </div>
 
 
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+        </div>
+        <div class="buttonsRow clearfix">
+            <input type="button" class="button-2 add addResumeItem floatRight" value="add skill"
+                   onclick="addResumeItem();">
+        </div>
+        <div class="resumeItemForm">
+            <h1>Add new skill:</h1>
 
+            <div class="formRow clearfix">
+                <?php
+                echo $this->skillsForm->getElement('skill');
+                ?>
+            </div>
+            <div class="uploadWrapper">
 
-    <input type = "button" onclick="saveSkills();" value ="save">
+                <input id="file_upload" type="file" name="file_upload" />
+                <input type="button" value="save" class="button-2 save floatRight"
+                       onclick="saveResumeItem('skill');">
+            </div>
+            <div id="queue"></div>
+        </div>
+    </div>
+    <?php echo $this->partial('partials/resumeFooter.phtml');?>
 
+</div>

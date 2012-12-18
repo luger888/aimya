@@ -5,8 +5,14 @@
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
-	<s:RichText text="LESSON PRESENTATION:" styleName="HeaderStyle" />
-	<s:RichText id="presentationTitle" text="Latin professor at Hampden-Sydney in Virginia to popular belie" styleName="DescriptionStyle" width="100%" />
+	<fx:Script>
+		<![CDATA[
+			import com.aimialesson.model.Main;
+			import com.aimialesson.model.Texts;
+		]]>
+	</fx:Script>
+	<s:RichText text="{Texts.getInstance().getText(Texts.LESSON_PRESENTATION, true)}" styleName="HeaderStyle" />
+	<s:RichText id="presentationTitle" text="{Main.getInstance().topic}" styleName="DescriptionStyle" width="100%" />
 	<s:Group width="100%">
 		<elements:EnterBtnSkin id="enterBtn" right="0" />
 	</s:Group>

@@ -9,6 +9,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
             ->addActionContext('edit', 'json')
             ->addActionContext('offline', 'json')
             ->addActionContext('online', 'json')
+            ->addActionContext('features', 'json')
             ->initContext('json');
     }
 
@@ -242,14 +243,24 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                 $lessonCat = $this->getRequest()->getParam('category');
             }
 
-            $this->view->featured = $dbUserModel->getLatestFeatured($userType, $lessonCat);
+            if($this->getRequest()->isXmlHttpRequest()) {
+                $offset = $this->getRequest()->getParam('offset');
+                $count = $this->getRequest()->getParam('count');
+
+                $this->view->featured = $dbUserModel->getLatestFeatured($userType, $lessonCat, $offset, $count);
+
+            } else {
+                $this->view->featured = $dbUserModel->getLatestFeatured($userType, $lessonCat);
+            }
+
 
     }
 
     public function offlineAction() {
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
         $onlineUserTable = new Application_Model_DbTable_OnlineUsers();
-        $onlineUserTable->makeOffline($userId);
+        $status = $onlineUserTable->makeOffline($userId);
+        $this->view->userStatus = $userId;
     }
 
     public function onlineAction() {

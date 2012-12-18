@@ -85,7 +85,6 @@ package com.aimialesson.controllers
 				// hack for usual case (not for refreshing on maximize mode in webkit based browsers etc...)
 				if (FlexGlobals.topLevelApplication.width != Main.NORMAL_WIDTH)
 					Main.getInstance().fsMode = true;
-				//Main.getInstance().dispatchEvent ( new Event ( Main.SCREEN_MODE_INIT ));
 			} else {
 				Main.getInstance().fsMode = false;
 			}

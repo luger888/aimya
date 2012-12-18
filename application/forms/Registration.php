@@ -18,7 +18,7 @@ class Application_Form_Registration extends Zend_Form
             ->setAttrib('id', 'firstname')
             ->addFilters($this->basicFilters)
             ->setErrorMessages(array('Insert your first name'))
-            ->setLabel('First Name:');
+            ->setLabel('first name:');
             #->setDecorators($this->basicDecorators);
 
         $lastName = new Zend_Form_Element_Text('lastname');
@@ -29,14 +29,14 @@ class Application_Form_Registration extends Zend_Form
             ->setAttrib('id', 'lastname')
             ->addFilters($this->basicFilters)
             ->setErrorMessages(array('Insert your last name'))
-            ->setLabel('Last Name:');
+            ->setLabel('last name:');
            # ->setDecorators($this->basicDecorators);
 
         $gender = new Zend_Form_Element_Radio('gender');
         $gender ->setAttrib('class', 'regRadio')
             ->setAttrib('id', 'gender')
             ->addFilters($this->basicFilters)
-            ->setLabel('Gender: ')
+            ->setLabel('gender: ')
             ->setSeparator('');
         $gender->addMultiOptions(array(
 
@@ -56,7 +56,7 @@ class Application_Form_Registration extends Zend_Form
             ->setAttrib('id', 'username')
             ->addFilters($this->basicFilters)
             ->setErrorMessages(array('Insert your username'))
-            ->setLabel('Login:');
+            ->setLabel('login:');
             #->setDecorators($this->basicDecorators);
 
         $email = new Zend_Form_Element_Text('email');
@@ -66,7 +66,7 @@ class Application_Form_Registration extends Zend_Form
             #->setAttrib('placeholder', 'email address')
             ->setAttrib('class', 'clearInput regTextInput email')
             ->setErrorMessages(array('Insert your email'))
-            ->setLabel('Email address:');
+            ->setLabel('email address:');
             #->setDecorators($this->basicDecorators);
 
         $password = new Zend_Form_Element_Password('password');
@@ -77,7 +77,7 @@ class Application_Form_Registration extends Zend_Form
             ->addFilters($this->basicFilters)
             ->setErrorMessages(array('Insert your password'))
             #->setDecorators($this->basicDecorators)
-            ->setLabel('Password:');
+            ->setLabel('password:');
 
         $password2 = new Zend_Form_Element_Password('password2');
         $password2 #->setRequired(true)
@@ -87,7 +87,7 @@ class Application_Form_Registration extends Zend_Form
            # ->setErrorMessages(array('Retype your password'))
             ->setAttrib('class', 'clearInput regTextInput')
             ->addFilters($this->basicFilters)
-            ->setLabel('Confirm password:');
+            ->setLabel('confirm password:');
             #->setDecorators($this->basicDecorators);
 
         $type = new Zend_Form_Element_Radio('type');
@@ -105,8 +105,8 @@ class Application_Form_Registration extends Zend_Form
             ->setSeparator('');
 
         $submit = new Zend_Form_Element_Submit('signup');
-        $submit ->setAttrib('id', 'signup')
-                ->setLabel('SIGN UP')
+        $submit ->setAttrib('id', 'signupBtn')
+                ->setLabel('sign up')
                 ->setAttrib('class', 'btnSignup signup-element button')
                 ->setDecorators($this->basicDecorators);
 

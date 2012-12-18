@@ -138,15 +138,17 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $router = $frontController->getRouter();
 
         $langRoute = new Zend_Controller_Router_Route(
-            ':lang/',
+            '/:lang',
             array(
                 'lang' => 'en'
             ),
-            array('lang' => '[a-z]{2}')
+            array(
+                'lang' => '[a-z]{2}'
+            )
         );
 
         $defaultRoute = new Zend_Controller_Router_Route(
-            ':controller/:action',
+            ':module/:controller/:action/*',
             array(
                 'module'=>'default',
                 'controller'=>'index',
@@ -191,6 +193,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             )
         );
 
+        $defaultRoute = $langRoute->chain($defaultRoute);
         $cmsRoute = $langRoute->chain($cmsRoute);
         $userRoute = $langRoute->chain($userRoute);
         $messageRoute = $langRoute->chain($messageRoute);
@@ -203,17 +206,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $router->addRoute('messageRoute', $messageRoute);
 
         //$router->addRoute('message/view/(\d+)', $messageRoute);
-    }
-
-    protected function _initSetupBaseUrl() {
-        $frontController = Zend_Controller_Front::getInstance();
-        $uri = ltrim($_SERVER["REQUEST_URI"], "/");
-        $module = substr($uri, 0, strpos($uri, "/"));
-        if($module == "") {
-            $module = "en";
-        }
-
-        $frontController->setBaseUrl('/' . $module);
     }
 
     public function _initNavigation()

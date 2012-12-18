@@ -38,7 +38,7 @@ package com.aimialesson.model
 		}
 		
 		public function get userRole () : String {
-			return (_userRole == User.STUDENT) ? "Student" : "Instructor";
+			return (_userRole == User.STUDENT) ? Texts.getInstance().getText(Texts.STUDENT) : Texts.getInstance().getText(Texts.TEACHER);
 		}
 		
 		private var _isOnline:Boolean = true;
@@ -76,7 +76,7 @@ package com.aimialesson.model
 		}
 		
 		public function get partnerRole () : String {
-			return (_userRole == User.TEACHER) ? "Student" : "Instructor";
+			return (_userRole == User.TEACHER) ? Texts.getInstance().getText(Texts.STUDENT) : Texts.getInstance().getText(Texts.TEACHER);
 		}
 		
 		private var _partnerIsOnline:Boolean = false;

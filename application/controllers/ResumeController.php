@@ -2,9 +2,10 @@
 class ResumeController extends Zend_Controller_Action implements Aimya_Controller_AccountInterface
 {
 
+
     public function init()
     {
-        $this->_helper->layout->setLayout("layoutInside");
+        $this->_helper->layout->setLayout("layoutInner");
         $this->_helper->AjaxContext()
             ->addActionContext('ajax', 'json')
             ->addActionContext('upload', 'json')
@@ -13,12 +14,10 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
 
     public function indexAction()
     {
-        $this->_helper->layout->setLayout("layoutInside");
+        $this->_helper->layout->setLayout("layoutInner");
         //basic tab
         $identity = Zend_Auth::getInstance()->getStorage()->read();
-        $this->view->headScript()->appendFile('../../js/jquery/resume/experience.js');
-        $this->view->headScript()->appendFile('../../js/jquery/resume/education.js');
-        $this->view->headScript()->appendFile('../../js/jquery/resume/objective.js');
+        $this->view->headScript()->appendFile('../../js/jquery/resume/resume.js');
         $this->view->headScript()->appendFile('../../js/jquery/jquery.uploadifive.js');
         $servicesModel = new Application_Model_DbTable_ServiceDetail();
         $this->view->services = $servicesModel->getServiceByUser($identity->id, 1);
@@ -31,10 +30,12 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
 
     public function objectiveAction()
     {
+        $identity = Zend_Auth::getInstance()->getStorage()->read();
         $this->_helper->layout()->disableLayout();
+        $profile = new Application_Model_DbTable_Profile();
 
         $objectiveForm = new Application_Form_ResumeObjective();
-        $this->view->objectiveForm = $objectiveForm;
+        $this->view->objectiveForm = $objectiveForm->populate($profile->getProfile($identity->id));
     }
 
     public function experienceAction()
@@ -62,11 +63,21 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
     public function skillsAction()
     {
         $this->_helper->layout()->disableLayout();
-
+        $identity = Zend_Auth::getInstance()->getStorage()->read();
         $skillsForm = new Application_Form_ResumeSkills();
         $this->view->skillsForm = $skillsForm;
         if ($this->getRequest()->isPost()) {
             $this->view->succes = 1;
+        }
+
+        $dbSkills = new Application_Model_DbTable_ResumeSkills();
+        $this->view->skillList = $dbSkills->getSkills($identity->id);
+        if ($handle = opendir('./img/uploads/'.$identity->id .'/certificate/skill/21/')) {
+            $certificates = array();
+            while (false !== ($entry = readdir($handle))) {
+                $certificates[] .= $entry;
+            }
+           
         }
     }
 
@@ -80,6 +91,7 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
 
             $dbExperience = new Application_Model_DbTable_ResumeExperience();
             $dbEducation = new Application_Model_DbTable_ResumeEducation();
+            $dbSkills = new Application_Model_DbTable_ResumeSkills();
             $dbProfile = new Application_Model_DbTable_Profile();
             $data = $this->getRequest()->getPost();
 
@@ -96,14 +108,33 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
 
                 }
             }
-            if ($this->getRequest()->getParam('deleteExperience')) {
-                $dbExperience->deleteExperience($this->getRequest()->getParam('deleteExperience'), $identity->id);
+            if ($this->getRequest()->getParam('deleteexperience')) {
+                $dbExperience->deleteExperience($this->getRequest()->getParam('deleteexperience'), $identity->id);
             }
-            if ($this->getRequest()->getParam('updateExperience')) {
+            if ($this->getRequest()->getParam('updateexperience')) {
                 $dbExperience->updateExperience($this->getRequest()->getParams(), $identity->id);
             }
             /*END -- EXPERIENCE TAB*/
+            /* SKILLS TAB*/
 
+            if ($this->getRequest()->getParam('skill')) {
+                $form = new Application_Form_ResumeSkills();
+                if ($form->isValid($data)) {
+                    $this->view->lastId = $dbSkills->createSkill($data, $identity->id);
+                    $this->view->success = '1';
+                } else {
+
+                    $this->view->errors = $form->getErrors();
+
+                }
+            }
+            if ($this->getRequest()->getParam('deleteskill')) {
+                $dbSkills->deleteSkill($this->getRequest()->getParam('deleteskill'), $identity->id);
+            }
+            if ($this->getRequest()->getParam('updateskill')) {
+                $dbSkills->updateSkill($this->getRequest()->getParams(), $identity->id);
+            }
+            /*END -- SKILLS TAB*/
             /* EDUCATION TAB*/
             if ($this->getRequest()->getParam('education')) {
                 $form = new Application_Form_ResumeEducation();
@@ -116,10 +147,10 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
 
                 }
             }
-            if ($this->getRequest()->getParam('deleteEducation')) {
-                $dbEducation->deleteEducation($this->getRequest()->getParam('deleteEducation'), $identity->id);
+            if ($this->getRequest()->getParam('deleteeducation')) {
+                $dbEducation->deleteEducation($this->getRequest()->getParam('deleteeducation'), $identity->id);
             }
-            if ($this->getRequest()->getParam('updateEducation')) {
+            if ($this->getRequest()->getParam('updateeducation')) {
                 $dbEducation->updateEducation($this->getRequest()->getParams(), $identity->id);
             }
             /*  END -- EDUCATION TAB*/
@@ -142,9 +173,15 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
 
     public function uploadAction()
     {
+        $identity = Zend_Auth::getInstance()->getStorage()->read();
 
+
+        $folderModel = new Application_Model_Folder();
+        $folderModel->createFolderChain('/img/uploads/' . $identity->id . '/certificate/' . $_POST['resumeType'] . '/' . $_POST['resumeTypeId'] . '/'); //creating chain of folders
         // Set the upload directory
-        $uploadDir = '/img/uploads/';
+        // $_POST['resumeType']  == experience, education or skill
+        $uploadDir = '/img/uploads/' . $identity->id . '/certificate/' . $_POST['resumeType'] . '/' . $_POST['resumeTypeId'] . '/';
+
 
         // Set the allowed file extensions
         $fileTypes = array('jpg', 'jpeg', 'gif', 'png'); // Allowed file extensions
@@ -160,12 +197,11 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
 
                 // Save the file
                 move_uploaded_file($tempFile, $targetFile);
-                echo 1;
+
 
             } else {
 
                 // The file type wasn't allowed
-                echo 'Invalid file type.';
 
             }
         }

@@ -27,11 +27,11 @@
                 <?php $isFriend = $friendTable->isFriend($person['id']); ?>
                 <?php $isPending = $friendTable->isPending($person['id']); ?>
                 <?php  if($isFriend){ // if friend, dont show the add to account button
-                    echo '<a class ="sendMessage" href=#>SEND MESSAGE</a>';
+                    echo "<a class ='sendMessage' href=#>" . $this->translate('SEND MESSAGE') . "</a>";
                 }elseif($isPending){
-                    echo '<span class ="request_sent">REQUEST SENT</span>';
+                    echo "<span class ='request_sent'>" . $this->translate('REQUEST SENT') . "</span>";
                 }else{
-                    echo '<a class ="button-2 add addAccount" href=#>ADD TO MY ACCOUNT</a>';
+                    echo "<a class ='button-2 add addAccount' href=#>" . $this->translate('ADD TO MY ACCOUNT') . "</a>";
                 }
                 ?>
                 <?php echo '<input type="hidden" value = "' .$person["id"]. '">';?>
@@ -39,18 +39,18 @@
             </div><!--End featuredButtonsTop-->
             <ul class="featuredInfo">
                 <li class="clearfix">
-                    <span class="title">Name:</span>
+                    <span class="title"><?php echo $this->translate('Name:') ?></span>
                     <div class="featuredTxt"><?php echo  ' ' .$person['firstname'] . ' ' . $person['lastname'];?></div>
                 </li>
 
                 <li class="clearfix">
-                    <span class="title">Time zone:</span>
+                    <span class="title"><?php echo $this->translate('Time zone:') ?></span>
                     <div class="featuredTxt"><?php echo ' UTC ' . $person['timezone'];?></div>
                 </li>
 
                 <?php if (count($person['service_offered']) > 0):?>
                 <li class="clearfix">
-                    <span class="title">Service offered:</span>
+                    <span class="title"><?php echo $this->translate('Service offered:') ?></span>
                     <div class="featuredTxt">
                     <?php
                         $i = 0;
@@ -65,7 +65,7 @@
                 <?php endif; ?>
                 <?php if (count($person['service_requested']) > 0):?>
                 <li class="clearfix">
-                    <span class="title">Service requested:</span>
+                    <span class="title"><?php echo $this->translate('Service requested:') ?></span>
                     <div class="featuredTxt">
                     <?php
                     $i = 0;
@@ -80,8 +80,8 @@
                 <?php endif; ?>
                 <?php if (count($person['add_info']) > 0):?>
                 <li class="clearfix">
-                    <span class="title">About me:</span>
-                    <div class="featuredTxt"><?php echo $person['add_info'];?></div>
+                    <span class="title"><?php echo $this->translate('About me:') ?></span>
+                    <div class="featuredTxt more"><?php echo $person['add_info'];?></div>
                 </li>
                 <?php endif; ?>
             </ul><!--End featuredInfo -->
@@ -93,9 +93,18 @@
 
         <?php endforeach; ?>
         <div class="feauteresButtons clearfix">
-            <input class ="showMore button-2 more" type="button" value = "SHOW MORE">
+            <input class ="showMore button-2 more" type="button" value = "<?php echo $this->translate('VIEW MORE') ?>">
         </div><!--End feauteresButtons-->
     </div><!--End messageContent -->
 
 
 </div><!--End featuresTab -->
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $(".more").shorten({
+            "showChars" : 200
+        });
+
+    });
+</script>

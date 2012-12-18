@@ -13,6 +13,8 @@
                 </thead>
                 <tbody>
                 <?php
+
+                $url = "'{$this->baseUrl()}/account/edit'";
                 if ($this->friends) {
                     foreach ($this->friends as $value) {
                         echo '<tr>
@@ -20,7 +22,7 @@
         <td>' . $value['lastname'] . '</td>
         <td>' . $value['username'] . '</td>
         <td>UTC ' . $value['timezone'] . '</td>
-        <td><input type = "button" value="BLOCK" class = "button-2 block"  onclick ="blockUser(this);return false;"></div><input type = "button" value = "DELETE" class="button-2 delete" onclick="deleteUser(this);return false;"></div><input type = "hidden" value = ' . $value['id'] . '</td>
+        <td><input type = "button" value="BLOCK" class = "button-2 block"  onclick ="blockUser(this, ' . $url . ');return false;"></div><input type = "button" value = "DELETE" class="button-2 delete" onclick="deleteUser(this, ' . $url . ');return false;"></div><input type = "hidden" value = ' . $value['id'] . '></td>
     </tr>';
                     }
 

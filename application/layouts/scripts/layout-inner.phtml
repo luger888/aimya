@@ -17,7 +17,7 @@
     <?php $this->headScript()->appendFile('/js/jquery/jquery-ui-1.9.1.custom.min.js');?>
     <?php $this->headScript()->appendFile('/js/jquery/customCheckboxRadio.js');?>
     <?php $this->headScript()->appendFile('/js/jquery/cookieJquery.js');?>
-    <?php #$this->headScript()->appendFile('/js/jquery/jquery.uploadifive.js');?>
+    <?php $this->headScript()->appendFile('/js/jquery/jquery.uploadifive.js');?>
     <?php $this->headScript()->appendFile('/js/jquery/main.js');?>
     <?php $this->headScript()->appendFile('/js/jquery/jquery-ui-timepicker-addon.js');?>
 
@@ -31,7 +31,7 @@
     <![endif]-->
 </head>
 <body>
-
+    <div id="flash_div" style="display: none; height: 100%; width: 100%"></div>
 <?php
 //information in left block of account:
 //  firstname, lastname, avatar, member since, services
@@ -73,6 +73,7 @@ if (Zend_Registry::isRegistered('username')) {
                     
                     <a href="<?php echo $this->baseUrl() ?>/booking" id="logo"></a>
                     <input id="user_activity" type="hidden" value="1">
+                    <input id="current_url" type="hidden" value="<?php echo $this->baseUrl()?>">
                     <div class="searchForm headerSearch">
                         <form id="search_form" method="get" action="<?php echo $this->baseUrl() ?>/search/search/">
                             <?php $searchForm = $this->addSearchForm();?>
@@ -83,12 +84,17 @@ if (Zend_Registry::isRegistered('username')) {
 
                     <nav id="globalNav">
                         <ul>
-                            <li><a href="#"><?php echo $this->translate("HOME"); ?></a></li>
-                            <li><a href="#">PRIVACY POLICY</a></li>
-                            <li><a href="<?php echo $this->baseUrl() ?>">ABOUT AIMYA</a></li>
-                            <li><a href="#">HELP</a></li>
-                            <li class="last"><a href="/user/logout/">SIGN OUT</a></li>
-
+                            <li><a href="<?php echo $this->baseUrl() ?>/booking"><?php echo $this->translate("HOME"); ?></a></li>
+                            <li><a href="<?php echo $this->baseUrl() ?>#">PRIVACY POLICY</a></li>
+                            <li><a href="<?php echo $this->baseUrl() ?>/about.thml">ABOUT AIMYA</a></li>
+                            <li><a href="<?php echo $this->baseUrl() ?>#">HELP</a></li>
+                            <li><a href="<?php echo $this->baseUrl() ?>/user/logout/">SIGN OUT</a></li>
+                            <li class="last"><a href="#"><?php echo $this->translate('language')?></a>
+                            <ul>
+                                <li><a href="<?php echo $this->getHelper('baseUrl')->setBaseUrl('/en')->baseUrl(substr($_SERVER["REQUEST_URI"], 3));?>"><span class = "language english"><?php echo $this->translate('english')?></span></a></li>
+                                <li><a href="<?php echo $this->getHelper('baseUrl')->setBaseUrl('/ja')->baseUrl(substr($_SERVER["REQUEST_URI"], 3));?>"><span class = "language japanese"><?php echo $this->translate('japanese')?></span></a></li>
+                                <li><a href="<?php echo $this->getHelper('baseUrl')->setBaseUrl('/zh')->baseUrl(substr($_SERVER["REQUEST_URI"], 3));?>"><span class = "language chinese"><?php echo $this->translate('chinese')?></span></a></li>
+                            </ul></li>
                         </ul>
                     </nav>
 

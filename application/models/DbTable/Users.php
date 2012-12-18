@@ -128,11 +128,8 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         $this->update($data, $where);
 
     }
-    public function getLatestFeatured($role='0', $category = 'All'){
+    public function getLatestFeatured($role='0', $category = 'All', $offset = 0, $count = 5){
 
-
-        $count  = 5;
-        $offset = 0;
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
 
         $subQuery = $this->getAdapter()->select()

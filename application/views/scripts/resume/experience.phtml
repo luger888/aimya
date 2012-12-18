@@ -1,37 +1,56 @@
 <script type="text/javascript">
-    /*$(function() {
-        $('#file_upload').uploadifive({
-            'auto'         : false,
-            'formData'     : {'experienceUpload' : 'certificate'},
-            'queueID'      : 'queue',
-            'uploadScript' : '/resume/upload',
-            'onUploadComplete' : function(file, data) {
-                console.log(data);
-            }
-        });
-    });*/
+    uploadify();
 </script>
+<div class="resumeGeneral clearfix">
 
+    <div class="shadowSeparatorBox clearfix">
+        <div class="resumeList clearfix">
+            <?php
+            foreach ($this->experienceList as $value):?>
+                <div class="shadowSeparator clearfix">
+                    <div class="shadowSeparatorBot clearfix">
+                        <div class="resumeItem clearfix">
+                            <div class="headRow clearfix">
+                                <h1>experience:</h1>
 
-<?php
-foreach ($this->experienceList as $value):?>
-<div class="experienceItem">
-    <div class="experienceHeader">Experience :</div>
-    <div class="experienceBody">
-        <?php echo $value['content'];?>
+                                <div class="buttonRow clearfix">
+                                    <input type="button" value="edit" class="button-2 edit"
+                                           onclick="editResumeItem(this, 'experience');">
+                                    <input type="button" value="delete" class="button-2 delete"
+                                           onclick="deleteResumeItem(this, 'experience');">
+                                    <input type="hidden" value="<?php echo $value['id'];?>">
+                                </div>
+                            </div>
+                            <div class="resumeItemBody clearfix">
+                                <?php echo $value['content'];?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <?php endforeach; ?>
+        </div>
+        <div class="buttonsRow clearfix">
+            <input type="button" class="button-2 add addResumeItem floatRight" value="add experience"
+                   onclick="addResumeItem();">
+        </div>
+        <div class="resumeItemForm">
+           <h1>Add new experience:</h1>
+            <div class="formRow clearfix">
+                <?php
+                echo $this->experienceForm->getElement('experience');
+                ?>
+            </div>
+            <div class="uploadWrapper">
+
+                <input id="file_upload" name="file_upload" type="file" multiple="true">
+                <input type="button" value="save" class="button-2 save floatRight"
+                       onclick="saveResumeItem('experience');">
+            </div>
+            <div id="queue"></div>
+        </div>
     </div>
 
-    <input type="button" value="edit" class="btn" onclick=editExperience(this);>
-    <input type="button" value="delete" class="btn" onclick=deleteExperience(this);>
-    <input type="hidden" value="<?php echo $value['id'];?>">
+
+    <?php echo $this->partial('partials/resumeFooter.phtml') ?>
 </div>
-
-<?php endforeach; ?>
-<div>Add new experience:</div>
-<?php
-    echo $this->experienceForm->getElement('experience');
-?>
-<div id="queue"></div>
-<input id="file_upload" name="file_upload" type="file" multiple="true">
-
-<input type="button" value="save" class="btn" onclick=saveExperience();>
