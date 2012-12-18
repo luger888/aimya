@@ -1,17 +1,17 @@
-<?php echo $this->partial('partials/message.phtml')?>
-<?php $message = $this->message?>
-<?php $user = $this->user?>
-<div class= "messageContent">
+<?php echo $this->partial('partials/message.phtml') ?>
+<?php $message = $this->message ?>
+<?php $user = $this->user ?>
+    <div class="messageTab viewMessageBlock">
+        <div class="shadowSeparator clearfix">
+            <div class="shadowSeparatorBox clearfix">
+                <div class="formRow clearfix viewSender"><span class = "messageViewSender"><?php echo $user['firstname'] . ' ' . $user['lastname']?></span><div class="messageTime view"><?php echo $message['created_at']?></div></div>
+                <div class="formRow clearfix viewTheme"><span class = "messageViewTheme"><?php echo $message['theme']?></span></div>
+                <div class="formRow clearfix viewText"><span class = "messageViewText"><?php echo $message['text']?></span></div>
+                <div class="buttonRow clearfix viewReply"><span class = "button-2 reply"><?php echo $this->translate('reply')?></span></div>
 
-	    <table width="300px">
-	        <tr>
-	            <td><?php echo $user['firstname'] . ' ' . $user['lastname']?></td>
-	        </tr>
-	        <tr>
-	            <td><?php echo $message['theme']?></td>
-	        </tr>
-	        <tr>
-	            <td><?php echo $message['text']?></td>
-	        </tr>
-	    </table>
-</div>
+            </div>
+            <!-- END shadowSeparatorBox -->
+        </div>
+        <!-- END shadowSeparator -->
+    </div>
+    <!-- END messageTab -->

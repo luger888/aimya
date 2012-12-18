@@ -1,42 +1,50 @@
 <?php $messageActions = $this->messageActions; ?>
-<?php echo $this->partial('partials/message.phtml')?>
-<div class= "messageContent">
-	<div class="messageButtons clearfix">
-		<span class="msgBtn archived" onclick="document.location='/message/send/'">Move to Archived</span>
-    	<span class="msgBtn inbox" onclick="document.location='/message/send/'">Move to Inbox</span>
-    	<span class="msgBtn delete" onclick="document.location='/message/send/'">Delete</span>
-	</div>
-    <div class = "userMessages">
-    <table  class="">
-<?php /*    <table  class="table table-striped table-hover"> 
-	        <thead style="">
-	        <tr>
-	            <td> </td>
-	            <td> Sender Name </td>
-	            <td> Subject </td>
-	            <td> Message </td>
-	            <td> Action </td>
-	        </tr>
-	        </thead> */?>
-	        <tbody>
-	        <?php
-	        if($this->messages){
-	            foreach($this->messages as $message){
-	                echo '<tr>
-	                <td><input type="checkbox" id="' . $message['id'] . '"></td>
-	    <td>'.$message['sender_id'].'</td>
-	    <td>'.$message['theme'].'</td>
-	    <td>'.$message['text'].'</td>
-	</tr>';
-	            }
-	
-	        }
-	
-	        ?>
-	        </tbody>
-	    </table>
-	</div>
-</div>
+<?php echo $this->partial('partials/message.phtml') ?>
+    <div class="messageTab">
+        <div class="shadowSeparator clearfix">
+            <div class="shadowSeparatorBox clearfix">
+                <div class="messageButtons trashBox clearfix">
+                    <span class="button-2 archived" onclick="document.location='/message/send/'">Move to Archived</span>
+                    <span class="button-2 delete" onclick="document.location='/message/send/'">Delete</span>
+                    <span class="button-2 inbox" onclick="document.location='/message/send/'">Move to Inbox</span>
+                </div>
+                <div class="userMessages">
+                    <table class="">
 
+                        <tbody>
+                        <?php
+                        if ($this->messages) {
+                            foreach ($this->messages as $message) {
+                                $originalTime = $message['created_at'];
+                                $time = date("H:i", strtotime($originalTime));
+                                echo '
+	                    <tr>
+	                        <td style="width:804px"><input type="checkbox" class="messageCheckboxes" value="' . $message['id'] . '">
+                                <a href="' . $this->baseUrl() . '/message/view/' . $message['id'] .'">
+                                    <span class ="messageSender">' . $message['sender_id'] . '</span>
+                                    <span class ="messageTheme">' . $message['theme'] . '</span>
+                                    <span class = "messageText">' . $message['text'] . '</span></a>
 
+                                    <div class = "rightMessageBlock">
+                                        <span class = "messageTime">' . $time . '</span>
+                                        <a href="' . $this->baseUrl() . '/message/reply/message_id/' . $message['id'] . '/current_action/"' . $action . '><span class="messageReply"></span></a>
+                                        <a href="' . $this->baseUrl() . '/message/forward/message_id/' . $message['id'] . '/current_action/"' . $action . '><span class="messageForward"></span></a>
+                                    </div>
 
+	                    </tr>
+	                    ';
+                            }
+
+                        }
+
+                        ?>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- END userMessages -->
+            </div>
+            <!-- END shadowSeparatorBox -->
+        </div>
+        <!-- END shadowSeparator -->
+    </div>
+    <!-- END messageTab -->

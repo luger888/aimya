@@ -1,6 +1,20 @@
 $(document).ready(function() {
 
-
+//    $.ajaxSetup({
+//        beforeSend: function(jqXHR, settings) {
+//            jQuery("body").append('<div class="loadingIcon"></div>');
+//        },
+//        complete:function(jqXHR, settings) {
+//            jQuery('.loadingIcon').remove();
+//        }
+//    });
+//---Main navigation--------------------------------------------------------------------------------
+    $("nav ul li >ul").hover( function() {
+        $('.last>a').addClass('liHover');
+    });
+    $("nav ul li >ul").mouseleave( function() {
+        $('.last>a').removeClass('liHover');
+    });
     //---Home page member buttons--------------------------------------------------------------------------------
 
     $('.memberButtons input:first').attr('checked', 'checked');
@@ -24,15 +38,16 @@ $(document).ready(function() {
 
 
 
-
+//---Styling uploads--------------------------------------------------------------------------------
     $('#uploadAvatar').click(function(){
         $('#avatar').click();
     });
 
-    $('#removeAvatar').click(function(){//deleting avatar from profile
-        $.post(
 
-            '/account/edit/0/controller%3D%3Eaccount/1/action%3D%3Eedit', {'deleteAvatar': 1},
+    $('#removeAvatar').click(function(){//deleting avatar from profile
+        pathName = $('#current_url').val();
+        $.post(
+            pathName + '/account/edit/0/controller%3D%3Eaccount/1/action%3D%3Eedit', {'deleteAvatar': 1},
             function(response){
                 window.location.reload();
             }
@@ -116,12 +131,13 @@ $(document).ready(function() {
     setInterval(imStillAlive, 60000);
     function imStillAlive() {
         activity = jQuery("#user_activity");
+        pathName = $('#current_url').val();
         if(activity.val() == 1) {
             jQuery.ajax({
-                url: "/account/offline",
+                url: pathName + "/account/offline",
                 type: "get",
                 success: function(result) {
-                    activity.val(0);
+                    console.log(result.userStatus);
                 }
             });
             return false;
@@ -129,10 +145,11 @@ $(document).ready(function() {
     }
 
     jQuery(window).unload( function () {
+        pathName = $('#current_url').val();
         activity = jQuery("#user_activity");
         if(activity.val() == 1) {
             jQuery.ajax({
-                url: "/account/offline",
+                url: pathName + "/account/offline",
                 type: "get",
                 success: function(result) {
                     activity.val(0);
@@ -145,15 +162,16 @@ $(document).ready(function() {
     setInterval(getNewMessagesCount, 60000);
     getNewMessagesCount();
     function getNewMessagesCount() {
+        pathName = $('#current_url').val();
         jQuery.ajax({
-            url: "/message/count",
+            url: pathName + "/message/count",
             type: "get",
             success: function(result) {
                 messagesCount = parseInt(result.messageCount.id);
 
                 if(messagesCount > 0) {
                     if($(".newMessagesCount").length) $(".newMessagesCount").remove();
-                    inboxLi = $('.leftNavigation').find($('a[href="/message/inbox"]')).parent();
+                    inboxLi = $('.leftNavigation').find($('a[href="' + pathName + '/message/inbox"]')).parent();
                     inboxLi.append('<span class="newMessagesCount">' + messagesCount + '</span>')
                 }
             }
@@ -164,14 +182,15 @@ $(document).ready(function() {
     setInterval(getNewBookingCount, 60000);
     getNewBookingCount();
     function getNewBookingCount() {
+        pathName = $('#current_url').val();
         jQuery.ajax({
-            url: "/booking/count",
+            url: pathName + "/booking/count",
             type: "get",
             success: function(result) {
                 bookingCount = parseInt(result.bookingCount.id);
                 if(bookingCount > 0) {
                     if($(".newBookingCount").length) $(".newBookingCount").remove();
-                    inboxLi = $('.leftNavigation').find($('a[href="/booking"]')).parent();
+                    inboxLi = $('.leftNavigation').find($('a[href="' + pathName + '/booking"]')).parent();
                     inboxLi.append('<span class="newBookingCount">' + bookingCount + '</span>')
                 }
             }
@@ -185,7 +204,6 @@ $(document).ready(function() {
 //        'auto'         : false,
 //        'formData'     : {'experienceUpload' : 'certificate'},
 //        'queueID'      : 'queue',
-//        'folder'        : '/img/uploads/' + $(this).attr('id'),
 //        'uploadScript' : '/resume/upload',
 //        'onUploadComplete' : function(file, data) {
 //        }
@@ -212,7 +230,7 @@ function messageAction(element_id, action) {
     return false;
 }
 
-function massDelete(current_action) {
+function massTrash(current_action, url) {
     jQuery("body").append('<div class="loadingIcon"></div>');
     ids = [];
     $('.messageCheckboxes:checkbox:checked').each(function() {
@@ -221,7 +239,7 @@ function massDelete(current_action) {
 
     idsString = ids.toString();
     $.ajax({
-        url: "/message/massdelete",
+        url: url + "/message/masstrash",
         type: "post",
         data: {
             'message_ids' : idsString,
@@ -229,13 +247,13 @@ function massDelete(current_action) {
         },
         success: function(result) {
             jQuery('.loadingIcon').remove();
-            window.location.href = "/message/" + current_action + "/current_action/" + current_action;
+            window.location.href = url+ "/message/" + current_action + "/current_action/" + current_action;
         }
     });
 
 }
 
-function massArchive(current_action) {
+function massDelete(current_action, url) {
     jQuery("body").append('<div class="loadingIcon"></div>');
     ids = [];
     $('.messageCheckboxes:checkbox:checked').each(function() {
@@ -244,7 +262,7 @@ function massArchive(current_action) {
 
     idsString = ids.toString();
     $.ajax({
-        url: "/message/massarchive",
+        url: url + "/message/massdelete",
         type: "post",
         data: {
             'message_ids' : idsString,
@@ -252,18 +270,33 @@ function massArchive(current_action) {
         },
         success: function(result) {
             jQuery('.loadingIcon').remove();
-            window.location.href = "/message/" + current_action + "/current_action/" + current_action;
+            window.location.href = url + "/message/" + current_action + "/current_action/" + current_action;
+        }
+    });
+
+}
+
+function massArchive(current_action, url) {
+    jQuery("body").append('<div class="loadingIcon"></div>');
+    ids = [];
+    $('.messageCheckboxes:checkbox:checked').each(function() {
+        ids.push($(this).val());
+    });
+
+    idsString = ids.toString();
+    $.ajax({
+        url: url + "/message/massarchive",
+        type: "post",
+        data: {
+            'message_ids' : idsString,
+            'current_action' : current_action
+        },
+        success: function(result) {
+            jQuery('.loadingIcon').remove();
+            window.location.href = url + "/message/" + current_action + "/current_action/" + current_action;
         }
     });
 }
 
-/*---PIE - add css3 to ie 7 and ie8 -----------------------------------------------------*/
 
-$(function() {
-    if (window.PIE) {
-      $('.boxShadow, #username-login, #password-login, .button, #tabsNavigation ul, #tabsNavigation ul li, .mainContainer').each(function() {
-      PIE.attach(this);
-    });//each
-  }//if
-});
 

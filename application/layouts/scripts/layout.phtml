@@ -18,7 +18,7 @@
     <?php $this->headScript()->appendFile('/js/jquery/jquery-ui-1.9.1.custom.min.js');?>
     <?php $this->headScript()->appendFile('/js/jquery/customCheckboxRadio.js');?>
     <?php $this->headScript()->appendFile('/js/jquery/cookieJquery.js');?>
-    <?php $this->headScript()->appendFile('/js/jquery/main.js');?>
+
     <?php echo $this->headScript();?>
     <?php echo $this->headLink();?>
     <!--[if lte IE 8]>
@@ -38,42 +38,43 @@ $controllerName = $front->getRequest()->getControllerName();
 
 <div id="page" class="clearfix">
 <div id="globalWrapper" class="clearfix">
-    
+
     <div id="wrapper" class="clearfix">
 
         <div id="header" class="clearfix">
             <a href="index" id="logo" title="Home page"></a>
-
+            <input id="user_activity" type="hidden" value="1">
+            <input id="current_url" type="hidden" value="<?php echo $this->baseUrl()?>">
             <!-- LOGIN -->
-            <?php
-            echo "
+
             <div id='loginFormHolder'>
-                <form id='signIn' action='user/login' name='signIn'  method='post'>
-                <div class='signInButton'>
-                    {$this->login['login']}
+                <form id="signIn" action="<?php echo $this->baseUrl()?>/user/login" name="signIn"  method="post">
+                <div class="signInButton">
+                    <?php echo $this->login['login'] ?>
                 </div><!--End signInButton-->
-                <div class='signInBox'>
-                    <label class='title'>Password:</label>
-                    {$this->login['password']}
-                    <a href='#'>Forgot your password?</a>
+                <div class="signInBox">
+                    <label class="title"><?php echo $this->translate("password") ?>:</label>
+                    <?php echo$this->login['password'] ?>
+                    <a href="<?php echo$this->baseUrl()?>#"><?php echo $this->translate("forgot your password")?>?</a>
                 </div><!--End signInBox-->
-                <div class='signInBox'>
-                    <label class='title'>Login or email:</label>
-                    {$this->login['username']}
-                    <div class='loginRemember clearfix'>
-                        <span class='checkboxBox'>{$this->login['remember']}</span>
-                        <label>Keep me signed in</label>
+                <div class="signInBox">
+                    <label class="title"><?php echo $this->translate("login or email") ?>:</label>
+                    <?php echo $this->login['username'] ?>
+                    <div class="loginRemember clearfix">
+                        <span class="checkboxBox"><?php echo $this->login['remember'] ?></span>
+                        <label><?php echo $this->translate("keep me signed in") ?></label>
                     </div><!--End loginRemember-->
                 </div><!--End signInBox-->
                 </form>
-            </div>";
-            ?>
+            </div>
             <!-- END /LOGIN -->
         </div><!--End header-->
 
-        
+        <div class="alertBlock">
+
+        </div>
         <div id="content" class="homePage clearfix">
-            
+
             <div class="messages clearfix">
                 <?php echo $this->flashMessages();?>
             </div><!--End messages-->
@@ -92,8 +93,8 @@ $controllerName = $front->getRequest()->getControllerName();
         <p>Copyright 2012 Aimya</p>
         <p>Created by <a href="#" title="Svitla Systems">Svitla.com</a></p>
     </div><!--End copyright-->
-</div><!--End footer--> 
-   
+</div><!--End footer-->
+
 </div><!--End page-->
 
 

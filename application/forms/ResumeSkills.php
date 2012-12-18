@@ -11,8 +11,8 @@ class Application_Form_ResumeSkills extends Zend_Form
         $this->setName('skills');
         $this->setEnctype(Zend_Form::ENCTYPE_MULTIPART);
 
-        $skills = new Zend_Form_Element_Textarea('skills');
-        $skills ->setAttrib('id', 'skills')
+        $skill = new Zend_Form_Element_Textarea('skill');
+        $skill ->setAttrib('id', 'skill')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators)
             ->setAttrib('rows', '7');
@@ -29,25 +29,7 @@ class Application_Form_ResumeSkills extends Zend_Form
             ->setAttrib('class', 'btn')
             ->setDecorators($this->basicDecorators);
 
-        $certificate = new Aimya_Form_Element_File( 'certificate' );
-        $certificate->setOptions(array(
-            'required'    => true,
-            'label'       => 'Label'
-        ))
-            ->setDestination( './img/uploads/' )
-            ->addValidators(array(
-            array( "Count", true, 1 ),
-            array( "Extension", true, array( 'jpg', 'png' ))
-        ))
-            ->addPrefixPath('Aimya_Form_Decorator', 'Aimya/Form/Decorator/', 'decorator')
-            ->setDecorators(array(
-            'File',
-            'Description',
-            'Label',
-            array('Errors', array('placement' => 'prepend')),
-            array('Uploadify', array('text' => 'Nahrať súbor'))
-        ))
-            ->create();
+
 
 
         $submit = new Zend_Form_Element_Submit('saveSkills');
@@ -59,7 +41,7 @@ class Application_Form_ResumeSkills extends Zend_Form
 
 
 
-        $this->addElements(array($skills, $delete, $add, $certificate, $submit));
+        $this->addElements(array($skill, $delete, $add,  $submit));
 
     }
 }

@@ -24,6 +24,7 @@ class Application_Form_Booking extends Zend_Form
 
         $recipiend_id = new Zend_Form_Element_Select('recipiend_id');
         $recipiend_id->setAttrib('id', 'recipiend_id')
+            ->setAttrib('class', 't-165')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
         foreach ($friendsArray as  $value) {
@@ -31,25 +32,25 @@ class Application_Form_Booking extends Zend_Form
         }
         $start_at = new Zend_Form_Element_Text('started_at');
         $start_at ->setAttrib('id', 'started_at')
+            ->setAttrib('class', 't-165')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 
 
         $focus_name = new Zend_Form_Element_Text('focus_name');
         $focus_name ->setAttrib('id', 'focus_name')
+            ->setAttrib('class', 't-165')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 
         $rate = new Zend_Form_Element_Text('rate');
         $rate ->setAttrib('class', 'required input-small')
-            ->setAttrib('placeholder', 'rate')
             ->setAttrib('id', 'rate')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 
         $duration = new Zend_Form_Element_Select('duration');
         $duration->setAttrib('id', 'duration')
-            ->setAttrib('class', 'input-small')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators)
             ->addMultiOptions(array('15'   => '15 min',
@@ -85,6 +86,7 @@ class Application_Form_Booking extends Zend_Form
     }else{
         $submit = new Zend_Form_Element_Submit('sendBooking');
         $submit ->setLabel('Send for verification')
+            ->setAttrib('class', 'button')
             ->setAttrib('id', 'sendBooking')
             ->setDecorators($this->basicDecorators);
     }

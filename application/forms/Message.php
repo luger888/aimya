@@ -28,7 +28,7 @@ class Application_Form_Message extends Zend_Form
 
         $content = new Zend_Form_Element_Textarea('content');
         $content->addValidator('NotEmpty')
-            ->setAttrib('id', 'content')
+            ->setAttrib('id', 'messageContent')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators)
             ->setAttrib('rows', '7');
@@ -37,7 +37,7 @@ class Application_Form_Message extends Zend_Form
         $send = new Zend_Form_Element_Submit('sendbutton');
         $send ->setLabel('Send')
             ->setAttrib('id', 'sendbutton')
-            ->setAttrib('class', 'addAccount')
+            ->setAttrib('class', 'button sendMessageButton')
             ->setDecorators($this->basicDecorators);
 
         $this->addElements(array($messageId, $email, $subject, $content, $send));

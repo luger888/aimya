@@ -10,7 +10,7 @@
                     <tr>
                         <td><b><?php echo $user['username']?></b></td>
                         <td>
-                            <form method="POST" id='start_session_<?php echo $user['id'];?>' action="<?php echo $this->baseLink() . '/lesson/setup/'?>">
+                            <form method="POST" id='start_session_<?php echo $user['id'];?>' action="<?php echo $this->baseUrl() . '/lesson/setup/'?>">
                                 <input name="student_id" type="hidden" value="<?php echo $user['id'];?>">
                                 <?php if(Zend_Auth::getInstance()->getIdentity()->role > 1 && !$availableLesson):?>
                                     <a href="#" id="<?php echo $user['id'];?>" onclick="jQuery('#start_session_<?php echo $user['id'];?>').submit()">Start Session</a>
@@ -54,7 +54,7 @@
     <script type="text/javascript">
         function doAjax() {
             $.ajax({
-                'url': '<?php echo $this->baseLink() . "/lesson/join/";?>',
+                'url': '<?php echo $this->baseUrl() . "/lesson/join/";?>',
                 'data': ({student_id : 3}),
                 //'data': serializedData,
                 'dataType': 'json',

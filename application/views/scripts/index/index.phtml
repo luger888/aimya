@@ -1,9 +1,7 @@
 <div class="messages">
     <?php echo $this->confirmFlash;?>
 </div>
-<div class="alertBlock">
 
-</div>
 
 
 <div class="homeLeftCol">
@@ -23,10 +21,10 @@
 
 <div class="homeRightCol regBlock">
 
-    <h2 class="strictFont">REGISTER</h2>
+    <h2 class="strictFont"><?php echo $this->translate("register") ?></h2>
 
     <div id="registrationFormHolder">
-        <form id="signUp" action="/user/registration/" name="signUp" method="post"> 
+        <form id="signUp" action="<?php echo $this->baseUrl()?>/user/registration/" name="signUp" method="post">
 
                 <div class='memberButtons clearfix'>
                     <?php echo $this->reg['type'];?>

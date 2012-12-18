@@ -3,13 +3,13 @@
     <div id="tabsNavigation" class="clearfix">
 
         <ul>
-            <li><a href="#tabs-1">GENERAL</a></li>
-            <?php if($this->role !== '1'){echo  '<li><a href="/account/services">SERVICE DETAILS</a></li>';}?>
-            <li><a href="/account/requestservices">REQUEST SERVICES</a></li>
-            <li><a href="/account/availability">AVAILABILITY</a></li>
-            <li><a href="/account/notifications">NOTIFICATIONS/ACCOUNT SETTINGS</a></li>
-            <li><a href="/account/users">USERS</a></li>
-            <li><a href="/account/metrics">MY METRICS</a></li>
+            <li><a href="#tabs-1">general</a></li>
+            <?php if($this->role !== '1'){echo  '<li><a href="' . $this->baseUrl() . '/account/services">SERVICE DETAILS</a></li>';}?>
+            <li><a href="<?php echo $this->baseUrl()?>/account/requestservices">request services</a></li>
+            <li><a href="<?php echo $this->baseUrl()?>/account/availability">availability</a></li>
+            <li><a href="<?php echo $this->baseUrl()?>/account/notifications">notifications/account settings</a></li>
+            <li><a href="<?php echo $this->baseUrl()?>/account/users">users</a></li>
+            <li><a href="<?php echo $this->baseUrl()?>/account/metrics">my metrics</a></li>
         </ul>
 
     </div><!--End tabsNavigation-->

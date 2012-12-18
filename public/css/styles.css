@@ -119,9 +119,67 @@ body {
 #globalNav ul li a.current, #globalNav ul li a:hover{
     background: url(../images/elem/nav-hover.png) repeat-x 0 0;
 }
-
+#globalNav .liHover{
+    background: url(../images/elem/nav-hover.png) repeat-x 0 0;
+}
 #globalNav ul li:first-child {
     background: none;
+}
+
+
+nav ul ul {
+    display: none;
+    position: absolute;
+    z-index: 1000;
+    background-color: #EAF4CF;
+    -webkit-box-shadow: 0 0 5px #ccc;
+    -moz-box-shadow:    0 0 5px #ccc;
+    box-shadow:         0 0 5px #ccc;
+}
+
+nav ul ul li{
+    width: 100%;
+    height:27px;
+    background: none !important;
+}
+nav ul ul li a:hover{
+   background: none !important;
+    color:#719418 !important;
+}
+nav ul ul:hover .last{
+    background-color: white !important;
+}
+nav ul ul li a{
+    color: #4F6711 !important;
+    height: 10px !important;
+    line-height: 25px !important;
+    text-shadow: none !important;
+    text-transform: none !important;
+    font:11px arial !important;
+    margin-top: 8px;
+
+}
+nav ul ul li .language{
+    text-transform: capitalize;
+    padding-left:15px;
+}
+nav ul ul li .language.english{
+    background: url('../images/icons/lang/english.png') no-repeat 0 2px;
+}
+nav ul ul li .language.chinese{
+    background: url('../images/icons/lang/chinese.png') no-repeat 0 2px;
+}
+nav ul ul li .language.japanese{
+    background: url('../images/icons/lang/japanese.png') no-repeat 0 2px;
+}
+nav ul .last{
+    width: 104px;
+}
+nav ul li:hover > ul {
+    display: block;
+}
+nav ul:after {
+    content: ""; clear: both; display: block;
 }
 
 /*=============================================
@@ -289,7 +347,14 @@ input.button-2 {
 .button-2.upload:hover {
     background-position: 0 -18px;
 }
+.button-2.reply {
+    background: url("../images/icons/reply.png") no-repeat scroll 0 3px transparent;
+    padding-left: 25px;
+}
 
+.button-2.reply:hover {
+    background-position: 0 -17px;
+}
 .button-2.upload.disable {
     background-position: 0 -41px;
 }
@@ -324,7 +389,13 @@ input.button-2 {
 .button-2.add.disable {
     background-position: 0 -43px;
 }
-
+.button-2.book{
+    background: url(../images/icons/book.png) no-repeat 0 3px;
+    margin-bottom: 7px;
+}
+.button-2.book:hover{
+    background-position: 0 -18px;
+}
 .button-2.view {
     background: url(../images/icons/view.png) no-repeat 0 3px;
     padding-left: 22px;
@@ -361,6 +432,37 @@ input.button-2 {
 .button-2.edit.disable {
     background-position: 0 -39px;
 }
+.button-2.createMessage {
+    background: url("../images/icons/createMessage.png") no-repeat scroll 0 4px transparent;
+    padding-left: 25px;
+}
+
+.button-2.createMessage:hover {
+    background-position: 0 -17px;
+}
+.button-2.inbox{
+    background: url("../images/icons/moveInbox.png") no-repeat scroll 0 2px transparent;
+    padding-left: 15px;
+    margin: 0 15px;
+}
+.button-2.inbox:hover{
+    background-position: 0 -21px;
+}
+.button-2.trash {
+    background: url(../images/icons/trash.png) no-repeat 0 3px;
+}
+
+.button-2.trash:hover {
+    background-position: 0 -18px;
+}
+.button-2.archived {
+    background: url(../images/icons/archived.png) no-repeat 0 3px;
+}
+
+.button-2.archived:hover {
+    background-position: 0 -17px;
+}
+
 .disable{
     pointer-events: none;
     cursor: default;
@@ -543,7 +645,7 @@ input.button-2 {
     padding-right: 9px;
     background: url(../images/bg/right-tabs-nav-shadow.png) no-repeat right 0;
     position: relative;
-    z-index: 1;
+    z-index: 10;
 
 }
 
@@ -561,6 +663,7 @@ input.button-2 {
     padding-bottom: 5px;
     border-radius: 3px;
     position: relative;
+    text-transform: uppercase;
 }
 
 #tabsNavigation ul li a {
@@ -570,11 +673,11 @@ input.button-2 {
     background: url(../images/bg/tabs-nav-item-shadow.png) no-repeat 0 0;
 }
 
-#tabsNavigation ul li:first-child a, #tabsNavigation ul li.ui-tabs-active a {
+#tabsNavigation ul li:first-child a, #tabsNavigation ul li.ui-tabs-active a, #tabsNavigation ul li.active a {
     background: none;
 }
  
-#tabsNavigation ul li.ui-tabs-active {
+#tabsNavigation ul li.ui-tabs-active, #tabsNavigation ul li.active {
     background: #fff ;
 }
 
@@ -703,6 +806,15 @@ input.button-2 {
     float: right;
     margin-left: 27px;
 }
+
+.featuresTab .featuredItem .featuredInfo .morelink a{
+    color: #0254EB
+}
+
+.featuresTab .featuredItem .featuredInfo .morecontent {
+    display: none;
+}
+
 
 .s-111 select {
     width: 111px;
@@ -1069,14 +1181,13 @@ input.button-2 {
     width: 166px;
 }
 /*---DIALOG JQUERY-----------------------------------------------------------------*/
-.ui-dialog{
+ .ui-dialog{
     display: block ;
     height: auto !important;
     left: 615.5px ;
     outline: 0 none;
     top: 388px;
-    width: 360px !important;
-    z-index: 1002 ;
+    z-index: 1002;
     padding:0 !important;
     border-top:none !important;
 }
@@ -1135,4 +1246,405 @@ input.button-2 {
     position:fixed;top:0;right:0;bottom:0;left:0;
     background: rgba(255,255,255,0.5) url(../img/design/accountLayout/glyphicons/aimya_ajax_loader.gif) no-repeat 50% 50%;
     z-index: 10000;
+}
+/*---FULL CALENDAR jquery-----------------------------------------------------------------*/
+.fc-event .fc-button{
+    background: url("../images/elem/fc-button.png") repeat-x scroll 0 0 transparent;
+    border: 1px solid #9B6B6B;
+    border-radius: 4px 4px 4px 4px;
+    color: #FFFFFF;
+    display: inline-block;
+    font-family: 'dosissemibold';
+    font-size: 12px;
+    height: 23px;
+    line-height: 28px;
+    margin-right: 10px;
+    padding-bottom: 2px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 1px 1px 1px #666666;
+    text-transform: uppercase;
+    width: 76px;
+}
+
+.fc-event .fc-button.reject{
+    background-position: 0 -22px;
+    color:#7c5757;
+    text-shadow: 1px 1px 1px #ffffff;
+    border: 1px solid #c8b4b4;
+}
+.fc-event-content-approve span{
+    background: url("../images/icons/approve.png") no-repeat scroll 0 0 transparent;
+    display: inline-block;
+    font: 12px/13px 'dosissemibold';
+    padding-left: 19px;
+    text-transform: uppercase;
+    padding-right: 10px;
+}
+.fc-event-content-approve.pending span{
+    background-position: 0 -41px;
+}
+
+.fc-state-default, .fc-state-default .fc-button-inner{
+    background: url("../images/elem/buttons-grid-1.png") no-repeat scroll -6px -123px !important;
+    text-transform: uppercase;
+    border-radius:  4px;
+    border: 1px solid #a2b477;
+    color: #324a0c;
+    text-shadow: 1px 1px 1px #ffffff;
+}
+.fc-state-default:hover, .fc-state-default .fc-button-inner:hover{
+    background-position: -3px -92px !important;
+}
+.fc-state-active, .fc-state-active .fc-button-inner{
+    background-position: -2px -62px !important;
+    border: 1px solid #65821e;
+    color:white;
+    text-shadow: 1px 1px 1px black;
+
+}
+/*---MESSAGES (INBOX)-----------------------------------------------------------------*/
+#content .messageTab{
+    box-shadow: 0 0 9px #ccc;
+    background: #fff;
+    padding: 20px 32px 22px 32px;
+    position: relative;
+    min-height: 480px;
+    z-index: 2;
+}
+
+.messageTab .shadowSeparatorBox{
+    min-height: 416px;
+}
+.messageTab .messageButtons .trash, .messageTab .messageButtons .archived{
+    float:right;
+    margin-right: 5px;
+}
+.messageTab .messageButtons .archived{
+    padding-right:9px;
+}
+#mainContent ul li {
+    list-style-type:none;
+    float:left;
+}
+
+.messageTab .userMessages{
+    padding-top:11px;
+}
+.messageTab .userMessages tbody tr td{
+    height: 34px;
+    border-top: 1px solid #DBDADF;
+}
+.messageTab .userMessages tbody tr td:last-child{
+    border-bottom: 1px solid #DBDADF;
+}
+.messageTab .userMessages td >  a{
+    font:11px arial;
+    padding-left: 24px;
+}
+.messageTab a {
+    text-decoration: none;
+}
+.messageTab .messageSender{
+    display: inline-block;
+    padding-left: 3px;
+    width: 101px;
+}
+.messageTab .messageTheme{
+    display: inline-block;
+    width: 125px;
+}
+.messageTab .messageText{
+    display: inline-block;
+    width: 301px;
+    color:#3e3e3e;
+}
+.messageTab .messageReply{
+    background: url("../images/icons/reply.png") no-repeat scroll 0 -40px transparent;
+    height: 14px;
+    display: inline-block;
+    width: 20px;
+    margin-left: 16px;
+}
+.messageTab .messageForward{
+    background: url("../images/icons/forward.png") no-repeat scroll 0 -40px transparent;
+    height: 14px;
+    display: inline-block;
+    width: 20px;
+    margin-left: 10px;
+}
+.messageTab .messageTime{
+    color:#858585;
+}
+
+.messageTab .rightMessageBlock{
+    float:right;
+}
+.messageTab  .messageButtons.trashBox{
+    float:right;
+}
+.sendMessageBox {
+    padding-top:24px;
+}
+.sendMessageBox .formRow input, .sendMessageBox .formRow textarea{
+    width:729px;
+    resize: none;
+}
+.sendMessageBox .formRow .label, .sendMessageBox .formRow input{
+    float:left;
+}
+.sendMessageBox .formRow{
+    padding-bottom:10px;
+}
+.sendMessageBox .formRow .label{
+    margin-top: 3px;
+    width:60px;
+    font-family: 'helvetica-light-rnormal';
+    font-weight: 500;
+}
+.sendMessageBox .buttonsRow{
+    float:right;
+}
+.sendMessageBox .buttonsRow .sendMessageButton{
+    width:100px;
+}
+.sendMessageBox .messageForwardInbox{
+    background: url("../images/icons/forward.png") no-repeat scroll 27px -37px transparent;
+}
+
+.sendMessageBox .messageReplyInbox{
+    background: url("../images/icons/reply.png") no-repeat scroll 27px -37px transparent;
+}
+.messageTab .activity{
+    background: url("../images/icons/activity.png") no-repeat scroll 0 -13px transparent;
+    display: inline-block;
+    height: 12px;
+    width: 9px;
+}
+.messageTab .activity.online{
+    background-position: 0 4px;
+}
+.messageTab .messageTime.view{
+    float:right;
+}
+.messageTab.viewMessageBlock .formRow.viewSender{
+    padding-bottom:13px;
+}
+.messageTab.viewMessageBlock .formRow.viewTheme{
+    padding-bottom: 7px;
+    padding-left: 16px;
+}
+.messageTab.viewMessageBlock .formRow.viewText{
+    padding-bottom: 32px;
+    padding-left: 16px;
+}
+.messageTab.viewMessageBlock .buttonRow.viewReply{
+    padding-left: 16px;
+}
+.messageTab.viewMessageBlock .messageViewSender{
+    font:600 12px arial;
+}
+.messageTab.viewMessageBlock .messageViewTheme{
+    font:600 13px arial;
+}
+.messageTab.viewMessageBlock .messageViewText, .messageTab.viewMessageBlock a{
+    font: 11px arial;
+}
+
+/*---JSMessenger, alert (red)-----------------------------------------------------------------*/
+.alertBlock{
+    margin: 0 auto;
+    position: relative;
+    top: 15px;
+    width: 800px;
+    -moz-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2); /* Для Firefox */
+    -webkit-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2); /* Для Safari и Chrome */
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
+}
+.alert{
+    font: 11px Arial !important;
+    color:#ad4c4c !important;
+    background-color: #fae9e9 !important;
+    border: 1px solid #ebb7b7 !important;
+    border-radius:2px;
+}
+
+.alert .flash-warning{
+    font: 700 11px Arial !important;
+    color: #981919 !important;
+}
+
+.alert .close{
+    background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat;
+    top: -17px !important;
+    left: 30px !important;
+    line-height: 20px;
+    position: relative;
+    width:12px;
+    height: 12px;
+    opacity: 1 !important;
+}
+
+/*JSMessenger, alert (red)*/
+.alertBlock{
+    margin: 0 auto;
+    position: relative;
+    top: 15px;
+    width: 800px;
+    -moz-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2); /* Для Firefox */
+    -webkit-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2); /* Для Safari и Chrome */
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
+}
+.alertBlock.modal{
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
+    height: 46px;
+    left: 29%;
+    margin: 0 auto;
+    overflow: hidden;
+    position: fixed;
+    top: 40%;
+    visibility: hidden;
+    width: 800px;
+    z-index: 10002;
+
+}
+
+.alert{
+    font: 11px Arial !important;
+    color:#ad4c4c !important;
+    background-color: #fae9e9 !important;
+    border: 1px solid #ebb7b7 !important;
+    border-radius:2px;
+}
+
+.alert .flash-warning{
+    font: 700 11px Arial !important;
+    color: #981919 !important;
+}
+
+.alert .close{
+    background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat;
+    top: -17px !important;
+    left: 30px !important;
+    line-height: 20px;
+    position: relative;
+    width:12px;
+    height: 12px;
+    opacity: 1 !important;
+}
+/*JSMessenger, attention (yellow)*/
+.attention{
+    font: 11px Arial !important;
+    color:#a3a586 !important;
+    background-color: #fafcd9 !important;
+    border: 1px solid #d1d0a9 !important;
+    border-radius:2px;
+}
+
+.attention .flash-attention{
+    font: 700 11px Arial !important;
+    color: #83855e !important;
+}
+.attention .close {
+    background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat 0 25%;
+    top: -17px !important;
+    left: 30px !important;
+    line-height: 20px;
+    position: relative;
+    width:12px;
+    height: 12px;
+    opacity: 1 !important;
+}
+/*JSMessenger, success (green)*/
+
+.success{
+    font: 11px Arial !important;
+    color:#537e6a !important;
+    background-color: #cce8bf !important;
+    border: 1px solid #a0c58e !important;
+    border-radius:2px;
+}
+
+.success .flash-success{
+    font: 700 11px Arial !important;
+    color: #315b47 !important;
+}
+.success .close {
+    background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat 33% 0;
+    top: -17px !important;
+    left: 30px !important;
+    line-height: 20px;
+    position: relative;
+    width:12px;
+    height: 12px;
+    opacity: 1 !important;
+}
+
+/*--- RESUME -----------------------------------------------------------------*/
+.resumeGeneral .shadowSeparatorBox{
+    padding-top:0;
+    min-height: 416px;
+}
+.resumeGeneral .shadowSeparator{
+    padding-top:27px;
+}
+.resumeGeneral .shadowSeparator .shadowSeparatorBot{
+    padding: 18px 0 45px 0;
+    background: url(../images/bg/bottom-shadow-line.png) no-repeat center bottom;
+
+}
+
+.resumeGeneral .headRow h1{
+    float:left;
+}
+.resumeGeneral .headRow{
+    padding-bottom:10px;
+}
+.resumeGeneral .headRow .buttonRow{
+    float:right;
+}
+.resumeGeneral .formRow textarea{
+    width: 98.5%;
+    resize: vertical;
+
+}
+.resumeFooter .buttonRow .button{
+    margin: 0 5px;
+    padding: 0 10px;
+}
+.resumeFooter{
+    margin: 0 auto;
+    width: 420px;
+}
+.resumeGeneral .uploadWrapper input[type="file"]{
+
+}
+.resumeGeneral .resumeItemForm{
+    display:none;
+}
+.resumeGeneral .buttonsRow{
+    padding-bottom: 35px;
+}
+
+.resumeGeneral .buttonsRow {
+    padding-bottom: 35px;
+}
+.resumeGeneral .delete {
+    margin-left: 15px;
+}
+/*--- UPLOADIFIVE -----------------------------------------------------------------*/
+#queue{
+    display: inline-block;
+    min-width: 92px;
+}
+.uploadifive-queue-item{
+     margin-top:5px;
+     padding: 2px;
+ }
+.uploadifive-queue-item:nth-child(odd){
+    background-color: #ECF4D7;
+}
+.uploadifive-queue-item .close{
+float:right;
 }

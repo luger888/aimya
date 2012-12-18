@@ -1,12 +1,35 @@
 $(document).ready(function() {
-    $("#signup").click(function(){
+
+    var pathName = $('#current_url').val();
+    //---Home page member buttons--------------------------------------------------------------------------------
+
+    $('.memberButtons input:first').attr('checked', 'checked');
+
+
+    //---Styling radio and checkbox buttons--------------------------------------------------------------------------------
+
+    $('input[type="checkbox"]').checkRadio({
+        wrapperClass: 'checkboxWrapper',
+        chekedClass: 'checked'
+    });
+
+    $('input[type="radio"]').checkRadio({
+        wrapperClass: 'radioBoxWrapper',
+        chekedClass: 'checked'
+    });
+
+    $('.memberButtons label').each(function(){
+        $(this).find( '.txt' ).appendTo($(this).find('.radioBoxWrapper'));
+    });
+
+    $("#signupBtn").click(function(){
         var myDate = new Date();
 
         var UTC = myDate.getTimezoneOffset()/60*(-1);
-        $.post(
-
-            "/user/registration/0/controller%3D%3Euser/1/action%3D%3Eregistration",{
-
+        $.ajax({
+            url: $('#signUp').attr('action'),
+            type: "post",
+            data: {
                 "firstname" : $("#firstname").val(),
                 "lastname" : $("#lastname").val(),
                 "username" : $("#username").val(),
@@ -14,10 +37,8 @@ $(document).ready(function() {
                 "email" : $("#email").val(),
                 "password" : $("#password").val(),
                 "role" : $('input[name=type]:checked').val()
-
             },
-
-            function(response){
+            success: function(response){
                     $('.error').remove();
 
                 for (key in response.errors){
@@ -36,21 +57,20 @@ $(document).ready(function() {
 
                 if(response.alertFlash){
                     $('.alertBlock .alert').remove();
-                    $('.alertBlock').append('<div class="alert"><div class = "flash-warning">Warning!</div>'+response.alertFlash+'<button type="button" class="close" data-dismiss="alert"></button></div>');
+                    $('.alertBlock').append('<div class="alert"><div class = "flash-warning">Warning!</div>'+response.alertFlash+'<button type="button" class="close" id = "closeAlert"></button></div>');
                     $('html, body').animate({scrollTop:0}, 'fast');
 
 
 
                 }else if(response.confirmFlash){
                     $('.alertBlock .alert').remove();
-                    $('.alertBlock').append('<div class="attention alert"><div class = "flash-attention">Attention!</div>'+response.confirmFlash+'<button type="button" class="close" data-dismiss="attention"></button></div>');
+                    $('.alertBlock').append('<div class="attention alert"><div class = "flash-attention">Attention!</div>'+response.confirmFlash+'<button type="button" class="close" id = "closeAlert"></button></div>');
                     $('html, body').animate({scrollTop:0}, 'fast');
                 }
 
             }
 
-        );
-
+        });
         return false;
 
     });
@@ -58,16 +78,14 @@ $(document).ready(function() {
         $('.alertBlock .alert').remove();
         $("input").removeClass("input-error");
 
-        $.post(
-
-            "/user/login/0/controller%3D%3Euser/1/action%3D%3Elogin",{
-
+        $.ajax({
+            url: $('#signIn').attr('action'),
+            type: "post",
+            data: {
                 "username" : $("#username-login").val(),
                 "password" : $("#password-login").val()
-
             },
-
-            function(response){
+            success: function(response){
                 for (key in response.errors){
 
                     if(response.errors[key].length>0){
@@ -83,23 +101,32 @@ $(document).ready(function() {
 
                 if(response.status == 1){
 
-                    window.location.href = "/account/index/";
+                    window.location.href = pathName + "/account/index/";
 
                 }else if(response.status == 0){
                     $('.alertBlock').append('<div class="alert">Account is not confirmed. Please check you email and confirm registration</div>');
                 }
                 if(response.alertFlash){
 
-                    $('.alertBlock').append('<div class="alert"><div class = "flash-warning">Warning!</div>'+response.alertFlash+'<button type="button" class="close" data-dismiss="alert"></button></div>');
+                    $('.alertBlock').append('<div class="alert"><div class = "flash-warning">Warning!</div>'+response.alertFlash+'<button type="button" class="close" id = "closeAlert"></button></div>');
 
                 }
 
             }
-
-        );
+    });
 
         return false;
 
     });
 
+});
+
+/*---PIE - add css3 to ie 7 and ie8 -----------------------------------------------------*/
+
+$(function() {
+    if (window.PIE) {
+        $('.boxShadow, #username-login, #password-login, .button, #tabsNavigation ul, #tabsNavigation ul li, .mainContainer').each(function() {
+            PIE.attach(this);
+        });//each
+    }//if
 });
