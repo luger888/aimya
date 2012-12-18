@@ -18,7 +18,9 @@ package com.aimialesson.model
 		public static var SESSION_STARTED_CHANGED:String = "sessionStartedChange";
 		public static var LESSON_FINISHED_CHANGED:String = "lessonFinishedChange";
 		
-
+		public var texts_loaded:Boolean = false;
+		public var connected:Boolean = false;
+		
 		private var _fsMode:Boolean = false;
 		[Bindable(Event=Main.FS_MODE_CHANGED)]
 		public function set fsMode ( value : Boolean ) : void {
@@ -69,6 +71,9 @@ package com.aimialesson.model
 		
 		[Bindable]
 		public var totalTime:int = 60;
+		
+		[Bindable]
+		public var topic:String = "Latin professor at Hampden-Sydney in Virginia to popular belie";
 		
 		private static var instance : Main;
 		

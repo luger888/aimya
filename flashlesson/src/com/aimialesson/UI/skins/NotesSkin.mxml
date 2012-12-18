@@ -18,10 +18,11 @@
 			import com.aimialesson.UI.skins.elements.NotesMainContainerSkin;
 			import com.aimialesson.model.Notes;
 			import com.aimialesson.model.Main;
+			import com.aimialesson.model.Texts;
 		]]>
 	</fx:Script>
 	<s:VGroup width="100%" height="100%">
-		<s:RichText text="LESSON NOTES:" fontFamily="HelveticaMd" fontSize="12" fontWeight="normal"  color="#1D3300" />
+		<s:RichText text="{Texts.getInstance().getText(Texts.LESSON_NOTES, true)}" styleName="HeaderStyle" fontSize="12" fontWeight="normal"  color="#1D3300" />
 		<s:SkinnableContainer  width="100%" height="100%" skinClass="com.aimialesson.UI.skins.elements.NotesMainContainerSkin" backgroundAlpha="100" >
 			<s:List id="notesList" width="100%" height="100%" itemRenderer="com.aimialesson.UI.renderers.NoteItemRenderer" dataProvider="{Notes.getInstance().notesAC}" borderColor="#B6B5B5"/>
 			<s:Group width="100%" height="102" >

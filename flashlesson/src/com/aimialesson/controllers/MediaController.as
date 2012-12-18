@@ -5,6 +5,7 @@ package com.aimialesson.controllers
 	import com.aimialesson.model.Main;
 	import com.aimialesson.model.Media;
 	import com.aimialesson.model.Actions;
+	import com.aimialesson.model.Texts;
 	
 	import flash.events.EventDispatcher;
 	import flash.events.NetStatusEvent;
@@ -36,6 +37,15 @@ package com.aimialesson.controllers
 			if (parameters.domain){
 				Actions.getInstance().domain = parameters.domain;
 				debug (parameters.domain);
+			}
+			if (parameters.lang){
+				Texts.getInstance().lang = parameters.lang;
+				Actions.getInstance().domain_add = parameters.lang;
+				debug (parameters.lang);
+			}
+			if (parameters.topic){
+				Main.getInstance().topic = parameters.topic;
+				debug (parameters.topic);
 			}
 		}
 		
