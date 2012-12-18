@@ -1627,3 +1627,10 @@ input.button-2 {
 .resumeGeneral .buttonsRow{
     padding-bottom: 35px;
 }
+
+.resumeGeneral .buttonsRow {
+    padding-bottom: 35px;
+}
+.resumeGeneral .delete {
+    margin-left:15px;
+}

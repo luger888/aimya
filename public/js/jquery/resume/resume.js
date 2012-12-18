@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
 });
-function addResumeItem(){
+function addResumeItem() {
 
     $(".resumeItemForm").css('display', 'block');
     $('.button-2:not(".save, .upload")').addClass("disable");
@@ -56,7 +56,7 @@ function deleteResumeItem(e, tab) {
     var answer = confirm("Delete " + tab + " ?");
     var baseUrl = $('#current_url').val();
     var dataObject = {};
-    dataObject['delete'+tab] = id;
+    dataObject['delete' + tab] = id;
     if (answer) {
 
         $.ajax({
@@ -80,12 +80,12 @@ function editResumeItem(e, tab) {
     var content = '<div class="formRow clearfix"><textarea rows="2" class = "resumeEditInput"></textarea></div>';
     experienceWrapper.children('.resumeItemBody').html(content);
     experienceWrapper.children('.resumeItemBody').children('.formRow').children('.resumeEditInput').val($.trim(resumeContent));
-    experienceWrapper.children('.resumeItemBody').after('<div class = "uploadWrapper">'+
-        '<div id="queue"></div>'+
-        '<input id="file_upload" name="file_upload" type="file" multiple="true">'+
-            '<input id="uploadExperience" class="button-2 upload" type="button"  value="upload file" onclick=uploadExperienceFile();>'+
-                '<input type="button" value="save" class="button-2 save floatRight" onclick=updateResumeItem(this,"' + tab + '");>'+
-                '</div>');
+    experienceWrapper.children('.resumeItemBody').after('<div class = "uploadWrapper">' +
+        '<div id="queue"></div>' +
+        '<input id="file_upload" name="file_upload" type="file" multiple="true">' +
+        '<input id="uploadExperience" class="button-2 upload" type="button"  value="upload file" onclick=uploadExperienceFile();>' +
+        '<input type="button" value="save" class="button-2 save floatRight" onclick=updateResumeItem(this,"' + tab + '");>' +
+        '</div>');
     $('.button-2:not(".save, .upload")').addClass("disable");
 }
 
@@ -117,21 +117,21 @@ function uploadExperienceFile() {
 
 }
 
-function updateObjective(){
+function updateObjective() {
 
     var objective = $('#objective').val();
     $.post(
 
         '/resume/ajax/0/controller%3D%3Eresume/1/action%3D%3Eajax', {
 
-            'objective' : objective
+            'objective':objective
 
         },
 
         function (response) {
 
 
-            for (key in response.errors){
+            for (key in response.errors) {
 
 
                 $("#" + key).attr("placeholder", response.errors[key]);
@@ -139,4 +139,5 @@ function updateObjective(){
             }
         }
     )
-};
+}
+;
