@@ -22,12 +22,12 @@ class Application_Model_DbTable_ResumeSkills extends Application_Model_DbTable_A
 
         $data = array(
 
-            'content' => $array['content']
+            'content' => $array['updateskill']
 
         );
         $where = array(
 
-            $this->getAdapter()->quoteInto('id =?', (int)$array['updateSkill']),
+            $this->getAdapter()->quoteInto('id =?', (int)$array['resumeItemId']),
             $this->getAdapter()->quoteInto('user_id=?', (int)$user_id)
 
         );

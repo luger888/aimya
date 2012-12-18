@@ -16,7 +16,7 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
         $this->_helper->layout->setLayout("layoutInner");
         //basic tab
         $identity = Zend_Auth::getInstance()->getStorage()->read();
-        $this->view->headScript()->appendFile('../../js/jquery/resume/experience.js');
+        $this->view->headScript()->appendFile('../../js/jquery/resume/resume.js');
         $this->view->headScript()->appendFile('../../js/jquery/jquery.uploadifive.js');
         $servicesModel = new Application_Model_DbTable_ServiceDetail();
         $this->view->services = $servicesModel->getServiceByUser($identity->id, 1);
@@ -103,7 +103,7 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
             if ($this->getRequest()->getParam('deleteexperience')) {
                 $dbExperience->deleteExperience($this->getRequest()->getParam('deleteexperience'), $identity->id);
             }
-            if ($this->getRequest()->getParam('updateExperience')) {
+            if ($this->getRequest()->getParam('updateexperience')) {
                 $dbExperience->updateExperience($this->getRequest()->getParams(), $identity->id);
             }
             /*END -- EXPERIENCE TAB*/
@@ -123,7 +123,7 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
             if ($this->getRequest()->getParam('deleteskill')) {
                 $dbSkills->deleteSkill($this->getRequest()->getParam('deleteskill'), $identity->id);
             }
-            if ($this->getRequest()->getParam('updateSkill')) {
+            if ($this->getRequest()->getParam('updateskill')) {
                 $dbSkills->updateSkill($this->getRequest()->getParams(), $identity->id);
             }
             /*END -- SKILLS TAB*/
