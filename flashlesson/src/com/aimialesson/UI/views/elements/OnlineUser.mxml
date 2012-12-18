@@ -11,11 +11,12 @@
 			import com.aimialesson.UI.skins.elements.StartSessionBtnSkin;
 			import com.aimialesson.UI.skins.elements.EnterBtnSkin;
 			import com.aimialesson.model.User;
+			import com.aimialesson.model.Texts;
 		]]>
 	</fx:Script>
 	<s:HGroup verticalAlign="middle">
 		<s:HGroup verticalAlign="bottom">
-			<s:RichText text="{User.getInstance().partnerRoleID == User.STUDENT?'ONLINE STUDENT:':'ONLINE INSTRUCTOR:'}" styleName="HeaderStyle" />
+			<s:RichText text="{User.getInstance().partnerRoleID == User.STUDENT?Texts.getInstance().getText(Texts.ONLINE, true) + ' ' + Texts.getInstance().getText(Texts.STUDENT, true) + ':':Texts.getInstance().getText(Texts.ONLINE, true) + ' ' + Texts.getInstance().getText(Texts.TEACHER, true)}" styleName="HeaderStyle" />
 			<s:RichText id="partnerUserName" text="{User.getInstance().partnerName}" styleName="SmallNameStyle"/>
 		</s:HGroup>
 		<elements:Lamp id="partnerLamp"  online="{User.getInstance().partnerIsOnline}"/>

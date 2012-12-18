@@ -8,6 +8,7 @@
 	<fx:Script>
 		<![CDATA[
 			import com.aimialesson.model.Main;
+			import com.aimialesson.model.Texts;
 			
 			import mx.events.FlexEvent;
 
@@ -29,8 +30,8 @@
 	</s:layout>
 	<s:Group>
 		<s:HGroup verticalAlign="bottom" gap="{ttGroup.width + 10}">
-			<s:RichText id="totalTimeRT" text="Total Lesson Time:" styleName="TimeTextStyle" />
-			<s:RichText text="min" styleName="TimeMinStyle" />
+			<s:RichText id="totalTimeRT" text="{Texts.getInstance().getText(Texts.TOTAL_LESSON_TIME)}" styleName="TimeTextStyle" />
+			<s:RichText text="{Texts.getInstance().getText(Texts.MIN)}" styleName="TimeMinStyle" />
 		</s:HGroup>
 		<s:Group x="{totalTimeRT.x + totalTimeRT.width + 5}" id="ttGroup" height="{totalTime.height}">
 			<s:BitmapImage source="@Embed('flashassets/2time_calculate__icon.png')" y="-10" horizontalCenter="0"/>
