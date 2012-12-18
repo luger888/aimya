@@ -21,6 +21,7 @@ package com.aimialesson.controllers
 		private var soController:SharedObjectController;
 		private var recorderController:RecorderController;
 		private var userController:UserController;
+		private var textsController:TextsController;
 		private var mainUI:MainUI;
 		public function MainController()
 		{
@@ -39,6 +40,9 @@ package com.aimialesson.controllers
 			soController.addEventListener(SharedObjectEvent.SHARED_PRESENTATION_UPLOADED, onSharedObjectEvent);
 			soController.addEventListener(SharedObjectEvent.LESSON_IS_FINISHED, onSharedObjectEvent);
 			soController.initSO();
+			textsController = new TextsController();
+			textsController.addEventListener(AppEvent.LOAD_TEXTS_COMPLETE, loadTextsHandler);
+			textsController.loadXML();
 			this.mainUI = mainUI;
 			/*recorderController = new RecorderController();
 			recorderController.init(mainUI);
@@ -134,7 +138,20 @@ package com.aimialesson.controllers
 			//streamController.addEventListener(AppEvent.MY_STREAM_INIT_COMPLETE, onMyStreamInitComplete);
 			streamController.initMyNetStream();
 			streamController.initPartnerNetStream();
-			this.dispatchEvent( event );
+			Main.getInstance().connected = true;
+			initCompleteCheck();
+			
+		}
+		
+		private function loadTextsHandler ( event : AppEvent ) : void {
+			Main.getInstance().texts_loaded = true;
+			initCompleteCheck();
+		}
+		
+		private function initCompleteCheck () : void {
+			if (Main.getInstance().texts_loaded == true && Main.getInstance().connected == true){
+				this.dispatchEvent( new AppEvent ( AppEvent.INIT_COMPLETE ) );
+			}
 		}
 		
 		private function debug ( str : String ) : void {

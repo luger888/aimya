@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="UTF-16"?>
+<lesson>
+	<text id="online">
+		<en>Online</en>
+		<ru>онлайн</ru>
+	</text>
+	<text id="student">
+		<en>Student</en>
+		<ru>студент</ru>
+	</text>
+	<text id="teacher">
+		<en>Instructor</en>
+		<ru>Инструктор</ru>
+	</text>
+	<text id="remainingTime">
+		<en>Remaining Time:</en>
+		<ru>Оставшееся Время</ru>
+	</text>
+	<text id="lessonPresentation">
+		<en>lesson presentation:</en>
+		<ru>Презентация Урока</ru>
+	</text>
+	<text id="min">
+		<en>min</en>
+		<ru>мин</ru>
+	</text>
+	<text id="vChat">
+		<en>video chat:</en>
+		<ru>Видео Чат</ru>
+	</text>
+	<text id="enter">
+		<en>enter</en>
+		<ru>ентер</ru>
+	</text>
+	<text id="stopSession">
+		<en>stop session</en>
+		<ru>Стоп Сессия</ru>
+	</text>
+	<text id="maximize">
+		<en>Maximize</en>
+		<ru>максимайз</ru>
+	</text>
+	<text id="minimize">
+		<en>Minimize</en>
+		<ru>Минимайз</ru>
+	</text>
+	<text id="totalLessonTime">
+		<en>Total lesson time:</en>
+		<ru>Общее время урока</ru>
+	</text>
+	<text id="lessonNotes">
+		<en>lesson notes:</en>
+		<ru>Заметки урока</ru>
+	</text>
+	<text id="upload">
+		<en>upload</en>
+		<ru>загрузить</ru>
+	</text>
+	<text id="uploadMore">
+		<en>upload more</en>
+		<ru>загрузить еще</ru>
+	</text>
+	<text id="lessonIsFinished">
+		<en>The lesson is finished by</en>
+		<ru>Урок окончен</ru>
+	</text>
+	<text id="alert">
+		<en>Alert:</en>
+		<ru>Предупреждение</ru>
+	</text>
+	<text id="wantEndLesson">
+		<en>Are you sure you want to end the lesson?</en>
+		<ru>Вы действительно хотите закончить урок?</ru>
+	</text>
+	<text id="yes">
+		<en>yes</en>
+		<ru>да</ru>
+	</text>
+	<text id="no">
+		<en>no</en>
+		<ru>нет</ru>
+	</text>
+</lesson>
