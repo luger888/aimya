@@ -2,6 +2,7 @@
 class ResumeController extends Zend_Controller_Action implements Aimya_Controller_AccountInterface
 {
 
+
     public function init()
     {
         $this->_helper->layout->setLayout("layoutInner");
@@ -165,10 +166,14 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
 
     public function uploadAction()
     {
+        $identity = Zend_Auth::getInstance()->getStorage()->read();
+
+
 
         // Set the upload directory
-        $uploadDir = '/img/uploads/';
-
+        // $_POST['resumeType']  == experience, education or skill
+        $uploadDir = '/img/uploads/' .$identity->id .'/certificate/' . $_POST['resumeType'] .'/'. $_POST['resumeTypeId'] .'/';
+        //mkdir('/img/uploads/' .$identity->id .'/' . $_POST['resumeType'] .'/'. $_POST['resumeTypeId'] .'/');
         // Set the allowed file extensions
         $fileTypes = array('jpg', 'jpeg', 'gif', 'png'); // Allowed file extensions
 
@@ -183,12 +188,11 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
 
                 // Save the file
                 move_uploaded_file($tempFile, $targetFile);
-                echo 1;
+
 
             } else {
 
                 // The file type wasn't allowed
-                echo 'Invalid file type.';
 
             }
         }

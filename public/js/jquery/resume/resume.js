@@ -11,7 +11,7 @@ function saveResumeItem(tab) {
     var id = $(this).nextAll('input[type=hidden]:first').val();
     var dataObject = {};
 
-//    $('#file_upload').uploadifive('upload');
+
     var resumeContent = $('#' + tab).val();
     var baseUrl = $('#current_url').val();
     dataObject[tab] = resumeContent;
@@ -20,7 +20,8 @@ function saveResumeItem(tab) {
             type:"post",
             data:dataObject,
             success:function (response) {
-
+                $('#file_upload').data('uploadifive').settings.formData = { 'resumeType': tab, 'resumeTypeId' : response.lastId };
+                $('#file_upload').uploadifive('upload');
 
                 for (key in response.errors) {
 
@@ -29,7 +30,6 @@ function saveResumeItem(tab) {
 
                 }
                 if (response.success == 1) { //if success
-                    window.location.reload();
 //                    $('#experience').val('');
 //                    var content = '  <div class="experienceItem clearfix">' +
 //                        '<div class="headRow clearfix">' +
@@ -83,10 +83,30 @@ function editResumeItem(e, tab) {
     experienceWrapper.children('.resumeItemBody').after('<div class = "uploadWrapper">' +
         '<div id="queue"></div>' +
         '<input id="file_upload" name="file_upload" type="file" multiple="true">' +
-        '<input id="uploadExperience" class="button-2 upload" type="button"  value="upload file" onclick=uploadExperienceFile();>' +
         '<input type="button" value="save" class="button-2 save floatRight" onclick=updateResumeItem(this,"' + tab + '");>' +
         '</div>');
     $('.button-2:not(".save, .upload")').addClass("disable");
+    $(function () {
+        var baseUrl = $('#current_url').val();
+        $('#file_upload').uploadifive({
+                'auto':false,
+                'formData':{'resumeType':'skills', 'resumeTypeId': '1'},
+                'queueID':'queue',
+                'uploadScript':baseUrl+'/resume/upload',
+                'buttonText':'upload file',
+                'height':20,
+                'width':70,
+                'buttonClass': 'button-2 upload',
+                'onSelect'    : function(event) {
+
+
+                },
+                'onUploadComplete':function (file, data) {
+                    window.location.reload();
+                }
+            }
+        )
+    });
 }
 
 function updateResumeItem(e, tab) {
@@ -102,7 +122,8 @@ function updateResumeItem(e, tab) {
             type:"post",
             data:dataObject,
             success:function (response) {
-                window.location.reload();
+                $('#file_upload').data('uploadifive').settings.formData = { 'resumeType': tab, 'resumeTypeId' : id};
+                $('#file_upload').uploadifive('upload');
             }
         }
 
@@ -113,7 +134,7 @@ function updateResumeItem(e, tab) {
 
 function uploadExperienceFile() {
 
-    $('#file_upload').click();
+    $('.uploadifive-button').click();
 
 }
 
@@ -140,4 +161,3 @@ function updateObjective() {
         }
     )
 }
-;

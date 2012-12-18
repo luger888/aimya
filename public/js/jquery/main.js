@@ -1,5 +1,14 @@
 $(document).ready(function() {
 
+    $.ajaxSetup({
+        beforeSend: function(jqXHR, settings) {
+            jQuery("body").append('<div class="loadingIcon"></div>');
+        },
+        complete:function(jqXHR, settings) {
+            jQuery('.loadingIcon').remove();
+        }
+    });
+//---Main navigation--------------------------------------------------------------------------------
     $("nav ul li >ul").hover( function() {
         $('.last>a').addClass('liHover');
     });
@@ -195,7 +204,6 @@ $(document).ready(function() {
 //        'auto'         : false,
 //        'formData'     : {'experienceUpload' : 'certificate'},
 //        'queueID'      : 'queue',
-//        'folder'        : '/img/uploads/' + $(this).attr('id'),
 //        'uploadScript' : '/resume/upload',
 //        'onUploadComplete' : function(file, data) {
 //        }
