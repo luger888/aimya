@@ -72,6 +72,13 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
 
         $dbSkills = new Application_Model_DbTable_ResumeSkills();
         $this->view->skillList = $dbSkills->getSkills($identity->id);
+        if ($handle = opendir('./img/uploads/'.$identity->id .'/certificate/skill/21/')) {
+            $certificates = array();
+            while (false !== ($entry = readdir($handle))) {
+                $certificates[] .= $entry;
+            }
+           
+        }
     }
 
     public function ajaxAction()
@@ -170,10 +177,10 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
 
 
         $folderModel = new Application_Model_Folder();
-        $folderModel->createFolderChain('/img/uploads/' .$identity->id .'/certificate/' . $_POST['resumeType'] .'/'. $_POST['resumeTypeId'] .'/');//creating chain of folders
+        $folderModel->createFolderChain('/img/uploads/' . $identity->id . '/certificate/' . $_POST['resumeType'] . '/' . $_POST['resumeTypeId'] . '/'); //creating chain of folders
         // Set the upload directory
         // $_POST['resumeType']  == experience, education or skill
-        $uploadDir = '/img/uploads/' .$identity->id .'/certificate/' . $_POST['resumeType'] .'/'. $_POST['resumeTypeId'] .'/';
+        $uploadDir = '/img/uploads/' . $identity->id . '/certificate/' . $_POST['resumeType'] . '/' . $_POST['resumeTypeId'] . '/';
 
 
         // Set the allowed file extensions
