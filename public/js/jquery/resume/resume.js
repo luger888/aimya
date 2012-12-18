@@ -86,6 +86,7 @@ function editResumeItem(e, tab) {
             '<input id="uploadExperience" class="button-2 upload" type="button"  value="upload file" onclick=uploadExperienceFile();>'+
                 '<input type="button" value="save" class="button-2 save floatRight" onclick=updateResumeItem(this,"' + tab + '");>'+
                 '</div>');
+    $('.button-2:not(".save, .upload")').addClass("disable");
 }
 
 function updateResumeItem(e, tab) {
