@@ -4,7 +4,16 @@
     <div class="mainContainer clearfix">
         <?php $users = $this->userList; ?>
 
-            <table>
+            <table class="table">
+                <thead>
+                <tr>
+                    <td> First Name</td>
+                    <td> Last Name</td>
+                    <!--<td> User Name</td>
+                    <td> Time Zone</td>
+                    <td> Block / Delete</td>-->
+                </tr>
+                </thead>
                 <?php foreach($users as $user): ?>
                 <?php if($user['id'] != Zend_Auth::getInstance()->getIdentity()->id):?>
                     <tr>
@@ -23,7 +32,7 @@
                     <?php endif?>
                 <?php endforeach; ?>
             </table>
-        </form>
+
     </div>
     <!--<div id="tabs-2">
         <div id="flash_element">
