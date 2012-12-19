@@ -121,8 +121,6 @@ class Aimya_PayPal_Paypal
     function checkPayment($data = array())
     {
 
-        $this->doLog($data);
-
         /* read the post from PayPal system and add 'cmd' */
         $req = 'cmd=_notify-validate';
 
@@ -163,13 +161,14 @@ class Aimya_PayPal_Paypal
                          */
                     return true;
                 } else {
-                    //				if (strcmp ($res, "INVALID") == 0) {
+                    				if (strcmp ($res, "INVALID") == 0) {
                     /*
                          log for manual investigation
                          */
-                    //if($this->logFile != NULL){
+                    if($this->logFile != NULL){
                         $this->doLog($data);
-                    //}
+                    }
+                }
                     return false;
                 }
             }
