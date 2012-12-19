@@ -90,17 +90,17 @@ class Aimya_PayPal_Paypal
     }
 
     /* Helper function to actually write to logfile */
-//    private function doLog($_POST)
-//    {
-//        ob_start();
-//        echo '<pre>'; print_r($_POST); echo '</pre>';
-//        $logInfo = ob_get_contents();
-//        ob_end_clean();
-//
-//        $file = fopen($this->logFile,'a');
-//        fwrite($file,$logInfo);
-//        fclose($file);
-//    }
+    private function doLog($_POST)
+    {
+        ob_start();
+        echo '<pre>'; print_r($_POST); echo '</pre>';
+        $logInfo = ob_get_contents();
+        ob_end_clean();
+
+        $file = fopen($this->logFile,'a');
+        fwrite($file,$logInfo);
+        fclose($file);
+    }
 
     /* Check payment */
     function checkPayment($_POST)
