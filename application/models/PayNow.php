@@ -5,7 +5,7 @@ class Application_Model_PayNow
 
     public function payNow()
     {
-        $doSubscribe = new Aimya_PayPal_Paypal();
+        $buyNow = new Aimya_PayPal_Paypal();
 
         /*
         Do you want to test payments
@@ -28,59 +28,41 @@ class Application_Model_PayNow
         View all paramters @ PaypalVariables.html
         located in main folder of this class
         */
-        $doSubscribe->addVar('business', 'itnnetwork@gmail.com'); /* Payment Email */
-        $doSubscribe->addVar('cmd', '_xclick-subscriptions');
-        $doSubscribe->addVar('currency_code', 'USD');
-        $doSubscribe->addVar('item_name', 'Script Support');
-        $doSubscribe->addVar('item_number', 'PHPCLASS8');
-
-        /* Set Free Trials */
-        $doSubscribe->addVar('a1', '15'); /* 0 Cost */
-        $doSubscribe->addVar('p1', '1'); /* For 30 */
-        $doSubscribe->addVar('t1', 'M'); /* Days */
-        /* Allowed t's: D -> Days, W -> Weeks , M -> Months, Y -> Years */
-
-        /* a2 can also be another trial period */
-
-        /* Regular Subscription Rates */
-        $doSubscribe->addVar('a3', '99'); /* 0 Cost */
-        $doSubscribe->addVar('p3', '1'); /* For 1 */
-        $doSubscribe->addVar('t3', 'M'); /* Year */
-
-        /* Unlimited recurring payments (till cancelled) */
-        $doSubscribe->addVar('src', '1');
-        /* Try payment again if it ever fails */
-        $doSubscribe->addVar('sr1', '1');
-
-        /* No note, required */
-        $doSubscribe->addVar('no_note', '1');
-
-        $doSubscribe->addVar('rm', '2'); /* Return method must be POST (2) for this class */
+        $buyNow->addVar('business','seller_1355909799_biz@gmail.com');	/* Payment Email */
+        $buyNow->addVar('cmd','_xclick');
+        $buyNow->addVar('amount','99.25');
+        $buyNow->addVar('item_name','Script Support');
+        $buyNow->addVar('item_number','PHPCLASS8');
+        $buyNow->addVar('quantity','1');
+        $buyNow->addVar('tax','1.99');
+        $buyNow->addVar('shipping','8.00');
+        $buyNow->addVar('currency_code','USD');
+        $buyNow->addVar('no_shipping','2');		/* Must provide shipping address */
+        $buyNow->addVar('rm','2');			/* Return method must be POST (2) for this class */
         /* Paypal IPN URL - MUST BE URL ENCODED */
-        $doSubscribe->addVar('notify_url', 'http://aimya.local/en/test/paypal/');
-        $doSubscribe->addVar('cancel_return', 'http://aimya.local/en/test/paypal/');
+        $buyNow->addVar('notify_url', 'http://aimya.svitla.com/en/test/response/');
         /*
 Thank you Page (if any) - not included in this package*/
         /*
-        $doDonate->addVar('return','thanks.html');
+        $buyNow->addVar('return','thanks.html');
         */
 
         /*
         Now add a button
         */
-        $doSubscribe->addButton(5); /* Default subscription button */
+        $buyNow->addButton(1);	/* Default buy now button */
         /* or use custom buttons */
         /*
-        $doSubscribe->addButton(6,'http://farm3.static.flickr.com/2154/2173129258_2c40a673f5.jpg?v=0');
+        $buyNow->addButton(6,'http://farm1.static.flickr.com/34/110260847_779dd141a6.jpg?v=0');
         */
         /* Show final form */
-        $doSubscribe->showForm();
+        $buyNow->showForm();
 
         /*
         To get the form in URL Form (when supported)
         You use:
         */
-        echo '<a href="' . $doSubscribe->getLink() . '">Click Here</a>';
+        echo '<a href="'.$buyNow->getLink().'">Click Here</a>';
     }
 
 }
