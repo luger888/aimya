@@ -5,7 +5,7 @@ class Application_Model_PayNow
 
     public function payNow()
     {
-        $doSubscribe = new Application_Model_Paypal;
+        $doSubscribe = new Aimya_PayPal_Paypal();
 
         /*
         Do you want to test payments

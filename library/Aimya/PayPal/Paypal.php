@@ -1,6 +1,6 @@
 <?php
 
-class Application_Model_Paypal
+class Aimya_PayPal_Paypal
 {
     private $VARS;
     private $button;
