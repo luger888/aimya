@@ -132,7 +132,7 @@ class Aimya_PayPal_Paypal
 //            $req .= "&$key=$value";
 //        }
         $validate_request = 'cmd=_notify-validate';
-        foreach ($_POST as $key => $value)
+        foreach ($data as $key => $value)
         {
             $validate_request .= "&" . $key . "=" . urlencode(stripslashes($value));
         }
