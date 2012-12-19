@@ -93,14 +93,27 @@ class Aimya_PayPal_Paypal
     private function doLog($data)
     {
 
-        ob_start();
-        echo '<pre>'; print_r($data); echo '</pre>';
+        /*ob_start();
+        echo '<pre>'; print_r($_POST); echo '</pre>';
         $logInfo = ob_get_contents();
         ob_end_clean();
 
         $file = fopen($this->logFile,'a');
         fwrite($file,$logInfo);
-        fclose($file);
+        fclose($file);*/
+
+            if( $fh = @fopen("../img/paypal.txt", "a+") )
+            {
+
+                $data = implode(',', $data);
+                fwrite($fh, $data);
+                fclose( $fh );
+                return( true );
+            }
+            else
+            {
+                return( false );
+            }
 
     }
 
