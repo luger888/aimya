@@ -90,6 +90,7 @@ class Aimya_PayPal_Paypal
     }
 
     /* Helper function to actually write to logfile */
+
     private function doLog($data)
     {
 
@@ -117,64 +118,98 @@ class Aimya_PayPal_Paypal
 
     }
 
+
     /* Check payment */
     function checkPayment($data = array())
     {
 
         /* read the post from PayPal system and add 'cmd' */
-        $req = 'cmd=_notify-validate';
-
-        /* Get post values and store them in req */
-        foreach ($data as $key => $value) {
-            $value = urlencode(stripslashes($value));
-            $req .= "&$key=$value";
+//        $req = 'cmd=_notify-validate';
+//
+//        /* Get post values and store them in req */
+//        foreach ($data as $key => $value) {
+//            $value = urlencode(stripslashes($value));
+//            $req .= "&$key=$value";
+//        }
+        $validate_request = 'cmd=_notify-validate';
+        foreach ($_POST as $key => $value)
+        {
+            $validate_request .= "&" . $key . "=" . urlencode(stripslashes($value));
         }
-
         $url = $this->getPaypal();
+        // Validate PayPal data to ensure it actually originated from PayPal
+        $curl_result = '';
+        $curl_err = '';
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $validate_request);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/x-www-form-urlencoded", "Content-Length: " . strlen($validate_request)));
+        curl_setopt($ch, CURLOPT_HEADER , 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
 
+        $curl_result = curl_exec($ch);
+        $curl_err = curl_error($ch);
+
+
+        curl_close($ch);
         /* post back to PayPal system to validate */
-        $header = "";
-        $header .= "POST /cgi-bin/webscr HTTP/1.0\r\n";
-        $header .= "Content-Type: application/x-www-form-urlencoded\r\n";
-        $header .= "Content-Length: " . strlen($req) . "\r\n\r\n";
-        $fp = fsockopen ('ssl://'.$url, 443, $errno, $errstr, 30);
+//        $header = "";
+//        $header .= "POST /cgi-bin/webscr HTTP/1.0\r\n";
+//        $header .= "Content-Type: application/x-www-form-urlencoded\r\n";
+//        $header .= "Content-Length: " . strlen($req) . "\r\n\r\n";
+//        $fp = fsockopen ('ssl://'.$url, 443, $errno, $errstr, 30);
 
         /*
           If ssl access gives you problem. try regular port:
           $fp = fsockopen ($url, 80, $errno, $errstr, 30);
           */
-
-        if (!$fp) {
-            /* HTTP ERROR */
-            return false;
-        } else {
-            fputs ($fp, $header . $req);
-            while (!feof($fp)) {
-                $res = fgets ($fp, 1024);
-                if (strcmp ($res, "VERIFIED") == 0) {
-                    /*
-                         check the payment_status is Completed
-                         check that txn_id has not been previously processed
-                         check that receiver_email is your Primary PayPal email
-                         check that payment_amount/payment_currency are correct
-                         process payment
-                         */
-                    return true;
-                } else {
-                    				if (strcmp ($res, "INVALID") == 0) {
-                    /*
-                         log for manual investigation
-                         */
-                    if($this->logFile != NULL){
-                        $this->doLog($data);
-                    }
-                }
-                    return false;
-                }
-            }
-            fclose ($fp);
+        if (strpos($curl_result, "VERIFIED")!==false)
+        {
+            $this->doLog($data);
+            return true;
         }
-        return false;
+        else
+        {
+            $this->doLog($data);
+            return false;
+        }
+
+//        if (!$fp) {
+//            /* HTTP ERROR */
+//            return false;
+//        } else {
+//            fputs ($fp, $header . $req);
+//            while (!feof($fp)) {
+//                $res = fgets ($fp, 1024);
+//                if (strcmp ($res, "VERIFIED") == 0) {
+//                    /*
+//                         check the payment_status is Completed
+//                         check that txn_id has not been previously processed
+//                         check that receiver_email is your Primary PayPal email
+//                         check that payment_amount/payment_currency are correct
+//                         process payment
+//                         */
+//                    return true;
+//                } else {
+//                    				if (strcmp ($res, "INVALID") == 0) {
+//                    /*
+//                         log for manual investigation
+//                         */
+//                    if($this->logFile != NULL){
+//
+//                        $this->doLog($data);
+//                    }
+//                }
+//
+//                    return false;
+//                }
+//            }
+//            fclose ($fp);
+//        }
+//        return false;
     }
 
     /* Set Test */
