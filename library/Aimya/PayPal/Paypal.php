@@ -135,11 +135,11 @@ class Aimya_PayPal_Paypal
         $url = $this->getPaypal();
 
         /* post back to PayPal system to validate */
+        $header = "";
         $header .= "POST /cgi-bin/webscr HTTP/1.0\r\n";
         $header .= "Content-Type: application/x-www-form-urlencoded\r\n";
         $header .= "Content-Length: " . strlen($req) . "\r\n\r\n";
-        /*$fp = fsockopen ('ssl://'.$url, 443, $errno, $errstr, 30);*/
-        $fp = fsockopen ($url, 80, $errno, $errstr, 30);
+        $fp = fsockopen ('ssl://'.$url, 443, $errno, $errstr, 30);
 
         /*
           If ssl access gives you problem. try regular port:
