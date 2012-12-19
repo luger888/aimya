@@ -90,7 +90,7 @@ class Aimya_PayPal_Paypal
     }
 
     /* Helper function to actually write to logfile */
-    private function doLog($_POST)
+    private function doLog($data)
     {
 
         /*ob_start();
@@ -104,7 +104,7 @@ class Aimya_PayPal_Paypal
 
             if( $fh = @fopen("./logfile.txt", "a+") )
             {
-                fputs( $fh, $_POST, strlen($_POST) );
+                fputs( $fh, $data, strlen($data) );
                 fclose( $fh );
                 return( true );
             }
@@ -116,7 +116,7 @@ class Aimya_PayPal_Paypal
     }
 
     /* Check payment */
-    function checkPayment($data)
+    function checkPayment($data = array())
     {
 
         $this->doLog($data);
@@ -125,7 +125,7 @@ class Aimya_PayPal_Paypal
         $req = 'cmd=_notify-validate';
 
         /* Get post values and store them in req */
-        foreach ($_POST as $key => $value) {
+        foreach ($data as $key => $value) {
             $value = urlencode(stripslashes($value));
             $req .= "&$key=$value";
         }
