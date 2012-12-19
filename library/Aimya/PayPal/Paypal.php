@@ -90,36 +90,21 @@ class Aimya_PayPal_Paypal
     }
 
     /* Helper function to actually write to logfile */
-    private function doLog($_POST)
-    {
-        /*ob_start();
-        echo '<pre>'; print_r($_POST); echo '</pre>';
-        $logInfo = ob_get_contents();
-        ob_end_clean();
-
-        $file = fopen($this->logFile,'a');
-        fwrite($file,$logInfo);
-        fclose($file);*/
-
-            if( $fh = @fopen("./logfile.txt", "a+") )
-            {
-                fputs( $fh, $_POST, strlen($_POST) );
-                fclose( $fh );
-                return( true );
-            }
-            else
-            {
-                return( false );
-            }
-
-    }
+//    private function doLog($_POST)
+//    {
+//        ob_start();
+//        echo '<pre>'; print_r($_POST); echo '</pre>';
+//        $logInfo = ob_get_contents();
+//        ob_end_clean();
+//
+//        $file = fopen($this->logFile,'a');
+//        fwrite($file,$logInfo);
+//        fclose($file);
+//    }
 
     /* Check payment */
     function checkPayment($_POST)
     {
-
-        $this->doLog($_POST);
-
         /* read the post from PayPal system and add 'cmd' */
         $req = 'cmd=_notify-validate';
 
@@ -163,9 +148,9 @@ class Aimya_PayPal_Paypal
                     /*
                          log for manual investigation
                          */
-                    //if($this->logFile != NULL){
+                    if($this->logFile != NULL){
                         $this->doLog($_POST);
-                    //}
+                    }
                     return false;
                 }
             }
