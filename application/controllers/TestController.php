@@ -24,6 +24,7 @@ class TestController extends Zend_Controller_Action
         $doCheck = new Aimya_PayPal_Paypal();
         $isPaid = $doCheck->checkPayment($_POST);
         $dbSkills = new Application_Model_DbTable_ResumeSkills();
+        $doCheck->setLogFile('logfile.txt');
         $data = array();
         $data['skill']= 'paypal';
         if($isPaid == true){

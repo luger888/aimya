@@ -72,13 +72,13 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
 
         $dbSkills = new Application_Model_DbTable_ResumeSkills();
         $this->view->skillList = $dbSkills->getSkills($identity->id);
-        if ($handle = opendir('./img/uploads/'.$identity->id .'/certificate/skill/21/')) {
-            $certificates = array();
-            while (false !== ($entry = readdir($handle))) {
-                $certificates[] .= $entry;
-            }
-           
-        }
+//        if ($handle = opendir('./img/uploads/'.$identity->id .'/certificate/skill/21/')) {
+//            $certificates = array();
+//            while (false !== ($entry = readdir($handle))) {
+//                $certificates[] .= $entry;
+//            }
+//
+//        }
     }
 
     public function ajaxAction()
