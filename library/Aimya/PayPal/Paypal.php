@@ -166,14 +166,17 @@ class Aimya_PayPal_Paypal
           If ssl access gives you problem. try regular port:
           $fp = fsockopen ($url, 80, $errno, $errstr, 30);
           */
-        if (strpos($curl_result, "VERIFIED")!==false)
-        {
-            $this->doLog($data);
+        if (strpos($curl_result, "VERIFIED")!==false) {
+            $this->doLog($curl_result);
             return true;
         }
-        else
-        {
-            $this->doLog($data);
+        elseif(strpos($curl_result, "INVALID")!==false) {
+            //$this->doLog("bla bla bla");
+            $this->doLog($curl_result);
+            return false;
+        } else {
+            //$this->doLog("lab lab lab");
+            $this->doLog($curl_result);
             return false;
         }
 
