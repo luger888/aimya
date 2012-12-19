@@ -92,6 +92,7 @@ class Aimya_PayPal_Paypal
     /* Helper function to actually write to logfile */
     private function doLog($_POST)
     {
+
         /*ob_start();
         echo '<pre>'; print_r($_POST); echo '</pre>';
         $logInfo = ob_get_contents();
@@ -115,10 +116,10 @@ class Aimya_PayPal_Paypal
     }
 
     /* Check payment */
-    function checkPayment($_POST)
+    function checkPayment($data)
     {
 
-        $this->doLog($_POST);
+        $this->doLog($data);
 
         /* read the post from PayPal system and add 'cmd' */
         $req = 'cmd=_notify-validate';
@@ -135,7 +136,8 @@ class Aimya_PayPal_Paypal
         $header .= "POST /cgi-bin/webscr HTTP/1.0\r\n";
         $header .= "Content-Type: application/x-www-form-urlencoded\r\n";
         $header .= "Content-Length: " . strlen($req) . "\r\n\r\n";
-        $fp = fsockopen ('ssl://'.$url, 443, $errno, $errstr, 30);
+        /*$fp = fsockopen ('ssl://'.$url, 443, $errno, $errstr, 30);*/
+        $fp = fsockopen ($url, 80, $errno, $errstr, 30);
 
         /*
           If ssl access gives you problem. try regular port:
@@ -164,7 +166,7 @@ class Aimya_PayPal_Paypal
                          log for manual investigation
                          */
                     //if($this->logFile != NULL){
-                        $this->doLog($_POST);
+                        $this->doLog($data);
                     //}
                     return false;
                 }
