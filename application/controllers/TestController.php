@@ -22,7 +22,7 @@ class TestController extends Zend_Controller_Action
     public function responseAction()
     {
         $doCheck = new Aimya_PayPal_Paypal();
-        $isPaid = $doCheck->checkPayment($_POST);
+        $isPaid = $doCheck->checkPayment('bmnbnbbnm');
         $dbSkills = new Application_Model_DbTable_ResumeSkills();
         $doCheck->setLogFile('./paypal.txt');
         $data = array();
