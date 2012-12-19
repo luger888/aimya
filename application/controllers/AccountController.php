@@ -233,7 +233,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
     {
         $this->view->headScript()->appendFile('../../js/jquery/account/features.js');
         $dbUserModel = new Application_Model_DbTable_Users();
-        $this->view->filters = new Application_Form_FeaturesFilter();
+
             $userType = '0';
             if( $this->getRequest()->getParam('user')) {
                 $userType = $this->getRequest()->getParam('user');
@@ -246,10 +246,83 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
             if($this->getRequest()->isXmlHttpRequest()) {
                 $offset = $this->getRequest()->getParam('offset');
                 $count = $this->getRequest()->getParam('count');
+                $profileModel = new Application_Model_Profile();
+                $featuredHtml = "";
+                $users = $dbUserModel->getLatestFeatured($userType, $lessonCat, $offset, $count);
+                foreach ($users as $person) {
+                    $friendTable = new Application_Model_DbTable_Friends();
+                    $isFriend = $friendTable->isFriend($person['id']);
+                    $isPending = $friendTable->isPending($person['id']);
+                    $avatarPath = $profileModel->getAvatarPath($person['id'], 'medium');
+                $featuredHtml .= "
+                    <div class='shadowSeparator clearfix'>
+                        <div class='shadowSeparatorBox clearfix'>
+                            <div class='featureItem clearfix'>
+                                <div class='imageBlock boxShadow'><img src='" . $avatarPath . "'></div>
+                                <div class='featuredButtonsTop clearfix'>
+                                    <a class ='button-2 view viewProfile' href='" . Zend_Controller_Front::getInstance()->getBaseUrl() . '/user/' . $person['id'] . "'>" . $this->view->translate('VIEW PROFILE') . "</a>" .
 
-                $this->view->featured = $dbUserModel->getLatestFeatured($userType, $lessonCat, $offset, $count);
+                                    "<input type='hidden' value='" . $person['id']. "'>
+
+                                </div>
+                                <ul class='featuredInfo'>
+                                    <li class='clearfix'>
+                                        <span class='title'>" . $this->view->translate('Name:') . "</span>
+                                        <div class='featuredTxt'>" .  ' ' . $person['firstname'] . ' ' . $person['lastname'] . "</div>
+                                    </li>
+                                    <li class='clearfix'>
+                                        <span class='title'>" . $this->view->translate('Time zone:') . "</span>
+                                        <div class='featuredTxt'>" . ' UTC ' . $person['timezone'] . "</div>
+                                    </li>";
+
+                                    if (count($person['service_offered']) > 0){
+                                        $featuredHtml .= "
+                                            <li class='clearfix'>
+                                            <span class='title'>" . $this->view->translate('Service offered:') . "</span>
+                                                <div class='featuredTxt'>";
+                                                    $i = 0;
+                                                    foreach ($person['service_offered'] as $index => $service) {
+                                                        $featuredHtml .= $service['subcategory'];
+                                                        if(count($person['service_offered']) - 1 != $i) $featuredHtml .= ', ';
+                                                        $i++;
+                                                    }
+                                                    $featuredHtml .= "
+                                                </div>
+                                            </li>";
+                                    }
+                                    if (count($person['service_requested']) > 0){
+                                        $featuredHtml .= "
+                                            <li class='clearfix'>
+                                                <span class='title'>" . $this->view->translate('Service requested:') . "</span>
+                                                <div class='featuredTxt'>";
+                                                    $i = 0;
+                                                    foreach ($person['service_requested'] as $index => $service) {
+                                                        $featuredHtml .=  $service['subcategory'];
+                                                        if(count($person['service_requested']) - 1 != $i) $featuredHtml .= ', ';
+                                                        $i++;
+                                                    }
+                                                $featuredHtml .= "
+                                                </div>
+                                            </li>";
+                                    }
+                                    if (count($person['add_info']) > 0){
+                                        $featuredHtml .= "
+                                            <li class='clearfix'>
+                                                <span class='title'>" . $this->view->translate('About me:') ." </span>
+                                                <div class='featuredTxt more'><" .$person['add_info'] . "</div>
+                                            </li>";
+                                    }
+                                    $featuredHtml .= "
+                                </ul>
+                            </div>
+                        </div>
+                    </div>";
+                }
+
+                $this->view->featuredHtml = $featuredHtml;
 
             } else {
+                $this->view->filters = new Application_Form_FeaturesFilter();
                 $this->view->featured = $dbUserModel->getLatestFeatured($userType, $lessonCat);
             }
 
@@ -260,7 +333,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
         $onlineUserTable = new Application_Model_DbTable_OnlineUsers();
         $status = $onlineUserTable->makeOffline($userId);
-        $this->view->userStatus = $userId;
+        $this->view->userStatus = $status;
     }
 
     public function onlineAction() {
