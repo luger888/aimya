@@ -1,14 +1,14 @@
 <?php
-class Application_Model_DbTable_ResumeEducation extends Application_Model_DbTable_Abstract
+class Application_Model_DbTable_ResumeSkills extends Application_Model_DbTable_Abstract
 
 {
-    protected $_name = 'education';
+    protected $_name = 'skills';
 
-    public function createEducation($array = array(), $user_id){
+    public function createSkill($array = array(), $user_id){
         $data = array(
 
             'user_id' => (int)$user_id,
-            'content' => $array['education']
+            'content' => $array['skill']
 
         );
 
@@ -17,12 +17,12 @@ class Application_Model_DbTable_ResumeEducation extends Application_Model_DbTabl
         return $lastId;
     }
 
-    public function updateEducation($array = array(), $user_id)
+    public function updateSkill($array = array(), $user_id)
     {
 
         $data = array(
 
-            'content' => $array['updateeducation']
+            'content' => $array['updateskill']
 
         );
         $where = array(
@@ -34,9 +34,9 @@ class Application_Model_DbTable_ResumeEducation extends Application_Model_DbTabl
         $this->update($data, $where);
     }
 
-    public function getEducations($user_id)
+    public function getSkills($user_id)
     {
-        $array = $this->fetchAll($this->select()->where('user_id=?' , (int)$user_id));
+        $array = $this->fetchAll($this->select()->where('user_id=?' , (int)$user_id)->order('id'));
         if(!$array) {
             throw new Exception("There is no element with ID: $user_id");
         }
@@ -46,7 +46,7 @@ class Application_Model_DbTable_ResumeEducation extends Application_Model_DbTabl
         return $array;
 
     }
-    public function deleteEducation($id, $user_id)
+    public function deleteSkill($id, $user_id)
     {
         $where = array(
 

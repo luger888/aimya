@@ -7,6 +7,7 @@ package com.aimialesson.model
 		
 		//public var domain:String = "http://aimya.svitla.com";
 		public var domain:String = "";
+		public var domain_add:String = "";
 		
 		private const FILE_UPLOAD_URL:String = "/lesson/upload/";//"/test/upload.php";
 		private const PRESENTATION_IMAGES_URL:String = "/lesson/files/";
@@ -28,32 +29,36 @@ package com.aimialesson.model
 			return instance;
 		}
 		
+		public function get urlbase ( ) : String {
+			return this.domain + "/" + this.domain_add;
+		}
+		
 		public function get fileUploadUrl () : String {
-			return this.domain + FILE_UPLOAD_URL;
+			return this.urlbase + FILE_UPLOAD_URL;
 		}
 		
 		public function get getPresentaionImagesUrl () : String {
-			return this.domain + PRESENTATION_IMAGES_URL;
+			return this.urlbase + PRESENTATION_IMAGES_URL;
 		}
 
 		public function get getIsOnlineUrl () : String {
-			return this.domain + GET_IS_ONLINE_URL;
+			return this.urlbase + GET_IS_ONLINE_URL;
 		}
 		
 		public function get addNoteUrl () : String {
-			return this.domain + ADD_NOTE_URL;
+			return this.urlbase + ADD_NOTE_URL;
 		}
 		
 		public function get startSessionUrl () : String {
-			return this.domain + START_SESSION_URL;
+			return this.urlbase + START_SESSION_URL;
 		}
 		
 		public function get stopSessionUrl () : String {
-			return this.domain + STOP_SESSION_URL;
+			return this.urlbase + STOP_SESSION_URL;
 		}
 		
 		public function get resizeUrl () : String {
-			return this.domain + RESIZE_URL;
+			return this.urlbase + RESIZE_URL;
 		}
 	}
 }

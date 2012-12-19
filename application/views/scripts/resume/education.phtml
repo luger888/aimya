@@ -1,27 +1,54 @@
+<script type="text/javascript">
+    uploadify();
+</script>
 <div class="resumeGeneral clearfix">
-    <div class="shadowSeparator clearfix">
         <div class="shadowSeparatorBox clearfix">
-            <?php
-            foreach ($this->educationList as $value):?>
-                <div class="educationItem">
-                    <div class="educationHeader">Education :</div>
-                    <div class="educationBody">
-                        <?php echo $value['content'];?>
+            <div class="resumeList clearfix">
+                <?php
+                foreach ($this->educationList as $value):?>
+                    <div class="shadowSeparator clearfix">
+                        <div class="shadowSeparatorBot clearfix">
+                            <div class="resumeItem clearfix">
+                                <div class="headRow clearfix">
+                                    <h1>education:</h1>
+
+                                    <div class="buttonRow clearfix">
+                                        <input type="button" value="edit" class="button-2 edit"
+                                               onclick="editResumeItem(this, 'education');">
+                                        <input type="button" value="delete" class="button-2 delete"
+                                               onclick="deleteResumeItem(this, 'education');">
+                                        <input type="hidden" value="<?php echo $value['id'];?>">
+                                    </div>
+                                </div>
+                                <div class="resumeItemBody clearfix">
+                                    <?php echo $value['content'];?>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <input type="button" value="edit" class="btn" onclick=editEducation(this);>
-                    <input type="button" value="delete" class="btn" onclick=deleteEducation(this);>
-                    <input type="hidden" value="<?php echo $value['id'];?>">
+                    <?php endforeach;?>
+            </div>
+            <div class="buttonsRow clearfix">
+                <input type="button" class="button-2 add addResumeItem floatRight" value="add education"
+                       onclick="addResumeItem();">
+            </div>
+            <div class="resumeItemForm">
+                <h1>Add new education:</h1>
+
+                <div class="formRow clearfix">
+                    <?php
+                    echo $this->educationForm->getElement('education');
+                    ?>
                 </div>
+                <div class="uploadWrapper">
 
-                <?php endforeach;?>
-            <div>Add new education:</div>
-            <?php
-            echo $this->educationForm->getElement('education');
-            ?>
-            <input type="button" value="save" class="btn" onclick=saveEducation();>
-
+                    <input id="file_upload" name="file_upload" type="file" multiple="true">
+                    <input type="button" value="save" class="button-2 save floatRight"
+                           onclick="saveResumeItem('education');">
+                </div>
+                <div id="queue"></div>
+            </div>
         </div>
 
-    </div>
     <?php echo $this->partial('partials/resumeFooter.phtml') ?>
 </div>

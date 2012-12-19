@@ -360,12 +360,12 @@ input.button-2 {
 }
 
 .button-2.delete {
-    background: url(../images/icons/delete.png) no-repeat 0 4px;
+    background: url(../images/icons/delete.png) no-repeat 0 3px;
 }
 
 
 .button-2.delete:hover {
-    background-position: 0 -15px;
+    background-position: 0 -16px;
 }
 
 .button-2.delete.disable {
@@ -1583,13 +1583,23 @@ input.button-2 {
 
 /*--- RESUME -----------------------------------------------------------------*/
 .resumeGeneral .shadowSeparatorBox{
+    padding-top:0;
     min-height: 416px;
 }
+.resumeGeneral .shadowSeparator{
+    padding-top:27px;
+}
+.resumeGeneral .shadowSeparator .shadowSeparatorBot{
+    padding: 18px 0 45px 0;
+    background: url(../images/bg/bottom-shadow-line.png) no-repeat center bottom;
+
+}
+
 .resumeGeneral .headRow h1{
     float:left;
 }
 .resumeGeneral .headRow{
-    padding-bottom:15px;
+    padding-bottom:10px;
 }
 .resumeGeneral .headRow .buttonRow{
     float:right;
@@ -1597,7 +1607,7 @@ input.button-2 {
 .resumeGeneral .formRow textarea{
     width: 98.5%;
     resize: vertical;
-    min-height: 210px;
+
 }
 .resumeFooter .buttonRow .button{
     margin: 0 5px;
@@ -1606,4 +1616,35 @@ input.button-2 {
 .resumeFooter{
     margin: 0 auto;
     width: 420px;
+}
+.resumeGeneral .uploadWrapper input[type="file"]{
+
+}
+.resumeGeneral .resumeItemForm{
+    display:none;
+}
+.resumeGeneral .buttonsRow{
+    padding-bottom: 35px;
+}
+
+.resumeGeneral .buttonsRow {
+    padding-bottom: 35px;
+}
+.resumeGeneral .delete {
+    margin-left: 15px;
+}
+/*--- UPLOADIFIVE -----------------------------------------------------------------*/
+#queue{
+    display: inline-block;
+    min-width: 92px;
+}
+.uploadifive-queue-item{
+     margin-top:5px;
+     padding: 2px;
+ }
+.uploadifive-queue-item:nth-child(odd){
+    background-color: #ECF4D7;
+}
+.uploadifive-queue-item .close{
+float:right;
 }

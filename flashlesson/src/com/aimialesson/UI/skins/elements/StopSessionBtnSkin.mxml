@@ -14,6 +14,7 @@
         <![CDATA[         
             /* Define the skin elements that should not be colorized. 
             For button, the graphics are colorized but the label is not. */
+			import com.aimialesson.model.Texts;
             static private const exclusions:Array = ["labelDisplay"];
                 
             override public function get colorizeExclusions():Array {return exclusions;}
@@ -41,6 +42,6 @@
 
 	<s:BitmapImage excludeFrom="over" source="@Embed('flashassets/finish_btn_active.png')" />
 	<s:BitmapImage includeIn="over" source="@Embed('flashassets/finish_btn_hover.png')" />
-	<s:Label text="STOP SESSION" styleName="StopButtonLabelStyle" horizontalCenter="0" verticalCenter="0"/>
+	<s:Label text="{Texts.getInstance().getText(Texts.STOP_SESSION, true)}" styleName="StopButtonLabelStyle" horizontalCenter="0" verticalCenter="0"/>
     
 </s:SparkSkin>

@@ -22,12 +22,12 @@ class Application_Model_DbTable_ResumeExperience extends Application_Model_DbTab
 
         $data = array(
 
-            'content' => $array['content']
+            'content' => $array['updateexperience']
 
         );
         $where = array(
 
-            $this->getAdapter()->quoteInto('id =?', (int)$array['updateExperience']),
+            $this->getAdapter()->quoteInto('id =?', (int)$array['resumeItemId']),
             $this->getAdapter()->quoteInto('user_id=?', (int)$user_id)
 
         );

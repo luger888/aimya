@@ -14,6 +14,21 @@ class TestController extends Zend_Controller_Action
         $this->view->form = $form;
     }
 
+    public function paypalAction()
+    {
 
+    }
+
+    public function responseAction()
+    {
+        $doCheck = new Aimya_PayPal_Paypal();
+        $isPaid = $doCheck->checkPayment($_POST);
+
+        if($isPaid == true){
+            $this->view->reponse = 'success';
+        }else{
+
+        }$this->view->reponse = 'fault';
+    }
 }
 

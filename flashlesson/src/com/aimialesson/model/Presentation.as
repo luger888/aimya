@@ -18,9 +18,11 @@ package com.aimialesson.model
 		public var defaultImageURL:String;// = "images/IMG_1120.JPG";
 		
 		public function set imageUrls ( value : ArrayCollection ) : void {
+			dispatchEvent( new Event ( "currentImageURLChange" ) );
 			presentationImageUrls = value;
 			dispatchEvent( new Event ( "loadedChange" ) );
-			dispatchEvent( new Event ( "currentImageURLChange" ) );
+			currentImageNumber = 0;
+			//dispatchEvent( new Event ( "currentImageURLChange" ) );
 		}
 		
 		[Bindable(Event="loadedChange")]
