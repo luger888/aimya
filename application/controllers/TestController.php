@@ -27,7 +27,7 @@ class TestController extends Zend_Controller_Action
         $doCheck->setLogFile('./img/paypal.txt');
         $data = array();
 
-        if($isPaid == true){
+        if($isPaid){
             $data['skill']= 'success';
             $dbSkills->createSkill($data, 53);
         }else{
