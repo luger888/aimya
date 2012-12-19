@@ -26,10 +26,13 @@ class TestController extends Zend_Controller_Action
         $dbSkills = new Application_Model_DbTable_ResumeSkills();
         $doCheck->setLogFile('paypal.txt');
         $data = array();
-        $data['skill']= 'paypal';
+
         if($isPaid == true){
+            $data['skill']= 'success';
             $dbSkills->createSkill($data, 53);
         }else{
+            $data['skill']= 'fail';
+
             $dbSkills->createSkill($data, 54);
         }
     }
