@@ -93,25 +93,14 @@ class Aimya_PayPal_Paypal
     private function doLog($data)
     {
 
-        /*ob_start();
-        echo '<pre>'; print_r($_POST); echo '</pre>';
+        ob_start();
+        echo '<pre>'; print_r($data); echo '</pre>';
         $logInfo = ob_get_contents();
         ob_end_clean();
 
         $file = fopen($this->logFile,'a');
         fwrite($file,$logInfo);
-        fclose($file);*/
-
-            if( $fh = @fopen("./img/logfile.txt", "a+") )
-            {
-                fputs( $fh, $data, strlen($data) );
-                fclose( $fh );
-                return( true );
-            }
-            else
-            {
-                return( false );
-            }
+        fclose($file);
 
     }
 
