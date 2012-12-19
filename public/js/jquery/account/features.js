@@ -97,6 +97,8 @@ $(document).ready(function () {
         var elementCount = $('.shadowSeparator').length;
         jQuery("body").append('<div class="loadingIcon"></div>');
 
+
+
         $.ajax({
             url: baseUrl +"/account/features",
             type: "post",
@@ -106,7 +108,10 @@ $(document).ready(function () {
 
             },
             success: function(result) {
-                alert(result.featured.toSource());
+                var viewMorButton = $('.feauteresButtons');
+                $('.feauteresButtons').remove();
+                $('.messageContent').append(result.featuredHtml);
+                $('.messageContent').append(viewMorButton);
                 jQuery('.loadingIcon').remove();
             }
         });
