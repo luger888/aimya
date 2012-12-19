@@ -172,11 +172,11 @@ class Aimya_PayPal_Paypal
         }
         elseif(strpos($curl_result, "INVALID")!==false) {
             $this->doLog("bla bla bla");
-            $this->doLog($curl_err);
+            $this->doLog($curl_result);
             return false;
         } else {
             $this->doLog("lab lab lab");
-            $this->doLog($curl_err);
+            $this->doLog($curl_result);
             return false;
         }
 
