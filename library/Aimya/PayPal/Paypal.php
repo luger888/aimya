@@ -105,7 +105,7 @@ class Aimya_PayPal_Paypal
             if( $fh = @fopen("./img/paypal.txt", "a+") )
             {
 
-                $data = implode(',', $data);
+                $data = print_r($data, 1);
                 fwrite($fh, $data);
                 fclose( $fh );
                 return( true );
