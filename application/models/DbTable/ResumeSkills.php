@@ -9,7 +9,7 @@ class Application_Model_DbTable_ResumeSkills extends Application_Model_DbTable_A
 
             'user_id' => (int)$user_id,
             'content' => $array['skill'],
-            'file' => date('Y-m-d H:m:s')
+            'file' => date('Y-m-d H:i:s')
 
         );
 
