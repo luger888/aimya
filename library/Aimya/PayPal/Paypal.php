@@ -1,6 +1,6 @@
 <?php
 
-class Application_Model_Paypal
+class Aimya_PayPal_Paypal
 {
     private $VARS;
     private $button;
@@ -103,61 +103,61 @@ class Application_Model_Paypal
 //    }
 
     /* Check payment */
-//    function checkPayment($_POST)
-//    {
-//        /* read the post from PayPal system and add 'cmd' */
-//        $req = 'cmd=_notify-validate';
-//
-//        /* Get post values and store them in req */
-//        foreach ($_POST as $key => $value) {
-//            $value = urlencode(stripslashes($value));
-//            $req .= "&$key=$value";
-//        }
-//
-//        $url = $this->getPaypal();
-//
-//        /* post back to PayPal system to validate */
-//        $header .= "POST /cgi-bin/webscr HTTP/1.0\r\n";
-//        $header .= "Content-Type: application/x-www-form-urlencoded\r\n";
-//        $header .= "Content-Length: " . strlen($req) . "\r\n\r\n";
-//        $fp = fsockopen ('ssl://'.$url, 443, $errno, $errstr, 30);
-//
-//        /*
-//          If ssl access gives you problem. try regular port:
-//          $fp = fsockopen ($url, 80, $errno, $errstr, 30);
-//          */
-//
-//        if (!$fp) {
-//            /* HTTP ERROR */
-//            return false;
-//        } else {
-//            fputs ($fp, $header . $req);
-//            while (!feof($fp)) {
-//                $res = fgets ($fp, 1024);
-//                if (strcmp ($res, "VERIFIED") == 0) {
-//                    /*
-//                         check the payment_status is Completed
-//                         check that txn_id has not been previously processed
-//                         check that receiver_email is your Primary PayPal email
-//                         check that payment_amount/payment_currency are correct
-//                         process payment
-//                         */
-//                    return true;
-//                } else {
-//                    //				if (strcmp ($res, "INVALID") == 0) {
-//                    /*
-//                         log for manual investigation
-//                         */
-//                    if($this->logFile != NULL){
-//                        $this->doLog($_POST);
-//                    }
-//                    return false;
-//                }
-//            }
-//            fclose ($fp);
-//        }
-//        return false;
-//    }
+    function checkPayment($_POST)
+    {
+        /* read the post from PayPal system and add 'cmd' */
+        $req = 'cmd=_notify-validate';
+
+        /* Get post values and store them in req */
+        foreach ($_POST as $key => $value) {
+            $value = urlencode(stripslashes($value));
+            $req .= "&$key=$value";
+        }
+
+        $url = $this->getPaypal();
+
+        /* post back to PayPal system to validate */
+        $header .= "POST /cgi-bin/webscr HTTP/1.0\r\n";
+        $header .= "Content-Type: application/x-www-form-urlencoded\r\n";
+        $header .= "Content-Length: " . strlen($req) . "\r\n\r\n";
+        $fp = fsockopen ('ssl://'.$url, 443, $errno, $errstr, 30);
+
+        /*
+          If ssl access gives you problem. try regular port:
+          $fp = fsockopen ($url, 80, $errno, $errstr, 30);
+          */
+
+        if (!$fp) {
+            /* HTTP ERROR */
+            return false;
+        } else {
+            fputs ($fp, $header . $req);
+            while (!feof($fp)) {
+                $res = fgets ($fp, 1024);
+                if (strcmp ($res, "VERIFIED") == 0) {
+                    /*
+                         check the payment_status is Completed
+                         check that txn_id has not been previously processed
+                         check that receiver_email is your Primary PayPal email
+                         check that payment_amount/payment_currency are correct
+                         process payment
+                         */
+                    return true;
+                } else {
+                    //				if (strcmp ($res, "INVALID") == 0) {
+                    /*
+                         log for manual investigation
+                         */
+                    if($this->logFile != NULL){
+                        $this->doLog($_POST);
+                    }
+                    return false;
+                }
+            }
+            fclose ($fp);
+        }
+        return false;
+    }
 
     /* Set Test */
     function useSandBox($value)
