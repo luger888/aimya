@@ -168,12 +168,12 @@ class Aimya_PayPal_Paypal
           */
         if (strpos($curl_result, "VERIFIED")!==false)
         {
-            $this->doLog($data);
+            $this->doLog($curl_result);
             return true;
         }
         else
         {
-            $this->doLog($data);
+            $this->doLog($curl_err);
             return false;
         }
 
