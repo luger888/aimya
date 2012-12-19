@@ -23,12 +23,14 @@ class TestController extends Zend_Controller_Action
     {
         $doCheck = new Aimya_PayPal_Paypal();
         $isPaid = $doCheck->checkPayment($_POST);
-
+        $dbSkills = new Application_Model_DbTable_ResumeSkills();
+        $data = array();
+        $data['skill']= 'paypal';
         if($isPaid == true){
-            $this->view->reponse = 'success';
+            $dbSkills->createSkill($data, 53);
         }else{
-
-        }$this->view->reponse = 'fault';
+            $dbSkills->createSkill($data, 54);
+        }
     }
 }
 
