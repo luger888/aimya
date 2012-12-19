@@ -102,17 +102,16 @@ class Aimya_PayPal_Paypal
         fwrite($file,$logInfo);
         fclose($file);*/
 
-            //if( $fh = @fopen("./logfile.txt", "a+") )
-            //{
-                $fh = @fopen("./img/logfile.txt", "a+");
-                fwrite( $fh, $data);
+            if( $fh = @fopen("./img/logfile.txt", "a+") )
+            {
+                fputs( $fh, $data, strlen($data) );
                 fclose( $fh );
                 return( true );
-            //}
-            //else
-            //{
-               //return( false );
-            //}
+            }
+            else
+            {
+                return( false );
+            }
 
     }
 
