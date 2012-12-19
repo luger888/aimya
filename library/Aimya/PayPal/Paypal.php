@@ -102,7 +102,7 @@ class Aimya_PayPal_Paypal
         fwrite($file,$logInfo);
         fclose($file);*/
 
-            if( $fh = @fopen("../img/paypal.txt", "a+") )
+            if( $fh = @fopen("./img/paypal.txt", "a+") )
             {
 
                 $data = implode(',', $data);
