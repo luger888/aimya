@@ -40,7 +40,7 @@ class Application_Model_PayNow
         $buyNow->addVar('no_shipping','2');		/* Must provide shipping address */
         $buyNow->addVar('rm','2');			/* Return method must be POST (2) for this class */
         /* Paypal IPN URL - MUST BE URL ENCODED */
-        $buyNow->addVar('notify_url', 'http://aimya.svitla.com/en/test/response/');
+        $buyNow->addVar('notify_url', 'http://aimya.svitla.com/en/test/response');
         /*
 Thank you Page (if any) - not included in this package*/
         /*
