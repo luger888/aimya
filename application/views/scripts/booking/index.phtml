@@ -4,18 +4,23 @@
 #booking {
     display: none;
 }
-.isTeacher{
+
+.isTeacher {
     display: none;
 }
-#teacher-label{
+
+#teacher-label {
     display: none;
 }
+
 .mainCalendar {
     background-color: #f6f3e4;
 }
-.senderUser{
-    font:600 10px arial;
+
+.senderUser {
+    font: 600 10px arial;
 }
+
 .fc-event-head .fc-event-focusName, .fc-event-head .fc-event-time {
     float: left;
 }
@@ -274,218 +279,221 @@ ul li {
 </div>
 
 <script type='text/javascript'>
-    jQuery(document).ready(function () {
+jQuery(document).ready(function () {
 
-        $('#recipiend_id').change(function(){
-            if($("#recipiend_id option:selected").hasClass('2') || $("#recipiend_id option:selected").hasClass('3')){
-                $('.isTeacher').css('display', 'block');
-            }else{
-                $('.isTeacher').css('display', 'none');
-            }
-        });
+    $('#recipiend_id').change(function () {
+        if ($("#recipiend_id option:selected").hasClass('2') || $("#recipiend_id option:selected").hasClass('3')) {
+            $('.isTeacher').css('display', 'block');
+        } else {
+            $('.isTeacher').css('display', 'none');
+        }
+    });
 
-        pathName = $('#current_url').val();
-        var date = new Date();
-        var d = date.getDate();
-        var m = date.getMonth();
-        var y = date.getFullYear();
+    pathName = $('#current_url').val();
+    var date = new Date();
+    var d = date.getDate();
+    var m = date.getMonth();
+    var y = date.getFullYear();
 
-        jQuery('#calendar').fullCalendar({
-            editable:true,
-            timeFormat:'(h:mm)tt -',
-            buttonIcons:{
-                day:''
-            },
-            disableDragging:true,
-            disableResizing:true,
-            allDay:false,
-            allDaySlot:false,
-            header:{
-                left:'title',
-                center:'month, agendaDay',
-                right:'prev,today,next'
-            },
-            dayClick:function (date, allDay, jsEvent, view) {
+    jQuery('#calendar').fullCalendar({
+        editable:true,
+        timeFormat:'(h:mm)tt -',
+        buttonIcons:{
+            day:''
+        },
+        disableDragging:true,
+        disableResizing:true,
+        allDay:false,
+        allDaySlot:false,
+        ignoreTimezone:true,
+        header:{
+            left:'title',
+            center:'month, agendaDay',
+            right:'prev,today,next'
+        },
+        dayClick:function (date, allDay, jsEvent, view) {
+            jQuery('#calendar').fullCalendar('changeView', 'agendaDay');
+            jQuery('#calendar').fullCalendar('gotoDate', date);
+
+        },
+        eventClick:function (event, element) {
+            var view = jQuery('#calendar').fullCalendar('getView');
+            if (view.name == 'agendaDay') { // if clicked on event while in agendaDay
+            } else {
                 jQuery('#calendar').fullCalendar('changeView', 'agendaDay');
-                jQuery('#calendar').fullCalendar('gotoDate', date);
-
-            },
-            eventClick:function (event, element) {
-                var view = jQuery('#calendar').fullCalendar('getView');
-                if (view.name == 'agendaDay') { // if clicked on event while in agendaDay
-                } else {
-                    jQuery('#calendar').fullCalendar('changeView', 'agendaDay');
-                    jQuery('#calendar').fullCalendar('gotoDate', event.start);
-                }
-
-            },
-
-            events:function (start, end, callback) {
-                jQuery("body").append('<div class="loadingIcon"></div>');
-                $.ajax({
-                    cache:false,
-                    url:pathName + '/booking/index',
-                    success:function (msg) {
-                        jQuery('.loadingIcon').remove();
-                        var events = [];
-                        for (var c = 0; c < msg.booking.length; c++) {
-                            if (msg.booking[c].booking_status == '1') {
-                                var eventColor = '#effad0';
-                                var borderColor = '#7e954c';
-                            } else {
-                                eventColor = '#ffe8e8';
-                                borderColor = '#c18989';
-                            }
-
-
-                            events.push({
-                                title:msg.booking[c].focus_name,
-                                start:msg.booking[c].started_at,
-                                started_at:msg.booking[c].started_at,
-                                recipient_id:msg.booking[c].recipient_id,
-                                booking_status:msg.booking[c].booking_status,
-                                add_info:msg.booking[c].add_info,
-                                rate:msg.booking[c].rate,
-                                duration:msg.booking[c].duration,
-                                video:msg.booking[c].video,
-                                feedback:msg.booking[c].feedback,
-                                notes:msg.booking[c].notes,
-                                sender_id:msg.booking[c].sender_id + "",
-                                booking_id:msg.booking[c].id + "",
-                                user_id:msg.id,
-                                allDay:false,
-                                color:eventColor,
-                                backgroundColor:eventColor,
-                                borderColor:borderColor
-
-                            });
-                        }
-                        callback(events);
-
-                    }
-                });
-            },
-
-            eventRender:function (event, element) {
-                var view = jQuery('#calendar').fullCalendar('getView');
-                if (view.name == 'agendaDay') { // render event in agendaDay
-                    if (event.duration == '0') {
-                        var duration = 'lesson';
-                    } else {
-                        duration = event.duration + ' min';
-                    }
-                    if(event.sender_id == event.user_id){
-                        var sender  = '<span class ="senderUser">You</span>';
-                    }else{
-                        sender = $('#recipiend_id option[value="'+event.sender_id+'"]').text();
-                    }
-                    if(event.recipient_id == event.user_id){
-                        var recipient  = '<span class ="senderUser">You</span>';
-                    }else{
-                        recipient = $('#recipiend_id option[value="'+event.recipient_id+'"]').text();
-                    }
-
-                    element.find(".fc-event-head").append('<div class ="fc-event-focusName">Focus name: "' + event.title + '"</div>');
-                    element.find(".fc-event-head").append('<div class = "fc-event-rate">Rate: $' + event.rate + ' / ' + duration + '</div>');
-                    element.find(".fc-event-content").append('<div class = "fc-event-content-description"> Description: ' + event.add_info + '</div>');
-                    element.find(".fc-event-content").append('<div class = "fc-event-content-requested">Request from: ' + sender + ' , to:  ' + recipient + '</div>');
-
-                    if (event.booking_status == '0' && event.user_id == event.recipient_id) {
-                        element.find(".fc-event-content").append('<input type = "button"  id ="rejectBooking" onclick="rejectBooking(this)" value = "Reject"  class="fc-event-content-reject fc-button reject">');
-                        element.find(".fc-event-content").append('<input type = "button" id ="confirmBooking" onclick="confirmBooking(this)" value = "Confirm" class = "fc-event-content-confirm fc-button">');
-                        element.find(".fc-event-content").append('<input type = "hidden" id = "booking_id"  value = ' + event.booking_id + ' >');
-                        element.find(".fc-event-content").append('<input type = "hidden" id = "sender_id"  value = ' + event.sender_id + ' >');
-                    } else if (event.booking_status == '1') {
-                        element.find(".fc-event-content").append('<div class="fc-event-content-approve"><span>Approved</span></div>');
-                    } else {
-                        element.find(".fc-event-content").append('<div class="fc-event-content-approve pending"><span>Pending</span></div>');
-                    }
-                }
+                jQuery('#calendar').fullCalendar('gotoDate', event.start);
             }
 
+        },
 
-        });
+        events:function (start, end, callback) {
+            jQuery("body").append('<div class="loadingIcon"></div>');
+            $.ajax({
+                cache:false,
+                url:pathName + '/booking/index',
+                success:function (msg) {
+                    jQuery('.loadingIcon').remove();
+                    var events = [];
+                    for (var c = 0; c < msg.booking.length; c++) {
+                        if (msg.booking[c].booking_status == '1') {
+                            var eventColor = '#effad0';
+                            var borderColor = '#7e954c';
+                        } else {
+                            eventColor = '#ffe8e8';
+                            borderColor = '#c18989';
+                        }
+
+
+                        var start = msg.booking[c].started_at;
+
+                        events.push({
+                            title:msg.booking[c].focus_name,
+                            start:start,
+                            started_at:msg.booking[c].started_at,
+                            recipient_id:msg.booking[c].recipient_id,
+                            booking_status:msg.booking[c].booking_status,
+                            add_info:msg.booking[c].add_info,
+                            rate:msg.booking[c].rate,
+                            duration:msg.booking[c].duration,
+                            video:msg.booking[c].video,
+                            feedback:msg.booking[c].feedback,
+                            notes:msg.booking[c].notes,
+                            sender_id:msg.booking[c].sender_id + "",
+                            booking_id:msg.booking[c].id + "",
+                            user_id:msg.id,
+                            allDay:false,
+                            color:eventColor,
+                            backgroundColor:eventColor,
+                            borderColor:borderColor
+
+                        });
+                    }
+                    callback(events);
+
+                }
+            });
+        },
+
+        eventRender:function (event, element) {
+            var view = jQuery('#calendar').fullCalendar('getView');
+            if (view.name == 'agendaDay') { // render event in agendaDay
+                if (event.duration == '0') {
+                    var duration = 'lesson';
+                } else {
+                    duration = event.duration + ' min';
+                }
+                if (event.sender_id == event.user_id) {
+                    var sender = '<span class ="senderUser">You</span>';
+                } else {
+                    sender = $('#recipiend_id option[value="' + event.sender_id + '"]').text();
+                }
+                if (event.recipient_id == event.user_id) {
+                    var recipient = '<span class ="senderUser">You</span>';
+                } else {
+                    recipient = $('#recipiend_id option[value="' + event.recipient_id + '"]').text();
+                }
+
+                element.find(".fc-event-head").append('<div class ="fc-event-focusName">Focus name: "' + event.title + '"</div>');
+                element.find(".fc-event-head").append('<div class = "fc-event-rate">Rate: $' + event.rate + ' / ' + duration + '</div>');
+                element.find(".fc-event-content").append('<div class = "fc-event-content-description"> Description: ' + event.add_info + '</div>');
+                element.find(".fc-event-content").append('<div class = "fc-event-content-requested">Request from: ' + sender + ' , to:  ' + recipient + '</div>');
+
+                if (event.booking_status == '0' && event.user_id == event.recipient_id) {
+                    element.find(".fc-event-content").append('<input type = "button"  id ="rejectBooking" onclick="rejectBooking(this)" value = "Reject"  class="fc-event-content-reject fc-button reject">');
+                    element.find(".fc-event-content").append('<input type = "button" id ="confirmBooking" onclick="confirmBooking(this)" value = "Confirm" class = "fc-event-content-confirm fc-button">');
+                    element.find(".fc-event-content").append('<input type = "hidden" id = "booking_id"  value = ' + event.booking_id + ' >');
+                    element.find(".fc-event-content").append('<input type = "hidden" id = "sender_id"  value = ' + event.sender_id + ' >');
+                } else if (event.booking_status == '1') {
+                    element.find(".fc-event-content").append('<div class="fc-event-content-approve"><span>Approved</span></div>');
+                } else {
+                    element.find(".fc-event-content").append('<div class="fc-event-content-approve pending"><span>Pending</span></div>');
+                }
+            }
+        }
+
+
+    });
 
 //FORM DIALOG JQUERY
-        $('.fc-header tbody').append('<tr><td><input type="button" id="bookLesson" class = "button-2 book" value="book lesson"><td></tr>');
+    $('.fc-header tbody').append('<tr><td><input type="button" id="bookLesson" class = "button-2 book" value="book lesson"><td></tr>');
 
-        $("#dialog-form").dialog({
-            autoOpen:false,
-            height:580,
-            width:450,
-            modal:true,
-            resizable:false,
-            close:function () {
+    $("#dialog-form").dialog({
+        autoOpen:false,
+        height:580,
+        width:450,
+        modal:true,
+        resizable:false,
+        close:function () {
 
-            }
-        });
-
-
-        $('#started_at').datetimepicker();
-
-        $('#sendBooking').click(function () {
-            $.post(
-
-                pathName + "/booking/add/0/controller%3D%3Ebooking/1/action%3D%3Eadd", {
-                    "recipient_id":$('#recipiend_id').val(),
-                    "focus_name":$('#focus_name').val(),
-                    "started_at":$('#started_at').val(),
-                    "duration":$('#duration').val(),
-                    "feedback":$('#feedback:checked').val() || 0,
-                    "video":$('#video:checked').val() || 0,
-                    "notes":$('#notes:checked').val() || 0,
-                    "rate":$('#rate').val(),
-                    "is_sender_teacher": $('input[name=role]:checked').val(),
-                    "add_info":$('#add_info').val()
+        }
+    });
 
 
-                },
-                function (response) {
-                    window.location.reload();
+    $('#started_at').datetimepicker();
 
-                });
-
-            return false;
-        });
-        $('#bookLesson').click(function () {
-            jQuery('#booking').css('display', 'block');
-            $("#dialog-form form").get(0).reset();
-            $("#dialog-form").dialog("open");
-            $('#dialog-form input').prop('checked', false);
-
-        });
-    });//END JQUERY
-
-    function confirmBooking(e) {
-        pathName = $('#current_url').val();
+    $('#sendBooking').click(function () {
         $.post(
 
-            pathName + "/booking/approve/0/controller%3D%3Ebooking/1/action%3D%3Eapprove", {
-                "booking_id":$('#booking_id').val()
+            pathName + "/booking/add/0/controller%3D%3Ebooking/1/action%3D%3Eadd", {
+                "recipient_id":$('#recipiend_id').val(),
+                "focus_name":$('#focus_name').val(),
+                "started_at":$('#started_at').val(),
+                "duration":$('#duration').val(),
+                "feedback":$('#feedback:checked').val() || 0,
+                "video":$('#video:checked').val() || 0,
+                "notes":$('#notes:checked').val() || 0,
+                "rate":$('#rate').val(),
+                "is_sender_teacher":$('input[name=role]:checked').val() || 0,
+                "add_info":$('#add_info').val()
+
+
             },
             function (response) {
-                $(e).parents('.fc-event-inner').find('.fc-event-head').css('background-color', '#effad0');
-                $(e).parents('.fc-event-inner').css('background-color', '#effad0');
-                $(e).parents('.fc-event').css('border-color', '#7e954c');
-                $(e).parents('.fc-event-inner').css('border-color', '#7e954c');
-                $(e).parent().append('<div class="fc-event-content-approve"><span>Approved</span></div>');
-                $(e).parents('.fc-event').find('.fc-event-content-reject').remove();
-                $(e).parents('.fc-event').find('.fc-event-content-confirm').remove();
-
+                window.location.reload();
 
             });
-    }
-    function rejectBooking(e) {
-        pathName = $('#current_url').val();
-        $.post(
 
-            pathName + "/booking/reject/0/controller%3D%3Ebooking/1/action%3D%3Ereject", {
-                "booking_id":$('#booking_id').val()
-            },
-            function (response) {
-                e.parentNode.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode.parentNode);
-            });
-    }
+        return false;
+    });
+    $('#bookLesson').click(function () {
+        jQuery('#booking').css('display', 'block');
+        $("#dialog-form form").get(0).reset();
+        $("#dialog-form").dialog("open");
+        $('#dialog-form input').prop('checked', false);
+
+    });
+});//END JQUERY
+
+function confirmBooking(e) {
+    pathName = $('#current_url').val();
+    $.post(
+
+        pathName + "/booking/approve/0/controller%3D%3Ebooking/1/action%3D%3Eapprove", {
+            "booking_id":$('#booking_id').val()
+        },
+        function (response) {
+            $(e).parents('.fc-event-inner').find('.fc-event-head').css('background-color', '#effad0');
+            $(e).parents('.fc-event-inner').css('background-color', '#effad0');
+            $(e).parents('.fc-event').css('border-color', '#7e954c');
+            $(e).parents('.fc-event-inner').css('border-color', '#7e954c');
+            $(e).parent().append('<div class="fc-event-content-approve"><span>Approved</span></div>');
+            $(e).parents('.fc-event').find('.fc-event-content-reject').remove();
+            $(e).parents('.fc-event').find('.fc-event-content-confirm').remove();
+
+
+        });
+}
+function rejectBooking(e) {
+    pathName = $('#current_url').val();
+    $.post(
+
+        pathName + "/booking/reject/0/controller%3D%3Ebooking/1/action%3D%3Ereject", {
+            "booking_id":$('#booking_id').val()
+        },
+        function (response) {
+            e.parentNode.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode.parentNode);
+        });
+}
 
 </script>
 
