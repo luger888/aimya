@@ -22,18 +22,18 @@ class LessonController extends Zend_Controller_Action
     public function indexAction()
     {
 
-        $this->_helper->layout()->getView()->headTitle('Friends');
+        $this->_helper->layout()->getView()->headTitle('Lessons');
 
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
         $lessonTable = new Application_Model_DbTable_Lesson();
 
         $lesson = $lessonTable->checkAvailableLesson($userId);
 
-        $userModel = new Application_Model_DbTable_Users();
-        $userList = $userModel->getItemsList();
+        $bookingTable = new Application_Model_DbTable_Booking();
+        $bookingList = $bookingTable->getFullBookingData($userId);
 
         $this->view->availableLesson = $lesson;
-        $this->view->userList = $userList;
+        $this->view->bookingList = $bookingList;
 
     }
 
