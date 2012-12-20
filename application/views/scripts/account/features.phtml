@@ -1,8 +1,9 @@
 <div class="featuresTab mainContainer clearfix">
 
     <div class="filters clearfix">
-
-        <span class="selectBox s-111"><?php echo $this->filters->author; ?></span>
+        <?php if(Zend_Auth::getInstance()->getIdentity()->role != 1): ?>
+            <span class="selectBox s-111"><?php echo $this->filters->author; ?></span>
+        <?php endif;?>
         <span class="selectBox s-123"><?php echo $this->filters->lesson_category; ?></span>
         <p>Display:</p>
 

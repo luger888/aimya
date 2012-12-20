@@ -40,15 +40,15 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
         $data = array(
 
-            'email' => $array['email'],
-            'password' => $password,
+            'email' => preg_replace('#<(.*?)>#', '', trim($array['email'])),
+            'password' => preg_replace('#<(.*?)>#', '', $password),
             'role' => (int)$array['role'],
-            'username' => $array['username'],
-            'firstname' => $array['firstname'],
-            'lastname' => $array['lastname'],
-            'gender' => $array['gender'],
+            'username' => preg_replace('#<(.*?)>#', '', trim($array['username'])),
+            'firstname' => preg_replace('#<(.*?)>#', '', $array['firstname']),
+            'lastname' => preg_replace('#<(.*?)>#', '', $array['lastname']),
+            'gender' => preg_replace('#<(.*?)>#', '', $array['gender']),
             'status' => $status,
-            'confirmation_token' => $token,
+            'confirmation_token' => preg_replace('#<(.*?)>#', '', $token),
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
 
@@ -82,7 +82,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
         $array = array(
 
-            'password' => md5($data['password'])
+            'password' => preg_replace('#<(.*?)>#', '', md5($data['password']))
 
         );
         $where = $this->getAdapter()->quoteInto('email=?', $data['email']);
@@ -115,12 +115,12 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
         $data = array(
 
-            'firstname'=> $array['firstname'],
-            'lastname' => $array['lastname'],
-            'gender' => $array['gender'],
-            'timezone' => $array['timezone'],
-            'email' => $array['email'],
-            'username' => $array['username'],
+            'firstname'=> preg_replace('#<(.*?)>#', '', $array['firstname']),
+            'lastname' => preg_replace('#<(.*?)>#', '', $array['lastname']),
+            'gender' => preg_replace('#<(.*?)>#', '', $array['gender']),
+            'timezone' => preg_replace('#<(.*?)>#', '', $array['timezone']),
+            'email' => preg_replace('#<(.*?)>#', '', $array['email']),
+            'username' => preg_replace('#<(.*?)>#', '', $array['username']),
             'updated_at' => date('Y-m-d H:i:s')
 
         );
@@ -143,6 +143,8 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
             ->joinLeft('account', 'account.user_id = sd.user_id', array('account.add_info'))
             ->where('sd.updated_at=?', $subQuery)
             ->where('user.id<>?', $userId);
+
+            if(Zend_Auth::getInstance()->getIdentity()->role == 1) $role = 1;
             if($role !== '0'){
                 $data  ->where('user.role=?', $role);
             }
