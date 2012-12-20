@@ -104,7 +104,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
     public function getUserInfo($user_id){
         $data = $this->select()
-            ->from('user', array('id', 'firstname', 'lastname', 'username', 'timezone'))
+            ->from('user', array('id', 'firstname', 'lastname', 'username', 'timezone', 'role'))
             ->where('id=?', (int)$user_id);
 
         return $data->query()->fetch();

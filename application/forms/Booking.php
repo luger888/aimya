@@ -15,20 +15,37 @@ class Application_Form_Booking extends Zend_Form
         $friends = array();
         foreach($friendsArray as $value){
             $friends[$value['id']] = $value['username'];
+            $friends[$value['role']] = $value['role'];
         }
 
         /*  BOOKING FORM */
         $this->setName('booking');
 
+        $role = new Zend_Form_Element_Radio('role');
+        $role ->setAttrib('class', 'radio')
+            ->setAttrib('id', 'teacher')
+            ->addFilters($this->basicFilters)
+            ->setSeparator('');
+        $role->addMultiOptions(array(
+
+                '0' => 'student',
+                '1' => 'teacher'
+
+            )
+        )
+            ->setValue('male');
+        # ->setDecorators($this->basicDecorators);
 
 
-        $recipiend_id = new Zend_Form_Element_Select('recipiend_id');
+        $recipiend_id = new Aimya_Form_Element_SelectAttribs('recipiend_id');
         $recipiend_id->setAttrib('id', 'recipiend_id')
             ->setAttrib('class', 't-165')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
+        $recipiend_id->addOption('0', 'Choose recipient',array());
         foreach ($friendsArray as  $value) {
-            $recipiend_id->addMultiOption($value['id'], $value['username']);
+
+            $recipiend_id->addOption($value['id'], $value['username'], array('class' => $value['role']));
         }
         $start_at = new Zend_Form_Element_Text('started_at');
         $start_at ->setAttrib('id', 'started_at')
@@ -92,7 +109,7 @@ class Application_Form_Booking extends Zend_Form
     }
 
 
-        $this->addElements(array($recipiend_id,  $start_at,  $focus_name, $rate, $duration, $video, $feedback, $notes, $info, $submit ));
+        $this->addElements(array($role, $recipiend_id,  $start_at,  $focus_name, $rate, $duration, $video, $feedback, $notes, $info, $submit ));
 
     }
 }
