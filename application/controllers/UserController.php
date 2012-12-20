@@ -3,7 +3,7 @@ class UserController extends Zend_Controller_Action
 {
     public function init()
     {
-        $this->_helper->layout->setLayout("layoutInside");
+        $this->_helper->layout->setLayout("layoutInner");
         $this->_helper->AjaxContext()
             ->addActionContext('registration','json')
             ->addActionContext('login','json')

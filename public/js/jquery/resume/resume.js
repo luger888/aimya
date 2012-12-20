@@ -10,8 +10,6 @@ function addResumeItem() {
 function saveResumeItem(tab) {
     var id = $(this).nextAll('input[type=hidden]:first').val();
     var dataObject = {};
-
-
     var resumeContent = $('#' + tab).val();
     var baseUrl = $('#current_url').val();
     dataObject[tab] = resumeContent;
@@ -81,7 +79,7 @@ function editResumeItem(e, tab) {
     experienceWrapper.children('.resumeItemBody').html(content);
     experienceWrapper.children('.resumeItemBody').children('.formRow').children('.resumeEditInput').val($.trim(resumeContent));
     experienceWrapper.children('.resumeItemBody').after('<div class = "uploadWrapper">' +
-        '<input id="file_upload" name="file_upload" type="file" multiple="true">' +
+        '<input id="file_upload" name="file_upload" type="file">' +
         '<input type="button" value="save" class="button-2 save floatRight" onclick=updateResumeItem(this,"' + tab + '");>' +
         '</div>'+
         '<div id="queue"></div>');
@@ -157,7 +155,7 @@ function uploadify() {
 
             },
             'onUploadComplete':function (file, data) {
-                //window.location.reload();
+                window.location.reload();
             }
         }
     )

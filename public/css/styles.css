@@ -1617,6 +1617,9 @@ input.button-2 {
 .resumeGeneral .delete {
     margin-left: 15px;
 }
+.resumeGeneral .save{
+    margin-left: 15px;
+}
 /*--- UPLOADIFIVE -----------------------------------------------------------------*/
 #queue{
     display: inline-block;
@@ -1631,4 +1634,46 @@ input.button-2 {
 }
 .uploadifive-queue-item .close{
 float:right;
+}
+
+/*----USER PROFILE ----------------------------------------------------------------------------------------------*/
+
+.infoBox ul.userInfo li{
+    display: block;
+    padding-left: 15px;
+    float:none !important;
+    line-height: 17px;
+}
+.infoBox ul.userInfo li.userName{
+    padding-left: 0;
+    padding-bottom:10px;
+    font:600 13px 'helvetica-light-rnormal';
+}
+.userInfo  .birthday{
+    background: url("../img/design/accountLayout/glyphicons/gift.png") no-repeat scroll 0 42% transparent;
+}
+
+.userInfo  .gender{
+    background: url("../img/design/accountLayout/glyphicons/gift.png") no-repeat scroll 0 42% transparent;
+}
+.userInfo  .education{
+    background: url("../img/design/accountLayout/glyphicons/university.png") no-repeat scroll 0 42% transparent;
+}
+.userInfo  .degree{
+    background: url("../img/design/accountLayout/glyphicons/degree.png") no-repeat scroll 0 42% transparent;
+}
+.userInfo .language{
+    background: url("../img/design/accountLayout/glyphicons/language.png") no-repeat scroll 0 42% transparent;
+}
+.userInfo .gender{
+    background: url("../img/design/accountLayout/glyphicons/female.png") no-repeat scroll 0 42% transparent;
+}
+.userInfo .address{
+    background: url("../img/design/accountLayout/glyphicons/address.png") no-repeat scroll 0 42% transparent;
+}
+.userInfo .mail{
+    background: url("../img/design/accountLayout/glyphicons/mail.png") no-repeat scroll 0 42% transparent;
+}
+.userInfo .phone{
+    background: url("../img/design/accountLayout/glyphicons/phone.png") no-repeat scroll 0 42% transparent;
 }

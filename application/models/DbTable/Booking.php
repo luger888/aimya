@@ -21,8 +21,7 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
             'video' => (int)$array['video'],
             'feedback' => (int)$array['feedback'],
             'notes' => (int)$array['notes'],
-            'sender_status' => 1,
-            'recipient_status' => 0,
+            'is_sender_teacher' =>(int)$array['is_sender_teacher'],
             'booking_status' => 0,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
@@ -64,7 +63,6 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
     {
 
         $data = array(
-            'recipient_status' => 1,
             'booking_status' => 1,
             'updated_at' => date('Y-m-d H:i:s')
         );
@@ -83,7 +81,7 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
 
         $data = $this->select()
             ->from($this->_name, array('id'=>'COUNT(*)'))
-            ->where('recipient_status=?' , 0)
+            ->where('booking_status=?' , 0)
             ->where('recipient_id=?', $userId);
 
         return $data->query()->fetch();
