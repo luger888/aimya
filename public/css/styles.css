@@ -1365,7 +1365,7 @@ input.button-2 {
 .messageTab .rightMessageBlock{
     float:right;
 }
-.messageTab  .messageButtons.trashBox{
+.messageTab  .messageButtons.trashBox span{
     float:right;
 }
 .sendMessageBox {
