@@ -288,7 +288,10 @@ jQuery(document).ready(function () {
             $('.isTeacher').css('display', 'none');
         }
     });
-
+    Date.prototype.addHours= function(h){
+        this.setHours(this.getHours()+h);
+        return this;
+    }
     pathName = $('#current_url').val();
     var date = new Date();
     var d = date.getDate();
@@ -305,7 +308,7 @@ jQuery(document).ready(function () {
         disableResizing:true,
         allDay:false,
         allDaySlot:false,
-        ignoreTimezone:false,
+        ignoreTimezone:true,
         header:{
             left:'title',
             center:'month, agendaDay',
@@ -345,7 +348,20 @@ jQuery(document).ready(function () {
 
 
                         var start = msg.booking[c].started_at;
+                        start= new Date(msg.booking[c].started_at);
 
+                        var sender_utc = parseFloat(msg.booking[c].creator_tz.replace(':',"."));
+                        var recipient_utc = parseFloat(msg.timezone.replace(':',"."));
+                        var utc = sender_utc - recipient_utc;
+//                        var time_zone = msg.booking[c].timezone - msg.booking[c].creator_tz;
+//                        var utc =  msg.booking[c].creator_tz.getTime() + ( msg.booking[c].creator_tz.getTimezoneOffset() * 60000);
+                        if (msg.booking[c].recipient_id == msg.user_id) {
+                            start = start.addHours(utc);
+                        } else {
+
+                        }
+
+                        console.log(sender_utc + '-' + recipient_utc + '=' +utc);
                         events.push({
                             title:msg.booking[c].focus_name,
                             start:start,
@@ -360,6 +376,8 @@ jQuery(document).ready(function () {
                             notes:msg.booking[c].notes,
                             sender_id:msg.booking[c].sender_id + "",
                             booking_id:msg.booking[c].id + "",
+                            timezone_recipient:msg.timezone,
+                            timezone_sender:msg.booking[c].creator_tz,
                             user_id:msg.id,
                             allDay:false,
                             color:eventColor,

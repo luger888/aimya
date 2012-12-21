@@ -15,6 +15,7 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
             'recipient_id' => (int)$array['recipient_id'],
             'started_at' => preg_replace('#<(.*?)>#', '',$array['started_at']),
             'focus_name' => preg_replace('#<(.*?)>#', '',$array['focus_name']),
+            'creator_tz' => preg_replace('#<(.*?)>#', '',$array['creator_tz']),
             'duration' => preg_replace('#<(.*?)>#', '',$array['duration']),
             'rate' => preg_replace('#<(.*?)>#', '',$array['rate']),
             'add_info' => preg_replace('#<(.*?)>#', '',$array['add_info']),
