@@ -1,6 +1,6 @@
 <?php $availableLesson = $this->availableLesson; ?>
 <?php echo $this->partial('partials/lesson.phtml')?>
-<div class="mainContainer userRelationsTab clearfix">
+<div class="mainContainer userRelationsTab lesson clearfix">
     <div class="shadowSeparator clearfix">
         <div class="shadowSeparatorBox clearfix">
 
@@ -28,26 +28,44 @@
                         <?php foreach($bookings as $booking): ?>
                             <?php //Zend_Debug::dump($booking)?>
                             <tr>
-                                <td>
+                                <td class ="username">
                                     <input type="hidden" id="booking_<?php echo $booking['booking']['id']?>" value="<?php echo $booking['booking']['id']?>">
                                     <?php echo $booking['userData']['firstname'] . ' ' . $booking['userData']['lastname']?>
                                 </td>
-                                <td><?php echo $booking['booking']['started_at']; ?></td>
-                                <td><?php echo $booking['booking']['focus_name']; ?></td>
-                                <td><?php echo $booking['booking']['video']; ?></td>
-                                <td><?php echo $booking['booking']['feedback']; ?></td>
-                                <td><?php echo $booking['booking']['notes']; ?></td>
+                                <td class ="startTime"><?php echo $booking['booking']['started_at']; ?></td>
+                                <td class ="focusName"><?php echo $booking['booking']['focus_name']; ?></td>
+                                <td class ="center">
+                                    <?php if($booking['booking']['video']){
+                                         echo '<span class ="checBoxGrey"></span>';
+                                }else{
+                                        echo '<span class ="checBoxGrey empty"></span>';
+                                } ?>
+                                </td>
+                                <td class ="center">
+                                    <?php if($booking['booking']['feedback']){
+                                    echo '<span class ="checBoxGrey"></span>';
+                                }else{
+                                    echo '<span class ="checBoxGrey empty"></span>';
+                                } ?>
+                                </td>
+                                <td class ="center">
+                                    <?php if($booking['booking']['notes']){
+                                    echo '<span class ="checBoxGrey"></span>';
+                                }else{
+                                    echo '<span class ="checBoxGrey empty"></span>';
+                                } ?>
+                                </td>
                                 <?php if($bookingTable->isTeacher($booking['booking']['id'], Zend_Auth::getInstance()->getIdentity()->id)): ?>
-                                    <td><input type="button" value="<?php echo $this->translate('Send'); ?>"></td>
+                                    <td class ="center"><input type="button" class = "button send"  value="<?php echo $this->translate('Send'); ?>"></td>
                                 <?php else: ?>
-                                    <td><input type="button" value="<?php echo $this->translate('Pay'); ?>"></td>
+                                    <td class ="center"><input type="button" class = "button pay" value="<?php echo $this->translate('Pay'); ?>"></td>
                                 <?php endif;?>
                                 <td>
                                     <form method="POST" id='start_session_<?php echo $booking['userData']['id'];?>' action="<?php echo $this->baseUrl() . '/lesson/setup/'?>">
                                         <input name="student_id" type="hidden" value="<?php echo $booking['userData']['id'];?>">
                                         <input name="booking_id" type="hidden" value="<?php echo $booking['booking']['id'];?>">
                                         <?php if($bookingTable->isTeacher($booking['booking']['id'], Zend_Auth::getInstance()->getIdentity()->id)): ?>
-                                            <a href="#" id="<?php echo $booking['userData']['id'];?>" onclick="jQuery('#start_session_<?php echo $booking['userData']['id'];?>').submit()">Start</a>
+                                            <a href="#" id="<?php echo $booking['userData']['id'];?>" onclick="jQuery('#start_session_<?php echo $booking['userData']['id'];?>').submit()"><span class ="button-2 play">Start</span></a>
                                         <?php else: ?>
                                             <?php echo "something"?>
                                         <?php endif; ?>

@@ -462,7 +462,16 @@ input.button-2 {
 .button-2.archived:hover {
     background-position: 0 -17px;
 }
+.button-2.play {
+    background: url(../images/icons/play.png) no-repeat 0 4px;
+}
 
+.button-2.play:hover {
+    background-position: 0 -19px;
+}
+.button-2.play.disable {
+    background-position: 0 -44px;
+}
 .disable{
     pointer-events: none;
     cursor: default;
@@ -1119,19 +1128,19 @@ input.button-2 {
 .userRelationsTab table thead tr td{
     padding: 7px;
 }
-.userRelationsTab  .button-2{
+.userRelationsTab.profile  .button-2{
     padding-right: 30px;
 }
 #block-confirm, #delete-confirm{
     display: none;
 }
 /*Availability td padding-right */
-.userRelationsTab table tr td:nth-child(1){padding-right: 52px; padding-left: 5px;}
-.userRelationsTab table tr td:nth-child(2){padding-right: 86px; padding-left: 5px;}
-.userRelationsTab table tr td:nth-child(3){padding-right: 98px; padding-left: 5px;}
-.userRelationsTab table tr td:nth-child(4){padding-right: 92px;  padding-left: 5px;}
-.userRelationsTab table tr td:nth-child(5){padding-right: 97px;}
-.userRelationsTab table tbody td:nth-child(5){  padding-left: 36px; padding-right: 0;}
+.userRelationsTab.profile table tr td:nth-child(1){padding-right: 52px; padding-left: 5px;}
+.userRelationsTab.profile table tr td:nth-child(2){padding-right: 86px; padding-left: 5px;}
+.userRelationsTab.profile table tr td:nth-child(3){padding-right: 98px; padding-left: 5px;}
+.userRelationsTab.profile table tr td:nth-child(4){padding-right: 92px;  padding-left: 5px;}
+.userRelationsTab.profile table tr td:nth-child(5){padding-right: 97px;}
+.userRelationsTab.profile table tbody td:nth-child(5){  padding-left: 36px; padding-right: 0;}
 /*---NOTIFICATIONS/CHANGE PASSWORD-----------------------------------------------------------------*/
 .notificationsTab label, .notificationsTab .passwordRecoveryBlock{
   font-family: 'helvetica-light-rnormal';
@@ -1676,4 +1685,37 @@ float:right;
 }
 .userInfo .phone{
     background: url("../img/design/accountLayout/glyphicons/phone.png") no-repeat scroll 0 42% transparent;
+}
+/********* LESSON *******************/
+.userRelationsTab.lesson tbody td{
+    padding-left: 4px;
+}
+.userRelationsTab.lesson td.username{
+    width:150px;
+}
+.userRelationsTab.lesson td.startTime{
+    width:104px;
+}
+.userRelationsTab.lesson td.focusName{
+    width:140px;
+}
+.center{
+    text-align:center;
+}
+.userRelationsTab.lesson .button.pay{
+    padding-left:15px;
+    padding-right:15px;
+}
+.userRelationsTab.lesson .button.send{
+    padding-left:12px;
+    padding-right:12px;
+}
+.checBoxGrey{
+    background: url(../images/elem/checkBoxGrey.png) no-repeat 0 5px;
+    display: inline-block;
+    height: 21px;
+    width: 17px;
+}
+.checBoxGrey.empty{
+    background-position: -16px 6px;
 }
