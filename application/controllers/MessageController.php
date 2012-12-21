@@ -125,9 +125,26 @@ class MessageController extends Zend_Controller_Action
         $this->view->messages = $messages;
     }
 
-    public function archiveAction()
+    public function archivedAction()
     {
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+        $this->_helper->layout()->getView()->headTitle('Archived Messages');
         //$this->_helper->layout()->disableLayout();
+        $messageTable = new Application_Model_DbTable_Message();
+        $messageActionsForm = new Application_Form_MessageActions();
+
+        $messages = $messageTable->getArchived($userId);
+
+        $activity = new Application_Model_DbTable_OnlineUsers();
+        $user = new Application_Model_DbTable_Users();
+
+        foreach ($messages as $index => $value){
+            $username = $user->getUser($value['sender_id']);
+            $messages[$index]['isActive'] = $activity->isOnline($value['sender_id']);//check if user online
+            $messages[$index]['username'] = $username['username'];//check if user online
+        }
+        $this->view->messageActions = $messageActionsForm;
+        $this->view->messages = $messages;
     }
     public function replyAction()
     {
