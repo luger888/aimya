@@ -1129,7 +1129,7 @@ input.button-2 {
     padding: 7px;
 }
 .userRelationsTab.profile  .button-2{
-    padding-right: 30px;
+    padding-right: 20px;
 }
 #block-confirm, #delete-confirm{
     display: none;
@@ -1718,4 +1718,197 @@ float:right;
 }
 .checBoxGrey.empty{
     background-position: -16px 6px;
+}
+
+/** ********************* user profile tab ***************************************************************/
+
+/*User profile*/
+.userProfileTab{
+    background: #ffffff;
+    width: 805px;
+    margin: 30px 5px 0;
+    padding: 20px 31px 0px;
+    box-shadow: 0 0 5px #e5e5e5;
+    -moz-box-shadow: 0 0 5px #e5e5e5; /* Firefox */
+    -webkit-box-shadow: 0 0 5px #e5e5e5; /* Safari, Chrome */
+    min-height: 450px;
+}
+.userProfileTab .addAccount{
+    background: url("../img/design/accountLayout/glyphicons/add.png") no-repeat scroll 0 52% transparent;
+    border: medium none;
+    color: #1D3300;
+    float: right;
+    font: 12px dosis-semibold-middle;
+    padding-left: 19px;
+    position: relative;
+    right: -13px;
+    text-decoration: none;
+    top: -35px;
+    width: 140px;
+}
+.userProfileTab .imageBlock{
+    float:left;
+    margin-left: 6px;
+    margin-right: 22px;
+}
+.userProfileTab ul{
+    margin-top:28px;
+    font: 12px helvetica;
+    min-height: 89px;
+}
+.userProfileTab ul li{
+    margin-bottom:-3px;
+}
+.userProfileTab .availability ul{
+    margin-top:28px;
+    font: 12px helvetica;
+    min-height: 89px;
+    margin-left:0;
+}
+.userProfileTab .availability ul li{
+    margin-bottom:-3px;
+    padding-left: 24px;
+    height: 33px;
+    padding-top: 8px;
+}
+.userProfileTab .availability ul li:nth-child(odd){
+    background-color: #FBFCFC;
+}
+.userProfileTab .firstSeparator{
+    background: url("../img/design/accountLayout/1page_middle_separator.png") no-repeat scroll 0 51% transparent;
+    height: 14px;
+    margin-bottom: 28px;
+    margin-top: 2px;
+    width: 800px;
+}
+
+.userProfileTab .services{
+    clear:both;
+}
+.userProfileTab .profileName{
+    position: relative;
+    top: 6px;
+    right: 1px;
+    font: 13px helvetica;
+
+}
+.userProfileTab .profileRole{
+    font: 11px helvetica;
+    right: 1px;
+    top: 9px;
+    position: relative;
+}
+
+.userProfileTab  .birthday{
+    background: url("../img/design/accountLayout/glyphicons/gift.png") no-repeat scroll 0 42% transparent;
+    display: inline-block;
+    padding-left: 15px;
+}
+
+.userProfileTab  .gender{
+    background: url("../img/design/accountLayout/glyphicons/gift.png") no-repeat scroll 0 42% transparent;
+    display: inline-block;
+    padding-left: 15px;
+}
+.userProfileTab  .education{
+    background: url("../img/design/accountLayout/glyphicons/university.png") no-repeat scroll 0 42% transparent;
+    display: inline-block;
+    padding-left: 15px;
+}
+.userProfileTab  .degree{
+    background: url("../img/design/accountLayout/glyphicons/degree.png") no-repeat scroll 0 42% transparent;
+    display: inline-block;
+    padding-left: 15px;
+}
+.userProfileTab .language{
+    background: url("../img/design/accountLayout/glyphicons/language.png") no-repeat scroll 0 42% transparent;
+    display: inline-block;
+    padding-left: 15px;
+}
+.userProfileTab .middleSeparator{
+    background: url('../img/design/accountLayout/middle_double_separator.png') no-repeat;
+    height: 33px;
+    width: 800px;
+    margin-top: 25px;
+    margin-bottom: 13px;
+
+}
+.userProfileTab .middleSeparatorSecond{
+    background: url('../img/design/accountLayout/middle_double_separator.png') no-repeat;
+    height: 33px;
+    width: 800px;
+    margin-top: 32px;
+    margin-bottom: 22px;
+}
+.userProfileTab .title{
+    color:#1d3300;
+    font:12px helvetica;
+}
+.userProfileTab .aboutBlock .aboutMe{
+    font:12px helvetica;
+    margin-top: 11px;
+
+}
+.userProfileTab .services .serviceItem{
+    background-color: #FBFCFC;
+    margin-top: 12px;
+    padding: 6px;
+}
+
+.userProfileTab .services .subCategory{
+    display: inline-block;
+    width:140px;
+    font:12px arial;
+}
+.userProfileTab .services .rate{
+    font:12px helvetica;
+}
+.userProfileTab .services .mainCategory{
+    display: inline-block;
+    font: 700 13px arial;
+    margin-left: 16px;
+    width: 132px;
+}
+.userProfileTab .services .serviceInfo{
+    font:12px helvetica;
+    margin: 12px 0 33px 21px;
+
+}
+
+.userProfileTab .availability{
+    margin-top: 36px;
+}
+
+.userProfileTab .availability .day{
+    display: inline-block;
+    margin-bottom: 21px;
+    width: 168px;
+}
+.userProfileTab .availability .from{
+    display: inline-block;
+    width: 50px;
+    text-align: center;
+    margin-right: 82px;
+}
+.userProfileTab .availability .to{
+    display: inline-block;
+    margin-left: 74px;
+    width: 50px;
+    text-align: center;
+}
+.userProfileTab .availability .dayWrap{
+    background-color: #fbfcfc;
+}
+.userProfileTab .availability .timezone{
+    float:right;
+    font:11px arial;
+    position: relative;
+    right: 29px;
+}
+.userProfileTab  .lastSeparator{
+    background: url("../img/design/accountLayout/2page_middle_separator.png") no-repeat scroll 0 0 transparent;
+    height: 33px;
+    margin-bottom: 25px;
+    margin-top: 30px;
+    width: 800px;
 }

@@ -9,7 +9,6 @@ if ($this->userData['role'] == '1') {
     $role = 'Unknown';
 }
 ?>
-<div class="mainContainer clearfix">
     <div class="userProfileTab">
         <div class="firstSeparator"></div>
 
@@ -97,7 +96,7 @@ if ($this->userData['role'] == '1') {
         </div>
         <!--AVAILABILITY BLOCK -->
         <?php if ($this->availability): ?>
-        <div class="availability">
+        <div class="availability clearfix">
             <span class="title">AVAILABLE:</span>
 
             <div class="timezone">Time Zone: <?php echo $this->userData['timezone']?> UTC</div>
@@ -134,4 +133,4 @@ if ($this->userData['role'] == '1') {
 
     </div>
 
-</div>
+
