@@ -28,6 +28,7 @@ class BookingController extends Zend_Controller_Action
     public function addAction() {
         $identity = Zend_Auth::getInstance()->getIdentity();
         $userDbTable = new Application_Model_DbTable_Users();
+        $userGmt = $userDbTable->getTimeZone($identity->id);
         if ($this->getRequest()->isPost()) {
             if($this->getRequest()->getParam('focus_name')){
                 $bookingDbTable = new Application_Model_DbTable_Booking();
