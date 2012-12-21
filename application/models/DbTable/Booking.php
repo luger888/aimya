@@ -87,11 +87,11 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
         return $data->query()->fetch();
     }
 
-    public function isTeacher($lessonId, $userId)
+    public function isTeacher($bookingId, $userId)
     {
         $data = $this->select()
             ->from($this->_name)
-            ->where($this->getAdapter()->quoteInto('id=?', (int)$lessonId))
+            ->where($this->getAdapter()->quoteInto('id=?', (int)$bookingId))
             ->where($this->getAdapter()->quoteInto('sender_id=?', (int)$userId))
             ->where($this->getAdapter()->quoteInto('is_sender_teacher=?', 1));
 
@@ -116,24 +116,51 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
         $bookings = $bookingData->query()->fetchAll();
 
         $results = array();
+        $iterator = 0;
         foreach($bookings as $result) {
-            $results['booking'] = $result;
+            $results[$iterator]['booking'] = $result;
             if($result['sender_id'] == $userId) {
                 $userData = '';
                 $userData = $this->getAdapter()->select()
-                    ->from(array('user'), array('user.firstname', 'user.lastname', 'user.username', 'user.role'))
-                    ->where($this->getAdapter()->quoteInto('id=?' , (int)$result['sender_id']));
-                    $results['userData'] = $userData->query()->fetch();
+                    ->from(array('user'), array('user.firstname', 'user.lastname', 'user.username', 'user.role', 'user.id'))
+                    ->where($this->getAdapter()->quoteInto('id=?' , (int)$result['recipient_id']));
+                    $results[$iterator]['userData'] = $userData->query()->fetch();
             } else {
                 $userData = '';
                 $userData = $this->getAdapter()->select()
-                    ->from('user', array('firstname', 'lastname', 'username', 'role'))
-                    ->where($this->getAdapter()->quoteInto('id=?' , (int)$result['recipient_id']));
-                $results['userData'] = $userData->query()->fetch();
+                    ->from('user', array('firstname', 'lastname', 'username', 'role', 'user.id'))
+                    ->where($this->getAdapter()->quoteInto('id=?' , (int)$result['sender_id']));
+                $results[$iterator]['userData'] = $userData->query()->fetch();
             }
+            $iterator++;
         }
 
         return $results;
+    }
+
+    public function changeStatus($bookingId)
+    {
+
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+        $where   = array(
+            $this->getAdapter()->quoteInto('id=?', (int)$bookingId),
+            '1' => "(sender_id={$userId} OR recipient_id={$userId})"
+        );
+
+        //Zend_Debug::dump($where);
+        $data = array(
+            'booking_status'=> 2,
+            'updated_at' => date('Y-m-d H:m:s')
+        );
+
+        $result = $this->update($data, $where);
+
+        if($result) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
 }

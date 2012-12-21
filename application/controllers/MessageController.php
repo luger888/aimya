@@ -86,7 +86,7 @@ class MessageController extends Zend_Controller_Action
     public function sentAction()
     {
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
-        $this->_helper->layout()->getView()->headTitle('Inbox Messages');
+        $this->_helper->layout()->getView()->headTitle('Sent Messages');
         //$this->_helper->layout()->disableLayout();
         $messageTable = new Application_Model_DbTable_Message();
         $messageActionsForm = new Application_Form_MessageActions();
@@ -113,6 +113,14 @@ class MessageController extends Zend_Controller_Action
 
         $messages = $messageTable->getTrash($userId);
 
+        $activity = new Application_Model_DbTable_OnlineUsers();
+        $user = new Application_Model_DbTable_Users();
+
+        foreach ($messages as $index => $value){
+            $username = $user->getUser($value['sender_id']);
+            $messages[$index]['isActive'] = $activity->isOnline($value['sender_id']);//check if user online
+            $messages[$index]['username'] = $username['username'];//check if user online
+        }
         $this->view->messageActions = $messageActionsForm;
         $this->view->messages = $messages;
     }
