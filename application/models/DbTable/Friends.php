@@ -102,6 +102,13 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
                     'subject' => "Add to Friend Request",
                 );
                 $messageTable->sendMessage($data);
+
+                if ($status) {
+                    return 'friend';
+                } else {
+                    return false;
+                }
+
             } else {
                 $status = false;
             }
@@ -125,14 +132,12 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
                         'subject' => "Add to Friend Request",
                     );
             $messageTable->sendMessage($data);
+            if ($status) {
+                return 'request';
+            } else {
+                return false;
+            }
         }
-
-        if ($status) {
-            return true;
-        } else {
-            return false;
-        }
-
     }
 
     public function isInList($friendId) {
