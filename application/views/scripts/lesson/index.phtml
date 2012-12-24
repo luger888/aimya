@@ -55,8 +55,13 @@
                                     echo '<span class ="checBoxGrey empty"></span>';
                                 } ?>
                                 </td>
-                                <?php if($bookingTable->isTeacher($booking['booking']['id'], Zend_Auth::getInstance()->getIdentity()->id)): ?>
-                                    <td class ="center"><input type="button" class = "button send"  value="<?php echo $this->translate('Send'); ?>"></td>
+                                <?php $user_id = $booking['userData']['id'];
+                                if($bookingTable->isTeacher($booking['booking']['id'], Zend_Auth::getInstance()->getIdentity()->id)): ?>
+                                    <?php if($booking['booking']['payment_status'] == '0'):?>
+                                    <td class ="center"><input type="button" class = "button send"  onclick = "payRequest(<?php echo $user_id;?>,<?php echo $booking['booking']['id'];?>, this);" value = <?php echo $this->translate('Send'); ?>></td>
+                                        <?php else: ?>
+                                        <td class ="center"></td>
+                                        <?php endif;?>
                                 <?php else: ?>
                                     <td class ="center"><input type="button" class = "button pay" value="<?php echo $this->translate('Pay'); ?>"></td>
                                 <?php endif;?>
