@@ -98,10 +98,20 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
 
         $result = $data->query()->fetch();
 
-        if($result) {
-            return true;
+        if(!$result) {
+            $query = $this->select()
+                ->from($this->_name)
+                ->where($this->getAdapter()->quoteInto('id=?', (int)$bookingId))
+                ->where($this->getAdapter()->quoteInto('recipient_id=?', (int)$userId))
+                ->where($this->getAdapter()->quoteInto('is_sender_teacher=?', 0));
+            $response = $query->query()->fetch();
+            if($response) {
+                return true;
+            } else {
+                return false;
+            }
         } else {
-            return false;
+            return true;
         }
 
     }
