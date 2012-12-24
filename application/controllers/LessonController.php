@@ -25,7 +25,7 @@ class LessonController extends Zend_Controller_Action
 
         $this->_helper->layout()->getView()->headTitle('Lessons');
 
-        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+        $this->view->userId = $userId = Zend_Auth::getInstance()->getIdentity()->id;
         $lessonTable = new Application_Model_DbTable_Lesson();
 
         $lesson = $lessonTable->checkAvailableLesson($userId);
