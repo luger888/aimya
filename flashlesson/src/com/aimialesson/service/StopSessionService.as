@@ -4,6 +4,7 @@ package com.aimialesson.service
 	import com.aimialesson.events.ServiceEvent;
 	import com.aimialesson.model.Actions;
 	import com.aimialesson.model.User;
+	import com.aimialesson.model.Main;
 	import flash.events.IEventDispatcher;
 	
 	import mx.collections.ArrayCollection;
@@ -16,6 +17,7 @@ package com.aimialesson.service
 			super(target);
 			callUrl = Actions.getInstance().stopSessionUrl;
 			params.lesson_id = User.getInstance().lesson_id;
+			params.booking_id = Main.getInstance().booking_id;
 		}
 		
 		public function addParams ( value : Object) : void {

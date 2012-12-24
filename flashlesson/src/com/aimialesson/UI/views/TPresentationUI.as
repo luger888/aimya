@@ -5,10 +5,13 @@ package com.aimialesson.UI.views
 	import com.aimialesson.model.Main;
 	import com.aimialesson.model.Presentation;
 	
+	import mx.core.UIComponent;
 	import mx.graphics.BitmapScaleMode;
 	
+	import spark.components.Group;
 	import spark.components.supportClasses.SkinnableComponent;
 	import spark.primitives.BitmapImage;
+	import spark.primitives.Rect;
 	
 	[Event (name="moveToLeft", type="com.aimialesson.events.PresentationEvent")]
 	[Event (name="moveToRight", type="com.aimialesson.events.PresentationEvent")]
@@ -20,15 +23,18 @@ package com.aimialesson.UI.views
 		[SkinPart (required="false")]
 		public var upload:UploadUI
 		[SkinPart (required="false")]
-		public var presentationBG:BitmapImage;
+		public var group:Group;
+		[SkinPart (required="false")]
+		public var rectBG:Rect;
+		
 		//public var presentationBG:PresentationBG;
 		[Bindable]
 		public var prWidth:int;
 		[Bindable]
 		public var prHeight:int;
 		
-		private var presentationTrueWidth:int;
-		private var presentationTrueHeight:int;
+		public static const PRESENTATION_TRUE_WIDTH:int = 634;
+		public static const PRESENTATION_TRUE_HEIGHT:int = 573;
 		
 		public function TPresentationUI()
 		{
@@ -44,36 +50,53 @@ package com.aimialesson.UI.views
 				presentation.invalidateDisplayList();
 			} else if ( instance == upload ) {
 				upload.addEventListener( PresentationEvent.PRESENTATION_UPLOADED, onPresentationEvent );
-			} else if ( instance == presentationBG ) {
 			}
 		}
 		
 		override protected function partRemoved ( partName : String, instance : Object) : void {
 			
 		}
+		
+		[Bindable]
+		public function set wScale ( value : Number ) : void {
+			
+		}
+		
+		public function get wScale () : Number {
+			return PRESENTATION_TRUE_WIDTH / PRESENTATION_TRUE_HEIGHT;
+		}
+		
+		
+		
+		[Bindable]
+		public function set hScale ( value : Number ) : void {
+			
+		}
+		
+		public function get hScale () : Number {
+			return PRESENTATION_TRUE_HEIGHT / PRESENTATION_TRUE_WIDTH;
+		}
+		
 		[Bindable]
 		public var bgWidth:Number;
 		[Bindable]
 		public var bgHeight:Number;
 		override protected function updateDisplayList ( unscaledWidth : Number, unscaledHeight : Number ) : void {
+			if (!(this.parent as UIComponent).percentWidth && !(this.parent as UIComponent).percentHeight){
+				//this.width = PRESENTATION_TRUE_WIDTH;
+				//this.height = PRESENTATION_TRUE_HEIGHT;
+			}
 			super.updateDisplayList(unscaledWidth, unscaledHeight);
-			if (!presentationBG) return;
-			if (unscaledHeight / unscaledWidth > presentationBG.sourceHeight / presentationBG.sourceWidth){
-				presentationBG.percentWidth = 100;
-				presentationBG.height = presentationBG.sourceHeight * ( unscaledWidth / presentationBG.sourceWidth );
+			if (unscaledHeight / unscaledWidth > PRESENTATION_TRUE_HEIGHT / PRESENTATION_TRUE_WIDTH){
+				//group.percentWidth = 100;
+				//group.height = group.width * hScale;
 			} else {
-				presentationBG.percentHeight = 100;
-				presentationBG.width = presentationBG.sourceWidth * ( unscaledHeight / presentationBG.sourceHeight );
+				//group.percentHeight = 100;
+				//group.width = group.height * wScale;
 			}
 		}
 		
 		public function initSize () : void {
-			if (presentationBG){
-				presentationBG.percentHeight = 0;
-				presentationBG.percentWidth = 0;
-				presentationBG.height = 0;
-				presentationBG.width = 0;
-			}
 			if (upload) upload.initSize();
 		}
 		

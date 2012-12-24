@@ -60,6 +60,12 @@ package com.aimialesson.service
 		protected function aimiaService_resultHandler ( event : ResultEvent ) : void
 		{
 			debug ("aimiaService_resultHandler:");
+			debug (event.result as String);
+			if (!event.result){
+				debug ("wrong format!");
+				timer.removeEventListener(TimerEvent.TIMER,aimiaService.send);
+				return;
+			} 
 			var result:Object = JSON.parse(event.result as String);
 			debug (result.answer);
 			

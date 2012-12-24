@@ -39,13 +39,17 @@ package com.aimialesson.controllers
 				debug (parameters.domain);
 			}
 			if (parameters.lang){
-				Texts.getInstance().lang = parameters.lang;
+				Texts.getInstance().lang = String(parameters.lang).substring(1);
 				Actions.getInstance().domain_add = parameters.lang;
 				debug (parameters.lang);
 			}
 			if (parameters.topic){
 				Main.getInstance().topic = parameters.topic;
 				debug (parameters.topic);
+			}
+			if (parameters.booking_id){
+				Main.getInstance().booking_id = parameters.booking_id;
+				debug (parameters.booking_id);
 			}
 		}
 		

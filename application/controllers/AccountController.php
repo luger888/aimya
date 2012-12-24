@@ -260,10 +260,17 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                             <div class='featureItem clearfix'>
                                 <div class='imageBlock boxShadow'><img src='" . $avatarPath . "'></div>
                                 <div class='featuredButtonsTop clearfix'>
-                                    <a class ='button-2 view viewProfile' href='" . Zend_Controller_Front::getInstance()->getBaseUrl() . '/user/' . $person['id'] . "'>" . $this->view->translate('VIEW PROFILE') . "</a>" .
-
-                                    "<input type='hidden' value='" . $person['id']. "'>
-
+                                    <a class ='button-2 view viewProfile' href='" . Zend_Controller_Front::getInstance()->getBaseUrl() . '/user/' . $person['id'] . "'>" . $this->view->translate('VIEW PROFILE') . "</a>";
+                                    if(Zend_Auth::getInstance()->getIdentity()->id != $person['id']){
+                                        if($isFriend){
+                                            $featuredHtml .= "<a class ='sendMessage' onclick='sendMessage(" . $person['id'] . ", this);' href='javascript:void(1)'>" . $this->view->translate('SEND MESSAGE') . "</a>";
+                                        } elseif($isPending){
+                                            $featuredHtml .= "<span class ='request_sent'>" . $this->view->translate('REQUEST SENT') . "</span>";
+                                        }else{
+                                            $featuredHtml .= "<a class ='button-2 add addAccount' onclick='addToFriend(" . $person['id'] . ", this);' href='javascript:void(1)'>" . $this->view->translate('ADD TO MY ACCOUNT') . "</a>";
+                                        }
+                                    }
+                                    $featuredHtml .= "<input type='hidden' value='" . $person['id']. "'>
                                 </div>
                                 <ul class='featuredInfo'>
                                     <li class='clearfix'>
@@ -322,8 +329,12 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                 $this->view->featuredHtml = $featuredHtml;
 
             } else {
+                $featuredList = $dbUserModel->getLatestFeatured($userType, $lessonCat);
+                $featuredCount = $dbUserModel->getFeaturedCount($userType, $lessonCat);
+
                 $this->view->filters = new Application_Form_FeaturesFilter();
-                $this->view->featured = $dbUserModel->getLatestFeatured($userType, $lessonCat);
+                $this->view->featured = $featuredList;
+                $this->view->featuredCount = $featuredCount;
             }
 
 

@@ -8,8 +8,8 @@
 	</fx:Declarations>	
 	<fx:Script>
 		<![CDATA[
-			import com.aimialesson.UI.skins.elements.StartSessionBtnSkin;
-			import com.aimialesson.UI.skins.elements.EnterBtnSkin;
+			import com.aimialesson.UI.skins.elements.buttons.StartSessionBtnSkin;
+			import com.aimialesson.UI.skins.elements.buttons.EnterBtnSkin;
 			import com.aimialesson.model.User;
 			import com.aimialesson.model.Texts;
 		]]>

@@ -42,5 +42,5 @@
 	
 	
 	
-	<s:Button id="enterBtn" skinClass="com.aimialesson.UI.skins.elements.EnterBtnSkin"/>
+	<s:Button id="enterBtn" skinClass="com.aimialesson.UI.skins.elements.buttons.EnterBtnSkin"/>
 </s:Group>

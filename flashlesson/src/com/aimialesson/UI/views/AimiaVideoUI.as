@@ -2,6 +2,7 @@ package com.aimialesson.UI.views
 {
 	import com.aimialesson.UI.views.elements.Lamp;
 	import com.aimialesson.events.MediaEvent;
+	import com.aimialesson.model.Main;
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -36,20 +37,23 @@ package com.aimialesson.UI.views
 		public var unMuteCamBtn:Button;
 
 		
-		public const VIDEO_CHAT_WINDOW_HEIGHT:int = 105;
-		public const VIDEO_CHAT_WINDOW_WIDTH:int = 140;
+		public const VIDEO_CHAT_WINDOW_HEIGHT_MIN_MODE:int = 105;
+		public const VIDEO_CHAT_WINDOW_WIDTH_MIN_MODE:int = 140;
+		public const VIDEO_CHAT_WINDOW_HEIGHT_MAX_MODE:int = 120;//150;//160;
+		public const VIDEO_CHAT_WINDOW_WIDTH_MAX_MODE:int = 160;//200;//214;
 
 		private var _video:Video;
 		
 		public function AimiaVideoUI()
 		{
 			super();
+			Main.getInstance().addEventListener(Main.FS_MODE_CHANGED, onFSModeChanged);
 		}
 		
 		override protected function partAdded ( partName : String, instance : Object) : void
 		{
 			if ( instance == videoContainter ) {
-				_video = new Video(VIDEO_CHAT_WINDOW_WIDTH, VIDEO_CHAT_WINDOW_HEIGHT);
+				_video = new Video(videoWidth, videoHeight);
 				_video.scaleX = -1;
 				_video.x = _video.width;
 				videoContainter.addChild(_video);
@@ -123,6 +127,48 @@ package com.aimialesson.UI.views
 			return _video;
 		}
 		
+		[Bindable(Event="videoWidthChange")]
+		public function set videoWidth ( value : int ) : void {
+		}
+		
+		public function get videoWidth ( ) : int {
+			var w:int;
+			if (Main.getInstance().fsMode){
+				w = VIDEO_CHAT_WINDOW_WIDTH_MAX_MODE;
+			} else {
+				w = VIDEO_CHAT_WINDOW_WIDTH_MIN_MODE;
+			}
+			return w;
+		}
+		
+		[Bindable(Event="videoHeightChange")]
+		public function set videoHeight ( value : int ) : void {
+		}
+		
+		public function get videoHeight ( ) : int {
+			var h:int;
+			if (Main.getInstance().fsMode){
+				h = VIDEO_CHAT_WINDOW_HEIGHT_MAX_MODE;
+			} else {
+				h = VIDEO_CHAT_WINDOW_HEIGHT_MIN_MODE;
+			}
+			return h;
+		}
+		
+		[Bindable(Event="videoScaleXChange")]
+		public function set videoScaleX ( value : Number ) : void {
+		}
+		
+		public function get videoScaleX ( ) : Number {
+			var sX:Number;
+			if (Main.getInstance().fsMode){
+				sX = VIDEO_CHAT_WINDOW_WIDTH_MAX_MODE / VIDEO_CHAT_WINDOW_WIDTH_MIN_MODE;
+			} else {
+				sX = 1;
+			}
+			return sX;
+		}
+		
 		private function onBtnClick ( event : MouseEvent ) : void {
 			switch (event.target) {
 				case muteMicBtn		:	
@@ -132,6 +178,18 @@ package com.aimialesson.UI.views
 				case muteCamBtn		:	this.dispatchEvent( new MediaEvent ( MediaEvent.CAM_PAUSE_TOGGLE ) );
 										break;
 			}
+		}
+		
+		private function onFSModeChanged ( event : Event ) : void {
+
+			_video.height = videoHeight;
+			_video.width = videoWidth;
+			_video.scaleX = -videoScaleX;
+			_video.x = _video.width;
+			
+			dispatchEvent( new Event ("videoHeightChange"));
+			dispatchEvent( new Event ("videoWidthChange"));
+			dispatchEvent( new Event ("videoScaleXChange"));
 		}
 	}
 }

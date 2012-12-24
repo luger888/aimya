@@ -5,9 +5,9 @@ package com.aimialesson.model
 		
 		private static var instance:Actions;
 		
-		//public var domain:String = "http://aimya.svitla.com";
-		public var domain:String = "";
-		public var domain_add:String = "";
+		public var domain:String = "http://aimya.svitla.com";
+		//public var domain:String = "";
+		public var domain_add:String = "/en";
 		
 		private const FILE_UPLOAD_URL:String = "/lesson/upload/";//"/test/upload.php";
 		private const PRESENTATION_IMAGES_URL:String = "/lesson/files/";
@@ -30,7 +30,7 @@ package com.aimialesson.model
 		}
 		
 		public function get urlbase ( ) : String {
-			return this.domain + "/" + this.domain_add;
+			return this.domain + this.domain_add;
 		}
 		
 		public function get fileUploadUrl () : String {

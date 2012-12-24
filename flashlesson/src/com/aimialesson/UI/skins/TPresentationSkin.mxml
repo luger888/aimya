@@ -8,44 +8,25 @@
 	</fx:Metadata>
 	<fx:Script>
 		<![CDATA[
-			import com.aimialesson.UI.skins.elements.PresentationContainerSkin;
 			import com.aimialesson.model.Main;
-			import com.aimialesson.model.Presentation;
+			import com.aimialesson.model.Presentation;			
 			
-			import mx.events.FlexEvent;
-
-			
-			/*public function get presantationBG () : BitmapImage {
-				if (Main.getInstance().fsMode){
-					return presantationBGFS;
-				} else {
-					return presantationBGnotFS;
-				}
-			}*/
-			
-/*			private function changeLayout ( event : Event = null ) : void {
-				if (Main.getInstance().fsMode){
-					this.currentState = "fullScreen";
-				} else {
-					this.currentState = "notFullScreen";
-				}
-			}
-			
-			protected function skin1_creationCompleteHandler(event:FlexEvent):void
-			{
-				Main.getInstance().addEventListener(Main.FS_MODE_CHANGED, changeLayout);
-			}*/
-
 		]]>
 	</fx:Script>
-		<!--s:SkinnableContainer id="cont" skinClass="com.aimialesson.UI.skins.elements.PresentationContainerSkin" width="100%" height="100%"-->
-		<s:Group width="100%" height="100%">
-			<s:BitmapImage id="presentationBG" source="@Embed('flashassets/presentation_background.png')" horizontalCenter="0" verticalCenter="0"/>
-			<views:PresentationUI id="presentation"  visible="{Presentation.getInstance().loaded}" includeInLayout="{Presentation.getInstance().loaded}" x="{presentationBG.x}" y="{presentationBG.y}"  width="{presentationBG.width}" height="{presentationBG.height}"/>
-			<views:UploadUI id="upload"   x="{presentationBG.x + 10}" y="{presentationBG.y + 10 }" width="{presentationBG.width - 20}" height="{presentationBG.height - 20}"/>
-		</s:Group>	
-			
-		<!--/s:SkinnableContainer--> 
-										  
-		<!--elements:PresentationBG id="presentationBG" width="100%" height="100%" /-->
+		
+		<s:Group id="group" width="{group.height*hostComponent.wScale}" height="100%" >
+			<!--s:BitmapImage id="presentationBG" source="@Embed('flashassets/presentation_background.png')" horizontalCenter="0" verticalCenter="0"/-->
+			<s:RectangularDropShadow id="dropShadow"
+									 alpha="0.21" distance="0"  blRadius="6"
+									 angle="120" color="#000101" blendMode="multiply"
+									 left="0" top="0" right="0" bottom="0" />
+			<s:Rect id="rectBG"
+					left="1" right="1" top="1" bottom="1" >
+				<s:fill>
+					<s:SolidColor id="bgFill" color="0xFFFFFF" />
+				</s:fill>
+			</s:Rect>
+			<views:PresentationUI id="presentation"  visible="{Presentation.getInstance().loaded}" includeInLayout="{Presentation.getInstance().loaded}" x="{rectBG.x}" y="{rectBG.y}"  width="{rectBG.width}" height="{rectBG.height}"/>
+			<views:UploadUI id="upload"   x="{rectBG.x + 5}" y="{rectBG.y + 5 }" width="{rectBG.width - 10}" height="{rectBG.height - 10}"/>
+		</s:Group>
 </s:Skin>

@@ -1,6 +1,5 @@
 package com.aimialesson.controllers
 {
-	import com.aimialesson.UI.views.MainUI;
 	import com.aimialesson.events.*;
 	import com.aimialesson.model.Main;
 	import com.aimialesson.model.Notes;
@@ -22,12 +21,11 @@ package com.aimialesson.controllers
 		private var recorderController:RecorderController;
 		private var userController:UserController;
 		private var textsController:TextsController;
-		private var mainUI:MainUI;
 		public function MainController()
 		{
 		}
 		
-		public function init ( mainUI : MainUI, parameters : Object ) : void {
+		public function init ( parameters : Object ) : void {
 			debug("MainController:init");
 			mediaController = new MediaController();
 			mediaController.setParameters(parameters);
@@ -36,14 +34,14 @@ package com.aimialesson.controllers
 			userController = new UserController();
 			userController.setParameters(parameters);
 			presentationController = new PresentationController();
+			textsController = new TextsController();
+			textsController.addEventListener(AppEvent.LOAD_TEXTS_COMPLETE, loadTextsHandler);
+			textsController.loadXML();
 			soController = new SharedObjectController();
 			soController.addEventListener(SharedObjectEvent.SHARED_PRESENTATION_UPLOADED, onSharedObjectEvent);
 			soController.addEventListener(SharedObjectEvent.LESSON_IS_FINISHED, onSharedObjectEvent);
 			soController.initSO();
-			textsController = new TextsController();
-			textsController.addEventListener(AppEvent.LOAD_TEXTS_COMPLETE, loadTextsHandler);
-			textsController.loadXML();
-			this.mainUI = mainUI;
+			//this.mainUI = mainUI;
 			/*recorderController = new RecorderController();
 			recorderController.init(mainUI);
 			recorderController.startTransferring();*/
@@ -138,10 +136,17 @@ package com.aimialesson.controllers
 			//streamController.addEventListener(AppEvent.MY_STREAM_INIT_COMPLETE, onMyStreamInitComplete);
 			streamController.initMyNetStream();
 			streamController.initPartnerNetStream();
+			//soController.initSO();
 			Main.getInstance().connected = true;
 			initCompleteCheck();
-			
 		}
+		
+/*		public function initSO():void {
+			soController = new SharedObjectController();
+			soController.addEventListener(SharedObjectEvent.SHARED_PRESENTATION_UPLOADED, onSharedObjectEvent);
+			soController.addEventListener(SharedObjectEvent.LESSON_IS_FINISHED, onSharedObjectEvent);
+			soController.initSO();
+		}*/
 		
 		private function loadTextsHandler ( event : AppEvent ) : void {
 			Main.getInstance().texts_loaded = true;
@@ -149,7 +154,8 @@ package com.aimialesson.controllers
 		}
 		
 		private function initCompleteCheck () : void {
-			if (Main.getInstance().texts_loaded == true && Main.getInstance().connected == true){
+			if (Main.getInstance().texts_loaded == true && Main.getInstance().connected == true)
+			{
 				this.dispatchEvent( new AppEvent ( AppEvent.INIT_COMPLETE ) );
 			}
 		}
