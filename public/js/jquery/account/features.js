@@ -17,41 +17,6 @@ $(document).ready(function () {
     });
     /*  END -- FILTER SYSTEM    */
 
-    $('.featuresTab .addAccount').click(function () {
-        var id = $(this).nextAll('input[type=hidden]:first').val();//id of service
-
-        $.post(
-
-            baseUrl + "/friends/send/0/controller%3D%3Efriends/1/action%3D%3Esend", {
-
-                "friend_id": id
-
-            },
-
-            function (response) {
-
-                if(response.alertFlash){
-                    $('.alertBlock .alert').remove();
-
-
-                    $('.alertBlock').append('<div class="alert"><div class = "flash-warning">Warning!</div>'+response.alertFlash+'<button type="button" class="close" data-dismiss="alert"></button></div>');
-                    $('html, body').animate({scrollTop:0}, 'fast');
-
-
-
-
-                }else if(response.successFlash){
-                    $('.alertBlock .alert').remove();
-                    $('.modal').css('visibility', 'visible');
-                    $('.alertBlock').append('<div class="success alert"><div class = "flash-success">Success!</div>'+response.successFlash+'<button type="button" class="close" data-dismiss="alert"></button></div>');
-                    $('.modal').fadeIn(1000).delay(800).fadeOut(1000);
-                }
-
-            })
-
-
-    });
-
     jQuery.fn.shorten = function(settings) {
         var config = {
             showChars : 100,
@@ -111,7 +76,10 @@ $(document).ready(function () {
                 var viewMorButton = $('.feauteresButtons');
                 $('.feauteresButtons').remove();
                 $('.messageContent').append(result.featuredHtml);
-                $('.messageContent').append(viewMorButton);
+                totalCount = $('.shadowSeparator').length + viewMorButton.children('.shadowSeparator').length;
+                if(totalCount != $('#featured_count').val() ) {
+                    $('.messageContent').append(viewMorButton);
+                }
                 jQuery('.loadingIcon').remove();
             }
         });
@@ -119,3 +87,53 @@ $(document).ready(function () {
     });
 
 });
+
+function addToFriend(id, obj) {
+    element = $(obj);
+    var baseUrl = $('#current_url').val();
+    jQuery("body").append('<div class="loadingIcon"></div>');
+    $.post(
+
+        baseUrl + "/friends/send/0/controller%3D%3Efriends/1/action%3D%3Esend", {
+
+            "friend_id": id
+
+        },
+
+        function (response) {
+            if(response.alertFlash){
+                $('.alertBlock .alert').remove();
+
+
+                $('.alertBlock').append('<div class="alert"><div class = "flash-warning">Warning!</div>'+response.alertFlash+'<button type="button" class="close" data-dismiss="alert"></button></div>');
+                $('html, body').animate({scrollTop:0}, 'fast');
+
+
+
+
+            }else if(response.successFlash){
+                $('.alertBlock .alert').remove();
+                $('.modal').css('visibility', 'visible');
+                $('.alertBlock').append('<div class="success alert"><div class = "flash-success">Success!</div>'+response.successFlash+'<button type="button" class="close" data-dismiss="alert"></button></div>');
+                $('.modal').fadeIn(1000).delay(800).fadeOut(1000);
+                if(response.result == 'request') {
+                    element.parent().append('<span class="request_sent">REQUEST SENT</span>');
+                    element.remove();
+                } else if(response.result == 'friend') {
+                    element.parent().append('<a class="sendMessage" href="javascript:void(1)" onclick="sendMessage(' + id + ')">SEND MESSAGE</a>');
+                    element.remove();
+                }
+                jQuery('.loadingIcon').remove();
+            }
+
+        })
+
+
+};
+
+function sendMessage(id, element) {
+    var baseUrl = $('#current_url').val();
+
+    alert('in development');
+    return false;
+}

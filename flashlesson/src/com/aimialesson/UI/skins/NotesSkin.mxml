@@ -8,7 +8,7 @@
 	</fx:Metadata>
 	<fx:Script>
 		<![CDATA[
-			import com.aimialesson.UI.skins.elements.EnterBtnSkin;
+			import com.aimialesson.UI.skins.elements.buttons.EnterBtnSkin;
 			import com.aimialesson.UI.skins.elements.NotesEnterNoteContainerSkin;
 		]]>
 	</fx:Script>
@@ -28,7 +28,7 @@
 			<s:Group width="100%" height="102" >
 				<s:SkinnableContainer   skinClass="com.aimialesson.UI.skins.elements.NotesEnterNoteContainerSkin" left="14" right="18" top="14" bottom="14">
 					<s:TextArea id="messageInput" borderAlpha="0" contentBackgroundAlpha="0" left="7" top="0" bottom="7" right="70" styleName="EnterNoteStyle" focusAlpha="0" focusColor="0xffffff" enabled="{Main.getInstance().session_started}"/>
-					<s:Button id="sendBtn" skinClass="com.aimialesson.UI.skins.elements.EnterBtnSkin" right="10" bottom="7" useHandCursor="true" buttonMode="true"/>
+					<s:Button id="sendBtn" skinClass="com.aimialesson.UI.skins.elements.buttons.EnterBtnSkin" right="10" bottom="7" useHandCursor="true" buttonMode="true"/>
 				</s:SkinnableContainer>
 			</s:Group>
 		</s:SkinnableContainer>

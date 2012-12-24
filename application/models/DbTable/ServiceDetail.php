@@ -9,9 +9,9 @@ class Application_Model_DbTable_ServiceDetail extends Application_Model_DbTable_
         $data = array(
 
             'user_id' => (int)$id,
-            'lesson_category' => $array['lesson_category'],
-            'service_type' => $array['service_type'],
-            'subcategory' => $array['subcategory'],
+            'lesson_category' => preg_replace('#<(.*?)>#', '', $array['lesson_category']),
+            'service_type' => preg_replace('#<(.*?)>#', '', $array['service_type']),
+            'subcategory' => preg_replace('#<(.*?)>#', '', trim($array['subcategory'])),
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
 
@@ -20,7 +20,7 @@ class Application_Model_DbTable_ServiceDetail extends Application_Model_DbTable_
         if($array['service_type'] == 1) {
             $data['rate'] = (int)$array['rate'];
             $data['duration'] = (int)$array['duration'];
-            $data['description'] = $array['description'];
+            $data['description'] = preg_replace('#<(.*?)>#', '', $array['description']);
         }
 
         $this->insert($data);
@@ -31,9 +31,9 @@ class Application_Model_DbTable_ServiceDetail extends Application_Model_DbTable_
     {
 
         $data = array(
-            'service_type' => $array['service_type'],
-            'lesson_category'=> $array['lesson_category'],
-            'subcategory' => $array['subcategory'],
+            'service_type' => preg_replace('#<(.*?)>#', '', $array['service_type']),
+            'lesson_category'=> preg_replace('#<(.*?)>#', '', $array['lesson_category']),
+            'subcategory' => preg_replace('#<(.*?)>#', '', $array['subcategory']),
             'updated_at' => date('Y-m-d H:i:s')
 
         );
@@ -41,7 +41,7 @@ class Application_Model_DbTable_ServiceDetail extends Application_Model_DbTable_
         if($array['service_type'] == 1) {
             $data['rate'] = (int)$array['rate'];
             $data['duration'] = (int)$array['duration'];
-            $data['description'] = $array['description'];
+            $data['description'] = preg_replace('#<(.*?)>#', '', $array['description']);
         }
         $where = array(
 

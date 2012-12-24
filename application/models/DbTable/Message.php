@@ -85,6 +85,21 @@ class Application_Model_DbTable_Message extends Application_Model_DbTable_Abstra
         return $row->toArray();
     }
 
+    public function getArchived($userId) {
+        $userId = (int)$userId;
+        $row = $this->fetchAll(
+            $this->select()
+                ->where('(' . $this->getAdapter()->quoteInto('sender_id=?' , $userId) . ' AND ' . $this->getAdapter()->quoteInto('sender_status=?' , 3) . ') OR (' . $this->getAdapter()->quoteInto('recipient_id=?' , $userId) . ' AND ' . $this->getAdapter()->quoteInto('recipient_status=?' , 3) . ')')
+                ->order((array('id DESC')))
+
+        );
+        if (!$row) {
+            throw new Exception("There is no element with ID: $userId");
+        }
+
+        return $row->toArray();
+    }
+
     public function deleteMessage($messageId, $action) {
 
         $array = array();

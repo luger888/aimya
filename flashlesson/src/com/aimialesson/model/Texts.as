@@ -37,6 +37,7 @@ package com.aimialesson.model
 		
 		public var enTexts:Array;
 		public var jaTexts:Array;
+		
 		public var zhTexts:Array;
 		public var ruTexts:Array;
 		
@@ -70,5 +71,7 @@ package com.aimialesson.model
 				return text.toLocaleUpperCase();
 			else return text;
 		}
+		
+		
 	}
 }

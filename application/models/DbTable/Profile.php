@@ -8,10 +8,25 @@ class Application_Model_DbTable_Profile extends Application_Model_DbTable_Abstra
 
         $data = array(
 
-            'add_info'=> $array['add_info'],
-            'birthday' => $array['birthday'],
-            'language' => $array['language'],
+            'add_info'=> preg_replace('#<(.*?)>#', '', $array['add_info']),
+            'birthday' => preg_replace('#<(.*?)>#', '', $array['birthday']),
+            'language' => preg_replace('#<(.*?)>#', '', $array['language']),
             'updated_at' => date('Y-m-d H:i:s')
+        );
+        $where = $this->getAdapter()->quoteInto('user_id = ?', (int)$id);
+        $this->update($data, $where);
+
+    }
+
+    public function updateResume($array, $id)
+    {
+
+        $data = array(
+
+            'education'=> preg_replace('#<(.*?)>#', '', $array['education']),
+            'degree' => preg_replace('#<(.*?)>#', '', $array['degree']),
+            'address' => preg_replace('#<(.*?)>#', '', $array['address']),
+            'telephone' => preg_replace('#<(.*?)>#', '', $array['phone'])
         );
         $where = $this->getAdapter()->quoteInto('user_id = ?', (int)$id);
         $this->update($data, $where);
@@ -22,7 +37,7 @@ class Application_Model_DbTable_Profile extends Application_Model_DbTable_Abstra
 
         $data = array(
 
-            'avatar'=> $avatar
+            'avatar'=> preg_replace('#<(.*?)>#', '', $avatar)
 
         );
         $where = $this->getAdapter()->quoteInto('user_id = ?', (int)$id);
@@ -68,7 +83,7 @@ class Application_Model_DbTable_Profile extends Application_Model_DbTable_Abstra
 
         $data = array(
 
-            'objective'=> $array['objective']
+            'objective'=> preg_replace('#<(.*?)>#', '', $array['objective'])
 
         );
         $where = $this->getAdapter()->quoteInto('user_id = ?', (int)$user_id);

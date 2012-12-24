@@ -40,6 +40,7 @@ class FriendsController extends Zend_Controller_Action
                 $result = $friendTable->addFriend($friendId);
 
                 if($result) {
+                    $this->view->result = $result;
                     $this->view->successFlash = "Request successfully sent";
                 } else {
                      $this->view->alertFlash = 'Problem with sending request, please try again later';

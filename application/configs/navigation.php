@@ -99,7 +99,7 @@ return array(
                 'resource'      => 'message',
                 'privilege'     => 'inbox',
             ),
-            /*array(
+            array(
                 'label' => 'Archived',
                 'tag' => 'messageMenu',
                 'route' => 'default',
@@ -108,7 +108,7 @@ return array(
                 'action' => 'archived',
                 'resource'      => 'message',
                 'privilege'     => 'archived',
-            ),*/
+            ),
             array(
                 'label' => 'Sent',
                 'tag' => 'messageMenu',

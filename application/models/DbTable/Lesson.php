@@ -12,6 +12,7 @@ class Application_Model_DbTable_Lesson extends Application_Model_DbTable_Abstrac
             'creator_stream_name' => $array['creator_stream_name'],
             'partner_stream_name' => $array['partner_stream_name'],
             'so_id' => $array['so_id'],
+            'booking_id' => $array['booking_id'],
             'status' => $array['status'],
             'created_at' => date('Y-m-d H:m:s')
         );

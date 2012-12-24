@@ -11,6 +11,7 @@ package com.aimialesson.controllers
 	{
 		public function UserController()
 		{
+			debug ("UserController");
 		}
 		
 		public function setParameters ( parameters : Object ) : void {
@@ -19,8 +20,8 @@ package com.aimialesson.controllers
 				debug ("userName:" + parameters.userName);
 			}
 			if (parameters.userRole){
-				User.getInstance().userRole = parameters.userRole;
 				debug ("userRole:" + parameters.userRole);
+				User.getInstance().userRoleID = parameters.userRole;
 			}
 			if (parameters.partnerName){
 				User.getInstance().partnerName = parameters.partnerName;
@@ -34,14 +35,6 @@ package com.aimialesson.controllers
 				User.getInstance().lesson_id = parameters.lesson_id;
 				debug ("lessonID:" + parameters.lesson_id);
 			}
-			/*if (parameters.teacherId){
-				User.getInstance().teacherID = parameters.teacherId;
-				debug ("teacherId:" + parameters.teacherId);
-			}
-			if (parameters.studentId){
-				User.getInstance().studentID = parameters.studentId;
-				debug ("studentId:" + parameters.studentId);
-			}*/
 			if (parameters.partnerId){
 				User.getInstance().partnerID = parameters.partnerId;
 				debug ("partnerId:" + parameters.partnerId);
