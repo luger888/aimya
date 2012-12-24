@@ -106,13 +106,13 @@
 
                         ?>
 
-                        <form method="POST" id='start_session_<?php echo $booking['userData']['id'];?>'
+                        <form method="POST" id='start_session_<?php echo $booking['booking']['id'];?>'
                               action="<?php echo $this->baseUrl() . '/lesson/setup/'?>">
                             <input name="student_id" type="hidden" value="<?php echo $booking['userData']['id'];?>">
                             <input name="booking_id" type="hidden" value="<?php echo $booking['booking']['id'];?>">
                             <?php if ($bookingTable->isTeacher($booking['booking']['id'], Zend_Auth::getInstance()->getIdentity()->id)): ?>
                             <a href="#" id="<?php echo $booking['userData']['id'];?>"
-                               onclick="jQuery('#start_session_<?php echo $booking['userData']['id'];?>').submit()"><span
+                               onclick="jQuery('#start_session_<?php echo $booking['booking']['id'];?>').submit()"><span
                                 class="button-2 play">Start</span></a>
                             <?php else: ?>
                             <?php echo "something" ?>
