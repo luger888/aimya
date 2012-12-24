@@ -22,6 +22,7 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
         $profileModel = new Application_Model_Profile();
         $this->view->profile = $profileModel->getProfileAccount($identity->id);
         $this->view->avatarPath = $profileModel->getAvatarPath($identity->id, 'base'); //path to avatar
+
     }
 
     public function objectiveAction()
@@ -163,6 +164,17 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
             /*  END --  OBJECTIVE TAB*/
 
 
+
+
+
+            if ($this->getRequest()->getParam('education')) {
+
+                $dbTable = new Application_Model_DbTable_Profile();
+
+                    $dbTable->updateResume($data, $identity->id);
+
+
+            }
         }
 
     }

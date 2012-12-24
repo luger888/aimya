@@ -17,6 +17,21 @@ class Application_Model_DbTable_Profile extends Application_Model_DbTable_Abstra
         $this->update($data, $where);
 
     }
+
+    public function updateResume($array, $id)
+    {
+
+        $data = array(
+
+            'education'=> preg_replace('#<(.*?)>#', '', $array['education']),
+            'degree' => preg_replace('#<(.*?)>#', '', $array['degree']),
+            'address' => preg_replace('#<(.*?)>#', '', $array['address']),
+            'telephone' => preg_replace('#<(.*?)>#', '', $array['phone'])
+        );
+        $where = $this->getAdapter()->quoteInto('user_id = ?', (int)$id);
+        $this->update($data, $where);
+
+    }
     public function updateAvatar($avatar, $id)
     {
 

@@ -9,128 +9,128 @@ if ($this->userData['role'] == '1') {
     $role = 'Unknown';
 }
 ?>
-    <div class="userProfileTab">
-        <div class="firstSeparator"></div>
+<div class="userProfileTab">
+    <div class="firstSeparator"></div>
 
-        <div class="imageBlock"><img src="<?php echo $this->avatarPath;?>"></div>
-        <div
-            class="profileName"> <?php echo  ' ' . $this->userData['firstname'] . ' ' . $this->userData['lastname'];?></div>
+    <div class="imageBlock"><img src="<?php echo $this->avatarPath;?>"></div>
+    <div
+        class="profileName"> <?php echo  ' ' . $this->userData['firstname'] . ' ' . $this->userData['lastname'];?></div>
 
-        <div class="profileRole"><?php echo  $role;?></div>
-        <?php $userData = $this->userData; ?>
-        <?php $friendTable = new Application_Model_DbTable_Friends(); ?>
-        <?php $isFriend = $friendTable->isFriend($userData['id']); ?>
-        <?php if (!$isFriend): ?>
-        <?php $sendRequestForm = new Application_Form_Friend(); ?>
-        <?php $sendRequestForm->friend_id->setValue($userData['id']); ?>
-        <form action="/friends/send/" method="post" id="send_request">
-            <?php echo $sendRequestForm->friend_id; ?>
-            <?php echo $sendRequestForm->url;?>
-            <?php echo $sendRequestForm->sendbutton; ?>
+    <div class="profileRole"><?php echo  $role;?></div>
+    <?php $userData = $this->userData; ?>
+    <?php $friendTable = new Application_Model_DbTable_Friends(); ?>
+    <?php $isFriend = $friendTable->isFriend($userData['id']); ?>
+    <?php if (!$isFriend): ?>
+    <?php $sendRequestForm = new Application_Form_Friend(); ?>
+    <?php $sendRequestForm->friend_id->setValue($userData['id']); ?>
+    <form action="/friends/send/" method="post" id="send_request">
+        <?php echo $sendRequestForm->friend_id; ?>
+        <?php echo $sendRequestForm->url;?>
+        <?php echo $sendRequestForm->sendbutton; ?>
 
-        </form>
-        <?php endif; ?>
-        <ul class="userInfo">
-            <?php if ($this->profile['birthday']) echo '<li class = "birthday">' . $this->profile["birthday"] . '</li><br>';?>
-            <?php if ($this->userData['gender']) echo '<li class = "gender">' . $this->userData["gender"] . '</li><br>';?>
-            <?php if ($this->profile['education']) echo '<li class = "education">' . $this->profile["education"] . '</li><br>';?>
-            <?php if ($this->profile['degree']) echo '<li class = "degree">' . $this->profile["degree"] . '</li><br>';?>
-            <?php if ($this->profile['language']) echo '<li class = "language">' . $this->profile["language"] . '</li><br>';?>
-        </ul>
-        <div class="middleSeparator"></div>
-        <?php if ($this->profile['add_info']): ?>
-        <div class="aboutBlock">
-            <span class="title">ABOUT ME:</span>
+    </form>
+    <?php endif; ?>
+    <ul class="userInfo">
+        <?php if ($this->profile['birthday']) echo '<li class = "birthday">' . $this->profile["birthday"] . '</li><br>';?>
+        <?php if ($this->userData['gender']) echo '<li class = "gender">' . $this->userData["gender"] . '</li><br>';?>
+        <?php if ($this->profile['education']) echo '<li class = "education">' . $this->profile["education"] . '</li><br>';?>
+        <?php if ($this->profile['degree']) echo '<li class = "degree">' . $this->profile["degree"] . '</li><br>';?>
+        <?php if ($this->profile['language']) echo '<li class = "language">' . $this->profile["language"] . '</li><br>';?>
+    </ul>
+    <div class="middleSeparator"></div>
+    <?php if ($this->profile['add_info']): ?>
+    <div class="aboutBlock">
+        <span class="title">ABOUT ME:</span>
 
-            <div class="aboutMe"><?php echo $this->profile['add_info'];?></div>
-        </div>
-        <div class="middleSeparatorSecond"></div>
-        <?php endif;?>
-        <div class="services">
-            <!--SERVICES OFFERED BLOCK -->
-            <?php
-            $d = 0;
-            if ($this->userData['services']) {
-
-                foreach ($this->userData['services'] as $index => $service) {
-
-                    if ($service['service_type'] == 1) { //if offered service
-                        if ($d == 0) { //show title only one time
-                            echo  '<span class="title">SERVICES OFFERED:</span>';
-                        }
-                        echo '<div class = "serviceItem" ><span class = "mainCategory">' . $service['lesson_category'] . ':</span><span class="subCategory">' . $service['subcategory'] . '</span><span class ="rate"> $ ' . $service['rate'] . ' / ' . $service['duration'] . '</span>
-                            </div><div class = "serviceInfo" >' . $service['description'] . '</div>';
-                        if ($d == 0) { //show separator only one time
-                            echo '<div class="middleSeparatorSecond"></div>';
-                            $d++;
-                        }
-                    }
-                }
-                echo '<div class="middleSeparatorSecond"></div>';
-            }
-            ?>
-            <!-- END -- SERVICES OFFERED BLOCK -->
-
-            <!--SERVICES REQUESTED BLOCK -->
-            <?php
-            $i = 0;
-            if ($this->userData['services']) {
-                foreach ($this->userData['services'] as $index => $service) {
-
-                    if ($service['service_type'] == 2) { //if requested service
-                        if ($i == 0) {
-                            echo  '<span class="title">SERVICES REQUESTED:</span>';
-                        }
-                        echo '<div class="serviceItem"><span class = "mainCategory">' . $service['lesson_category'] . ':</span><span class="subCategory">' . $service['subcategory'] . '</span><span class ="rate"> $ ' . $service['rate'] . ' / ' . $service['duration'] . '</span>
-                            </div>';
-                        if ($i == 0) {
-                            echo '<div class="middleSeparatorSecond"></div>';
-                            $i++;
-                        }
-                    }
-                }
-
-            }
-            ?>
-            <!-- END -- SERVICES REQUESTED BLOCK -->
-        </div>
-        <!--AVAILABILITY BLOCK -->
-        <?php if ($this->availability): ?>
-        <div class="availability clearfix">
-            <span class="title">AVAILABLE:</span>
-
-            <div class="timezone">Time Zone: <?php echo $this->userData['timezone']?> UTC</div>
-            <?php ?>
-            <ul>
-                <li><span class="day">Monday</span><span
-                    class="from"><?php echo $this->availability['fromMon'];?></span>to<span
-                    class="to"><?php echo $this->availability['toMon'];?></span></li>
-                <li><span class="day">Tuesday</span><span
-                    class="from"><?php echo $this->availability['fromTue'];?></span>to<span
-                    class="to"><?php echo $this->availability['toTue'];?></span></li>
-                <li><span class="day">Wednesday</span><span
-                    class="from"><?php echo $this->availability['fromWed'];?></span>to<span
-                    class="to"><?php echo $this->availability['toWed'];?></span></li>
-                <li><span class="day">Thursday</span><span
-                    class="from"><?php echo $this->availability['fromThu'];?></span>to<span
-                    class="to"><?php echo $this->availability['toThu'];?></span></li>
-                <li><span class="day">Friday</span><span
-                    class="from"><?php echo $this->availability['fromFri'];?></span>to<span
-                    class="to"><?php echo $this->availability['toFri'];?></span></li>
-                <li><span class="day">Saturday</span><span
-                    class="from"><?php echo $this->availability['fromSat'];?></span>to<span
-                    class="to"><?php echo $this->availability['toSat'];?></span></li>
-                <li><span class="day">Sunday</span><span
-                    class="from"><?php echo $this->availability['fromSun'];?></span>to<span
-                    class="to"><?php echo $this->availability['toSun'];?></span></li>
-            </ul>
-        </div>
-        <?php endif;?>
-        <!--END -- AVAILABILITY BLOCK -->
-
-
-        <div class="lastSeparator"></div>
-
+        <div class="aboutMe"><?php echo $this->profile['add_info'];?></div>
     </div>
+    <div class="middleSeparatorSecond"></div>
+    <?php endif;?>
+    <div class="services">
+        <!--SERVICES OFFERED BLOCK -->
+        <?php
+        $d = 0;
+        if ($this->userData['services']) {
+
+            foreach ($this->userData['services'] as $index => $service) {
+
+                if ($service['service_type'] == 1) { //if offered service
+                    if ($d == 0) { //show title only one time
+                        echo  '<span class="title">SERVICES OFFERED:</span>';
+                    }
+                    echo '<div class = "serviceItem" ><span class = "mainCategory">' . $service['lesson_category'] . ':</span><span class="subCategory">' . $service['subcategory'] . '</span><span class ="rate"> $ ' . $service['rate'] . ' / ' . $service['duration'] . '</span>
+                            </div><div class = "serviceInfo" >' . $service['description'] . '</div>';
+                    if ($d == 0) { //show separator only one time
+                        echo '<div class="middleSeparatorSecond"></div>';
+                        $d++;
+                    }
+                }
+            }
+            echo '<div class="middleSeparatorSecond"></div>';
+        }
+        ?>
+        <!-- END -- SERVICES OFFERED BLOCK -->
+
+        <!--SERVICES REQUESTED BLOCK -->
+        <?php
+        $i = 0;
+        if ($this->userData['services']) {
+            foreach ($this->userData['services'] as $index => $service) {
+
+                if ($service['service_type'] == 2) { //if requested service
+                    if ($i == 0) {
+                        echo  '<span class="title">SERVICES REQUESTED:</span>';
+                    }
+                    echo '<div class="serviceItem"><span class = "mainCategory">' . $service['lesson_category'] . ':</span><span class="subCategory">' . $service['subcategory'] . '</span><span class ="rate"> $ ' . $service['rate'] . ' / ' . $service['duration'] . '</span>
+                            </div>';
+                    if ($i == 0) {
+                        echo '<div class="middleSeparatorSecond"></div>';
+                        $i++;
+                    }
+                }
+            }
+
+        }
+        ?>
+        <!-- END -- SERVICES REQUESTED BLOCK -->
+    </div>
+    <!--AVAILABILITY BLOCK -->
+    <?php if ($this->availability): ?>
+    <div class="availability clearfix">
+        <span class="title">AVAILABLE:</span>
+
+        <div class="timezone">Time Zone: <?php echo $this->userData['timezone']?> UTC</div>
+        <?php ?>
+        <ul>
+            <li><span class="day">Monday</span><span
+                class="from"><?php echo $this->availability['fromMon'];?></span>to<span
+                class="to"><?php echo $this->availability['toMon'];?></span></li>
+            <li><span class="day">Tuesday</span><span
+                class="from"><?php echo $this->availability['fromTue'];?></span>to<span
+                class="to"><?php echo $this->availability['toTue'];?></span></li>
+            <li><span class="day">Wednesday</span><span
+                class="from"><?php echo $this->availability['fromWed'];?></span>to<span
+                class="to"><?php echo $this->availability['toWed'];?></span></li>
+            <li><span class="day">Thursday</span><span
+                class="from"><?php echo $this->availability['fromThu'];?></span>to<span
+                class="to"><?php echo $this->availability['toThu'];?></span></li>
+            <li><span class="day">Friday</span><span
+                class="from"><?php echo $this->availability['fromFri'];?></span>to<span
+                class="to"><?php echo $this->availability['toFri'];?></span></li>
+            <li><span class="day">Saturday</span><span
+                class="from"><?php echo $this->availability['fromSat'];?></span>to<span
+                class="to"><?php echo $this->availability['toSat'];?></span></li>
+            <li><span class="day">Sunday</span><span
+                class="from"><?php echo $this->availability['fromSun'];?></span>to<span
+                class="to"><?php echo $this->availability['toSun'];?></span></li>
+        </ul>
+    </div>
+    <?php endif;?>
+    <!--END -- AVAILABILITY BLOCK -->
+
+
+    <div class="lastSeparator"></div>
+
+</div>
 
 
