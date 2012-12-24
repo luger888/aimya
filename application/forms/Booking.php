@@ -28,7 +28,7 @@ class Application_Form_Booking extends Zend_Form
             ->setSeparator('');
         $role->addMultiOptions(array(
 
-                '0' => 'student',
+                '2' => 'student',
                 '1' => 'teacher'
 
             )
