@@ -113,7 +113,12 @@ if (Zend_Registry::isRegistered('username')) {
                                 if($services){
                                     echo '<div class = "leftServices clearfix">';
                                     foreach($services as $value){
-                                        echo '<p>$ '.$value['rate']. ' / ' .$value['duration'] . '  ' . $value['subcategory'].'</p>';
+                                        if($value['rate']){
+                                            echo '<p>$ '.$value['rate']. ' / ' .$value['duration'] . '  ' . $value['subcategory'].'</p>';
+                                        }else{
+                                            echo '<p>' . $value['subcategory'].'</p>';
+                                        }
+
                                     }
                                     echo '</div>';
                                 }

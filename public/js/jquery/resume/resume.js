@@ -7,10 +7,26 @@ function editResume() {
     var degree = $('.userInfo .degree').html();
     var address = $('.userInfo .address').html();
     var phone = $('.userInfo .phone').html();
-    $('.userInfo .education').html("<input type='text' value = " + education + ">");
-    $('.userInfo .degree').html("<input type='text' value = " + degree + ">");
-    $('.userInfo .address').html("<input type='text' value = " + address + ">");
-    $('.userInfo .phone').html("<input type='text' value = " + phone + ">");
+    if($('.userInfo .education').html()){
+        $('.userInfo .education').html("<input type='text' value = " + education + ">");
+    }else{
+        $('.userInfo').append('<li class = "education"><input type="text" placeholder = "education"></li>') ;
+    }
+    if($('.userInfo .degree').html()){
+        $('.userInfo .degree').html("<input type='text' value = " + degree + ">");
+    }else{
+        $('.userInfo').append('<li class = "degree"><input type="text" placeholder = "degree"></li>') ;
+    }
+    if($('.userInfo .address').html()){
+        $('.userInfo .address').html("<input type='text' value = " + address + ">");
+    }else{
+        $('.userInfo').append('<li class = "address"><input type="text" placeholder = "address"></li>') ;
+    }
+    if($('.userInfo .phone').html()){
+        $('.userInfo .phone').html("<input type='text' value = " + phone + ">");
+    }else{
+        $('.userInfo').append('<li class = "phone"><input type="text" placeholder = "phone"></li>') ;
+    }
     $('.saveResume').removeClass('disable');
     $('.edit').addClass('disable');
 }
