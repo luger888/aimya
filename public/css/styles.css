@@ -1674,8 +1674,11 @@ float:right;
 .userInfo .language{
     background: url("../img/design/accountLayout/glyphicons/language.png") no-repeat scroll 0 42% transparent;
 }
-.userInfo .gender{
-    background: url("../img/design/accountLayout/glyphicons/female.png") no-repeat scroll 0 42% transparent;
+.userInfo .gender.female{
+    background: url("../img/design/accountLayout/glyphicons/female.png") no-repeat scroll 2px 42% transparent;
+}
+.userInfo .gender.male{
+    background: url("../img/design/accountLayout/glyphicons/male.png") no-repeat scroll 1% 42% transparent;
 }
 .userInfo .address{
     background: url("../img/design/accountLayout/glyphicons/address.png") no-repeat scroll 0 42% transparent;

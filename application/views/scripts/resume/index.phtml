@@ -20,9 +20,11 @@
                         <div class="infoBox floatLeft">
 
                             <ul class = "userInfo">
+                                <?php $gender = 'male';
+                                if ($this->profile['gender'] == 'female') $gender = 'female'; ?>
                                 <li class = "userName"><?php echo $this->profile['firstname'] . ' ' . $this->profile['lastname'];?></li>
                                 <?php if ($this->profile['birthday']) echo '<li class = "birthday">' . $this->profile["birthday"] . '</li>';?>
-                                <?php if ($this->profile['gender']) echo '<li class = "gender">' . $this->profile["gender"] . '</li>';?>
+                                <?php if ($this->profile['gender']) echo '<li class = "gender ' .$gender .'">' . $this->profile["gender"] . '</li>';?>
                                 <?php if ($this->profile['email']) echo '<li class = "mail">' . $this->profile["email"] . '</li>';?>
                                 <?php if ($this->profile['language']) echo '<li class = "language">' . $this->profile["language"] . '</li>';?>
                                 <?php if ($this->profile['education']) echo '<li class = "education">' . $this->profile["education"] . '</li>';?>
