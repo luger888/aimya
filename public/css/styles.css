@@ -1444,6 +1444,13 @@ input.button-2 {
 .messageTab.viewMessageBlock .messageViewText, .messageTab.viewMessageBlock a{
     font: 11px arial;
 }
+.messageTab.viewMessageBlock .messageViewText a{
+    text-decoration: underline;
+    font-weight: bold;
+}
+.messageTab.viewMessageBlock .messageViewText a:hover{
+    text-decoration: none;
+}
 
 /*---JSMessenger, alert (red)-----------------------------------------------------------------*/
 .alertBlock{
