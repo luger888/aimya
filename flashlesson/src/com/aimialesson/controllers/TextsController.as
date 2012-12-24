@@ -1,6 +1,7 @@
 package com.aimialesson.controllers
 {
 	import com.aimialesson.events.AppEvent;
+	import com.aimialesson.model.Actions;
 	import com.aimialesson.model.Main;
 	import com.aimialesson.model.Texts;
 	
@@ -20,20 +21,28 @@ package com.aimialesson.controllers
 	[Event (name="loadTextsComplete", type="com.aimialesson.events.AppEvent")]
 	public class TextsController extends EventDispatcher
 	{
-		public const text_xml_url:String = "lessontexts.xml";
+		public const text_xml_url:String = "/flash/lessontexts.xml";
 		private var loader:URLLoader = new URLLoader();
 		public var textsXML:XML;
 	
 		public function TextsController(target:IEventDispatcher=null)
 		{
 			super(target);
+			debug ("TextsController");
 		}		
 
 		public function loadXML():void {
+			debug ("loadXML");
 			loader.addEventListener(Event.COMPLETE, onLoaded);
 			loader.addEventListener(IOErrorEvent.IO_ERROR, onIOError);
 			loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError);
-			loader.load(new URLRequest(text_xml_url));
+			var urlRequest:URLRequest = new URLRequest(Actions.getInstance().domain + text_xml_url);
+			/*var obj:Object = new Object();
+			if (User.getInstance().sessionID){
+				obj.PHPSESSID = User.getInstance().sessionID;
+			}
+			urlRequest.data = obj;*/
+			loader.load(urlRequest);
 		}
 		// Our reaction function
 		private function onLoaded(e:Event) : void {
@@ -42,6 +51,8 @@ package com.aimialesson.controllers
 			debug (textsXML.toString());
 			Texts.getInstance().ruTexts = getLangTextsAC (Texts.RU);
 			Texts.getInstance().enTexts = getLangTextsAC (Texts.EN);
+			Texts.getInstance().jaTexts = getLangTextsAC (Texts.JA);
+			Texts.getInstance().zhTexts = getLangTextsAC (Texts.ZH);
 			this.dispatchEvent( new AppEvent ( AppEvent.LOAD_TEXTS_COMPLETE ) );
 		}
 		
@@ -55,7 +66,6 @@ package com.aimialesson.controllers
 				debug (text[lang].toString());
 				texts[text.@id.toString()] = text[lang].toString();
 			} 
-			debug (texts[text.@id].toString());
 			return texts;
 		}
 		

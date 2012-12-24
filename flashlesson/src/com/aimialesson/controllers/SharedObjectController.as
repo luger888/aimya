@@ -37,7 +37,7 @@ package com.aimialesson.controllers
 		{
 			so = SharedObject.getRemote(Media.getInstance().soID, Media.getInstance().nc.uri, true);
 			so.addEventListener(SyncEvent.SYNC, soOnSync);
-			so.client    = this;
+			so.client = this;
 			so.connect(Media.getInstance().nc);
 			partnerIsOnlineTimer.addEventListener(TimerEvent.TIMER, checkPartnerOnline);
 			userIsOnlineTimer.addEventListener(TimerEvent.TIMER, setOnlineUpdate);

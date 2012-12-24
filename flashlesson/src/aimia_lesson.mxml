@@ -2,7 +2,7 @@
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
 			   xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:views="com.aimialesson.UI.views.*" width="100%" height="100%"
-			   creationComplete="onInit(event)" stateChangeComplete="onStateChange(event)" stateChangeInterrupted="onStateChangeInterrupted(event)" >
+			   creationComplete="onInit(event)" stateChangeComplete="onStateChange(event)"  >
 	<fx:Script>
 		<![CDATA[
 			import com.aimialesson.UI.skins.MainUISkin;
@@ -23,18 +23,18 @@
 			private var mainController:MainController = new MainController();
 			private var seviceMap:ServiceMap = new ServiceMap();
 
-			[Embed(source = "flashassets/fonts/Helvetica/HelveticaNeueLTStd-Md.ttf", fontWeight="Normal", fontName = "HelveticaMd", mimeType="application/x-font-truetype")]
-			private var fontHelveticaMd:Class;
+//			[Embed(source = "flashassets/fonts/Helvetica/HelveticaNeueLTStd-Md.ttf", fontWeight="Normal", fontName = "HelveticaMd", mimeType="application/x-font-truetype")]
+//			private var fontHelveticaMd:Class;
 			
 			[Embed(source = "flashassets/fonts/Dosis/Dosis-SemiBold.ttf", fontWeight="Normal", fontName = "DosisSB", mimeType="application/x-font-truetype")]
 			private var fontDosisSB:Class;
 			
-			private var lastState:String;
+			private var lastState:String = "loaded";
 			
 			private function onInit ( event : FlexEvent ) : void {
 				mainController.addEventListener(AppEvent.INIT_COMPLETE, onInitComplete);
 				mainController.addEventListener(SharedObjectEvent.SHARED_PRESENTATION_UPLOADED, seviceMap.onSharedObjectEvent);
-				mainController.init(mainUI, FlexGlobals.topLevelApplication.parameters);
+				mainController.init(FlexGlobals.topLevelApplication.parameters);
 				seviceMap.init();
 				seviceMap.addEventListener(ServiceEvent.GET_PRESENTATION_IMAGES_RESULT, mainController.onServiceEvent);
 				seviceMap.addEventListener(ServiceEvent.RESIZE_RESULT, mainController.onServiceEvent);
@@ -46,8 +46,7 @@
 				Main.getInstance().addEventListener(Main.FS_MODE_CHANGED, onFSModeChange);
 				Main.getInstance().addEventListener(Main.SCREEN_MODE_CHANGED, onScreenModeChange);
 				
-				this.currentState = "loading";
-			//	connectInitComplete(null);
+				this.currentState = "loaded";
 			//	this.currentState = (Main.getInstance().fsMode)?"fullScreen":"notFullScreen";
 				debug("app:onInit");
 			}
@@ -79,17 +78,19 @@
 			}
 			
 			private function onStateChange ( event : FlexEvent ) : void {
-				if (lastState == "loading"){
+				debug("onStateChange");
+				debug("lastState:" + lastState);
+				debug("this.currentState:" + this.currentState);
+				if (lastState == "loaded" && this.currentState != lastState){
 					mainUI.connectionInit();
 					UIEventHandling();
+					lastState = this.currentState; 
 				} 
 			}
-			
-			private function onStateChangeInterrupted( event : FlexEvent ) : void {
-				lastState = this.currentState;
-			}
+
 			
 			private function UIEventHandling () : void {
+				debug("UIEventHandling");
 				mainUI.addEventListener(PresentationEvent.MOVE_TO_LEFT, mainController.onPresentationEvent);
 				mainUI.addEventListener(PresentationEvent.MOVE_TO_RIGHT, mainController.onPresentationEvent);
 				mainUI.addEventListener(PresentationEvent.PRESENTATION_UPLOADED, mainController.onPresentationEvent);
@@ -120,9 +121,9 @@
 	</fx:Script>
 	<fx:Style source="lesson.css" />
 	<s:states>
-		<s:State id="loadingState" name="loading"/>
+		<s:State id="loadedState" name="loaded"/>
 		<s:State id="notFullScreenState" name="notFullScreen"/>
 		<s:State id="fullScreenState" name="fullScreen" />
 	</s:states>
-	<views:MainUI excludeFrom="loading"  id="mainUI" skinClass="com.aimialesson.UI.skins.MainUISkin" skinClass.fullScreen="com.aimialesson.UI.skins.MainFSUISkin" width="100%" height="100%"/>
+	<views:MainUI excludeFrom="loaded" id="mainUI" skinClass="com.aimialesson.UI.skins.MainUISkin" skinClass.fullScreen="com.aimialesson.UI.skins.MainFSUISkin" width="100%" height="100%"/>
 </s:Application>

@@ -75,6 +75,8 @@ package com.aimialesson.model
 		[Bindable]
 		public var topic:String = "Latin professor at Hampden-Sydney in Virginia to popular belie";
 		
+		public var booking_id:String;
+		
 		private static var instance : Main;
 		
 		public function Main () {
