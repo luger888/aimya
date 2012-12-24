@@ -84,6 +84,8 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
         $isInList = $this->isInList($friendId);
         $userTable = new Application_Model_DbTable_Users();
         $friend = $userTable->getItem($friendId);
+
+        $user = $userTable->getItem($userId);
         $accountPage = $url . "/user/{$userId}";
         if($isInList){
             if($isInList['recipient_status'] == 0 && $isInList['sender_status'] == 1) {
@@ -98,7 +100,7 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
                 $data = array(
                     'sender_id' => $userId,
                     'recipient_id' => $friendId,
-                    'content' => 'Hello ' . $friend["username"] . ', I have approved your request. My Account page is <a href="' . $accountPage . '">' . $friend["username"] . '</a>' ,
+                    'content' => 'Hello ' . $friend["username"] . ', I have approved your request. My Account page is <a href="' . $accountPage . '">' . $user["username"] . '</a>' ,
                     'subject' => "Add to Friend Request",
                 );
                 $messageTable->sendMessage($data);
@@ -128,7 +130,7 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
             $data = array(
                         'sender_id' => $userId,
                         'recipient_id' => $friendId,
-                        'content' => 'Hello ' . $friend["username"] . ', I\'d like add you to my account. My Account page is <a href="' . $accountPage . '">' . $friend["username"] . '</a>' ,
+                        'content' => 'Hello ' . $friend["username"] . ', I\'d like add you to my account. My Account page is <a href="' . $accountPage . '">' . $user["username"] . '</a>' ,
                         'subject' => "Add to Friend Request",
                     );
             $messageTable->sendMessage($data);
