@@ -78,6 +78,17 @@ return array(
                 'resource'      => 'lesson',
                 'privilege'     => 'index',
             ),
+            array
+            (
+                'label' => 'ACCOUNTS/PAYMENTS',
+                'tag' => 'leftMenu',
+                'route' => 'default',
+                'module' => 'default',
+                'controller' => 'payment',
+                'action' => 'index',
+                'resource'      => 'payment',
+                'privilege'     => 'index',
+            ),
 			array(
                 'label' => 'Inbox',
                 'tag' => 'messageMenu',
@@ -88,7 +99,7 @@ return array(
                 'resource'      => 'message',
                 'privilege'     => 'inbox',
             ),
-            /*array(
+            array(
                 'label' => 'Archived',
                 'tag' => 'messageMenu',
                 'route' => 'default',
@@ -97,7 +108,7 @@ return array(
                 'action' => 'archived',
                 'resource'      => 'message',
                 'privilege'     => 'archived',
-            ),*/
+            ),
             array(
                 'label' => 'Sent',
                 'tag' => 'messageMenu',

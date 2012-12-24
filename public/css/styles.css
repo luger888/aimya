@@ -462,7 +462,16 @@ input.button-2 {
 .button-2.archived:hover {
     background-position: 0 -17px;
 }
+.button-2.play {
+    background: url(../images/icons/play.png) no-repeat 0 4px;
+}
 
+.button-2.play:hover {
+    background-position: 0 -19px;
+}
+.button-2.play.disable {
+    background-position: 0 -44px;
+}
 .disable{
     pointer-events: none;
     cursor: default;
@@ -585,22 +594,6 @@ input.button-2 {
 
 .leftServices p {
     padding: 0;
-}
-
-.newMessagesCount {
-    position: absolute;
-    left: 4px;
-    top: 12px;
-    display: block;
-    width: 13px;
-    height: 12px;
-    background: url(../images/elem/inbox.png) no-repeat 0 0;
-    text-align: center;
-    font-size: 9px;
-    line-height: 12px;
-    color: #ffffff;
-    font-family: 'helvetica-light-rnormal';
-    text-decoration: none;
 }
 
 /*-----Tabs---------------------------------------------*/
@@ -1135,19 +1128,19 @@ input.button-2 {
 .userRelationsTab table thead tr td{
     padding: 7px;
 }
-.userRelationsTab  .button-2{
-    padding-right: 30px;
+.userRelationsTab.profile  .button-2{
+    padding-right: 20px;
 }
 #block-confirm, #delete-confirm{
     display: none;
 }
 /*Availability td padding-right */
-.userRelationsTab table tr td:nth-child(1){padding-right: 52px; padding-left: 5px;}
-.userRelationsTab table tr td:nth-child(2){padding-right: 86px; padding-left: 5px;}
-.userRelationsTab table tr td:nth-child(3){padding-right: 98px; padding-left: 5px;}
-.userRelationsTab table tr td:nth-child(4){padding-right: 92px;  padding-left: 5px;}
-.userRelationsTab table tr td:nth-child(5){padding-right: 97px;}
-.userRelationsTab table tbody td:nth-child(5){  padding-left: 36px; padding-right: 0;}
+.userRelationsTab.profile table tr td:nth-child(1){padding-right: 52px; padding-left: 5px;}
+.userRelationsTab.profile table tr td:nth-child(2){padding-right: 86px; padding-left: 5px;}
+.userRelationsTab.profile table tr td:nth-child(3){padding-right: 98px; padding-left: 5px;}
+.userRelationsTab.profile table tr td:nth-child(4){padding-right: 92px;  padding-left: 5px;}
+.userRelationsTab.profile table tr td:nth-child(5){padding-right: 97px;}
+.userRelationsTab.profile table tbody td:nth-child(5){  padding-left: 36px; padding-right: 0;}
 /*---NOTIFICATIONS/CHANGE PASSWORD-----------------------------------------------------------------*/
 .notificationsTab label, .notificationsTab .passwordRecoveryBlock{
   font-family: 'helvetica-light-rnormal';
@@ -1381,7 +1374,7 @@ input.button-2 {
 .messageTab .rightMessageBlock{
     float:right;
 }
-.messageTab  .messageButtons.trashBox{
+.messageTab  .messageButtons.trashBox span{
     float:right;
 }
 .sendMessageBox {
@@ -1633,6 +1626,9 @@ input.button-2 {
 .resumeGeneral .delete {
     margin-left: 15px;
 }
+.resumeGeneral .save{
+    margin-left: 15px;
+}
 /*--- UPLOADIFIVE -----------------------------------------------------------------*/
 #queue{
     display: inline-block;
@@ -1647,4 +1643,272 @@ input.button-2 {
 }
 .uploadifive-queue-item .close{
 float:right;
+}
+
+/*----USER PROFILE ----------------------------------------------------------------------------------------------*/
+
+.infoBox ul.userInfo li{
+    display: block;
+    padding-left: 15px;
+    float:none !important;
+    line-height: 17px;
+}
+.infoBox ul.userInfo li.userName{
+    padding-left: 0;
+    padding-bottom:10px;
+    font:600 13px 'helvetica-light-rnormal';
+}
+.userInfo  .birthday{
+    background: url("../img/design/accountLayout/glyphicons/gift.png") no-repeat scroll 0 42% transparent;
+}
+
+.userInfo  .gender{
+    background: url("../img/design/accountLayout/glyphicons/gift.png") no-repeat scroll 0 42% transparent;
+}
+.userInfo  .education{
+    background: url("../img/design/accountLayout/glyphicons/university.png") no-repeat scroll 0 42% transparent;
+}
+.userInfo  .degree{
+    background: url("../img/design/accountLayout/glyphicons/degree.png") no-repeat scroll 0 42% transparent;
+}
+.userInfo .language{
+    background: url("../img/design/accountLayout/glyphicons/language.png") no-repeat scroll 0 42% transparent;
+}
+.userInfo .gender{
+    background: url("../img/design/accountLayout/glyphicons/female.png") no-repeat scroll 0 42% transparent;
+}
+.userInfo .address{
+    background: url("../img/design/accountLayout/glyphicons/address.png") no-repeat scroll 0 42% transparent;
+}
+.userInfo .mail{
+    background: url("../img/design/accountLayout/glyphicons/mail.png") no-repeat scroll 0 42% transparent;
+}
+.userInfo .phone{
+    background: url("../img/design/accountLayout/glyphicons/phone.png") no-repeat scroll 0 42% transparent;
+}
+/********* LESSON *******************/
+.userRelationsTab.lesson tbody td{
+    padding-left: 4px;
+}
+.userRelationsTab.lesson td.username{
+    width:150px;
+}
+.userRelationsTab.lesson td.startTime{
+    width:104px;
+}
+.userRelationsTab.lesson td.focusName{
+    width:140px;
+}
+.center{
+    text-align:center;
+}
+.userRelationsTab.lesson .button.pay{
+    padding-left:15px;
+    padding-right:15px;
+}
+.userRelationsTab.lesson .button.send{
+    padding-left:12px;
+    padding-right:12px;
+}
+.checBoxGrey{
+    background: url(../images/elem/checkBoxGrey.png) no-repeat 0 5px;
+    display: inline-block;
+    height: 21px;
+    width: 17px;
+}
+.checBoxGrey.empty{
+    background-position: -16px 6px;
+}
+
+/** ********************* user profile tab ***************************************************************/
+
+/*User profile*/
+.userProfileTab{
+    background: #ffffff;
+    width: 805px;
+    margin: 30px 5px 0;
+    padding: 20px 31px 0px;
+    box-shadow: 0 0 5px #e5e5e5;
+    -moz-box-shadow: 0 0 5px #e5e5e5; /* Firefox */
+    -webkit-box-shadow: 0 0 5px #e5e5e5; /* Safari, Chrome */
+    min-height: 450px;
+}
+.userProfileTab .addAccount{
+    background: url("../img/design/accountLayout/glyphicons/add.png") no-repeat scroll 0 52% transparent;
+    border: medium none;
+    color: #1D3300;
+    float: right;
+    font: 12px dosis-semibold-middle;
+    padding-left: 19px;
+    position: relative;
+    right: -13px;
+    text-decoration: none;
+    top: -35px;
+    width: 140px;
+}
+.userProfileTab .imageBlock{
+    float:left;
+    margin-left: 6px;
+    margin-right: 22px;
+}
+.userProfileTab ul{
+    margin-top:28px;
+    font: 12px helvetica;
+    min-height: 89px;
+}
+.userProfileTab ul li{
+    margin-bottom:-3px;
+}
+.userProfileTab .availability ul{
+    margin-top:28px;
+    font: 12px helvetica;
+    min-height: 89px;
+    margin-left:0;
+}
+.userProfileTab .availability ul li{
+    margin-bottom:-3px;
+    padding-left: 24px;
+    height: 33px;
+    padding-top: 8px;
+}
+.userProfileTab .availability ul li:nth-child(odd){
+    background-color: #FBFCFC;
+}
+.userProfileTab .firstSeparator{
+    background: url("../img/design/accountLayout/1page_middle_separator.png") no-repeat scroll 0 51% transparent;
+    height: 14px;
+    margin-bottom: 28px;
+    margin-top: 2px;
+    width: 800px;
+}
+
+.userProfileTab .services{
+    clear:both;
+}
+.userProfileTab .profileName{
+    position: relative;
+    top: 6px;
+    right: 1px;
+    font: 13px helvetica;
+
+}
+.userProfileTab .profileRole{
+    font: 11px helvetica;
+    right: 1px;
+    top: 9px;
+    position: relative;
+}
+
+.userProfileTab  .birthday{
+    background: url("../img/design/accountLayout/glyphicons/gift.png") no-repeat scroll 0 42% transparent;
+    display: inline-block;
+    padding-left: 15px;
+}
+
+.userProfileTab  .gender{
+    background: url("../img/design/accountLayout/glyphicons/gift.png") no-repeat scroll 0 42% transparent;
+    display: inline-block;
+    padding-left: 15px;
+}
+.userProfileTab  .education{
+    background: url("../img/design/accountLayout/glyphicons/university.png") no-repeat scroll 0 42% transparent;
+    display: inline-block;
+    padding-left: 15px;
+}
+.userProfileTab  .degree{
+    background: url("../img/design/accountLayout/glyphicons/degree.png") no-repeat scroll 0 42% transparent;
+    display: inline-block;
+    padding-left: 15px;
+}
+.userProfileTab .language{
+    background: url("../img/design/accountLayout/glyphicons/language.png") no-repeat scroll 0 42% transparent;
+    display: inline-block;
+    padding-left: 15px;
+}
+.userProfileTab .middleSeparator{
+    background: url('../img/design/accountLayout/middle_double_separator.png') no-repeat;
+    height: 33px;
+    width: 800px;
+    margin-top: 25px;
+    margin-bottom: 13px;
+
+}
+.userProfileTab .middleSeparatorSecond{
+    background: url('../img/design/accountLayout/middle_double_separator.png') no-repeat;
+    height: 33px;
+    width: 800px;
+    margin-top: 32px;
+    margin-bottom: 22px;
+}
+.userProfileTab .title{
+    color:#1d3300;
+    font:12px helvetica;
+}
+.userProfileTab .aboutBlock .aboutMe{
+    font:12px helvetica;
+    margin-top: 11px;
+
+}
+.userProfileTab .services .serviceItem{
+    background-color: #FBFCFC;
+    margin-top: 12px;
+    padding: 6px;
+}
+
+.userProfileTab .services .subCategory{
+    display: inline-block;
+    width:140px;
+    font:12px arial;
+}
+.userProfileTab .services .rate{
+    font:12px helvetica;
+}
+.userProfileTab .services .mainCategory{
+    display: inline-block;
+    font: 700 13px arial;
+    margin-left: 16px;
+    width: 132px;
+}
+.userProfileTab .services .serviceInfo{
+    font:12px helvetica;
+    margin: 12px 0 33px 21px;
+
+}
+
+.userProfileTab .availability{
+    margin-top: 36px;
+}
+
+.userProfileTab .availability .day{
+    display: inline-block;
+    margin-bottom: 21px;
+    width: 168px;
+}
+.userProfileTab .availability .from{
+    display: inline-block;
+    width: 50px;
+    text-align: center;
+    margin-right: 82px;
+}
+.userProfileTab .availability .to{
+    display: inline-block;
+    margin-left: 74px;
+    width: 50px;
+    text-align: center;
+}
+.userProfileTab .availability .dayWrap{
+    background-color: #fbfcfc;
+}
+.userProfileTab .availability .timezone{
+    float:right;
+    font:11px arial;
+    position: relative;
+    right: 29px;
+}
+.userProfileTab  .lastSeparator{
+    background: url("../img/design/accountLayout/2page_middle_separator.png") no-repeat scroll 0 0 transparent;
+    height: 33px;
+    margin-bottom: 25px;
+    margin-top: 30px;
+    width: 800px;
 }

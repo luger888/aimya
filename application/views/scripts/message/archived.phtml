@@ -5,7 +5,7 @@
     <div class="shadowSeparator clearfix">
         <div class="shadowSeparatorBox clearfix">
             <div class="messageButtons trashBox clearfix">
-                <span class="button-2 archived" onclick="document.location='/message/send/'">Move to Archived</span>
+                <span class="button-2 archived" onclick="document.location='/message/send/'">Move to Trash</span>
                 <span class="button-2 inbox" onclick="document.location='/message/send/'">Move to Inbox</span>
                 <span class="button-2 delete" onclick="document.location='/message/send/'">Delete</span>
             </div>
@@ -29,7 +29,7 @@
                             echo '
 	                    <tr>
 	                        <td style="width:804px"><input type="checkbox" class="messageCheckboxes" value="' . $message['id'] . '">
-                                <a href="' . $this->baseUrl() . '/message/view/' . $message['id'] . '">
+                                <a href="' . $this->baseUrl() . '/message/view/' . $message['id'] .'">
                                     <span class="activity'. $activity.'"></span><span class ="messageSender">' . $message['username'] . '</span>
                                     <span class ="messageTheme">' . $message['theme'] . '</span>
                                     <span class = "messageText">' . $text . '</span></a>
@@ -57,3 +57,4 @@
     <!-- END shadowSeparator -->
 </div>
 <!-- END messageTab -->
+

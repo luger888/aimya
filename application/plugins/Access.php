@@ -40,6 +40,7 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         $acl->addResource('friends');
         $acl->addResource('search');
         $acl->addResource('booking');
+        $acl->addResource('payment');
         $acl->addResource('test');
 
         #allow to user
@@ -51,6 +52,7 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         $acl->allow(self::STUDENT , 'message', array('inbox', 'send', 'sent', 'trash', 'archived'));
         $acl->allow(self::STUDENT , 'search', array('search'));
         $acl->allow(self::STUDENT , 'booking', array('index'));
+        $acl->allow(self::STUDENT , 'payment', array('index'));
         $acl->deny(self::STUDENT , 'user', array('index', 'registration', 'login'));
         $acl->allow(self::TEACHER , 'lesson', array('setup', 'upload'));
 
@@ -60,10 +62,11 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         $acl->allow(self::GUEST , 'index', array('index'));
         $acl->allow(self::GUEST , 'user', array('index','registration', 'login'));
         $acl->allow(self::GUEST , 'error', array('index'));
+        $acl->allow(self::GUEST , 'test', array('index', 'paypal', 'response', 'responsenew'));
         #allow to admin
         $acl->allow(self::ADMIN , 'admin', array('index', 'payments', 'metrics'));
         $acl->allow(self::ADMIN , 'search', array('reindex'));
-        $acl->allow(self::ADMIN , 'test', array('index'));
+        $acl->allow(self::ADMIN , 'test', array('index', 'paypal'));
 
         Zend_Registry::set('Zend_Acl',$acl);
 

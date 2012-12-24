@@ -19,10 +19,6 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
         $identity = Zend_Auth::getInstance()->getStorage()->read();
         $this->view->headScript()->appendFile('../../js/jquery/resume/resume.js');
         $this->view->headScript()->appendFile('../../js/jquery/jquery.uploadifive.js');
-        $servicesModel = new Application_Model_DbTable_ServiceDetail();
-        $this->view->services = $servicesModel->getServiceByUser($identity->id, 1);
-        $this->view->servicesOffered = $servicesModel->getServiceByUser($identity->id, 2);
-
         $profileModel = new Application_Model_Profile();
         $this->view->profile = $profileModel->getProfileAccount($identity->id);
         $this->view->avatarPath = $profileModel->getAvatarPath($identity->id, 'base'); //path to avatar
@@ -72,6 +68,13 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
 
         $dbSkills = new Application_Model_DbTable_ResumeSkills();
         $this->view->skillList = $dbSkills->getSkills($identity->id);
+//        if ($handle = opendir('./img/uploads/'.$identity->id .'/certificate/skill/21/')) {
+//            $certificates = array();
+//            while (false !== ($entry = readdir($handle))) {
+//                $certificates[] .= $entry;
+//            }
+//
+//        }
     }
 
     public function ajaxAction()
@@ -170,10 +173,10 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
 
 
         $folderModel = new Application_Model_Folder();
-        $folderModel->createFolderChain('/img/uploads/' .$identity->id .'/certificate/' . $_POST['resumeType'] .'/'. $_POST['resumeTypeId'] .'/');//creating chain of folders
+        $folderModel->createFolderChain('/img/uploads/' . $identity->id . '/certificate/' . $_POST['resumeType'] . '/' . $_POST['resumeTypeId'] . '/'); //creating chain of folders
         // Set the upload directory
         // $_POST['resumeType']  == experience, education or skill
-        $uploadDir = '/img/uploads/' .$identity->id .'/certificate/' . $_POST['resumeType'] .'/'. $_POST['resumeTypeId'] .'/';
+        $uploadDir = '/img/uploads/' . $identity->id . '/certificate/' . $_POST['resumeType'] . '/' . $_POST['resumeTypeId'] . '/';
 
 
         // Set the allowed file extensions

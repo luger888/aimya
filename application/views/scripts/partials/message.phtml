@@ -1,12 +1,11 @@
 <div class="messageHeader clearfix">
-
-        <div id="tabsNavigation" class="clearfix">
-    <?php
-    echo $this->navigation()
-        ->menu()
-        ->setMaxDepth(0)
-        ->setUlClass('nav nav-tabs nav-stacked messageTabs')
-        ->render(new Aimya_Navigation($this->navigation()->findAllBy('tag', 'messageMenu', true)));
-    ?>
-</div>
+    <div id="tabsNavigation" class="clearfix">
+        <?php
+        echo $this->navigation()
+            ->menu()
+            ->setMaxDepth(0)
+            ->setUlClass('nav nav-tabs nav-stacked messageTabs')
+            ->render(new Aimya_Navigation($this->navigation()->findAllBy('tag', 'messageMenu', true)));
+        ?>
     </div>
+</div>

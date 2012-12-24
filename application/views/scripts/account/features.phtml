@@ -1,8 +1,9 @@
 <div class="featuresTab mainContainer clearfix">
 
     <div class="filters clearfix">
-
-        <span class="selectBox s-111"><?php echo $this->filters->author; ?></span>
+        <?php if(Zend_Auth::getInstance()->getIdentity()->role != 1): ?>
+            <span class="selectBox s-111"><?php echo $this->filters->author; ?></span>
+        <?php endif;?>
         <span class="selectBox s-123"><?php echo $this->filters->lesson_category; ?></span>
         <p>Display:</p>
 
@@ -10,7 +11,7 @@
 
     <?php $profileModel = new Application_Model_Profile(); ?>
     <div class="messageContent clearfix">
-
+    <input id="featured_count" type="hidden" value="<?php echo $this->featuredCount['featuredCount']; ?>">
         <?php //Zend_Debug::dump($this->featured); ?>
         <?php foreach ($this->featured as $person): ?>
 
@@ -26,14 +27,16 @@
                 <?php $friendTable = new Application_Model_DbTable_Friends(); ?>
                 <?php $isFriend = $friendTable->isFriend($person['id']); ?>
                 <?php $isPending = $friendTable->isPending($person['id']); ?>
-                <?php  if($isFriend){ // if friend, dont show the add to account button
-                    echo "<a class ='sendMessage' href=#>" . $this->translate('SEND MESSAGE') . "</a>";
-                }elseif($isPending){
-                    echo "<span class ='request_sent'>" . $this->translate('REQUEST SENT') . "</span>";
-                }else{
-                    echo "<a class ='button-2 add addAccount' href=#>" . $this->translate('ADD TO MY ACCOUNT') . "</a>";
-                }
-                ?>
+                <?php if(Zend_Auth::getInstance()->getIdentity()->id != $person['id']): ?>
+                    <?php  if($isFriend){ // if friend, dont show the add to account button
+                        echo "<a class ='sendMessage' onclick='sendMessage(" . $person['id'] . ", this)' href='javascript:void(1)'>" . $this->translate('SEND MESSAGE') . "</a>";
+                    }elseif($isPending){
+                        echo "<span class ='request_sent'>" . $this->translate('REQUEST SENT') . "</span>";
+                    }else{
+                        echo "<a class ='button-2 add addAccount' onclick='addToFriend(" . $person['id'] . ", this);' href='javascript:void(1)'>" . $this->translate('ADD TO MY ACCOUNT') . "</a>";
+                    }
+                    ?>
+                <?php endif;?>
                 <?php echo '<input type="hidden" value = "' .$person["id"]. '">';?>
 
             </div><!--End featuredButtonsTop-->

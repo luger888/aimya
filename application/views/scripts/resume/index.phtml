@@ -14,15 +14,28 @@
             <div class="resumeGeneral">
                 <div class="shadowSeparator clearfix">
                     <div class="shadowSeparatorBox clearfix">
-                        <img class="resumePhoto" src="<?php echo$this->avatarPath;?>">
-                        <?php
+                        <div class="avatarBox floatLeft">
+                            <img class="resumePhoto" src="<?php echo $this->avatarPath;?>">
+                        </div>
+                        <div class="infoBox floatLeft">
 
-                        echo $this->profile['firstname'] . ' ' . $this->profile['lastname'] . '<br>';
-                        foreach ($this->services as $value):
-                            echo $value['subcategory'] . ' ';
-                        endforeach;
-                        echo  '<br>' . $this->profile['email'];
-                        ?>
+                            <ul class = "userInfo">
+                                <li class = "userName"><?php echo $this->profile['firstname'] . ' ' . $this->profile['lastname'];?></li>
+                                <?php if ($this->profile['birthday']) echo '<li class = "birthday">' . $this->profile["birthday"] . '</li>';?>
+                                <?php if ($this->profile['gender']) echo '<li class = "gender">' . $this->profile["gender"] . '</li>';?>
+                                <?php if ($this->profile['email']) echo '<li class = "mail">' . $this->profile["email"] . '</li>';?>
+                                <?php if ($this->profile['language']) echo '<li class = "language">' . $this->profile["language"] . '</li>';?>
+                                <?php if ($this->profile['education']) echo '<li class = "education">' . $this->profile["education"] . '</li>';?>
+                                <?php if ($this->profile['degree']) echo '<li class = "degree">' . $this->profile["degree"] . '</li>';?>
+                                <?php if ($this->profile['address']) echo '<li class = "address">' . $this->profile["address"] . '</li>';?>
+                                <?php if ($this->profile['telephone']) echo '<li class = "phone">' . $this->profile["telephone"] . '</li>';?>
+                            </ul>
+
+                        </div>
+                        <div class="buttonsRow floatRight">
+                            <input type="button" class="button-2 edit" value="edit">
+                            <input type="button" class="button-2 save" value="save">
+                        </div>
                     </div>
                     <!--End shadowSeparatorBox-->
                 </div>
