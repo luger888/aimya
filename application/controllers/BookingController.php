@@ -15,6 +15,7 @@ class BookingController extends Zend_Controller_Action
 
     public function indexAction()
     {
+        $userDbTable = new Application_Model_DbTable_Users();
         $this->view->headLink()->appendStylesheet('../../js/fullcalendar/fullcalendar.css');
         $this->view->headScript()->appendFile('../../js/fullcalendar/fullcalendar.js');
         $identity = Zend_Auth::getInstance()->getIdentity();
@@ -23,7 +24,7 @@ class BookingController extends Zend_Controller_Action
         $this->view->booking = $bookingDbTable->getBookingByUser($identity->id);
         $this->view->id = $identity->id;
         $this->view->role = $identity->role;
-        $this->view->timezone = $identity->timezone;
+        $this->view->timezone = $userDbTable->getTimeZone($identity->id);
     }
 
     public function addAction() {
