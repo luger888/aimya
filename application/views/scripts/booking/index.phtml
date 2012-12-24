@@ -450,6 +450,10 @@ jQuery(document).ready(function () {
     $('#started_at').datetimepicker();
 
     $('#sendBooking').click(function () {
+
+        if($('input[name=role]:checked').val() == '2'){
+            var role = '0';
+        }
         $.post(
 
             pathName + "/booking/add/0/controller%3D%3Ebooking/1/action%3D%3Eadd", {
@@ -461,7 +465,7 @@ jQuery(document).ready(function () {
                 "video":$('#video:checked').val() || 0,
                 "notes":$('#notes:checked').val() || 0,
                 "rate":$('#rate').val(),
-                "is_sender_teacher":$('input[name=role]:checked').val() || 0,
+                "is_sender_teacher":role || 1,
                 "add_info":$('#add_info').val()
 
 
