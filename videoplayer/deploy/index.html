@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='utf-8'?><!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN'   'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' lang='en'>
+<head>
+<meta http-equiv='X-UA-Compatible' content='IE=EmulateIE7' />
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<meta http-equiv='Content-Script-Type' content='text/javascript' />
+<title>Dynamic Video Player v5</title>
+<style type="text/css">
+body {
+	margin: 0;
+	padding: 0;
+	background:url(background.jpg);
+	height:100%;
+	width: 100%;
+	font-family:Tahoma, Geneva, sans-serif;
+	color:#FFF;
+	font-size:16px;
+}
+#flash{
+display: block;
+}
+html{
+	margin:0;
+	padding:0;
+	height:100%;
+	width: 100%;
+}
+</style>
+<script type='text/javascript' src='js/swfobject.js'></script>
+
+<script type='text/javascript'>
+// first video demo
+var flashvars = {};
+var params = {};
+var attributes = {};
+
+params.codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0';
+params.width='640';
+params.height='360';
+params.quality='high';
+params.align='middle';
+params.play='true';
+params.loop='true';
+params.scale='showall';
+params.wmode='transparent';
+params.devicefont='false';
+params.bgcolor='#2e2e2e',
+params.allowFullScreen='true';
+params.allowScriptAccess='sameDomain';
+params.salign='';
+
+// SETUP
+/* <![CDATA[ */
+flashvars.width='800'
+flashvars.height='400'
+flashvars.imagepath='image/1.jpg'
+flashvars.videopath='video/video1.flv'
+//flashvars.color='0x2C75A3'
+flashvars.volume='0.3'
+flashvars.fullscreenbutton='on'
+flashvars.infobutton='on'
+flashvars.volumebutton='on'
+flashvars.titletext="<b><font size='16' color='#2C75A3'>Dynamic Video Player V5</font></b>";
+flashvars.descriptiontext="<font size='14'>HTML formatted text, you can write a short description for your movie.</font>";
+flashvars.autoplay='true'
+
+attributes.id = 'vp1';
+/* ]]> */
+
+swfobject.embedSWF('videoplayer.swf', 'vp1', '800', '400', '9.0.0', 'js/expressInstall.swf', flashvars, params, attributes);
+
+</script>
+
+</head>
+<body bgcolor="#666666" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" scroll="no">
+		<table width="100%" height="100%">
+		<th width="100%" height="100%" align="center" valign="middle">
+<div align="center" valign="middle"><div align="center" valign="middle" id='vp1' >You need to upgrade your flash player</div></div>
+</th>
+		</table>
+</body>
+</html>
