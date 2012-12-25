@@ -95,7 +95,8 @@ class LessonController extends Zend_Controller_Action
             $partnerStreamName = '';
             $teacherId = '';
             $studentId = '';
-            if((Zend_Auth::getInstance()->getIdentity()->role > 1)) {
+            $bookingTable = new Application_Model_DbTable_Booking();
+            if(!$bookingTable->isTeacher($result['booking_id'], $userId)) {
                 $teacher = $userModel->getItem($result['partner_id']);
                 $teacherId = $result['partner_id'];
                 $studentId = $result['creator_id'];
@@ -109,7 +110,6 @@ class LessonController extends Zend_Controller_Action
                 $partnerStreamName = $result['creator_stream_name'];
             }
 
-            $bookingTable = new Application_Model_DbTable_Booking();
             $booking = $bookingTable->getItem($result['booking_id']);
 
             if($bookingTable->isTeacher($result['booking_id'], $userId)) {
