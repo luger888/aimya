@@ -71,4 +71,33 @@ class Application_Model_Lesson
             return( false );
         }
     }
+
+    public function payRequest($friendId) {
+        $request = Zend_Controller_Front::getInstance()->getRequest();
+        $url = $request->getScheme() . '://' . $request->getHttpHost();
+        $status = false;
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+
+
+        $userTable = new Application_Model_DbTable_Users();
+        $friend = $userTable->getItem($friendId);
+
+        $user = $userTable->getItem($userId);
+        $accountPage = $url . "/user/{$userId}";
+
+
+            $messageTable = new Application_Model_DbTable_Message();
+            $data = array(
+                'sender_id' => $userId,
+                'recipient_id' => $friendId,
+                'content' => 'Hello ' . $friend["username"] . ', It\' time to pay, my friend. My Account page is <a href="' . $accountPage . '">' . $user["username"] . '</a>' ,
+                'subject' => "Pay Request"
+            );
+            $messageTable->sendMessage($data);
+            if ($status) {
+                return 'request';
+            } else {
+                return false;
+            }
+        }
 }

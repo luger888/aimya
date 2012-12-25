@@ -1558,7 +1558,7 @@ input.button-2 {
 }
 /*JSMessenger, success (green)*/
 
-.success{
+.alert .success{
     font: 11px Arial !important;
     color:#537e6a !important;
     background-color: #cce8bf !important;
@@ -1566,11 +1566,11 @@ input.button-2 {
     border-radius:2px;
 }
 
-.success .flash-success{
+.alert .success .flash-success{
     font: 700 11px Arial !important;
     color: #315b47 !important;
 }
-.success .close {
+.alert .success .close {
     background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat 33% 0;
     top: -17px !important;
     left: 30px !important;
@@ -1711,6 +1711,18 @@ float:right;
 }
 .center{
     text-align:center;
+}
+.button.send.disable{
+
+}
+.userRelationsTab.lesson  .result{
+    font-weight: bold;
+}
+.userRelationsTab.lesson  .result.success{
+    color:#9acd32;
+}
+.userRelationsTab.lesson  .result.pending{
+    color:orange;
 }
 .userRelationsTab.lesson .button.pay{
     padding-left:15px;
