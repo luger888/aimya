@@ -16,4 +16,18 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
     }
 
+    public function payAction()
+    {
+        $payPalModel = new Application_Model_PayPal();
+        $response = $payPalModel->generateRequestXml(54, 127);
+
+        if($response) {
+            echo $response;
+            die;
+        } else {
+
+        }
+
+    }
+
 }

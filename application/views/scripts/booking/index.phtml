@@ -348,7 +348,7 @@ jQuery(document).ready(function () {
 
 
                         var start = msg.booking[c].started_at;
-                        start= new Date(msg.booking[c].started_at);
+                        start = new Date(msg.booking[c].started_at);
 
                         var sender_utc = parseFloat(msg.booking[c].creator_tz.replace(':',"."));
                         var recipient_utc = parseFloat(msg.timezone.replace(':',"."));
@@ -357,11 +357,7 @@ jQuery(document).ready(function () {
 //                        var utc =  msg.booking[c].creator_tz.getTime() + ( msg.booking[c].creator_tz.getTimezoneOffset() * 60000);
                         if (msg.booking[c].recipient_id == msg.user_id) {
                             start = start.addHours(utc);
-                        } else {
-
                         }
-
-                        console.log(sender_utc + '-' + recipient_utc + '=' +utc);
                         events.push({
                             title:msg.booking[c].focus_name,
                             start:start,
@@ -450,6 +446,10 @@ jQuery(document).ready(function () {
     $('#started_at').datetimepicker();
 
     $('#sendBooking').click(function () {
+
+        if($('input[name=role]:checked').val() == '2'){
+            var role = '0';
+        }
         $.post(
 
             pathName + "/booking/add/0/controller%3D%3Ebooking/1/action%3D%3Eadd", {
@@ -461,7 +461,7 @@ jQuery(document).ready(function () {
                 "video":$('#video:checked').val() || 0,
                 "notes":$('#notes:checked').val() || 0,
                 "rate":$('#rate').val(),
-                "is_sender_teacher":$('input[name=role]:checked').val() || 0,
+                "is_sender_teacher":role || 1,
                 "add_info":$('#add_info').val()
 
 

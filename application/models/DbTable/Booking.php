@@ -79,7 +79,6 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
 
     public function getNewBookingCount($userId) {
         $userId = (int)$userId;
-
         $data = $this->select()
             ->from($this->_name, array('id'=>'COUNT(*)'))
             ->where('booking_status=?' , 0)
@@ -98,10 +97,20 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
 
         $result = $data->query()->fetch();
 
-        if($result) {
-            return true;
+        if(!$result) {
+            $query = $this->select()
+                ->from($this->_name)
+                ->where($this->getAdapter()->quoteInto('id=?', (int)$bookingId))
+                ->where($this->getAdapter()->quoteInto('recipient_id=?', (int)$userId))
+                ->where($this->getAdapter()->quoteInto('is_sender_teacher=?', 0));
+            $response = $query->query()->fetch();
+            if($response) {
+                return true;
+            } else {
+                return false;
+            }
         } else {
-            return false;
+            return true;
         }
 
     }
@@ -151,6 +160,31 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
         //Zend_Debug::dump($where);
         $data = array(
             'booking_status'=> 2,
+            'updated_at' => date('Y-m-d H:m:s')
+        );
+
+        $result = $this->update($data, $where);
+
+        if($result) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public function paymentStatus($bookingId, $status)
+    {
+
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+        $where   = array(
+            $this->getAdapter()->quoteInto('id=?', (int)$bookingId),
+            '1' => "(sender_id={$userId} OR recipient_id={$userId})"
+        );
+
+        //Zend_Debug::dump($where);
+        $data = array(
+            'payment_status'=> $status,
             'updated_at' => date('Y-m-d H:m:s')
         );
 

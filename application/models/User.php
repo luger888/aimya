@@ -22,7 +22,7 @@ class Application_Model_User
         $mail->email = $array['email'];
         $mail->password = $array['password'];
         $mail->token = $token;
-        $mail->baseLink = "http://" . $_SERVER['HTTP_HOST'];
+        $mail->baseLink = "http://" . $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance()->getBaseUrl();
 
         if($mail->send()){
 
@@ -114,7 +114,7 @@ class Application_Model_User
             $mail->lastName = $userData['lastname'];
             $mail->email = $data['email'];
             $mail->password = $data['password'];
-            $mail->baseLink = "http://" . $_SERVER['HTTP_HOST'];
+            $mail->baseLink = "http://" . $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance()->getBaseUrl();
             $mail->send();
 
             return 'done';

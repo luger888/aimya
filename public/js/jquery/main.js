@@ -299,4 +299,25 @@ function massArchive(current_action, url) {
 }
 
 
+//LESSONS
+function payRequest(id,booking, e) {
+    var element = $(e);
+    var baseUrl = $('#current_url').val();
+    jQuery("body").append('<div class="loadingIcon"></div>');
+    $.post(
 
+        baseUrl + "/lesson/pay/0/controller%3D%3Elesson/1/action%3D%3Epay", {
+
+            "friend_id": id,
+            "booking_id": booking
+
+        },
+
+        function (response) {
+            jQuery('.loadingIcon').remove();
+
+
+        })
+
+
+};
