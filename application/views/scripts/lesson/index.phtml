@@ -1,5 +1,5 @@
 <?php $availableLesson = $this->availableLesson; ?>
-<?php echo $this->partial('partials/lesson.phtml')?>
+<?php echo $this->partial('partials/lesson.phtml') ?>
 <div class="mainContainer userRelationsTab lesson clearfix">
     <div class="shadowSeparator clearfix">
         <div class="shadowSeparatorBox clearfix">
@@ -9,112 +9,163 @@
             <?php //var_dump($test)?>
 
             <?php $bookings = $this->bookingList; ?>
-            <?php if(!$availableLesson):?>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <td> <?php echo $this->translate('User Name') ?></td>
-                            <!--<td> <?php /*echo $this->translate('Status') */?></td>-->
-                            <td> <?php echo $this->translate('Date/Time') ?></td>
-                            <td> <?php echo $this->translate('Focus Name') ?></td>
-                            <td> <?php echo $this->translate('Video REC') ?></td>
-                            <td> <?php echo $this->translate('Feedback') ?></td>
-                            <td> <?php echo $this->translate('PDF Notes') ?></td>
-                            <td> <?php echo $this->translate('Payment Request') ?></td>
-                            <td> <?php echo $this->translate('Action') ?></td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach($bookings as $booking): ?>
-                            <?php //Zend_Debug::dump($booking)?>
-                            <tr>
-                                <td class ="username">
-                                    <input type="hidden" id="booking_<?php echo $booking['booking']['id']?>" value="<?php echo $booking['booking']['id']?>">
-                                    <?php echo $booking['userData']['firstname'] . ' ' . $booking['userData']['lastname']?>
-                                </td>
-                                <td class ="startTime"><?php echo $booking['booking']['started_at']; ?></td>
-                                <td class ="focusName"><?php echo $booking['booking']['focus_name']; ?></td>
-                                <td class ="center">
-                                    <?php if($booking['booking']['video']){
-                                         echo '<span class ="checBoxGrey"></span>';
-                                }else{
-                                        echo '<span class ="checBoxGrey empty"></span>';
-                                } ?>
-                                </td>
-                                <td class ="center">
-                                    <?php if($booking['booking']['feedback']){
-                                    echo '<span class ="checBoxGrey"></span>';
-                                }else{
-                                    echo '<span class ="checBoxGrey empty"></span>';
-                                } ?>
-                                </td>
-                                <td class ="center">
-                                    <?php if($booking['booking']['notes']){
-                                    echo '<span class ="checBoxGrey"></span>';
-                                }else{
-                                    echo '<span class ="checBoxGrey empty"></span>';
-                                } ?>
-                                </td>
-                                <?php if($bookingTable->isTeacher($booking['booking']['id'], Zend_Auth::getInstance()->getIdentity()->id)): ?>
-                                    <td class ="center"><input type="button" class = "button send"  value="<?php echo $this->translate('Send'); ?>"></td>
-                                <?php else: ?>
-                                    <td class ="center"><input type="button" class = "button pay" value="<?php echo $this->translate('Pay'); ?>"></td>
-                                <?php endif;?>
-                                <td>
-                                    <form method="POST" id='start_session_<?php echo $booking['booking']['id'];?>' action="<?php echo $this->baseUrl() . '/lesson/setup/'?>">
-                                        <input name="student_id" type="hidden" value="<?php echo $booking['userData']['id'];?>">
-                                        <input name="booking_id" type="hidden" value="<?php echo $booking['booking']['id'];?>">
-                                        <?php if($bookingTable->isTeacher($booking['booking']['id'], Zend_Auth::getInstance()->getIdentity()->id)): ?>
-                                            <a href="#" id="<?php echo $booking['userData']['id'];?>" onclick="jQuery('#start_session_<?php echo $booking['booking']['id'];?>').submit()"><span class ="button-2 play">Start</span></a>
-                                        <?php else: ?>
-                                            <?php echo "something"?>
-                                        <?php endif; ?>
-                                    </form>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+            <?php if (!$availableLesson): ?>
+            <table class="table">
+                <thead>
+                <tr>
+                    <td> <?php echo $this->translate('User Name') ?></td>
+                    <!--<td> <?php /*echo $this->translate('Status') */?></td>-->
+                    <td> <?php echo $this->translate('Date/Time') ?></td>
+                    <td> <?php echo $this->translate('Focus Name') ?></td>
+                    <td> <?php echo $this->translate('Video REC') ?></td>
+                    <td> <?php echo $this->translate('Feedback') ?></td>
+                    <td> <?php echo $this->translate('PDF Notes') ?></td>
+                    <td> <?php echo $this->translate('Payment Request') ?></td>
+                    <td> <?php echo $this->translate('Action') ?></td>
+                </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($bookings as $booking): ?>
+                    <?php //Zend_Debug::dump($booking)?>
+                <tr>
+                    <td class="username">
+                        <input type="hidden" id="booking_<?php echo $booking['booking']['id']?>"
+                               value="<?php echo $booking['booking']['id']?>">
+                        <?php echo $booking['userData']['firstname'] . ' ' . $booking['userData']['lastname']?>
+                    </td>
+                    <td class="startTime"><?php echo $booking['booking']['started_at']; ?></td>
+                    <td class="focusName"><?php echo $booking['booking']['focus_name']; ?></td>
+                    <td class="center">
+                        <?php if ($booking['booking']['video']) {
+                        echo '<span class ="checBoxGrey"></span>';
+                    } else {
+                        echo '<span class ="checBoxGrey empty"></span>';
+                    } ?>
+                    </td>
+                    <td class="center">
+                        <?php if ($booking['booking']['feedback']) {
+                        echo '<span class ="checBoxGrey"></span>';
+                    } else {
+                        echo '<span class ="checBoxGrey empty"></span>';
+                    } ?>
+                    </td>
+                    <td class="center">
+                        <?php if ($booking['booking']['notes']) {
+                        echo '<span class ="checBoxGrey"></span>';
+                    } else {
+                        echo '<span class ="checBoxGrey empty"></span>';
+                    } ?>
+                    </td>
+                    <?php                         $date = gmdate("Y-m-d H:i:s");
+                    $userTable = new Application_Model_DbTable_Users();
+                    //                        if()
+                    $userGmt = $userTable->getTimeZone($this->userId);
+                    $timeZone = str_replace(':', '.', $userGmt['timezone']);
+                    $timeToAdd = floatval($timeZone);
+
+                    $dateWithUTC = gmdate("m/d/Y H:i", strtotime($date) + (($timeToAdd+1) * 3600)); //adding timezone
+                    ?>
+                    <?php $user_id = $booking['userData']['id'];
+                    if ($bookingTable->isTeacher($booking['booking']['id'], Zend_Auth::getInstance()->getIdentity()->id)):?>
+
+                        <?php if ($booking['booking']['payment_status'] == '0'):
+
+                        echo date(strtotime($booking['booking']['started_at']) - strtotime($dateWithUTC)) . '<br>';
+                        echo $booking['booking']['started_at'] . 'start<br>';
+                        echo $dateWithUTC . 'reserve<br>';
+                        echo $date . 'GMT = 0<br>';
+                        ?>
+                        <?php if (strtotime($booking['booking']['started_at']) - strtotime($dateWithUTC) <= 600 && strtotime($booking['booking']['started_at']) - strtotime($dateWithUTC) > 0):?>
+
+                        <?php
+
+                        ?>
+                        <td class="center"><input type="button" class="button send"
+                                                  onclick="payRequest(<?php echo $user_id;?>,<?php echo $booking['booking']['id'];?>, this);"
+                                                  value= <?php echo $this->translate('Send'); ?>></td>
+                        <?php else: ?>
+                        <td class="center"><input type="button" class="button send disable"
+                                                  onclick="payRequest(<?php echo $user_id;?>,<?php echo $booking['booking']['id'];?>, this);"
+                                                  value= <?php echo $this->translate('disabled'); ?>></td>
+                        <?php endif; ?>
+                        <?php endif; ?>
+                        <?php if ($booking['booking']['payment_status'] == '1'): ?>
+                        <td class="center result pending">Pending</td>
+                        <?php endif; ?>
+                        <?php if ($booking['booking']['payment_status'] == '2'): ?>
+                        <td class="center result success">Paid</td>
+                        <?php endif; ?>
+                        <?php else: ?>
+                        <?php if (strtotime($booking['booking']['started_at']) - strtotime($dateWithUTC) <= 600 && strtotime($booking['booking']['started_at']) - strtotime($dateWithUTC) > 0 && $booking['booking']['booking_status']=='1'):?>
+                        <td class="center"><input type="button" class="button pay"
+                                                  value="<?php echo $this->translate('Pay'); ?>"></td>
+                            <?php endif;?>
+                        <?php endif;?>
+                    <td>
+                        <?php if ($booking['booking']['payment_status'] == '2'):
+
+                        ?>
+
+                        <form method="POST" id='start_session_<?php echo $booking['booking']['id'];?>'
+                              action="<?php echo $this->baseUrl() . '/lesson/setup/'?>">
+                            <input name="student_id" type="hidden" value="<?php echo $booking['userData']['id'];?>">
+                            <input name="booking_id" type="hidden" value="<?php echo $booking['booking']['id'];?>">
+                            <?php if ($bookingTable->isTeacher($booking['booking']['id'], Zend_Auth::getInstance()->getIdentity()->id)): ?>
+                            <a href="#" id="<?php echo $booking['userData']['id'];?>"
+                               onclick="jQuery('#start_session_<?php echo $booking['booking']['id'];?>').submit()"><span
+                                class="button-2 play">Start</span></a>
+                            <?php else: ?>
+                            <?php echo "something" ?>
+                            <?php endif; ?>
+                        </form>
+                        <?php endif;?>
+                    </td>
+                </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
             <?php else: ?>
-                <tr><td><?php echo "You can't start new lesson because you have active lesson. Go to \"On yhe Air Tab\" to end old lesson"?></td></tr>
+            <tr>
+                <td><?php echo "You can't start new lesson because you have active lesson. Go to \"On yhe Air Tab\" to end old lesson"?></td>
+            </tr>
             <?php endif; ?>
         </div>
     </div>
 </div>
-<?php if(Zend_Auth::getInstance()->getIdentity()->role == 2):?>
+<?php if (Zend_Auth::getInstance()->getIdentity()->role == 2): ?>
 <script type="text/javascript">
 
-    function startSession(id){
+    function startSession(id) {
         var form = $('#start_session');
         var serializedData = form.serialize();
         $('#tabs').tabs('select', 1);
         $.ajax({
-            'url': $('#start_session').attr('action'),
-            'data': ({student_id : id}),
+            'url':$('#start_session').attr('action'),
+            'data':({student_id:id}),
             //'data': serializedData,
-            'dataType': 'json',
-            'type': 'get',
-            success: function(data) {
+            'dataType':'json',
+            'type':'get',
+            success:function (data) {
                 $('#flash_element').append(data.flashObj);
             }
         });
     }
 </script>
-<?php elseif(Zend_Auth::getInstance()->getIdentity()->role == 1):?>
+<?php elseif (Zend_Auth::getInstance()->getIdentity()->role == 1): ?>
 <script type="text/javascript">
     function doAjax() {
         $.ajax({
-            'url': '<?php echo $this->baseUrl() . "/lesson/join/";?>',
-            'data': ({student_id : 3}),
+            'url':'<?php echo $this->baseUrl() . "/lesson/join/";?>',
+            'data':({student_id:3}),
             //'data': serializedData,
-            'dataType': 'json',
-            'type': 'get',
-            success: function(data) {
-                if(data.result == true){
+            'dataType':'json',
+            'type':'get',
+            success:function (data) {
+                if (data.result == true) {
                     $('#flash_element').append(data.flashObj);
                     return false;
                 } else {
-                    setTimeout(doAjax,3000);
+                    setTimeout(doAjax, 3000);
                 }
             }
         });
