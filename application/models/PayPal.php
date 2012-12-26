@@ -19,9 +19,7 @@ class Application_Model_PayPal
 
         $cancelUrl = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/lesson/index';
         $returnURL = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/lesson/index';
-        $ipnURL = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment/ipn';
-
-        $this->writeLog($ipnURL);
+        $ipnURL = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment/ipn?booking_id=' . $bookingId;
 
         $profileTable = new Application_Model_DbTable_Profile();
         $bookingTable = new Application_Model_DbTable_Booking();
@@ -54,17 +52,17 @@ class Application_Model_PayPal
         $body_data .= "<cancelUrl>{$cancelUrl}</cancelUrl>";
         $body_data .= "<returnUrl>{$returnURL}</returnUrl>";
         $body_data .= "<currencyCode>USD</currencyCode>";
-        $body_data .= "<FeesPayer>SENDER</FeesPayer>";
+        $body_data .= "<feesPayer>SENDER</feesPayer>";
         $body_data .= "<receiverList>";
         $body_data .= "<receiver>";
         $body_data .= "<amount>{$userProfit}</amount>";
         $body_data .= "<email>{$paypalEmail['paypal_email']}</email>";
-        $body_data .= "<InvoiceID>{$booking['id']}</InvoiceID>";
+        $body_data .= "<invoiceId>{$booking['id']}</invoiceId>";
         $body_data .= "</receiver>";
         $body_data .= "<receiver>";
         $body_data .= "<amount>{$aimyaProfit}</amount>";
         $body_data .= "<email>{$this->amiyaPayPalEmail}</email>";
-        $body_data .= "<InvoiceID>{$booking['id']}</InvoiceID>";
+        $body_data .= "<invoiceId>{$booking['id']}</invoiceId>";
         $body_data .= "</receiver>";
         $body_data .= "</receiverList>";
         $body_data .= "<requestEnvelope>";

@@ -42,8 +42,6 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
     {
         $listener = new Aimya_PayPal_IpnListener();
 
-        $this->writeLog('Yes');
-
         // tell the IPN listener to use the PayPal test sandbox
         $listener->use_sandbox = true;
 
@@ -59,6 +57,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         if($verified){
             $this->writeLog("VALID IPN");
             $this->writeLog($listener->getTextReport());
+            $this->writeLog($_GET);
 
             $bookingTable = new Application_Model_DbTable_Booking();
             //$status = $bookingTable->payLesson($bookingId);
