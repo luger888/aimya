@@ -30,7 +30,6 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
             if($response) {
                 $this->_helper->flashMessenger->addMessage(array('failure'=>'Problem with PayPal url'));
                 $this->redirect($response);
-                $this->writeLog('Yes');
             } else {
                 $this->redirect('/lesson/index');
             }
