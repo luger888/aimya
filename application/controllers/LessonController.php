@@ -29,12 +29,12 @@ class LessonController extends Zend_Controller_Action
         $lessonTable = new Application_Model_DbTable_Lesson();
 
         $lesson = $lessonTable->checkAvailableLesson($userId);
-
+        $lessonModel = new Application_Model_Lesson();
         $bookingTable = new Application_Model_DbTable_Booking();
         $bookingList = $bookingTable->getFullBookingData($userId);
-
+        $extendedBookingList = $lessonModel->extendLesson($bookingList);
         $this->view->availableLesson = $lesson;
-        $this->view->bookingList = $bookingList;
+        $this->view->bookingList = $extendedBookingList;
 
     }
 
