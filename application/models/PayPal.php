@@ -21,14 +21,14 @@ class Application_Model_PayPal
         $returnURL = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/lesson/index';
         $ipnURL = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment/ipn';
 
-
+        $this->writeLog($ipnURL);
 
         $profileTable = new Application_Model_DbTable_Profile();
         $bookingTable = new Application_Model_DbTable_Booking();
 
         $paypalEmail = $profileTable->getPayPalEmail($sellerId);
         $paypalEmail['paypal_email'] = 'seller_1355909799_biz@gmail.com';
-        
+
         $booking = $bookingTable->getItem($bookingId);
 
         $rate = $booking['rate'];
@@ -39,12 +39,12 @@ class Application_Model_PayPal
             $aimyaProfit += $this->videoCost;
         }
         if($booking['notes'] == 1) {
-            $userProfit += $rate - $this->videoCost;
-            $aimyaProfit += $this->videoCost;
+            $userProfit += $rate - $this->notesCost;
+            $aimyaProfit += $this->notesCost;
         }
         if($booking['feedback'] == 1) {
-            $userProfit += $rate - $this->videoCost;
-            $aimyaProfit += $this->videoCost;
+            $userProfit += $rate - $this->feedbackCost;
+            $aimyaProfit += $this->feedbackCost;
         }
 
 
@@ -55,15 +55,16 @@ class Application_Model_PayPal
         $body_data .= "<returnUrl>{$returnURL}</returnUrl>";
         $body_data .= "<currencyCode>USD</currencyCode>";
         $body_data .= "<FeesPayer>SENDER</FeesPayer>";
-        $body_data .= "<InvoiceID>{$booking['id']}</InvoiceID>";
         $body_data .= "<receiverList>";
         $body_data .= "<receiver>";
         $body_data .= "<amount>{$userProfit}</amount>";
         $body_data .= "<email>{$paypalEmail['paypal_email']}</email>";
+        $body_data .= "<InvoiceID>{$booking['id']}</InvoiceID>";
         $body_data .= "</receiver>";
         $body_data .= "<receiver>";
         $body_data .= "<amount>{$aimyaProfit}</amount>";
         $body_data .= "<email>{$this->amiyaPayPalEmail}</email>";
+        $body_data .= "<InvoiceID>{$booking['id']}</InvoiceID>";
         $body_data .= "</receiver>";
         $body_data .= "</receiverList>";
         $body_data .= "<requestEnvelope>";
@@ -109,6 +110,24 @@ class Application_Model_PayPal
         } else {
             return false;
         }
+    }
+
+    public function writeLog($data)
+    {
+
+        if( $fh = @fopen("./img/paypal.txt", "a+") )
+        {
+
+            $data = print_r($data, 1);
+            fwrite($fh, $data);
+            fclose( $fh );
+            return( true );
+        }
+        else
+        {
+            return( false );
+        }
+
     }
 
 }
