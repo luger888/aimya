@@ -20,16 +20,16 @@ class FriendsController extends Zend_Controller_Action
 
                 $friendId = $this->getRequest()->getParam('friend_id');
                 $friendTable = new Application_Model_DbTable_Friends();
-                $url = Zend_Controller_Front::getInstance()->getBaseUrl() . $this->getRequest()->getParam('url');
+                $url = $this->getRequest()->getParam('url');
 
                 $result = $friendTable->addFriend($friendId);
 
                 if($result) {
                     $this->_helper->flashMessenger->addMessage(array('success'=>'Request successfully sent'));
-                    $this->_redirect($url);
+                    $this->redirect($url);
                 } else {
                     $this->_helper->flashMessenger->addMessage(array('failure'=>'Problem with sending request, please try again later'));
-                    $this->_redirect($url);
+                    $this->redirect($url);
                 }
             }
             if($this->getRequest()->getParam('friend_id')){
