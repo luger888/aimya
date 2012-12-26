@@ -235,11 +235,17 @@ class Aimya_PayPal_IpnListener {
         $r .= "\n{$this->getResponse()}\n";
 
         // POST vars
-        for ($i=0; $i<80; $i++) { $r .= '-'; }
+        for ($i=0; $i<100; $i++) { $r .= '-'; }
         $r .= "\n";
 
         foreach ($this->post_data as $key => $value) {
-            $r .= str_pad($key, 25)."$value\n";
+            if($value == 'transaction') {
+                foreach ($this->post_data['transaction'] as $key1 => $value1) {
+                    $r .= str_pad($key1, 40)."$value1\n";
+                }
+            }
+
+            $r .= str_pad($key, 40)."$value\n";
         }
         $r .= "\n\n";
 
