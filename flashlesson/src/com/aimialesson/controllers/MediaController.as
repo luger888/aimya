@@ -22,6 +22,9 @@ package com.aimialesson.controllers
 		}
 		
 		public function setParameters ( parameters : Object ) : void {
+			for (var i in parameters){
+				debug (i+":"+parameters[i]);
+			}
 			if (parameters.myStreamName){
 				Media.getInstance().myStreamName = parameters.myStreamName;
 				debug (parameters.myStreamName);

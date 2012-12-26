@@ -45,6 +45,9 @@ package com.aimialesson.service
 			debug ("AimiaService:makeCall:" + callUrl);
 			aimiaService = new HTTPService();
 			aimiaService.request = params;
+			for (var i in params){
+				debug (i+":"+params[i]);
+			}
 			aimiaService.method = URLRequestMethod.POST;
 			aimiaService.url = callUrl;
 			aimiaService.headers['X-Requested-With'] = "XMLHttpRequest";
@@ -61,6 +64,8 @@ package com.aimialesson.service
 		{
 			debug ("aimiaService_resultHandler:");
 			debug (event.result as String);
+			debug (event.message as String)
+			
 			if (!event.result){
 				debug ("wrong format!");
 				timer.removeEventListener(TimerEvent.TIMER,aimiaService.send);
