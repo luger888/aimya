@@ -12,7 +12,7 @@ class Application_Model_DbTable_Orders extends Application_Model_DbTable_Abstrac
             'payer_id' => $array['payer_id'],
             'seller_id' => $array['seller_id'],
             'booking_id' => $array['booking_id'],
-            'aimya_profit' => $array['booking_id'],
+            'aimya_profit' => $array['aimya_profit'],
             'teacher_profit' => $array['teacher_profit'],
             'pay_key' => $array['pay_key'],
             'status' => 'pending',
