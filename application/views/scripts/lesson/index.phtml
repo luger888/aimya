@@ -74,7 +74,8 @@
                                         <?php echo '<br>НАчало : ' .($booking['booking']['started_at']) . ' - ВРемя резерва : ' . $dateWithUTC;?>
                                         <?php Zend_Debug::dump(strtotime($booking['booking']['started_at']) - strtotime($dateWithUTC) <= 600 && strtotime($booking['booking']['started_at']) - strtotime($dateWithUTC) > 0 ); echo ' time'?>
                                         <?php Zend_Debug::dump($bookingTable->isTeacher($booking['booking']['id'], Zend_Auth::getInstance()->getIdentity()->id)); echo ' isTeacher<br><br>'?>
-                    <td class="center payment">
+            <?php endif;?>
+            <td class="center payment">
                         <!--CASE: Send pay request BUTTON-->
                         <?php if(isset($booking['booking']['sendRequest'])): ?>
                         <input type="button" class="button send"
