@@ -1,7 +1,9 @@
 <?php
 class PaymentController extends Zend_Controller_Action implements Aimya_Controller_AccountInterface
 {
-
+    private $videoCost = 3;
+    private $notesCost = 2;
+    private $feedbackCost = 2;
 
     public function init()
     {
@@ -23,13 +25,46 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
         if(isset($teacherId) && isset($bookingId)) {
             $payPalModel = new Application_Model_PayPal();
-            $xml = $payPalModel->generateXml($teacherId, $bookingId);
+            $bookingTable = new Application_Model_DbTable_Booking();
+            $booking = $bookingTable->getItem($bookingId);
+
+            $rate = $booking['rate'];
+            $userProfit = 0;
+            $aimyaProfit = 0;
+            if($booking['video'] == 1) {
+                $userProfit += $rate - $this->videoCost;
+                $aimyaProfit += $this->videoCost;
+            }
+            if($booking['notes'] == 1) {
+                $userProfit += $rate - $this->notesCost;
+                $aimyaProfit += $this->notesCost;
+            }
+            if($booking['feedback'] == 1) {
+                $userProfit += $rate - $this->feedbackCost;
+                $aimyaProfit += $this->feedbackCost;
+            }
+            $xml = $payPalModel->generateXml($teacherId, $bookingId, $userProfit, $aimyaProfit);
 
             $response = $payPalModel->getAdaptivUrl($xml);
 
             if($response) {
-                $this->_helper->flashMessenger->addMessage(array('failure'=>'Problem with PayPal url'));
-                $this->redirect($response);
+                $paymentTable = new Application_Model_DbTable_Orders();
+
+                $data = array(
+                    'payer_id' => Zend_Auth::getInstance()->getIdentity()->id,
+                    'seller_id' => $teacherId,
+                    'booking_id' => $bookingId,
+                    'aimya_profit' => $aimyaProfit,
+                    'teacher_profit' => $userProfit,
+                    'pay_key' => $response['pay_key'],
+                    'status' => 'pending',
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
+                );
+
+                $paymentTable->addPayment($data);
+
+                $this->redirect($response['url']);
             } else {
                 $this->redirect('/lesson/index');
             }
@@ -57,10 +92,16 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         if($verified){
             $this->writeLog("VALID IPN");
             $this->writeLog($listener->getTextReport());
-            $this->writeLog($_GET);
-
-            $bookingTable = new Application_Model_DbTable_Booking();
-            //$status = $bookingTable->payLesson($bookingId);
+            if($_GET['booking_id']) {
+                $bookingId = $_GET['booking_id'];
+                $bookingTable = new Application_Model_DbTable_Booking();
+                $orderTable = new Application_Model_DbTable_Orders();
+                $payKey = $orderTable->getPayKeyFromOrder($bookingId);
+                if($payKey['pay_key'] = $_POST['pay_key']) {
+                    $orderTable->updatePaymentStatus($bookingId);
+                    $bookingTable->payLesson($bookingId);
+                }
+            }
 
         }else{
             $this->writeLog("INVALID IPN");

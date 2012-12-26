@@ -2,9 +2,6 @@
 
 class Application_Model_PayPal
 {
-    private $videoCost = 3;
-    private $notesCost = 2;
-    private $feedbackCost = 2;
 
     private $payPalApiLogin = 'saaant_1294144318_biz_api1.mail.ru';
     private $payPalApiPassword = '1294144327';
@@ -13,7 +10,7 @@ class Application_Model_PayPal
     private $adaptivUrl = 'https://svcs.sandbox.paypal.com/AdaptivePayments/Pay';
     private $amiyaPayPalEmail = 'saaant_1294144318_biz@mail.ru';
 
-    public function generateXml($sellerId, $bookingId) {
+    public function generateXml($sellerId, $bookingId, $userProfit, $aimyaProfit) {
 
         $request = Zend_Controller_Front::getInstance()->getRequest();
 
@@ -27,24 +24,6 @@ class Application_Model_PayPal
         $paypalEmail = $profileTable->getPayPalEmail($sellerId);
         $paypalEmail['paypal_email'] = 'seller_1355909799_biz@gmail.com';
 
-        $booking = $bookingTable->getItem($bookingId);
-
-        $rate = $booking['rate'];
-        $userProfit = 0;
-        $aimyaProfit = 0;
-        if($booking['video'] == 1) {
-            $userProfit += $rate - $this->videoCost;
-            $aimyaProfit += $this->videoCost;
-        }
-        if($booking['notes'] == 1) {
-            $userProfit += $rate - $this->notesCost;
-            $aimyaProfit += $this->notesCost;
-        }
-        if($booking['feedback'] == 1) {
-            $userProfit += $rate - $this->feedbackCost;
-            $aimyaProfit += $this->feedbackCost;
-        }
-
 
         $body_data  = "<?xml version='1.0'?>";
         $body_data .= "<payRequest>";
@@ -57,12 +36,12 @@ class Application_Model_PayPal
         $body_data .= "<receiver>";
         $body_data .= "<amount>{$userProfit}</amount>";
         $body_data .= "<email>{$paypalEmail['paypal_email']}</email>";
-        $body_data .= "<invoiceId>{$booking['id']}</invoiceId>";
+        $body_data .= "<invoiceId>{$bookingId}</invoiceId>";
         $body_data .= "</receiver>";
         $body_data .= "<receiver>";
         $body_data .= "<amount>{$aimyaProfit}</amount>";
         $body_data .= "<email>{$this->amiyaPayPalEmail}</email>";
-        $body_data .= "<invoiceId>{$booking['id']}</invoiceId>";
+        $body_data .= "<invoiceId>{$bookingId}</invoiceId>";
         $body_data .= "</receiver>";
         $body_data .= "</receiverList>";
         $body_data .= "<requestEnvelope>";
@@ -104,7 +83,11 @@ class Application_Model_PayPal
         fclose($fp);
 
         if ($ack == 'Success') {
-            return "https://www.sandbox.paypal.com/webscr?cmd=_ap-payment&paykey=" . $paykey;
+            $data = array(
+                'url' => "https://www.sandbox.paypal.com/webscr?cmd=_ap-payment&paykey=" . $paykey,
+                'pay_key' => $paykey
+            );
+            return $data;
         } else {
             return false;
         }
