@@ -54,12 +54,12 @@ class Application_Model_PayPal
         $body_data .= "<cancelUrl>{$cancelUrl}</cancelUrl>";
         $body_data .= "<returnUrl>{$returnURL}</returnUrl>";
         $body_data .= "<currencyCode>USD</currencyCode>";
-        $body_data .= "<FeesPayer>SENDER</FeesPayer>";
+        $body_data .= "<feesPayer>SENDER</feesPayer>";
         $body_data .= "<receiverList>";
         $body_data .= "<receiver>";
         $body_data .= "<amount>{$userProfit}</amount>";
         $body_data .= "<email>{$paypalEmail['paypal_email']}</email>";
-        $body_data .= "<InvoiceID>{$booking['id']}</InvoiceID>";
+        $body_data .= "<invoiceID>{$booking['id']}</invoiceID>";
         $body_data .= "</receiver>";
         $body_data .= "<receiver>";
         $body_data .= "<amount>{$aimyaProfit}</amount>";
