@@ -19,7 +19,7 @@ class Application_Model_PayPal
 
         $cancelUrl = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/lesson/index';
         $returnURL = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/lesson/index';
-        $ipnURL = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment/ipn';
+        $ipnURL = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment/ipn?booking_id=' . $bookingId;
 
         $profileTable = new Application_Model_DbTable_Profile();
         $bookingTable = new Application_Model_DbTable_Booking();
