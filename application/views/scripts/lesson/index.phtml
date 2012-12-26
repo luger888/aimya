@@ -69,6 +69,11 @@
 
 
                     <?php if ($booking['booking']['payment_status'] == '0'):?>
+                    <?php echo $booking['booking']['id'] . 'book_id';?>
+                    <?php echo '<br>НАчало : ' .($booking['booking']['started_at']) . ' - ВРемя резерва : ' . $dateWithUTC;?>
+                    <?php Zend_Debug::dump(strtotime($booking['booking']['started_at']) - strtotime($dateWithUTC) <= 600 && strtotime($booking['booking']['started_at']) - strtotime($dateWithUTC) > 0 ); echo ' time'?>
+                    <?php Zend_Debug::dump($bookingTable->isTeacher($booking['booking']['id'], Zend_Auth::getInstance()->getIdentity()->id)); echo ' isTeacher<br><br>'?>
+
                     <?php if ($bookingTable->isTeacher($booking['booking']['id'], Zend_Auth::getInstance()->getIdentity()->id)): ?>
 
                     <?php if (strtotime($booking['booking']['started_at']) - strtotime($dateWithUTC) <= 600 && strtotime($booking['booking']['started_at']) - strtotime($dateWithUTC) > 0): ?>
