@@ -68,13 +68,7 @@
                     <?php $user_id = $booking['userData']['id'];?>
 
 
-                    <?php if ($booking['booking']['payment_status'] == '0'):
-
-                    echo date(strtotime($booking['booking']['started_at']) - strtotime($dateWithUTC)) . '<br>';
-                    echo $booking['booking']['started_at'] . 'start<br>';
-                    echo $dateWithUTC . 'reserve<br>';
-                    echo $date . 'GMT = 0<br>';
-                    ?>
+                    <?php if ($booking['booking']['payment_status'] == '0'):?>
                     <?php if ($bookingTable->isTeacher($booking['booking']['id'], Zend_Auth::getInstance()->getIdentity()->id)): ?>
 
                     <?php if (strtotime($booking['booking']['started_at']) - strtotime($dateWithUTC) <= 600 && strtotime($booking['booking']['started_at']) - strtotime($dateWithUTC) > 0): ?>
@@ -87,7 +81,7 @@
 
                     <?php endif; ?>
                     <?php endif; ?>
-                    <?php Zend_Debug::dump($user_id);?>
+
                     <?php if ($booking['booking']['booking_status'] == '1' )://BOOKING status == 1(approved) ?>
                         <?php if ($booking['booking']['payment_status'] == '1' && $bookingTable->isTeacher($booking['booking']['id'], Zend_Auth::getInstance()->getIdentity()->id))://PAYMENT status == 1(request to pay has been sent) ?>
                         <td class="center result pending">Pending</td>
