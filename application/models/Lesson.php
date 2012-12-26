@@ -73,8 +73,6 @@ class Application_Model_Lesson
     }
 
     public function payRequest($friendId) {
-        $request = Zend_Controller_Front::getInstance()->getRequest();
-        $url = $request->getScheme() . '://' . $request->getHttpHost();
         $status = false;
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
 
@@ -83,7 +81,7 @@ class Application_Model_Lesson
         $friend = $userTable->getItem($friendId);
 
         $user = $userTable->getItem($userId);
-        $accountPage = $url . "/user/{$userId}";
+        $accountPage = Zend_Controller_Front::getInstance()->getBaseUrl() . "/user/{$userId}";
 
 
             $messageTable = new Application_Model_DbTable_Message();
