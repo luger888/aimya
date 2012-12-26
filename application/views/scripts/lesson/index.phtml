@@ -63,62 +63,79 @@
                     $timeZone = str_replace(':', '.', $userGmt['timezone']);
                     $timeToAdd = floatval($timeZone);
 
-                    $dateWithUTC = gmdate("m/d/Y H:i", strtotime($date) + (($timeToAdd+1) * 3600)); //adding timezone
+                    $dateWithUTC = gmdate("m/d/Y H:i", strtotime($date) + (($timeToAdd + 1) * 3600)); //adding timezone
                     ?>
-                    <?php $user_id = $booking['userData']['id'];
-                    if ($bookingTable->isTeacher($booking['booking']['id'], Zend_Auth::getInstance()->getIdentity()->id)):?>
+                    <?php $user_id = $booking['userData']['id'];?>
 
-                        <?php if ($booking['booking']['payment_status'] == '0'):
 
-                        echo date(strtotime($booking['booking']['started_at']) - strtotime($dateWithUTC)) . '<br>';
-                        echo $booking['booking']['started_at'] . 'start<br>';
-                        echo $dateWithUTC . 'reserve<br>';
-                        echo $date . 'GMT = 0<br>';
-                        ?>
-                        <?php if (strtotime($booking['booking']['started_at']) - strtotime($dateWithUTC) <= 600 && strtotime($booking['booking']['started_at']) - strtotime($dateWithUTC) > 0):?>
+                    <?php if ($booking['booking']['payment_status'] == '0'):
 
-                        <?php
+                    echo date(strtotime($booking['booking']['started_at']) - strtotime($dateWithUTC)) . '<br>';
+                    echo $booking['booking']['started_at'] . 'start<br>';
+                    echo $dateWithUTC . 'reserve<br>';
+                    echo $date . 'GMT = 0<br>';
+                    ?>
+                    <?php if ($bookingTable->isTeacher($booking['booking']['id'], Zend_Auth::getInstance()->getIdentity()->id)): ?>
 
-                        ?>
+                    <?php if (strtotime($booking['booking']['started_at']) - strtotime($dateWithUTC) <= 600 && strtotime($booking['booking']['started_at']) - strtotime($dateWithUTC) > 0): ?>
                         <td class="center"><input type="button" class="button send"
                                                   onclick="payRequest(<?php echo $user_id;?>,<?php echo $booking['booking']['id'];?>, this);"
                                                   value= <?php echo $this->translate('Send'); ?>></td>
                         <?php else: ?>
-                        <td class="center"><input type="button" class="button send disable"
-                                                  onclick="payRequest(<?php echo $user_id;?>,<?php echo $booking['booking']['id'];?>, this);"
-                                                  value= <?php echo $this->translate('disabled'); ?>></td>
+                        <td class="center">waiting to send</td>
                         <?php endif; ?>
-                        <?php endif; ?>
-                        <?php if ($booking['booking']['payment_status'] == '1'): ?>
+
+                    <?php endif; ?>
+                    <?php endif; ?>
+                    <?php Zend_Debug::dump($user_id);?>
+                    <?php if ($booking['booking']['booking_status'] == '1' )://BOOKING status == 1(approved) ?>
+                        <?php if ($booking['booking']['payment_status'] == '1' && $bookingTable->isTeacher($booking['booking']['id'], Zend_Auth::getInstance()->getIdentity()->id))://PAYMENT status == 1(request to pay has been sent) ?>
                         <td class="center result pending">Pending</td>
-                        <?php endif; ?>
-                        <?php if ($booking['booking']['payment_status'] == '2'): ?>
+                        <?php elseif ($booking['booking']['payment_status'] == '2')://PAYMENT status == 2(request  has been paid) ?>
                         <td class="center result success">Paid</td>
                         <?php endif; ?>
-                        <?php else: ?>
-                        <?php if (strtotime($booking['booking']['started_at']) - strtotime($dateWithUTC) <= 600 && strtotime($booking['booking']['started_at']) - strtotime($dateWithUTC) > 0 && $booking['booking']['booking_status']=='1'):?>
-                        <td class="center"><input type="button" class="button pay"
-                                                  value="<?php echo $this->translate('Pay'); ?>"></td>
-                            <?php endif;?>
-                        <?php endif;?>
-                    <td>
+
+                            <?php if (strtotime($booking['booking']['started_at']) - strtotime($dateWithUTC) <= 600 && strtotime($booking['booking']['started_at']) - strtotime($dateWithUTC) > 0): ?>
+                            <?php if($booking['booking']['payment_status'] == '1'):?>
+                            <td>
+                            <form method="POST" id='pay_<?php echo $booking['booking']['id'];?>'
+                                  action="<?php echo $this->baseUrl() . '/payment/pay/'?>">
+                                <input name="teacher_id" type="hidden" value="<?php echo $booking['userData']['id'];?>">
+                                <input name="booking_id" type="hidden" value="<?php echo $booking['booking']['id'];?>">
+                            <a href="#" id="<?php echo $booking['userData']['id'];?>"
+                               onclick="jQuery('#pay_<?php echo $booking['booking']['id'];?>').submit()"><span
+                                class="button-2 play">Pay</span></a>
+                                <?php else: ?>
+                            <?php echo '<td>fail</td>';?>
+                                <?php endif; ?>
+                            </form>
+                            </td>
+
+                        <?php endif; ?>
+                        <?php endif; ?>
+                        <?php if ((strtotime($booking['booking']['started_at']) - strtotime($dateWithUTC) > 600 || strtotime($booking['booking']['started_at']) - strtotime($dateWithUTC) < 0) && $booking['booking']['payment_status'] == '0'): ?>
+                                <td class="center payment">waiting</td>
+                            <?php endif; ?>
+
+
+                    <td> <!--ACTION-->
                         <?php if ($booking['booking']['payment_status'] == '2'):
 
-                        ?>
+                            ?>
 
-                        <form method="POST" id='start_session_<?php echo $booking['booking']['id'];?>'
-                              action="<?php echo $this->baseUrl() . '/lesson/setup/'?>">
-                            <input name="student_id" type="hidden" value="<?php echo $booking['userData']['id'];?>">
-                            <input name="booking_id" type="hidden" value="<?php echo $booking['booking']['id'];?>">
-                            <?php if ($bookingTable->isTeacher($booking['booking']['id'], Zend_Auth::getInstance()->getIdentity()->id)): ?>
-                            <a href="#" id="<?php echo $booking['userData']['id'];?>"
-                               onclick="jQuery('#start_session_<?php echo $booking['booking']['id'];?>').submit()"><span
-                                class="button-2 play">Start</span></a>
-                            <?php else: ?>
-                            <?php echo "something" ?>
-                            <?php endif; ?>
-                        </form>
-                        <?php endif;?>
+                            <form method="POST" id='start_session_<?php echo $booking['booking']['id'];?>'
+                                  action="<?php echo $this->baseUrl() . '/lesson/setup/'?>">
+                                <input name="student_id" type="hidden" value="<?php echo $booking['userData']['id'];?>">
+                                <input name="booking_id" type="hidden" value="<?php echo $booking['booking']['id'];?>">
+                                <?php if ($bookingTable->isTeacher($booking['booking']['id'], Zend_Auth::getInstance()->getIdentity()->id)): ?>
+                                <a href="#" id="<?php echo $booking['userData']['id'];?>"
+                                   onclick="jQuery('#start_session_<?php echo $booking['booking']['id'];?>').submit()"><span
+                                    class="button-2 play">Start</span></a>
+                                <?php else: ?>
+                                <?php echo "something" ?>
+                                <?php endif; ?>
+                            </form>
+                            <?php endif;?>
                     </td>
                 </tr>
                     <?php endforeach; ?>

@@ -315,10 +315,10 @@ class LessonController extends Zend_Controller_Action
                 $result = $bookingTable->paymentStatus($this->getRequest()->getParam('booking_id'), 1);
                 if($result) {
                     $this->_helper->flashMessenger->addMessage(array('success'=>'Request successfully sent'));
-                    $this->_redirect($url);
+                    $this->redirect($url);
                 } else {
                     $this->_helper->flashMessenger->addMessage(array('failure'=>'Problem with sending request, please try again later'));
-                    $this->_redirect($url);
+                    $this->redirect($url);
                 }
 
             }
