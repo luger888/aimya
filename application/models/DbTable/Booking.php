@@ -112,7 +112,6 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
         } else {
             return true;
         }
-
     }
 
     public function getFullBookingData($userId)
