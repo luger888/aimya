@@ -239,7 +239,7 @@ class Aimya_PayPal_IpnListener {
         $r .= "\n";
 
         foreach ($this->post_data as $key => $value) {
-            if($value == 'transaction') {
+            if($key == 'transaction') {
                 foreach ($this->post_data['transaction'] as $key1 => $value1) {
                     $r .= str_pad($key1, 40)."$value1\n";
                 }

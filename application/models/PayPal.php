@@ -21,8 +21,6 @@ class Application_Model_PayPal
         $returnURL = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/lesson/index';
         $ipnURL = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment/ipn';
 
-        $this->writeLog($ipnURL);
-
         $profileTable = new Application_Model_DbTable_Profile();
         $bookingTable = new Application_Model_DbTable_Booking();
 
