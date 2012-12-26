@@ -83,9 +83,13 @@ class BookingController extends Zend_Controller_Action
         $bookingCount = $bookingTable->getNewBookingCount($userId);
         $bookings = $bookingTable->getBookingByUser($userId);
         $bookingPaymentStatus = array();
-        foreach($bookings as $value){
-            $bookingPaymentStatus['status'] = $value['payment_status'];
-            $bookingPaymentStatus['id'] = $value['id'];
+        foreach($bookings as $index=>$value){
+            if($value['payment_status'] == 1){
+                $bookingPaymentStatus[$index]['lesson']['status'] = $value['payment_status'];
+                $bookingPaymentStatus[$index]['lesson']['id'] = $value['id'];
+                $bookingPaymentStatus[$index]['lesson']['is_sender_teacher'] = $value['is_sender_teacher'];
+            }
+
         }
         $this->view->bookingPaymentStatus = $bookingPaymentStatus;
         $this->view->bookingCount = $bookingCount;

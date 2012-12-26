@@ -2,65 +2,99 @@
 
 class Application_Model_PayPal
 {
+    private $videoCost = 3;
+    private $notesCost = 2;
+    private $feedbackCost = 2;
 
-    public function generateRequestXml($sellerId, $bookingId) {
+    private $payPalApiLogin = 'saaant_1294144318_biz_api1.mail.ru';
+    private $payPalApiPassword = '1294144327';
+    private $payPalSignature = 'Abnyp.Z2zyY-WdA4Tu7.O0nvLTCOAOWNAuJ8OQHrTwCU9KUpnW2voS4v';
+    private $payPalApiId = 'APP-80W284485P519543T';
+    private $adaptivUrl = 'https://svcs.sandbox.paypal.com/AdaptivePayments/Pay';
+    private $amiyaPayPalEmail = 'saaant_1294144318_biz@mail.ru';
 
-        $cancelUrl = "http://" . $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance()->getBaseUrl() . '/lesson/index';
-        $returnURL = "http://" . $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance()->getBaseUrl() . '/lesson/index';
-        $ipnURL = "http://" . $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance()->getBaseUrl() . '/test/responsenew';
-        $adaptivUrl = 'https://svcs.sandbox.paypal.com/AdaptivePayments/Pay';
+    public function generateXml($sellerId, $bookingId) {
 
-        $payPalApiLogin = 'saaant_1294144318_biz_api1.mail.ru';
-        $payPalApiPassword = '1294144327';
-        $payPalSignature = 'Abnyp.Z2zyY-WdA4Tu7.O0nvLTCOAOWNAuJ8OQHrTwCU9KUpnW2voS4v';
-        $payPalApiId = 'APP-80W284485P519543T';
+        $request = Zend_Controller_Front::getInstance()->getRequest();
+
+        $cancelUrl = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/lesson/index';
+        $returnURL = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/lesson/index';
+        $ipnURL = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment/ipn';
 
 
-        $userTable = new Application_Model_DbTable_Users();
+
+        $profileTable = new Application_Model_DbTable_Profile();
         $bookingTable = new Application_Model_DbTable_Booking();
 
-        $seller = $userTable->getItem($sellerId);
+        $paypalEmail = $profileTable->getPayPalEmail($sellerId);
+        $paypalEmail['paypal_email'] = 'seller_1355909799_biz@gmail.com';
+        
         $booking = $bookingTable->getItem($bookingId);
 
+        $rate = $booking['rate'];
+        $userProfit = 0;
+        $aimyaProfit = 0;
+        if($booking['video'] == 1) {
+            $userProfit += $rate - $this->videoCost;
+            $aimyaProfit += $this->videoCost;
+        }
+        if($booking['notes'] == 1) {
+            $userProfit += $rate - $this->videoCost;
+            $aimyaProfit += $this->videoCost;
+        }
+        if($booking['feedback'] == 1) {
+            $userProfit += $rate - $this->videoCost;
+            $aimyaProfit += $this->videoCost;
+        }
+
+
         $body_data  = "<?xml version='1.0'?>";
-        $body_data .= " <payRequest>";
-        $body_data .= " <actionType>PAY</actionType>";
-        $body_data .= " <cancelUrl>{$cancelUrl}</cancelUrl>";
-        $body_data .= " <returnUrl>{$returnURL}</returnUrl>";
-        $body_data .= " <currencyCode>USD</currencyCode>";
-        $body_data .= " <receiverList>";
-        $body_data .= "  <receiver>";
-        $body_data .= "   <amount>3</amount>";
-        $body_data .= "   <email>seller_1355909799_biz@gmail.com</email>";
-        $body_data .= "  </receiver>";
-        $body_data .= "  <receiver>";
-        $body_data .= "   <amount>5</amount>";
-        $body_data .= "   <email>saaant_1294144318_biz@mail.ru</email>";
-        $body_data .= "  </receiver>";
-        $body_data .= " </receiverList>";
-        $body_data .= " <requestEnvelope>";
-        $body_data .= "  <errorLanguage>en_US</errorLanguage>";
-        $body_data .= " </requestEnvelope>";
+        $body_data .= "<payRequest>";
+        $body_data .= "<actionType>PAY</actionType>";
+        $body_data .= "<cancelUrl>{$cancelUrl}</cancelUrl>";
+        $body_data .= "<returnUrl>{$returnURL}</returnUrl>";
+        $body_data .= "<currencyCode>USD</currencyCode>";
+        $body_data .= "<FeesPayer>SENDER</FeesPayer>";
+        $body_data .= "<InvoiceID>{$booking['id']}</InvoiceID>";
+        $body_data .= "<receiverList>";
+        $body_data .= "<receiver>";
+        $body_data .= "<amount>{$userProfit}</amount>";
+        $body_data .= "<email>{$paypalEmail['paypal_email']}</email>";
+        $body_data .= "</receiver>";
+        $body_data .= "<receiver>";
+        $body_data .= "<amount>{$aimyaProfit}</amount>";
+        $body_data .= "<email>{$this->amiyaPayPalEmail}</email>";
+        $body_data .= "</receiver>";
+        $body_data .= "</receiverList>";
+        $body_data .= "<requestEnvelope>";
+        $body_data .= "<errorLanguage>en_US</errorLanguage>";
+        $body_data .= "</requestEnvelope>";
         $body_data .= "<ipnNotificationUrl>{$ipnURL}</ipnNotificationUrl>";
         $body_data .= "</payRequest>";
 
+        return $body_data;
+
+    }
+
+    public function getAdaptivUrl($xml) {
         $params = array(
             "http" => array(
                 "method" => "POST",
-                "content" => $body_data,
+                "content" => $xml,
 
                 "header" => "Content-type: application/x-www-form-urlencoded\r\n" .
-                    "Content-Length: " . strlen ( $body_data ) . "\r\n" .
-                    "X-PAYPAL-SECURITY-USERID: {$payPalApiLogin}\r\n" .
-                    "X-PAYPAL-SECURITY-SIGNATURE: {$payPalSignature}\r\n" .
-                    "X-PAYPAL-SECURITY-PASSWORD: {$payPalApiPassword}\r\n" .
-                    "X-PAYPAL-APPLICATION-ID: {$payPalApiId}\r\n" .
+                    "Content-Length: " . strlen ( $xml ) . "\r\n" .
+                    "X-PAYPAL-SECURITY-USERID: {$this->payPalApiLogin}\r\n" .
+                    "X-PAYPAL-SECURITY-SIGNATURE: {$this->payPalSignature}\r\n" .
+                    "X-PAYPAL-SECURITY-PASSWORD: {$this->payPalApiPassword}\r\n" .
+                    "X-PAYPAL-APPLICATION-ID: {$this->payPalApiId}\r\n" .
                     "X-PAYPAL-REQUEST-DATA-FORMAT: XML\r\n" .
                     "X-PAYPAL-RESPONSE-DATA-FORMAT: XML\r\n"
             )
         );
+
         $ctx = stream_context_create($params);
-        $fp = fopen($adaptivUrl, "r", false, $ctx);
+        $fp = fopen($this->adaptivUrl, "r", false, $ctx);
 
         $response = stream_get_contents($fp);
 
@@ -70,12 +104,11 @@ class Application_Model_PayPal
 
         fclose($fp);
 
-        if ($ack === 'Success') {
+        if ($ack == 'Success') {
             return "https://www.sandbox.paypal.com/webscr?cmd=_ap-payment&paykey=" . $paykey;
         } else {
             return false;
         }
-
     }
 
 }

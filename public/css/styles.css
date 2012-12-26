@@ -1697,6 +1697,29 @@ float:right;
     background: url("../img/design/accountLayout/glyphicons/phone.png") no-repeat scroll 0 42% transparent;
 }
 /********* LESSON *******************/
+.messageTabs .newBookingCount {
+    background: url("../img/design/accountLayout/glyphicons/alertMessage.png") no-repeat scroll 0 53% transparent;
+    color: white;
+    display: inline-block;
+    float: left;
+    font-size: 9px;
+    margin-left: 74px;
+    margin-top: -48px;
+    padding-left: 4px;
+    position: absolute;
+    width: 20px;
+}
+.userRelationsTab.lesson .newBookingCount {
+    background: url("../img/design/accountLayout/glyphicons/alertMessage.png") no-repeat scroll 0 53% transparent;
+    color: white;
+    display: inline-block;
+    float: left;
+    font-size: 9px;
+    margin-left: 6px;
+    padding-left: 4px;
+    position: absolute;
+    width: 20px;
+}
 .userRelationsTab.lesson tbody td{
     padding-left: 4px;
 }

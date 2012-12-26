@@ -182,12 +182,26 @@ $(document).ready(function() {
     setInterval(getNewBookingCount, 60000);
     getNewBookingCount();
     function getNewBookingCount() {
-        pathName = $('#current_url').val();
+        var pathName = $('#current_url').val();
         jQuery.ajax({
             url: pathName + "/booking/count",
             type: "get",
             success: function(result) {
-                bookingCount = parseInt(result.bookingCount.id);
+                var bookingCount = parseInt(result.bookingCount.id);
+
+                if($(result.bookingPaymentStatus).length > 0 ){
+                    var lessonLi = $('.leftNavigation').find($('a[href="' + pathName + '/lesson"]')).parent();
+                    lessonLi.append('<span class="newBookingCount">' + $(result.bookingPaymentStatus).length + '</span>')
+
+                    var scheduled = $('.messageTabs').find($('a[href="' + pathName + '/lesson"]')).parent();
+                    scheduled.append('<span class="newBookingCount">' + $(result.bookingPaymentStatus).length + '</span>')
+
+                    for(var i=0; i<result.bookingPaymentStatus.length;i++){
+                        var lesson = $('.userRelationsTab.lesson .table .username').find($('input[value="' + result.bookingPaymentStatus.lesson.id + '"]')).parent();
+                        lesson.append('<span class="newBookingCount">!</span>')
+                    }
+
+                }
                 if(bookingCount > 0) {
                     if($(".newBookingCount").length) $(".newBookingCount").remove();
                     inboxLi = $('.leftNavigation').find($('a[href="' + pathName + '/booking"]')).parent();
