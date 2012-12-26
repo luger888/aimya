@@ -57,6 +57,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         if($verified){
             $this->writeLog("VALID IPN");
             $this->writeLog($listener->getTextReport());
+            $this->writeLog($_POST);
 
             $bookingTable = new Application_Model_DbTable_Booking();
             //$status = $bookingTable->payLesson($bookingId);
