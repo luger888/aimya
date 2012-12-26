@@ -89,4 +89,13 @@ class Application_Model_DbTable_Profile extends Application_Model_DbTable_Abstra
         $where = $this->getAdapter()->quoteInto('user_id = ?', (int)$user_id);
         $this->update($data, $where);
     }
+
+    public function getPayPalEmail($userId){
+
+        $data = $this->select()
+            ->from($this->_name, array('paypal_email'))
+            ->where('user_id=?', (int)$userId);
+
+        return $data->query()->fetch();
+    }
 }
