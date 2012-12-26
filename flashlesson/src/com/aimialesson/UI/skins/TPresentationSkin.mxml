@@ -17,7 +17,7 @@
 		<s:Group id="group" width="{group.height*hostComponent.wScale}" height="100%" >
 			<!--s:BitmapImage id="presentationBG" source="@Embed('flashassets/presentation_background.png')" horizontalCenter="0" verticalCenter="0"/-->
 			<s:RectangularDropShadow id="dropShadow"
-									 alpha="0.21" distance="0"  blRadius="6"
+									 alpha="0.21" distance="0"  blRadius="8"
 									 angle="120" color="#000101" blendMode="multiply"
 									 left="0" top="0" right="0" bottom="0" />
 			<s:Rect id="rectBG"

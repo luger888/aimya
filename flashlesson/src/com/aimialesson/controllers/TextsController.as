@@ -53,6 +53,7 @@ package com.aimialesson.controllers
 			Texts.getInstance().enTexts = getLangTextsAC (Texts.EN);
 			Texts.getInstance().jaTexts = getLangTextsAC (Texts.JA);
 			Texts.getInstance().zhTexts = getLangTextsAC (Texts.ZH);
+			Texts.getInstance().setTexts();
 			this.dispatchEvent( new AppEvent ( AppEvent.LOAD_TEXTS_COMPLETE ) );
 		}
 		

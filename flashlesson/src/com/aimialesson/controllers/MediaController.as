@@ -46,8 +46,8 @@ package com.aimialesson.controllers
 				Actions.getInstance().domain_add = parameters.lang;
 				debug (parameters.lang);
 			}
-			if (parameters.topic){
-				Main.getInstance().topic = parameters.topic;
+			if (parameters.focus_name){
+				Main.getInstance().topic = parameters.focus_name;
 				debug (parameters.topic);
 			}
 			if (parameters.booking_id){

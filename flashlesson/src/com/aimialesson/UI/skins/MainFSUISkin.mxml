@@ -14,6 +14,8 @@
 			import com.aimialesson.model.Main;
 			import com.aimialesson.model.Presentation;
 			import com.aimialesson.model.Texts;
+			import com.aimialesson.model.User;
+			
 		]]>
 	</fx:Script>
 	<s:Group width="{hostComponent.stage_width}" height="{hostComponent.stage_height}" luminosityClip="true">
@@ -30,7 +32,7 @@
 			<s:VGroup id="leftGroup" height="100%" gap="20" width="{videoChatContainer.contentWidth}">
 				<s:RichText id="presentationTitle" text="{Main.getInstance().topic}" styleName="DescriptionStyle" width="100%" />
 				<s:Group width="100%" height="{stopSessionBtn.height}">
-					<s:Button skinClass="com.aimialesson.UI.skins.elements.buttons.StopSessionBtnSkin" id="stopSessionBtn" left="0" buttonMode="true" useHandCursor="true" verticalCenter="0"/>
+					<s:Button skinClass="com.aimialesson.UI.skins.elements.buttons.StopSessionBtnSkin" id="stopSessionBtn" left="0" buttonMode="true" includeInLayout="{User.getInstance().partnerRoleID == User.STUDENT}" visible="{User.getInstance().partnerRoleID == User.STUDENT}" useHandCursor="true" verticalCenter="0"/>
 					<views:MainUIContainer id="remainingTimeContainer" right="0" verticalCenter="0"/>
 				</s:Group>				
 				<views:MainUIContainer id="videoChatContainer" top="0"/>

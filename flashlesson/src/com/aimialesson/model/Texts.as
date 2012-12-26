@@ -41,6 +41,22 @@ package com.aimialesson.model
 		public var zhTexts:Array;
 		public var ruTexts:Array;
 		
+		[Bindable]
+		public var texts:Array;
+		
+		public function setTexts():void { // just an attempt to fix the emty strings issue - on first loading. texts shoul
+			switch (lang){
+				case (Texts.EN)	:	texts = enTexts;
+					break;
+				case (Texts.JA)	:	texts = jaTexts;
+					break;
+				case (Texts.ZH)	:	texts = zhTexts;
+					break;
+				case (Texts.RU)	:	texts = ruTexts;
+					break;
+			}
+		}
+		
 		private static var instance : Texts;
 		
 		public var lang:String = Texts.EN;
@@ -57,6 +73,7 @@ package com.aimialesson.model
 		
 		public function getText ( value : String, upperCase : Boolean = false) : String {
 			var text:String;
+			debug ("getText:" + value);
 			switch (lang){
 				case (Texts.EN)	:	text = enTexts[value];
 									break;
@@ -67,11 +84,16 @@ package com.aimialesson.model
 				case (Texts.RU)	:	text = ruTexts[value];
 									break;
 			}
+			debug (text);
 			if (upperCase)
 				return text.toLocaleUpperCase();
 			else return text;
 		}
 		
 		
+		private function debug ( str : String ) : void {
+			if (Main.getInstance().debugger != null)
+				Main.getInstance().debugger.text += str + "\n";
+		}
 	}
 }
