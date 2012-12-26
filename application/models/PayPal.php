@@ -50,9 +50,7 @@ class Application_Model_PayPal
 
         $body_data  = "<?xml version='1.0'?>";
         $body_data .= "<payRequest>";
-        $body_data .= "<clientDetails>";
-        $body_data .= "<bookingId>{$booking['id']}</bookingId>";
-        $body_data .= "</clientDetails>";
+        $body_data .= "<invoiceId>{$booking['id']}</invoiceId>";
         $body_data .= "<actionType>PAY</actionType>";
         $body_data .= "<cancelUrl>{$cancelUrl}</cancelUrl>";
         $body_data .= "<returnUrl>{$returnURL}</returnUrl>";
@@ -62,12 +60,12 @@ class Application_Model_PayPal
         $body_data .= "<receiver>";
         $body_data .= "<amount>{$userProfit}</amount>";
         $body_data .= "<email>{$paypalEmail['paypal_email']}</email>";
-        $body_data .= "<invoiceID>{$booking['id']}</invoiceID>";
+        $body_data .= "<invoiceId>{$booking['id']}</invoiceId>";
         $body_data .= "</receiver>";
         $body_data .= "<receiver>";
         $body_data .= "<amount>{$aimyaProfit}</amount>";
         $body_data .= "<email>{$this->amiyaPayPalEmail}</email>";
-        $body_data .= "<InvoiceID>{$booking['id']}</InvoiceID>";
+        $body_data .= "<invoiceId>{$booking['id']}</invoiceId>";
         $body_data .= "</receiver>";
         $body_data .= "</receiverList>";
         $body_data .= "<requestEnvelope>";
