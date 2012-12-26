@@ -146,7 +146,7 @@ class Application_Model_Lesson
             $lesson['booking']['isTeacher']  = $isTeacher;//adding is teacher attr to lesson
 
             $lessons[] = $lesson;
-           
+
         }//END FOREACH
 
         return $lessons;
