@@ -50,6 +50,9 @@ class Application_Model_PayPal
 
         $body_data  = "<?xml version='1.0'?>";
         $body_data .= "<payRequest>";
+        $body_data .= "<clientDetails>";
+        $body_data .= "<bookingId>{$booking['id']}</bookingId>";
+        $body_data .= "</clientDetails>";
         $body_data .= "<actionType>PAY</actionType>";
         $body_data .= "<cancelUrl>{$cancelUrl}</cancelUrl>";
         $body_data .= "<returnUrl>{$returnURL}</returnUrl>";
