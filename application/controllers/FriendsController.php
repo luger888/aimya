@@ -20,7 +20,7 @@ class FriendsController extends Zend_Controller_Action
 
                 $friendId = $this->getRequest()->getParam('friend_id');
                 $friendTable = new Application_Model_DbTable_Friends();
-                $url = $this->getRequest()->getParam('url');
+                $url = Zend_Controller_Front::getInstance()->getBaseUrl() . $this->getRequest()->getParam('url');
 
                 $result = $friendTable->addFriend($friendId);
 
