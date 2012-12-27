@@ -346,7 +346,6 @@ jQuery(document).ready(function () {
                             borderColor = '#c18989';
                         }
 
-
                         var start = msg.booking[c].started_at;
                         start = new Date(msg.booking[c].started_at);
 
@@ -406,10 +405,30 @@ jQuery(document).ready(function () {
                 } else {
                     recipient = $('#recipiend_id option[value="' + event.recipient_id + '"]').text();
                 }
-
+                if(event.booking_status == '1'){
+                    var colorAlt = 'green';
+                }
+                if(event.booking_status == '0'){
+                     colorAlt = 'rose';
+                }
+                if(event.video == '1'){
+                    videoActivity = 'active';
+                }else{
+                    videoActivity ='passive'
+                }
+                if(event.notes == '1'){
+                    notesActivity = 'active';
+                }else{
+                    notesActivity ='passive'
+                }
+                if(event.feedback == '1'){
+                    feedbackActivity = 'active';
+                }else{
+                    feedbackActivity ='passive'
+                }
                 element.find(".fc-event-head").append('<div class ="fc-event-focusName">Focus name: "' + event.title + '"</div>');
                 element.find(".fc-event-head").append('<div class = "fc-event-rate">Rate: $' + event.rate + ' / ' + duration + '</div>');
-                element.find(".fc-event-content").append('<div class = "fc-event-content-alt floatRight"><span class = "videoRec"></span class = "feedback"><span class = "notes"></span><span>rec</span></div>');
+                element.find(".fc-event-content").append('<div class = "fc-event-content-alt floatRight"><span class = "videoRec '+ colorAlt+' '+videoActivity+'"></span> <span class = "feedback '+ colorAlt+' '+feedbackActivity+'"></span><span class = "notes '+ colorAlt+' '+notesActivity+'"></span></div>');
                 element.find(".fc-event-content").append('<div class = "fc-event-content-description"> Description: ' + event.add_info + '</div>');
                 element.find(".fc-event-content").append('<div class = "fc-event-content-requested">Request from: ' + sender + ' , to:  ' + recipient + '</div>');
 
