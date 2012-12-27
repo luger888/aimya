@@ -61,7 +61,7 @@
         //TIME FORMATTING BY TIMEZONES BLOCK
         $identity = Zend_Auth::getInstance()->getIdentity();
         $userTable = new Application_Model_DbTable_Users();
-        $date = gmdate("Y-m-d H:i:s"); //current time in GMT 0
+        $date = gmdate("m/d/Y H:i"); //current time in GMT 0
         $userGmt = $userTable->getTimeZone($identity->id); //getting time zone of logged user
         $separatedData = explode(':', $userGmt['timezone']); //exploding HH: MM by ':'
         $minutesInHours = $separatedData[0] * 60; // HH -> minutes
