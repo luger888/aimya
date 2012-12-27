@@ -91,7 +91,8 @@ class Application_Model_Lesson
         $bookingTable = new Application_Model_DbTable_Booking();
 
         //TIME FORMATTING BY TIMEZONES BLOCK
-        $date = gmdate("Y-m-d H:i:s"); //current time in GMT 0
+        $date = gmdate("m/d/Y H:i"); //current time in GMT 0
+        date_default_timezone_set('Europe/London');
         $userGmt = $userTable->getTimeZone($identity->id); //getting time zone of logged user
         $separatedData = explode(':', $userGmt['timezone']); //exploding HH: MM by ':'
         $minutesInHours = $separatedData[0] * 60; // HH -> minutes
