@@ -81,16 +81,24 @@ class BookingController extends Zend_Controller_Action
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
         $bookingTable = new Application_Model_DbTable_Booking();
         $bookingCount = $bookingTable->getNewBookingCount($userId);
-        $bookings = $bookingTable->getBookingByUser($userId);
+        $lessonModel = new Application_Model_Lesson();
+        $bookingList = $bookingTable->getFullBookingData($userId);
+        $extendedBookingList = $lessonModel->extendLesson($bookingList);
         $bookingPaymentStatus = array();
-        foreach($bookings as $index=>$value){
-            if($value['payment_status'] == 1){
-                $bookingPaymentStatus[$index]['lesson']['status'] = $value['payment_status'];
-                $bookingPaymentStatus[$index]['lesson']['id'] = $value['id'];
-                $bookingPaymentStatus[$index]['lesson']['is_sender_teacher'] = $value['is_sender_teacher'];
+        foreach($extendedBookingList as $value){
+            if(isset($value['booking']['pay'])){ //if need to append payButton for student
+                    $bookingPaymentStatus['booking']['pay'] = 1; //request has been sent, show PAY button
+                    $bookingPaymentStatus['booking']['id'] = $value['booking']['id']; //id of booking
+                    $bookingPaymentStatus['userdata']['id'] = $value['userData']['id']; //id of bookinguserdata
+            }
+             if(isset($value['booking']['sendRequest'])){ //if need to append payButton for student
+                $bookingPaymentStatus['booking']['send'] = 1; //request has been sent, show Send button
+                $bookingPaymentStatus['booking']['id'] = $value['booking']['id']; //id of booking
+                $bookingPaymentStatus['userdata']['id'] = $value['userData']['id']; //id of bookinguserdata
             }
 
         }
+       // Zend_Debug::dump($extendedBookingList);
         $this->view->bookingPaymentStatus = $bookingPaymentStatus;
         $this->view->bookingCount = $bookingCount;
 

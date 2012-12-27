@@ -337,4 +337,3 @@ class LessonController extends Zend_Controller_Action
         }
     }
 }
-
