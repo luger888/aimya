@@ -3,12 +3,12 @@
 class Application_Model_PayPal
 {
 
-    private $payPalApiLogin = 'saaant_1294144318_biz_api1.mail.ru';
-    private $payPalApiPassword = '1294144327';
-    private $payPalSignature = 'Abnyp.Z2zyY-WdA4Tu7.O0nvLTCOAOWNAuJ8OQHrTwCU9KUpnW2voS4v';
+    private $payPalApiLogin = 'aimSto_1356606163_biz_api1.svitla.com';
+    private $payPalApiPassword = '1356606183';
+    private $payPalSignature = 'AFcWxV21C7fd0v3bYYYRCpSSRl31Aqj87aln5rpg.G3x2sFLvAx-YMjX';
     private $payPalApiId = 'APP-80W284485P519543T';
     private $adaptivUrl = 'https://svcs.sandbox.paypal.com/AdaptivePayments/Pay';
-    private $amiyaPayPalEmail = 'saaant_1294144318_biz@mail.ru';
+    private $amiyaPayPalEmail = 'aimSto_1356606163_biz@svitla.com';
 
     public function generateXml($sellerId, $bookingId, $userProfit, $aimyaProfit) {
 
