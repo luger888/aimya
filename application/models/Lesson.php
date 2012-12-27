@@ -146,7 +146,6 @@ class Application_Model_Lesson
             }
             $lesson['booking']['isOnline'] = $isOnline;//adding is online attr to lesson
             $lesson['booking']['isTeacher']  = $isTeacher;//adding is teacher attr to lesson
-            $lesson['booking']['debug'] = '<br>НАчало : ' .($lesson['booking']['started_at']) . ' - ВРемя резерва : ' . $dateWithUTC . ' - current date :' . $date . 'usergmt :' . $userGmt['timezone'];
 
             $lessons[] = $lesson;
 
