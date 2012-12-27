@@ -91,14 +91,16 @@ class Application_Model_Lesson
         $bookingTable = new Application_Model_DbTable_Booking();
 
         //TIME FORMATTING BY TIMEZONES BLOCK
-        $date = gmdate("Y-m-d H:i:s"); //current time in GMT 0
+        date_default_timezone_set('Europe/London');
+        $date = gmdate("m/d/Y H:i"); //current time in GMT 0
+
         $userGmt = $userTable->getTimeZone($identity->id); //getting time zone of logged user
         $separatedData = explode(':', $userGmt['timezone']); //exploding HH: MM by ':'
         $minutesInHours = $separatedData[0] * 60; // HH -> minutes
         $minutesInDecimals = $separatedData[1]; // MM -> minutes
         $totalMinutes = $minutesInHours + $minutesInDecimals; //converted timezone to minutes
         $isTeacher = 0;
-        $dateWithUTC = gmdate("m/d/Y H:i", strtotime($date) + (($totalMinutes+60) * 60)); //adding timezone to current date
+        $dateWithUTC = gmdate("m/d/Y H:i", strtotime($date) + (($totalMinutes) * 60)); //adding timezone to current date
         // END -- TIME FORMATTING BY TIMEZONES BLOCK
 
 
@@ -144,6 +146,7 @@ class Application_Model_Lesson
             }
             $lesson['booking']['isOnline'] = $isOnline;//adding is online attr to lesson
             $lesson['booking']['isTeacher']  = $isTeacher;//adding is teacher attr to lesson
+            $lesson['booking']['debug'] = '<br>НАчало : ' .($lesson['booking']['started_at']) . ' - ВРемя резерва : ' . $dateWithUTC . ' - current date :' . $date . 'usergmt :' . $userGmt['timezone'];
 
             $lessons[] = $lesson;
 

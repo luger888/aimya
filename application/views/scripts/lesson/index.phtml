@@ -59,6 +59,7 @@
 
                                      <?php
         //TIME FORMATTING BY TIMEZONES BLOCK
+                    date_default_timezone_set('Europe/London');
         $identity = Zend_Auth::getInstance()->getIdentity();
         $userTable = new Application_Model_DbTable_Users();
         $date = gmdate("m/d/Y H:i"); //current time in GMT 0
@@ -67,13 +68,12 @@
         $minutesInHours = $separatedData[0] * 60; // HH -> minutes
         $minutesInDecimals = $separatedData[1]; // MM -> minutes
         $totalMinutes = $minutesInHours + $minutesInDecimals; //converted timezone to minutes
-        date_default_timezone_set('Europe/London');
+
         $dateWithUTC = gmdate("m/d/Y H:i", strtotime($date) + (($totalMinutes) * 60)); //adding timezone to current date
         // END -- TIME FORMATTING BY TIMEZONES BLOCK
         if ($booking['booking']['payment_status'] == '0'):?>
                                         <?php echo $booking['booking']['id'] . 'book_id';?>
-                                        <?php echo '<br>НАчало : ' .($booking['booking']['started_at']) . ' - ВРемя резерва : ' . $dateWithUTC . ' - current date :' . $date . 'usergmt :' . $userGmt['timezone'];?>
-                                        <?php Zend_Debug::dump(strtotime($booking['booking']['started_at']) - strtotime($dateWithUTC) <= 600 && strtotime($booking['booking']['started_at']) - strtotime($dateWithUTC) > 0 ); echo ' time'?>
+                                       <?php echo $booking['booking']['debug'];?>
                                         <?php Zend_Debug::dump($bookingTable->isTeacher($booking['booking']['id'], Zend_Auth::getInstance()->getIdentity()->id)); echo ' isTeacher<br><br>'?>
             <?php endif;?>
             <td class="center payment">
