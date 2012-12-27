@@ -19,7 +19,12 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         $emailForm = new Application_Form_PaypalEmail();
         $subscriptionForm = new Application_Form_Subscriptions();
         $profileTable = new Application_Model_DbTable_Profile();
-        $this->view->emailForm = $emailForm->populate($profileTable->getPayPalEmail($userId));
+        $email = $profileTable->getPayPalEmail($userId);
+        if($email) {
+            $this->view->emailForm = $emailForm->populate($profileTable->getPayPalEmail($userId));
+        } else {
+            $this->view->emailForm = $emailForm;
+        }
         $this->view->subscriptionForm = $subscriptionForm;
     }
 
