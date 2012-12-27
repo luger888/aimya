@@ -204,7 +204,6 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
 
         $where   = array(
             $this->getAdapter()->quoteInto('id=?', (int)$bookingId),
-            '1' => "(sender_id={$userId} OR recipient_id={$userId})"
         );
 
         $data = array(
