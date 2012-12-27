@@ -96,18 +96,18 @@ class LessonController extends Zend_Controller_Action
             $teacherId = '';
             $studentId = '';
             $bookingTable = new Application_Model_DbTable_Booking();
-            if(!$bookingTable->isTeacher($result['booking_id'], $userId)) {
-                $teacher = $userModel->getItem($result['partner_id']);
-                $teacherId = $result['partner_id'];
-                $studentId = $result['creator_id'];
-                $myStreamName = $result['creator_stream_name'];
-                $partnerStreamName = $result['partner_stream_name'];
-            } else {
+            if($bookingTable->isTeacher($result['booking_id'], $userId)) {
                 $teacher = $userModel->getItem($result['creator_id']);
                 $teacherId = $result['creator_id'];
                 $studentId = $result['partner_id'];
                 $myStreamName = $result['partner_stream_name'];
                 $partnerStreamName = $result['creator_stream_name'];
+            } else {
+                $teacher = $userModel->getItem($result['partner_id']);
+                $teacherId = $result['partner_id'];
+                $studentId = $result['creator_id'];
+                $myStreamName = $result['creator_stream_name'];
+                $partnerStreamName = $result['partner_stream_name'];
             }
 
             $booking = $bookingTable->getItem($result['booking_id']);
