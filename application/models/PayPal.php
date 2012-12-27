@@ -38,11 +38,13 @@ class Application_Model_PayPal
         $body_data .= "<email>{$paypalEmail['paypal_email']}</email>";
         $body_data .= "<invoiceId>{$bookingId}</invoiceId>";
         $body_data .= "</receiver>";
-        $body_data .= "<receiver>";
-        $body_data .= "<amount>{$aimyaProfit}</amount>";
-        $body_data .= "<email>{$this->amiyaPayPalEmail}</email>";
-        $body_data .= "<invoiceId>{$bookingId}</invoiceId>";
-        $body_data .= "</receiver>";
+        if($aimyaProfit != 0) {
+            $body_data .= "<receiver>";
+            $body_data .= "<amount>{$aimyaProfit}</amount>";
+            $body_data .= "<email>{$this->amiyaPayPalEmail}</email>";
+            $body_data .= "<invoiceId>{$bookingId}</invoiceId>";
+            $body_data .= "</receiver>";
+        }
         $body_data .= "</receiverList>";
         $body_data .= "<requestEnvelope>";
         $body_data .= "<errorLanguage>en_US</errorLanguage>";

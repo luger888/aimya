@@ -57,25 +57,7 @@
                     } ?>
                     </td>
 
-                                     <?php
-        //TIME FORMATTING BY TIMEZONES BLOCK
-                    date_default_timezone_set('Europe/London');
-        $identity = Zend_Auth::getInstance()->getIdentity();
-        $userTable = new Application_Model_DbTable_Users();
-        $date = gmdate("m/d/Y H:i"); //current time in GMT 0
-        $userGmt = $userTable->getTimeZone($identity->id); //getting time zone of logged user
-        $separatedData = explode(':', $userGmt['timezone']); //exploding HH: MM by ':'
-        $minutesInHours = $separatedData[0] * 60; // HH -> minutes
-        $minutesInDecimals = $separatedData[1]; // MM -> minutes
-        $totalMinutes = $minutesInHours + $minutesInDecimals; //converted timezone to minutes
 
-        $dateWithUTC = gmdate("m/d/Y H:i", strtotime($date) + (($totalMinutes) * 60)); //adding timezone to current date
-        // END -- TIME FORMATTING BY TIMEZONES BLOCK
-        if ($booking['booking']['payment_status'] == '0'):?>
-                                        <?php echo $booking['booking']['id'] . 'book_id';?>
-                                       <?php echo $booking['booking']['debug'];?>
-                                        <?php Zend_Debug::dump($bookingTable->isTeacher($booking['booking']['id'], Zend_Auth::getInstance()->getIdentity()->id)); echo ' isTeacher<br><br>'?>
-            <?php endif;?>
             <td class="center payment">
                         <!--CASE: Send pay request BUTTON-->
                         <?php if(isset($booking['booking']['sendRequest'])): ?>

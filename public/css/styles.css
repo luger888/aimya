@@ -1297,6 +1297,24 @@ input.button-2 {
     text-shadow: 1px 1px 1px black;
 
 }
+.fc-event-content .videoRec{
+     background: url('../images/icons/videoRec.png') no-repeat;
+    width:10px;
+    height: 20px;
+    display: inline-block;
+ }
+.fc-event-content .notes{
+    background: url('../images/icons/notes.png') no-repeat;
+    width:20px;
+    height: 12px;
+    display: inline-block;
+}
+.fc-event-content .feedback{
+    background: url('../images/icons/feedback.png') no-repeat;
+    width:10px;
+    height: 10px;
+    display: inline-block;
+}
 /*---MESSAGES (INBOX)-----------------------------------------------------------------*/
 #content .messageTab{
     box-shadow: 0 0 9px #ccc;

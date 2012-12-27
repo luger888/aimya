@@ -15,7 +15,11 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
     public function indexAction()
     {
+        $emailForm = new Application_Form_PaypalEmail();
+        $subscriptionForm = new Application_Form_Subscriptions();
 
+        $this->view->emailForm = $emailForm;
+        $this->view->subscriptionForm = $subscriptionForm;
     }
 
     public function payAction()
@@ -49,6 +53,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
                 $paymentTable = new Application_Model_DbTable_Orders();
 
                 $isAlreadyExist = $paymentTable->getPayKeyFromOrder($bookingId);
+
                 if(!$isAlreadyExist) {
                     $data = array(
                         'payer_id' => Zend_Auth::getInstance()->getIdentity()->id,
