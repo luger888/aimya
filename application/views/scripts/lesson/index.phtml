@@ -67,7 +67,8 @@
         $minutesInHours = $separatedData[0] * 60; // HH -> minutes
         $minutesInDecimals = $separatedData[1]; // MM -> minutes
         $totalMinutes = $minutesInHours + $minutesInDecimals; //converted timezone to minutes
-        $dateWithUTC = gmdate("m/d/Y H:i", strtotime($date) + (($totalMinutes+60) * 60)); //adding timezone to current date
+        date_default_timezone_set('Europe/London');
+        $dateWithUTC = gmdate("m/d/Y H:i", strtotime($date) + (($totalMinutes) * 60)); //adding timezone to current date
         // END -- TIME FORMATTING BY TIMEZONES BLOCK
         if ($booking['booking']['payment_status'] == '0'):?>
                                         <?php echo $booking['booking']['id'] . 'book_id';?>
