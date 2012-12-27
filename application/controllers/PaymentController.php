@@ -15,10 +15,11 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
     public function indexAction()
     {
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
         $emailForm = new Application_Form_PaypalEmail();
         $subscriptionForm = new Application_Form_Subscriptions();
-
-        $this->view->emailForm = $emailForm;
+        $profileTable = new Application_Model_DbTable_Profile();
+        $this->view->emailForm = $emailForm->populate($profileTable->getPayPalEmail($userId));
         $this->view->subscriptionForm = $subscriptionForm;
     }
 
@@ -114,6 +115,41 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
             $this->writeLog($listener->getTextReport());
 
         }
+    }
+
+    public function emailAction()
+    {
+        $form = new Application_Form_PaypalEmail();
+        if ($this->getRequest()->isPost()) {
+            $formData = $this->getRequest()->getPost();
+
+            if ($form->isValid($formData)) {
+                    $userId = Zend_Auth::getInstance()->getIdentity()->id;
+                    $profileTable = new Application_Model_DbTable_Profile();
+                    $status = $profileTable->updatePaypalEmail($formData['paypal_email'], $userId);
+
+                    if($status) {
+                        $this->_helper->flashMessenger->addMessage(array('success'=>'Email successfully save'));
+                        $this->_helper->redirector('index', 'payment');
+                    } else {
+                        $this->_helper->flashMessenger->addMessage(array('failure'=>'Problem with saving. Please try again later'));
+                        $this->_helper->redirector('index', 'payment');
+                    }
+            } else {
+                $this->_helper->flashMessenger->addMessage(array('failure'=>'Please insert corect email'));
+                $this->_helper->redirector('index', 'payment');
+            }
+        }
+    }
+
+    public function subscribeAction()
+    {
+
+    }
+
+    public function unsubscribeAction()
+    {
+
     }
 
     public function writeLog($data)
