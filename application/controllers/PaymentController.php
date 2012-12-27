@@ -29,20 +29,18 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
             $booking = $bookingTable->getItem($bookingId);
 
             $rate = $booking['rate'];
-            $userProfit = 0;
             $aimyaProfit = 0;
             if($booking['video'] == 1) {
-                $userProfit += $rate - $this->videoCost;
                 $aimyaProfit += $this->videoCost;
             }
             if($booking['notes'] == 1) {
-                $userProfit += $rate - $this->notesCost;
                 $aimyaProfit += $this->notesCost;
             }
             if($booking['feedback'] == 1) {
-                $userProfit += $rate - $this->feedbackCost;
                 $aimyaProfit += $this->feedbackCost;
             }
+            $userProfit = $rate - $aimyaProfit;
+
             $xml = $payPalModel->generateXml($teacherId, $bookingId, $userProfit, $aimyaProfit);
 
             $response = $payPalModel->getAdaptivUrl($xml);
@@ -50,19 +48,22 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
             if($response) {
                 $paymentTable = new Application_Model_DbTable_Orders();
 
-                $data = array(
-                    'payer_id' => Zend_Auth::getInstance()->getIdentity()->id,
-                    'seller_id' => $teacherId,
-                    'booking_id' => $bookingId,
-                    'aimya_profit' => $aimyaProfit,
-                    'teacher_profit' => $userProfit,
-                    'pay_key' => $response['pay_key'],
-                    'status' => 'pending',
-                    'created_at' => date('Y-m-d H:i:s'),
-                    'updated_at' => date('Y-m-d H:i:s')
-                );
+                $isAlreadyExist = $paymentTable->getPayKeyFromOrder($bookingId);
+                if(!$isAlreadyExist) {
+                    $data = array(
+                        'payer_id' => Zend_Auth::getInstance()->getIdentity()->id,
+                        'seller_id' => $teacherId,
+                        'booking_id' => $bookingId,
+                        'aimya_profit' => $aimyaProfit,
+                        'teacher_profit' => $userProfit,
+                        'pay_key' => $response['pay_key'],
+                        'status' => 'pending',
+                        'created_at' => date('Y-m-d H:i:s'),
+                        'updated_at' => date('Y-m-d H:i:s')
+                    );
 
-                $paymentTable->addPayment($data);
+                    $paymentTable->addPayment($data);
+                }
 
                 $this->redirect($response['url']);
             } else {
