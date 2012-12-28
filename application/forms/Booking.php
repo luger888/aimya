@@ -32,23 +32,25 @@ class Application_Form_Booking extends Zend_Form
                 '1' => 'teacher'
 
             )
-        )
-            ->setValue('male');
+        );
         # ->setDecorators($this->basicDecorators);
 
 
         $recipiend_id = new Aimya_Form_Element_SelectAttribs('recipiend_id');
+
         $recipiend_id->setAttrib('id', 'recipiend_id')
             ->setAttrib('class', 't-165')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
-        $recipiend_id->addOption('0', 'Choose recipient',array());
+        $recipiend_id->addOption('', 'Choose recipient',array());
         foreach ($friendsArray as  $value) {
 
             $recipiend_id->addOption($value['id'], $value['username'], array('class' => $value['role']));
         }
         $start_at = new Zend_Form_Element_Text('started_at');
         $start_at ->setAttrib('id', 'started_at')
+            ->setRequired(true)
+            ->addValidator('NotEmpty')
             ->setAttrib('class', 't-165')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
@@ -56,12 +58,17 @@ class Application_Form_Booking extends Zend_Form
 
         $focus_name = new Zend_Form_Element_Text('focus_name');
         $focus_name ->setAttrib('id', 'focus_name')
+            ->setRequired(true)
+            ->addValidator('NotEmpty')
             ->setAttrib('class', 't-165')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 
         $rate = new Zend_Form_Element_Text('rate');
         $rate ->setAttrib('class', 'required input-small')
+            ->setRequired(true)
+            ->addValidator('NotEmpty')
+            ->addValidator('Digits')
             ->setAttrib('id', 'rate')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
