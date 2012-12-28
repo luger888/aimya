@@ -1299,22 +1299,41 @@ input.button-2 {
 }
 .fc-event-content .videoRec{
      background: url('../images/icons/videoRec.png') no-repeat;
-    width:10px;
-    height: 20px;
+    width:20px;
+    height: 11px;
     display: inline-block;
  }
 .fc-event-content .notes{
     background: url('../images/icons/notes.png') no-repeat;
     width:20px;
-    height: 12px;
+    height: 13px;
     display: inline-block;
 }
 .fc-event-content .feedback{
     background: url('../images/icons/feedback.png') no-repeat;
-    width:10px;
-    height: 10px;
+    width:20px;
+    height: 15px;
     display: inline-block;
 }
+.fc-event-content .notes.green{
+    background-position: 0 -16px;
+}
+.fc-event-content .feedback.green{
+    background-position: 0 -13px;
+}
+.fc-event-content .videoRec.green{
+    background-position: 0 -17px;
+}
+.fc-event-content .notes.passive{
+    background-position: 0 -33px;
+}
+.fc-event-content .feedback.passive{
+    background-position: 0 -30px;
+}
+.fc-event-content .videoRec.passive{
+    background-position: 0 -36px;
+}
+
 /*---MESSAGES (INBOX)-----------------------------------------------------------------*/
 #content .messageTab{
     box-shadow: 0 0 9px #ccc;

@@ -80,7 +80,7 @@ class LessonController extends Zend_Controller_Action
         //$this->_helper->layout()->disableLayout();
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
         $lessonTable = new Application_Model_DbTable_Lesson();
-
+        $this->view->lessonStatus = 1;
         $result = $lessonTable->checkAvailableLesson($userId);
 
         if($result) {
