@@ -466,7 +466,7 @@ jQuery(document).ready(function () {
     $('#started_at').datetimepicker();
 
     $('#sendBooking').click(function () {
-
+        jQuery("body").append('<div class="loadingIcon"></div>');
         if($('input[name=role]:checked').val() == '2'){
             var role = '0';
         }
@@ -487,6 +487,7 @@ jQuery(document).ready(function () {
 
             },
             function (response) {
+                
                 window.location.reload();
 
             });
