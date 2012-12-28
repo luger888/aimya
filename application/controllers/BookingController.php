@@ -96,7 +96,26 @@ class BookingController extends Zend_Controller_Action
                 $bookingPaymentStatus['booking']['id'] = $value['booking']['id']; //id of booking
                 $bookingPaymentStatus['userdata']['id'] = $value['userData']['id']; //id of bookinguserdata
             }
-
+            if(isset($value['booking']['paid'])){ //if need to append payButton for student
+                $bookingPaymentStatus['booking']['paid'] = 1; //request has been sent, show Send button
+                $bookingPaymentStatus['booking']['id'] = $value['booking']['id']; //id of booking
+                $bookingPaymentStatus['userdata']['id'] = $value['userData']['id']; //id of bookinguserdata
+            }
+            if(isset($value['booking']['pending'])){ //if need to append payButton for student
+                $bookingPaymentStatus['booking']['pending'] = 1; //request has been sent, show Send button
+                $bookingPaymentStatus['booking']['id'] = $value['booking']['id']; //id of booking
+                $bookingPaymentStatus['userdata']['id'] = $value['userData']['id']; //id of bookinguserdata
+            }
+            if(isset($value['booking']['startLesson'])){ //if need to append payButton for student
+                $bookingPaymentStatus['booking']['start'] = 1; //request has been sent, show Send button
+                $bookingPaymentStatus['booking']['id'] = $value['booking']['id']; //id of booking
+                $bookingPaymentStatus['userdata']['id'] = $value['userData']['id']; //id of bookinguserdata
+            }
+            if(isset($value['booking']['join'])){ //if need to append payButton for student
+                $bookingPaymentStatus['booking']['join'] = 1; //request has been sent, show Send button
+                $bookingPaymentStatus['booking']['id'] = $value['booking']['id']; //id of booking
+                $bookingPaymentStatus['userdata']['id'] = $value['userData']['id']; //id of bookinguserdata
+            }
         }
        // Zend_Debug::dump($extendedBookingList);
         $this->view->bookingPaymentStatus = $bookingPaymentStatus;

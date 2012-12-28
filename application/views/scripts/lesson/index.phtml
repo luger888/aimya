@@ -102,6 +102,10 @@
                                onclick="jQuery('#start_session_<?php echo $booking['booking']['id'];?>').submit()"><span
                                 class="button-2 play">Start</span></a>
                         </form>
+
+                        <?php endif;?>
+                        <?php if(isset($booking['booking']['join'])): ?>
+                        <span class ="button-2 play">Join</span>
                         <?php endif;?>
                     </td>
 

@@ -102,9 +102,12 @@ class Application_Model_Lesson
         $isTeacher = 0;
         $dateWithUTC = gmdate("m/d/Y H:i", strtotime($date) + (($totalMinutes) * 60)); //adding timezone to current date
         // END -- TIME FORMATTING BY TIMEZONES BLOCK
+        $lessonTable = new Application_Model_DbTable_Lesson();
+
 
 
         foreach ($bookingArray as $lesson) { //extending base array of lessons
+            $joinLesson = $lessonTable->checkAvailableLesson($lesson['userData']['id']);
             $lessonDuration = $lesson['booking']['duration'] *60; //lesson duration in seconds
             $starting_time = strtotime($lesson['booking']['started_at']); //booking started_at time to UNIX stamp
             $currentTimeUtc = strtotime($dateWithUTC); //currentTime + UTC of user to UNIX stamp
@@ -128,7 +131,9 @@ class Application_Model_Lesson
 
                 }else{ //if user is a student in current lesson
                     $isTeacher = 0;
-
+                    if($joinLesson){//if available for student to join
+                        $lesson['booking']['join'] = 1;
+                    }
                     if($lesson['booking']['payment_status'] == $paymentStatusDefault){//payment status 0
                         $lesson['booking']['waiting'] = 1;
                     }else if($lesson['booking']['payment_status'] == $paymentStatusRequested){//payment status 1
@@ -144,6 +149,7 @@ class Application_Model_Lesson
                 $lesson['booking']['waiting'] = 1;
                 $isOnline = 0;
             }
+
             $lesson['booking']['isOnline'] = $isOnline;//adding is online attr to lesson
             $lesson['booking']['isTeacher']  = $isTeacher;//adding is teacher attr to lesson
 

@@ -175,7 +175,7 @@ $(document).ready(function () {
         return false;
     }
 
-    setInterval(getNewBookingCount, 60000);
+    setInterval(getNewBookingCount, 30000);
     getNewBookingCount();
     function getNewBookingCount() {
         var pathName = $('#current_url').val();
@@ -205,20 +205,42 @@ $(document).ready(function () {
                                 '<input name="teacher_id" type="hidden" value="' + result.bookingPaymentStatus.userdata.id + '">' +
                                 '<input name="booking_id" type="hidden" value="' + result.bookingPaymentStatus.booking.id + '">' +
                                 '<a href="#" id="' + result.bookingPaymentStatus.userdata.id + '"' +
-                                'onclick=payMoney(this)><span class="button-2 play">Pay</span></a>' +
+                                'onclick=payMoney(this)><span class="button play">Pay</span></a>' +
                                 '</form>';
                             lesson.parents('tr:first').find(paymentTd).html(payButtonCode);
 
                         }
                     }
                     if (result.bookingPaymentStatus.booking.send) {
-
                         for (var d = 0; d < $(result.bookingPaymentStatus.booking.send).length; d++) {
-                            console.log('send')
                             var sendButtonCode = '<input type="button" class="button send"' +
                                 ' onclick="payRequest(' + result.bookingPaymentStatus.userdata.id + ',' + result.bookingPaymentStatus.booking.id + ', this);" value = "send">';
                             lesson.parents('tr:first').find(paymentTd).html(sendButtonCode);
                         }
+                    }
+                    if (result.bookingPaymentStatus.booking.paid) {
+                        for (var v = 0; v < $(result.bookingPaymentStatus.booking.paid).length; v++) {
+                            var  paidCode = '<span class="result success">Paid</span>';
+                            lesson.parents('tr:first').find(paymentTd).html(paidCode);
+                        }
+                    }
+                    if (result.bookingPaymentStatus.booking.start) {
+                        var actionTd = $('td.action');
+                        for (var s = 0; s < $(result.bookingPaymentStatus.booking.start).length; s++) {
+                            var startButtonCode = '<form method="POST"'+
+                            '" action="' + pathName + '/lesson/setup/">' +
+                                '<input name="student_id" type="hidden" value="' + result.bookingPaymentStatus.userdata.id + '">'+
+                                    '<input name="booking_id" type="hidden" value="' + result.bookingPaymentStatus.booking.id + '">'+
+                                        '<a href="#" id="' + result.bookingPaymentStatus.userdata.id + '"'+
+                                        'onclick=startLesson(this)><span class="button-2 play">Start</span></a>'+
+                                    '</form>';
+                            lesson.parents('tr:first').find(actionTd).html(startButtonCode);
+                        }
+                    }
+
+                    if (result.bookingPaymentStatus.booking.join && window.location.pathname == pathName + "/lesson") {
+
+                        window.location.href =  pathName + '/lesson/join/';
                     }
                 }
 
@@ -245,11 +267,13 @@ $(document).ready(function () {
 //    });
 //}
 function payMoney(e) {
-    console.log($(e).parent())
-    //$(e).parent().submit();
-   $('#pay_55').submit();
-}
 
+    $(e).parent().submit();
+}
+function startLesson(e) {
+
+    $(e).parent().submit();
+}
 //LESSONS
 function payRequest(id, booking, e) {
     var element = $(e);
