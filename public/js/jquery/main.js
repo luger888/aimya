@@ -207,7 +207,7 @@ $(document).ready(function () {
                                 '<a href="#" id="' + result.bookingPaymentStatus.userdata.id + '"' +
                                 'onclick=payMoney(this)><span class="button play">Pay</span></a>' +
                                 '</form>';
-                           // lesson.parents('tr:first').find(paymentTd).html(payButtonCode);
+                            lesson.parents('tr:first').find(paymentTd).html(payButtonCode);
 
                         }
                     }
