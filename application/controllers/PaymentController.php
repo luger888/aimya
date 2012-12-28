@@ -53,7 +53,11 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
             $xml = $payPalModel->generateXml($teacherId, $bookingId, $userProfit, $aimyaProfit);
 
+
             $response = $payPalModel->getAdaptivUrl($xml);
+
+            var_dump($response);
+            die;
 
             if($response) {
                 $paymentTable = new Application_Model_DbTable_Orders();
@@ -151,7 +155,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
     {
         $payPalModel = new Application_Model_PayPal();
 
-        $rate = $booking['rate'];
+        //$rate = $booking['rate'];
         $aimyaProfit = 0;
         if($booking['video'] == 1) {
             $aimyaProfit += $this->videoCost;
