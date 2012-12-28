@@ -3,19 +3,19 @@
 class Application_Model_PayPal
 {
 
-    private $payPalApiLogin = 'aimSto_1356606163_biz_api1.svitla.com';
-    private $payPalApiPassword = '1356606183';
-    private $payPalSignature = 'AFcWxV21C7fd0v3bYYYRCpSSRl31Aqj87aln5rpg.G3x2sFLvAx-YMjX';
-    private $payPalApiId = 'APP-80W284485P519543T';
-    private $adaptivUrl = 'https://svcs.sandbox.paypal.com/AdaptivePayments/Pay';
-    private $amiyaPayPalEmail = 'aimSto_1356606163_biz@svitla.com';
-
-    //private $payPalApiLogin = 'aim_pr_1356696524_biz@mail.ru';
-    //private $payPalApiPassword = '1356696594';
-    //private $payPalSignature = 'AGgiSKCZ2j6Msrbwd65ACNRY-hZIAANcIOdlhHhOA5jNQxS7Xf-1Dcj0';
+    //private $payPalApiLogin = 'aimSto_1356606163_biz_api1.svitla.com';
+    //private $payPalApiPassword = '1356606183';
+    //private $payPalSignature = 'AFcWxV21C7fd0v3bYYYRCpSSRl31Aqj87aln5rpg.G3x2sFLvAx-YMjX';
     //private $payPalApiId = 'APP-80W284485P519543T';
     //private $adaptivUrl = 'https://svcs.sandbox.paypal.com/AdaptivePayments/Pay';
-    //private $amiyaPayPalEmail = 'aim_pr_1356696524_biz@mail.ru';
+    //private $amiyaPayPalEmail = 'aimSto_1356606163_biz@svitla.com';
+
+    private $payPalApiLogin = 'aim_pr_1356696524_biz_api1.mail.ru';
+    private $payPalApiPassword = '1356696594';
+    private $payPalSignature = 'AGgiSKCZ2j6Msrbwd65ACNRY-hZIAANcIOdlhHhOA5jNQxS7Xf-1Dcj0';
+    private $payPalApiId = 'APP-80W284485P519543T';
+    private $adaptivUrl = 'https://svcs.sandbox.paypal.com/AdaptivePayments/Pay';
+    private $amiyaPayPalEmail = 'aim_pr_1356696524_biz@mail.ru';
 
     public function generateXml($sellerId, $bookingId, $userProfit, $aimyaProfit) {
 
