@@ -149,7 +149,22 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
     public function subscribeAction()
     {
+        $payPalModel = new Application_Model_PayPal();
 
+        $rate = $booking['rate'];
+        $aimyaProfit = 0;
+        if($booking['video'] == 1) {
+            $aimyaProfit += $this->videoCost;
+        }
+        if($booking['notes'] == 1) {
+            $aimyaProfit += $this->notesCost;
+        }
+        if($booking['feedback'] == 1) {
+            $aimyaProfit += $this->feedbackCost;
+        }
+        $userProfit = $rate - $aimyaProfit;
+
+        $xml = $payPalModel->generateXml($userProfit, $aimyaProfit);
     }
 
     public function unsubscribeAction()
