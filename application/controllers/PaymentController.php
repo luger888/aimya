@@ -151,21 +151,57 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
     public function subscribeAction()
     {
         $payPalModel = new Application_Model_PayPal();
+        $gateway = $payPalModel->getGateway();
 
-        //$rate = $booking['rate'];
-        $aimyaProfit = 0;
-        if($booking['video'] == 1) {
-            $aimyaProfit += $this->videoCost;
-        }
-        if($booking['notes'] == 1) {
-            $aimyaProfit += $this->notesCost;
-        }
-        if($booking['feedback'] == 1) {
-            $aimyaProfit += $this->feedbackCost;
-        }
-        $userProfit = $rate - $aimyaProfit;
+        $recurring = new Aimya_PayPal_Subscription_PaypalRecurringPayments($gateway);
 
-        $xml = $payPalModel->generateXml($userProfit, $aimyaProfit);
+        switch ($_GET['action']) {
+            case "": // Index page, here you should be redirected to Paypal
+                $resultData = array();
+                $isOk = $recurring->obtainBillingAgreement("Test subscription", "aim_pr_1356696524_biz@mail.ru", 'USD', $resultData);
+                //die;
+                if (!$isOk) {
+                    print_r($resultData);
+                    die;
+                }
+
+                break;
+
+
+            case "success": // Paypal says everything's fine (see $gateway->returnUrl)
+                $resultData = array();
+                $details = $recurring->getBillingDetails($resultData);
+                if (!$details) {
+                    echo "Something went wrong\n";
+                    print_r($resultData);
+                    return;
+                }
+                $billingAgreementId = $recurring->doInitialPayment($details->token, $details->payerId, 12.34, $resultData);
+                if (!$billingAgreementId) {
+                    echo "Something went wrong\n";
+                    print_r($resultData);
+                    return;
+                }
+                echo "agreementId = ".$billingAgreementId;
+                break;
+
+            // Type ?action=test in browser to perform a subscription (reference) transaction
+            case "test":
+                $resultData = array();
+                $billingAgreementId = 'B-5YW327438T794174S';
+                // To perform payments you need to store billing agreement ID in your database
+                $isOk = $recurring->doSubscriptionPayment($billingAgreementId, 21.17, $resultData);
+                if ($isOk) {
+                    echo "Success!";
+                } else {
+                    print_r($resultData);
+                }
+                break;
+
+            case "cancel": // User cancel subscription process (see $gateway->cancelUrl)
+                echo "User canceled";
+                break;
+        }
     }
 
     public function unsubscribeAction()

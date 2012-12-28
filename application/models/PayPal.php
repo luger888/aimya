@@ -16,6 +16,7 @@ class Application_Model_PayPal
     private $payPalApiId = 'APP-80W284485P519543T';
     private $adaptivUrl = 'https://svcs.sandbox.paypal.com/AdaptivePayments/Pay';
     private $amiyaPayPalEmail = 'aim_pr_1356696524_biz@mail.ru';
+    private $testMode = true;
 
     public function generateXml($sellerId, $bookingId, $userProfit, $aimyaProfit) {
 
@@ -100,6 +101,66 @@ class Application_Model_PayPal
         } else {
             return false;
         }
+    }
+
+    public function generateSubscriptionXml($sellerId, $period, $dateFrom) {
+
+        $pp = new Aimya_PayPal_Subscription();
+
+        $pp->test = true; // connect to the test sandbox or live server
+        $pp->requestHeaderArr['user'] = $this->payPalApiLogin;
+        $pp->requestHeaderArr['pwd'] = $this->payPalApiPassword;
+        $pp->requestHeaderArr['signature'] = $this->payPalSignature;
+        $pp->requestHeaderArr['countrycode'] = "US";
+        $pp->requestHeaderArr['billingperiod'] = "Month"; // bill per month
+        $pp->requestHeaderArr['billingfrequency'] = 1; // bill once every month
+        $pp->requestHeaderArr['currencycode'] = "USD";
+        $pp->requestHeaderArr['amt'] = 9.95; // amount to bill per month
+        $pp->requestHeaderArr['initamt'] = 0.00; // setup fee
+        $pp->requestHeaderArr['taxamt'] = $pp->requestHeaderArr['amt'] * .07; // 0 for no tax
+        $pp->requestHeaderArr['desc'] = "Super Deluxe Package";
+
+        // most likely won't need to edit below here
+
+        $pp->requestHeaderArr['creditcardtype'] = $_REQUEST["cardtype"];
+        $pp->requestHeaderArr['acct'] = $_REQUEST["cardnumber"];
+        $pp->requestHeaderArr['expdate'] = str_pad($_REQUEST["cardexpm"],2,'0', STR_PAD_LEFT)  .  $_REQUEST["cardexpy"];
+        $pp->requestHeaderArr['firstname'] = $_REQUEST["f_nm"];
+        $pp->requestHeaderArr['lastname'] = $_REQUEST["l_nm"];
+        $pp->requestHeaderArr['profilestartdate'] = gmdate("Y-m-d\TH:i:s\Z");
+        $pp->requestHeaderArr['totalbillingcycles'] = $_REQUEST["period"];
+        $pp->requestHeaderArr['email'] = $_POST['email'];
+        $pp->requestHeaderArr['payerstatus'] = "verified";
+
+        $ppResponse = $pp->PPHttpPost(); // make the connection to paypal and get a response
+
+        $viewResponse = Array();
+
+        if(isset($ppResponse['L_ERRORCODE0']))
+            $viewResponse['error'] = "Error: {$ppResponse['L_LONGMESSAGE0']}";
+        else if(isset($ppResponse['ACK']) && $ppResponse['ACK'] == ('Success' || 'SuccessWithWarning'))
+            $viewResponse['success'] = "Your subscription has been processed.";
+
+        echo json_encode($viewResponse);
+        die;
+
+    }
+
+    public function getGateway() {
+
+        $gateway = new Aimya_PayPal_Subscription_Request_PaypalGateway();
+        $gateway->apiUsername = $this->payPalApiLogin;
+        $gateway->apiPassword = $this->payPalApiPassword;
+        $gateway->apiSignature = $this->payPalSignature;
+        $gateway->testMode = $this->testMode;
+
+        $request = Zend_Controller_Front::getInstance()->getRequest();
+
+        $gateway->returnUrl = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . 'payment/subscribe/?action=success';
+        $gateway->returnUrl = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . 'payment/subscribe/?action=cancel';
+
+        return $gateway;
+
     }
 
     public function writeLog($data)
