@@ -13,7 +13,7 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
 
             'sender_id' => (int)$userId,
             'recipient_id' => (int)$array['recipient_id'],
-            'started_at' => preg_replace('#<(.*?)>#', '',$array['started_at']),
+            'started_at' => preg_replace('#<(.*?)>#', '', date('Y-m-d H:i:s', strtotime($array['started_at']))),
             'focus_name' => preg_replace('#<(.*?)>#', '',$array['focus_name']),
             'creator_tz' => preg_replace('#<(.*?)>#', '',$array['creator_tz']),
             'duration' => preg_replace('#<(.*?)>#', '',$array['duration']),
@@ -197,25 +197,17 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
 
     }
 
-    public function payLesson($bookingId)
+    public function isExistBooking($booking_id, $userId)
     {
+        $current = $this->fetchRow($this->select()->where('id=?',$booking_id ));
+        $started_at = $current['started_at'];
 
-        $userId = Zend_Auth::getInstance()->getIdentity()->id;
-
-        $where   = array(
-            $this->getAdapter()->quoteInto('id=?', (int)$bookingId),
-        );
-
-        $data = array(
-            'payment_status'=> 2,
-            'updated_at' => date('Y-m-d H:m:s')
-        );
-
-        $result = $this->update($data, $where);
-
-        if($result) {
+        $started_atAdd = date( "YYYY-MM-dd HH:mm:ss", strtotime($started_at)*600);
+        $row = $this->fetchAll($this->select()->where('recipient_id=?',$userId )->where('started_at<=?',$started_at ));//if there is booking previous to current
+        Zend_Debug::dump($row);
+        if($row){
             return true;
-        } else {
+        }else{
             return false;
         }
 
