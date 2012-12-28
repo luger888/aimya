@@ -22,7 +22,7 @@ class Application_Model_PayPal
         $bookingTable = new Application_Model_DbTable_Booking();
 
         $paypalEmail = $profileTable->getPayPalEmail($sellerId);
-        $paypalEmail['paypal_email'] = 'seller_1355909799_biz@gmail.com';
+        //$paypalEmail['paypal_email'] = 'seller_1355909799_biz@gmail.com';
 
 
         $body_data  = "<?xml version='1.0'?>";

@@ -98,4 +98,14 @@ class Application_Model_DbTable_Profile extends Application_Model_DbTable_Abstra
 
         return $data->query()->fetch();
     }
+
+    public function updatePaypalEmail($email, $userId){
+
+        $data = array(
+            'paypal_email'=> preg_replace('#<(.*?)>#', '', $email)
+        );
+        $where = $this->getAdapter()->quoteInto('user_id = ?', (int)$userId);
+        return $this->update($data, $where);
+
+    }
 }
