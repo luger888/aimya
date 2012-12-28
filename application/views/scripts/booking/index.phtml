@@ -357,10 +357,12 @@ jQuery(document).ready(function () {
                         if (msg.booking[c].recipient_id == msg.user_id) {
                             start = start.addHours(utc);
                         }
+                        var dateTime = msg.booking[c].started_at;
+
                         events.push({
                             title:msg.booking[c].focus_name,
-                            start:start,
-                            started_at:msg.booking[c].started_at,
+                            start:dateTime,
+                            started_at:dateTime,
                             recipient_id:msg.booking[c].recipient_id,
                             booking_status:msg.booking[c].booking_status,
                             add_info:msg.booking[c].add_info,
@@ -466,7 +468,7 @@ jQuery(document).ready(function () {
     $('#started_at').datetimepicker();
 
     $('#sendBooking').click(function () {
-
+        jQuery("body").append('<div class="loadingIcon"></div>');
         if($('input[name=role]:checked').val() == '2'){
             var role = '0';
         }
@@ -487,6 +489,7 @@ jQuery(document).ready(function () {
 
             },
             function (response) {
+
                 window.location.reload();
 
             });
