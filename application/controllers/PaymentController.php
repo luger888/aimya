@@ -178,6 +178,8 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
         if(!$_GET['task']) {
             $task="setExpressCheckout"; //set initial task as Express Checkout
+        } else {
+            $task=$_GET['task'];
         }
 
         switch($task)
