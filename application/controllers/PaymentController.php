@@ -176,7 +176,9 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         $obj->cancelURL = urlencode($gateway['cancelUrl']);
 
 
-        $task="setExpressCheckout"; //set initial task as Express Checkout
+        if(!$_GET['task']) {
+            $task="setExpressCheckout"; //set initial task as Express Checkout
+        }
 
         switch($task)
         {
