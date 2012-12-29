@@ -153,54 +153,42 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         $payPalModel = new Application_Model_PayPal();
         $gateway = $payPalModel->getGateway();
 
-        $recurring = new Aimya_PayPal_Subscription_PaypalRecurringPayments($gateway);
+        $obj = new Aimya_PayPal_RecurringPayment;
 
-        switch ($_GET['action']) {
-            case "": // Index page, here you should be redirected to Paypal
-                $resultData = array();
-                $isOk = $recurring->obtainBillingAgreement("Test subscription", "aim_pr_1356696524_biz@mail.ru", 'USD', $resultData);
-                //die;
-                if (!$isOk) {
-                    print_r($resultData);
-                    die;
-                }
+        $obj->environment = $gateway['testMode'];	// or 'beta-sandbox' or 'live'
+        $obj->paymentType = urlencode('Authorization');				// or 'Sale' or 'Order'
 
-                break;
+        // Set request-specific fields.
+        $obj->startDate = urlencode("2012-12-29T0:0:0");
+        $obj->billingPeriod = urlencode("Month");				// or "Day", "Week", "SemiMonth", "Year"
+        $obj->billingFreq = urlencode("4");						// combination of this and billingPeriod must be at most a year
+        $obj->paymentAmount = urlencode('10');
+        $obj->currencyID = urlencode('USD');							// or other currency code ('GBP', 'EUR', 'JPY', 'CAD', 'AUD')
+
+        /* PAYPAL API  DETAILS */
+        $obj->API_UserName = urlencode($gateway['apiUsername']);
+        $obj->API_Password = urlencode($gateway['apiPassword']);
+        $obj->API_Signature = urlencode($gateway['apiSignature']);
+        $obj->API_Endpoint = "https://api-3t.paypal.com/nvp";
+
+        /*SET SUCCESS AND FAIL URL*/
+        $obj->returnURL = urlencode($gateway['returnUrl']);
+        $obj->cancelURL = urlencode($gateway['cancelUrl']);
 
 
-            case "success": // Paypal says everything's fine (see $gateway->returnUrl)
-                $resultData = array();
-                $details = $recurring->getBillingDetails($resultData);
-                if (!$details) {
-                    echo "Something went wrong\n";
-                    print_r($resultData);
-                    return;
-                }
-                $billingAgreementId = $recurring->doInitialPayment($details->token, $details->payerId, 12.34, $resultData);
-                if (!$billingAgreementId) {
-                    echo "Something went wrong\n";
-                    print_r($resultData);
-                    return;
-                }
-                echo "agreementId = ".$billingAgreementId;
-                break;
+        $task="setExpressCheckout"; //set initial task as Express Checkout
 
-            // Type ?action=test in browser to perform a subscription (reference) transaction
-            case "test":
-                $resultData = array();
-                $billingAgreementId = 'B-5YW327438T794174S';
-                // To perform payments you need to store billing agreement ID in your database
-                $isOk = $recurring->doSubscriptionPayment($billingAgreementId, 21.17, $resultData);
-                if ($isOk) {
-                    echo "Success!";
-                } else {
-                    print_r($resultData);
-                }
-                break;
-
-            case "cancel": // User cancel subscription process (see $gateway->cancelUrl)
-                echo "User canceled";
-                break;
+        switch($task)
+        {
+            case "setExpressCheckout":
+                $obj->setExpressCheckout();
+                exit;
+            case "getExpressCheckout":
+                $obj->getExpressCheckout();
+                exit;
+            case "error":
+                echo "setExpress checkout failed";
+                exit;
         }
     }
 
