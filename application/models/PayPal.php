@@ -154,8 +154,8 @@ class Application_Model_PayPal
             'apiPassword' => $this->payPalApiPassword,
             'apiSignature' => $this->payPalSignature,
             'testMode' => $this->testMode,
-            'returnUrl' => $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . 'payment/subscribe/?task=getExpressCheckout',
-            'cancelUrl' => $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . 'payment/subscribe/?task=error'
+            'returnUrl' => $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment/subscribe/?task=getExpressCheckout',
+            'cancelUrl' => $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment/subscribe/?task=error'
 
         );
         return $defaultData;
