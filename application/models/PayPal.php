@@ -16,7 +16,7 @@ class Application_Model_PayPal
     private $payPalApiId = 'APP-80W284485P519543T';
     private $adaptivUrl = 'https://svcs.sandbox.paypal.com/AdaptivePayments/Pay';
     private $amiyaPayPalEmail = 'aim_pr_1356696524_biz@mail.ru';
-    private $testMode = true;
+    private $testMode = 'sandbox';
 
     public function generateXml($sellerId, $bookingId, $userProfit, $aimyaProfit) {
 
@@ -148,18 +148,17 @@ class Application_Model_PayPal
 
     public function getGateway() {
 
-        $gateway = new Aimya_PayPal_Subscription_Request_PaypalGateway();
-        $gateway->apiUsername = $this->payPalApiLogin;
-        $gateway->apiPassword = $this->payPalApiPassword;
-        $gateway->apiSignature = $this->payPalSignature;
-        $gateway->testMode = $this->testMode;
-
         $request = Zend_Controller_Front::getInstance()->getRequest();
+        $defaultData = array(
+            'apiUsername' => $this->payPalApiLogin,
+            'apiPassword' => $this->payPalApiPassword,
+            'apiSignature' => $this->payPalSignature,
+            'testMode' => $this->testMode,
+            'returnUrl' => $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . 'payment/subscribe/?task=getExpressCheckout',
+            'cancelUrl' => $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . 'payment/subscribe/?task=error'
 
-        $gateway->returnUrl = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . 'payment/subscribe/?action=success';
-        $gateway->returnUrl = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . 'payment/subscribe/?action=cancel';
-
-        return $gateway;
+        );
+        return $defaultData;
 
     }
 
