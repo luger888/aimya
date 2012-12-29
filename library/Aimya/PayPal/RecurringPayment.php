@@ -91,7 +91,7 @@ class Aimya_PayPal_RecurringPayment {
         $environment=$this->environment;
         $API_UserName=$this->API_UserName;
         $API_Password=$this->API_Password;
-        $API_Signature=$this->$API_Signature;
+        $API_Signature=$this->API_Signature;
         $API_Endpoint=$this->API_Endpoint;
         $paymentAmount=$this->paymentAmount;
         $currencyID=$this->currencyID;
