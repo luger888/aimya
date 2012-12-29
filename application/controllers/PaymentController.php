@@ -161,7 +161,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         // Set request-specific fields.
         $obj->startDate = urlencode("3012-12-31T0:0:0");
         $obj->billingPeriod = urlencode("Month");				// or "Day", "Week", "SemiMonth", "Year"
-        $obj->billingFreq = url2ncode("2");						// combination of this and billingPeriod must be at most a year
+        $obj->billingFreq = urlencode("2");						// combination of this and billingPeriod must be at most a year
         $obj->paymentAmount = urlencode('10');
         $obj->currencyID = urlencode('USD');							// or other currency code ('GBP', 'EUR', 'JPY', 'CAD', 'AUD')
 
