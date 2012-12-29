@@ -225,7 +225,6 @@ class Aimya_PayPal_RecurringPayment {
         $startDate=$this->startDate;
 
         if("sandbox" === $environment || "beta-sandbox" === $environment) {
-            die('2');
             $API_Endpoint = "https://api-3t.$environment.paypal.com/nvp";
         }
         $version = urlencode('57.0');
