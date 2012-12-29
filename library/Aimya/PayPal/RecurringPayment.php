@@ -107,7 +107,7 @@ class Aimya_PayPal_RecurringPayment {
 
         if("SUCCESS" == strtoupper($httpParsedResponseAr["ACK"]) || "SUCCESSWITHWARNING" == strtoupper($httpParsedResponseAr["ACK"])) {
 
-        createRecurringPaymentsProfile($token);
+        $this->createRecurringPaymentsProfile($token);
 
 
             exit('Express Checkout Payment Completed Successfully: '.print_r($httpParsedResponseAr, true));
