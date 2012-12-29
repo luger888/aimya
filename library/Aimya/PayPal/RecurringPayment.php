@@ -28,6 +28,7 @@ class Aimya_PayPal_RecurringPayment {
             $token = urldecode($httpParsedResponseAr["TOKEN"]);
             $payPalURL = "https://www.paypal.com/webscr&cmd=_express-checkout&token=$token";
             if("sandbox" === $environment || "beta-sandbox" === $environment) {
+                die;
                 $payPalURL = "https://www.$environment.paypal.com/webscr&cmd=_express-checkout&token=$token";
             }
             header("Location: $payPalURL");
@@ -224,6 +225,7 @@ class Aimya_PayPal_RecurringPayment {
         $startDate=$this->startDate;
 
         if("sandbox" === $environment || "beta-sandbox" === $environment) {
+            die('2');
             $API_Endpoint = "https://api-3t.$environment.paypal.com/nvp";
         }
         $version = urlencode('57.0');
