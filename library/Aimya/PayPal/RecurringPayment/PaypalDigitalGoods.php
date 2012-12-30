@@ -69,9 +69,9 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 	 */
 	public function __construct( $args = array() ){
 
-		if( '' == PayPal_Digital_Goods_Configuration::username() || '' == PayPal_Digital_Goods_Configuration::password() || '' == PayPal_Digital_Goods_Configuration::signature() )
+		if( '' == Aimya_PayPal_RecurringPayment_PaypalConfiguration::username() || '' == Aimya_PayPal_RecurringPayment_PaypalConfiguration::password() || '' == Aimya_PayPal_RecurringPayment_PaypalConfiguration::signature() )
 			exit( 'You must specify your PayPal API username, password & signature in the $api_credentials array. For details of how to ' );
-		elseif( ( empty( $args['return_url'] ) && '' == PayPal_Digital_Goods_Configuration::username() ) || ( empty( $args['cancel_url'] ) && '' == PayPal_Digital_Goods_Configuration::cancel_url() ) )
+		elseif( ( empty( $args['return_url'] ) && '' == Aimya_PayPal_RecurringPayment_PaypalConfiguration::username() ) || ( empty( $args['cancel_url'] ) && '' == Aimya_PayPal_RecurringPayment_PaypalConfiguration::cancel_url() ) )
 			exit( 'You must specify a return_url & cancel_url.' );
 
 		$defaults = array(
@@ -79,14 +79,14 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 			'version'       => '76.0',
 			'business_name' => '',
 			'solution_type' => 'Sole',
-			'return_url'    => PayPal_Digital_Goods_Configuration::return_url(),
-			'cancel_url'    => PayPal_Digital_Goods_Configuration::cancel_url(),
-			'notify_url'    => PayPal_Digital_Goods_Configuration::notify_url()
+			'return_url'    => Aimya_PayPal_RecurringPayment_PaypalConfiguration::return_url(),
+			'cancel_url'    => Aimya_PayPal_RecurringPayment_PaypalConfiguration::cancel_url(),
+			'notify_url'    => Aimya_PayPal_RecurringPayment_PaypalConfiguration::notify_url()
 		);
 
 		$args = array_merge( $defaults, $args );
 
-		$this->currency      = PayPal_Digital_Goods_Configuration::currency();
+		$this->currency      = Aimya_PayPal_RecurringPayment_PaypalConfiguration::currency();
 		$this->business_name = $args['business_name'];
 
 		$this->return_url    = $args['return_url'];
@@ -97,23 +97,23 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 
 	/**
 	 * Map this object's API credentials to the PayPal NVP format for posting to the API.
-	 * 
-	 * Abstracted from @see get_payment_details_url for readability. 
+	 *
+	 * Abstracted from @see get_payment_details_url for readability.
 	 */
 	protected function get_api_credentials_url(){
 
-		return 'USER=' . urlencode( PayPal_Digital_Goods_Configuration::username() )
-			 . '&PWD=' . urlencode( PayPal_Digital_Goods_Configuration::password() )
-			 . '&SIGNATURE=' . urlencode( PayPal_Digital_Goods_Configuration::signature() )
-			 . '&VERSION='.  urlencode( PayPal_Digital_Goods_Configuration::version() );
+		return 'USER=' . urlencode( Aimya_PayPal_RecurringPayment_PaypalConfiguration::username() )
+			 . '&PWD=' . urlencode( Aimya_PayPal_RecurringPayment_PaypalConfiguration::password() )
+			 . '&SIGNATURE=' . urlencode( Aimya_PayPal_RecurringPayment_PaypalConfiguration::signature() )
+			 . '&VERSION='.  urlencode( Aimya_PayPal_RecurringPayment_PaypalConfiguration::version() );
 	}
 
 
 	/**
 	 * Map this object's transaction details to the PayPal NVP format for posting to PayPal.
-	 * 
+	 *
 	 * @param $action, string. The PayPal NVP API action to create the URL for. One of SetExpressCheckout, CreateRecurringPaymentsProfile or GetRecurringPaymentsProfileDetails.
-	 * @param $profile_id, (optional) string. A PayPal Recurrent Payment Profile ID, required for GetRecurringPaymentsProfileDetails operation. 
+	 * @param $profile_id, (optional) string. A PayPal Recurrent Payment Profile ID, required for GetRecurringPaymentsProfileDetails operation.
 	 * @return string A URL which can be called with the @see call_paypal() method to perform the appropriate API operation.
 	 */
 	protected function get_payment_details_url( $action, $profile_or_transaction_id = '' ){
@@ -151,14 +151,14 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 
 	/**
 	 * Creates a payment profile with PayPal represented by the token it returns.
-	 * 
+	 *
 	 * When a buyer clicks the Pay with PayPal button, this function calls the PayPal SetExpressCheckout API operation.
 	 *
 	 * It passes payment details of the items purchased and therefore, set_payment_details() must have been called
 	 * before this function.
 	 *
 	 * Return:
-	 * 
+	 *
 	 */
 	public function request_checkout_token(){
 
@@ -172,8 +172,8 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 
 	/**
 	 * Calls the PayPal GetExpressCheckoutDetails methods and returns a more nicely formatted response
-	 * 
-	 * Called internally on return from set_express_checkout(). Can be called anytime to get details of 
+	 *
+	 * Called internally on return from set_express_checkout(). Can be called anytime to get details of
 	 * a transaction for which you have the Token.
 	 */
 	public function get_checkout_details(){
@@ -183,9 +183,9 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 
 	/**
 	 * Post to PayPal
-	 * 
+	 *
 	 * Makes an API call using an NVP String and an Endpoint. Based on code available here: https://www.x.com/blogs/Nate/2011/01/07/digital-goods-with-express-checkout-in-php
-	 * 
+	 *
 	 * @param action, string, required. The API operation to be performed, eg. GetExpressCheckoutDetails. The action is abstracted from you (the developer) by the appropriate helper function eg. GetExpressCheckoutDetails via get_checkout_details()
 	 */
 	protected function call_paypal( $action, $profile_id = '', $status = '' ){
@@ -194,7 +194,7 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 		$api_parameters = $this->get_payment_details_url( $action, $profile_id, $status );
 
 		$ch = curl_init();
-		curl_setopt( $ch, CURLOPT_URL, PayPal_Digital_Goods_Configuration::endpoint() );
+		curl_setopt( $ch, CURLOPT_URL, Aimya_PayPal_RecurringPayment_PaypalConfiguration::endpoint() );
 		curl_setopt( $ch, CURLOPT_VERBOSE, 1 );
 
 		// Turn off server and peer verification
@@ -219,7 +219,7 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 		parse_str( $response, $parsed_response );
 
 		if( ( 0 == sizeof( $parsed_response ) ) || ! array_key_exists( 'ACK', $parsed_response ) )
-			exit( "Invalid HTTP Response for POST request($api_parameters) to " . PayPal_Digital_Goods_Configuration::endpoint() );
+			exit( "Invalid HTTP Response for POST request($api_parameters) to " . Aimya_PayPal_RecurringPayment_PaypalConfiguration::endpoint() );
 
 		if( $parsed_response['ACK'] == 'Failure' )
 			exit( "Calling PayPal with action $action has Failed: " . $parsed_response['L_LONGMESSAGE0'] );
@@ -241,13 +241,13 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 
 	/**
 	 * The Javascript to invoke the digital goods in context checkout process.
-	 * 
-	 * No need to call this function manually, required scripts are automatically printed with @see print_buy_buttion(). 
-	 * If you do print this script manually, print it after the button in the DOM to ensure the 
+	 *
+	 * No need to call this function manually, required scripts are automatically printed with @see print_buy_buttion().
+	 * If you do print this script manually, print it after the button in the DOM to ensure the
 	 * click event is properly hooked.
 	 */
 	public function get_script( $args = array() ){
-		
+
 		if( empty( $args['element_id'] ) )
 			$args['element_id'] = 'paypal-submit';
 
@@ -262,27 +262,27 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 
 
 	/**
-	 * Create and return the Buy (or Subscribe) button for your page. 
-	 * 
+	 * Create and return the Buy (or Subscribe) button for your page.
+	 *
 	 * The button can be output either as a link to a image submit button, link to a page
-	 * or link directly to PayPal (default). 
-	 * 
+	 * or link directly to PayPal (default).
+	 *
 	 * The simplest method is to pass no parameters and have the button be a link directly to
-	 * PayPal; however, the drawback of this approach is a slower load time for the page on which 
+	 * PayPal; however, the drawback of this approach is a slower load time for the page on which
 	 * the button is included.
-	 * 
-	 * @param args array. Name => value parameters to customise the buy button. 
-	 * 			'id' string. The id of the submit element. Defaults to 'paypal-submit'. 
+	 *
+	 * @param args array. Name => value parameters to customise the buy button.
+	 * 			'id' string. The id of the submit element. Defaults to 'paypal-submit'.
 	 * 			'element' string. The type of element to use as the button. Either anchor or submit. Default 'anchor'.
-	 * 			'href' string. The URL for 'anchor' tag. Ignored when 'element' is 'submit'. Default $this->checkout_url. 
+	 * 			'href' string. The URL for 'anchor' tag. Ignored when 'element' is 'submit'. Default $this->checkout_url.
 	 * 			'get_token' boolean. Whether to include a token with the href. Overridden by 'element' when it is 'submit'.
-	 * 			'type' string. Type of element to output, either anchor or image/submit. Defaults to 'anchor'. 
+	 * 			'type' string. Type of element to output, either anchor or image/submit. Defaults to 'anchor'.
 	 */
 	public function get_buy_button( $args = array() ){
 
 		$defaults = array(  'id'        => 'paypal-submit',
 							'type'      => 'anchor',
-							'href'      => PayPal_Digital_Goods_Configuration::checkout_url(),
+							'href'      => Aimya_PayPal_RecurringPayment_PaypalConfiguration::checkout_url(),
 							'alt'       => 'Submit',
 							'get_token' => true
 					);
@@ -294,7 +294,7 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 				$this->request_checkout_token();
 
 			// Include the token in the href if the default href is not overridden
-			if( $args['href'] == PayPal_Digital_Goods_Configuration::checkout_url() )
+			if( $args['href'] == Aimya_PayPal_RecurringPayment_PaypalConfiguration::checkout_url() )
 				$args['href'] .= $this->token;
 
 			$button = '<a href="' . $args['href'] . '" id="' . $args['id'] . '" alt="' . $args['alt'] . '"><img src="https://www.paypal.com/en_US/i/btn/btn_dg_pay_w_paypal.gif" border="0" /></a>';
@@ -307,12 +307,12 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 
 
 	/**
-	 * Print the Buy (or Subscribe) button for this API object as well as the scripts 
+	 * Print the Buy (or Subscribe) button for this API object as well as the scripts
 	 * required by the button.
-	 * 
+	 *
 	 * If you want to manually insert the script at a different position in your page,
 	 * you can manually call @see get_buy_button() & @see get_script().
-	 * 
+	 *
 	 * @uses get_buy_button()
 	 * @uses get_script()
 	 */
@@ -323,29 +323,29 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 
 
 	/**
-	 * Returns the Checkout URL including a token for this transaction. 
+	 * Returns the Checkout URL including a token for this transaction.
 	 */
 	public function get_checkout_url() {
 		if( empty( $this->token ) )
 			$this->request_checkout_token();
 
 		// Include the token in the href if the default href is not overridden
-		return PayPal_Digital_Goods_Configuration::checkout_url() . $this->token;
+		return Aimya_PayPal_RecurringPayment_PaypalConfiguration::checkout_url() . $this->token;
 	}
 
 
 	/**
-	 * Get the symbol associated with a currency, optionally specified with '$currency_code' parameter. 
-	 * 
+	 * Get the symbol associated with a currency, optionally specified with '$currency_code' parameter.
+	 *
 	 * Will always return the symbol and can optionally also print the symbol.
-	 * 
+	 *
 	 * @param $currency_code, string, optional, the ISO 4217 Code of the currency for which you want the Symbol, default the currency code of this object
 	 * @param $echo bool, Optionally print the symbol before returning it.
 	 **/
 	public function get_currency_symbol( $currency_code = '', $echo = false ){
 
 		if( empty( $currency_code ) )
-			$currency_code = PayPal_Digital_Goods_Configuration::currency();
+			$currency_code = Aimya_PayPal_RecurringPayment_PaypalConfiguration::currency();
 
 		switch( $currency_code ) {
 			case 'AUD' :
