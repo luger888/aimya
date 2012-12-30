@@ -140,7 +140,7 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 
 		} elseif ( 'GetExpressCheckoutDetails' == $action ) {
 
-			$api_request .= '&METHOD=GetExpressCheckoutDetails';
+			$api_request .= '&METHOD=GetExpressCheckoutDetails'
 						  . '&TOKEN=' . $this->token;
 
 		}
