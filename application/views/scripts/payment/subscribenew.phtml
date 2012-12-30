@@ -1,4 +1,10 @@
-<?php echo $this->button?>
+<?php $obj =  $this->obj; ?>
+<div class="container">
+    <h2>PayPal Recurring Payments Demo</h2>
+    <p><b>Description:</b> <?php echo $obj->get_description(); ?></p>
+    <p><b>Subscription details:</b> <?php echo $obj->get_subscription_string(); ?></p>
+    <?php $obj->print_buy_button(); ?>
+</div>
 <h2>PayPal Recurring Payments Demo</h2>
 
 <?php // Returning from PayPal & Payment Cancelled ?>

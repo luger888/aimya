@@ -228,7 +228,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
         //$paypal_subscription->start_subscription();
 
-        //$this->view->button = $paypal_subscription->print_buy_button();
+        $this->view->obj = $paypal_subscription;
     }
 
     public function unsubscribeAction()
