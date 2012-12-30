@@ -302,6 +302,8 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 			$button = '<input type="image" id="' . $args['id'] . '" alt="' . $args['alt'] . '" src="https://www.paypal.com/en_US/i/btn/btn_dg_pay_w_paypal.gif">';
 		}
 
+        die('1111');
+
 		return $button;
 	}
 
