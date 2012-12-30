@@ -69,9 +69,9 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 	 */
 	public function __construct( $args = array() ){
 
-		if( '' == Aimya_PayPal_RecurringPayment_PaypalConfiguration::username() || '' == Aimya_PayPal_RecurringPayment_PaypalConfiguration::password() || '' == Aimya_PayPal_RecurringPayment_PaypalConfiguration::signature() )
+		if( '' == PayPal_Digital_Goods_Configuration::username() || '' == PayPal_Digital_Goods_Configuration::password() || '' == PayPal_Digital_Goods_Configuration::signature() )
 			exit( 'You must specify your PayPal API username, password & signature in the $api_credentials array. For details of how to ' );
-		elseif( ( empty( $args['return_url'] ) && '' == Aimya_PayPal_RecurringPayment_PaypalConfiguration::username() ) || ( empty( $args['cancel_url'] ) && '' == Aimya_PayPal_RecurringPayment_PaypalConfiguration::cancel_url() ) )
+		elseif( ( empty( $args['return_url'] ) && '' == PayPal_Digital_Goods_Configuration::username() ) || ( empty( $args['cancel_url'] ) && '' == PayPal_Digital_Goods_Configuration::cancel_url() ) )
 			exit( 'You must specify a return_url & cancel_url.' );
 
 		$defaults = array(
@@ -79,20 +79,25 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 			'version'       => '76.0',
 			'business_name' => '',
 			'solution_type' => 'Sole',
-			'return_url'    => Aimya_PayPal_RecurringPayment_PaypalConfiguration::return_url(),
-			'cancel_url'    => Aimya_PayPal_RecurringPayment_PaypalConfiguration::cancel_url(),
-			'notify_url'    => Aimya_PayPal_RecurringPayment_PaypalConfiguration::notify_url()
+			'return_url'    => PayPal_Digital_Goods_Configuration::return_url(),
+			'cancel_url'    => PayPal_Digital_Goods_Configuration::cancel_url(),
+			'notify_url'    => PayPal_Digital_Goods_Configuration::notify_url()
 		);
 
 		$args = array_merge( $defaults, $args );
 
-		$this->currency      = Aimya_PayPal_RecurringPayment_PaypalConfiguration::currency();
+		$this->currency      = PayPal_Digital_Goods_Configuration::currency();
 		$this->business_name = $args['business_name'];
 
 		$this->return_url    = $args['return_url'];
 		$this->cancel_url    = $args['cancel_url'];
 		$this->notify_url    = $args['notify_url'];
 		$this->solution_type = $args['solution_type'];
+
+        if(!isset($this->token)) {
+            die('jjj');
+            $this->get_checkout_details();
+        }
 	}
 
 	/**
@@ -102,10 +107,10 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 	 */
 	protected function get_api_credentials_url(){
 
-		return 'USER=' . urlencode( Aimya_PayPal_RecurringPayment_PaypalConfiguration::username() )
-			 . '&PWD=' . urlencode( Aimya_PayPal_RecurringPayment_PaypalConfiguration::password() )
-			 . '&SIGNATURE=' . urlencode( Aimya_PayPal_RecurringPayment_PaypalConfiguration::signature() )
-			 . '&VERSION='.  urlencode( Aimya_PayPal_RecurringPayment_PaypalConfiguration::version() );
+		return 'USER=' . urlencode( PayPal_Digital_Goods_Configuration::username() )
+			 . '&PWD=' . urlencode( PayPal_Digital_Goods_Configuration::password() )
+			 . '&SIGNATURE=' . urlencode( PayPal_Digital_Goods_Configuration::signature() )
+			 . '&VERSION='.  urlencode( PayPal_Digital_Goods_Configuration::version() );
 	}
 
 
@@ -194,7 +199,7 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 		$api_parameters = $this->get_payment_details_url( $action, $profile_id, $status );
 
 		$ch = curl_init();
-		curl_setopt( $ch, CURLOPT_URL, Aimya_PayPal_RecurringPayment_PaypalConfiguration::endpoint() );
+		curl_setopt( $ch, CURLOPT_URL, PayPal_Digital_Goods_Configuration::endpoint() );
 		curl_setopt( $ch, CURLOPT_VERBOSE, 1 );
 
 		// Turn off server and peer verification
@@ -219,12 +224,11 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 		parse_str( $response, $parsed_response );
 
 		if( ( 0 == sizeof( $parsed_response ) ) || ! array_key_exists( 'ACK', $parsed_response ) )
-			exit( "Invalid HTTP Response for POST request($api_parameters) to " . Aimya_PayPal_RecurringPayment_PaypalConfiguration::endpoint() );
+			exit( "Invalid HTTP Response for POST request($api_parameters) to " . PayPal_Digital_Goods_Configuration::endpoint() );
 
 		if( $parsed_response['ACK'] == 'Failure' )
 			exit( "Calling PayPal with action $action has Failed: " . $parsed_response['L_LONGMESSAGE0'] );
-        var_dump($parsed_response);
-        die('fff');
+
 		return $parsed_response;
 	}
 
@@ -283,7 +287,7 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 
 		$defaults = array(  'id'        => 'paypal-submit',
 							'type'      => 'anchor',
-							'href'      => Aimya_PayPal_RecurringPayment_PaypalConfiguration::checkout_url(),
+							'href'      => PayPal_Digital_Goods_Configuration::checkout_url(),
 							'alt'       => 'Submit',
 							'get_token' => true
 					);
@@ -295,7 +299,7 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 				$this->request_checkout_token();
 
 			// Include the token in the href if the default href is not overridden
-			if( $args['href'] == Aimya_PayPal_RecurringPayment_PaypalConfiguration::checkout_url() )
+			if( $args['href'] == PayPal_Digital_Goods_Configuration::checkout_url() )
 				$args['href'] .= $this->token;
 
 			$button = '<a href="' . $args['href'] . '" id="' . $args['id'] . '" alt="' . $args['alt'] . '"><img src="https://www.paypal.com/en_US/i/btn/btn_dg_pay_w_paypal.gif" border="0" /></a>';
@@ -331,7 +335,7 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 			$this->request_checkout_token();
 
 		// Include the token in the href if the default href is not overridden
-		return Aimya_PayPal_RecurringPayment_PaypalConfiguration::checkout_url() . $this->token;
+		return PayPal_Digital_Goods_Configuration::checkout_url() . $this->token;
 	}
 
 
@@ -346,7 +350,7 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 	public function get_currency_symbol( $currency_code = '', $echo = false ){
 
 		if( empty( $currency_code ) )
-			$currency_code = Aimya_PayPal_RecurringPayment_PaypalConfiguration::currency();
+			$currency_code = PayPal_Digital_Goods_Configuration::currency();
 
 		switch( $currency_code ) {
 			case 'AUD' :
