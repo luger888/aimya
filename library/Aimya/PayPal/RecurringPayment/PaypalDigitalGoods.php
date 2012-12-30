@@ -192,7 +192,6 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 
 		// Use the one function for all PayPal API operations
 		$api_parameters = $this->get_payment_details_url( $action, $profile_id, $status );
-        die('fff');
 
 		$ch = curl_init();
 		curl_setopt( $ch, CURLOPT_URL, Aimya_PayPal_RecurringPayment_PaypalConfiguration::endpoint() );
@@ -224,7 +223,8 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 
 		if( $parsed_response['ACK'] == 'Failure' )
 			exit( "Calling PayPal with action $action has Failed: " . $parsed_response['L_LONGMESSAGE0'] );
-
+        var_dump($parsed_response);
+        die('fff');
 		return $parsed_response;
 	}
 
