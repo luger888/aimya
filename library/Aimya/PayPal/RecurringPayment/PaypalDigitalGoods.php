@@ -93,6 +93,8 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 		$this->cancel_url    = $args['cancel_url'];
 		$this->notify_url    = $args['notify_url'];
 		$this->solution_type = $args['solution_type'];
+        $this->token = $this->get_checkout_details();
+
 	}
 
 	/**
