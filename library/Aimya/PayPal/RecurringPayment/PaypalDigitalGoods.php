@@ -145,8 +145,8 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 						  . '&TOKEN=' . $this->token;
 
 		}
-        echo $api_request;
-        die;
+        /*echo $api_request;
+        die;*/
 		return $api_request;
 	}
 
