@@ -10,7 +10,7 @@
  */
 
 
-class Aimya_PayPal_RecurringPayment_PaypalSubscription extends Aimya_Paypal_RecurringPayment_PaypalDigitalGoods {
+class Aimya_PayPal_RecurringPayment_PaypalSubscription extends Aimya_PaPpal_RecurringPayment_PaypalDigitalGoods {
 
 		/**
 		 * Details of this particular recurring payment profile, including price, period & frequency.
