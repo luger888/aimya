@@ -95,7 +95,6 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 		$this->solution_type = $args['solution_type'];
 
         if(!isset($this->token)) {
-            die('jjj');
             $this->get_checkout_details();
         }
 	}
@@ -197,6 +196,9 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 
 		// Use the one function for all PayPal API operations
 		$api_parameters = $this->get_payment_details_url( $action, $profile_id, $status );
+
+        echo $api_parameters;
+        die('gg');
 
 		$ch = curl_init();
 		curl_setopt( $ch, CURLOPT_URL, Aimya_PayPal_RecurringPayment_PaypalConfiguration::endpoint() );
