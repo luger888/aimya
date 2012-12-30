@@ -208,7 +208,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
         Aimya_PayPal_RecurringPayment_PaypalConfiguration::return_url(urlencode($gateway['returnUrl']));
         Aimya_PayPal_RecurringPayment_PaypalConfiguration::cancel_url(urlencode($gateway['cancelUrl']));
-        Aimya_PayPal_RecurringPayment_PaypalConfiguration::notify_url(urlencode($gateway['cancelUrl']));
+        Aimya_PayPal_RecurringPayment_PaypalConfiguration::notify_url(urlencode($gateway['notifyUrl']));
 
 
         //Aimya_PayPal_RecurringPayment_PaypalDigitalGoods::environment( 'live' );
@@ -224,28 +224,11 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
         $paypal_subscription = new Aimya_PayPal_RecurringPayment_PaypalSubscription($subscription_details);
 
-        var_dump($paypal_subscription);die;
+        //var_dump($paypal_subscription);die;
 
-        $paypal_subscription->start_subscription();
+        //$paypal_subscription->start_subscription();
 
-        if(!$_GET['task']) {
-            $task="setExpressCheckout"; //set initial task as Express Checkout
-        } else {
-            $task=$_GET['task'];
-        }
-
-        switch($task)
-        {
-            case "setExpressCheckout":
-                $obj->setExpressCheckout();
-                exit;
-            case "getExpressCheckout":
-                $obj->getExpressCheckout();
-                exit;
-            case "error":
-                echo "setExpress checkout failed";
-                exit;
-        }
+        $this->view->button = $paypal_subscription->print_buy_button();
     }
 
     public function unsubscribeAction()
