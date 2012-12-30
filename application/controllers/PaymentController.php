@@ -223,6 +223,9 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         );
 
         $paypal_subscription = new Aimya_PayPal_RecurringPayment_PaypalSubscription($subscription_details);
+
+        var_dump($paypal_subscription);die;
+
         $paypal_subscription->start_subscription();
 
         if(!$_GET['task']) {
