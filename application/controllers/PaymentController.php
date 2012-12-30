@@ -196,6 +196,53 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         }
     }
 
+    public function subscribenewAction()
+    {
+        $payPalModel = new Application_Model_PayPal();
+        $gateway = $payPalModel->getGateway();
+
+        Aimya_PayPal_RecurringPayment_PaypalConfiguration::username(urlencode($gateway['apiUsername']));
+        Aimya_PayPal_RecurringPayment_PaypalConfiguration::password(urlencode($gateway['apiPassword']));
+        Aimya_PayPal_RecurringPayment_PaypalConfiguration::signature(urlencode($gateway['apiSignature']));
+
+        Aimya_PayPal_RecurringPayment_PaypalConfiguration::return_url(urlencode($gateway['returnUrl']));
+        Aimya_PayPal_RecurringPayment_PaypalConfiguration::cancel_url(urlencode($gateway['cancelUrl']));
+
+
+        //Aimya_PayPal_RecurringPayment_PaypalDigitalGoods::environment( 'live' );
+
+        $subscription_details = array(
+            'description'        => 'Example Subscription: $10 sign-up fee then $2/week for the next four weeks.',
+            'initial_amount'     => '10.00',
+            'amount'             => '2.00',
+            'period'             => 'Week',
+            'frequency'          => '1',
+            'total_cycles'       => '4',
+        );
+
+        $paypal_subscription = new Aimya_PayPal_RecurringPayment_PaypalSubscription($subscription_details);
+        $paypal_subscription->start_subscription();
+
+        if(!$_GET['task']) {
+            $task="setExpressCheckout"; //set initial task as Express Checkout
+        } else {
+            $task=$_GET['task'];
+        }
+
+        switch($task)
+        {
+            case "setExpressCheckout":
+                $obj->setExpressCheckout();
+                exit;
+            case "getExpressCheckout":
+                $obj->getExpressCheckout();
+                exit;
+            case "error":
+                echo "setExpress checkout failed";
+                exit;
+        }
+    }
+
     public function unsubscribeAction()
     {
 
