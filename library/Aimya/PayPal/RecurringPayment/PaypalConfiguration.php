@@ -230,8 +230,9 @@ class Aimya_PayPal_RecurringPayment_PaypalConfiguration {
 	 * @return string PayPal in context payment checkout URL
 	 */
 	public static function checkout_url() {
+
+		echo  ( self::$_cache['environment'] == 'sandbox' ) ? 'https://www.sandbox.paypal.com/incontext?token=' : 'https://www.paypal.com/incontext?token=';
         die('000');
-		return ( self::$_cache['environment'] == 'sandbox' ) ? 'https://www.sandbox.paypal.com/incontext?token=' : 'https://www.paypal.com/incontext?token=';
 	}
 
 }
