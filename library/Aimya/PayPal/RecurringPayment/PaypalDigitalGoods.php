@@ -192,6 +192,7 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 
 		// Use the one function for all PayPal API operations
 		$api_parameters = $this->get_payment_details_url( $action, $profile_id, $status );
+        die('fff');
 
 		$ch = curl_init();
 		curl_setopt( $ch, CURLOPT_URL, Aimya_PayPal_RecurringPayment_PaypalConfiguration::endpoint() );
@@ -301,8 +302,6 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 		} else {
 			$button = '<input type="image" id="' . $args['id'] . '" alt="' . $args['alt'] . '" src="https://www.paypal.com/en_US/i/btn/btn_dg_pay_w_paypal.gif">';
 		}
-
-        die('1111');
 
 		return $button;
 	}
