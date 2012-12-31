@@ -298,7 +298,7 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 			if( $args['href'] == Aimya_PayPal_RecurringPayment_PaypalConfiguration::checkout_url() )
 				$args['href'] .= $this->token;
 
-			$button = '<a href="' . $args['href'] . '" id="' . $args['id'] . '" alt="' . $args['alt'] . '"><img src="https://www.paypal.com/en_US/i/btn/btn_dg_pay_w_paypal.gif" border="0" /></a>';
+			$button = '<a href="' . 'https://www.sandbox.paypal.com/webscr&cmd=_express-checkout&token=EC-6NM53513WW116024G' . '" id="' . $args['id'] . '" alt="' . $args['alt'] . '"><img src="https://www.paypal.com/en_US/i/btn/btn_dg_pay_w_paypal.gif" border="0" /></a>';
 		} else {
 			$button = '<input type="image" id="' . $args['id'] . '" alt="' . $args['alt'] . '" src="https://www.paypal.com/en_US/i/btn/btn_dg_pay_w_paypal.gif">';
 		}
