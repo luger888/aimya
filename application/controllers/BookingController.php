@@ -10,6 +10,7 @@ class BookingController extends Zend_Controller_Action
             ->addActionContext('index', 'json')
             ->addActionContext('add', 'json')
             ->addActionContext('count', 'json')
+            ->addActionContext('approve', 'json')
             ->initContext('json');
     }
 
@@ -63,6 +64,7 @@ class BookingController extends Zend_Controller_Action
                 if(!$isExist){
                     $bookingDbTable = new Application_Model_DbTable_Booking();
                     $bookingDbTable->approveBooking($this->getRequest()->getParam('booking_id'), $identity->id);
+                    $this->view->approved = 1;
                 }
 
 
