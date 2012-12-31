@@ -513,13 +513,19 @@ function confirmBooking(e) {
             "booking_id":$(e).nextAll('#booking_id:first').val()
         },
         function (response) {
-            $(e).parents('.fc-event-inner').find('.fc-event-head').css('background-color', '#effad0');
-            $(e).parents('.fc-event-inner').css('background-color', '#effad0');
-            $(e).parents('.fc-event').css('border-color', '#7e954c');
-            $(e).parents('.fc-event-inner').css('border-color', '#7e954c');
-            $(e).parent().append('<div class="fc-event-content-approve"><span>Approved</span></div>');
-            $(e).parents('.fc-event').find('.fc-event-content-reject').remove();
-            $(e).parents('.fc-event').find('.fc-event-content-confirm').remove();
+
+            if(response.approved){
+                $(e).parents('.fc-event-inner').find('.fc-event-head').css('background-color', '#effad0');
+                $(e).parents('.fc-event-inner').css('background-color', '#effad0');
+                $(e).parents('.fc-event').css('border-color', '#7e954c');
+                $(e).parents('.fc-event-inner').css('border-color', '#7e954c');
+                $(e).parent().append('<div class="fc-event-content-approve"><span>Approved</span></div>');
+                $(e).parents('.fc-event').find('.fc-event-content-reject').remove();
+                $(e).parents('.fc-event').find('.fc-event-content-confirm').remove();
+            }else{
+                alert('You already approved lesson on this time!')
+            }
+
 
 
         });

@@ -205,11 +205,12 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
         $started_atAdd = date( "YYYY-MM-dd HH:mm:ss", strtotime($current_at)*600);
         $row = $this->fetchRow($this->select()
             ->where('recipient_id=?',$userId )
-            ->where('started_at<?', $current_at )
-            //->where('started_at<=?', $started_atAdd)
+            ->where('started_at<=?', $started_atAdd )
+            ->where('started_at>=?', $current_at)
+            ->where('booking_status=?', 1)
            // ->where('id!=?', $booking_id )
-            ->where('id<=>?', $booking_id ));//if there is booking previous to current
-        Zend_Debug::dump($row);
+            ->where('id!=?', $booking_id ));//if there is booking previous to current
+        //Zend_Debug::dump($row);
         if($row){
             return true;
         }else{
