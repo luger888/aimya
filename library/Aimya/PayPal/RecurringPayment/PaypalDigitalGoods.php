@@ -130,7 +130,6 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 			$api_request .= '&METHOD=SetExpressCheckout'
 						 .  '&RETURNURL=' . urlencode( $this->return_url )
 						 .  '&SOLUTIONTYPE=' . urlencode( $this->solution_type )
-                         .  '&PAYMENTACTION=Authorization'
 						 .  '&CANCELURL=' . urlencode( $this->cancel_url );
 
 			if( ! empty( $this->notify_url ) )

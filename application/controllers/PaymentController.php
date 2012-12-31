@@ -201,14 +201,14 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         $payPalModel = new Application_Model_PayPal();
         $gateway = $payPalModel->getGateway();
 
-        Aimya_PayPal_RecurringPayment_PaypalConfiguration::username(urlencode($gateway['apiUsername']));
-        Aimya_PayPal_RecurringPayment_PaypalConfiguration::password(urlencode($gateway['apiPassword']));
-        Aimya_PayPal_RecurringPayment_PaypalConfiguration::signature(urlencode($gateway['apiSignature']));
+        Aimya_PayPal_RecurringPayment_PaypalConfiguration::username($gateway['apiUsername']);
+        Aimya_PayPal_RecurringPayment_PaypalConfiguration::password($gateway['apiPassword']);
+        Aimya_PayPal_RecurringPayment_PaypalConfiguration::signature($gateway['apiSignature']);
         Aimya_PayPal_RecurringPayment_PaypalConfiguration::business_name( 'Aimya Store' );
 
-        Aimya_PayPal_RecurringPayment_PaypalConfiguration::return_url(urlencode($gateway['returnUrl']));
-        Aimya_PayPal_RecurringPayment_PaypalConfiguration::cancel_url(urlencode($gateway['cancelUrl']));
-        Aimya_PayPal_RecurringPayment_PaypalConfiguration::notify_url(urlencode($gateway['notifyUrl']));
+        Aimya_PayPal_RecurringPayment_PaypalConfiguration::return_url($gateway['returnUrl']);
+        Aimya_PayPal_RecurringPayment_PaypalConfiguration::cancel_url($gateway['cancelUrl']);
+        Aimya_PayPal_RecurringPayment_PaypalConfiguration::notify_url($gateway['notifyUrl']);
 
 
         //Aimya_PayPal_RecurringPayment_PaypalDigitalGoods::environment( 'live' );
