@@ -201,8 +201,8 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
     {
         $current = $this->fetchRow($this->select()->where('id=?',$booking_id ));
         $current_at = $current['started_at'];//12 am 13.12
-
-        $started_atAdd = date( "YYYY-MM-dd HH:mm:ss", strtotime($current_at)*600);
+        $current_duration = $current['duration']*60;
+        $started_atAdd = date( "Y-m-d H:i:s", strtotime($current_at)+600+$current_duration );
         $row = $this->fetchRow($this->select()
             ->where('recipient_id=?',$userId )
             ->where('started_at<=?', $started_atAdd )
@@ -210,7 +210,8 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
             ->where('booking_status=?', 1)
            // ->where('id!=?', $booking_id )
             ->where('id!=?', $booking_id ));//if there is booking previous to current
-        //Zend_Debug::dump($row);
+//        Zend_Debug::dump($current_at);
+//        Zend_Debug::dump($started_atAdd);
         if($row){
             return true;
         }else{
