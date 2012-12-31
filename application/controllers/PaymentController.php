@@ -112,7 +112,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
                 $payKey = $orderTable->getPayKeyFromOrder($bookingId);
                 if($payKey['pay_key'] = $_POST['pay_key']) {
                     $orderTable->updatePaymentStatus($bookingId);
-                    $bookingTable->payLesson($bookingId);
+                    $bookingTable->paymentStatus($bookingId ,2);
                 }
             }
 
