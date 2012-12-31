@@ -157,9 +157,9 @@ class Application_Model_PayPal
             //'returnUrl' => $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment/subscribe/?task=getExpressCheckout',
             //'cancelUrl' => $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment/subscribe/?task=error',
             //'notifyUrl' => $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment/subscribe/?task=notify'
-            'returnUrl' => $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment/subscribe/?paypal=paid',
-            'cancelUrl' => $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment/subscribe/?paypal=cancel',
-            'notifyUrl' => $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment/subscribe/?paypal=notify'
+            'returnUrl' => $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment/subscribenew/?paypal=paid',
+            'cancelUrl' => $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment/subscribenew/?paypal=cancel',
+            'notifyUrl' => $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment/subscribenew/?paypal=notify'
 
         );
         return $defaultData;
