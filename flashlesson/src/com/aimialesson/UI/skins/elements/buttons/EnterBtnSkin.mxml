@@ -24,6 +24,6 @@
     </s:states>
     
 		<s:BitmapImage source="@Embed('flashassets/enter_icon.png')" x="0" y="-2" />
-		<s:RichText text="{Texts.getInstance().getText(Texts.ENTER, true)}" x="24" styleName="ButtonLabelStyle" y="-2"/>
+		<s:RichText text="{(Texts.getInstance().texts[Texts.ENTER] as String).toUpperCase()}" x="24" styleName="ButtonLabelStyle" y="-2"/>
     
 </s:SparkSkin>

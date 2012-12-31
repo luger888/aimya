@@ -33,11 +33,11 @@
 	<s:BitmapImage source="@Embed('flashassets/background_allert.png')" left="0" top="0" bottom="0" right="0"/>
 	<s:BitmapImage source="@Embed('flashassets/green_stripe.png')" x="19" y="19"/>
 	<s:Group id="topGroup" left="19" top="19"  right="19" height="33">
-		<s:RichText text="{Texts.getInstance().getText(Texts.ALERT) + ':'}" left="13" top="13" styleName="PopUpTitleStyle"/>
+		<s:RichText text="{(Texts.getInstance().texts[Texts.ALERT] as String) + ':'}" left="13" top="13" styleName="PopUpTitleStyle"/>
 		<s:Button right="13" top="13" skinClass="com.aimialesson.UI.skins.elements.buttons.ClosePopupBtnSkin" useHandCursor="true" buttonMode="true" click="onCloseClick()"/>
 	</s:Group>
 	<s:Group left="19" bottom="19"  right="19" top="52">
-		<s:RichText left="18" top="24" id="messageRT" text="{Texts.getInstance().getText(Texts.ARE_YOU_SURE_YOU_WANT_TO_END_THE_LESSON)}" styleName="PopUpTextStyle"/>
+		<s:RichText left="18" top="24" id="messageRT" text="{(Texts.getInstance().texts[Texts.ARE_YOU_SURE_YOU_WANT_TO_END_THE_LESSON] as String)}" styleName="PopUpTextStyle"/>
 		<s:HGroup id="buttonGroup" right="17" bottom="14" gap="11">
 			<s:Button id="yesBtn" skinClass="com.aimialesson.UI.skins.elements.buttons.YesPopupBtnSkin" useHandCursor="true" buttonMode="true" click="onYesClick()"/>
 			<s:Button id="noBtn" skinClass="com.aimialesson.UI.skins.elements.buttons.NoPopupBtnSkin" useHandCursor="true" buttonMode="true" click="onNoClick()"/>
