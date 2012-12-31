@@ -25,12 +25,12 @@
 	<s:VGroup width="100%" height="100%">
 		<s:RichText text="{(Texts.getInstance().texts[Texts.LESSON_NOTES] as String).toUpperCase()}" styleName="HeaderStyle" fontSize="12" fontWeight="normal"  color="#1D3300" />
 		<s:SkinnableContainer  width="100%" height="100%" skinClass="com.aimialesson.UI.skins.elements.NotesMainContainerSkin" backgroundAlpha="100" >
-			<s:List id="notesList"  width="100%" height="100%" itemRenderer="com.aimialesson.UI.renderers.NoteItemRenderer" dataProvider="{Notes.getInstance().notesAC}" borderColor="#B6B5B5" scrollSnappingMode="center">
+			<s:List id="notesList"  width="100%" height="100%" itemRenderer="com.aimialesson.UI.renderers.NoteItemRenderer" dataProvider="{Notes.getInstance().notesAC}" borderColor="#B6B5B5" scrollSnappingMode="center" horizontalScrollPolicy="off">
 				<s:layout>
-					<s:VerticalLayout  verticalScrollPosition.unchangedState="{notesList.dataGroup.contentHeight - notesList.height}" />
+					<s:TileLayout requestedColumnCount="1" columnWidth="{inputGroup.width - 10}" verticalScrollPosition.unchangedState="{notesList.dataGroup.contentHeight - notesList.height}"/>
 				</s:layout>
 			</s:List>	
-			<s:Group width="100%" height="102" >
+			<s:Group id="inputGroup" width="100%" height="102" >
 				<s:SkinnableContainer   skinClass="com.aimialesson.UI.skins.elements.NotesEnterNoteContainerSkin" left="14" right="18" top="14" bottom="14">
 					<s:TextArea id="messageInput" borderAlpha="0" contentBackgroundAlpha="0" left="7" top="0" bottom="7" right="70" styleName="EnterNoteStyle" focusAlpha="0" focusColor="0xffffff" enabled="{Main.getInstance().session_started}"/>
 					<s:Button id="sendBtn" skinClass="com.aimialesson.UI.skins.elements.buttons.EnterBtnSkin" right="10" bottom="7" useHandCursor="true" buttonMode="true"/>

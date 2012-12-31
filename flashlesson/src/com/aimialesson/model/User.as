@@ -24,7 +24,7 @@ package com.aimialesson.model
 			return _userName;
 		}
 		
-		private var _userRole:String = "1";
+		private var _userRole:String = "1" ;
 		public function set userRoleID ( value : String ) : void {
 			_userRole = value;
 		//	this.dispatchEvent( new Event("partnerRoleChange") );
@@ -38,7 +38,7 @@ package com.aimialesson.model
 		}
 		
 		public function get userRole () : String {
-			return (_userRole == User.STUDENT) ? Texts.getInstance().getText(Texts.STUDENT) : Texts.getInstance().getText(Texts.TEACHER);
+			return (_userRole == User.STUDENT) ? (Texts.getInstance().texts[Texts.STUDENT] as String) : (Texts.getInstance().texts[Texts.TEACHER] as String);
 		}
 		
 		private var _isOnline:Boolean = true;
@@ -76,7 +76,7 @@ package com.aimialesson.model
 		}
 		
 		public function get partnerRole () : String {
-			return (_userRole == User.TEACHER) ? Texts.getInstance().getText(Texts.STUDENT) : Texts.getInstance().getText(Texts.TEACHER);
+			return (_userRole == User.TEACHER) ? (Texts.getInstance().texts[Texts.STUDENT] as String) : (Texts.getInstance().texts[Texts.TEACHER] as String);
 		}
 		
 		private var _partnerIsOnline:Boolean = false;

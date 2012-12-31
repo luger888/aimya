@@ -61,8 +61,6 @@ package com.aimialesson.UI.views
 		public var stopSessionBtn:Button;
 		[SkinPart (required="false")]
 		public var debugger:TextArea;
-		[SkinPart (required="false")]
-		public var endLesson:EndLesson;
 		[Bindable]
 		public var stage_width:int;
 		[Bindable]
@@ -100,8 +98,6 @@ package com.aimialesson.UI.views
 				startSessionBtn.addEventListener(MouseEvent.CLICK, onBtnClick);
 			} else if ( instance == stopSessionBtn ) {
 				stopSessionBtn.addEventListener(MouseEvent.CLICK, onBtnClick);
-			} else if ( instance == endLesson ) {
-				endLesson.visible = false;
 			}
 		}
 		

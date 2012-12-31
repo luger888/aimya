@@ -125,5 +125,5 @@
 		<s:State id="notFullScreenState" name="notFullScreen"/>
 		<s:State id="fullScreenState" name="fullScreen" />
 	</s:states>
-	<views:MainUI id="mainUI" skinClass="com.aimialesson.UI.skins.MainUISkin" skinClass.fullScreen="com.aimialesson.UI.skins.MainFSUISkin" width="100%" height="100%"/>
+	<views:MainUI id="mainUI" excludeFrom="loaded" skinClass="com.aimialesson.UI.skins.MainUISkin" skinClass.fullScreen="com.aimialesson.UI.skins.MainFSUISkin" width="100%" height="100%"/>
 </s:Application>

@@ -26,6 +26,6 @@
     
 		<s:BitmapImage source="@Embed('flashassets/no.png')" x="0"/>
 		<s:BitmapImage includeIn="over" source="@Embed('flashassets/no_active.png')" x="0"/>
-		<s:RichText text="{Texts.getInstance().getText(Texts.NO, true)}" verticalCenter="0" horizontalCenter="0" styleName="ButtonNoLabelStyle"/>
+		<s:RichText text="{(Texts.getInstance().texts[Texts.NO] as String).toUpperCase()}" verticalCenter="0" horizontalCenter="0" styleName="ButtonNoLabelStyle"/>
     
 </s:SparkSkin>
