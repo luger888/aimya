@@ -200,12 +200,28 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
     public function isExistBooking($booking_id, $userId)
     {
         $current = $this->fetchRow($this->select()->where('id=?',$booking_id ));
-        $started_at = $current['started_at'];
+        $current_at = $current['started_at'];//12 am 13.12
+        $current_duration = $current['duration']*60;
+        $started_atAdd = date( "Y-m-d H:i:s", strtotime($current_at)+600+$current_duration );
+        $started_atSub = date( "Y-m-d H:i:s", strtotime($current_at)-600-$current_duration );
+        $row = $this->fetchRow($this->select()
+            ->where('('. $this->getAdapter()->quoteInto('sender_id=?' , (int)$userId) . ') OR (' . $this->getAdapter()->quoteInto('recipient_id=?' , (int)$userId) . ')')
+            ->where('started_at<=?', $started_atAdd )
+            ->where('started_at>=?', $current_at)
+            ->where('booking_status=?', 1)
+           // ->where('id!=?', $booking_id )
+            ->where('id!=?', $booking_id ));//if there is booking previous to current
 
-        $started_atAdd = date( "YYYY-MM-dd HH:mm:ss", strtotime($started_at)*600);
-        $row = $this->fetchAll($this->select()->where('recipient_id=?',$userId )->where('started_at<=?',$started_at ));//if there is booking previous to current
-        Zend_Debug::dump($row);
-        if($row){
+        $row2 = $this->fetchRow($this->select()
+            ->where('('. $this->getAdapter()->quoteInto('sender_id=?' , (int)$userId) . ') OR (' . $this->getAdapter()->quoteInto('recipient_id=?' , (int)$userId) . ')')
+            ->where('started_at<=?', $current_at )
+            ->where('started_at>=?', $started_atSub)
+            ->where('booking_status=?', 1)
+        // ->where('id!=?', $booking_id )
+            ->where('id!=?', $booking_id ));//if there is booking previous to current
+       // Zend_Debug::dump($current_at);
+       // Zend_Debug::dump($started_atAdd);
+        if($row || $row2){
             return true;
         }else{
             return false;
