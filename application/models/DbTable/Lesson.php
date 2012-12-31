@@ -22,15 +22,10 @@ class Application_Model_DbTable_Lesson extends Application_Model_DbTable_Abstrac
 
     public function checkAvailableLesson($userId){
 
-        $identity = Zend_Auth::getInstance()->getIdentity();
         $data = $this->select()
-            ->from($this->_name);
-        if($identity->role == 1){
-            $data->where('partner_id=?', (int)$userId);
-        } else {
-            $data->where('creator_id=?', (int)$userId);
-        }
-            $data->where('status=?', 1);
+            ->from($this->_name)
+            ->where('(' . $this->getAdapter()->quoteInto('partner_id=?', (int)$userId ) . ' OR ' . $this->getAdapter()->quoteInto('creator_id=?', (int)$userId) . ')')
+            ->where('status=?', 1);
 
         $userData = $data->query();
         $row = $userData->fetch();

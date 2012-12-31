@@ -76,8 +76,6 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
     }
 
     public function addFriend($friendId) {
-        $request = Zend_Controller_Front::getInstance()->getRequest();
-        $url = $request->getScheme() . '://' . $request->getHttpHost();
         $status = false;
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
 
@@ -86,7 +84,7 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
         $friend = $userTable->getItem($friendId);
 
         $user = $userTable->getItem($userId);
-        $accountPage = $url . "/user/{$userId}";
+        $accountPage = Zend_Controller_Front::getInstance()->getBaseUrl() . "/user/{$userId}";
         if($isInList){
             if($isInList['recipient_status'] == 0 && $isInList['sender_status'] == 1) {
                 $where = $this->getAdapter()->quoteInto('id = ?', (int)$isInList['id']);

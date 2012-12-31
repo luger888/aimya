@@ -1,0 +1,41 @@
+<?php $emailForm = $this->emailForm; ?>
+<?php $subscriptionForm = $this->subscriptionForm; ?>
+<div class="featuresTab mainContainer clearfix">
+    <div class="messageContent clearfix">
+        <div class="shadowSeparator clearfix">
+            <div class="shadowSeparatorBox clearfix">
+                <form action="<?php echo $this->baseUrl() . "/payment/email"?>" name="paypal_email" method="post">
+                    <div class="leftCol">
+                        <div class="formRow clearfix">
+                            <label class="title"><?php echo $this->translate('PayPal Email'); ?></label>
+                            <div class="formElem"><?php echo $emailForm->paypal_email; ?></div>
+                        </div><!--End formRow-->
+                    </div>
+                    <div class="buttonRow clearfix"><?php echo $emailForm->saveemail; ?></div><!--End buttonRow-->
+                </form>
+            </div><!--End shadowSeparatorBox-->
+            <div class="shadowSeparatorBox clearfix">
+                <form action="<?php echo $this->baseUrl() . "/payment/subscribe"?>" name="subscribe" method="post">
+                    <div class="leftCol">
+                        <div class="formRow clearfix">
+                            <label class="title"><?php echo $this->translate('Date from:'); ?></label>
+                            <div class="formElem"><?php echo $subscriptionForm->date_from; ?></div>
+                            <label class="title"><?php echo $this->translate('Period:'); ?></label>
+                            <div class="formElem"><?php echo $subscriptionForm->period; ?></div>
+                        </div><!--End formRow-->
+                    </div>
+                    <div class="buttonRow clearfix"><?php echo $subscriptionForm->subscribe; ?><?php echo $subscriptionForm->unsubscribe; ?></div><!--End buttonRow-->
+                </form>
+            </div><!--End shadowSeparatorBox-->
+        </div><!--End shadowSeparator-->
+    </div>
+</div><!--End featuresTab -->
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $(".more").shorten({
+            "showChars" : 200
+        });
+
+    });
+</script>

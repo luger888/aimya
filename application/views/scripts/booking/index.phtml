@@ -346,7 +346,6 @@ jQuery(document).ready(function () {
                             borderColor = '#c18989';
                         }
 
-
                         var start = msg.booking[c].started_at;
                         start = new Date(msg.booking[c].started_at);
 
@@ -358,10 +357,12 @@ jQuery(document).ready(function () {
                         if (msg.booking[c].recipient_id == msg.user_id) {
                             start = start.addHours(utc);
                         }
+                        var dateTime = msg.booking[c].started_at;
+
                         events.push({
                             title:msg.booking[c].focus_name,
-                            start:start,
-                            started_at:msg.booking[c].started_at,
+                            start:dateTime,
+                            started_at:dateTime,
                             recipient_id:msg.booking[c].recipient_id,
                             booking_status:msg.booking[c].booking_status,
                             add_info:msg.booking[c].add_info,
@@ -406,9 +407,30 @@ jQuery(document).ready(function () {
                 } else {
                     recipient = $('#recipiend_id option[value="' + event.recipient_id + '"]').text();
                 }
-
+                if(event.booking_status == '1'){
+                    var colorAlt = 'green';
+                }
+                if(event.booking_status == '0'){
+                     colorAlt = 'rose';
+                }
+                if(event.video == '1'){
+                    videoActivity = 'active';
+                }else{
+                    videoActivity ='passive'
+                }
+                if(event.notes == '1'){
+                    notesActivity = 'active';
+                }else{
+                    notesActivity ='passive'
+                }
+                if(event.feedback == '1'){
+                    feedbackActivity = 'active';
+                }else{
+                    feedbackActivity ='passive'
+                }
                 element.find(".fc-event-head").append('<div class ="fc-event-focusName">Focus name: "' + event.title + '"</div>');
                 element.find(".fc-event-head").append('<div class = "fc-event-rate">Rate: $' + event.rate + ' / ' + duration + '</div>');
+                element.find(".fc-event-content").append('<div class = "fc-event-content-alt floatRight"><span class = "videoRec '+ colorAlt+' '+videoActivity+'"></span> <span class = "feedback '+ colorAlt+' '+feedbackActivity+'"></span><span class = "notes '+ colorAlt+' '+notesActivity+'"></span></div>');
                 element.find(".fc-event-content").append('<div class = "fc-event-content-description"> Description: ' + event.add_info + '</div>');
                 element.find(".fc-event-content").append('<div class = "fc-event-content-requested">Request from: ' + sender + ' , to:  ' + recipient + '</div>');
 
@@ -446,7 +468,7 @@ jQuery(document).ready(function () {
     $('#started_at').datetimepicker();
 
     $('#sendBooking').click(function () {
-
+        jQuery("body").append('<div class="loadingIcon"></div>');
         if($('input[name=role]:checked').val() == '2'){
             var role = '0';
         }
@@ -467,6 +489,7 @@ jQuery(document).ready(function () {
 
             },
             function (response) {
+
                 window.location.reload();
 
             });
@@ -487,16 +510,22 @@ function confirmBooking(e) {
     $.post(
 
         pathName + "/booking/approve/0/controller%3D%3Ebooking/1/action%3D%3Eapprove", {
-            "booking_id":$('#booking_id').val()
+            "booking_id":$(e).nextAll('#booking_id:first').val()
         },
         function (response) {
-            $(e).parents('.fc-event-inner').find('.fc-event-head').css('background-color', '#effad0');
-            $(e).parents('.fc-event-inner').css('background-color', '#effad0');
-            $(e).parents('.fc-event').css('border-color', '#7e954c');
-            $(e).parents('.fc-event-inner').css('border-color', '#7e954c');
-            $(e).parent().append('<div class="fc-event-content-approve"><span>Approved</span></div>');
-            $(e).parents('.fc-event').find('.fc-event-content-reject').remove();
-            $(e).parents('.fc-event').find('.fc-event-content-confirm').remove();
+
+            if(response.approved){
+                $(e).parents('.fc-event-inner').find('.fc-event-head').css('background-color', '#effad0');
+                $(e).parents('.fc-event-inner').css('background-color', '#effad0');
+                $(e).parents('.fc-event').css('border-color', '#7e954c');
+                $(e).parents('.fc-event-inner').css('border-color', '#7e954c');
+                $(e).parent().append('<div class="fc-event-content-approve"><span>Approved</span></div>');
+                $(e).parents('.fc-event').find('.fc-event-content-reject').remove();
+                $(e).parents('.fc-event').find('.fc-event-content-confirm').remove();
+            }else{
+                alert('You already approved lesson on this time!')
+            }
+
 
 
         });
@@ -506,7 +535,7 @@ function rejectBooking(e) {
     $.post(
 
         pathName + "/booking/reject/0/controller%3D%3Ebooking/1/action%3D%3Ereject", {
-            "booking_id":$('#booking_id').val()
+            "booking_id":$(e).nextAll('#booking_id:first').val()
         },
         function (response) {
             e.parentNode.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode.parentNode);
