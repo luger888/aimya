@@ -169,7 +169,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         $obj->API_UserName = urlencode($gateway['apiUsername']);
         $obj->API_Password = urlencode($gateway['apiPassword']);
         $obj->API_Signature = urlencode($gateway['apiSignature']);
-        $obj->API_Endpoint = "https://api-3t.paypal.com/nvp";
+        $obj->API_Endpoint = "https://api-3t.sandbox.paypal.com/nvp";
 
         /*SET SUCCESS AND FAIL URL*/
         $obj->returnURL = urlencode($gateway['returnUrl']);
