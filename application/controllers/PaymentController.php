@@ -223,11 +223,31 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         );
 
         $paypal_subscription = new Aimya_PayPal_RecurringPayment_PaypalSubscription($subscription_details);
+        $html = "";
+        if( isset( $_GET['paypal'] ) && $_GET['paypal'] == 'cancel' ){
 
-        //var_dump($paypal_subscription);die;
+            //$html .= "<script>if (window!=top) {top.location.replace(document.location);}</script>";
+            $html .= '<p>Your subscription has been cancelled. <a href="#" target="_top">Try again?</a></p>';
 
-        //$paypal_subscription->start_subscription();
+        } elseif( isset( $_GET['paypal'] ) && $_GET['paypal'] == 'paid' ){
 
+            // Process the payment or start the Subscription
+            if( isset( $_GET['PayerID'] ) ) {
+                $response = $paypal_subscription->process_payment();
+            } else {
+                $response = $paypal_subscription->start_subscription();
+            }
+
+            $html .= '<h3>Payment Complete!</h3>';
+            if( isset( $_GET['PayerID'] ) ) {
+                $html .= "<p>Your Transaction ID is {$response['PAYMENTINFO_0_TRANSACTIONID']}</p>";
+                $html .= '<p>You can use this Transaction ID to see the details of your subscription like so:</p>';
+            } else {
+                $html .= '<p>You can use this Profile ID to see the details of your subscription like so:</p>';
+            }
+
+        }
+        $this->view->html = $html;
         $this->view->obj = $paypal_subscription;
     }
 
