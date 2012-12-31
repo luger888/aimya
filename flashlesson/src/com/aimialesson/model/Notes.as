@@ -2,34 +2,48 @@ package com.aimialesson.model
 {
 	import com.aimialesson.model.Main;
 	
+	import flash.events.EventDispatcher;
+	
 	import mx.collections.ArrayCollection;
+	import mx.events.CollectionEvent;
 
-	public class Notes
+	public class Notes extends EventDispatcher
 	{
+		
+		public static const NEW_LINE_ADDED:String = "newLineAdded";
 				
 		public function Notes()
 		{
 		}
 		
-		private var _notesAC:ArrayCollection;// = new ArrayCollection([{message:"test message 1", date:"1000", name:"user1"}, {message:"test message 2", date:"2000", name:"user2"}]);
+		private var _notesAC:ArrayCollection;// = new ArrayCollection();//[{message:"test message 1", date:"1000", name:"user1"}, {message:"test message 2", date:"2000", name:"user2"}]);
 		[Bindable]
 		public function set notesAC ( value : ArrayCollection ) : void {
 			_notesAC = value;
+			_notesAC.addEventListener(CollectionEvent.COLLECTION_CHANGE, onCollectionChange);
+			onCollectionChange(null);
+			//notesAC.enableAutoUpdate();
 		}
 		
 		public function get notesAC () : ArrayCollection {
 			return _notesAC;
 		}
+
 		
 		private var _newLineData:Object;
 		public function set newLineData ( value : Object ) : void {
 			if (value != _newLineData){
 				_newLineData = value;
-				if (!notesAC) notesAC = new ArrayCollection();
+				if (!notesAC){
+					notesAC = new ArrayCollection();
+				} 
 				_newLineData.isEven = isEven(); 
 				notesAC.addItem(_newLineData);
-				//text += value + "\n";
 			}
+		}
+		
+		public function onCollectionChange ( event : Event ) : void {
+			this.dispatchEvent(new Event ( Notes.NEW_LINE_ADDED ) );
 		}
 		
 		public function get newLineData () : Object {

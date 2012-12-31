@@ -23,7 +23,7 @@ package com.aimialesson.model
 		public static const TOTAL_LESSON_TIME:String = "totalLessonTime";
 		public static const LESSON_NOTES:String = "lessonNotes";
 		public static const UPLOAD:String = "upload";
-		public static const UPLOAD_MORE:String = "upload more";
+		public static const UPLOAD_MORE:String = "uploadMore";
 		public static const THE_LESSON_IS_FINISHED:String = "lessonIsFinished";
 		public static const ALERT:String = "Alert:";
 		public static const ARE_YOU_SURE_YOU_WANT_TO_END_THE_LESSON:String = "wantEndLesson";

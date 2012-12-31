@@ -95,6 +95,8 @@ package com.aimialesson.controllers
 			Notes.getInstance().clear();
 			Main.getInstance().lesson_finished_by = initiator_id;
 			Main.getInstance().lesson_finished = true;
+			if(Main.getInstance().fsMode)
+				soController.setSOProperty('screenMode' + User.getInstance().userID, (!Main.getInstance().fsMode).toString());
 		}
 		
 		public function onTextChatEvent ( event : NotesEvent ) : void {

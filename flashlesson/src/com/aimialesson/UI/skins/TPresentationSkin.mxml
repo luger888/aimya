@@ -14,16 +14,26 @@
 		]]>
 	</fx:Script>
 		
-		<s:Group id="group" width="{group.height*hostComponent.wScale}" height="100%" >
+		<!--s:Group id="group" width="{(hostComponent.wScale > hostComponent.hScale)?group.height*hostComponent.wScale:hostComponent.maxWidth}" height="100%"-->
+		<s:Group id="group" width="{group.height*hostComponent.wScale}" height="100%">
 			<!--s:BitmapImage id="presentationBG" source="@Embed('flashassets/presentation_background.png')" horizontalCenter="0" verticalCenter="0"/-->
-			<s:RectangularDropShadow id="dropShadow"
-									 alpha="0.21" distance="0"  blRadius="8"
-									 angle="120" color="#000101" blendMode="multiply"
-									 left="0" top="0" right="0" bottom="0" />
-			<s:Rect id="rectBG"
-					left="1" right="1" top="1" bottom="1" >
+			<!--s:RectangularDropShadow id="dropShadow"
+									 alpha="0.21" distance="0"  blRadius="6" blurX="10" blurY="10"
+									 angle="120" color="#000101" blendMode="multiply" 
+									 left="0" top="0" right="0" bottom="0" /-->
+			<s:Rect left="0" right="0" top="0" bottom="0" >
 				<s:fill>
-					<s:SolidColor id="bgFill" color="0xFFFFFF" />
+					<s:SolidColor color="0xFFFFFF" alpha="1"/>
+				</s:fill>
+				<s:filters>
+					<s:DropShadowFilter alpha="0.21" distance="0" blurX="10" blurY="10" angle="120"
+										color="#000101"  knockout="true" />
+				</s:filters>
+			</s:Rect>
+			<s:Rect id="rectBG"
+					left="0" right="0" top="0" bottom="0" >
+				<s:fill>
+					<s:SolidColor id="bgFill" color="0xFFFFFF" alpha="1"/>
 				</s:fill>
 			</s:Rect>
 			<views:PresentationUI id="presentation"  visible="{Presentation.getInstance().loaded}" includeInLayout="{Presentation.getInstance().loaded}" x="{rectBG.x}" y="{rectBG.y}"  width="{rectBG.width}" height="{rectBG.height}"/>
