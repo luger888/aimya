@@ -510,7 +510,7 @@ function confirmBooking(e) {
     $.post(
 
         pathName + "/booking/approve/0/controller%3D%3Ebooking/1/action%3D%3Eapprove", {
-            "booking_id":$('#booking_id').val()
+            "booking_id":$(e).nextAll('#booking_id:first').val()
         },
         function (response) {
             $(e).parents('.fc-event-inner').find('.fc-event-head').css('background-color', '#effad0');
@@ -529,7 +529,7 @@ function rejectBooking(e) {
     $.post(
 
         pathName + "/booking/reject/0/controller%3D%3Ebooking/1/action%3D%3Ereject", {
-            "booking_id":$('#booking_id').val()
+            "booking_id":$(e).nextAll('#booking_id:first').val()
         },
         function (response) {
             e.parentNode.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode.parentNode);

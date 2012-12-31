@@ -200,10 +200,15 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
     public function isExistBooking($booking_id, $userId)
     {
         $current = $this->fetchRow($this->select()->where('id=?',$booking_id ));
-        $started_at = $current['started_at'];
+        $current_at = $current['started_at'];//12 am 13.12
 
-        $started_atAdd = date( "YYYY-MM-dd HH:mm:ss", strtotime($started_at)*600);
-        $row = $this->fetchAll($this->select()->where('recipient_id=?',$userId )->where('started_at<=?',$started_at ));//if there is booking previous to current
+        $started_atAdd = date( "YYYY-MM-dd HH:mm:ss", strtotime($current_at)*600);
+        $row = $this->fetchRow($this->select()
+            ->where('recipient_id=?',$userId )
+            ->where('started_at<?', $current_at )
+            //->where('started_at<=?', $started_atAdd)
+           // ->where('id!=?', $booking_id )
+            ->where('id<=>?', $booking_id ));//if there is booking previous to current
         Zend_Debug::dump($row);
         if($row){
             return true;
