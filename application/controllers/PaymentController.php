@@ -156,7 +156,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         $obj = new Aimya_PayPal_RecurringPayment;
 
         $obj->environment = $gateway['testMode'];	// or 'beta-sandbox' or 'live'
-        $obj->paymentType = urlencode('Authorization');				// or 'Sale' or 'Order'
+        //$obj->paymentType = urlencode('Authorization');				// or 'Sale' or 'Order'
 
         // Set request-specific fields.
         $obj->startDate = urlencode("3012-12-31T0:0:0");
