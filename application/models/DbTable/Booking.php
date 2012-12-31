@@ -203,7 +203,6 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
         $where   = array(
             $this->getAdapter()->quoteInto('id=?', (int)$bookingId),
-            '1' => "(sender_id={$userId} OR recipient_id={$userId})"
         );
 
         //Zend_Debug::dump($where);
