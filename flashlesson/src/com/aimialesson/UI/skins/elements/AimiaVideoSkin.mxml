@@ -6,6 +6,11 @@
 	<fx:Metadata>
 		[HostComponent("com.aimialesson.UI.views.AimiaVideoUI")]
 	</fx:Metadata>
+	<fx:Script>
+		<![CDATA[
+			import com.aimialesson.model.User;
+		]]>
+	</fx:Script>
 	
 	<!-- SkinParts
 	name=lamp, type=com.aimialesson.UI.views.elements.Lamp, required=true
@@ -19,28 +24,37 @@
 			<elements:Lamp online="{hostComponent.userOnline}" id="lamp" />
 		</s:HGroup>
 		<s:RichText id="userRoleField" text="{hostComponent.userRole}" styleName="RoleStyle"/>
-		<s:Group width="{hostComponent.videoWidth + 8}" height="{hostComponent.videoHeight + 8}">
-			<s:Group top="-15"  right="0" width="30">
+		<s:Group width="{hostComponent.videoWidth + 12}" height="{hostComponent.videoHeight + 12}">
+			<s:Group top="-15"  right="0" width="30" includeInLayout="{hostComponent.userRole == User.getInstance().userRole}" visible="{hostComponent.userRole == User.getInstance().userRole}">
 				<s:Button verticalCenter="0" left="0" id="muteMicBtn" visible="{!hostComponent.muteMic}" includeInLayout="{!hostComponent.muteMic}" skinClass="com.aimialesson.UI.skins.elements.buttons.MuteMicBtnSkin" useHandCursor="true" buttonMode="true" />
 				<s:Button verticalCenter="0" left="0" id="unMuteMicBtn" visible="{hostComponent.muteMic}" includeInLayout="{hostComponent.muteMic}" skinClass="com.aimialesson.UI.skins.elements.buttons.UnMuteMicBtnSkin" useHandCursor="true" buttonMode="true" />
 				<s:Button verticalCenter="0" right="0" id="muteCamBtn" visible="{!hostComponent.muteCam}" includeInLayout="{!hostComponent.muteCam}" skinClass="com.aimialesson.UI.skins.elements.buttons.MuteCamBtnSkin" useHandCursor="true" buttonMode="true" />
 				<s:Button verticalCenter="0" right="0" id="unMuteCamBtn" visible="{hostComponent.muteCam}" includeInLayout="{hostComponent.muteCam}" skinClass="com.aimialesson.UI.skins.elements.buttons.UnMuteCamBtnSkin" useHandCursor="true" buttonMode="true" />
 			</s:Group>
 			<!--s:BitmapImage id="bg" source="@Embed('flashassets/video_background.png')" left="-4" top="-4" right="-4" bottom="-4"/-->
-			<s:RectangularDropShadow id="dropShadow"
+			<!--s:RectangularDropShadow id="dropShadow" blurX="10" blurY="10"
 									 alpha="0.21" distance="0"  blRadius="6"
 									 angle="120" color="#000101" blendMode="multiply"
-									 left="0" top="0" right="0" bottom="0" />
+									 left="0" top="0" right="0" bottom="0" /-->
 			
 			
-			<s:Rect id="rectBG"
-					left="1" right="1" top="1" bottom="1" >
+			<s:Rect left="0" right="0" top="0" bottom="0" >
 				<s:fill>
-					<s:SolidColor id="bgFill" color="0xFFFFFF" />
+					<s:SolidColor color="0xFFFFFF" alpha="1"/>
+				</s:fill>
+				<s:filters>
+					<s:DropShadowFilter alpha="0.21" distance="0" blurX="10" blurY="10" angle="120"
+										color="#000101"  knockout="true" />
+				</s:filters>
+			</s:Rect>
+			<s:Rect id="rectBG"
+					left="0" right="0" top="0" bottom="0" >
+				<s:fill>
+					<s:SolidColor id="bgFill" color="0xFFFFFF" alpha="1"/>
 				</s:fill>
 			</s:Rect>
 
-			<mx:UIComponent id="videoContainter"  x="4" y="4" visible="{!hostComponent.muteCam}"/>
+			<mx:UIComponent id="videoContainter"  x="6" y="6" visible="{!hostComponent.muteCam}"/>
 		</s:Group>
 	</s:VGroup>
 	<fx:Script>

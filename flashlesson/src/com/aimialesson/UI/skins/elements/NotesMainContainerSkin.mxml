@@ -64,16 +64,25 @@
     </s:states>
     
     <!--- Defines the appearance of the SkinnableContainer class's background. -->
-	<s:RectangularDropShadow id="dropShadow"
+	<!--s:RectangularDropShadow id="dropShadow" blurX="10" blurY="10"
 							 alpha="0.21" distance="0"  blRadius="6"
 							 angle="120" color="#000101" blendMode="multiply"
-							 left="0" top="0" right="0" bottom="0" />
+							 left="0" top="0" right="0" bottom="0" /-->
 	
 	
-	<s:Rect id="rectBG"
-			left="1" right="1" top="1" bottom="1" >
+	<s:Rect left="0" right="0" top="0" bottom="0" >
 		<s:fill>
-			<s:SolidColor id="mainBGFill" color="0xFFFFFF" />
+			<s:SolidColor color="0xFFFFFF" alpha="1"/>
+		</s:fill>
+		<s:filters>
+			<s:DropShadowFilter alpha="0.21" distance="0" blurX="10" blurY="10" angle="120"
+								color="#000101"  knockout="true" />
+		</s:filters>
+	</s:Rect>
+	<s:Rect id="rectBG"
+			left="0" right="0" top="0" bottom="0" >
+		<s:fill>
+			<s:SolidColor color="0xFFFFFF" alpha="1"/>
 		</s:fill>
 	</s:Rect>
 

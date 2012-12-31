@@ -44,7 +44,7 @@ package com.aimialesson.controllers
 				debug ("userId:" + parameters.userId);
 			}
 			if (parameters.userTZ){
-				User.getInstance().timeZone = Number(parameters.userTZ);
+				User.getInstance().timeZone = Number((parameters.userTZ as String).substr(0,3));
 				debug ("timeZone:" + parameters.userTZ);
 			}
 		}
