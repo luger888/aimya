@@ -199,7 +199,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
     public function subscribenewAction()
     {
         $payPalModel = new Application_Model_PayPal();
-        $gateway = $payPalModel->getGateway();
+        $gateway = $payPalModel->getGatewayNew();
 
         Aimya_PayPal_RecurringPayment_PaypalConfiguration::username($gateway['apiUsername']);
         Aimya_PayPal_RecurringPayment_PaypalConfiguration::password($gateway['apiPassword']);
@@ -211,7 +211,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         Aimya_PayPal_RecurringPayment_PaypalConfiguration::notify_url($gateway['notifyUrl']);
 
 
-        //Aimya_PayPal_RecurringPayment_PaypalDigitalGoods::environment( 'live' );
+        Aimya_PayPal_RecurringPayment_PaypalDigitalGoods::environment( 'live' );
 
         $subscription_details = array(
             'description'        => 'Example Subscription: $10 sign-up fee then $2/week for the next four weeks.',
