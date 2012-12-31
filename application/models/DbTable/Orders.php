@@ -38,7 +38,7 @@ class Application_Model_DbTable_Orders extends Application_Model_DbTable_Abstrac
 
         $where[] = $this->getAdapter()->quoteInto('booking_id=?', $bookingId);;
 
-        return $this->update($data , $where);
+        $this->update($data , $where);
     }
 
     public function getPayKeyFromOrder($bookingId) {
