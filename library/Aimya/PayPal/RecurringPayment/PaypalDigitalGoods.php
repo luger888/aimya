@@ -318,7 +318,7 @@ abstract class Aimya_PayPal_RecurringPayment_PaypalDigitalGoods {
 	 * @uses get_script()
 	 */
 	public function print_buy_button( $args = array() ){
-		//echo $this->get_buy_button( $args );
+		echo $this->get_buy_button( $args );
 		//echo $this->get_script( $args );
 	}
 
