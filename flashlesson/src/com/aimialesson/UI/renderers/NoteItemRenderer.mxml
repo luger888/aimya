@@ -12,7 +12,7 @@
 			[Bindable]
 			private var dateStr:String = ""; 
 			override public function set data(value:Object):void {
-				//debug("NoteItemRenderer");
+				trace("NoteItemRenderer");
 				super.data = value;
 				if (data) {
 					var date:Date = new Date();

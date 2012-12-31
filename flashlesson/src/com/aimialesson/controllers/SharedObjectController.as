@@ -130,7 +130,7 @@ package com.aimialesson.controllers
 					case "imagesUrls"		:	//Presentation.getInstance().imageUrls = so.data['imagesUrls'];
 												break;
 					case "uploaded"			:	if (so.data['uploaded'] == "true"){
-													so.data['uploaded'] = "false";
+													setSOProperty('uploaded', "false");
 													dispatchEvent( new SharedObjectEvent ( SharedObjectEvent.SHARED_PRESENTATION_UPLOADED ) );
 												}
 												break;

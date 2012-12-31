@@ -197,6 +197,31 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
 
     }
 
+    public function payLesson($bookingId, $status)
+    {
+
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+        $where   = array(
+            $this->getAdapter()->quoteInto('id=?', (int)$bookingId),
+            '1' => "(sender_id={$userId} OR recipient_id={$userId})"
+        );
+
+        //Zend_Debug::dump($where);
+        $data = array(
+            'payment_status'=> $status,
+            'updated_at' => date('Y-m-d H:m:s')
+        );
+
+        $result = $this->update($data, $where);
+
+        if($result) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
     public function isExistBooking($booking_id, $userId)
     {
         $current = $this->fetchRow($this->select()->where('id=?',$booking_id ));

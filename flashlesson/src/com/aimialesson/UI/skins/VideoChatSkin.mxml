@@ -8,7 +8,7 @@
 	</fx:Metadata>
 	<fx:Script>
 		<![CDATA[
-			import com.aimialesson.UI.views.elements.AimiaVideoSkin;
+			import com.aimialesson.UI.skins.elements.AimiaVideoSkin;
 			import com.aimialesson.model.Main;
 			import com.aimialesson.model.Media;
 			import com.aimialesson.model.User;
@@ -48,8 +48,8 @@
 	<s:VGroup>
 		<s:RichText text="{Texts.getInstance().getText(Texts.VIDEO_CHAT, true)}" styleName="HeaderStyle" />
 		<s:VGroup id="chatGroup" gap="15">
-			<views:AimiaVideoUI id="myAimiaVideo" userName="{User.getInstance().userName}" userRole="{User.getInstance().userRole}" userOnline="{User.getInstance().isOnline}" muteMic="{Main.getInstance().lesson_finished || Media.getInstance().micPaused}" muteCam="{Main.getInstance().lesson_finished || Media.getInstance().camPaused}" skinClass="com.aimialesson.UI.views.elements.AimiaVideoSkin" />
-			<views:AimiaVideoUI id="partnerAimiaVideo" userName="{User.getInstance().partnerName}" userRole="{User.getInstance().partnerRole}" userOnline="{User.getInstance().partnerIsOnline}" muteMic="{Main.getInstance().lesson_finished || Media.getInstance().partnerMicPaused}" muteCam="{Main.getInstance().lesson_finished || Media.getInstance().partnerCamPaused}" skinClass="com.aimialesson.UI.views.elements.AimiaVideoSkin" />
+			<views:AimiaVideoUI id="myAimiaVideo" userName="{User.getInstance().userName}" userRole="{User.getInstance().userRole}" userOnline="{User.getInstance().isOnline}" muteMic="{Main.getInstance().lesson_finished || Media.getInstance().micPaused}" muteCam="{Main.getInstance().lesson_finished || Media.getInstance().camPaused}" skinClass="com.aimialesson.UI.skins.elements.AimiaVideoSkin" />
+			<views:AimiaVideoUI id="partnerAimiaVideo" userName="{User.getInstance().partnerName}" userRole="{User.getInstance().partnerRole}" userOnline="{User.getInstance().partnerIsOnline}" muteMic="{Main.getInstance().lesson_finished || Media.getInstance().partnerMicPaused}" muteCam="{Main.getInstance().lesson_finished || Media.getInstance().partnerCamPaused}" skinClass="com.aimialesson.UI.skins.elements.AimiaVideoSkin" />
 			<s:HGroup id="chatHGroup" width="100%" gap="30"/>
 		</s:VGroup>
 	</s:VGroup>

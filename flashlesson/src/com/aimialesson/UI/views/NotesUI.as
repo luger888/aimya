@@ -3,9 +3,15 @@ package com.aimialesson.UI.views
 	import com.aimialesson.UI.skins.NotesSkin;
 	import com.aimialesson.events.NotesEvent;
 	import com.aimialesson.model.Main;
+	import com.aimialesson.model.Notes;
 	import com.aimialesson.model.User;
 	
 	import flash.events.*;
+	
+	import mx.collections.ArrayCollection;
+	import mx.collections.ListCollectionView;
+	import mx.events.CollectionEvent;
+	import mx.events.FlexEvent;
 	
 	import spark.components.Button;
 	import spark.components.List;
@@ -23,27 +29,21 @@ package com.aimialesson.UI.views
 		[SkinPart (required="true")]
 		public var sendBtn:Button;
 		
-		private static var instance:NotesUI;
 		public function NotesUI()
 		{
 			super();
 			//setStyle("skinClass", NotesSkin);
+			Notes.getInstance().addEventListener(Notes.NEW_LINE_ADDED, onNewLine );	
 		}
-		
-		public static function getInstance():NotesUI{
-			trace("getInstance:" + instance);
-			if (instance == null){
-				instance = new NotesUI();
-			}
-			return instance;
-		}
-		
+				
 		override protected function partAdded(partName:String, instance:Object):void
 		{
 			trace("NotesUI:partAdded:" + instance);
 			if (instance == notesList) {
 	//			user = User.getInstance();
 				//initChat();
+				//notesList.dataProvider = Notes.getInstance().notesAC;
+				skin.currentState = "unchangedState";
 			} else {
 				if (instance == sendBtn){
 					sendBtn.addEventListener(MouseEvent.CLICK, onClickSendBtn);
@@ -57,12 +57,24 @@ package com.aimialesson.UI.views
 			
 		}
 		
-		private function onClickSendBtn(event:MouseEvent):void
+		private function onNewLine( event : Event ) : void {
+			trace("NotesUI:onNewLine");
+			(notesList.dataProvider as ArrayCollection).refresh();
+			notesList.callLater(setVerticalPosition);
+			skin.currentState = "changedState";
+		}
+		
+		private function setVerticalPosition(): void {
+			notesList.layout.verticalScrollPosition = notesList.dataGroup.contentHeight - notesList.height;
+		}
+		
+		private function onClickSendBtn ( event : MouseEvent ) : void
 		{
 	//		messageInput.text = Media.getInstance().userName + ": " + messageInput.text;
 			var date:Date = new Date();
 			debug ("date.getTime():" + date.getTime());
-			this.dispatchEvent( new NotesEvent ( NotesEvent.ADD_NEW_LINE,  {message:messageInput.text, name:User.getInstance().userName, date:date.getTime() + User.getInstance().timeZone}) );
+			date.hours += User.getInstance().timeZone; 
+			this.dispatchEvent( new NotesEvent ( NotesEvent.ADD_NEW_LINE,  {message:messageInput.text, name:User.getInstance().userName, date:date.getTime()}) );
 			messageInput.text = "";
 		}
 		

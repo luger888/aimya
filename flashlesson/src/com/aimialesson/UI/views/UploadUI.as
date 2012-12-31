@@ -70,20 +70,20 @@ package com.aimialesson.UI.views
 		override protected function updateDisplayList ( unscaledWidth : Number, unscaledHeight : Number ) : void {
 			super.updateDisplayList(unscaledWidth, unscaledHeight);
 			if (!presantationBG) return;
-			if (unscaledHeight / unscaledWidth > presantationBG.sourceHeight / presantationBG.sourceWidth){
+			/*if (unscaledHeight / unscaledWidth > presantationBG.sourceHeight / presantationBG.sourceWidth){
 				presantationBG.percentWidth = 100;
 				presantationBG.height = presantationBG.sourceHeight * ( unscaledWidth / presantationBG.sourceWidth );
 			} else {
 				presantationBG.percentHeight = 100;
 				presantationBG.width = presantationBG.sourceWidth * ( unscaledHeight / presantationBG.sourceHeight );
-			}
+			}*/
 		}
 		
 		public function initSize () : void {
-			presantationBG.percentHeight = 0;
+			/*presantationBG.percentHeight = 0;
 			presantationBG.percentWidth = 0;
 			presantationBG.height = 0;
-			presantationBG.width = 0;
+			presantationBG.width = 0;*/
 		}
 		
 		private function init():void {

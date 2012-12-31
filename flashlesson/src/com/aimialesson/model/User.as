@@ -24,7 +24,7 @@ package com.aimialesson.model
 			return _userName;
 		}
 		
-		private var _userRole:String = "";
+		private var _userRole:String = "1";
 		public function set userRoleID ( value : String ) : void {
 			_userRole = value;
 		//	this.dispatchEvent( new Event("partnerRoleChange") );

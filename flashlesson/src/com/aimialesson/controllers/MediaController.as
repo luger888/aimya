@@ -1,24 +1,29 @@
 package com.aimialesson.controllers
 {
 	import com.aimialesson.events.AppEvent;
+	import com.aimialesson.model.Actions;
 	import com.aimialesson.model.Client;
 	import com.aimialesson.model.Main;
 	import com.aimialesson.model.Media;
-	import com.aimialesson.model.Actions;
 	import com.aimialesson.model.Texts;
 	
 	import flash.events.EventDispatcher;
 	import flash.events.NetStatusEvent;
 	import flash.events.SecurityErrorEvent;
+	import flash.events.TimerEvent;
 	import flash.net.NetConnection;
+	import flash.utils.Timer;
 	
 	import spark.components.Application;
 
 	[Event (name="connectInitComplete", type="com.aimialesson.events.AppEvent")]
 	public class MediaController extends EventDispatcher
 	{
+		private var timer:Timer = new Timer (1000);
+		
 		public function MediaController()
 		{
+			timer.addEventListener(TimerEvent.TIMER, reconnect);
 		}
 		
 		public function setParameters ( parameters : Object ) : void {
@@ -46,8 +51,8 @@ package com.aimialesson.controllers
 				Actions.getInstance().domain_add = parameters.lang;
 				debug (parameters.lang);
 			}
-			if (parameters.topic){
-				Main.getInstance().topic = parameters.topic;
+			if (parameters.focus_name){
+				Main.getInstance().topic = parameters.focus_name;
 				debug (parameters.topic);
 			}
 			if (parameters.booking_id){
@@ -76,8 +81,17 @@ package com.aimialesson.controllers
 
 			if (event.info.code == "NetConnection.Connect.Success") 
 			{
+				timer.stop();
 				this.dispatchEvent( new AppEvent(AppEvent.CONNECT_INIT_COMPLETE));
 			}
+			if (event.info.code == "NetConnection.Connect.Closed") 
+			{
+				timer.start();
+			}
+		}
+		
+		private function reconnect(event:TimerEvent) : void {
+			Media.getInstance().nc.connect(Media.getInstance().rtmp);
 		}
 		
 		private function securityErrorHandler ( event : SecurityErrorEvent ) : void {
