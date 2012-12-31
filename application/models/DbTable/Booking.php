@@ -205,7 +205,7 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
         $started_atAdd = date( "Y-m-d H:i:s", strtotime($current_at)+600+$current_duration );
         $started_atSub = date( "Y-m-d H:i:s", strtotime($current_at)-600-$current_duration );
         $row = $this->fetchRow($this->select()
-            ->where('recipient_id=?',$userId )
+            ->where('('. $this->getAdapter()->quoteInto('sender_id=?' , (int)$userId) . ') OR (' . $this->getAdapter()->quoteInto('recipient_id=?' , (int)$userId) . ')')
             ->where('started_at<=?', $started_atAdd )
             ->where('started_at>=?', $current_at)
             ->where('booking_status=?', 1)
@@ -213,7 +213,7 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
             ->where('id!=?', $booking_id ));//if there is booking previous to current
 
         $row2 = $this->fetchRow($this->select()
-            ->where('recipient_id=?',$userId )
+            ->where('('. $this->getAdapter()->quoteInto('sender_id=?' , (int)$userId) . ') OR (' . $this->getAdapter()->quoteInto('recipient_id=?' , (int)$userId) . ')')
             ->where('started_at<=?', $current_at )
             ->where('started_at>=?', $started_atSub)
             ->where('booking_status=?', 1)
