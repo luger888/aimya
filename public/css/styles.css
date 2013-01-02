@@ -710,9 +710,13 @@ input.button-2 {
     float: left;
 }
 
-.profileGeneral input.hasDatepicker, .hasDatepicker {
+.hasDatepicker {
     width: 80px;
     background: url(../images/icons/datapicer.png) no-repeat right 2px;
+}
+.hasTimepicker{
+    width: 80px;
+    background: url("../images/icons/timepicker.png") no-repeat scroll 65px 2px transparent;
 }
 
 .profileGeneral select {
@@ -1234,7 +1238,6 @@ input.button-2 {
 .ui-dialog-buttonpane{
     border:none !important;
 }
-
 .loadingIcon {
     position:fixed;top:0;right:0;bottom:0;left:0;
     background: rgba(255,255,255,0.5) url(../img/design/accountLayout/glyphicons/aimya_ajax_loader.gif) no-repeat 50% 50%;

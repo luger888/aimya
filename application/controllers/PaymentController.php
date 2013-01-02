@@ -162,7 +162,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         $obj->startDate = urlencode("3012-12-31T0:0:0");
         $obj->billingPeriod = urlencode("Month");				// or "Day", "Week", "SemiMonth", "Year"
         $obj->billingFreq = urlencode("2");						// combination of this and billingPeriod must be at most a year
-        $obj->paymentAmount = urlencode('10');
+        $obj->paymentAmount = urlencode('100');
         $obj->currencyID = urlencode('USD');							// or other currency code ('GBP', 'EUR', 'JPY', 'CAD', 'AUD')
 
         /* PAYPAL API  DETAILS */
@@ -211,7 +211,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         Aimya_PayPal_RecurringPayment_PaypalConfiguration::notify_url($gateway['notifyUrl']);
 
 
-        Aimya_PayPal_RecurringPayment_PaypalDigitalGoods::environment( 'live' );
+        //Aimya_PayPal_RecurringPayment_PaypalDigitalGoods::environment( 'live' );
 
         $subscription_details = array(
             'description'        => 'Example Subscription: $10 sign-up fee then $2/week for the next four weeks.',
