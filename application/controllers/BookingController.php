@@ -85,6 +85,20 @@ class BookingController extends Zend_Controller_Action
         }
     }
 
+    public function cancelAction()
+    {
+        $identity = Zend_Auth::getInstance()->getIdentity();
+        if ($this->getRequest()->isPost()) {
+
+            if ($this->getRequest()->getParam('booking_id')) {
+
+                $bookingDbTable = new Application_Model_DbTable_Booking();
+                $bookingDbTable->cancelBooking($this->getRequest()->getParam('booking_id'), $identity->id);
+
+            }
+        }
+    }
+
     public function countAction()
     {
         $this->_helper->layout()->disableLayout();
