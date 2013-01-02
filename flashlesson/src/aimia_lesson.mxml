@@ -82,7 +82,7 @@
 				debug("lastState:" + lastState);
 				debug("this.currentState:" + this.currentState);
 				if (lastState == "loaded" && this.currentState != lastState){
-					mainUI.connectionInit();
+					mainUI.onConnectChanged(null);
 					UIEventHandling();
 					lastState = this.currentState; 
 				} 

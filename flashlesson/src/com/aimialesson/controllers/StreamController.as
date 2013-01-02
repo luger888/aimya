@@ -31,7 +31,7 @@ package com.aimialesson.controllers
 			debug("StreamController:initPartnerNetStream");
 			Media.getInstance().partnerNetStream = new NetStream(Media.getInstance().nc);
 			Media.getInstance().partnerNetStream.client = this;
-			Media.getInstance().partnerNetStream.maxPauseBufferTime = 1;
+			Media.getInstance().partnerNetStream.maxPauseBufferTime = 0.1;
 			Media.getInstance().partnerNetStream.bufferTime = 2;
 			Media.getInstance().partnerNetStream.bufferTimeMax = 1;
 			Media.getInstance().partnerNetStream.addEventListener( NetStatusEvent.NET_STATUS, netStatusHandler );
@@ -68,6 +68,7 @@ package com.aimialesson.controllers
 			Media.getInstance().mic = Microphone.getMicrophone();
 			if ( Media.getInstance().cam != null ) 
 			{
+				debug("StreamController:myNetStream.attachCamera");
 				Media.getInstance().cam.setMode(320, 240, 15);
 				Media.getInstance().cam.setQuality(0, 0);
 				Media.getInstance().cam.setKeyFrameInterval( 5 );
