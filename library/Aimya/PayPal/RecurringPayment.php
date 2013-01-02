@@ -18,7 +18,7 @@ class Aimya_PayPal_RecurringPayment {
         $startDate=$this->startDate;
 
         // Add request-specific fields to the request string.
-        $nvpStr = "&AMT=$paymentAmount&RETURNURL=$returnURL&CANCELURL=$cancelURL&NOSHIPPING=0&L_BILLINGTYPE0=RecurringPayments&L_BILLINGAGREEMENTDESCRIPTION0=testdesc&BUTTONSOURCE=AngellFreeInc_USBSwiper_EC_US&PAYMENTACTION=$paymentType&CURRENCYCODE=$currencyID";
+        $nvpStr = "&RETURNURL=$returnURL&CANCELURL=$cancelURL&PAYMENTACTION=$paymentType&CURRENCYCODE=$currencyID";
 
         // Execute the API operation; see the PPHttpPost function above.
         $httpParsedResponseAr = $this->fn_setExpressCheckout('SetExpressCheckout', $nvpStr);
@@ -136,8 +136,8 @@ class Aimya_PayPal_RecurringPayment {
         $token = $_REQUEST['token'];
 
 
-        $nvpStr="&TOKEN=$token&AMT=$paymentAmount&TOTALBILLINGCYCLES=4&DESC=testdescfor&SUBSCRIBERNAME=DrewAngell&CURRENCYCODE=$currencyID&PROFILESTARTDATE=$startDate";
-        $nvpStr .= "&BILLINGPERIOD=$billingPeriod&BILLINGFREQUENCY=$billingFreq";
+        $nvpStr="&TOKEN=$token&AMT=$paymentAmount&DESC=testdescfor&CURRENCYCODE=$currencyID&PROFILESTARTDATE=$startDate";
+        $nvpStr .= "&BILLINGPERIOD=$billingPeriod&BILLINGFREQUENCY=$billingFreq&EMAIL=saaant_1355936880_per@mail.ru";
 
         $httpParsedResponseAr = $this->fn_createRecurringPaymentsProfile('CreateRecurringPaymentsProfile', $nvpStr);
 
