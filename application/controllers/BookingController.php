@@ -84,6 +84,7 @@ class BookingController extends Zend_Controller_Action
                 $bookingDbTable = new Application_Model_DbTable_Booking();
                 $bookingDbTable->rejectBooking($this->getRequest()->getParam('booking_id'), $identity->id);
 
+
             }
         }
     }
@@ -97,7 +98,12 @@ class BookingController extends Zend_Controller_Action
 
                 $bookingDbTable = new Application_Model_DbTable_Booking();
                 $bookingDbTable->cancelBooking($this->getRequest()->getParam('booking_id'), $identity->id);
-
+                $messageTable = new Application_Model_DbTable_Message();
+                $message = array('sender_id'=>$identity->id,
+                                'recipient_id'=>$this->getRequest()->getParam('recipient_id'),
+                                'content'=>"Dear User 2. I am cancelling Lesson on <month/day/year> at <hour/min>. Please, confirm the cancellation and we will reschedule new time for a Lesson at more convenient time upon mutual agreement. In order to do so, please, go to “My Booking”, find the requested Lesson and confirm cancellation. Thank you",
+                                'subject'=>"Lesson Cancellation!");
+                $messageTable->sendMessage($message);
             }
         }
     }

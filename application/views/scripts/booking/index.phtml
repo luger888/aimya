@@ -319,7 +319,7 @@ jQuery(document).ready(function () {
         this.setHours(this.getHours()+h);
         return this;
     }
-    pathName = $('#current_url').val();
+    var pathName = $('#current_url').val();
     var date = new Date();
     var d = date.getDate();
     var m = date.getMonth();
@@ -458,8 +458,14 @@ jQuery(document).ready(function () {
                 element.find(".fc-event-head").append('<div class ="fc-event-focusName">Focus name: "' + event.title + '"</div>');
                 if(event.booking_status == '1'){
                     element.find(".fc-event-head").append('<a class ="fc-event-cancel" onclick ="cancelBooking(this);">X</a>');
+                    element.find(".fc-event-head").append('<input type = "hidden" value = '+ event.booking_id +'>');
+                    if(event.user_id == event.recipient_id){
+                        element.find(".fc-event-head").append('<input type = "hidden" value = '+ event.sender_id +'>');
+                    }else{
+                        element.find(".fc-event-head").append('<input type = "hidden" value = '+ event.recipient_id +'>');
+                    }
                 }
-                element.find(".fc-event-head").append('<input type = "hidden" value = '+ event.booking_id +'>');
+
                 element.find(".fc-event-head").append('<div class = "fc-event-rate">Rate: $' + event.rate + ' / ' + duration + '</div>');
                 element.find(".fc-event-content").append('<div class = "fc-event-content-alt floatRight"><span class = "videoRec '+ colorAlt+' '+videoActivity+'"></span> <span class = "feedback '+ colorAlt+' '+feedbackActivity+'"></span><span class = "notes '+ colorAlt+' '+notesActivity+'"></span></div>');
                 element.find(".fc-event-content").append('<div class = "fc-event-content-description"> Description: ' + event.add_info + '</div>');
@@ -569,10 +575,7 @@ jQuery(document).ready(function () {
         $('#dialog-form input').prop('checked', false);
 
     });
-    $('.fc-event-cancel').click(function()
-    {
 
-    });
 //    $('.fc-event-inner').hover(function(){
 //        alert(';f')
 //        $('.fc-event-cancel').css('display', 'block');
@@ -600,7 +603,7 @@ function confirmBooking(e) {
                 $(e).parents('.fc-event').find('.fc-event-content-reject').remove();
                 $(e).parents('.fc-event').find('.fc-event-content-confirm').remove();
             }else{
-                alert('You already approved lesson on this time!')
+                alert('You already  approved lesson on this time!')
             }
 
 
@@ -621,6 +624,7 @@ function rejectBooking(e) {
 function cancelBooking(e) {
     pathName = $('#current_url').val();
     var id = $(e).nextAll('input[type=hidden]:first').val();
+    var recipient_id = $(e).nextAll('input[type=hidden]:last').val();
     $(function() {
         $( "#cancel-confirm" ).dialog({
             resizable: false,
@@ -634,7 +638,8 @@ function cancelBooking(e) {
                         url: pathName + "/booking/cancel",
                         type: "post",
                         data: {
-                            'booking_id':id
+                            'booking_id':id,
+                            'recipient_id':recipient_id
                         },
                         success: function(response){
                             //window.location.reload();
