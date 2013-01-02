@@ -42,11 +42,15 @@ class Application_Form_Booking extends Zend_Form
             ->setAttrib('class', 't-165')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
+            //->setRequired(true);
+            //->addValidator('NotEmpty');
         $recipiend_id->addOption('', 'Choose recipient',array());
         foreach ($friendsArray as  $value) {
 
             $recipiend_id->addOption($value['id'], $value['username'], array('class' => $value['role']));
         }
+
+
         $start_at = new Zend_Form_Element_Text('started_at');
         $start_at ->setAttrib('id', 'started_at')
             ->setRequired(true)
@@ -78,9 +82,9 @@ class Application_Form_Booking extends Zend_Form
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators)
             ->addMultiOptions(array('15'   => '15 min',
+            '30'   => '30 min',
             '45'   => '45 min',
-            '60'   => 'hour',
-            '0'   => 'lesson'
+            '60'   => '60 min'
         ));
 
         $video = new Zend_Form_Element_Checkbox('video');

@@ -37,7 +37,6 @@ class BookingController extends Zend_Controller_Action
 
         if ($this->getRequest()->isPost()) {
             $data = $this->getRequest()->getParams();
-            if ($this->getRequest()->getParam('focus_name')) {
                 if ($bookingForm->isValid($data)) {
                     if ($identity->role == '1') {
                         $this->getRequest()->setParam('is_sender_teacher', '0');
@@ -45,12 +44,12 @@ class BookingController extends Zend_Controller_Action
                     $userGmt = $userDbTable->getTimeZone($this->getRequest()->getParam('sender_id'));
                     $bookingDbTable = new Application_Model_DbTable_Booking();
                     $this->getRequest()->setParam('creator_tz', $userGmt['timezone']);
-
                     $bookingDbTable->addBooking($this->getRequest()->getParams(), $identity->id);
+                    $this->view->success = 1;
                 }else{
+                    $this->view->success = 0;
                     $this->view->errors = $bookingForm->getErrors();
                 }
-            }
         }
     }
 
