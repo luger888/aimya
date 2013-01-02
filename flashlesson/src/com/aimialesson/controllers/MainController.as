@@ -46,9 +46,9 @@ package com.aimialesson.controllers
 			soController.addEventListener(SharedObjectEvent.SHARED_PRESENTATION_UPLOADED, onSharedObjectEvent);
 			soController.addEventListener(SharedObjectEvent.LESSON_IS_FINISHED, onSharedObjectEvent);
 			soController.addEventListener(SharedObjectEvent.TIME_IS_OUT, onSharedObjectEvent);
+			timerController = new TimerController();
 			if (User.getInstance().partnerRoleID == User.STUDENT)
 			{
-				timerController = new TimerController();
 				timerController.addEventListener(AimyaTimerEvent.TIMER_EVENT, onAimyaTimerEvent);
 			}
 			//soController.initSO();
