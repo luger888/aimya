@@ -243,6 +243,9 @@ class Aimya_PayPal_RecurringPayment {
         // Set the API operation, version, and API signature in the request.
         $nvpreq = "METHOD=$methodName_&VERSION=$version&PWD=$API_Password&USER=$API_UserName&SIGNATURE=$API_Signature$nvpStr_";
 
+        echo $nvpreq;
+       die;
+
         // Set the request as a POST FIELD for curl.
         curl_setopt($ch, CURLOPT_POSTFIELDS, $nvpreq);
 
