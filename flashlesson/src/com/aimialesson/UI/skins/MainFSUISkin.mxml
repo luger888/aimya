@@ -40,7 +40,7 @@
 			</s:VGroup>
 			<s:VGroup id="rightGroup" width="100%" height="100%" gap="10">
 				<s:Group id="titleGroup" width="100%">
-					<s:RichText text="{Texts.getInstance().getText(Texts.LESSON_PRESENTATION, true)}" styleName="HeaderStyle" />
+					<s:RichText text="{(Texts.getInstance().texts[Texts.LESSON_PRESENTATION] as String).toUpperCase()}" styleName="HeaderStyle" />
 					<s:Button skinClass="com.aimialesson.UI.skins.elements.buttons.MinimizeBtnSkin" id="goFSBtn" right="0" top="0" buttonMode="true" useHandCursor="true"/>					
 				</s:Group>
 				<views:MainUIContainer id="tPresentationContainer" width="100%" height="100%" />

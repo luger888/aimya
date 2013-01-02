@@ -41,7 +41,7 @@
         <s:State name="disabled" />
     </s:states>
 	<s:BitmapImage source="@Embed('flashassets/upload_icon.png')" verticalCenter="0"/>
-	<s:Label id="lbl" visible="{!Presentation.getInstance().loaded}" includeInLayout="{!Presentation.getInstance().loaded}" text="{Texts.getInstance().getText(Texts.UPLOAD, true)}" x="24"  verticalCenter="0"  styleName="ButtonLabelStyle"/>
-	<s:Label id="lbl1" visible="{Presentation.getInstance().loaded}" includeInLayout="{Presentation.getInstance().loaded}" text="{Texts.getInstance().getText(Texts.UPLOAD_MORE, true)}" x="24"  verticalCenter="0"  styleName="ButtonLabelStyle"/>
+	<s:Label id="lbl" visible="{!Presentation.getInstance().loaded}" includeInLayout="{!Presentation.getInstance().loaded}" text="{(Texts.getInstance().texts[Texts.UPLOAD] as String).toUpperCase()}" x="24"  verticalCenter="0"  styleName="ButtonLabelStyle"/>
+	<s:Label id="lbl1" visible="{Presentation.getInstance().loaded}" includeInLayout="{Presentation.getInstance().loaded}" text="{(Texts.getInstance().texts[Texts.UPLOAD_MORE] as String).toUpperCase()}" x="24"  verticalCenter="0"  styleName="ButtonLabelStyle"/>
 	
 </s:SparkSkin>

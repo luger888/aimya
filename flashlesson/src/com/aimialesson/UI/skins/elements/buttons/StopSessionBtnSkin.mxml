@@ -42,6 +42,6 @@
 
 	<s:BitmapImage excludeFrom="over" source="@Embed('flashassets/finish_btn_active.png')" />
 	<s:BitmapImage includeIn="over" source="@Embed('flashassets/finish_btn_hover.png')" />
-	<s:Label text="{Texts.getInstance().getText(Texts.STOP_SESSION, true)}" styleName="StopButtonLabelStyle" horizontalCenter="0" verticalCenter="0"/>
+	<s:Label text="{(Texts.getInstance().texts[Texts.STOP_SESSION] as String).toUpperCase()}" styleName="StopButtonLabelStyle" horizontalCenter="0" verticalCenter="0"/>
     
 </s:SparkSkin>

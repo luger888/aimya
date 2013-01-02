@@ -86,11 +86,17 @@ package com.aimialesson.controllers
 			}
 			if (event.info.code == "NetConnection.Connect.Closed") 
 			{
-				timer.start();
+				Media.getInstance().nc.removeEventListener(NetStatusEvent.NET_STATUS, netStatusHandler);
+				Media.getInstance().nc.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
+				if (!timer.running) timer.start();
 			}
 		}
 		
 		private function reconnect(event:TimerEvent) : void {
+			Media.getInstance().nc = new NetConnection();
+			Media.getInstance().nc.addEventListener(NetStatusEvent.NET_STATUS, netStatusHandler);
+			Media.getInstance().nc.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
+			Media.getInstance().nc.client = new Client(); 
 			Media.getInstance().nc.connect(Media.getInstance().rtmp);
 		}
 		
