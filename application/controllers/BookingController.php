@@ -44,8 +44,11 @@ class BookingController extends Zend_Controller_Action
                     $userGmt = $userDbTable->getTimeZone($this->getRequest()->getParam('sender_id'));
                     $bookingDbTable = new Application_Model_DbTable_Booking();
                     $this->getRequest()->setParam('creator_tz', $userGmt['timezone']);
-                    $bookingDbTable->addBooking($this->getRequest()->getParams(), $identity->id);
-                    $this->view->success = 1;
+                    if($this->getRequest()->getParam('recipient_id')){
+                        $bookingDbTable->addBooking($this->getRequest()->getParams(), $identity->id);
+                        $this->view->success = 1;
+                    }
+
                 }else{
                     $this->view->success = 0;
                     $this->view->errors = $bookingForm->getErrors();
