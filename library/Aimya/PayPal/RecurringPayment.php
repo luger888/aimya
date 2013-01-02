@@ -18,7 +18,7 @@ class Aimya_PayPal_RecurringPayment {
         $startDate=$this->startDate;
 
         // Add request-specific fields to the request string.
-        $nvpStr = "&returnUrl=$returnURL&cancelUrl=$cancelURL&L_BILLINGTYPE0=RecurringPayments&L_BILLINGAGREEMENTDESCRIPTION0=AimyaMembership";
+        $nvpStr = "&returnUrl=$returnURL&cancelUrl=$cancelURL&PAYMENTACTION=$paymentType&L_BILLINGTYPE0=RecurringPayments&L_BILLINGAGREEMENTDESCRIPTION0=AimyaMembership";
 
         // Execute the API operation; see the PPHttpPost function above.
         $httpParsedResponseAr = $this->fn_setExpressCheckout('SetExpressCheckout', $nvpStr);
@@ -100,7 +100,7 @@ class Aimya_PayPal_RecurringPayment {
         $cancelURL=$this->cancelURL;
 
         // Add request-specific fields to the request string.
-        $nvpStr = "&TOKEN=$token&PAYERID=$payerID&AMT=$paymentAmount&L_BILLINGTYPE0=RecurringPayments&L_BILLINGAGREEMENTDESCRIPTION0=AimyaMembership&CURRENCYCODE=$currencyID";
+        $nvpStr = "&TOKEN=$token&PAYERID=$payerID&AMT=$paymentAmount&PAYMENTACTION=$paymentType&L_BILLINGTYPE0=RecurringPayments&L_BILLINGAGREEMENTDESCRIPTION0=AimyaMembership&CURRENCYCODE=$currencyID";
 
         // Execute the API operation; see the PPHttpPost function above.
         $httpParsedResponseAr = $this->fn_doExpressCheckout('DoExpressCheckoutPayment', $nvpStr);
