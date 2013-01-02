@@ -55,10 +55,16 @@ class Application_Form_Booking extends Zend_Form
         $start_at ->setAttrib('id', 'started_at')
             ->setRequired(true)
             ->addValidator('NotEmpty')
-            ->setAttrib('class', 't-165')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 
+        $start_at_time = new Zend_Form_Element_Text('started_at_time');
+        $start_at_time ->setAttrib('id', 'started_at_time')
+//            ->setRequired(true)
+//            ->addValidator('NotEmpty')
+            ->setAttrib('class','hasTimepicker')
+            ->addFilters($this->basicFilters)
+            ->setDecorators($this->basicDecorators);
 
         $focus_name = new Zend_Form_Element_Text('focus_name');
         $focus_name ->setAttrib('id', 'focus_name')
@@ -120,7 +126,7 @@ class Application_Form_Booking extends Zend_Form
     }
 
 
-        $this->addElements(array($role, $recipiend_id,  $start_at,  $focus_name, $rate, $duration, $video, $feedback, $notes, $info, $submit ));
+        $this->addElements(array($role, $recipiend_id,  $start_at, $start_at_time,  $focus_name, $rate, $duration, $video, $feedback, $notes, $info, $submit ));
 
     }
 }
