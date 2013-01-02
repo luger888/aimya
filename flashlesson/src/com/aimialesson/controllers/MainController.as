@@ -11,6 +11,7 @@ package com.aimialesson.controllers
 	
 	import mx.collections.ArrayCollection;
 
+	[Event (name="timeIsOut", type="com.aimialesson.events.AppEvent")]
 	[Event (name="connectInitComplete", type="com.aimialesson.events.AppEvent")]
 	[Event (name="sharedPresentationUploaded", type="com.aimialesson.events.SharedObjectEvent")]
 	public class MainController extends EventDispatcher
@@ -133,8 +134,14 @@ package com.aimialesson.controllers
 		}
 		
 		public function onAimyaTimerEvent( event : AimyaTimerEvent ) : void {
-			if (soController.soIsInit()) 
-				soController.setSOProperty("remainingTime", Number(soController.getSOProperty("remainingTime")) - TimerController.INTERVAL_IN_SEC); 
+			if (soController.soIsInit())
+				var rT:Number = Number(soController.getSOProperty("remainingTime"));
+				rT -= TimerController.INTERVAL_IN_SEC;
+				if (rT <= 0){
+					rT = 0;
+					timerController.stop();
+				}
+				soController.setSOProperty("remainingTime", String(rT)); 
 		}
 		
 		public function onSharedObjectEvent ( event : SharedObjectEvent ) : void {
@@ -145,7 +152,9 @@ package com.aimialesson.controllers
 																break;*/
 				case (SharedObjectEvent.LESSON_IS_FINISHED) : 	endLesson(event.value);
 					break;
-				case (SharedObjectEvent.TIME_IS_OUT)		 : 	endLesson("0");
+				case (SharedObjectEvent.TIME_IS_OUT)		 : 	// We don't need to end the lesson if time is out - teacher should do it himself
+																//endLesson("0");
+																//this.dispatchEvent( new AppEvent ( AppEvent.TIME_IS_OUT ) );
 					break;
 			}
 		}
