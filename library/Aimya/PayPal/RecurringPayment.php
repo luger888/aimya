@@ -136,8 +136,8 @@ class Aimya_PayPal_RecurringPayment {
         $token = $_REQUEST['token'];
 
 
-        $nvpStr="&TOKEN=$token&AMT=$paymentAmount&DESC=AimyaMembership&CURRENCYCODE=$currencyID&PROFILESTARTDATE=2013-20-11T00:00:00Z";
-        $nvpStr .= "&BILLINGPERIOD=$billingPeriod&BILLINGFREQUENCY=$billingFreq&COUNTRYCODE=US";
+        $nvpStr="&TOKEN=$token&AMT=$paymentAmount&DESC=AimyaMembership&CURRENCYCODE=$currencyID&PROFILESTARTDATE=$startDate";
+        $nvpStr .= "&BILLINGPERIOD=$billingPeriod&BILLINGFREQUENCY=$billingFreq";
 
         $httpParsedResponseAr = $this->fn_createRecurringPaymentsProfile('CreateRecurringPaymentsProfile', $nvpStr);
 
