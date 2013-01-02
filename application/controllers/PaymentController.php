@@ -162,7 +162,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         $obj->startDate = urlencode("2013-01-04T0:0:0");
         $obj->billingPeriod = urlencode("Month");				// or "Day", "Week", "SemiMonth", "Year"
         $obj->billingFreq = urlencode("2");						// combination of this and billingPeriod must be at most a year
-        $obj->paymentAmount = urlencode('100');
+        $obj->paymentAmount = urlencode('10');
         $obj->currencyID = urlencode('USD');							// or other currency code ('GBP', 'EUR', 'JPY', 'CAD', 'AUD')
 
         /* PAYPAL API  DETAILS */

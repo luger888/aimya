@@ -78,7 +78,7 @@ class Aimya_PayPal_RecurringPayment {
             $country_code = $httpParsedResponseAr["SHIPTOCOUNTRYCODE"];
 
 
-        $this->createRecurringPaymentsProfile($payerID,$token);
+        $this->doExpressCheckout($payerID,$token);
 
         //	exit('Get Express Checkout Details Completed Successfully: '.print_r($httpParsedResponseAr, true));
         } else  {
@@ -100,7 +100,7 @@ class Aimya_PayPal_RecurringPayment {
         $cancelURL=$this->cancelURL;
 
         // Add request-specific fields to the request string.
-        $nvpStr = "&TOKEN=$token&PAYERID=$payerID&AMT=$paymentAmount&L_BILLINGTYPE0=RecurringPayments&L_BILLINGAGREEMENTDESCRIPTION0=SameEveryTime&CURRENCYCODE=$currencyID";
+        $nvpStr = "&TOKEN=$token&PAYERID=$payerID&AMT=$paymentAmount&L_BILLINGTYPE0=RecurringPayments&L_BILLINGAGREEMENTDESCRIPTION0=AimyaMembership&CURRENCYCODE=$currencyID";
 
         // Execute the API operation; see the PPHttpPost function above.
         $httpParsedResponseAr = $this->fn_doExpressCheckout('DoExpressCheckoutPayment', $nvpStr);
