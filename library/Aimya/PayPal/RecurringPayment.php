@@ -161,7 +161,7 @@ class Aimya_PayPal_RecurringPayment {
         $returnURL=$this->returnURL;
         $cancelURL=$this->cancelURL;
         $startDate=$this->startDate;
-        $version = urlencode('57.0');
+        $version = urlencode('53.0');
 
         // setting the curl parameters.
         $ch = curl_init();
@@ -226,7 +226,7 @@ class Aimya_PayPal_RecurringPayment {
         if("sandbox" === $environment || "beta-sandbox" === $environment) {
             $API_Endpoint = "https://api-3t.$environment.paypal.com/nvp";
         }
-        $version = urlencode('57.0');
+        $version = urlencode('53.0');
 
         // Set the curl parameters.
         $ch = curl_init();
@@ -292,7 +292,7 @@ class Aimya_PayPal_RecurringPayment {
         if("sandbox" === $environment || "beta-sandbox" === $environment) {
             $API_Endpoint = "https://api-3t.$environment.paypal.com/nvp";
         }
-        $version = urlencode('57.0');
+        $version = urlencode('53.0');
 
         // Set the curl parameters.
         $ch = curl_init();
@@ -356,7 +356,7 @@ class Aimya_PayPal_RecurringPayment {
         if("sandbox" === $environment || "beta-sandbox" === $environment) {
             $API_Endpoint = "https://api-3t.$environment.paypal.com/nvp";
         }
-        $version = urlencode('57.0');
+        $version = urlencode('53.0');
 
         // setting the curl parameters.
         $ch = curl_init();
