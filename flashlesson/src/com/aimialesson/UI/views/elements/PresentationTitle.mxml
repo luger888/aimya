@@ -11,9 +11,9 @@
 			import com.aimialesson.model.Texts;
 		]]>
 	</fx:Script>
-	<s:RichText text="{(Texts.getInstance().texts[Texts.LESSON_PRESENTATION] as String)}" styleName="HeaderStyle" />
+	<s:RichText text="{(Texts.getInstance().texts[Texts.LESSON_PRESENTATION] as String).toUpperCase()}" styleName="HeaderStyle" />
 	<s:RichText id="presentationTitle" text="{Main.getInstance().topic}" styleName="DescriptionStyle" width="100%" />
-	<s:Group width="100%">
+	<!--s:Group width="100%">
 		<buttons:EnterBtnSkin id="enterBtn" right="0" />
-	</s:Group>
+	</s:Group-->
 </s:VGroup>

@@ -10,6 +10,7 @@ package com.aimialesson.UI.views
 	import com.aimialesson.events.PopUpEvent;
 	import com.aimialesson.events.PresentationEvent;
 	import com.aimialesson.model.Main;
+	import com.aimialesson.model.Media;
 	
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
@@ -72,6 +73,7 @@ package com.aimialesson.UI.views
 			super();
 			this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			Main.getInstance().addEventListener(Main.LESSON_FINISHED_CHANGED, onLessonFinished);
+			Media.getInstance().addEventListener(Media.CONNECTED_CHANGED, onConnectChanged);
 		}
 		
 		override protected function partAdded ( partName : String, instance : Object) : void
@@ -207,10 +209,12 @@ package com.aimialesson.UI.views
 		}
 		
 		
-		public function connectionInit () : void {
-			debug("connectionInit");
-			videoChat.myVideoInit();
-			videoChat.partnerVideoInit();
+		public function onConnectChanged ( event : Event ) : void {
+			debug("onConnectChanged");
+			if (Media.getInstance().connected){
+				videoChat.myVideoInit();
+				videoChat.partnerVideoInit();
+			}
 		}
 		
 		private function onBtnClick ( event : MouseEvent ) : void {
