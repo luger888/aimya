@@ -88,7 +88,12 @@ input[type='text'],input[type='password'], textarea {
     padding: 0 5px;
     color: #1c1c1c;
 }
-
+.page404{
+    background: url('../images/icons/error404.png') no-repeat;
+    width:100%;
+    height:688px;
+    margin-left: 150px;
+}
 textarea {
     height: auto;
     padding-top: 5px;

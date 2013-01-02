@@ -18,7 +18,7 @@ class Aimya_PayPal_RecurringPayment {
         $startDate=$this->startDate;
 
         // Add request-specific fields to the request string.
-        $nvpStr = "&AMT=$paymentAmount&RETURNURL=$returnURL&CANCELURL=$cancelURL&PAYMENTACTION=$paymentType&DESC=testECpayment&L_BILLINGTYPEn=RecurringPayments&L_BILLINGAGREEMENTDESCRIPTIONn=SameEveryTime&CURRENCYCODE=$currencyID";
+        $nvpStr = "&returnUrl=$returnURL&cancelUrl=$cancelURL&PAYMENTACTION=$paymentType&L_BILLINGTYPE0=RecurringPayments&L_BILLINGAGREEMENTDESCRIPTION0=AimyaMembership";
 
         // Execute the API operation; see the PPHttpPost function above.
         $httpParsedResponseAr = $this->fn_setExpressCheckout('SetExpressCheckout', $nvpStr);
@@ -100,7 +100,7 @@ class Aimya_PayPal_RecurringPayment {
         $cancelURL=$this->cancelURL;
 
         // Add request-specific fields to the request string.
-        $nvpStr = "&TOKEN=$token&PAYERID=$payerID&PAYMENTACTION=$paymentType&AMT=$paymentAmount&&L_BILLINGTYPEn=RecurringPaymentsL_BILLINGAGREEMENTDESCRIPTIONn=SameEveryTime&CURRENCYCODE=$currencyID";
+        $nvpStr = "&TOKEN=$token&PAYERID=$payerID&AMT=$paymentAmount&PAYMENTACTION=$paymentType&L_BILLINGTYPE0=RecurringPayments&L_BILLINGAGREEMENTDESCRIPTION0=AimyaMembership&CURRENCYCODE=$currencyID";
 
         // Execute the API operation; see the PPHttpPost function above.
         $httpParsedResponseAr = $this->fn_doExpressCheckout('DoExpressCheckoutPayment', $nvpStr);
@@ -136,7 +136,7 @@ class Aimya_PayPal_RecurringPayment {
         $token = $_REQUEST['token'];
 
 
-        $nvpStr="&TOKEN=$token&AMT=$paymentAmount&DESC=SameEveryTime&CURRENCYCODE=$currencyID&PROFILESTARTDATE=$startDate";
+        $nvpStr="&TOKEN=$token&AMT=$paymentAmount&DESC=AimyaMembership&CURRENCYCODE=$currencyID&PROFILESTARTDATE=$startDate";
         $nvpStr .= "&BILLINGPERIOD=$billingPeriod&BILLINGFREQUENCY=$billingFreq";
 
         $httpParsedResponseAr = $this->fn_createRecurringPaymentsProfile('CreateRecurringPaymentsProfile', $nvpStr);
@@ -161,7 +161,7 @@ class Aimya_PayPal_RecurringPayment {
         $returnURL=$this->returnURL;
         $cancelURL=$this->cancelURL;
         $startDate=$this->startDate;
-        $version = urlencode('64.0');
+        $version = urlencode('86.0');
 
         // setting the curl parameters.
         $ch = curl_init();
@@ -226,7 +226,7 @@ class Aimya_PayPal_RecurringPayment {
         if("sandbox" === $environment || "beta-sandbox" === $environment) {
             $API_Endpoint = "https://api-3t.$environment.paypal.com/nvp";
         }
-        $version = urlencode('64.0');
+        $version = urlencode('86.0');
 
         // Set the curl parameters.
         $ch = curl_init();
@@ -292,7 +292,7 @@ class Aimya_PayPal_RecurringPayment {
         if("sandbox" === $environment || "beta-sandbox" === $environment) {
             $API_Endpoint = "https://api-3t.$environment.paypal.com/nvp";
         }
-        $version = urlencode('64.0');
+        $version = urlencode('86.0');
 
         // Set the curl parameters.
         $ch = curl_init();
@@ -356,7 +356,7 @@ class Aimya_PayPal_RecurringPayment {
         if("sandbox" === $environment || "beta-sandbox" === $environment) {
             $API_Endpoint = "https://api-3t.$environment.paypal.com/nvp";
         }
-        $version = urlencode('64.0');
+        $version = urlencode('86.0');
 
         // setting the curl parameters.
         $ch = curl_init();
