@@ -88,25 +88,32 @@ ul li {
 }
 
 .mainBooking .formRow .t-165 {
-    width: 165px;
+    width: 268px;
 }
 
 .mainBooking .txt {
-    padding: 2px 9px 0 20px;
+    padding: 2px 9px 0 48px;
 }
 
 .mainBooking #recipiend_id {
-    width: 177px;
+    width: 280px;
 }
 
 .mainBooking #duration {
-    width: 68px;
+    width: 112px;
 }
 
 .mainBooking #rate {
-    width: 40px;
+    width: 70px;
 }
-
+.mainBooking #started_at{
+    width:100px;
+    margin-right: 35px;
+}
+.mainBooking #started_at_time{
+    width:75px;
+    margin-left:15px;
+}
 .mainBooking  .button {
     font-family: 'dosissemibold' !important;
     font-size: 12px !important;
@@ -255,6 +262,8 @@ ul li {
             <div class="formRow clearfix">
                 <div class="label">Select Date:</div>
                 <div><?php echo $this->bookingForm->started_at;?></div>
+                <span class="floatLeft">Time:</span>
+                <div><?php echo $this->bookingForm->started_at_time;?></div>
             </div>
             <div class="formRow clearfix">
                 <div class="label">Focus Name:</div>
@@ -475,9 +484,15 @@ jQuery(document).ready(function () {
 
         }
     });
+    var oldDateObj = new Date();
+    var today = new Date(oldDateObj.getTime() + 10*60000);
+    $('#started_at').datepicker({
+        minDate: today
+    });
 
-
-    $('#started_at').datetimepicker();
+    $('#started_at_time').timepicker({
+        minDate: today
+    });
 
     $('#sendBooking').click(function () {
         jQuery("body").append('<div class="loadingIcon"></div>');
@@ -490,7 +505,7 @@ jQuery(document).ready(function () {
             pathName + "/booking/add/0/controller%3D%3Ebooking/1/action%3D%3Eadd", {
                 "recipient_id":$('#recipiend_id').val(),
                 "focus_name":$('#focus_name').val(),
-                "started_at":$('#started_at').val(),
+                "started_at":$('#started_at').val() + ' ' + $('#started_at_time').val(),
                 "duration":$('#duration').val(),
                 "feedback":$('#feedback:checked').val() || 0,
                 "video":$('#video:checked').val() || 0,
@@ -510,20 +525,20 @@ jQuery(document).ready(function () {
                     $('#booking').find('.error').remove();
 
                     if($('#recipiend_id').val() == 0){
-                        $('#recipiend_id').parent().after('<div class="error">Choose recipient</div>');
+                        $('#recipiend_id').parent().parent().append('<div class="error">Choose recipient</div>');
                     }
                     $("#recipiend_id").change(function() {
                         $(this).removeClass("input-error");
-                        $(this).parent().next().remove();
+                        $(this).parent().parent().find('.error').remove();
                     });
                     for (key in response.errors){
 
                         if(response.errors[key].length>0){
-                            $("#" + key).parent().after('<div class="error">' +response.errors[key] + '</div>');
+                            $("#" + key).parent().parent().append('<div class="error">' +response.errors[key] + '</div>');
                             $("#" + key).addClass("input-error");
                             $("#" + key).change(function() {
                                 $(this).removeClass("input-error");
-                                $(this).parent().next().remove();
+                                $(this).parent().parent().find('.error').remove();
                             });
                         }
 
