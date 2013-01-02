@@ -19,7 +19,7 @@ package com.aimialesson.model
 		public var partnerStreamName:String = "streamAlex";
 		public var myNetStream:NetStream;
 		public var partnerNetStream:NetStream;
-		public var soID:String = "SampleSO5";
+		public var soID:String = "SampleSO6";
 		public var audioSocketHost:String;
 		public var videoSocketHost:String;
 		public var audioSocketPort:int;
