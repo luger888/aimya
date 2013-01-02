@@ -7,6 +7,8 @@ package com.aimialesson.model
 
 	public class Media
 	{
+		public static var CONNECTED_CHANGED:String = "connectedChange";
+		
 		//public var rtmp:String = "rtmp://localhost/oflaDemo";
 		public var rtmp:String = "rtmp://66.199.229.115/oflaDemo";
 		//public var rtmp:String = "rtmp://localhost/videorecording";
@@ -17,7 +19,7 @@ package com.aimialesson.model
 		public var partnerStreamName:String = "streamAlex";
 		public var myNetStream:NetStream;
 		public var partnerNetStream:NetStream;
-		public var soID:String = "SampleSO4";
+		public var soID:String = "SampleSO5";
 		public var audioSocketHost:String;
 		public var videoSocketHost:String;
 		public var audioSocketPort:int;
@@ -32,7 +34,19 @@ package com.aimialesson.model
 		public var partnerCamPaused:Boolean = false;
 		[Bindable]
 		public var partnerMicPaused:Boolean = false;
-				
+		
+		private var _connected:Boolean = false;
+		[Bindable(Event=Media.CONNECTED_CHANGED)]
+		public function set connected ( value : Boolean ) : void {
+			if (value != _connected){
+				_connected = value;
+				dispatchEvent ( new Event ( Media.CONNECTED_CHANGED ));
+			}
+		}
+		public function get connected () : Boolean {
+			return _connected;
+		}
+		
 		private static var instance:Media;
 		
 		public function Media()
