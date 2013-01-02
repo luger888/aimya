@@ -710,9 +710,13 @@ input.button-2 {
     float: left;
 }
 
-.profileGeneral input.hasDatepicker, .hasDatepicker {
+.hasDatepicker {
     width: 80px;
     background: url(../images/icons/datapicer.png) no-repeat right 2px;
+}
+.hasTimepicker{
+    width: 80px;
+    background: url("../images/icons/timepicker.png") no-repeat scroll 65px 2px transparent;
 }
 
 .profileGeneral select {
