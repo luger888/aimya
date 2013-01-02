@@ -9,6 +9,10 @@ package com.aimialesson.model
 	public class User extends EventDispatcher
 	{
 		private static var instance:User;
+		
+		public static const USER_IS_ONLINE_CHANGE:String = "userIsOnlineChange";
+		public static const PARTNER_IS_ONLINE_CHANGE:String = "partnerIsOnlineChange";
+		
 		public static const TEACHER:String = "2";
 		public static const STUDENT:String = "1";
 		
@@ -24,7 +28,7 @@ package com.aimialesson.model
 			return _userName;
 		}
 		
-		private var _userRole:String = "1" ;
+		private var _userRole:String = "2" ;
 		public function set userRoleID ( value : String ) : void {
 			_userRole = value;
 		//	this.dispatchEvent( new Event("partnerRoleChange") );
@@ -42,8 +46,10 @@ package com.aimialesson.model
 		}
 		
 		private var _isOnline:Boolean = true;
+		[Bindable(Event=User.USER_IS_ONLINE_CHANGE)]
 		public function set isOnline ( value : Boolean ) : void {
 			_isOnline = value;
+			this.dispatchEvent( new Event ( User.USER_IS_ONLINE_CHANGE ) );
 		}
 		
 		public function get isOnline () : Boolean {
@@ -80,8 +86,10 @@ package com.aimialesson.model
 		}
 		
 		private var _partnerIsOnline:Boolean = false;
+		[Bindable(Event=User.PARTNER_IS_ONLINE_CHANGE)]
 		public function set partnerIsOnline ( value : Boolean ) : void {
 			_partnerIsOnline = value;
+			this.dispatchEvent( new Event ( User.PARTNER_IS_ONLINE_CHANGE ) ); 
 		}
 		
 		public function get partnerIsOnline () : Boolean {

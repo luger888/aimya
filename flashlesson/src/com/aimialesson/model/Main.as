@@ -18,8 +18,8 @@ package com.aimialesson.model
 		public static var SESSION_STARTED_CHANGED:String = "sessionStartedChange";
 		public static var LESSON_FINISHED_CHANGED:String = "lessonFinishedChange";
 		
+		
 		public var texts_loaded:Boolean = false;
-		public var connected:Boolean = false;
 		
 		private var _fsMode:Boolean = false;
 		[Bindable(Event=Main.FS_MODE_CHANGED)]

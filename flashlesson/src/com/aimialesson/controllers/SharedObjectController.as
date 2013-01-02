@@ -16,8 +16,8 @@ package com.aimialesson.controllers
 	import flash.net.SharedObject;
 	import flash.utils.Timer;
 	
-	import mx.core.FlexGlobals;	
 	import mx.collections.ArrayCollection;
+	import mx.core.FlexGlobals;
 	
 	[Event (name="sharedPresentationUploaded", type="com.aimialesson.events.SharedObjectEvent")]
 	public class SharedObjectController extends EventDispatcher
@@ -75,6 +75,14 @@ package com.aimialesson.controllers
 				partnerIsOnlineTimer.reset();
 				partnerIsOnlineTimer.start();
 			}
+			if ( so.data['remainingTime']){
+				//setSOProperty("remainingTime", Main.getInstance().totalTime);
+				Main.getInstance().remainingTime = Number(so.data['remainingTime']);
+				if (Main.getInstance().remainingTime <= 0)
+					this.dispatchEvent( new SharedObjectEvent (SharedObjectEvent.TIME_IS_OUT) );
+			} else {
+				setSOProperty("remainingTime", Main.getInstance().totalTime);
+			}
 			if (so.data['endLesson' + User.getInstance().partnerID] == "true"){
 				dispatchEvent( new SharedObjectEvent ( SharedObjectEvent.LESSON_IS_FINISHED, User.getInstance().partnerName  ) );
 			}
@@ -105,6 +113,14 @@ package com.aimialesson.controllers
 			so.setProperty(name, value);
 		}
 		
+		public function getSOProperty(name:String) : String {
+			return so.data[name];
+		}
+		
+		public function soIsInit():Boolean{
+			return (so != null && so.data != null);
+		}
+		
 		private var initialized:Boolean = false;
 		private function soOnSync(event:SyncEvent):void
 		{
@@ -118,6 +134,7 @@ package com.aimialesson.controllers
 			
 			for (var i:int = 0; i < changedList.length; i++){
 				debug(changedList[i].name);
+				debug(so.data[changedList[i].name]);
 				switch (changedList[i].name){
 					case "chatMessageData"	: 	if (so.data['chatMessageData'] != null){
 													Notes.getInstance().newLineData = so.data['chatMessageData'];
@@ -150,6 +167,10 @@ package com.aimialesson.controllers
 					case 'endLesson'  + User.getInstance().userID		:	if (so.data[changedList[i].name] == "true"){
 																					dispatchEvent( new SharedObjectEvent ( SharedObjectEvent.LESSON_IS_FINISHED, User.getInstance().userName ) );
 																				}
+																				break;
+					case 'remainingTime'								:	Main.getInstance().remainingTime = Number(so.data[changedList[i].name]); 
+																			if (Main.getInstance().remainingTime <= 0)
+																				this.dispatchEvent( new SharedObjectEvent (SharedObjectEvent.TIME_IS_OUT) );
 																				break;
 					case 'screenMode' + User.getInstance().userID	:	if (so.data[changedList[i].name] == "true"){
 																			Main.getInstance().fsMode = true;   

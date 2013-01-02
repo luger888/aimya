@@ -20,7 +20,7 @@ package com.aimialesson.controllers
 	public class MediaController extends EventDispatcher
 	{
 		private var timer:Timer = new Timer (1000);
-		
+	
 		public function MediaController()
 		{
 			timer.addEventListener(TimerEvent.TIMER, reconnect);
@@ -59,6 +59,11 @@ package com.aimialesson.controllers
 				Main.getInstance().booking_id = parameters.booking_id;
 				debug (parameters.booking_id);
 			}
+			if (parameters.total_time){
+				Main.getInstance().totalTime = parameters.total_time;
+		//		Main.getInstance().remainingTime = parameters.total_time;
+				debug (parameters.total_time);
+			}
 		}
 		
 		public function initConnection () : void {
@@ -81,23 +86,27 @@ package com.aimialesson.controllers
 
 			if (event.info.code == "NetConnection.Connect.Success") 
 			{
+				debug ("nc.connected:" + Media.getInstance().nc.connected.toString());
+				if (Media.getInstance().nc.connected){
+					this.dispatchEvent( new AppEvent(AppEvent.CONNECT_INIT_COMPLETE));
+				}
 				timer.stop();
-				this.dispatchEvent( new AppEvent(AppEvent.CONNECT_INIT_COMPLETE));
 			}
 			if (event.info.code == "NetConnection.Connect.Closed") 
 			{
-				Media.getInstance().nc.removeEventListener(NetStatusEvent.NET_STATUS, netStatusHandler);
-				Media.getInstance().nc.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
+//				Media.getInstance().nc.removeEventListener(NetStatusEvent.NET_STATUS, netStatusHandler);
+//				Media.getInstance().nc.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
+				Media.getInstance().connected = false;
+				Media.getInstance().nc = new NetConnection();
+				Media.getInstance().nc.addEventListener(NetStatusEvent.NET_STATUS, netStatusHandler);
+				Media.getInstance().nc.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
+				Media.getInstance().nc.client = new Client(); 
 				if (!timer.running) timer.start();
 			}
 		}
 		
 		private function reconnect(event:TimerEvent) : void {
-			Media.getInstance().nc = new NetConnection();
-			Media.getInstance().nc.addEventListener(NetStatusEvent.NET_STATUS, netStatusHandler);
-			Media.getInstance().nc.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
-			Media.getInstance().nc.client = new Client(); 
-			Media.getInstance().nc.connect(Media.getInstance().rtmp);
+			Media.getInstance().nc.connect(Media.getInstance().rtmp );
 		}
 		
 		private function securityErrorHandler ( event : SecurityErrorEvent ) : void {

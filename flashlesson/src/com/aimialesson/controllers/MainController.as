@@ -2,6 +2,7 @@ package com.aimialesson.controllers
 {
 	import com.aimialesson.events.*;
 	import com.aimialesson.model.Main;
+	import com.aimialesson.model.Media;
 	import com.aimialesson.model.Notes;
 	import com.aimialesson.model.Presentation;
 	import com.aimialesson.model.User;
@@ -21,6 +22,8 @@ package com.aimialesson.controllers
 		private var recorderController:RecorderController;
 		private var userController:UserController;
 		private var textsController:TextsController;
+		private var timerController:TimerController;
+		
 		public function MainController()
 		{
 		}
@@ -33,6 +36,7 @@ package com.aimialesson.controllers
 			mediaController.initConnection();
 			userController = new UserController();
 			userController.setParameters(parameters);
+			streamController = new StreamController();
 			presentationController = new PresentationController();
 			textsController = new TextsController();
 			textsController.addEventListener(AppEvent.LOAD_TEXTS_COMPLETE, loadTextsHandler);
@@ -40,7 +44,13 @@ package com.aimialesson.controllers
 			soController = new SharedObjectController();
 			soController.addEventListener(SharedObjectEvent.SHARED_PRESENTATION_UPLOADED, onSharedObjectEvent);
 			soController.addEventListener(SharedObjectEvent.LESSON_IS_FINISHED, onSharedObjectEvent);
-			soController.initSO();
+			soController.addEventListener(SharedObjectEvent.TIME_IS_OUT, onSharedObjectEvent);
+			if (User.getInstance().partnerRoleID == User.STUDENT)
+			{
+				timerController = new TimerController();
+				timerController.addEventListener(AimyaTimerEvent.TIMER_EVENT, onAimyaTimerEvent);
+			}
+			//soController.initSO();
 			//this.mainUI = mainUI;
 			/*recorderController = new RecorderController();
 			recorderController.init(mainUI);
@@ -94,9 +104,10 @@ package com.aimialesson.controllers
 			presentationController.clearImages();
 			Notes.getInstance().clear();
 			Main.getInstance().lesson_finished_by = initiator_id;
+			timerController.stop();
 			Main.getInstance().lesson_finished = true;
-			if(Main.getInstance().fsMode)
-				soController.setSOProperty('screenMode' + User.getInstance().userID, (!Main.getInstance().fsMode).toString());
+			//if(Main.getInstance().fsMode)
+				//soController.setSOProperty('screenMode' + User.getInstance().userID, (!Main.getInstance().fsMode).toString());
 		}
 		
 		public function onTextChatEvent ( event : NotesEvent ) : void {
@@ -121,6 +132,11 @@ package com.aimialesson.controllers
 			}
 		}
 		
+		public function onAimyaTimerEvent( event : AimyaTimerEvent ) : void {
+			if (soController.soIsInit()) 
+				soController.setSOProperty("remainingTime", Number(soController.getSOProperty("remainingTime")) - TimerController.INTERVAL_IN_SEC); 
+		}
+		
 		public function onSharedObjectEvent ( event : SharedObjectEvent ) : void {
 			debug("MainController:onSOEvent");
 			dispatchEvent(event);
@@ -129,17 +145,19 @@ package com.aimialesson.controllers
 																break;*/
 				case (SharedObjectEvent.LESSON_IS_FINISHED) : 	endLesson(event.value);
 					break;
+				case (SharedObjectEvent.TIME_IS_OUT)		 : 	endLesson("0");
+					break;
 			}
 		}
 		
 		private function appNetConnectHandler ( event : AppEvent ) : void {
 			debug("MainController:appNetConnectHandler");
-			streamController = new StreamController();
 			//streamController.addEventListener(AppEvent.MY_STREAM_INIT_COMPLETE, onMyStreamInitComplete);
 			streamController.initMyNetStream();
 			streamController.initPartnerNetStream();
-			//soController.initSO();
-			Main.getInstance().connected = true;
+			soController.initSO();
+			timerController.start();
+			Media.getInstance().connected = true;
 			initCompleteCheck();
 		}
 		
@@ -156,7 +174,7 @@ package com.aimialesson.controllers
 		}
 		
 		private function initCompleteCheck () : void {
-			if (Main.getInstance().texts_loaded == true && Main.getInstance().connected == true)
+			if (Main.getInstance().texts_loaded == true && Media.getInstance().connected == true)
 			{
 				this.dispatchEvent( new AppEvent ( AppEvent.INIT_COMPLETE ) );
 			}

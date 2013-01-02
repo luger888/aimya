@@ -14,7 +14,7 @@
 	<s:HGroup id="hgr" verticalAlign="bottom">
 		<s:RichText text="{Texts.getInstance().getText(Texts.REMAINING_TIME)}" styleName="TimeTextStyle"/>
 		<s:Group height="{hgr.height}">
-			<s:RichText text="{Main.getInstance().remainingTime}" id="timeLeft" styleName="TimeValueStyle"  fontFamily="Arial" verticalCenter="0"/>	
+			<s:RichText text="{Math.ceil((Main.getInstance().remainingTime / 60))}" id="timeLeft" styleName="TimeValueStyle"  fontFamily="Arial" verticalCenter="0"/>	
 		</s:Group>
 		<s:RichText text="{Texts.getInstance().getText(Texts.MIN)}" styleName="TimeMinStyle"/>
 	</s:HGroup>
