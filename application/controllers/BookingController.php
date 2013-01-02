@@ -44,8 +44,11 @@ class BookingController extends Zend_Controller_Action
                     $userGmt = $userDbTable->getTimeZone($this->getRequest()->getParam('sender_id'));
                     $bookingDbTable = new Application_Model_DbTable_Booking();
                     $this->getRequest()->setParam('creator_tz', $userGmt['timezone']);
-                    $bookingDbTable->addBooking($this->getRequest()->getParams(), $identity->id);
-                    $this->view->success = 1;
+                    if($this->getRequest()->getParam('recipient_id')){
+                        $bookingDbTable->addBooking($this->getRequest()->getParams(), $identity->id);
+                        $this->view->success = 1;
+                    }
+
                 }else{
                     $this->view->success = 0;
                     $this->view->errors = $bookingForm->getErrors();
@@ -80,6 +83,20 @@ class BookingController extends Zend_Controller_Action
 
                 $bookingDbTable = new Application_Model_DbTable_Booking();
                 $bookingDbTable->rejectBooking($this->getRequest()->getParam('booking_id'), $identity->id);
+
+            }
+        }
+    }
+
+    public function cancelAction()
+    {
+        $identity = Zend_Auth::getInstance()->getIdentity();
+        if ($this->getRequest()->isPost()) {
+
+            if ($this->getRequest()->getParam('booking_id')) {
+
+                $bookingDbTable = new Application_Model_DbTable_Booking();
+                $bookingDbTable->cancelBooking($this->getRequest()->getParam('booking_id'), $identity->id);
 
             }
         }
