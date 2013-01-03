@@ -86,7 +86,7 @@ package com.aimialesson.controllers
 				Media.getInstance().mic.setUseEchoSuppression(true);
 				//Media.getInstance().mic.gain = 50;
 				//Media.getInstance().mic.rate = 22;
-				Media.getInstance().mic.setSilenceLevel( 10, 2000 );
+				Media.getInstance().mic.setSilenceLevel( 1, 2000 );
 				Media.getInstance().myNetStream.attachAudio(Media.getInstance().mic);
 			}
 			//Media.getInstance().myNetStream.bufferTime = 2;
