@@ -5,7 +5,7 @@ class SearchController extends Aimya_Controller_BaseController
 
     public function init()
     {
-        $this->_helper->layout->setLayout("layoutInside");
+        $this->_helper->layout->setLayout("layoutInner");
         $this->_helper->AjaxContext()
             ->initContext('json');
     }
