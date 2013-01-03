@@ -60,19 +60,32 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
 
     }
 
-    public function cancelBooking($id, $userId)
+    public function cancelBooking($id, $userId, $status = '')
     {
         $where = array(
 
             $this->getAdapter()->quoteInto('id =?', (int)$id)
 
         );
+        if($status == ''){
+            $data = array(
+                'is_cancel' => $userId,
+                'updated_at' => date('Y-m-d H:i:s')
+            );
+            $this->update($data, $where);
+        }else if($status == 'reject'){
 
-        $data = array(
-            'is_cancel' => $userId,
-            'updated_at' => date('Y-m-d H:i:s')
-        );
-        $this->update($data, $where);
+            $data = array(
+                'is_cancel' => '',
+                'updated_at' => date('Y-m-d H:i:s')
+            );
+            $this->update($data, $where);
+        }else if($status == 'confirm'){
+
+            $this->delete($where);
+        }
+
+
 
     }
 
