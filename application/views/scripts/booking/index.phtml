@@ -242,7 +242,9 @@ ul li {
     margin: 0;
     width: 66px;
 }
-
+.cancellation{
+    margin-left: 15px;
+}
 
 </style>
 <div class="mainCalendar mainContainer clearfix">
@@ -398,6 +400,7 @@ jQuery(document).ready(function () {
                             video:msg.booking[c].video,
                             feedback:msg.booking[c].feedback,
                             notes:msg.booking[c].notes,
+                            is_cancel:msg.booking[c].is_cancel,
                             sender_id:msg.booking[c].sender_id + "",
                             booking_id:msg.booking[c].id + "",
                             timezone_recipient:msg.timezone,
@@ -419,6 +422,7 @@ jQuery(document).ready(function () {
         eventRender:function (event, element) {
             var view = jQuery('#calendar').fullCalendar('getView');
             if (view.name == 'agendaDay') { // render event in agendaDay
+
                 if (event.duration == '0') {
                     var duration = 'lesson';
                 } else {
@@ -480,6 +484,13 @@ jQuery(document).ready(function () {
                     element.find(".fc-event-content").append('<div class="fc-event-content-approve"><span>Approved</span></div>');
                 } else {
                     element.find(".fc-event-content").append('<div class="fc-event-content-approve pending"><span>Pending</span></div>');
+                }
+                if(event.user_id != event.is_cancel && event.is_cancel != '0'){
+                        element.find(".fc-event-content").append('<input type = "button" id ="confirmCancellation" onclick="confirmCancellation(this)" value = "Confirm Cancellation" class = "button cancellation">');
+                        element.find(".fc-event-content").append('<input type = "button"  id ="rejectCancellation" onclick="rejectCancellation(this)" value = "Reject Cancellation"  class="button cancellation">');
+                        element.find(".fc-event-content").append('<input type = "hidden" id = "booking_id"  value = ' + event.booking_id + ' >');
+
+
                 }
             }
         }
@@ -611,7 +622,7 @@ function confirmBooking(e) {
         });
 }
 function rejectBooking(e) {
-    pathName = $('#current_url').val();
+    var pathName = $('#current_url').val();
     $.post(
 
         pathName + "/booking/reject/0/controller%3D%3Ebooking/1/action%3D%3Ereject", {
@@ -621,8 +632,41 @@ function rejectBooking(e) {
             e.parentNode.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode.parentNode);
         });
 }
+
+function confirmCancellation(e) {
+    var pathName = $('#current_url').val();
+    $.post(
+
+        pathName + "/booking/cancel/0/controller%3D%3Ebooking/1/action%3D%3Ecancel", {
+            "cancelConfirmId":$(e).nextAll('#booking_id:first').val()
+        },
+        function (response) {
+
+            if(response.confirmed){
+                window.location.reload();
+            }
+
+
+
+        });
+}
+function rejectCancellation(e) {
+    var pathName = $('#current_url').val();
+    $.post(
+
+        pathName + "/booking/cancel/0/controller%3D%3Ebooking/1/action%3D%3Ecancel", {
+            "cancelRejectId":$(e).nextAll('#booking_id:first').val()
+        },
+        function (response) {
+            if(response.rejected){
+                window.location.reload();
+            }
+        });
+}
+
+
 function cancelBooking(e) {
-    pathName = $('#current_url').val();
+    var pathName = $('#current_url').val();
     var id = $(e).nextAll('input[type=hidden]:first').val();
     var recipient_id = $(e).nextAll('input[type=hidden]:last').val();
     $(function() {
