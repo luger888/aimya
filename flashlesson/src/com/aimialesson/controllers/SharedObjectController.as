@@ -124,7 +124,7 @@ package com.aimialesson.controllers
 		private var initialized:Boolean = false;
 		private function soOnSync(event:SyncEvent):void
 		{
-			debug("soOnSync");
+			//debug("soOnSync");
 			if (!initialized){
 				initStates();
 				initialized = true;
@@ -133,8 +133,7 @@ package com.aimialesson.controllers
 			var changedList:Array = event.changeList;
 			
 			for (var i:int = 0; i < changedList.length; i++){
-				debug(changedList[i].name);
-				debug(so.data[changedList[i].name]);
+				//debug(changedList[i].name);
 				switch (changedList[i].name){
 					case "chatMessageData"	: 	if (so.data['chatMessageData'] != null){
 													Notes.getInstance().newLineData = so.data['chatMessageData'];
@@ -154,6 +153,7 @@ package com.aimialesson.controllers
 					case "imageN"			:	Presentation.getInstance().currentImageNumber = so.data['imageN'];
 												break;
 					case 'User' + User.getInstance().partnerID + 'isOnline' : if (so.data[changedList[i].name] == "true"){
+																					debug("partnerIsOnline");
 																					setSOProperty('User' + User.getInstance().partnerID + 'isOnline', "false");
 																					User.getInstance().partnerIsOnline = true;
 																					partnerIsOnlineTimer.reset();
@@ -171,7 +171,7 @@ package com.aimialesson.controllers
 					case 'remainingTime'								:	Main.getInstance().remainingTime = Number(so.data[changedList[i].name]); 
 																			if (Main.getInstance().remainingTime <= 0)
 																				this.dispatchEvent( new SharedObjectEvent (SharedObjectEvent.TIME_IS_OUT) );
-																				break;
+																			break;
 					case 'screenMode' + User.getInstance().userID	:	if (so.data[changedList[i].name] == "true"){
 																			Main.getInstance().fsMode = true;   
 																		} else {
@@ -186,7 +186,7 @@ package com.aimialesson.controllers
 		
 		private function checkPartnerOnline ( event : TimerEvent ) : void {
 			User.getInstance().partnerIsOnline = false;
-		//	debug("checkPartnerOnline");
+			debug("checkPartnerOnline");
 		}
 		
 		private function setOnlineUpdate ( event : TimerEvent ) : void {

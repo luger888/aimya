@@ -69,7 +69,8 @@ package com.aimialesson.controllers
 			if ( Media.getInstance().cam != null ) 
 			{
 				debug("StreamController:myNetStream.attachCamera");
-				Media.getInstance().cam.setMode(320, 240, 15);
+				//Media.getInstance().cam.setMode(320, 240, 15);
+				Media.getInstance().cam.setMode(240, 180, 15);
 				Media.getInstance().cam.setQuality(0, 0);
 				Media.getInstance().cam.setKeyFrameInterval( 5 );
 
@@ -83,9 +84,9 @@ package com.aimialesson.controllers
 				Media.getInstance().mic.setLoopBack( true );
 //				Media.getInstance().mic.encodeQuality = 10;
 				Media.getInstance().mic.setUseEchoSuppression(true);
-				Media.getInstance().mic.gain = 50;
-				Media.getInstance().mic.rate = 22;
-				Media.getInstance().mic.setSilenceLevel( 10, 2000 );
+				//Media.getInstance().mic.gain = 50;
+				//Media.getInstance().mic.rate = 22;
+				Media.getInstance().mic.setSilenceLevel( 5, 2000 );
 				Media.getInstance().myNetStream.attachAudio(Media.getInstance().mic);
 			}
 			//Media.getInstance().myNetStream.bufferTime = 2;

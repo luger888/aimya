@@ -46,11 +46,7 @@ package com.aimialesson.controllers
 			soController.addEventListener(SharedObjectEvent.SHARED_PRESENTATION_UPLOADED, onSharedObjectEvent);
 			soController.addEventListener(SharedObjectEvent.LESSON_IS_FINISHED, onSharedObjectEvent);
 			soController.addEventListener(SharedObjectEvent.TIME_IS_OUT, onSharedObjectEvent);
-			timerController = new TimerController();
-			if (User.getInstance().partnerRoleID == User.STUDENT)
-			{
-				timerController.addEventListener(AimyaTimerEvent.TIMER_EVENT, onAimyaTimerEvent);
-			}
+			
 			//soController.initSO();
 			//this.mainUI = mainUI;
 			/*recorderController = new RecorderController();
@@ -105,7 +101,7 @@ package com.aimialesson.controllers
 			presentationController.clearImages();
 			Notes.getInstance().clear();
 			Main.getInstance().lesson_finished_by = initiator_id;
-			timerController.stop();
+			if (timerController) timerController.stop();
 			Main.getInstance().lesson_finished = true;
 			//if(Main.getInstance().fsMode)
 				//soController.setSOProperty('screenMode' + User.getInstance().userID, (!Main.getInstance().fsMode).toString());
@@ -134,7 +130,7 @@ package com.aimialesson.controllers
 		}
 		
 		public function onAimyaTimerEvent( event : AimyaTimerEvent ) : void {
-			if (soController.soIsInit())
+			if (soController.soIsInit() && soController.getSOProperty("remainingTime")){
 				var rT:Number = Number(soController.getSOProperty("remainingTime"));
 				rT -= TimerController.INTERVAL_IN_SEC;
 				if (rT <= 0){
@@ -142,6 +138,7 @@ package com.aimialesson.controllers
 					timerController.stop();
 				}
 				soController.setSOProperty("remainingTime", String(rT)); 
+			}
 		}
 		
 		public function onSharedObjectEvent ( event : SharedObjectEvent ) : void {
@@ -165,7 +162,12 @@ package com.aimialesson.controllers
 			streamController.initMyNetStream();
 			streamController.initPartnerNetStream();
 			soController.initSO();
-			timerController.start();
+			if (User.getInstance().partnerRoleID == User.STUDENT)
+			{
+				timerController = new TimerController();
+				timerController.addEventListener(AimyaTimerEvent.TIMER_EVENT, onAimyaTimerEvent);
+				timerController.start();
+			}
 			Media.getInstance().connected = true;
 			initCompleteCheck();
 		}

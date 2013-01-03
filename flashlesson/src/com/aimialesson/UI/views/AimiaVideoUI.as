@@ -90,10 +90,12 @@ package com.aimialesson.UI.views
 			return _userRole;
 		}
 		
-		private var _userOnline:Boolean;
+		private var _userOnline:Boolean = true;
 		[Bindable(Event="userOnlineChange")]
 		public function set userOnline ( value : Boolean ) : void {
 			_userOnline = value;
+			debug("AimiaVideo:userOnline");
+			debug(_userOnline.toString());
 			dispatchEvent( new Event("userOnlineChange") );
 		}
 		
@@ -190,6 +192,10 @@ package com.aimialesson.UI.views
 			dispatchEvent( new Event ("videoHeightChange"));
 			dispatchEvent( new Event ("videoWidthChange"));
 			dispatchEvent( new Event ("videoScaleXChange"));
+		}
+		private function debug ( str : String ) : void {
+			if (Main.getInstance().debugger != null)
+				Main.getInstance().debugger.text += str + "\n";
 		}
 	}
 }
