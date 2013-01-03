@@ -19,16 +19,12 @@
 		]]>
 	</fx:Script>
 	<s:Group width="{hostComponent.stage_width}" height="{hostComponent.stage_height}" luminosityClip="true">
-		<!--s:BitmapImage id="bgImage" source="@Embed('flashassets/fsbg.jpg')" width="100%" height="100%"/-->
-		<!--s:Group width="870" height="1190">
-			<s:BitmapImage source="@Embed('flashassets/t_my_lessons_on_the_air.jpg')" y="-130" x="-287"/>
-		</s:Group-->
 		<s:Rect top="0" bottom="0" left="0" right="0">
 			<s:fill>
 				<s:SolidColor color="#F8F8F7" />
 			</s:fill>
 		</s:Rect>
-		<s:HGroup paddingTop="35" paddingBottom="35" horizontalCenter="0" height="100%" gap="50">
+		<s:HGroup paddingTop="35" paddingBottom="35" horizontalCenter="0" height="100%" gap="50" width="100%" paddingLeft="50" paddingRight="50">
 			<s:VGroup id="leftGroup" height="100%" gap="20" width="{videoChatContainer.contentWidth}">
 				<s:RichText id="presentationTitle" text="{Main.getInstance().topic}" styleName="DescriptionStyle" width="100%" />
 				<s:Group width="100%" height="{stopSessionBtn.height}">
@@ -44,7 +40,6 @@
 					<s:Button skinClass="com.aimialesson.UI.skins.elements.buttons.MinimizeBtnSkin" id="goFSBtn" right="0" top="0" buttonMode="true" useHandCursor="true"/>					
 				</s:Group>
 				<views:MainUIContainer id="tPresentationContainer" width="100%" height="100%" />
-				<!--s:Spacer height="15" /-->
 			</s:VGroup>			
 		</s:HGroup>
 	</s:Group>

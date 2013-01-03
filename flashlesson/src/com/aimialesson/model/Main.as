@@ -73,7 +73,7 @@ package com.aimialesson.model
 		public var totalTime:int = 60;
 		
 		[Bindable]
-		public var topic:String = "Latin professor at Hampden-Sydney in Virginia to popular belie";
+		public var topic:String = "Latin professor at Hampden-Sydney in Virginia to popular belie ";
 		
 		public var booking_id:String;
 		

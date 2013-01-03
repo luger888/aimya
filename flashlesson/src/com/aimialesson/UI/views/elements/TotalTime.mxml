@@ -34,13 +34,7 @@
 			<s:RichText text="{(Texts.getInstance().texts[Texts.MIN] as String)}" styleName="TimeMinStyle" />
 		</s:HGroup>
 		<s:Group x="{totalTimeRT.x + totalTimeRT.width + 5}" id="ttGroup" height="{totalTime.height}">
-			<s:BitmapImage source="@Embed('flashassets/2time_calculate__icon.png')" y="-10" horizontalCenter="0"/>
-			<s:RichText text="{Math.round(Main.getInstance().totalTime / 60)}" id="totalTime" styleName="TimeValueStyle"  horizontalCenter="0"/>
-			<s:BitmapImage source="@Embed('flashassets/1time_calculate__icon.png')" y="15" horizontalCenter="0"/>				
+			<s:RichText text="{Math.round(Main.getInstance().totalTime / 60)}" id="totalTime" styleName="TimeValueStyle"  horizontalCenter="0"/>				
 		</s:Group>
 	</s:Group>
-	
-	
-	
-	<s:Button id="enterBtn" skinClass="com.aimialesson.UI.skins.elements.buttons.EnterBtnSkin"/>
 </s:Group>

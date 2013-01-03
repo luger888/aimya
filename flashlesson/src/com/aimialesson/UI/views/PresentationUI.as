@@ -66,13 +66,13 @@ package com.aimialesson.UI.views
 		override protected function updateDisplayList ( unscaledWidth : Number, unscaledHeight : Number ) : void {
 			super.updateDisplayList(unscaledWidth, unscaledHeight);
 			if (!currentImage || !currentImage.loaderInfo) return;
-			if (this.height / this.width > currentImage.loaderInfo.height / currentImage.loaderInfo.width){
+/*			if (this.height / this.width > currentImage.loaderInfo.height / currentImage.loaderInfo.width){
 				currentImage.width = this.width - 20;
 				currentImage.height = currentImage.loaderInfo.height * ( ( this.width - 20 ) / currentImage.loaderInfo.width );				 
 			} else {
 				currentImage.height = this.height - 20;
 				currentImage.width = currentImage.loaderInfo.width * ( ( this.height - 20 ) / currentImage.loaderInfo.height );
-			}
+			}*/
 		}
 		
 		private function debug ( str : String ) : void {
