@@ -31,8 +31,8 @@ package com.aimialesson.model
 		private var _userRole:String = "2" ;
 		public function set userRoleID ( value : String ) : void {
 			_userRole = value;
-		//	this.dispatchEvent( new Event("partnerRoleChange") );
-		//	this.dispatchEvent( new Event("partnerRoleIdChange") );
+			this.dispatchEvent( new Event("partnerRoleChange") );
+			this.dispatchEvent( new Event("partnerRoleIdChange") );
 		}
 		
 		[Bindable(Event="partnerRoleIdChange")]
