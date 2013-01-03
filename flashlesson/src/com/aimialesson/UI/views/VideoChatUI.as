@@ -3,6 +3,7 @@ package com.aimialesson.UI.views
 	import com.aimialesson.events.MediaEvent;
 	import com.aimialesson.model.Main;
 	import com.aimialesson.model.Media;
+	import com.aimialesson.model.User;
 	
 	import flash.events.*;
 	import flash.media.Video;
@@ -33,6 +34,8 @@ package com.aimialesson.UI.views
 		public function VideoChatUI()
 		{
 			super();
+			User.getInstance().addEventListener(User.PARTNER_IS_ONLINE_CHANGE, onPartnerIsOnlineChange);
+			User.getInstance().addEventListener(User.USER_IS_ONLINE_CHANGE, onUserIsOnlineChange);
 		}
 
 		override protected function partAdded(partName:String, instance:Object):void
@@ -115,6 +118,14 @@ package com.aimialesson.UI.views
 			} else {
 				partnerVideo.attachNetStream(Media.getInstance().partnerNetStream);
 			}
+		}
+		
+		private function onPartnerIsOnlineChange ( event : Event ) : void {
+			partnerAimiaVideo.userOnline = User.getInstance().partnerIsOnline;
+		}
+		
+		private function onUserIsOnlineChange ( event : Event ) : void {
+			myAimiaVideo.userOnline = User.getInstance().isOnline;
 		}
 
 		private function debug (str:String):void {

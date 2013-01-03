@@ -2,16 +2,28 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx"
-		 xmlns:elements="com.aimialesson.UI.views.elements.*">
+		 xmlns:elements="com.aimialesson.UI.views.elements.*" creationComplete="group1_creationCompleteHandler(event)">
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>	
 	<fx:Script>
 		<![CDATA[
-			import com.aimialesson.UI.skins.elements.buttons.StartSessionBtnSkin;
 			import com.aimialesson.UI.skins.elements.buttons.EnterBtnSkin;
-			import com.aimialesson.model.User;
+			import com.aimialesson.UI.skins.elements.buttons.StartSessionBtnSkin;
 			import com.aimialesson.model.Texts;
+			import com.aimialesson.model.User;
+			
+			import mx.events.FlexEvent;
+			
+			private function onPartnerIsOnlineChange ( event : Event ) : void {
+				partnerLamp.online = User.getInstance().partnerIsOnline;
+			}
+
+			protected function group1_creationCompleteHandler(event:FlexEvent):void
+			{
+				User.getInstance().addEventListener(User.PARTNER_IS_ONLINE_CHANGE, onPartnerIsOnlineChange);
+			}
+
 		]]>
 	</fx:Script>
 	<s:HGroup verticalAlign="middle">
@@ -19,6 +31,6 @@
 			<s:RichText text="{User.getInstance().partnerRoleID == User.STUDENT?Texts.getInstance().getText(Texts.ONLINE, true) + ' ' + Texts.getInstance().getText(Texts.STUDENT, true) + ':':Texts.getInstance().getText(Texts.ONLINE, true) + ' ' + Texts.getInstance().getText(Texts.TEACHER, true)}" styleName="HeaderStyle" />
 			<s:RichText id="partnerUserName" text="{User.getInstance().partnerName}" styleName="SmallNameStyle"/>
 		</s:HGroup>
-		<elements:Lamp id="partnerLamp"  online="{User.getInstance().partnerIsOnline}"/>
+		<elements:Lamp id="partnerLamp"/>
 	</s:HGroup>
 </s:Group>

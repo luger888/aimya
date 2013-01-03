@@ -48,8 +48,8 @@
 	<s:VGroup>
 		<s:RichText text="{(Texts.getInstance().texts[Texts.VIDEO_CHAT] as String).toUpperCase()}" styleName="HeaderStyle" />
 		<s:VGroup id="chatGroup" gap="15">
-			<views:AimiaVideoUI id="myAimiaVideo" userName="{User.getInstance().userName}" userRole="{User.getInstance().userRole}" userOnline="{User.getInstance().isOnline}" muteMic="{Main.getInstance().lesson_finished || Media.getInstance().micPaused}" muteCam="{Main.getInstance().lesson_finished || Media.getInstance().camPaused}" skinClass="com.aimialesson.UI.skins.elements.AimiaVideoSkin" />
-			<views:AimiaVideoUI id="partnerAimiaVideo" userName="{User.getInstance().partnerName}" userRole="{User.getInstance().partnerRole}" userOnline="{User.getInstance().partnerIsOnline}" muteMic="{Main.getInstance().lesson_finished || Media.getInstance().partnerMicPaused}" muteCam="{Main.getInstance().lesson_finished || Media.getInstance().partnerCamPaused}" skinClass="com.aimialesson.UI.skins.elements.AimiaVideoSkin" />
+			<views:AimiaVideoUI id="myAimiaVideo" userName="{User.getInstance().userName}" userRole="{User.getInstance().userRole}"  muteMic="{Main.getInstance().lesson_finished || Media.getInstance().micPaused}" muteCam="{Main.getInstance().lesson_finished || Media.getInstance().camPaused}" skinClass="com.aimialesson.UI.skins.elements.AimiaVideoSkin" />
+			<views:AimiaVideoUI id="partnerAimiaVideo" userName="{User.getInstance().partnerName}" userRole="{User.getInstance().partnerRole}"  muteMic="{Main.getInstance().lesson_finished || Media.getInstance().partnerMicPaused}" muteCam="{Main.getInstance().lesson_finished || Media.getInstance().partnerCamPaused}" skinClass="com.aimialesson.UI.skins.elements.AimiaVideoSkin" />
 			<s:HGroup id="chatHGroup" width="100%" gap="30"/>
 		</s:VGroup>
 	</s:VGroup>
