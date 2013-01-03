@@ -8,8 +8,9 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
     public function createSubscription($aimyaProfit)
     {
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
+        
         $data = array(
-            'user_id' => $userId,
+            'user_id' => (int)$userId,
             'aimya_profit' => (int)$aimyaProfit,
             'status' => 'paid',
             'created_at' => date('Y-m-d H:i:s'),
