@@ -133,7 +133,7 @@ $(document).ready(function () {
                 url:pathName + "/account/offline",
                 type:"get",
                 success:function (result) {
-                    console.log(result.userStatus);
+                    //console.log(result.userStatus);
                 }
             });
             return false;
