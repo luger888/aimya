@@ -1,0 +1,52 @@
+<?php $this->headLink()->appendStylesheet('/css/reset.css'); ?>
+<?php $this->headLink()->appendStylesheet('/css/fonts.css'); ?>
+<?php $this->headLink()->appendStylesheet('/css/onlineResume.css'); ?>
+<?php echo $this->headLink(); ?>
+<div class="resumeOnlineMain">
+    <div class="shadowSeparator">
+        <div class="shadowSeparatorBox">
+
+            <div class="title"><?php echo $this->user['firstname'] . ' ' . $this->user['lastname'] ?></div>
+            <div class="titleInfo"><span
+                class="degree"><?php echo $this->profile['degree'] . '</span> <span class = "language">' . $this->profile['language'] . '</span>' ?>
+            </div>
+            <div class="shadowSeparator">
+                <div class="shadowSeparatorBoxMid">
+                </div>
+            </div>
+            <!--            OBJECTIVE-->
+            <?php if ($this->profile['objective']): ?>
+            <h1><?php echo $this->translate('objective') .':';?></h1>
+            <div class="textBlock"><?php echo $this->profile['objective']; ?></div>
+            <?php endif;?>
+            <!--      END     OBJECTIVE-->
+
+            <!--            EXPERIENCE -->
+            <?php if ($this->experience): ?>
+            <?php foreach ($this->experience as $value): ?>
+                <h1><?php echo $this->translate('experience') .':';?></h1>
+                <div class="textBlock"><?php echo $value['content']; ?></div>
+                <?php endforeach; ?>
+            <?php endif;?>
+            <!--        END  EXPERIENCE -->
+
+            <!--            EDUCATION -->
+            <?php if ($this->education): ?>
+            <?php foreach ($this->education as $value): ?>
+                <h1><?php echo $this->translate('education') .':';?></h1>
+                <div class="textBlock"><?php echo $value['content']; ?></div>
+                <?php endforeach; ?>
+            <?php endif;?>
+            <!--      END    EDUCATION -->
+
+            <!--            SKILLS -->
+            <?php if ($this->skills): ?>
+            <?php foreach ($this->skills as $value): ?>
+                <h1><?php echo $this->translate('skill') .':';?></h1>
+                <div class="textBlock"><?php echo $value['content']; ?></div>
+                <?php endforeach; ?>
+            <?php endif;?>
+            <!--      END    SKILLS -->
+        </div>
+    </div>
+</div>
