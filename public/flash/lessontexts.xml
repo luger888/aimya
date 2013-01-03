@@ -16,6 +16,10 @@
 		<en>Remaining Time:</en>
 		<ru>Оставшееся Время</ru>
 	</text>
+	<text id="lessonFocus">
+		<en>focus name:</en>
+		<ru>тема Урока</ru>
+	</text>
 	<text id="lessonPresentation">
 		<en>lesson presentation:</en>
 		<ru>Презентация Урока</ru>
@@ -37,7 +41,7 @@
 		<ru>Стоп Сессия</ru>
 	</text>
 	<text id="maximize">
-		<en>Maximize</en>
+		<en>FULL SCREEN</en>
 		<ru>максимайз</ru>
 	</text>
 	<text id="minimize">
