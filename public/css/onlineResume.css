@@ -1,0 +1,60 @@
+.resumeOnlineMain {
+    width: 800px;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+
+.shadowSeparatorBox {
+    padding: 27px 0 70px;
+    background: url(../images/bg/bottom-shadow-line.png) no-repeat center bottom;
+    min-height: 400px;
+}
+.shadowSeparator {
+    padding: 13px 0 0 0;
+    background: url(../images/bg/top-shadow-line.png) no-repeat center 0;
+    margin-bottom: 9px;
+}
+.shadowSeparatorBoxMid {
+    padding: 18px 0 24px 0;
+    background: url(../images/bg/bottom-shadow-line.png) no-repeat center bottom;
+}
+.shadowSeparator {
+    padding: 13px 0 0 0;
+    background: url(../images/bg/top-shadow-line.png) no-repeat center 0;
+    margin-bottom: 9px;
+}
+.title{
+    margin-bottom: 32px;
+    font: 30px 'dosissemibold';
+    text-align: center;
+}
+
+.titleInfo{
+    text-align: center;
+    font: 700 13px arial;
+    margin-bottom: 40px;
+}
+
+.titleInfo .degree{
+    background: url("../img/design/accountLayout/glyphicons/degree.png") no-repeat scroll 0 42% transparent;
+    padding-left:15px;
+}
+.titleInfo .language{
+    background: url("../img/design/accountLayout/glyphicons/language.png") no-repeat scroll 0 42% transparent;
+    padding-left:15px;
+    margin-left:15px;
+}
+
+h1{
+    font-size: 18px;
+    line-height: 16px;
+    color: #1d3300;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: 'helvetica-light-rnormal';
+    padding-top: 47px;
+}
+.textBlock{
+    padding: 29px 0 0 44px;
+    font: 16px arial;
+}

@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
 $('.saveResume').addClass('disable');
 });
 function editResume() {
@@ -69,8 +70,11 @@ function saveResumeItem(tab) {
             type:"post",
             data:dataObject,
             success:function (response) {
-                $('#file_upload').data('uploadifive').settings.formData = { 'resumeType':tab, 'resumeTypeId':response.lastId };
-                $('#file_upload').uploadifive('upload');
+
+                    $('#file_upload').data('uploadifive').settings.formData = { 'resumeType':tab, 'resumeTypeId':response.lastId };
+                    $('#file_upload').uploadifive('upload');
+
+
 
                 for (key in response.errors) {
 
@@ -78,7 +82,8 @@ function saveResumeItem(tab) {
                     $("#" + key).attr("placeholder", response.errors[key]);
 
                 }
-                if (response.success == 1) { //if success
+                if (response.result) { //if success
+
 //                    $('#experience').val('');
 //                    var content = '  <div class="experienceItem clearfix">' +
 //                        '<div class="headRow clearfix">' +
@@ -92,6 +97,7 @@ function saveResumeItem(tab) {
 //                        '<div class = "resumeItemBody">' + resumeContent + '</div>' +
 //                        '</div>';
 //                    $('.resumeList').append(content);
+                    window.location.reload();
                 }
 
             }

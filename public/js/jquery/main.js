@@ -185,7 +185,6 @@ $(document).ready(function () {
             type:"get",
             success:function (result) {
                 var bookingCount = parseInt(result.bookingCount);
-                //console.log(result.bookingPaymentStatus);
 
                 if (result.bookingPaymentStatus.booking) {
                     var paymentTd = $('td.payment');
