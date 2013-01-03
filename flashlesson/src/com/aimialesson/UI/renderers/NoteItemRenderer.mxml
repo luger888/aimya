@@ -19,7 +19,7 @@
 					date.setTime(value.date);
 					var d:String = date.date.toString();
 					if (d.length == 1) d = "0" + d;
-					var month:String = date.month.toString();
+					var month:String = (date.month + 1).toString();
 					if (month.length == 1) month = "0" + month;
 					var hours:String = (date.hours - User.getInstance().timeZone).toString();
 					if (hours.length == 1) hours = "0" + hours;
@@ -27,7 +27,7 @@
 					if (minutes.length == 1) minutes = "0" + minutes;
 					var fullYear:String = date.fullYear.toString();
 					fullYear = fullYear.substr(2,2);
-					dateStr = d + "." + month + "." + fullYear + " " + hours + ":" + minutes;
+					dateStr = month + "." + d + "." + fullYear + " " + hours + ":" + minutes;
 				}
 			}
 			
