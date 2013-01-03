@@ -460,7 +460,7 @@ jQuery(document).ready(function () {
                     feedbackActivity ='passive'
                 }
                 element.find(".fc-event-head").append('<div class ="fc-event-focusName">Focus name: "' + event.title + '"</div>');
-                if(event.booking_status == '1'){
+                if(event.booking_status == '1' && event.is_cancel =='0'){
                     element.find(".fc-event-head").append('<a class ="fc-event-cancel" onclick ="cancelBooking(this);">X</a>');
                     element.find(".fc-event-head").append('<input type = "hidden" value = '+ event.booking_id +'>');
                     if(event.user_id == event.recipient_id){
