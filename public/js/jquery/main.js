@@ -133,7 +133,7 @@ $(document).ready(function () {
                 url:pathName + "/account/offline",
                 type:"get",
                 success:function (result) {
-                    console.log(result.userStatus);
+                    //console.log(result.userStatus);
                 }
             });
             return false;
@@ -185,7 +185,7 @@ $(document).ready(function () {
             type:"get",
             success:function (result) {
                 var bookingCount = parseInt(result.bookingCount);
-                console.log(result.bookingPaymentStatus);
+                //console.log(result.bookingPaymentStatus);
 
                 if (result.bookingPaymentStatus.booking) {
                     var paymentTd = $('td.payment');
