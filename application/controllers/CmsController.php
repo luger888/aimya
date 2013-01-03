@@ -5,6 +5,7 @@ class CmsController extends Aimya_Controller_BaseController
 
     public function init()
     {
+        $this->_helper->layout->setLayout("layoutInner");
         $this->_helper->AjaxContext()
             ->addActionContext('index', 'json')
             ->addActionContext('new', 'json')
