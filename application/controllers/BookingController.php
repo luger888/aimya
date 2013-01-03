@@ -11,6 +11,7 @@ class BookingController extends Zend_Controller_Action
             ->addActionContext('add', 'json')
             ->addActionContext('count', 'json')
             ->addActionContext('approve', 'json')
+            ->addActionContext('cancel', 'json')
             ->initContext('json');
     }
 
@@ -93,17 +94,29 @@ class BookingController extends Zend_Controller_Action
     {
         $identity = Zend_Auth::getInstance()->getIdentity();
         if ($this->getRequest()->isPost()) {
-
+            $bookingDbTable = new Application_Model_DbTable_Booking();
             if ($this->getRequest()->getParam('booking_id')) {
 
-                $bookingDbTable = new Application_Model_DbTable_Booking();
+                $userTable = new Application_Model_DbTable_Users();
+
                 $bookingDbTable->cancelBooking($this->getRequest()->getParam('booking_id'), $identity->id);
+                $bookingItem = $bookingDbTable->getItem($this->getRequest()->getParam('booking_id'));
+                $user = $userTable->getItem($this->getRequest()->getParam('recipient_id'));
+
                 $messageTable = new Application_Model_DbTable_Message();
                 $message = array('sender_id'=>$identity->id,
                                 'recipient_id'=>$this->getRequest()->getParam('recipient_id'),
-                                'content'=>"Dear User 2. I am cancelling Lesson on <month/day/year> at <hour/min>. Please, confirm the cancellation and we will reschedule new time for a Lesson at more convenient time upon mutual agreement. In order to do so, please, go to “My Booking”, find the requested Lesson and confirm cancellation. Thank you",
+                                'content'=>"Dear ".$user['username'].". I am cancelling Lesson on ".$bookingItem['started_at'].". Please, confirm the cancellation and we will reschedule new time for a Lesson at more convenient time upon mutual agreement. In order to do so, please, go to “My Booking”, find the requested Lesson and confirm cancellation. Thank you",
                                 'subject'=>"Lesson Cancellation!");
                 $messageTable->sendMessage($message);
+            }
+            if ($this->getRequest()->getParam('cancelConfirmId')) {
+                $bookingDbTable->cancelBooking($this->getRequest()->getParam('cancelConfirmId'), $identity->id, 'confirm');
+                $this->view->confirmed = 1;
+            }
+            if ($this->getRequest()->getParam('cancelRejectId')) {
+                $bookingDbTable->cancelBooking($this->getRequest()->getParam('cancelRejectId'), $identity->id, 'reject');
+                $this->view->rejected = 1;
             }
         }
     }

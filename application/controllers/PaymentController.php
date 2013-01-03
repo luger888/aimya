@@ -161,8 +161,9 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         // Set request-specific fields.
         $obj->startDate = urlencode("2013-01-04T0:0:0");
         $obj->billingPeriod = urlencode("Month");				// or "Day", "Week", "SemiMonth", "Year"
-        $obj->billingFreq = urlencode("2");						// combination of this and billingPeriod must be at most a year
-        $obj->paymentAmount = urlencode('10');
+        $obj->billingFreq = urlencode("1");						// combination of this and billingPeriod must be at most a year
+        $obj->paymentAmount = urlencode('30');
+        $obj->totalBillingCycles = urlencode('10');
         $obj->currencyID = urlencode('USD');							// or other currency code ('GBP', 'EUR', 'JPY', 'CAD', 'AUD')
 
         /* PAYPAL API  DETAILS */
@@ -188,7 +189,22 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
                 $obj->setExpressCheckout();
                 exit;
             case "getExpressCheckout":
-                $obj->getExpressCheckout();
+                $result = $obj->getExpressCheckout();
+                if($result['ACK'] == 'Success') {
+                    if($this->getRequest()->getParam('userId')){
+                        $subscriptionTable = new Application_Model_DbTable_Subscriptions();
+                        $ifExistAccount = $subscriptionTable->getSubscription($this->getRequest()->getParam('userId'));
+
+                        if($ifExistAccount) {
+                            $subscriptionTable->updateSubscription($ifExistAccount['id'], 'paid');
+                        } else {
+                            $subscriptionTable->createSubscription($this->getRequest()->getParam('userId'), $obj->paymentAmount);
+                        }
+                    } else {
+                        echo 'fail';
+                        die;
+                    }
+                }
                 exit;
             case "error":
                 echo "setExpress checkout failed";
