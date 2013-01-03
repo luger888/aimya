@@ -77,7 +77,25 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
 //
 //        }
     }
+    public function onlineAction()
+    {
+        $this->_helper->layout()->disableLayout();
 
+        $identity = Zend_Auth::getInstance()->getStorage()->read();
+
+        $dbProfile = new Application_Model_DbTable_Profile();
+        $dbUser = new Application_Model_DbTable_Users();
+        $dbExperience = new Application_Model_DbTable_ResumeExperience();
+        $dbEducation = new Application_Model_DbTable_ResumeEducation();
+        $dbSkills = new Application_Model_DbTable_ResumeSkills();
+
+
+        $this->view->profile = $dbProfile->getItem($identity->id);
+        $this->view->user = $dbUser->getItem($identity->id);
+        $this->view->experience = $dbExperience->getExperiences($identity->id);
+        $this->view->education = $dbEducation->getEducations($identity->id);
+        $this->view->skills = $dbSkills->getSkills($identity->id);
+    }
     public function ajaxAction()
     {
         $identity = Zend_Auth::getInstance()->getStorage()->read();
@@ -110,6 +128,7 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
             }
             if ($this->getRequest()->getParam('updateexperience')) {
                 $dbExperience->updateExperience($this->getRequest()->getParams(), $identity->id);
+                $this->view->result = '1';
             }
             /*END -- EXPERIENCE TAB*/
             /* SKILLS TAB*/
@@ -130,6 +149,7 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
             }
             if ($this->getRequest()->getParam('updateskill')) {
                 $dbSkills->updateSkill($this->getRequest()->getParams(), $identity->id);
+                $this->view->result = '1';
             }
             /*END -- SKILLS TAB*/
             /* EDUCATION TAB*/
@@ -149,6 +169,7 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
             }
             if ($this->getRequest()->getParam('updateeducation')) {
                 $dbEducation->updateEducation($this->getRequest()->getParams(), $identity->id);
+                $this->view->result = '1';
             }
             /*  END -- EDUCATION TAB*/
             /*  OBJECTIVE TAB*/

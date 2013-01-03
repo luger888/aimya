@@ -3,7 +3,7 @@ class FriendsController extends Zend_Controller_Action
 {
     public function init()
     {
-        $this->_helper->layout->setLayout("layoutInside");
+        $this->_helper->layout->setLayout("layoutInner");
         $this   ->_helper->AjaxContext()
             ->addActionContext('send', 'json')
             ->initContext('json');
