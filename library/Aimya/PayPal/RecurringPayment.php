@@ -78,8 +78,8 @@ class Aimya_PayPal_RecurringPayment {
             $country_code = $httpParsedResponseAr["SHIPTOCOUNTRYCODE"];
 
 
-        $this->doExpressCheckout($payerID,$token);
-
+        $result = $this->doExpressCheckout($payerID,$token);
+        return $result;
         //	exit('Get Express Checkout Details Completed Successfully: '.print_r($httpParsedResponseAr, true));
         } else  {
             exit('GetExpressCheckoutDetails failed: ' . print_r($httpParsedResponseAr, true));
@@ -107,10 +107,10 @@ class Aimya_PayPal_RecurringPayment {
 
         if("SUCCESS" == strtoupper($httpParsedResponseAr["ACK"]) || "SUCCESSWITHWARNING" == strtoupper($httpParsedResponseAr["ACK"])) {
 
-        $this->createRecurringPaymentsProfile($token);
+        $result = $this->createRecurringPaymentsProfile($token);
 
-
-            exit('Express Checkout Payment Completed Successfully: '.print_r($httpParsedResponseAr, true));
+        return $result;
+            //exit('Express Checkout Payment Completed Successfully: '.print_r($httpParsedResponseAr, true));
         } else  {
             exit('DoExpressCheckoutPayment failed: ' . print_r($httpParsedResponseAr, true));
         }
