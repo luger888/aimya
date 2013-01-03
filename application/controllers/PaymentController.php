@@ -191,12 +191,18 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
             case "getExpressCheckout":
                 $result = $obj->getExpressCheckout();
                 if($result['ACK'] == 'Success') {
-                    $subscriptionTable = new Application_Model_DbTable_Subscriptions();
-                    $ifExistAccount = $subscriptionTable->getSubscription();
-                    if($ifExistAccount) {
-                        $subscriptionTable->updateSubscription($ifExistAccount['id'], 'paid');
+                    if($this->getRequest()->getParam('userId')){
+                        $subscriptionTable = new Application_Model_DbTable_Subscriptions();
+                        $ifExistAccount = $subscriptionTable->getSubscription($this->getRequest()->getParam('userId'));
+
+                        if($ifExistAccount) {
+                            $subscriptionTable->updateSubscription($ifExistAccount['id'], 'paid');
+                        } else {
+                            $subscriptionTable->createSubscription($this->getRequest()->getParam('userId'), $obj->paymentAmount);
+                        }
                     } else {
-                        $subscriptionTable->createSubscription($obj->paymentAmount);
+                        echo 'fail';
+                        die;
                     }
                 }
                 exit;

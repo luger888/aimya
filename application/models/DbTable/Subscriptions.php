@@ -5,10 +5,9 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
 
     protected $_name = 'subscription_history';
 
-    public function createSubscription($aimyaProfit)
+    public function createSubscription($userId, $aimyaProfit)
     {
-        $userId = Zend_Auth::getInstance()->getIdentity()->id;
-        
+
         $data = array(
             'user_id' => (int)$userId,
             'aimya_profit' => (int)$aimyaProfit,
@@ -38,8 +37,7 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
         $this->update($data , $where);
     }
 
-    public function getSubscription() {
-        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+    public function getSubscription($userId) {
 
         $data = $this->select()
             ->from($this->_name, array('id'))
