@@ -31,8 +31,8 @@ package com.aimialesson.model
 		private var _userRole:String = "2" ;
 		public function set userRoleID ( value : String ) : void {
 			_userRole = value;
-			this.dispatchEvent( new Event("partnerRoleChange") );
-			this.dispatchEvent( new Event("partnerRoleIdChange") );
+//			this.dispatchEvent( new Event("partnerRoleChange") );
+//			this.dispatchEvent( new Event("partnerRoleIdChange") );
 		}
 		
 		[Bindable(Event="partnerRoleIdChange")]
@@ -89,6 +89,8 @@ package com.aimialesson.model
 		[Bindable(Event=User.PARTNER_IS_ONLINE_CHANGE)]
 		public function set partnerIsOnline ( value : Boolean ) : void {
 			_partnerIsOnline = value;
+			debug("User:partnerIsOnline");
+			debug(_partnerIsOnline.toString());
 			this.dispatchEvent( new Event ( User.PARTNER_IS_ONLINE_CHANGE ) ); 
 		}
 		
