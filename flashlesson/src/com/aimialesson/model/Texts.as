@@ -13,6 +13,7 @@ package com.aimialesson.model
 		public static const STUDENT:String = "student";
 		public static const TEACHER:String = "teacher";
 		public static const REMAINING_TIME:String = "remainingTime";
+		public static const LESSON_FOCUS:String = "lessonFocus";
 		public static const LESSON_PRESENTATION:String = "lessonPresentation";
 		public static const MIN:String = "min";
 		public static const VIDEO_CHAT:String = "vChat";

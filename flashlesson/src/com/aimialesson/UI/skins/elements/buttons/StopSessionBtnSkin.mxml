@@ -15,19 +15,6 @@
             /* Define the skin elements that should not be colorized. 
             For button, the graphics are colorized but the label is not. */
 			import com.aimialesson.model.Texts;
-            static private const exclusions:Array = ["labelDisplay"];
-                
-            override public function get colorizeExclusions():Array {return exclusions;}
-            
-            override protected function initializationComplete():void
-            {
-                super.initializationComplete();
-            }  
-            override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number) : void
-            {
-                
-                super.updateDisplayList(unscaledWidth, unscaledHeight);
-            }
             
         ]]>        
     </fx:Script>
