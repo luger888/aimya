@@ -142,7 +142,9 @@ class Aimya_PayPal_RecurringPayment {
         $httpParsedResponseAr = $this->fn_createRecurringPaymentsProfile('CreateRecurringPaymentsProfile', $nvpStr);
 
         if("SUCCESS" == strtoupper($httpParsedResponseAr["ACK"]) || "SUCCESSWITHWARNING" == strtoupper($httpParsedResponseAr["ACK"])) {
-            exit('CreateRecurringPaymentsProfile Completed Successfully: '.print_r($httpParsedResponseAr, true));
+            //exit('CreateRecurringPaymentsProfile Completed Successfully: '.print_r($httpParsedResponseAr, true));
+            return $httpParsedResponseAr;
+
         } else  {
             exit('CreateRecurringPaymentsProfile failed: ' . print_r($httpParsedResponseAr, true));
         }
