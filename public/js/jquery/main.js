@@ -381,5 +381,45 @@ function massArchive(current_action, url) {
     });
 }
 
+function setDefaultTimezone() {
+    var baseUrl = $('#current_url').val();
+    var d=new Date(Date.now()); // sets your date to variable d
+
+    function repeat(str,count) { // EXTENSION
+        return new Array(count+1).join(str);
+    };
+
+    function padLeft(str,length,char) { // EXTENSION
+        return length<=str.length ? str.substr(0,length) : repeat(String(char||" ").substr(0,1),length-str.length)+str;
+    };
+
+    var str=padLeft(String(d.getFullYear()),4,"0")+"-"+
+        padLeft(String(d.getMonth()),2,"0")+"-"+
+        padLeft(String(d.getDate()),2,"0")+"T"+
+        padLeft(String(d.getHours()),2,"0")+":"+
+        padLeft(String(d.getMinutes()),2,"0")+":"+
+        padLeft(String(d.getSeconds()),2,"0")+"."+
+        d.getMilliseconds();
+    //str+=" GMT";
+    var o=d.getTimezoneOffset(),s=o<0?"+":"-",h,m;
+    h=Math.floor(Math.abs(o)/60);
+    m=Math.abs(o)-h*60;
+
+    str+=" "+s+padLeft(String(h),2,"0")+padLeft(String(m),2,"0");
+    var str = str.substr(str.length - 5);
+    var first = str.slice(0, 3);
+    var second = str.slice(3, 5);
+    var newTimeZone = first + ':' + second;
+
+    $.ajax({
+        'url':baseUrl + '/user/timezone/',
+        'data':({timezone: newTimeZone}),
+        'dataType':'json',
+        'type':'post',
+        success:function (data) {
+            $("#timezone").val(newTimeZone);
+        }
+    });
+}
 
 

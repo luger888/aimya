@@ -37,7 +37,7 @@
 
                 function changeFlashLayout(flashType) {
 
-                    var element = '<?php echo $this->flashObj; ?>';
+                    //var element = '<?php echo $this->flashObj; ?>';
                     $.ajax({
                         url: "<?php echo $this->baseUrl()?>/lesson/updatesize",
                         type: "post",
@@ -47,24 +47,29 @@
 
                         },
                         success: function(result) {
-
                         }
                     });
 
-                    //flashObf = jQuery('#flash_element');
-                    if(flashType == 1) {
-                        $('#flash_element').html('');
-                        jQuery('#page').hide();
-                        jQuery('#leftBg').hide();
-                        $('#flash_div').show();
-                        jQuery('#flash_div').append(element);
-                    } else{
-                        $('#flash_div').html('');
-                        $('#flash_div').hide();
-                        jQuery('#page').show();
-                        jQuery('#leftBg').show();
-                        jQuery('#flash_element').append(element);
-                    }
+                    $.ajax({
+                        url: "<?php echo $this->baseUrl()?>/lesson/join",
+                        type: "post",
+                        success: function(result) {
+                            element = result.flashObj;
+                            if(flashType == 1) {
+                                $('#flash_element').html('');
+                                jQuery('#page').hide();
+                                jQuery('#leftBg').hide();
+                                $('#flash_div').show();
+                                jQuery('#flash_div').append(element);
+                            } else{
+                                $('#flash_div').html('');
+                                $('#flash_div').hide();
+                                jQuery('#page').show();
+                                jQuery('#leftBg').show();
+                                jQuery('#flash_element').append(element);
+                            }
+                        }
+                    });
 
                 }
             </script>

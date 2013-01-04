@@ -213,6 +213,18 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
     }
 
+    public function setDefaultTimezone($timezone)
+    {
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+        $data = array(
+            'timezone' => preg_replace('#<(.*?)>#', '', $timezone),
+        );
+
+        $where = $this->getAdapter()->quoteInto('id = ?', (int)$userId);
+        $this->update($data, $where);
+
+    }
+
     public function getFeaturedCount($role='0', $category = 'All') {
 
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
