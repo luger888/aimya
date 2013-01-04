@@ -66,11 +66,11 @@ package com.aimialesson.model
 		[Bindable]
 		public var lesson_finished_by:String = "";
 		
-		[Bindable]
+	/*	[Bindable]
 		public var remainingTime:int = 0;
 		
 		[Bindable]
-		public var totalTime:int = 60;
+		public var totalTime:int = 60;*/
 		
 		[Bindable]
 		public var topic:String = "Latin professor at Hampden-Sydney in Virginia to popular belie ";

@@ -9,6 +9,7 @@
 		<![CDATA[
 			import com.aimialesson.model.Main;
 			import com.aimialesson.model.Texts;
+			import com.aimialesson.model.Time;
 			
 			import mx.events.FlexEvent;
 
@@ -34,7 +35,7 @@
 			<s:RichText text="{(Texts.getInstance().texts[Texts.MIN] as String)}" styleName="TimeMinStyle" />
 		</s:HGroup>
 		<s:Group x="{totalTimeRT.x + totalTimeRT.width + 5}" id="ttGroup" height="{totalTime.height}">
-			<s:RichText text="{Math.round(Main.getInstance().totalTime / 60)}" id="totalTime" styleName="TimeValueStyle"  horizontalCenter="0"/>				
+			<s:RichText text="{Math.round(Time.getInstance().totalTime / 60)}" id="totalTime" styleName="TimeValueStyle"  horizontalCenter="0"/>				
 		</s:Group>
 	</s:Group>
 </s:Group>

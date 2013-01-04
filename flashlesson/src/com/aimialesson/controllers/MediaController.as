@@ -6,6 +6,7 @@ package com.aimialesson.controllers
 	import com.aimialesson.model.Main;
 	import com.aimialesson.model.Media;
 	import com.aimialesson.model.Texts;
+	import com.aimialesson.model.Time;
 	
 	import flash.events.EventDispatcher;
 	import flash.events.NetStatusEvent;
@@ -60,9 +61,13 @@ package com.aimialesson.controllers
 				debug (parameters.booking_id);
 			}
 			if (parameters.total_time){
-				Main.getInstance().totalTime = parameters.total_time;
+				Time.getInstance().totalTime = parameters.total_time;
 		//		Main.getInstance().remainingTime = parameters.total_time;
 				debug (parameters.total_time);
+			}
+			if (parameters.fs_mode){
+				Main.getInstance().fsMode = (parameters.fs_mode == "1");
+				debug (parameters.fs_mode);
 			}
 		}
 		
@@ -97,11 +102,13 @@ package com.aimialesson.controllers
 //				Media.getInstance().nc.removeEventListener(NetStatusEvent.NET_STATUS, netStatusHandler);
 //				Media.getInstance().nc.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
 				Media.getInstance().connected = false;
-				Media.getInstance().nc = new NetConnection();
-				Media.getInstance().nc.addEventListener(NetStatusEvent.NET_STATUS, netStatusHandler);
-				Media.getInstance().nc.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
-				Media.getInstance().nc.client = new Client(); 
-				if (!timer.running) timer.start();
+				if (!Main.getInstance().lesson_finished){
+					Media.getInstance().nc = new NetConnection();
+					Media.getInstance().nc.addEventListener(NetStatusEvent.NET_STATUS, netStatusHandler);
+					Media.getInstance().nc.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
+					Media.getInstance().nc.client = new Client(); 
+					if (!timer.running) timer.start();
+				}
 			}
 		}
 		

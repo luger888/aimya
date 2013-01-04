@@ -84,4 +84,13 @@
 		<en>no</en>
 		<ru>нет</ru>
 	</text>
+	<text id="ok">
+		<en>ok</en>
+		<ru>ок</ru>
+	</text>
+	<text id="alert">
+		<en>Alert</en>
+		<ru>Внимание</ru>
+	</text>
+
 </lesson>
