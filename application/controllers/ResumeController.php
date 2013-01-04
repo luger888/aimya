@@ -96,6 +96,11 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
         $this->view->education = $dbEducation->getEducations($identity->id);
         $this->view->skills = $dbSkills->getSkills($identity->id);
     }
+
+    public function pdfAction(){
+
+
+    }
     public function ajaxAction()
     {
         $identity = Zend_Auth::getInstance()->getStorage()->read();
