@@ -44,7 +44,7 @@
 				//UIEventHandling();
 				
 				Main.getInstance().addEventListener(Main.FS_MODE_CHANGED, onFSModeChange);
-				Main.getInstance().addEventListener(Main.SCREEN_MODE_CHANGED, onScreenModeChange);
+			//	Main.getInstance().addEventListener(Main.SCREEN_MODE_CHANGED, onScreenModeChange);
 				
 				this.currentState = "loaded";
 			//	this.currentState = (Main.getInstance().fsMode)?"fullScreen":"notFullScreen";
@@ -54,7 +54,10 @@
 			private function toggleFullScreen(event:AppEvent = null):void {
 				debug( "toggleFullScreen" );
 				//Main.getInstance().fsMode = !Main.getInstance().fsMode;
-				if (event) mainController.onAppEvent(event);
+			//	if (event) mainController.onAppEvent(event);
+				Main.getInstance().fsMode = !Main.getInstance().fsMode;
+				var param:int = (Main.getInstance().fsMode)?1:0;
+				ExternalInterface.call("changeFlashLayout", param);
 			}
 			
 			private function onFSModeChange ( event : Event ) : void {

@@ -59,8 +59,9 @@ package com.aimialesson.UI.views
 		
 		private function onNewLine( event : Event ) : void {
 			trace("NotesUI:onNewLine");
-			(notesList.dataProvider as ArrayCollection).refresh();
-			notesList.callLater(setVerticalPosition);
+			if (notesList.dataProvider as ArrayCollection) 
+				(notesList.dataProvider as ArrayCollection).refresh();
+			callLater(setVerticalPosition);
 			skin.currentState = "changedState";
 		}
 		

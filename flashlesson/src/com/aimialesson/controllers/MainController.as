@@ -5,6 +5,7 @@ package com.aimialesson.controllers
 	import com.aimialesson.model.Media;
 	import com.aimialesson.model.Notes;
 	import com.aimialesson.model.Presentation;
+	import com.aimialesson.model.Time;
 	import com.aimialesson.model.User;
 	
 	import flash.events.EventDispatcher;
@@ -97,12 +98,12 @@ package com.aimialesson.controllers
 			soController.closeConnect();
 			streamController.closeConnect();
 			// the sharedobject can not send the end lesson message that fast. need to close netconnect somehow later...
-			mediaController.closeConnect();
 			presentationController.clearImages();
 			Notes.getInstance().clear();
 			Main.getInstance().lesson_finished_by = initiator_id;
 			if (timerController) timerController.stop();
 			Main.getInstance().lesson_finished = true;
+			mediaController.closeConnect();
 			//if(Main.getInstance().fsMode)
 				//soController.setSOProperty('screenMode' + User.getInstance().userID, (!Main.getInstance().fsMode).toString());
 		}
@@ -123,8 +124,8 @@ package com.aimialesson.controllers
 				case (ServiceEvent.SESSION_IS_STOPPED_RESULT) : 		Main.getInstance().session_started = false;
 																		soController.setSOProperty('endLesson' + User.getInstance().userID, "true");
 																		break;
-				case (ServiceEvent.GET_CURRENT_TIME_RESULT) :	 		Main.getInstance().remainingTime = event.value.data as int;
-																		break;
+/*				case (ServiceEvent.GET_CURRENT_TIME_RESULT) :	 		Time.getInstance().remainingTime = event.value.data as int;
+																		break;*/
 				case (ServiceEvent.RESIZE_RESULT) :				 		break;
 			}
 		}
@@ -180,6 +181,7 @@ package com.aimialesson.controllers
 		}*/
 		
 		private function loadTextsHandler ( event : AppEvent ) : void {
+			debug("MainController:loadTextsHandler");
 			Main.getInstance().texts_loaded = true;
 			initCompleteCheck();
 		}
@@ -194,6 +196,7 @@ package com.aimialesson.controllers
 		private function debug ( str : String ) : void {
 			if (Main.getInstance().debugger != null)
 				Main.getInstance().debugger.text += str + "\n";
+			trace(str);
 		}
 	}
 }

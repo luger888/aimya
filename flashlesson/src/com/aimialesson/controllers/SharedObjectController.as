@@ -6,6 +6,7 @@ package com.aimialesson.controllers
 	import com.aimialesson.model.Notes;
 	import com.aimialesson.model.Presentation;
 	import com.aimialesson.model.User;
+	import com.aimialesson.model.Time;
 	
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
@@ -77,11 +78,11 @@ package com.aimialesson.controllers
 			}
 			if ( so.data['remainingTime']){
 				//setSOProperty("remainingTime", Main.getInstance().totalTime);
-				Main.getInstance().remainingTime = Number(so.data['remainingTime']);
-				if (Main.getInstance().remainingTime <= 0)
+				Time.getInstance().remainingTime = Number(so.data['remainingTime']);
+				if (Time.getInstance().remainingTime <= 0)
 					this.dispatchEvent( new SharedObjectEvent (SharedObjectEvent.TIME_IS_OUT) );
 			} else {
-				setSOProperty("remainingTime", Main.getInstance().totalTime);
+				setSOProperty("remainingTime", Time.getInstance().totalTime);
 			}
 			if (so.data['endLesson' + User.getInstance().partnerID] == "true"){
 				dispatchEvent( new SharedObjectEvent ( SharedObjectEvent.LESSON_IS_FINISHED, User.getInstance().partnerName  ) );
@@ -89,13 +90,13 @@ package com.aimialesson.controllers
 			if (so.data['endLesson' + User.getInstance().userID] == "true"){
 				dispatchEvent( new SharedObjectEvent ( SharedObjectEvent.LESSON_IS_FINISHED, User.getInstance().userName  ) );
 			}
-			if (so.data['screenMode' + User.getInstance().userID] == "true"){
+			/*if (so.data['screenMode' + User.getInstance().userID] == "true"){
 				// hack for usual case (not for refreshing on maximize mode in webkit based browsers etc...)
 				if (FlexGlobals.topLevelApplication.width != Main.NORMAL_WIDTH)
 					Main.getInstance().fsMode = true;
 			} else {
 				Main.getInstance().fsMode = false;
-			}
+			}*/
 		}
 		
 		public function closeConnect():void {
@@ -168,17 +169,17 @@ package com.aimialesson.controllers
 																					dispatchEvent( new SharedObjectEvent ( SharedObjectEvent.LESSON_IS_FINISHED, User.getInstance().userName ) );
 																				}
 																				break;
-					case 'remainingTime'								:	Main.getInstance().remainingTime = Number(so.data[changedList[i].name]); 
-																			if (Main.getInstance().remainingTime <= 0)
+					case 'remainingTime'								:	Time.getInstance().remainingTime = Number(so.data[changedList[i].name]); 
+																			if (Time.getInstance().remainingTime <= 0)
 																				this.dispatchEvent( new SharedObjectEvent (SharedObjectEvent.TIME_IS_OUT) );
 																			break;
-					case 'screenMode' + User.getInstance().userID	:	if (so.data[changedList[i].name] == "true"){
+					/*case 'screenMode' + User.getInstance().userID	:	if (so.data[changedList[i].name] == "true"){
 																			Main.getInstance().fsMode = true;   
 																		} else {
 																			Main.getInstance().fsMode = false;
 																		} 
 																		Main.getInstance().dispatchEvent ( new Event ( Main.SCREEN_MODE_CHANGED ));
-																		break;
+																		break;*/
 						
 				}
 			}

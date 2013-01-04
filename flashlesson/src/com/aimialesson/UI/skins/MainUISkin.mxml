@@ -28,12 +28,12 @@
 			<s:BitmapImage source="@Embed('flashassets/1page_middle_separator.png')" width="100%"/>
 			<mx:Spacer height="10" />
 			<s:VGroup  width="100%"  gap="20" horizontalAlign="right">
-				<s:HGroup width="{tPresentationContainer.width}">
+				<s:HGroup width="{tPresentationContainer.width}" verticalAlign="bottom">
 					<s:RichText text="{(Texts.getInstance().texts[Texts.LESSON_FOCUS] as String).toUpperCase()}" styleName="HeaderStyle" />
 					<s:RichText id="presentationTitle" text="{Main.getInstance().topic}" styleName="DescriptionStyle" width="100%" />
 				</s:HGroup>						
-				<s:Group width="100%">
-					<s:Button left="0" skinClass="com.aimialesson.UI.skins.elements.buttons.StopSessionBtnSkin" id="stopSessionBtn" right="0" includeInLayout="{User.getInstance().partnerRoleID == User.STUDENT}" visible="{User.getInstance().partnerRoleID == User.STUDENT}" buttonMode="true" useHandCursor="true"/>
+				<s:Group width="100%" >
+					<s:Button left="0" skinClass="com.aimialesson.UI.skins.elements.buttons.StopSessionBtnSkin" id="stopSessionBtn" includeInLayout="{User.getInstance().partnerRoleID == User.STUDENT}" visible="{User.getInstance().partnerRoleID == User.STUDENT}" buttonMode="true" useHandCursor="true"/>
 					<s:Group width="{tPresentationContainer.width}"  x="{tPresentationContainer.x}">
 						<views:MainUIContainer id="remainingTimeContainer" left="0"/>
 						<views:MainUIContainer id="totalTimeContainer" horizontalCenter="0" />
