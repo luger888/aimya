@@ -68,6 +68,7 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         $acl->allow(self::ADMIN , 'admin', array('index', 'payments', 'metrics'));
         $acl->allow(self::ADMIN , 'search', array('reindex'));
         $acl->allow(self::ADMIN , 'test', array('index', 'paypal'));
+        $acl->allow(self::ADMIN , 'lesson', array('recording'));
 
         Zend_Registry::set('Zend_Acl',$acl);
 
