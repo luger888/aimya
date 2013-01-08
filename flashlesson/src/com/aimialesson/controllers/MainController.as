@@ -176,8 +176,8 @@ package com.aimialesson.controllers
 			if (timerController) timerController.stop();
 			Main.getInstance().lesson_finished = true;
 			mediaController.closeConnect();
-			//if(Main.getInstance().fsMode)
-				//soController.setSOProperty('screenMode' + User.getInstance().userID, (!Main.getInstance().fsMode).toString());
+			if(Main.getInstance().fsMode)
+				soController.setSOProperty('screenMode' + User.getInstance().userID, (!Main.getInstance().fsMode).toString());
 		}
 		
 		public function onTextChatEvent ( event : NotesEvent ) : void {
