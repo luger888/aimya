@@ -145,4 +145,16 @@ class Application_Model_DbTable_Lesson extends Application_Model_DbTable_Abstrac
         return $data->query()->fetchAll();
     }
 
+    public function getLessonByUser($lessonId) {
+        $userId = (int)Zend_Auth::getInstance()->getIdentity()->id;
+
+        $data = $this->getAdapter()->select()
+            ->from($this->_name)
+            ->where('(' . $this->getAdapter()->quoteInto('creator_id=?' , $userId) . ' OR ' . $this->getAdapter()->quoteInto('partner_id=?' , $userId) .') ')
+            ->where($this->getAdapter()->quoteInto('status=?' , 2))
+            ->where($this->getAdapter()->quoteInto('id=?' , (int)$lessonId));
+
+        return $data->query()->fetch();
+    }
+
 }
