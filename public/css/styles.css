@@ -930,7 +930,10 @@ input.button-2 {
 }
 
 .feauteresButtons .button-2 {
+    bottom: 65px;
     float: right;
+    position: absolute;
+    right: 25px;
 }
 
 /*---Services tab-----------------------------------------------------------------*/
@@ -1140,6 +1143,7 @@ input.button-2 {
 }
 .userRelationsTab table{
     border:1px solid #dbdbde;
+    width:100%;
 }
 .userRelationsTab  table tbody tr{
     height:35px;
@@ -1834,6 +1838,10 @@ float:right;
 .lessonFilterBlock .filters{
     float:left;
 }
+.lessonFilterBlock .filters h1{
+    padding-top:5px;
+}
+
 /** ********************* user profile tab ***************************************************************/
 
 /*User profile*/
@@ -2025,4 +2033,9 @@ float:right;
     margin-bottom: 25px;
     margin-top: 30px;
     width: 800px;
+}
+/*---SEARCH----------------------------------------------------------------*/
+
+.searchTab .shadowSeparatorBox{
+    min-height:415px;
 }

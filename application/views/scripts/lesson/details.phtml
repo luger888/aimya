@@ -38,19 +38,19 @@
                     <td><?php echo $date; ?></td>
                     <td><?php echo $time; ?></td>
                     <td><?php echo $lesson['focus_name']?></td>
-                    <td>
+                    <td class ="center">
                         <?php if ($lesson['video']): ?>
-                        <a href="#" class="button-2 open"><?php echo $this->translate('Open') ?></a>
+                        <a href="#" class="button-2 open center"><?php echo $this->translate('Open') ?></a>
                         <?php endif;?>
                     </td>
-                    <td>
+                    <td class ="center">
                         <?php if ($lesson['feedback']): ?>
-                        <a href="#" class="button-2 open"><?php echo $this->translate('Open') ?></a>
+                        <a href="#" class="button-2 open center"><?php echo $this->translate('Open') ?></a>
                         <?php endif;?>
                     </td>
-                    <td>
+                    <td class ="center">
                         <?php if ($lesson['notes']): ?>
-                        <a href="#" class="button-2 open"><?php echo $this->translate('Open') ?></a>
+                        <a href="#" class="button-2 open "><?php echo $this->translate('Open') ?></a>
                         <?php endif;?>
                     </td>
                 </tr>
