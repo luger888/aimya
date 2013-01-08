@@ -20,9 +20,9 @@ class Application_Model_Lesson
     {
 
         $identityId = Zend_Auth::getInstance()->getIdentity()->id;
-        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation');
-        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . $identityId);
-        $presPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR;
+        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users');
+        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'presentation');
+        $presPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR;
         @mkdir($presPath);
 
         //$this->write(' / ' . $identityId . " / \n");
@@ -30,11 +30,44 @@ class Application_Model_Lesson
         return $presPath;
     }
 
+    public function createNotesPath($lessonId, $teacherId)
+    {
+
+        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users');
+        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId);
+        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId . DIRECTORY_SEPARATOR . $lessonId);
+        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'notes');
+        $notePath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'notes' . DIRECTORY_SEPARATOR;
+        @mkdir($notePath);
+
+        //$this->write(' / ' . $identityId . " / \n");
+
+        return $notePath;
+    }
+
+    public function createNote($notePath, $userName, $message, $time)
+    {
+        $string = '<li class="note"><p class="username">' . $userName . '</p><p class="time">' . $time . '</p><p class="message">' . $message  . '</p></li>';
+
+        $fp = fopen($notePath . "notes.txt", "a+");
+
+        fwrite($fp, $string);
+
+        fclose($fp);
+    }
+
+    public function getNotes($lessonId, $teacherId)
+    {
+        $notePath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'notes' . DIRECTORY_SEPARATOR . 'notes.txt';
+        $fileContent = file_get_contents($notePath);
+        return $fileContent;
+    }
+
     public function getImages($lessonId)
     {
         $lessonTable = new Application_Model_DbTable_Lesson();
         $lessonData = $lessonTable->getItem($lessonId);
-        $imagesPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . $lessonData['creator_id'] . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'jpges' . DIRECTORY_SEPARATOR;
+        $imagesPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $lessonData['creator_id'] . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . 'jpges' . DIRECTORY_SEPARATOR;
         //$imagesPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . "1" . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'jpges' . DIRECTORY_SEPARATOR;
         $imageNames = scandir($imagesPath);
         $imagePath = array();
@@ -122,7 +155,6 @@ class Application_Model_Lesson
             }
             $currentTimeUtc = strtotime($dateWithUTC); //currentTime + UTC of user to UNIX stamp
             $timeDifference = $starting_time - $currentTimeUtc;
-            Zend_Debug::dump($currentTimeUtc);
             if ($timeDifference <= $reserveSeconds && $timeDifference > 0){ //if difference between current time and starting is 10 minutes or less, but not less than 0
                 $isOnline = 1;
 

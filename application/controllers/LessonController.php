@@ -17,6 +17,7 @@ class LessonController extends Zend_Controller_Action
             ->addActionContext('updatesize', 'json')
             ->addActionContext('getsize', 'json')
             ->addActionContext('notes', 'json')
+            ->addActionContext('correspondence', 'json')
             ->addActionContext('pay', 'json')
             ->initContext('json');
     }
@@ -357,8 +358,43 @@ class LessonController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender(true);
 
         if ($this->getRequest()->isXmlHttpRequest()) {
-            $this->view->answer = 'success';
+
+            $identityId = Zend_Auth::getInstance()->getIdentity()->id;
+
+            $bookingTable = new Application_Model_DbTable_Booking();
+
+            $lessonModel = new Application_Model_Lesson();
+            $lessonTable = new Application_Model_DbTable_Lesson();
+            $activeLesson = $lessonTable->checkAvailableLesson($identityId);
+            $booking = $bookingTable->getItem($activeLesson['booking_id']);
+            if($booking['notes']) {
+                if($this->getRequest()->getParam('date') && $this->getRequest()->getParam('name') && $this->getRequest()->getParam('message')) {
+                    $userName = $this->getRequest()->getParam('name');
+                    $message = $this->getRequest()->getParam('message');
+                    $time = $this->getRequest()->getParam('date');
+                    $notesPath = $lessonModel->createNotesPath($this->getRequest()->getParam('lesson_id'), $activeLesson['creator_id']);
+                    $lessonModel->createNote($notesPath, $userName, $message, $time);
+                    $this->view->answer = 'success';
+                } else {
+                    $this->view->answer = 'error';
+                }
+            }
         }
+    }
+
+    public function correspondenceAction() {
+        $lessonId = $this->getRequest()->getParam('lesson_id');
+        if($lessonId){
+            $lessonTable = new Application_Model_DbTable_Lesson();
+            $lessonModel = new Application_Model_Lesson();
+            $lesson = $lessonTable->getLessonByUser($lessonId);
+
+            $fileContent = $lessonModel->getNotes($lessonId, $lesson['creator_id']);
+
+            $this->view->notes = $fileContent;
+        }
+
+
     }
 
     function write($the_string )
