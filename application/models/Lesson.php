@@ -110,8 +110,19 @@ class Application_Model_Lesson
             $joinLesson = $lessonTable->checkAvailableLesson($lesson['userData']['id']);
             $lessonDuration = $lesson['booking']['duration'] *60; //lesson duration in seconds
             $starting_time = strtotime($lesson['booking']['started_at']); //booking started_at time to UNIX stamp
+            if($lesson['booking']['sender_id'] != $identity->id){
+                $separatedData = explode(':',  $lesson['booking']['creator_tz']); //exploding HH: MM by ':'
+                $minutesInHours = $separatedData[0] * 60; // HH -> minutes
+                $minutesInDecimals = $separatedData[1]; // MM -> minutes
+                $totalCreatorTZ = $minutesInHours + $minutesInDecimals; //converted timezone to minutes
+
+
+                $starting_time = ($starting_time + $totalMinutes * 60) - $totalCreatorTZ * 60;
+
+            }
             $currentTimeUtc = strtotime($dateWithUTC); //currentTime + UTC of user to UNIX stamp
             $timeDifference = $starting_time - $currentTimeUtc;
+            Zend_Debug::dump($currentTimeUtc);
             if ($timeDifference <= $reserveSeconds && $timeDifference > 0){ //if difference between current time and starting is 10 minutes or less, but not less than 0
                 $isOnline = 1;
 
@@ -152,7 +163,7 @@ class Application_Model_Lesson
 
             $lesson['booking']['isOnline'] = $isOnline;//adding is online attr to lesson
             $lesson['booking']['isTeacher']  = $isTeacher;//adding is teacher attr to lesson
-
+            $lesson['booking']['startingTime']  = date('m/d/Y H:i', $starting_time);;//starting time with user utc
             $lessons[] = $lesson;
 
         }//END FOREACH

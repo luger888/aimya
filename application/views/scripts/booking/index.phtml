@@ -376,17 +376,27 @@ jQuery(document).ready(function () {
                         }
 
                         var start = msg.booking[c].started_at;
-                        start = new Date(msg.booking[c].started_at);
 
+                        start = start.replace(" ","T");
                         var sender_utc = parseFloat(msg.booking[c].creator_tz.replace(':',"."));
                         var recipient_utc = parseFloat(msg.timezone.replace(':',"."));
-                        var utc = sender_utc - recipient_utc;
+                        var utc = recipient_utc - sender_utc;
+
 //                        var time_zone = msg.booking[c].timezone - msg.booking[c].creator_tz;
 //                        var utc =  msg.booking[c].creator_tz.getTime() + ( msg.booking[c].creator_tz.getTimezoneOffset() * 60000);
+
                         if (msg.booking[c].recipient_id == msg.user_id) {
-                            start = start.addHours(utc);
+
+                            var unixStamp = Date.parse(start);
+                            console.log(unixStamp.toString());
+                            unixStamp = unixStamp.toString();
+                            unixStamp = unixStamp.substring(0, unixStamp.length - 3);
+                            unixStamp = parseInt(unixStamp);
+                            var dateTime = unixStamp+utc*3600;
+                        }else{
+                            dateTime = msg.booking[c].started_at;
                         }
-                        var dateTime = msg.booking[c].started_at;
+
 
                         events.push({
                             title:msg.booking[c].focus_name,
@@ -405,7 +415,7 @@ jQuery(document).ready(function () {
                             booking_id:msg.booking[c].id + "",
                             timezone_recipient:msg.timezone,
                             timezone_sender:msg.booking[c].creator_tz,
-                            user_id:msg.id,
+                            user_id:msg.user_id,
                             allDay:false,
                             color:eventColor,
                             backgroundColor:eventColor,
@@ -517,9 +527,7 @@ jQuery(document).ready(function () {
         minDate: today
     });
 
-    $('#started_at_time').timepicker({
-        minDate: today
-    });
+
 
     $('#sendBooking').click(function () {
         jQuery("body").append('<div class="loadingIcon"></div>');

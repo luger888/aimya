@@ -178,6 +178,8 @@ class UserController extends Zend_Controller_Action
                 } else {
                     $this->view->status = 'error';
                 }
+            } else {
+                $this->view->status = 'error';
             }
         }
     }
