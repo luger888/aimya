@@ -13,6 +13,7 @@ class LessonController extends Zend_Controller_Action
             ->addActionContext('upload', 'json')
             ->addActionContext('files', 'json')
             ->addActionContext('end', 'json')
+            ->addActionContext('recording', 'json')
             ->addActionContext('updatesize', 'json')
             ->addActionContext('getsize', 'json')
             ->addActionContext('notes', 'json')
@@ -138,9 +139,60 @@ class LessonController extends Zend_Controller_Action
 
     }
 
+    public function recordingAction()
+    {
+        if($this->getRequest()->getParam('partner_id')) {
+            $userId = $this->getRequest()->getParam('partner_id');
+            $lessonTable = new Application_Model_DbTable_Lesson();
+            $this->view->lessonStatus = 1;
+            $result = $lessonTable->checkAvailableLesson($userId);
+
+            if($result) {
+                $broker = new Aimya_View_Helper_BaseLink();
+                $baseLink = $broker->baseLink();
+
+                $userModel = new Application_Model_DbTable_Users();
+                $timeZone = $userModel->getTimeZone();
+
+                $bookingTable = new Application_Model_DbTable_Booking();
+
+                $teacher = $userModel->getItem($result['creator_id']);
+                $teacherName = $teacher['username'];
+                $teacherId = $result['creator_id'];
+                $studentId = $result['partner_id'];
+                $myStreamName = $result['partner_stream_name'];
+                $fsMode = $result['partner_flash_size'];
+                $partnerStreamName = $result['creator_stream_name'];
+
+                $booking = $bookingTable->getItem($result['booking_id']);
+                $userRole = '1';
+
+                $flashObj = '<object clsid:d27cdb6e-ae6d-11cf-96b8-444553540000 width="100%" height="100%" id="aimia_lesson"><param name="movie" value="' . $baseLink . '/flash/aimia_lesson.swf" /><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" /><param name="allowScriptAccess" value="sameDomain" /><param name="allowFullScreen" value="true" /><param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&partnerName=' . $teacherName . '&partnerId=' . $teacherId . '&userId=' . $studentId . '&userRole=' . $userRole . '&userTZ=' . $timeZone['timezone'] . '&total_time=' . $booking['duration'] * 60 . '&focus_name=' . addslashes($booking['focus_name']) . '&fs_mode=' . $fsMode . '&myStreamName=' . $myStreamName . '&partnerStreamName=' . $partnerStreamName . '&lang=' . Zend_Controller_Front::getInstance()->getBaseUrl() . '&soID=' . $result['so_id'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink .'&lesson_id=' . $result['id'] .'&booking_id=' . $result['booking_id'] .'"><object type="application/x-shockwave-flash" data="' . $baseLink . '/flash/aimia_lesson.swf" width="100%" height="100%"><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" /><param name="allowScriptAccess" value="sameDomain" /><param name="allowFullScreen" value="true" /><param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&partnerName=' . $teacherName . '&partnerId=' . $teacherId . '&userId=' . $studentId . '&userRole=' . $userRole . '&userTZ=' . $timeZone['timezone'] . '&total_time=' . $booking['duration'] * 60 . '&focus_name=' . addslashes($booking['focus_name']) . '&fs_mode=' . $fsMode . '&myStreamName=' . $myStreamName . '&partnerStreamName=' . $partnerStreamName . '&soID=' . $result['so_id'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink .'&lesson_id=' . $result['id'] .'&booking_id=' . $result['booking_id'] .'"><p>Either scripts and active content are not permitted to run or Adobe Flash Player version10.0.0 or greater is not installed.</p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash Player" /></a></object></object>';
+
+                if($this->getRequest()->isXmlHttpRequest()) {
+                    $this->view->flashObj = $flashObj;
+                } else {
+                    $this->view->flashObj = $flashObj;
+                    $this->view->responce = $result;
+                    $this->view->result = true;
+                }
+
+            } else {
+                $this->view->result = false;
+            }
+        } else {
+            die('server error');
+        }
+    }
+
     public function detailsAction()
     {
         //$this->_helper->layout()->disableLayout();
+        $lessonTable = new Application_Model_DbTable_Lesson();
+        $studentLessons = $lessonTable->getStudentLessons();
+
+        $this->view->studentLessons = $studentLessons;
+
     }
 
     public function uploadAction() {
