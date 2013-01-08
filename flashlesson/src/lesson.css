@@ -11,26 +11,33 @@
 	[advancedAntiAliasing: true | false;]
 }*/
 
-@font-face {
+/*@font-face {
 	src: url("flashassets/fonts/Helvetica/HelveticaNeueLTStd-Md.ttf");
 	fontFamily: HelveticaFont;
 	fontStyle: normal;
 	fontWeight: light;
-}
+}*/
 
 @font-face {
-	src: url("flashassets/fonts/Helvetica/HelveticaNeueLTStd-Md.ttf");
-	fontFamily: ArialCus;
+	src: url("flashassets/fonts/arial.ttf");
+	fontFamily: Arial;
 	fontStyle: normal;
 	fontWeight: normal;
 }
 
 @font-face {
+	src: url("flashassets/fonts/ariali.ttf");
+	fontFamily: Arial;
+	fontStyle: italic;
+	fontWeight: normal;
+}
+
+/*@font-face {
 	src: url("flashassets/fonts/Helvetica/HelveticaNeueLTStd-Md 2.ttf");
 	fontFamily: HelveticaRoman;
 	fontStyle: normal;
 	fontWeight: normal;
-}
+}*/
 
 @font-face {
 	src: url("flashassets/fonts/Dosis/Dosis-SemiBold.ttf");

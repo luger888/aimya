@@ -27,7 +27,7 @@ package com.aimialesson.controllers
 			timer.addEventListener(TimerEvent.TIMER, reconnect);
 		}
 		
-		public function setParameters ( parameters : Object ) : void {
+		/*public function setParameters ( parameters : Object ) : void {
 			for (var i in parameters){
 				debug (i+":"+parameters[i]);
 			}
@@ -69,7 +69,7 @@ package com.aimialesson.controllers
 				Main.getInstance().fsMode = (parameters.fs_mode == "1");
 				debug (parameters.fs_mode);
 			}
-		}
+		}*/
 		
 		public function initConnection () : void {
 			debug("MediaController:initConnection");
