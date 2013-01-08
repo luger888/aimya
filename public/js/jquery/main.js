@@ -417,7 +417,9 @@ function setDefaultTimezone() {
         'dataType':'json',
         'type':'post',
         success:function (data) {
-            $("#timezone").val(newTimeZone);
+            if(data.status == 'success') {
+                $("#timezone").val(newTimeZone);
+            }
         }
     });
 }

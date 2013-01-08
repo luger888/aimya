@@ -221,7 +221,9 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         );
 
         $where = $this->getAdapter()->quoteInto('id = ?', (int)$userId);
-        $this->update($data, $where);
+        $result = $this->update($data, $where);
+
+        return $result;
 
     }
 

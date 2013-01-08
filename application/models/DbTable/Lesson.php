@@ -135,10 +135,10 @@ class Application_Model_DbTable_Lesson extends Application_Model_DbTable_Abstrac
     public function getStudentLessons() {
         $userId = (int)Zend_Auth::getInstance()->getIdentity()->id;
 
-        $data = $this->select()
+        $data = $this->getAdapter()->select()
             ->from($this->_name)
             ->joinLeft('booking', 'booking.id = lessons.booking_id', array('booking.focus_name', 'booking.notes', 'booking.video', 'booking.feedback'))
-            ->where($this->getAdapter()->quoteInto('partner_id=?' , $userId))
+            ->where('(' . $this->getAdapter()->quoteInto('creator_id=?' , $userId) . ' OR ' . $this->getAdapter()->quoteInto('partner_id=?' , $userId) .') ')
             ->where($this->getAdapter()->quoteInto('status=?' , 2))
             ->order((array('id DESC')));
 
