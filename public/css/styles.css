@@ -256,7 +256,10 @@ nav ul:after {
     padding: 18px 0 24px 0;
     background: url(../images/bg/bottom-shadow-line.png) no-repeat center bottom;
 }
-
+.shadowSeparatorBoxSmall{
+    padding: 18px 0 24px 0;
+    background: url(../images/bg/bottom-shadow-line.png) no-repeat center bottom;
+}
 #content h1, #content h2 {
     font-size: 12px;
     line-height: 16px;
@@ -470,6 +473,26 @@ input.button-2 {
     background-position: 0 -19px;
 }
 .button-2.play.disable {
+    background-position: 0 -44px;
+}
+.button-2.open {
+    background: url(../images/icons/open.png) no-repeat 0 2px;
+}
+
+.button-2.open:hover {
+    background-position: 0 -17px;
+}
+.button-2.open.disable {
+    background-position: 0 -44px;
+}
+
+.button-2.display {
+    background: url(../images/icons/display.png) no-repeat 0 2px;
+}
+.button-2.display:hover {
+    background-position: 0 -18px;
+}
+.button-2.display.disable {
     background-position: 0 -44px;
 }
 .disable{
@@ -1626,6 +1649,7 @@ input.button-2 {
     padding-top:0;
     min-height: 416px;
 }
+
 .resumeGeneral .shadowSeparator{
     padding-top:27px;
 }
@@ -1804,7 +1828,12 @@ float:right;
 .checBoxGrey.empty{
     background-position: -16px 6px;
 }
-
+.lessonFilterBlock{
+    padding-top:15px;
+}
+.lessonFilterBlock .filters{
+    float:left;
+}
 /** ********************* user profile tab ***************************************************************/
 
 /*User profile*/

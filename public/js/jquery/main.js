@@ -72,6 +72,15 @@ $(document).ready(function () {
             $("input[name='birthday']").val(dateText);
         }
     });
+
+    $('#fromPeriod').datepicker({ dateFormat:'yy-mm-dd',
+        changeMonth:true,
+        changeYear:true,
+        yearRange:"1910:2012" }).val();
+    $('#toPeriod').datepicker({ dateFormat:'yy-mm-dd',
+        changeMonth:true,
+        changeYear:true,
+        yearRange:"1910:2012" }).val();
     /* END DatePicker jquery UI */
 
     /* TABS with COOKIES jquery UI */
