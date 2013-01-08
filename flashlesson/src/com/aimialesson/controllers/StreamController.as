@@ -33,7 +33,7 @@ package com.aimialesson.controllers
 			Media.getInstance().partnerNetStream.client = this;
 			Media.getInstance().partnerNetStream.maxPauseBufferTime = 0.1;
 			Media.getInstance().partnerNetStream.bufferTime = 0.02;
-			Media.getInstance().partnerNetStream.bufferTimeMax = 2;
+		//	Media.getInstance().partnerNetStream.bufferTimeMax = 2;
 			Media.getInstance().partnerNetStream.addEventListener( NetStatusEvent.NET_STATUS, netStatusHandler );
 			Media.getInstance().partnerNetStream.addEventListener( IOErrorEvent.IO_ERROR, netIOError );
 			Media.getInstance().partnerNetStream.addEventListener( AsyncErrorEvent.ASYNC_ERROR, netASyncError );
