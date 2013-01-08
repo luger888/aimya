@@ -5,7 +5,11 @@ package com.aimialesson.model
 		
 		public function onBWCheck(... rest):Number { 
 			return 0; 
-		} 
+		}
+		
+		public function close(... rest):void { 
+			
+		}
 		
 		public function onBWDone(... rest):void { 
 			var p_bw:Number; 

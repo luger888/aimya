@@ -32,7 +32,7 @@ package com.aimialesson.controllers
 			Media.getInstance().partnerNetStream = new NetStream(Media.getInstance().nc);
 			Media.getInstance().partnerNetStream.client = this;
 			Media.getInstance().partnerNetStream.maxPauseBufferTime = 0.1;
-			Media.getInstance().partnerNetStream.bufferTime = 2;
+			Media.getInstance().partnerNetStream.bufferTime = 0.02;
 			Media.getInstance().partnerNetStream.bufferTimeMax = 2;
 			Media.getInstance().partnerNetStream.addEventListener( NetStatusEvent.NET_STATUS, netStatusHandler );
 			Media.getInstance().partnerNetStream.addEventListener( IOErrorEvent.IO_ERROR, netIOError );
@@ -47,14 +47,14 @@ package com.aimialesson.controllers
 		}
 				
 		protected function netStatusHandler( event : NetStatusEvent ) : void {
-			debug("netStatusHandler");
+		//	debug("netStatusHandler");
 			
-			for ( var prop:String in event.info)
+		/*	for ( var prop:String in event.info)
 			{
 				debug("prop : "+prop+" = "+event.info[prop]);
 			}
 			
-			debug(event.info.code);
+			debug(event.info.code);*/
 			
 			if (event.info.code == "NetStream.Connect.Success"){
 				//this.dispatchEvent( new AppEvent ( AppEvent.MY_STREAM_INIT_COMPLETE));
@@ -86,7 +86,7 @@ package com.aimialesson.controllers
 				Media.getInstance().mic.setUseEchoSuppression(true);
 				//Media.getInstance().mic.gain = 50;
 				//Media.getInstance().mic.rate = 22;
-				Media.getInstance().mic.setSilenceLevel( 1, 2000 );
+				Media.getInstance().mic.setSilenceLevel( 10, 2000 );
 				Media.getInstance().myNetStream.attachAudio(Media.getInstance().mic);
 			}
 			//Media.getInstance().myNetStream.bufferTime = 2;

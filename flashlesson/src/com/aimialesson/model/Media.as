@@ -14,12 +14,13 @@ package com.aimialesson.model
 		//public var rtmp:String = "rtmp://localhost/videorecording";
 		//public var rtmp:String = "rtmp://localhost/videochat";
 		//public var rtmp:String = "rtmp://localhost/savelive1";
+		//public var rtmp:String = "rtmp://demo6.flashmediaserver.it/livepkgr/livestream?adbe-live-event=liveevent";
 		public var nc:NetConnection;
 		public var myStreamName:String = "streamAlex";
 		public var partnerStreamName:String = "streamAlex";
 		public var myNetStream:NetStream;
 		public var partnerNetStream:NetStream;
-		public var soID:String = "15_25";
+		public var soID:String = "12_55";
 		public var audioSocketHost:String;
 		public var videoSocketHost:String;
 		public var audioSocketPort:int;
