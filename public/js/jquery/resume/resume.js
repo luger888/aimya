@@ -197,6 +197,7 @@ function updateObjective() {
     )
 }
 function uploadify() {
+
     var baseUrl = $('#current_url').val();
     $('#file_upload').uploadifive({
             'auto':false,

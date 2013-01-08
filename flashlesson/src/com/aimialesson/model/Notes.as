@@ -20,9 +20,10 @@ package com.aimialesson.model
 		[Bindable]
 		public function set notesAC ( value : ArrayCollection ) : void {
 			_notesAC = value;
-			_notesAC.addEventListener(CollectionEvent.COLLECTION_CHANGE, onCollectionChange);
-			onCollectionChange(null);
+//			_notesAC.addEventListener(CollectionEvent.COLLECTION_CHANGE, onCollectionChange);
+			//onCollectionChange(null);
 			//notesAC.enableAutoUpdate();
+			this.dispatchEvent(new Event ( Notes.NEW_LINE_ADDED ) );
 		}
 		
 		public function get notesAC () : ArrayCollection {
@@ -39,12 +40,13 @@ package com.aimialesson.model
 				} 
 				_newLineData.isEven = isEven(); 
 				notesAC.addItem(_newLineData);
+				this.dispatchEvent(new Event ( Notes.NEW_LINE_ADDED ) );
 			}
 		}
 		
-		public function onCollectionChange ( event : Event ) : void {
+	/*	public function onCollectionChange ( event : Event ) : void {
 			this.dispatchEvent(new Event ( Notes.NEW_LINE_ADDED ) );
-		}
+		}*/
 		
 		public function get newLineData () : Object {
 			return _newLineData;
