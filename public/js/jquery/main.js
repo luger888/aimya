@@ -1,5 +1,10 @@
 $(document).ready(function () {
+    //timepicker
 
+    $(function(){
+
+        $('#started_at_time').scroller({ preset: 'time', theme: 'android-ics', ampm: false, timeFormat: 'HH:ii' });
+    });
 //    $.ajaxSetup({
 //        beforeSend: function(jqXHR, settings) {
 //            jQuery("body").append('<div class="loadingIcon"></div>');
@@ -423,5 +428,6 @@ function setDefaultTimezone() {
         }
     });
 }
+
 
 

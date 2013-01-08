@@ -28,6 +28,8 @@
 			
 			[Embed(source = "flashassets/fonts/Dosis/Dosis-SemiBold.ttf", fontWeight="Normal", fontName = "DosisSB", mimeType="application/x-font-truetype")]
 			private var fontDosisSB:Class;
+			[Embed(source = "flashassets/fonts/arial.ttf", fontWeight="Normal", fontName = "Arial", mimeType="application/x-font-truetype")]
+			private var Arial:Class;
 			
 			private var lastState:String = "loaded";
 			
