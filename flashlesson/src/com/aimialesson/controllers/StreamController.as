@@ -24,7 +24,14 @@ package com.aimialesson.controllers
 			Media.getInstance().myNetStream.addEventListener( NetStatusEvent.NET_STATUS, netStatusHandler );
 			Media.getInstance().myNetStream.addEventListener( IOErrorEvent.IO_ERROR, netIOError );
 			Media.getInstance().myNetStream.addEventListener( AsyncErrorEvent.ASYNC_ERROR, netASyncError );
-			myVideoInit();
+			if (Main.getInstance().isServer){
+				Media.getInstance().myNetStream.client = this;
+				Media.getInstance().myNetStream.maxPauseBufferTime = 0.1;
+				Media.getInstance().myNetStream.bufferTime = 0.02;
+				Media.getInstance().myNetStream.play(Media.getInstance().myStreamName);
+			} else {
+				myVideoInit();
+			}
 		}
 		
 		public function initPartnerNetStream () : void {
