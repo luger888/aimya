@@ -70,16 +70,20 @@ class Application_Model_Lesson
         $imagesPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $lessonData['creator_id'] . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . 'jpges' . DIRECTORY_SEPARATOR;
         //$imagesPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . "1" . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'jpges' . DIRECTORY_SEPARATOR;
         $imageNames = scandir($imagesPath);
-        $imagePath = array();
-        foreach ($imageNames as $name) {
-            if (strlen($name) > 3) {
-                $search = realpath(APPLICATION_PATH . '/../public/');
-                $cutedPath = str_replace($search, "", $imagesPath);
-                $imagePath[] = $cutedPath . $name;
+        if($imageNames) {
+            $imagePath = array();
+            foreach ($imageNames as $name) {
+                if (strlen($name) > 3) {
+                    $search = realpath(APPLICATION_PATH . '/../public/');
+                    $cutedPath = str_replace($search, "", $imagesPath);
+                    $imagePath[] = $cutedPath . $name;
+                }
             }
-        }
 
-        return $imagePath;
+            return $imagePath;
+        } else {
+            return false;
+        }
     }
 
 
