@@ -1,5 +1,0 @@
-<li class="note"><p class="username">luger</p><p class="time">01.09.13 06:42</p><p class="message">This lesson will teach you some moves boy
-</p></li><li class="note"><p class="username">santa</p><p class="time">01.09.13 06:42</p><p class="message">oh, really? Im so eager to learn some!
-</p></li><li class="note"><p class="username">luger</p><p class="time">01.09.13 06:43</p><p class="message">Don't worry, in a 20 minutes you will know the basics of a knowledge!
-</p></li><li class="note"><p class="username">santa</p><p class="time">01.09.13 06:43</p><p class="message">Oh, it sounds so cool!
-</p></li>
