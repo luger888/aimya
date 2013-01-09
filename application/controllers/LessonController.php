@@ -19,6 +19,7 @@ class LessonController extends Zend_Controller_Action
             ->addActionContext('notes', 'json')
             ->addActionContext('correspondence', 'json')
             ->addActionContext('pay', 'json')
+            ->addActionContext('review', 'json')
             ->initContext('json');
     }
 
@@ -44,7 +45,7 @@ class LessonController extends Zend_Controller_Action
     {
         $studentId = $this->getRequest()->getParam('student_id');
         $bookingId = $this->getRequest()->getParam('booking_id');
-        if(isset($studentId) && isset($bookingId)) {
+        if (isset($studentId) && isset($bookingId)) {
             $broker = new Aimya_View_Helper_BaseLink();
             $baseLink = $broker->baseLink();
 
@@ -53,9 +54,9 @@ class LessonController extends Zend_Controller_Action
             $teacher = $userModel->getItem(Zend_Auth::getInstance()->getIdentity()->id);
             $lessonModel = new Application_Model_Lesson();
             $params = array(
-                'teacherStream'     => $teacher['username'],
-                'studentStream'     => $student['username'],
-                'soID'   => $teacher['id'] . $student['id'],
+                'teacherStream' => $teacher['username'],
+                'studentStream' => $student['username'],
+                'soID' => $teacher['id'] . $student['id'],
             );
 
             $resultParams = $lessonModel->createFlashParams($params);
@@ -85,7 +86,7 @@ class LessonController extends Zend_Controller_Action
         $this->view->lessonStatus = 1;
         $result = $lessonTable->checkAvailableLesson($userId);
 
-        if($result) {
+        if ($result) {
             $broker = new Aimya_View_Helper_BaseLink();
             $baseLink = $broker->baseLink();
 
@@ -98,7 +99,7 @@ class LessonController extends Zend_Controller_Action
             $teacherId = '';
             $studentId = '';
             $bookingTable = new Application_Model_DbTable_Booking();
-            if(!$bookingTable->isTeacher($result['booking_id'], $userId)) {
+            if (!$bookingTable->isTeacher($result['booking_id'], $userId)) {
                 $teacher = $userModel->getItem($result['creator_id']);
                 $teacherName = $teacher['username'];
                 $teacherId = $result['creator_id'];
@@ -118,15 +119,15 @@ class LessonController extends Zend_Controller_Action
 
             $booking = $bookingTable->getItem($result['booking_id']);
 
-            if($bookingTable->isTeacher($result['booking_id'], $userId)) {
+            if ($bookingTable->isTeacher($result['booking_id'], $userId)) {
                 $userRole = '2';
             } else {
                 $userRole = '1';
             }
 
-            $flashObj = '<object clsid:d27cdb6e-ae6d-11cf-96b8-444553540000 width="100%" height="100%" id="aimia_lesson"><param name="movie" value="' . $baseLink . '/flash/aimia_lesson.swf" /><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" /><param name="allowScriptAccess" value="sameDomain" /><param name="allowFullScreen" value="true" /><param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&partnerName=' . $teacherName . '&partnerId=' . $teacherId . '&userId=' . $studentId . '&userRole=' . $userRole . '&userTZ=' . $timeZone['timezone'] . '&total_time=' . $booking['duration'] * 60 . '&focus_name=' . addslashes($booking['focus_name']) . '&fs_mode=' . $fsMode . '&myStreamName=' . $myStreamName . '&partnerStreamName=' . $partnerStreamName . '&lang=' . Zend_Controller_Front::getInstance()->getBaseUrl() . '&soID=' . $result['so_id'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink .'&lesson_id=' . $result['id'] .'&booking_id=' . $result['booking_id'] .'"><object type="application/x-shockwave-flash" data="' . $baseLink . '/flash/aimia_lesson.swf" width="100%" height="100%"><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" /><param name="allowScriptAccess" value="sameDomain" /><param name="allowFullScreen" value="true" /><param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&partnerName=' . $teacherName . '&partnerId=' . $teacherId . '&userId=' . $studentId . '&userRole=' . $userRole . '&userTZ=' . $timeZone['timezone'] . '&total_time=' . $booking['duration'] * 60 . '&focus_name=' . addslashes($booking['focus_name']) . '&fs_mode=' . $fsMode . '&myStreamName=' . $myStreamName . '&partnerStreamName=' . $partnerStreamName . '&soID=' . $result['so_id'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink .'&lesson_id=' . $result['id'] .'&booking_id=' . $result['booking_id'] .'"><p>Either scripts and active content are not permitted to run or Adobe Flash Player version10.0.0 or greater is not installed.</p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash Player" /></a></object></object>';
+            $flashObj = '<object clsid:d27cdb6e-ae6d-11cf-96b8-444553540000 width="100%" height="100%" id="aimia_lesson"><param name="movie" value="' . $baseLink . '/flash/aimia_lesson.swf" /><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" /><param name="allowScriptAccess" value="sameDomain" /><param name="allowFullScreen" value="true" /><param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&partnerName=' . $teacherName . '&partnerId=' . $teacherId . '&userId=' . $studentId . '&userRole=' . $userRole . '&userTZ=' . $timeZone['timezone'] . '&total_time=' . $booking['duration'] * 60 . '&focus_name=' . addslashes($booking['focus_name']) . '&fs_mode=' . $fsMode . '&myStreamName=' . $myStreamName . '&partnerStreamName=' . $partnerStreamName . '&lang=' . Zend_Controller_Front::getInstance()->getBaseUrl() . '&soID=' . $result['so_id'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink . '&lesson_id=' . $result['id'] . '&booking_id=' . $result['booking_id'] . '"><object type="application/x-shockwave-flash" data="' . $baseLink . '/flash/aimia_lesson.swf" width="100%" height="100%"><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" /><param name="allowScriptAccess" value="sameDomain" /><param name="allowFullScreen" value="true" /><param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&partnerName=' . $teacherName . '&partnerId=' . $teacherId . '&userId=' . $studentId . '&userRole=' . $userRole . '&userTZ=' . $timeZone['timezone'] . '&total_time=' . $booking['duration'] * 60 . '&focus_name=' . addslashes($booking['focus_name']) . '&fs_mode=' . $fsMode . '&myStreamName=' . $myStreamName . '&partnerStreamName=' . $partnerStreamName . '&soID=' . $result['so_id'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink . '&lesson_id=' . $result['id'] . '&booking_id=' . $result['booking_id'] . '"><p>Either scripts and active content are not permitted to run or Adobe Flash Player version10.0.0 or greater is not installed.</p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash Player" /></a></object></object>';
 
-            if($this->getRequest()->isXmlHttpRequest()) {
+            if ($this->getRequest()->isXmlHttpRequest()) {
                 $this->view->flashObj = $flashObj;
             } else {
                 $this->view->flashObj = $flashObj;
@@ -142,13 +143,13 @@ class LessonController extends Zend_Controller_Action
 
     public function recordingAction()
     {
-        if($this->getRequest()->getParam('partner_id')) {
+        if ($this->getRequest()->getParam('partner_id')) {
             $userId = $this->getRequest()->getParam('partner_id');
             $lessonTable = new Application_Model_DbTable_Lesson();
             $this->view->lessonStatus = 1;
             $result = $lessonTable->checkAvailableLesson($userId);
 
-            if($result) {
+            if ($result) {
                 $broker = new Aimya_View_Helper_BaseLink();
                 $baseLink = $broker->baseLink();
 
@@ -168,9 +169,9 @@ class LessonController extends Zend_Controller_Action
                 $booking = $bookingTable->getItem($result['booking_id']);
                 $userRole = '1';
 
-                $flashObj = '<object clsid:d27cdb6e-ae6d-11cf-96b8-444553540000 width="100%" height="100%" id="aimia_lesson"><param name="movie" value="' . $baseLink . '/flash/aimia_lesson.swf" /><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" /><param name="allowScriptAccess" value="sameDomain" /><param name="allowFullScreen" value="true" /><param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&partnerName=' . $teacherName . '&partnerId=' . $teacherId . '&userId=' . $studentId . '&userRole=' . $userRole . '&userTZ=' . $timeZone['timezone'] . '&total_time=' . $booking['duration'] * 60 . '&focus_name=' . addslashes($booking['focus_name']) . '&fs_mode=' . $fsMode . '&myStreamName=' . $myStreamName . '&partnerStreamName=' . $partnerStreamName . '&lang=' . Zend_Controller_Front::getInstance()->getBaseUrl() . '&soID=' . $result['so_id'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink .'&lesson_id=' . $result['id'] .'&booking_id=' . $result['booking_id'] .'"><object type="application/x-shockwave-flash" data="' . $baseLink . '/flash/aimia_lesson.swf" width="100%" height="100%"><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" /><param name="allowScriptAccess" value="sameDomain" /><param name="allowFullScreen" value="true" /><param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&partnerName=' . $teacherName . '&partnerId=' . $teacherId . '&userId=' . $studentId . '&userRole=' . $userRole . '&userTZ=' . $timeZone['timezone'] . '&total_time=' . $booking['duration'] * 60 . '&focus_name=' . addslashes($booking['focus_name']) . '&fs_mode=' . $fsMode . '&myStreamName=' . $myStreamName . '&partnerStreamName=' . $partnerStreamName . '&soID=' . $result['so_id'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink .'&lesson_id=' . $result['id'] .'&booking_id=' . $result['booking_id'] .'"><p>Either scripts and active content are not permitted to run or Adobe Flash Player version10.0.0 or greater is not installed.</p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash Player" /></a></object></object>';
+                $flashObj = '<object clsid:d27cdb6e-ae6d-11cf-96b8-444553540000 width="100%" height="100%" id="aimia_lesson"><param name="movie" value="' . $baseLink . '/flash/aimia_lesson.swf" /><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" /><param name="allowScriptAccess" value="sameDomain" /><param name="allowFullScreen" value="true" /><param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&partnerName=' . $teacherName . '&partnerId=' . $teacherId . '&userId=' . $studentId . '&userRole=' . $userRole . '&userTZ=' . $timeZone['timezone'] . '&total_time=' . $booking['duration'] * 60 . '&focus_name=' . addslashes($booking['focus_name']) . '&fs_mode=' . $fsMode . '&myStreamName=' . $myStreamName . '&partnerStreamName=' . $partnerStreamName . '&lang=' . Zend_Controller_Front::getInstance()->getBaseUrl() . '&soID=' . $result['so_id'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink . '&lesson_id=' . $result['id'] . '&booking_id=' . $result['booking_id'] . '"><object type="application/x-shockwave-flash" data="' . $baseLink . '/flash/aimia_lesson.swf" width="100%" height="100%"><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" /><param name="allowScriptAccess" value="sameDomain" /><param name="allowFullScreen" value="true" /><param name="flashvars" value="userName=' . Zend_Auth::getInstance()->getIdentity()->username . '&partnerName=' . $teacherName . '&partnerId=' . $teacherId . '&userId=' . $studentId . '&userRole=' . $userRole . '&userTZ=' . $timeZone['timezone'] . '&total_time=' . $booking['duration'] * 60 . '&focus_name=' . addslashes($booking['focus_name']) . '&fs_mode=' . $fsMode . '&myStreamName=' . $myStreamName . '&partnerStreamName=' . $partnerStreamName . '&soID=' . $result['so_id'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink . '&lesson_id=' . $result['id'] . '&booking_id=' . $result['booking_id'] . '"><p>Either scripts and active content are not permitted to run or Adobe Flash Player version10.0.0 or greater is not installed.</p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash Player" /></a></object></object>';
 
-                if($this->getRequest()->isXmlHttpRequest()) {
+                if ($this->getRequest()->isXmlHttpRequest()) {
                     $this->view->flashObj = $flashObj;
                 } else {
                     $this->view->flashObj = $flashObj;
@@ -194,10 +195,13 @@ class LessonController extends Zend_Controller_Action
         $filterForm = new Application_Form_LessonFilter();
         $this->view->filterForm = $filterForm;
         $this->view->studentLessons = $studentLessons;
+        $this->view->review = new Application_Model_DbTable_Review();
+
 
     }
 
-    public function uploadAction() {
+    public function uploadAction()
+    {
 
         //$text = json_encode($_POST);
         //$text = session_id();
@@ -214,7 +218,7 @@ class LessonController extends Zend_Controller_Action
 
         $formData = $this->getRequest()->getParams();
 
-        if(isset($_FILES['Filedata']['name']) && $_FILES['Filedata']['name'] != '') {
+        if (isset($_FILES['Filedata']['name']) && $_FILES['Filedata']['name'] != '') {
             //$lessonModel->delTree($presPath);
             $presentationForm = new Application_Form_Presentation();
             $presentationForm->getElement("Filedata")->setDestination($presPath);
@@ -247,38 +251,40 @@ class LessonController extends Zend_Controller_Action
 
     }
 
-    public function filesAction() {
+    public function filesAction()
+    {
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
         if ($this->getRequest()->isXmlHttpRequest()) {
 
             $data = $this->getRequest()->getPost();
-            if(isset($data['lesson_id'])) {
+            if (isset($data['lesson_id'])) {
                 $lessonId = $data['lesson_id'];
                 $lessonModel = new Application_Model_Lesson();
 
                 $imageArray = $lessonModel->getImages($lessonId);
-                if(isset($imageArray) && !empty($imageArray)) {
+                if (isset($imageArray) && !empty($imageArray)) {
                     $this->view->answer = 'success';
                     $this->view->comment = '';
-                    $this->view->data  = $imageArray;
+                    $this->view->data = $imageArray;
                 } else {
                     $this->view->answer = 'failure';
                     $this->view->comment = 'There no any images';
-                    $this->view->data  = "";
+                    $this->view->data = "";
                 }
             } else {
                 $this->view->answer = 'failure';
                 $this->view->comment = '';
-                $this->view->data  = "There no any parameters";
+                $this->view->data = "There no any parameters";
             }
         }
 
 
     }
 
-    public function startAction() {
+    public function startAction()
+    {
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -287,7 +293,8 @@ class LessonController extends Zend_Controller_Action
         }
     }
 
-    public function stopAction() {
+    public function stopAction()
+    {
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -296,19 +303,20 @@ class LessonController extends Zend_Controller_Action
         }
     }
 
-    public function endAction() {
+    public function endAction()
+    {
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
         if ($this->getRequest()->isXmlHttpRequest()) {
-            if($this->getRequest()->getParam('lesson_id') && $this->getRequest()->getParam('booking_id')){
+            if ($this->getRequest()->getParam('lesson_id') && $this->getRequest()->getParam('booking_id')) {
                 $lessonId = $this->getRequest()->getParam('lesson_id');
                 $bookingId = $this->getRequest()->getParam('booking_id');
                 $lessonTable = new Application_Model_DbTable_Lesson();
                 $bookingTable = new Application_Model_DbTable_Booking();
                 $bookingStatus = $bookingTable->changeStatus($bookingId);
                 $status = $lessonTable->changeStatus($lessonId);
-                if($status && $bookingStatus) {
+                if ($status && $bookingStatus) {
                     $this->view->answer = 'success';
                 } else {
                     $this->view->answer = 'failure';
@@ -318,18 +326,19 @@ class LessonController extends Zend_Controller_Action
         }
     }
 
-    public function updatesizeAction() {
+    public function updatesizeAction()
+    {
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
         if ($this->getRequest()->isXmlHttpRequest()) {
-            if($this->getRequest()->getParam('lesson_id')){
+            if ($this->getRequest()->getParam('lesson_id')) {
                 $flashSize = $this->getRequest()->getParam('flash_size');
                 $lessonId = $this->getRequest()->getParam('lesson_id');
                 $lessonTable = new Application_Model_DbTable_Lesson();
                 $status = $lessonTable->changeFlashSize($lessonId, $flashSize);
 
-                if($status) {
+                if ($status) {
                     $this->view->answer = 'success';
                 } else {
                     $this->view->answer = 'failure';
@@ -339,12 +348,13 @@ class LessonController extends Zend_Controller_Action
         }
     }
 
-    public function getsizeAction() {
+    public function getsizeAction()
+    {
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
         if ($this->getRequest()->isXmlHttpRequest()) {
-            if($this->getRequest()->getParam('lesson_id')){
+            if ($this->getRequest()->getParam('lesson_id')) {
                 $lessonId = $this->getRequest()->getParam('lesson_id');
                 $lessonTable = new Application_Model_DbTable_Lesson();
                 $size = $lessonTable->getFlashSize($lessonId);
@@ -354,7 +364,8 @@ class LessonController extends Zend_Controller_Action
         }
     }
 
-    public function notesAction() {
+    public function notesAction()
+    {
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -368,8 +379,8 @@ class LessonController extends Zend_Controller_Action
             $lessonTable = new Application_Model_DbTable_Lesson();
             $activeLesson = $lessonTable->checkAvailableLesson($identityId);
             $booking = $bookingTable->getItem($activeLesson['booking_id']);
-            if($booking['notes']) {
-                if($this->getRequest()->getParam('date') && $this->getRequest()->getParam('name') && $this->getRequest()->getParam('message')) {
+            if ($booking['notes']) {
+                if ($this->getRequest()->getParam('date') && $this->getRequest()->getParam('name') && $this->getRequest()->getParam('message')) {
                     $userName = $this->getRequest()->getParam('name');
                     $message = $this->getRequest()->getParam('message');
                     $time = $this->getRequest()->getParam('date');
@@ -383,53 +394,85 @@ class LessonController extends Zend_Controller_Action
         }
     }
 
-    public function correspondenceAction() {
+    public function correspondenceAction()
+    {
         $lessonId = $this->getRequest()->getParam('lesson_id');
-        if($lessonId){
+        if ($lessonId) {
             $lessonTable = new Application_Model_DbTable_Lesson();
+            $reviewTable = new Application_Model_DbTable_Review();
             $lessonModel = new Application_Model_Lesson();
             $lesson = $lessonTable->getLessonByUser($lessonId);
 
             $fileContent = $lessonModel->getNotes($lessonId, $lesson['creator_id']);
+            $review = $reviewTable->getReviews($lessonId);
 
+            $now = time(); // or your date as well
+            $your_date = strtotime($lesson['created_at']);
+            $datediff = $your_date - $now;
+            $reviewDate = floor($datediff / (60 * 60 * 24) + 10);
+            $this->view->review = $review['review'];
+            $this->view->rate = $review['rate'];
+            $this->view->date = $reviewDate;
             $this->view->notes = $fileContent;
         }
 
 
     }
 
-    function write($the_string )
+    function write($the_string)
     {
-        if( $fh = @fopen("./logfile.txt", "a+") )
-        {
-            fputs( $fh, $the_string, strlen($the_string) );
-            fclose( $fh );
-            return( true );
+        if ($fh = @fopen("./logfile.txt", "a+")) {
+            fputs($fh, $the_string, strlen($the_string));
+            fclose($fh);
+            return (true);
         }
         else
         {
-            return( false );
+            return (false);
         }
     }
-    public function payAction() {
+
+    public function payAction()
+    {
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
         $url = $this->getRequest()->getParam('url');
         if ($this->getRequest()->isXmlHttpRequest()) {
-            if($this->getRequest()->getParam('friend_id')){
+            if ($this->getRequest()->getParam('friend_id')) {
                 $friendId = $this->getRequest()->getParam('friend_id');
                 $bookingTable = new Application_Model_DbTable_Booking();
                 $result = $bookingTable->paymentStatus($this->getRequest()->getParam('booking_id'), 1);
-                if($result) {
-                    $this->_helper->flashMessenger->addMessage(array('success'=>'Request successfully sent'));
+                if ($result) {
+                    $this->_helper->flashMessenger->addMessage(array('success' => 'Request successfully sent'));
                     $this->redirect($url);
                 } else {
-                    $this->_helper->flashMessenger->addMessage(array('failure'=>'Problem with sending request, please try again later'));
+                    $this->_helper->flashMessenger->addMessage(array('failure' => 'Problem with sending request, please try again later'));
                     $this->redirect($url);
                 }
 
             }
         }
     }
+
+    public function reviewAction()
+    {
+        if ($this->getRequest()->isXmlHttpRequest()) {
+            $userId = Zend_Auth::getInstance()->getIdentity()->id;
+            if ($this->getRequest()->getParam('rating')) {
+                $reviewTable = new Application_Model_DbTable_Review();
+                $review = $reviewTable->getReviews($this->getRequest()->getParam('lesson_id'));
+                if (!$review) {
+
+                    $result = $reviewTable->createReview($this->getRequest()->getParam('rating'), $this->getRequest()->getParam('review'), $this->getRequest()->getParam('lesson_id'), $userId);
+                    if ($result) {
+                        $this->view->success = 1;
+                    }
+                }else{
+                    echo 'already reviewed';
+                }
+            }
+        }
+    }
+
 }

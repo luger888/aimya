@@ -1,0 +1,6 @@
+<li class="note"><p class="username">santa</p><p class="time">01.09.13 11:47</p><p class="message">Hello teacher, teach me sometgin bout lucene, plz?
+</p></li><li class="note"><p class="username">luger</p><p class="time">01.09.13 11:47</p><p class="message">Hello, what do you want exactly, little one?
+</p></li><li class="note"><p class="username">santa</p><p class="time">01.09.13 11:47</p><p class="message">How about the core ?
+</p></li><li class="note"><p class="username">luger</p><p class="time">01.09.13 11:48</p><p class="message">Oh, so the basic it is. So listen carefully, because u spend a lot of money for this knowledge.
+</p></li><li class="note"><p class="username">santa</p><p class="time">01.09.13 11:48</p><p class="message">Yes, my master!
+</p></li>
