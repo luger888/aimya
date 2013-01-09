@@ -479,6 +479,7 @@ function getNotes(e,id){
             $('.timeLeftSpan').html(result.date + ' ');
             if(result.review){
                 $('#sendRating').remove();
+                $('.timeLeft').remove();
                 $('.comment').html('Comment: '+ result.review);
                 $('#starsBlock').raty({
                     readOnly : true,
