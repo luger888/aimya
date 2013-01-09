@@ -5,13 +5,15 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
 
     protected $_name = 'subscription_history';
 
-    public function createSubscription($userId, $aimyaProfit)
+    public function createSubscription($data  = array())
     {
 
         $data = array(
-            'user_id' => (int)$userId,
-            'aimya_profit' => (int)$aimyaProfit,
+            'user_id' => $data['user_id'],
+            'aimya_profit' => $data['aimya_profit'],
+            'pay_key' => $data['pay_key'],
             'status' => 'paid',
+            'active_to' => $data['active_to'],
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
         );
@@ -42,6 +44,23 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
         $data = $this->select()
             ->from($this->_name, array('id'))
             ->where('user_id=?' , (int)$userId);
+
+        return $data->query()->fetch();
+    }
+
+    public function getLastId() {
+        $data = $this->select()
+            ->from($this->_name, array('MAX(id)'));
+
+        return $data->query()->fetch();
+    }
+
+    public function getPayKeyFromOrder($subscriptionId) {
+        $subscriptionId = (int)$subscriptionId;
+
+        $data = $this->select()
+            ->from($this->_name, array('pay_key'))
+            ->where('id=?' , $subscriptionId);
 
         return $data->query()->fetch();
     }
