@@ -9,9 +9,9 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
     {
 
         $data = array(
-            'user_id' => $data['id'],
-            'aimya_profit' => $data[''],
-            'pay_key' => $data[''],
+            'user_id' => $data['user_id'],
+            'aimya_profit' => $data['aimya_profit'],
+            'pay_key' => $data['pay_key'],
             'status' => 'paid',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
