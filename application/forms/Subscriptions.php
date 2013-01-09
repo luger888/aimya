@@ -51,7 +51,7 @@ class Application_Form_Subscriptions extends Zend_Form
             ->setDecorators($this->basicDecorators);
 
 
-        $this->addElements(array($dateFrom, $period, $subscribe, $unSubscribe));
+        $this->addElements(array($period, $subscribe, $unSubscribe));
 
     }
 
