@@ -89,8 +89,7 @@ package com.aimialesson.UI.views
 		private function init():void {
 			fileRef = new FileReference();
 			fileRef.addEventListener(Event.SELECT, fileRef_select);
-			fileRef.addEventListener(ProgressEvent.PROGRESS, fileRef_progress);
-			fileRef.addEventListener(Event.COMPLETE, fileRef_complete);
+			//fileRef.addEventListener(Event.COMPLETE, fileRef_complete);
 			fileRef.addEventListener(IOErrorEvent.IO_ERROR, onIOErrorEvent);
 		}
 		
@@ -113,6 +112,7 @@ package com.aimialesson.UI.views
 				//	{PHPSESSID : User.getInstance().sessionID};
 				debug ( "UploadUI fileRef_select PHPSESSID:" + User.getInstance().sessionID );
 				debug ( "urlRequest.url:" + Actions.getInstance().fileUploadUrl );
+				fileRef.addEventListener(ProgressEvent.PROGRESS, fileRef_progress);
 				fileRef.upload(urlRequest);
 			} catch (err:Error) {
 				debug ( "ERROR: zero-byte file" );
@@ -121,7 +121,14 @@ package com.aimialesson.UI.views
 		
 		private function fileRef_progress(evt:ProgressEvent):void {
 			progressBar.visible = true;
-			if (evt.bytesTotal) progressBar.percent = evt.bytesLoaded / evt.bytesTotal;
+			if (evt.bytesTotal){
+				progressBar.percent = evt.bytesLoaded / evt.bytesTotal;
+				if (evt.bytesLoaded / evt.bytesTotal == 1){
+					fileRef.removeEventListener(ProgressEvent.PROGRESS, fileRef_progress);
+					progressBar.visible = false;
+					this.dispatchEvent(new PresentationEvent ( PresentationEvent.PRESENTATION_UPLOADED ));
+				}
+			}
 		}
 		
 		private function fileRef_complete(evt:Event):void {

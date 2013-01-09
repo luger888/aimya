@@ -40,7 +40,7 @@ package com.aimialesson.controllers
 			Media.getInstance().partnerNetStream.client = this;
 			Media.getInstance().partnerNetStream.maxPauseBufferTime = 0.1;
 			Media.getInstance().partnerNetStream.bufferTime = 0.02;
-		//	Media.getInstance().partnerNetStream.bufferTimeMax = 2;
+			Media.getInstance().partnerNetStream.bufferTimeMax = 1;
 			Media.getInstance().partnerNetStream.addEventListener( NetStatusEvent.NET_STATUS, netStatusHandler );
 			Media.getInstance().partnerNetStream.addEventListener( IOErrorEvent.IO_ERROR, netIOError );
 			Media.getInstance().partnerNetStream.addEventListener( AsyncErrorEvent.ASYNC_ERROR, netASyncError );
@@ -72,7 +72,11 @@ package com.aimialesson.controllers
 		public function myVideoInit():void {
 			debug("StreamController:myVideoInit");
 			Media.getInstance().cam = Camera.getCamera();
-			Media.getInstance().mic = Microphone.getMicrophone();
+			//Media.getInstance().mic = Microphone.getMicrophone(); 
+			Media.getInstance().mic = Microphone.getEnhancedMicrophone();
+			if (Media.getInstance().mic == null){
+				Media.getInstance().mic = Microphone.getMicrophone();
+			}
 			if ( Media.getInstance().cam != null ) 
 			{
 				debug("StreamController:myNetStream.attachCamera");
@@ -88,11 +92,11 @@ package com.aimialesson.controllers
 				var transform : SoundTransform = Media.getInstance().mic.soundTransform;
 				transform.volume = 0;
 				Media.getInstance().mic.soundTransform = transform;
-				//Media.getInstance().mic.setLoopBack( true );
+				Media.getInstance().mic.setLoopBack(false);
 //				Media.getInstance().mic.encodeQuality = 10;
-				Media.getInstance().mic.setUseEchoSuppression(true);
-				//Media.getInstance().mic.gain = 50;
-				//Media.getInstance().mic.rate = 22;
+//				Media.getInstance().mic.setUseEchoSuppression(true);
+				Media.getInstance().mic.gain = 50;
+				Media.getInstance().mic.rate = 11;
 				Media.getInstance().mic.setSilenceLevel( 10, 2000 );
 				Media.getInstance().myNetStream.attachAudio(Media.getInstance().mic);
 			}
