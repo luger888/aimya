@@ -157,19 +157,17 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
             $payPalModel = new Application_Model_PayPal();
 
             $subscriptionTable = new Application_Model_DbTable_Subscriptions();
-            $lastId = $subscriptionTable->getLastId();
 
             $aimyaProfit = $period * $this->subscriptionCost;
-            $newId = $lastId['id'];
+            $lastId = $subscriptionTable->getAdapter()->lastInsertId();
 
-            $requestData = $payPalModel->generateSubscriptionXml($newId, $aimyaProfit);
-
+            $requestData = $payPalModel->generateSubscriptionXml($lastId, $aimyaProfit);
 
             $response = $payPalModel->getAdaptivUrl($requestData);
 
             if($response) {
 
-                $isAlreadyExist = $subscriptionTable->getPayKeyFromOrder($newId);
+                $isAlreadyExist = $subscriptionTable->getPayKeyFromOrder($lastId);
 
                 if(!$isAlreadyExist) {
                     $data = array(
