@@ -12,7 +12,7 @@
             <a class="button-2 display floatRight"><?php echo $this->translate('display') ?></a>
         </div>
         <div class="shadowSeparatorBoxSmall clearfix">
-            </div>
+        </div>
         <div class="shadowSeparator clearfix">
         </div>
         <div class="shadowSeparatorBox clearfix">
@@ -35,22 +35,23 @@
                     ?>
                 <tr>
 
-                    <td><?php echo $date; ?></td>
-                    <td><?php echo $time; ?></td>
-                    <td><?php echo $lesson['focus_name']?></td>
-                    <td class ="center">
+                    <td class ="date"><?php echo $date; ?></td>
+                    <td class ="time"><?php echo $time; ?></td>
+                    <td class ="focus"><?php echo $lesson['focus_name']?></td>
+                    <td class="center">
                         <?php if ($lesson['video']): ?>
                         <a href="#" class="button-2 open center"><?php echo $this->translate('Open') ?></a>
                         <?php endif;?>
                     </td>
-                    <td class ="center">
+                    <td class="center">
                         <?php if ($lesson['feedback']): ?>
                         <a href="#" class="button-2 open center"><?php echo $this->translate('Open') ?></a>
                         <?php endif;?>
                     </td>
-                    <td class ="center">
+                    <td class="center">
                         <?php if ($lesson['notes']): ?>
-                        <a href="#" class="button-2 open "><?php echo $this->translate('Open') ?></a>
+                        <a href="#" onClick="getNotes(this, <?php echo $lesson['id'];?>);"
+                           class="button-2 open "><?php echo $this->translate('Open') ?></a>
                         <?php endif;?>
                     </td>
                 </tr>
@@ -59,4 +60,25 @@
             </table>
         </div>
     </div>
-</div>
+    <div id="notes-dialog" title="<?php echo $this->translate('recorded notes:') ?>">
+        <div class="notes">
+            <div class="header clearfix">
+                <div class="focus cc floatLeft"><?php echo $this->translate('focus:') . ' <span class ="focusDialog"></span>'; ?></div>
+                <div class="date  cc floatRight"><?php echo $this->translate('date:') . ' <span class ="dateDialog"></span>' ?></div>
+            </div>
+            <div class="notesWindow"></div>
+            <div class ="dialogFooter">
+                <div class ="timeLeft">You have ** days left to rate this lesson!</div>
+                <div class ="rate cc"><?php echo $this->translate('rate lesson:')?></div>
+                <div class ="comment cc"><?php echo $this->translate('comment:')?><input class ="rateInput" type ="text"></div>
+                <input type = "button" class ="button floatRight" value ="OK"></div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+<script type="text/javascript">
+
+</script>
