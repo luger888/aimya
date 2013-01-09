@@ -103,46 +103,51 @@ class Application_Model_PayPal
         }
     }
 
-    public function generateSubscriptionXml($sellerId, $period, $dateFrom) {
+    public function generateSubscriptionXml($period, $subscriptionCost) {
 
-        $pp = new Aimya_PayPal_Subscription();
+        $request = Zend_Controller_Front::getInstance()->getRequest();
 
-        $pp->test = true; // connect to the test sandbox or live server
-        $pp->requestHeaderArr['user'] = $this->payPalApiLogin;
-        $pp->requestHeaderArr['pwd'] = $this->payPalApiPassword;
-        $pp->requestHeaderArr['signature'] = $this->payPalSignature;
-        $pp->requestHeaderArr['countrycode'] = "US";
-        $pp->requestHeaderArr['billingperiod'] = "Month"; // bill per month
-        $pp->requestHeaderArr['billingfrequency'] = 1; // bill once every month
-        $pp->requestHeaderArr['currencycode'] = "USD";
-        $pp->requestHeaderArr['amt'] = 9.95; // amount to bill per month
-        $pp->requestHeaderArr['initamt'] = 0.00; // setup fee
-        $pp->requestHeaderArr['taxamt'] = $pp->requestHeaderArr['amt'] * .07; // 0 for no tax
-        $pp->requestHeaderArr['desc'] = "Super Deluxe Package";
+        $sellerId = Zend_Auth::getInstance()->getIdentity()->id;
 
-        // most likely won't need to edit below here
+        $cancelUrl = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/lesson';
+        $returnURL = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/lesson';
+        $ipnURL = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment/ipn?booking_id=' . $bookingId;
 
-        $pp->requestHeaderArr['creditcardtype'] = $_REQUEST["cardtype"];
-        $pp->requestHeaderArr['acct'] = $_REQUEST["cardnumber"];
-        $pp->requestHeaderArr['expdate'] = str_pad($_REQUEST["cardexpm"],2,'0', STR_PAD_LEFT)  .  $_REQUEST["cardexpy"];
-        $pp->requestHeaderArr['firstname'] = $_REQUEST["f_nm"];
-        $pp->requestHeaderArr['lastname'] = $_REQUEST["l_nm"];
-        $pp->requestHeaderArr['profilestartdate'] = gmdate("Y-m-d\TH:i:s\Z");
-        $pp->requestHeaderArr['totalbillingcycles'] = $_REQUEST["period"];
-        $pp->requestHeaderArr['email'] = $_POST['email'];
-        $pp->requestHeaderArr['payerstatus'] = "verified";
+        $profileTable = new Application_Model_DbTable_Profile();
+        $bookingTable = new Application_Model_DbTable_Booking();
 
-        $ppResponse = $pp->PPHttpPost(); // make the connection to paypal and get a response
+        $paypalEmail = $profileTable->getPayPalEmail($sellerId);
+        //$paypalEmail['paypal_email'] = 'seller_1355909799_biz@gmail.com';
 
-        $viewResponse = Array();
 
-        if(isset($ppResponse['L_ERRORCODE0']))
-            $viewResponse['error'] = "Error: {$ppResponse['L_LONGMESSAGE0']}";
-        else if(isset($ppResponse['ACK']) && $ppResponse['ACK'] == ('Success' || 'SuccessWithWarning'))
-            $viewResponse['success'] = "Your subscription has been processed.";
+        $body_data  = "<?xml version='1.0'?>";
+        $body_data .= "<payRequest>";
+        $body_data .= "<actionType>PAY</actionType>";
+        $body_data .= "<cancelUrl>{$cancelUrl}</cancelUrl>";
+        $body_data .= "<returnUrl>{$returnURL}</returnUrl>";
+        $body_data .= "<currencyCode>USD</currencyCode>";
+        $body_data .= "<feesPayer>SENDER</feesPayer>";
+        $body_data .= "<receiverList>";
+        $body_data .= "<receiver>";
+        $body_data .= "<amount>{$userProfit}</amount>";
+        $body_data .= "<email>{$paypalEmail['paypal_email']}</email>";
+        $body_data .= "<invoiceId>{$bookingId}</invoiceId>";
+        $body_data .= "</receiver>";
+        if($aimyaProfit != 0) {
+            $body_data .= "<receiver>";
+            $body_data .= "<amount>{$aimyaProfit}</amount>";
+            $body_data .= "<email>{$this->amiyaPayPalEmail}</email>";
+            $body_data .= "<invoiceId>{$bookingId}</invoiceId>";
+            $body_data .= "</receiver>";
+        }
+        $body_data .= "</receiverList>";
+        $body_data .= "<requestEnvelope>";
+        $body_data .= "<errorLanguage>en_US</errorLanguage>";
+        $body_data .= "</requestEnvelope>";
+        $body_data .= "<ipnNotificationUrl>{$ipnURL}</ipnNotificationUrl>";
+        $body_data .= "</payRequest>";
 
-        echo json_encode($viewResponse);
-        die;
+        return $body_data;
 
     }
 
