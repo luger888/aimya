@@ -59,7 +59,7 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
 
         $data = $this->select()
             ->from($this->_name, array('pay_key'))
-            ->where('bid=?' , $subscriptionId);
+            ->where('id=?' , $subscriptionId);
 
         return $data->query()->fetch();
     }
