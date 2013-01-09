@@ -8,6 +8,7 @@ package com.aimialesson.events
 		public static const LOAD_TEXTS_COMPLETE:String = "loadTextsComplete";
 		public static const INIT_COMPLETE:String = "initComplete";
 		public static const CHANGE_SCREEN_STATE:String = "changeScreenState";
+		public static const EXIT_FROM_FULL_SCREEN_STATE:String = "exitFromFullScreenState";
 		public static const START_SESSION:String = "startSession";
 		public static const STOP_SESSION:String = "stopSession";
 		public static const TIME_IS_OUT:String = "timeIsOut";

@@ -1,6 +1,7 @@
 <div class="searchTab mainContainer clearfix">
 
     <?php $hits = $this->hits; ?>
+
     <h1><?php echo "Search results for: \"{$_GET['search_string']}\""?></h1>
 
     <div class="shadowSeparator clearfix">
@@ -8,7 +9,8 @@
             <div class="messageContent">
                 <?php if (count($hits)): ?>
                 <?php foreach ($hits as $hit) { ?>
-                    <div class="searchItem">
+
+                  <div class="searchItem">
                         <ul class="featuredInfo clearfix">
                             <li class="clearfix">
                                 <span class="title"><?php echo $this->translate('Service name:') ?></span>
@@ -20,6 +22,7 @@
 
                                 <div class="featuredTxt"><?php echo  ' ' . $hit->lesson_category;?></div>
                             </li>
+
                         </ul><br>
 
 
