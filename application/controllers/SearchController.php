@@ -30,7 +30,11 @@ class SearchController extends Aimya_Controller_BaseController
         @mkdir(realpath(APPLICATION_PATH) . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'search_indexes');
 
         $index = Zend_Search_Lucene::create(realpath(APPLICATION_PATH . '/data/search_indexes'));
+        $dbUserModel = new Application_Model_DbTable_Users();
+        //$services = $dbUserModel->getLatestFeatured();
+       //Zend_Debug::dump($services);
         $services = $serviceTable->getServices();
+       // Zend_Debug::dump($services);
         foreach($services as $service)
         {
             $doc = new Zend_Search_Lucene_Document();

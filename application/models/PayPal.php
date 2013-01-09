@@ -17,6 +17,7 @@ class Application_Model_PayPal
     private $adaptivUrl = 'https://svcs.sandbox.paypal.com/AdaptivePayments/Pay';
     private $amiyaPayPalEmail = 'aim_pr_1356696524_biz@mail.ru';
     private $testMode = 'sandbox';
+    private $subscriptionCost = 30;
 
     public function generateXml($sellerId, $bookingId, $userProfit, $aimyaProfit) {
 
@@ -103,43 +104,35 @@ class Application_Model_PayPal
         }
     }
 
-    public function generateSubscriptionXml($period, $subscriptionCost) {
+    public function generateSubscriptionXml($subscribeId, $aimyaProfit) {
 
         $request = Zend_Controller_Front::getInstance()->getRequest();
 
-        $sellerId = Zend_Auth::getInstance()->getIdentity()->id;
+        $buyerId = Zend_Auth::getInstance()->getIdentity()->id;
 
-        $cancelUrl = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/lesson';
-        $returnURL = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/lesson';
-        $ipnURL = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment/ipn?booking_id=' . $bookingId;
+        $cancelUrl = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment';
+        $returnURL = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment';
+        $ipnURL = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment/ipn?user_id=' . $buyerId;
 
-        $profileTable = new Application_Model_DbTable_Profile();
-        $bookingTable = new Application_Model_DbTable_Booking();
+        /*$userTable = new Application_Model_DbTable_Users();
+        $user = $userTable->getFullData($buyerId);*/
 
-        $paypalEmail = $profileTable->getPayPalEmail($sellerId);
-        //$paypalEmail['paypal_email'] = 'seller_1355909799_biz@gmail.com';
-
+        $itemName = 'Aimya Subscription';
 
         $body_data  = "<?xml version='1.0'?>";
         $body_data .= "<payRequest>";
         $body_data .= "<actionType>PAY</actionType>";
+        $body_data .= "<itemName>{$itemName}</itemName>";
         $body_data .= "<cancelUrl>{$cancelUrl}</cancelUrl>";
         $body_data .= "<returnUrl>{$returnURL}</returnUrl>";
         $body_data .= "<currencyCode>USD</currencyCode>";
         $body_data .= "<feesPayer>SENDER</feesPayer>";
         $body_data .= "<receiverList>";
         $body_data .= "<receiver>";
-        $body_data .= "<amount>{$userProfit}</amount>";
-        $body_data .= "<email>{$paypalEmail['paypal_email']}</email>";
-        $body_data .= "<invoiceId>{$bookingId}</invoiceId>";
+        $body_data .= "<amount>{$aimyaProfit}</amount>";
+        $body_data .= "<email>{$this->amiyaPayPalEmail}</email>";
+        $body_data .= "<invoiceId>{$subscribeId}</invoiceId>";
         $body_data .= "</receiver>";
-        if($aimyaProfit != 0) {
-            $body_data .= "<receiver>";
-            $body_data .= "<amount>{$aimyaProfit}</amount>";
-            $body_data .= "<email>{$this->amiyaPayPalEmail}</email>";
-            $body_data .= "<invoiceId>{$bookingId}</invoiceId>";
-            $body_data .= "</receiver>";
-        }
         $body_data .= "</receiverList>";
         $body_data .= "<requestEnvelope>";
         $body_data .= "<errorLanguage>en_US</errorLanguage>";

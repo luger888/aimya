@@ -4,8 +4,6 @@
     <div class="shadowSeparator clearfix">
         <div class="lessonFilterBlock clearfix">
             <div class="filters">
-                <h1 class="floatLeft"> <?php echo $this->translate('display list of:') ?></h1>
-                <?php echo $this->filterForm->details; ?>
                 <?php echo $this->translate('from') ?><?php echo $this->filterForm->fromPeriod; ?>
                 <?php echo $this->translate('to') ?><?php echo $this->filterForm->toPeriod; ?>
             </div>
@@ -34,7 +32,7 @@
                     $time = substr($lesson['started_at'], 10);
                     ?>
                 <tr>
-
+                    <input type ="hidden" value="<?php echo $lesson['id'] ?>">
                     <td class ="date"><?php echo $date; ?></td>
                     <td class ="time"><?php echo $time; ?></td>
                     <td class ="focus"><?php echo $lesson['focus_name']?></td>
@@ -56,6 +54,8 @@
                     </td>
                 </tr>
                     <?php endforeach; ?>
+
+
                 </tbody>
             </table>
         </div>
@@ -68,10 +68,13 @@
             </div>
             <div class="notesWindow"></div>
             <div class ="dialogFooter">
-                <div class ="timeLeft">You have ** days left to rate this lesson!</div>
+                <div class ="timeLeft">You have <span class ="timeLeftSpan"></span>days left to rate this lesson!</div>
+                <?php //if($this->view->review->getReviews()):?>
                 <div class ="rate cc"><?php echo $this->translate('rate lesson:')?></div>
+                <div id ="starsBlock">
+                </div>
                 <div class ="comment cc"><?php echo $this->translate('comment:')?><input class ="rateInput" type ="text"></div>
-                <input type = "button" class ="button floatRight" value ="OK"></div>
+                <input type = "button" id = "sendRating" class ="button floatRight" value ="OK" onClick="sendRating(this);"></div>
             </div>
 
 
