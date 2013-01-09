@@ -35,6 +35,7 @@
 			
 			private function onInit ( event : FlexEvent ) : void {
 				mainController.addEventListener(AppEvent.INIT_COMPLETE, onInitComplete);
+				mainController.addEventListener(AppEvent.CHANGE_SCREEN_STATE, toggleFullScreen);
 				mainController.addEventListener(SharedObjectEvent.SHARED_PRESENTATION_UPLOADED, seviceMap.onSharedObjectEvent);
 				mainController.init(FlexGlobals.topLevelApplication.parameters);
 				seviceMap.init();
