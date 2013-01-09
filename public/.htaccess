@@ -1,8 +1,6 @@
-<<<<<<< HEAD
+
 SetEnv APPLICATION_ENV development
-=======
-SetEnv APPLICATION_ENV local
->>>>>>> 11234017f01cda116dc047420c76af56a14baeb3
+
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]

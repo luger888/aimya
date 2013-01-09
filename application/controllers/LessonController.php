@@ -191,7 +191,8 @@ class LessonController extends Zend_Controller_Action
         //$this->_helper->layout()->disableLayout();
         $lessonTable = new Application_Model_DbTable_Lesson();
         $studentLessons = $lessonTable->getStudentLessons();
-
+        $filterForm = new Application_Form_LessonFilter();
+        $this->view->filterForm = $filterForm;
         $this->view->studentLessons = $studentLessons;
 
     }

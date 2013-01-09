@@ -1,19 +1,46 @@
-<?php $hits = $this->hits; ?>
-<?php echo "Search result for: \"{$_GET['search_string']}\""?>
-<div class="messageContent">
-    <?php if(count($hits)):?>
-        <?php foreach ($hits as $hit) { ?>
-        <h3><?php echo "Lessun Category: " . $hit->lesson_category ?></h3>
-        <p>
-             <?php echo "Lessun Name: " . $hit->subcategory ?>
-        </p>
-        <p>
-            <a href="<?php echo "/user/" . $hit->user_id ?>">Read more…</a>
-        </p>
-        <?php }
-        //echo $this->paginationControl($hits, 'Sliding','partials/p.phtml');
-        ?>
-    <?php else: ?>
-        <?php echo "Your search returns no results."?>
-    <?php endif; ?>
+<div class="searchTab mainContainer clearfix">
+
+    <?php $hits = $this->hits; ?>
+    <h1><?php echo "Search results for: \"{$_GET['search_string']}\""?></h1>
+
+    <div class="shadowSeparator clearfix">
+        <div class="shadowSeparatorBox clearfix">
+            <div class="messageContent">
+                <?php if (count($hits)): ?>
+                <?php foreach ($hits as $hit) { ?>
+                    <div class="searchItem">
+                        <ul class="featuredInfo clearfix">
+                            <li class="clearfix">
+                                <span class="title"><?php echo $this->translate('Service name:') ?></span>
+
+                                <div class="featuredTxt"><?php echo  ' ' . $hit->subcategory;?></div>
+                            </li>
+                            <li class="clearfix">
+                                <span class="title"><?php echo $this->translate('Service category:') ?></span>
+
+                                <div class="featuredTxt"><?php echo  ' ' . $hit->lesson_category;?></div>
+                            </li>
+                        </ul><br>
+
+
+                        <a href="<?php echo "/user/" . $hit->user_id ?>">Read more…</a>
+
+                        <div class="shadowSeparatorBoxSmall clearfix">
+                        </div>
+                        <div class="shadowSeparator clearfix">
+                        </div>
+
+                    </div>
+                    <?php
+                }?>
+                <div class="feauteresButtons clearfix">
+                    <input class ="showMore button-2 more" type="button" value = "<?php echo $this->translate('VIEW MORE') ?>">
+                    </div><!--End feauteresButtons-->
+
+                <?php else: ?>
+                <?php echo "Your search returns no results." ?>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
 </div>
