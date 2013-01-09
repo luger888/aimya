@@ -156,35 +156,37 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         if(isset($period)) {
             $payPalModel = new Application_Model_PayPal();
 
-            $xml = $payPalModel->generateSubscriptionXml($period, $this->subscriptionCost);
+            $subscriptionTable = new Application_Model_DbTable_Subscriptions();
+            $lastId = $subscriptionTable->getLastId();
+
+            $aimyaProfit = $period * $this->subscriptionCost;
+            $newId = $lastId['id'];
+
+            $requestData = $payPalModel->generateSubscriptionXml($newId, $aimyaProfit);
 
 
-            $response = $payPalModel->getAdaptivUrl($xml);
+            $response = $payPalModel->getAdaptivUrl($requestData);
 
             if($response) {
-                $paymentTable = new Application_Model_DbTable_Orders();
 
-                $isAlreadyExist = $paymentTable->getPayKeyFromOrder($bookingId);
+                $isAlreadyExist = $subscriptionTable->getPayKeyFromOrder($newId);
 
                 if(!$isAlreadyExist) {
                     $data = array(
-                        'payer_id' => Zend_Auth::getInstance()->getIdentity()->id,
-                        'seller_id' => $teacherId,
-                        'booking_id' => $bookingId,
+                        'user_id' => Zend_Auth::getInstance()->getIdentity()->id,
                         'aimya_profit' => $aimyaProfit,
-                        'teacher_profit' => $userProfit,
                         'pay_key' => $response['pay_key'],
                         'status' => 'pending',
                         'created_at' => date('Y-m-d H:i:s'),
                         'updated_at' => date('Y-m-d H:i:s')
                     );
 
-                    $paymentTable->addPayment($data);
+                    $subscriptionTable->createSubscription($data);
                 }
 
                 $this->redirect($response['url']);
             } else {
-                $this->redirect('/lesson/index');
+                $this->redirect('/payment');
             }
         } else {
             $this->_helper->flashMessenger->addMessage(array('failure'=>'Problem with parameters'));
