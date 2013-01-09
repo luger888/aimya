@@ -22,7 +22,7 @@ package com.aimialesson.model
 		private var _remainingTime:int = 0;
 		[Bindable(Event=Time.REMAINING_TIME_CHANGED)]
 		public function set remainingTime ( value : int ) : void {
-			if (_remainingTime == 0 && value > 0 ){
+			if (_remainingTime == 0 && value >= 0 ){
 				initWarnings(value);
 			}
 			_remainingTime = value;

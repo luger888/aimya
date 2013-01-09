@@ -21,6 +21,8 @@ package com.aimialesson.model
 		
 		public var texts_loaded:Boolean = false;
 		
+		public var isServer:Boolean = false;
+		
 		private var _fsMode:Boolean = false;
 		[Bindable(Event=Main.FS_MODE_CHANGED)]
 		public function set fsMode ( value : Boolean ) : void {

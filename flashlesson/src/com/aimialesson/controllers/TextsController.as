@@ -22,6 +22,7 @@ package com.aimialesson.controllers
 	public class TextsController extends EventDispatcher
 	{
 		public const text_xml_url:String = "/flash/lessontexts.xml";
+		//public const text_xml_url:String = "lessontexts.xml";
 		private var loader:URLLoader = new URLLoader();
 		public var textsXML:XML;
 	
@@ -37,6 +38,7 @@ package com.aimialesson.controllers
 			loader.addEventListener(IOErrorEvent.IO_ERROR, onIOError);
 			loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError);
 			var urlRequest:URLRequest = new URLRequest(Actions.getInstance().domain + text_xml_url);
+			//var urlRequest:URLRequest = new URLRequest(text_xml_url);
 			/*var obj:Object = new Object();
 			if (User.getInstance().sessionID){
 				obj.PHPSESSID = User.getInstance().sessionID;

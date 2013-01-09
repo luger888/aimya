@@ -9,6 +9,7 @@ package com.aimialesson.controllers
 
 	[Event (name="timeIsOut", type="com.aimialesson.events.AppEvent")]
 	[Event (name="connectInitComplete", type="com.aimialesson.events.AppEvent")]
+	[Event (name="changeScreenState", type="com.aimialesson.events.AppEvent")]
 	[Event (name="sharedPresentationUploaded", type="com.aimialesson.events.SharedObjectEvent")]
 	public class MainController extends EventDispatcher
 	{
@@ -99,7 +100,12 @@ package com.aimialesson.controllers
 			}
 			if (parameters.userRole){
 				debug ("userRole:" + parameters.userRole);
-				User.getInstance().userRoleID = parameters.userRole;
+				if (parameters.userRole == User.SERVER){
+					Main.getInstance().isServer = true;
+					User.getInstance().userRoleID = User.STUDENT;
+				} else {
+					User.getInstance().userRoleID = parameters.userRole;
+				}
 			}
 			if (parameters.partnerName){
 				User.getInstance().partnerName = parameters.partnerName;
@@ -177,7 +183,8 @@ package com.aimialesson.controllers
 			Main.getInstance().lesson_finished = true;
 			mediaController.closeConnect();
 			if(Main.getInstance().fsMode)
-				soController.setSOProperty('screenMode' + User.getInstance().userID, (!Main.getInstance().fsMode).toString());
+				this.dispatchEvent( new AppEvent ( AppEvent.CHANGE_SCREEN_STATE ) );
+//				soController.setSOProperty('screenMode' + User.getInstance().userID, (!Main.getInstance().fsMode).toString());
 		}
 		
 		public function onTextChatEvent ( event : NotesEvent ) : void {
