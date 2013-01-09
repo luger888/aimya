@@ -72,6 +72,15 @@ $(document).ready(function () {
             $("input[name='birthday']").val(dateText);
         }
     });
+
+    $('#fromPeriod').datepicker({ dateFormat:'yy-mm-dd',
+        changeMonth:true,
+        changeYear:true,
+        yearRange:"1910:2012" }).val();
+    $('#toPeriod').datepicker({ dateFormat:'yy-mm-dd',
+        changeMonth:true,
+        changeYear:true,
+        yearRange:"1910:2012" }).val();
     /* END DatePicker jquery UI */
 
     /* TABS with COOKIES jquery UI */
@@ -258,6 +267,20 @@ $(document).ready(function () {
         });
         return false;
     }
+
+//LESSON DETAILS//
+    $("#notes-dialog").dialog({
+        autoOpen:false,
+        height: 'auto',
+        width:450,
+        modal:true,
+        resizable:false,
+        close:function () {
+
+        }
+    });
+
+    // END LESSON DETAILS//
 });
 //function uploadify(){
 //    //$(function() {
@@ -431,3 +454,26 @@ function setDefaultTimezone() {
 
 
 
+function getNotes(e,id){
+    var pathName = $('#current_url').val();
+    jQuery("body").append('<div class="loadingIcon"></div>');
+    $.ajax({
+        url:pathName + "/lesson/correspondence",
+        type:"post",
+        data:{
+            'lesson_id':id
+        },
+        success:function (result) {
+            jQuery('.loadingIcon').remove();
+            $("#notes-dialog").dialog("open");
+            $('.notesWindow').html(result.notes);
+            var parent = $(e).parents('tr');
+            var focusName = parent.find('.focus');
+            var dateLesson = parent.find('.date');
+            $('.focusDialog').html(focusName.text());
+            $('.dateDialog').html(dateLesson.text());
+            $('.note:nth-child(even)').append('<div class ="smallSeparatorBot"></div>');
+            $('.note:nth-child(even)').prepend('<div class ="smallSeparatorTop"></div>');
+        }
+    });
+}

@@ -45,7 +45,7 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
 
         #allow to user
         $acl->allow(self::STUDENT , 'user', array('logout', 'timezone'));
-        $acl->allow(self::STUDENT , 'lesson', array('index', 'details', 'join', 'upload'));
+        $acl->allow(self::STUDENT , 'lesson', array('index', 'details', 'join', 'upload', 'notes', 'correspondence'));
         $acl->allow(self::STUDENT , 'account', array('index', 'features', 'online', 'offline'));
         $acl->allow(self::STUDENT , 'resume', array('index'));
         $acl->allow(self::STUDENT , 'friends', array('list', 'send'));

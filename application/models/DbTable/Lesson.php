@@ -137,12 +137,24 @@ class Application_Model_DbTable_Lesson extends Application_Model_DbTable_Abstrac
 
         $data = $this->getAdapter()->select()
             ->from($this->_name)
-            ->joinLeft('booking', 'booking.id = lessons.booking_id', array('booking.focus_name', 'booking.notes', 'booking.video', 'booking.feedback'))
+            ->joinLeft('booking', 'booking.id = lessons.booking_id', array('booking.started_at', 'booking.focus_name', 'booking.notes', 'booking.video', 'booking.feedback'))
             ->where('(' . $this->getAdapter()->quoteInto('creator_id=?' , $userId) . ' OR ' . $this->getAdapter()->quoteInto('partner_id=?' , $userId) .') ')
             ->where($this->getAdapter()->quoteInto('status=?' , 2))
             ->order((array('id DESC')));
 
         return $data->query()->fetchAll();
+    }
+
+    public function getLessonByUser($lessonId) {
+        $userId = (int)Zend_Auth::getInstance()->getIdentity()->id;
+
+        $data = $this->getAdapter()->select()
+            ->from($this->_name)
+            ->where('(' . $this->getAdapter()->quoteInto('creator_id=?' , $userId) . ' OR ' . $this->getAdapter()->quoteInto('partner_id=?' , $userId) .') ')
+            ->where($this->getAdapter()->quoteInto('status=?' , 2))
+            ->where($this->getAdapter()->quoteInto('id=?' , (int)$lessonId));
+
+        return $data->query()->fetch();
     }
 
 }

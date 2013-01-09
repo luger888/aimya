@@ -4,6 +4,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
     private $videoCost = 3;
     private $notesCost = 2;
     private $feedbackCost = 2;
+    private $subscriptionCost = 30;
 
     public function init()
     {
@@ -150,65 +151,43 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
     public function subscribeAction()
     {
-        $payPalModel = new Application_Model_PayPal();
-        $gateway = $payPalModel->getGateway();
+        $period = $this->getRequest()->getParam('period');
 
-        $obj = new Aimya_PayPal_RecurringPayment;
+        if(isset($period)) {
+            $payPalModel = new Application_Model_PayPal();
 
-        $obj->environment = $gateway['testMode'];	// or 'beta-sandbox' or 'live'
-        $obj->paymentType = urlencode('Authorization');				// or 'Sale' or 'Order'
-
-        // Set request-specific fields.
-        $obj->startDate = urlencode("2013-01-04T0:0:0");
-        $obj->billingPeriod = urlencode("Month");				// or "Day", "Week", "SemiMonth", "Year"
-        $obj->billingFreq = urlencode("1");						// combination of this and billingPeriod must be at most a year
-        $obj->paymentAmount = urlencode('30');
-        $obj->totalBillingCycles = urlencode('10');
-        $obj->currencyID = urlencode('USD');							// or other currency code ('GBP', 'EUR', 'JPY', 'CAD', 'AUD')
-
-        /* PAYPAL API  DETAILS */
-        $obj->API_UserName = urlencode($gateway['apiUsername']);
-        $obj->API_Password = urlencode($gateway['apiPassword']);
-        $obj->API_Signature = urlencode($gateway['apiSignature']);
-        $obj->API_Endpoint = "https://api-3t.sandbox.paypal.com/nvp";
-
-        /*SET SUCCESS AND FAIL URL*/
-        $obj->returnURL = urlencode($gateway['returnUrl']);
-        $obj->cancelURL = urlencode($gateway['cancelUrl']);
+            $xml = $payPalModel->generateSubscriptionXml($period, $this->subscriptionCost);
 
 
-        if(!$_GET['task']) {
-            $task="setExpressCheckout"; //set initial task as Express Checkout
-        } else {
-            $task=$_GET['task'];
-        }
+            $response = $payPalModel->getAdaptivUrl($xml);
 
-        switch($task)
-        {
-            case "setExpressCheckout":
-                $obj->setExpressCheckout();
-                exit;
-            case "getExpressCheckout":
-                $result = $obj->getExpressCheckout();
-                if($result['ACK'] == 'Success') {
-                    if($this->getRequest()->getParam('userId')){
-                        $subscriptionTable = new Application_Model_DbTable_Subscriptions();
-                        $ifExistAccount = $subscriptionTable->getSubscription($this->getRequest()->getParam('userId'));
+            if($response) {
+                $paymentTable = new Application_Model_DbTable_Orders();
 
-                        if($ifExistAccount) {
-                            $subscriptionTable->updateSubscription($ifExistAccount['id'], 'paid');
-                        } else {
-                            $subscriptionTable->createSubscription($this->getRequest()->getParam('userId'), $obj->paymentAmount);
-                        }
-                    } else {
-                        echo 'fail';
-                        die;
-                    }
+                $isAlreadyExist = $paymentTable->getPayKeyFromOrder($bookingId);
+
+                if(!$isAlreadyExist) {
+                    $data = array(
+                        'payer_id' => Zend_Auth::getInstance()->getIdentity()->id,
+                        'seller_id' => $teacherId,
+                        'booking_id' => $bookingId,
+                        'aimya_profit' => $aimyaProfit,
+                        'teacher_profit' => $userProfit,
+                        'pay_key' => $response['pay_key'],
+                        'status' => 'pending',
+                        'created_at' => date('Y-m-d H:i:s'),
+                        'updated_at' => date('Y-m-d H:i:s')
+                    );
+
+                    $paymentTable->addPayment($data);
                 }
-                exit;
-            case "error":
-                echo "setExpress checkout failed";
-                exit;
+
+                $this->redirect($response['url']);
+            } else {
+                $this->redirect('/lesson/index');
+            }
+        } else {
+            $this->_helper->flashMessenger->addMessage(array('failure'=>'Problem with parameters'));
         }
     }
 
