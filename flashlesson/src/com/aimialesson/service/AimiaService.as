@@ -25,7 +25,7 @@ package com.aimialesson.service
 	{
 		
 		private var aimiaService:HTTPService;
-		private const REQUEST_DELAY:int = 1000;
+		private const REQUEST_DELAY:int = 3000;
 		private var timer:Timer = new Timer(REQUEST_DELAY);
 		private var urlLoader:URLLoader = new URLLoader();
 		protected var callUrl:String; 
@@ -68,7 +68,7 @@ package com.aimialesson.service
 			
 			if (!event.result){
 				debug ("wrong format!");
-				timer.removeEventListener(TimerEvent.TIMER,aimiaService.send);
+//				timer.removeEventListener(TimerEvent.TIMER,aimiaService.send);
 				return;
 			} 
 			var result:Object = JSON.parse(event.result as String);
