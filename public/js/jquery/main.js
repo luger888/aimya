@@ -82,7 +82,7 @@ $(document).ready(function () {
         changeYear:true,
         yearRange:"1910:2012" }).val();
     /* END DatePicker jquery UI */
-
+    $('#starsBlock').raty();//stars rating
     /* TABS with COOKIES jquery UI */
     $(function () {
         var cookieName, $tabs, stickyTab;
@@ -468,12 +468,54 @@ function getNotes(e,id){
             $("#notes-dialog").dialog("open");
             $('.notesWindow').html(result.notes);
             var parent = $(e).parents('tr');
+            var id = parent.find('input[type=hidden]').val();
+
             var focusName = parent.find('.focus');
             var dateLesson = parent.find('.date');
             $('.focusDialog').html(focusName.text());
             $('.dateDialog').html(dateLesson.text());
             $('.note:nth-child(even)').append('<div class ="smallSeparatorBot"></div>');
             $('.note:nth-child(even)').prepend('<div class ="smallSeparatorTop"></div>');
+            $('.dialogFooter').prepend('<input type="hidden" name="les_id" value = "'+id+'">');
+            $('.timeLeftSpan').html(result.date + ' ');
+            if(result.review){
+                $('#sendRating').remove();
+                $('.timeLeft').remove();
+                $('.comment').html('Comment: '+ result.review);
+                $('#starsBlock').raty({
+                    readOnly : true,
+                    score    : result.rate
+                });
+            }
+        }
+    });
+}
+
+function sendRating(e){
+    var pathName = $('#current_url').val();
+    var parent = $(e).parents('.dialogFooter');
+    var id = parent.find('input[name=les_id]').val();
+    var rating = parent.find('input[name=score]').val();
+    var review = parent.find('input.rateInput').val();
+    jQuery("body").append('<div class="loadingIcon"></div>');
+    $.ajax({
+        url:pathName + "/lesson/review",
+        type:"post",
+        data:{
+            'lesson_id':id,
+            'rating':rating,
+            'review':review
+        },
+        success:function (result) {
+            jQuery('.loadingIcon').remove();
+                if(result.success){
+                    $('.comment').html('Comment: '+ review);
+                    $('#starsBlock').raty({
+                        readOnly : true,
+                        score    : rating
+                    });
+                    $(e).remove();
+                }
         }
     });
 }

@@ -1,3 +1,5 @@
+.titleInfo .degreee
+
 /*=============================================
   Page
 =============================================*/
@@ -1854,6 +1856,7 @@ float:right;
 }
 .note{
     padding: 3px 0 3px 8px;
+    list-style: none;
 }
 .note p{
     padding: 0;
@@ -1873,8 +1876,8 @@ float:right;
     float:left;
 }
 .notes .rateInput{
-    margin: 0 0 15px 15px;
-    width: 337px;
+    margin: 0 0 15px 26px;
+    width: 327px;
 }
 .smallSeparatorBot {
     background: url("../images/elem/smallSeparator.png") no-repeat scroll center 0 transparent;
@@ -1896,6 +1899,11 @@ float:right;
 .dialogFooter .button{
     padding: 0 25px 2px;
     font: 12px dosis-semibold-middle;
+}
+
+.dialogFooter .starsBlock, .dialogFooter .rate{
+    float:left;
+    margin-right: 10px;
 }
 /** ********************* user profile tab ***************************************************************/
 
