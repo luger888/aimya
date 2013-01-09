@@ -159,6 +159,8 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
             $subscriptionTable = new Application_Model_DbTable_Subscriptions();
 
             $aimyaProfit = $period * $this->subscriptionCost;
+            $activeTo = date('Y-m-d h:i:s', strtotime("+$period month"));
+
             $lastId = $subscriptionTable->getAdapter()->lastInsertId();
 
             $requestData = $payPalModel->generateSubscriptionXml($lastId, $aimyaProfit);
@@ -175,6 +177,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
                         'aimya_profit' => $aimyaProfit,
                         'pay_key' => $response['pay_key'],
                         'status' => 'pending',
+                        'active_to' => $activeTo,
                         'created_at' => date('Y-m-d H:i:s'),
                         'updated_at' => date('Y-m-d H:i:s')
                     );
