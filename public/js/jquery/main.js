@@ -236,7 +236,13 @@ $(document).ready(function () {
             url:pathName + "/booking/count",
             type:"get",
             success:function (result) {
-                var bookingCount = parseInt(result.bookingCount);
+                var bookingCount = parseInt(result.bookingCount.id);
+
+                if (bookingCount > 0) {
+                    if ($(".newBookingCount").length) $(".newBookingCount").remove();
+                    var inboxLi = $('.leftNavigation').find($('a[href="' + pathName + '/booking"]')).parent();
+                    inboxLi.append('<span class="newBookingCount">' + bookingCount + '</span>')
+                }
 
                 if (result.bookingPaymentStatus.booking) {
                     var paymentTd = $('td.payment');
@@ -293,13 +299,6 @@ $(document).ready(function () {
 
                         window.location.href =  pathName + '/lesson/join/';
                     }
-                }
-
-
-                if (bookingCount > 0) {
-                    if ($(".newBookingCount").length) $(".newBookingCount").remove();
-                    var inboxLi = $('.leftNavigation').find($('a[href="' + pathName + '/booking"]')).parent();
-                    inboxLi.append('<span class="newBookingCount">' + bookingCount + '</span>')
                 }
             }
         });

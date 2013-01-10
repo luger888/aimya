@@ -264,7 +264,7 @@ class LessonController extends Zend_Controller_Action
                 $lessonModel = new Application_Model_Lesson();
 
                 $imageArray = $lessonModel->getImages($lessonId);
-                if (isset($imageArray) && !empty($imageArray)) {
+                if ($imageArray && !empty($imageArray)) {
                     $this->view->answer = 'success';
                     $this->view->comment = '';
                     $this->view->data = $imageArray;
