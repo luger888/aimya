@@ -10,7 +10,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
     {
         $this->_helper->layout->setLayout("layoutInner");
         $this->_helper->AjaxContext()
-            //->addActionContext('ajax', 'json')
+            ->addActionContext('remained', 'json')
             ->initContext('json');
     }
 
@@ -252,6 +252,24 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
     public function unsubscribeAction()
     {
 
+    }
+
+    public function remainedAction() {
+
+        $subscriptionTable = new Application_Model_DbTable_Subscriptions();
+        $activeTo = $subscriptionTable->getTimeLeft();
+
+        if($activeTo['active_to'] == NULL && Zend_Auth::getInstance()->getIdentity()->role > 1) {
+            $subscriptionTable->setDefaultPeriod();
+        }
+
+        $now = time(); // or your date as well
+        $your_date = strtotime($activeTo['active_to']);
+        $datediff = $now - $your_date;
+        $timeLeft = floor($datediff/(60*60*24));
+        $timeLeft = substr($timeLeft, 1);
+
+        $this->view->timeLeft = $timeLeft;
     }
 
     public function writeLog($data)
