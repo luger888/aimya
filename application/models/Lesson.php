@@ -27,7 +27,11 @@ class Application_Model_Lesson
         $presPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR;
         @mkdir($presPath);
 
-        //$this->write(' / ' . $identityId . " / \n");
+        $files = glob('path/to/temp/*'); // get all file names
+        foreach($files as $file){ // iterate files
+            if(is_file($file))
+                unlink($file); // delete file
+        }
 
         return $presPath;
     }

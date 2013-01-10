@@ -242,6 +242,12 @@ class LessonController extends Zend_Controller_Action
             @mkdir($presPath . 'jpges' . DIRECTORY_SEPARATOR);
             $imgsPath = $presPath . 'jpges' . DIRECTORY_SEPARATOR;
 
+            $files = glob($imgsPath . '*'); // get all file names
+            foreach($files as $file){ // iterate files
+                if(is_file($file))
+                    unlink($file); // delete file
+            }
+
             //$this->write(' / ' . "{$imgsPath}file.jpg" . " / \n");
 
             exec("convert {$pdfPath} {$imgsPath}file.jpg");
