@@ -7,6 +7,7 @@ package com.aimialesson.controllers
 	import flash.events.*;
 	import flash.media.Camera;
 	import flash.media.Microphone;
+	import flash.media.MicrophoneEnhancedOptions;
 	import flash.media.SoundTransform;
 	import flash.net.NetStream;
 
@@ -94,10 +95,12 @@ package com.aimialesson.controllers
 				Media.getInstance().mic.soundTransform = transform;
 				Media.getInstance().mic.setLoopBack(false);
 //				Media.getInstance().mic.encodeQuality = 10;
-//				Media.getInstance().mic.setUseEchoSuppression(true);
+				Media.getInstance().mic.setUseEchoSuppression(true);
 				Media.getInstance().mic.gain = 50;
-				Media.getInstance().mic.rate = 11;
-				Media.getInstance().mic.setSilenceLevel( 10, 2000 );
+				Media.getInstance().mic.rate = 16;
+				Media.getInstance().mic.codec = "Speex";
+				Media.getInstance().mic.noiseSuppressionLevel = -15; 
+				Media.getInstance().mic.setSilenceLevel( 0);
 				Media.getInstance().myNetStream.attachAudio(Media.getInstance().mic);
 			}
 			//Media.getInstance().myNetStream.bufferTime = 2;
