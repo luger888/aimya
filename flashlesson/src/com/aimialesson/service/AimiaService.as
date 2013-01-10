@@ -39,7 +39,6 @@ package com.aimialesson.service
 			if (User.getInstance().sessionID){
 				params.PHPSESSID = User.getInstance().sessionID;
 			}
-			timer.addEventListener(TimerEvent.TIMER,aimiaService.send);
 		}
 		
 		public function makeCall():void{
@@ -54,6 +53,7 @@ package com.aimialesson.service
 			aimiaService.headers['X-Requested-With'] = "XMLHttpRequest";
 			aimiaService.addEventListener(ResultEvent.RESULT, aimiaService_resultHandler);
 			aimiaService.addEventListener(FaultEvent.FAULT, aimiaService_faultHandler);
+			timer.addEventListener(TimerEvent.TIMER,aimiaService.send);
 			timer.start();
 			aimiaService.send();
 		} 

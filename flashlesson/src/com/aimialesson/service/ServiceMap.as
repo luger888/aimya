@@ -27,6 +27,7 @@ package com.aimialesson.service
 		}
 		
 		public function init () : void {
+			debug ( "ServiceMap : init ");
 			presentationService = new PresentationService();
 			presentationService.addEventListener(ServiceEvent.GET_PRESENTATION_IMAGES_RESULT, onServiceEvent);
 			userIsOnlineService = new UserIsOnlineService();
