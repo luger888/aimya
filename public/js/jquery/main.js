@@ -41,7 +41,45 @@ $(document).ready(function () {
         $(this).find('.txt').appendTo($(this).find('.radioBoxWrapper'));
     });
 
+    jQuery.fn.shorten = function(settings) {
+        var config = {
+            showChars : 100,
+            ellipsesText : "...",
+            moreText : "more",
+            lessText : "less"
+        };
 
+        if (settings) {
+            $.extend(config, settings);
+        }
+
+        $('.morelink').live('click', function() {
+            var $this = $(this);
+            if ($this.hasClass('less')) {
+                $this.removeClass('less');
+                $this.html(config.moreText);
+            } else {
+                $this.addClass('less');
+                $this.html(config.lessText);
+            }
+            $this.parent().prev().toggle();
+            $this.prev().toggle();
+            return false;
+        });
+
+        return this.each(function() {
+            var $this = $(this);
+
+            var content = $this.html();
+            if (content.length > config.showChars) {
+                var c = content.substr(0, config.showChars);
+                var h = content.substr(config.showChars , content.length - config.showChars);
+                var html = c + '<span class="moreellipses">' + config.ellipsesText + '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="javascript:void(0)" class="morelink">' + config.moreText + '</a></span>';
+                $this.html(html);
+                $(".morecontent span").hide();
+            }
+        });
+    };
 //---Styling uploads--------------------------------------------------------------------------------
     $('#uploadAvatar').click(function () {
         $('#avatar').click();
@@ -198,7 +236,13 @@ $(document).ready(function () {
             url:pathName + "/booking/count",
             type:"get",
             success:function (result) {
-                var bookingCount = parseInt(result.bookingCount);
+                var bookingCount = parseInt(result.bookingCount.id);
+
+                if (bookingCount > 0) {
+                    if ($(".newBookingCount").length) $(".newBookingCount").remove();
+                    var inboxLi = $('.leftNavigation').find($('a[href="' + pathName + '/booking"]')).parent();
+                    inboxLi.append('<span class="newBookingCount">' + bookingCount + '</span>')
+                }
 
                 if (result.bookingPaymentStatus.booking) {
                     var paymentTd = $('td.payment');
@@ -255,13 +299,6 @@ $(document).ready(function () {
 
                         window.location.href =  pathName + '/lesson/join/';
                     }
-                }
-
-
-                if (bookingCount > 0) {
-                    if ($(".newBookingCount").length) $(".newBookingCount").remove();
-                    var inboxLi = $('.leftNavigation').find($('a[href="' + pathName + '/booking"]')).parent();
-                    inboxLi.append('<span class="newBookingCount">' + bookingCount + '</span>')
                 }
             }
         });
