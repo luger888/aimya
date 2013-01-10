@@ -52,7 +52,7 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         $acl->allow(self::STUDENT , 'message', array('inbox', 'send', 'sent', 'trash', 'archived'));
         $acl->allow(self::STUDENT , 'search', array('search'));
         $acl->allow(self::STUDENT , 'booking', array('index'));
-        $acl->allow(self::TEACHER , 'payment', array('index', 'pay', 'email', 'subscribe', 'unsubscribe'));
+        $acl->allow(self::TEACHER , 'payment', array('index', 'pay', 'email', 'subscribe', 'unsubscribe', 'remained'));
         $acl->deny(self::STUDENT ,  'user', array('index', 'registration', 'login'));
         $acl->allow(self::TEACHER , 'lesson', array('setup', 'upload'));
 
@@ -63,7 +63,7 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         $acl->allow(self::GUEST , 'user', array('index','registration', 'login'));
         $acl->allow(self::GUEST , 'error', array('index'));
         $acl->allow(self::GUEST , 'test', array('index', 'paypal', 'response', 'responsenew'));
-        $acl->allow(self::GUEST , 'payment', array('ipn', 'subscribenew', 'subscribe'));
+        $acl->allow(self::GUEST , 'payment', array('ipn', 'subscribenew'));
         #allow to admin
         $acl->allow(self::ADMIN , 'admin', array('index', 'payments', 'metrics'));
         $acl->allow(self::ADMIN , 'search', array('reindex'));
