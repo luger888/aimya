@@ -25,7 +25,7 @@ package com.aimialesson.service
 	{
 		
 		private var aimiaService:HTTPService;
-		private const REQUEST_DELAY:int = 3000;
+		private const REQUEST_DELAY:int = 5000;
 		private var timer:Timer = new Timer(REQUEST_DELAY);
 		private var urlLoader:URLLoader = new URLLoader();
 		protected var callUrl:String; 
@@ -39,24 +39,28 @@ package com.aimialesson.service
 			if (User.getInstance().sessionID){
 				params.PHPSESSID = User.getInstance().sessionID;
 			}
-			timer.addEventListener(TimerEvent.TIMER,aimiaService.send);
 		}
 		
 		public function makeCall():void{
 			debug ("AimiaService:makeCall:" + callUrl);
-			aimiaService = new HTTPService();
-			aimiaService.request = params;
 			for (var i in params){
 				debug (i+":"+params[i]);
 			}
+			timer.addEventListener(TimerEvent.TIMER,makeCall2);
+			timer.start();
+			makeCall2(null);
+		} 
+		
+		private function makeCall2(event:TimerEvent):void {
+			aimiaService = new HTTPService();
+			aimiaService.request = params;
 			aimiaService.method = URLRequestMethod.POST;
 			aimiaService.url = callUrl;
 			aimiaService.headers['X-Requested-With'] = "XMLHttpRequest";
 			aimiaService.addEventListener(ResultEvent.RESULT, aimiaService_resultHandler);
 			aimiaService.addEventListener(FaultEvent.FAULT, aimiaService_faultHandler);
-			timer.start();
 			aimiaService.send();
-		} 
+		}
 		
 		protected function onSuccess ( result : Object ) : void {
 		}

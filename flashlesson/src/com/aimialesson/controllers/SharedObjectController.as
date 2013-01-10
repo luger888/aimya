@@ -126,7 +126,7 @@ package com.aimialesson.controllers
 		private var initialized:Boolean = false;
 		private function soOnSync(event:SyncEvent):void
 		{
-			debug("soOnSync");
+			//debug("soOnSync");
 			if (!initialized){
 				initStates();
 				initialized = true;
@@ -135,7 +135,7 @@ package com.aimialesson.controllers
 			var changedList:Array = event.changeList;
 			
 			for (var i:int = 0; i < changedList.length; i++){
-				debug(changedList[i].name);
+				//debug(changedList[i].name);
 				switch (changedList[i].name){
 					case "chatMessageData"	: 	if (so.data['chatMessageData'] != null){
 													Notes.getInstance().newLineData = so.data['chatMessageData'];
