@@ -47,6 +47,7 @@
 			[Bindable]
 			private var _percent:int = 0;
 			public function set percent ( value : Number ) : void {
+				if (value > 1) value = 1; 
 				_percent = Math.round(value * 100);
 				var t:Number = value*360;
 				var angleR:Number = t*Math.PI/180.0;				
