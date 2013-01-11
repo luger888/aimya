@@ -350,7 +350,13 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
     public function onlineAction() {
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
         $onlineUserTable = new Application_Model_DbTable_OnlineUsers();
-        $onlineUserTable->makeOnline($userId);
+        $res = $onlineUserTable->makeOnline($userId);
+        if($res) {
+            $this->view->answer = 'success';
+        } else {
+            $this->view->answer = 'error';
+            $this->view->data = 'problem with mysql request';
+        }
     }
 
 }
