@@ -41,6 +41,7 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         $acl->addResource('search');
         $acl->addResource('booking');
         $acl->addResource('payment');
+        $acl->addResource('review');
         $acl->addResource('test');
 
         #allow to user
@@ -55,7 +56,7 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         $acl->allow(self::TEACHER , 'payment', array('index', 'pay', 'email', 'subscribe', 'unsubscribe', 'remained'));
         $acl->deny(self::STUDENT ,  'user', array('index', 'registration', 'login'));
         $acl->allow(self::TEACHER , 'lesson', array('setup', 'upload'));
-
+        $acl->allow(self::TEACHER , 'review', array('index'));
         #allow to guest
         $acl->deny(self::GUEST , 'user', array('logout'));
         $acl->deny(self::GUEST , 'account', array('index'));

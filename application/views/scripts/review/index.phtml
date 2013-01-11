@@ -1,0 +1,114 @@
+<div class="mainContainer userRelationsTab reviews clearfix">
+    <div class="shadowSeparator clearfix">
+        <div class="shadowSeparatorBox clearfix">
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <td> <?php echo $this->translate('ranking') ?></td>
+                    <td> <?php echo $this->translate('user name') ?></td>
+                    <td> <?php echo $this->translate('service') ?></td>
+                    <td> <?php echo $this->translate('date/time') ?></td>
+                    <td> <?php echo $this->translate('rate') ?></td>
+                    <td> <?php echo $this->translate('comment') ?></td>
+
+                </tr>
+                </thead>
+                <tbody>
+
+                <?php if(isset($reviews)){
+
+
+                foreach ($reviews as $review): ?>
+                    <?php //Zend_Debug::dump($booking)?>
+                <tr>
+                    <td class="username">
+                        <input type="hidden" id="booking_<?php echo $review['booking']['id']?>"
+                               value="<?php echo $review['booking']['id']?>">
+                        <?php echo $review['userData']['firstname'] . ' ' . $review['userData']['lastname']?>
+                    </td>
+                    <td class="startTime"><?php echo $review['booking']['startingTime']; ?></td>
+                    <td class="focusName"><?php echo $review['booking']['focus_name']; ?></td>
+                    <td class="center">
+                        <?php if ($review['booking']['video']) {
+                        echo '<span class ="checBoxGrey"></span>';
+                    } else {
+                        echo '<span class ="checBoxGrey empty"></span>';
+                    } ?>
+                    </td>
+                    <td class="center">
+                        <?php if ($review['booking']['feedback']) {
+                        echo '<span class ="checBoxGrey"></span>';
+                    } else {
+                        echo '<span class ="checBoxGrey empty"></span>';
+                    } ?>
+                    </td>
+                    <td class="center">
+                        <?php if ($review['booking']['notes']) {
+                        echo '<span class ="checBoxGrey"></span>';
+                    } else {
+                        echo '<span class ="checBoxGrey empty"></span>';
+                    } ?>
+                    </td>
+
+
+                    <td class="center payment">
+                        <!--CASE: Send pay request BUTTON-->
+                        <?php if(isset($review['booking']['sendRequest'])): ?>
+                        <input type="button" class="button send"
+                               onclick="payRequest(<?php echo $review['userData']['id'];?>,
+                                   <?php echo $review['booking']['id'];?>,
+                                   this);"
+                               value= <?php echo $this->translate('Send'); ?>>
+                        <?php endif;?>
+                        <!--CASE: Pending-->
+                        <?php if(isset($review['booking']['pending'])): ?>
+                        <span class="result pending">Pending</span>
+                        <?php endif;?>
+                        <!--CASE: Paid-->
+                        <?php if(isset($review['booking']['paid'])): ?>
+                        <span class="result success">Paid</span>
+                        <?php endif;?>
+
+                        <!--CASE: PAY BUTTON-->
+                        <?php if(isset($review['booking']['pay'])): ?>
+                        <form method="POST" id='pay_<?php echo $review['booking']['id'];?>'
+                              action="<?php echo $this->baseUrl() . '/payment/pay/'?>">
+                            <input name="teacher_id" type="hidden" value="<?php echo $review['userData']['id'];?>">
+                            <input name="booking_id" type="hidden" value="<?php echo $review['booking']['id'];?>">
+                            <a href="#" id="<?php echo $review['userData']['id'];?>"
+                               onclick="jQuery('#pay_<?php echo $review['booking']['id'];?>').submit()"><span
+                                class="button-2 play">Pay</span></a>
+                        </form>
+                        <?php endif;?>
+                        <?php if(isset($review['booking']['waiting'])): ?>
+                        <span class="result">waiting</span>
+                        <?php endif;?>
+                    </td><!--END payment -->
+                    <td class="center action">
+                        <!--CASE: START LESSON BUTTON-->
+                        <?php if(isset($review['booking']['startLesson'])): ?>
+                        <form method="POST" id='start_session_<?php echo $review['booking']['id'];?>'
+                              action="<?php echo $this->baseUrl() . '/lesson/setup/'?>">
+                            <input name="student_id" type="hidden" value="<?php echo $review['userData']['id'];?>">
+                            <input name="booking_id" type="hidden" value="<?php echo $review['booking']['id'];?>">
+                            <a href="#" id="<?php echo $review['userData']['id'];?>"
+                               onclick="jQuery('#start_session_<?php echo $review['booking']['id'];?>').submit()"><span
+                                class="button-2 play">Start</span></a>
+                        </form>
+
+                        <?php endif;?>
+                        <?php if(isset($review['booking']['join'])): ?>
+                        <span class ="button-2 play">Join</span>
+                        <?php endif;?>
+                    </td>
+
+                </tr>
+                    <?php endforeach;
+                }?>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

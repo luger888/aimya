@@ -89,6 +89,17 @@ return array(
                 'resource'      => 'payment',
                 'privilege'     => 'index',
             ),
+            array
+            (
+                'label' => 'CUSTOMER REVIEWS',
+                'tag' => 'leftMenu',
+                'route' => 'default',
+                'module' => 'default',
+                'controller' => 'review',
+                'action' => 'index',
+                'resource'      => 'review',
+                'privilege'     => 'index',
+            ),
 			array(
                 'label' => 'Inbox',
                 'tag' => 'messageMenu',
