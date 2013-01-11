@@ -17,7 +17,7 @@ class Application_Model_DbTable_OnlineUsers extends Application_Model_DbTable_Ab
         $where = array(
             $this->getAdapter()->quoteInto('user_id=?', $userId)
         );
-        $this->update($data, $where);
+        return $this->update($data, $where);
     }
 
     public function makeOffline($userId)

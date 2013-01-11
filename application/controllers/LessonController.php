@@ -402,7 +402,11 @@ class LessonController extends Zend_Controller_Action
                     $this->view->answer = 'success';
                 } else {
                     $this->view->answer = 'error';
+                    $this->view->data = 'problem with parameters';
                 }
+            } else {
+                $this->view->answer = 'error';
+                $this->view->data = 'student doesn\'t pay for notes saving';
             }
         }
     }

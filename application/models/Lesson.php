@@ -27,12 +27,6 @@ class Application_Model_Lesson
         $presPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR;
         @mkdir($presPath);
 
-        $files = glob('path/to/temp/*'); // get all file names
-        foreach($files as $file){ // iterate files
-            if(is_file($file))
-                unlink($file); // delete file
-        }
-
         return $presPath;
     }
 
@@ -84,6 +78,7 @@ class Application_Model_Lesson
                         $search = realpath(APPLICATION_PATH . '/../public/');
                         $cutedPath = str_replace($search, "", $imagesPath);
                         $imagePath[] = $cutedPath . $name;
+                        natsort($imagePath);
                     }
                 }
 
