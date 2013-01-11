@@ -15,13 +15,14 @@ class Aimya_View_Helper_FlashMessages extends Zend_View_Helper_Abstract
         $output = '';
 
         if (!empty($messages)) {
-            $output .= '<ul id="messages" class="alert alert-block">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            <h4>Warning!</h4>';
+
             foreach ($messages as $message) {
-                $output .= '<li class="' . key($message) . '">' . current($message) . '</li>';
+                $output .= '<div id="messages" class="alert alert-block"><div class ="'.key($message).'">
+            <button type="button" class="close" data-dismiss="alert"></button>
+            <div class="header">'.key($message).'!</div>';
+                $output .= '<div>' . current($message) . '</div>';
             }
-            $output .= '</ul>';
+            $output .= '</div></div>';
         }
 
         return $output;

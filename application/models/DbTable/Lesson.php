@@ -17,7 +17,7 @@ class Application_Model_DbTable_Lesson extends Application_Model_DbTable_Abstrac
             'created_at' => date('Y-m-d H:m:s')
         );
 
-        $this->insert($data);
+        return $this->insert($data);
     }
 
     public function checkAvailableLesson($userId){
