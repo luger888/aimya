@@ -207,7 +207,7 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
 
 
 
-            if ($this->getRequest()->getParam('education')) {
+            if ($this->getRequest()->getParam('resumeMain')) {
 
                 $dbTable = new Application_Model_DbTable_Profile();
 
