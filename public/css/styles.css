@@ -1531,23 +1531,12 @@ input.button-2 {
     -webkit-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2); /* Для Safari и Chrome */
     box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
 }
-.alert{
-    font: 11px Arial !important;
-    color:#ad4c4c !important;
-    background-color: #fae9e9 !important;
-    border: 1px solid #ebb7b7 !important;
-    border-radius:2px;
-}
 
-.alert .flash-warning{
-    font: 700 11px Arial !important;
-    color: #981919 !important;
-}
 
-.alert .close{
+
+.alert .close, .alert-block .close{
     background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat;
-    top: -17px !important;
-    left: 30px !important;
+
     line-height: 20px;
     position: relative;
     width:12px;
@@ -1583,7 +1572,7 @@ input.button-2 {
     font: 11px Arial !important;
     color:#ad4c4c !important;
     background-color: #fae9e9 !important;
-    border: 1px solid #ebb7b7 !important;
+    /*border: 1px solid #ebb7b7 !important;*/
     border-radius:2px;
 }
 
@@ -1592,16 +1581,7 @@ input.button-2 {
     color: #981919 !important;
 }
 
-.alert .close{
-    background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat;
-    top: -17px !important;
-    left: 30px !important;
-    line-height: 20px;
-    position: relative;
-    width:12px;
-    height: 12px;
-    opacity: 1 !important;
-}
+
 /*JSMessenger, attention (yellow)*/
 .attention{
     font: 11px Arial !important;
@@ -1617,8 +1597,6 @@ input.button-2 {
 }
 .attention .close {
     background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat 0 25%;
-    top: -17px !important;
-    left: 30px !important;
     line-height: 20px;
     position: relative;
     width:12px;
@@ -1633,6 +1611,7 @@ input.button-2 {
     background-color: #cce8bf !important;
     border: 1px solid #a0c58e !important;
     border-radius:2px;
+    padding: 5px;
 }
 
 .alert .success .flash-success{
@@ -1641,15 +1620,16 @@ input.button-2 {
 }
 .alert .success .close {
     background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat 33% 0;
-    top: -17px !important;
-    left: 30px !important;
     line-height: 20px;
     position: relative;
     width:12px;
     height: 12px;
     opacity: 1 !important;
+    float:right;
 }
-
+.alert-block .header{
+    text-transform: capitalize;
+}
 /*--- RESUME -----------------------------------------------------------------*/
 .resumeGeneral .shadowSeparatorBox{
     padding-top:0;

@@ -1,4 +1,9 @@
 $(document).ready(function () {
+
+    $('.alert-block .close').click(function(){
+        $(this).parents('.alert-block').remove();
+    });
+
     //timepicker
 
     $(function(){
