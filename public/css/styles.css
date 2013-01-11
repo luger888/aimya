@@ -2102,3 +2102,33 @@ float:right;
 .searchTab .shadowSeparatorBox{
     min-height:415px;
 }
+/*---timepicker----------------------------------------------------------------*/
+.android-ics .dw{
+    color:#4E5C2D !important;
+    background :none repeat scroll 0 0 #B8CD85 !important
+}
+.android-ics .dwv{
+    border-bottom: 2px solid #4E5C2D !important;
+}
+
+.android-ics .dw .dwwb{
+    background: none repeat scroll 0 0 #839A4C !important;
+}
+.android-ics .dwwbm:after{
+    border-color: transparent transparent #3A4422  !important;
+}
+ .android-ics .dwwbp:after{
+     border-color: #3A4422 transparent transparent  !important;
+}
+
+.android-ics .dw .dwwol{
+    border-bottom: 1px solid #555555 !important;
+    border-top: 1px solid #333333 !important;
+}
+.android-ics  .dwbw {
+    background-color: #6C803F !important;
+
+}
+.dwa{
+    background: transparent;
+}
