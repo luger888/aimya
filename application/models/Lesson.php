@@ -21,11 +21,17 @@ class Application_Model_Lesson
 
         $identityId = Zend_Auth::getInstance()->getIdentity()->id;
         @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users');
+        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $identityId);
+        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $lessonId);
         @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'presentation');
         $presPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR;
         @mkdir($presPath);
 
-        //$this->write(' / ' . $identityId . " / \n");
+        $files = glob('path/to/temp/*'); // get all file names
+        foreach($files as $file){ // iterate files
+            if(is_file($file))
+                unlink($file); // delete file
+        }
 
         return $presPath;
     }
@@ -69,18 +75,22 @@ class Application_Model_Lesson
         $lessonData = $lessonTable->getItem($lessonId);
         $imagesPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $lessonData['creator_id'] . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . 'jpges' . DIRECTORY_SEPARATOR;
         //$imagesPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . "1" . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'jpges' . DIRECTORY_SEPARATOR;
-        $imageNames = scandir($imagesPath);
-        if($imageNames) {
-            $imagePath = array();
-            foreach ($imageNames as $name) {
-                if (strlen($name) > 3) {
-                    $search = realpath(APPLICATION_PATH . '/../public/');
-                    $cutedPath = str_replace($search, "", $imagesPath);
-                    $imagePath[] = $cutedPath . $name;
+        if(is_dir($imagesPath)) {
+            $imageNames = scandir($imagesPath);
+            if($imageNames && is_array($imageNames)) {
+                $imagePath = array();
+                foreach ($imageNames as $name) {
+                    if (strlen($name) > 3) {
+                        $search = realpath(APPLICATION_PATH . '/../public/');
+                        $cutedPath = str_replace($search, "", $imagesPath);
+                        $imagePath[] = $cutedPath . $name;
+                    }
                 }
-            }
 
-            return $imagePath;
+                return $imagePath;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
