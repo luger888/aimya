@@ -79,6 +79,7 @@ class Application_Model_Lesson
                         $cutedPath = str_replace($search, "", $imagesPath);
                         $imagePath[] = $cutedPath . $name;
                         natsort($imagePath);
+                        $imagePath = array_merge(array(),$imagePath);
                     }
                 }
 
