@@ -46,7 +46,7 @@ package com.aimialesson.service
 		public function onPresentationEvent ( event : PresentationEvent ) : void {
 			debug ( "ServiceMap : onPresentationEvent : " + event.type );
 			if (event.type == PresentationEvent.PRESENTATION_UPLOADED){
-				presentationService.makeCall();
+				presentationService.makeCallLater();
 			}
 		}
 		

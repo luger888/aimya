@@ -41,6 +41,15 @@ package com.aimialesson.service
 			}
 		}
 		
+		public function makeCallLater():void{
+			debug ("AimiaService:makeCall:" + callUrl);
+			for (var i in params){
+				debug (i+":"+params[i]);
+			}
+			timer.addEventListener(TimerEvent.TIMER,makeCall2);
+			timer.start();
+		}
+		
 		public function makeCall():void{
 			debug ("AimiaService:makeCall:" + callUrl);
 			for (var i in params){
