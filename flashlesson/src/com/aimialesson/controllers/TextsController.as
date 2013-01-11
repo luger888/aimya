@@ -50,7 +50,7 @@ package com.aimialesson.controllers
 		private function onLoaded(e:Event) : void {
 			debug ("onLoaded");
 			textsXML = new XML(e.target.data);
-			debug (textsXML.toString());
+			//debug (textsXML.toString());
 			Texts.getInstance().ruTexts = getLangTextsAC (Texts.RU);
 			Texts.getInstance().enTexts = getLangTextsAC (Texts.EN);
 			Texts.getInstance().jaTexts = getLangTextsAC (Texts.JA);
@@ -60,13 +60,13 @@ package com.aimialesson.controllers
 		}
 		
 		private function getLangTextsAC ( lang : String ) : Array {
-			debug ("getLangTextsAC:" + lang);
+			//debug ("getLangTextsAC:" + lang);
 			var texts:Array = new Array();
 		//	var textsXMLLC:XMLListCollection = textsXML.childNodes;
 			for each( var text:XML in textsXML..text){
-				debug (text.toString());
-				debug (text.@id.toString());
-				debug (text[lang].toString());
+				//debug (text.toString());
+				//debug (text.@id.toString());
+				//debug (text[lang].toString());
 				texts[text.@id.toString()] = text[lang].toString();
 			} 
 			return texts;
