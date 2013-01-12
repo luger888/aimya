@@ -71,8 +71,15 @@ class LessonController extends Zend_Controller_Action
                 'status' => 1,
             );
 
-            $lessonModel = new Application_Model_DbTable_Lesson();
-            $lessonModel->startLesson($dataToInsert);
+            $lessonTable = new Application_Model_DbTable_Lesson();
+            $bookingTable = new Application_Model_DbTable_Booking();
+            $booking = $bookingTable->getItem($bookingId);
+
+            $res = $lessonTable->startLesson($dataToInsert);
+            if ($booking['feedback']) {
+                $lessonFeadbackTable = new Application_Model_DbTable_LessonFeedback();
+                $lessonFeadbackTable->createDefaultFeedback($res, Zend_Auth::getInstance()->getIdentity()->id);
+            }
 
             $this->_helper->redirector('join', 'lesson');
         }
@@ -395,7 +402,11 @@ class LessonController extends Zend_Controller_Action
                     $this->view->answer = 'success';
                 } else {
                     $this->view->answer = 'error';
+                    $this->view->data = 'problem with parameters';
                 }
+            } else {
+                $this->view->answer = 'error';
+                $this->view->data = 'student doesn\'t pay for notes saving';
             }
         }
     }

@@ -46,7 +46,7 @@ package com.aimialesson.service
 		public function onPresentationEvent ( event : PresentationEvent ) : void {
 			debug ( "ServiceMap : onPresentationEvent : " + event.type );
 			if (event.type == PresentationEvent.PRESENTATION_UPLOADED){
-				presentationService.makeCall();
+				presentationService.makeCallLater();
 			}
 		}
 		
@@ -74,7 +74,7 @@ package com.aimialesson.service
 		public function onSharedObjectEvent ( event : SharedObjectEvent ) : void {
 			debug ( "ServiceMap : onSOEvent : " + event.type );
 			switch (event.type) {
-				case (SharedObjectEvent.SHARED_PRESENTATION_UPLOADED) : 	presentationService.makeCall();
+				case (SharedObjectEvent.SHARED_PRESENTATION_UPLOADED) : 	presentationService.makeCallLater();//presentationService.makeCall();
 																break;
 			}
 		}

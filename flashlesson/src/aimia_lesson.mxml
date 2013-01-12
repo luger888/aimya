@@ -100,7 +100,7 @@
 				mainUI.addEventListener(PresentationEvent.MOVE_TO_LEFT, mainController.onPresentationEvent);
 				mainUI.addEventListener(PresentationEvent.MOVE_TO_RIGHT, mainController.onPresentationEvent);
 				mainUI.addEventListener(PresentationEvent.PRESENTATION_UPLOADED, mainController.onPresentationEvent);
-				mainUI.addEventListener(PresentationEvent.PRESENTATION_UPLOADED, seviceMap.onPresentationEvent);
+				//mainUI.addEventListener(PresentationEvent.PRESENTATION_UPLOADED, seviceMap.onPresentationEvent);
 				mainUI.addEventListener(NotesEvent.ADD_NEW_LINE, mainController.onTextChatEvent);
 				mainUI.addEventListener(NotesEvent.ADD_NEW_LINE, seviceMap.onNotesEvent);
 				mainUI.addEventListener(AppEvent.START_SESSION, seviceMap.onAppEvent);

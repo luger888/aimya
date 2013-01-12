@@ -288,6 +288,7 @@ package com.aimialesson.UI.views
 				case (Time.SHOW_SECOND_WARNING)	:	timeWarningUI.minValue = Time.SECOND_WARNING_VALUE;
 													break;
 			}
+			PopUpManager.removePopUp(timeWarningUI);
 			PopUpManager.addPopUp(timeWarningUI, this, true);
 			PopUpManager.centerPopUp(timeWarningUI);
 		}
