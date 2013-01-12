@@ -126,6 +126,12 @@ $(document).ready(function () {
         yearRange:"1910:2012" }).val();
     /* END DatePicker jquery UI */
     $('#starsBlock').raty();//stars rating
+    $('.stars').raty({
+        score: function() {
+            return $(this).attr('data-rating');
+        },
+        readOnly:true
+    });
     /* TABS with COOKIES jquery UI */
     $(function () {
         var cookieName, $tabs, stickyTab;

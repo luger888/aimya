@@ -2113,3 +2113,26 @@ float:right;
 .dwa{
     background: transparent;
 }
+
+/********** REVIEWS ************/
+#mainContent .starsUL li{
+    float:none;
+}
+
+.userRelationsTab.reviews h1{
+    padding:10px 0;
+}
+.starsUL{
+    padding-left:0;
+}
+.userRelationsTab.reviews table tbody td{
+    padding-left:5px;
+}
+
+.userRelationsTab.reviews .shadowSeparatorBoxSmall{
+    padding-top:3px;
+}
+.userRelationsTab.reviews .shadowSeparator{
+    margin-bottom: 28px;
+    margin-top: 7px;
+}
