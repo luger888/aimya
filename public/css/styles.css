@@ -2128,7 +2128,9 @@ float:right;
 .userRelationsTab.reviews table tbody td{
     padding-left:5px;
 }
-
+.userRelationsTab.reviews .stars{
+    padding-right: 10px;
+}
 .userRelationsTab.reviews .shadowSeparatorBoxSmall{
     padding-top:3px;
 }
