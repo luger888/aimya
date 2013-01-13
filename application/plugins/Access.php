@@ -37,6 +37,7 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         $acl->addResource('message');
         $acl->addResource('resume');
         $acl->addResource('admin');
+        $acl->addResource('feedback');
         $acl->addResource('friends');
         $acl->addResource('search');
         $acl->addResource('booking');
@@ -53,6 +54,7 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         $acl->allow(self::STUDENT , 'message', array('inbox', 'send', 'sent', 'trash', 'archived'));
         $acl->allow(self::STUDENT , 'search', array('search'));
         $acl->allow(self::STUDENT , 'booking', array('index'));
+        $acl->allow(self::STUDENT , 'feedback', array('create', 'form', 'view'));
         $acl->allow(self::TEACHER , 'payment', array('index', 'pay', 'email', 'subscribe', 'unsubscribe', 'remained'));
         $acl->deny(self::STUDENT ,  'user', array('index', 'registration', 'login'));
         $acl->allow(self::TEACHER , 'lesson', array('setup', 'upload'));

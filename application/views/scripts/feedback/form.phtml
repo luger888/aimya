@@ -1,0 +1,8 @@
+<?php $feedbackForm = $this->feedbackForm;?>
+<form action="<?php echo $this->baseUrl()?>/feedback/create" id='feedbackForm' method="post">
+    <?php echo $feedbackForm->lessonId; ?>
+    <?php echo $feedbackForm->feedbackContent; ?>
+    <?php echo $feedbackForm->saveFeedback; ?>
+</form>
+
+

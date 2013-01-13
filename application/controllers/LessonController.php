@@ -200,10 +200,16 @@ class LessonController extends Zend_Controller_Action
         $lessonTable = new Application_Model_DbTable_Lesson();
         $studentLessons = $lessonTable->getStudentLessons();
         $filterForm = new Application_Form_LessonFilter();
+        $feedbackForm = new Application_Form_Feedback();
+        $feedbackTable = new Application_Model_DbTable_LessonFeedback();
+        $bookingTable = new Application_Model_DbTable_Booking();
+
+        $this->view->feedbackForm = $feedbackForm;
         $this->view->filterForm = $filterForm;
         $this->view->studentLessons = $studentLessons;
         $this->view->review = new Application_Model_DbTable_Review();
-
+        $this->view->feedbackTable = new $feedbackTable;
+        $this->view->bookingTable = new $bookingTable;
 
     }
 
