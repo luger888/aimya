@@ -7,7 +7,9 @@ package com.aimialesson.controllers
 	import flash.events.*;
 	import flash.media.Camera;
 	import flash.media.Microphone;
+	import flash.media.MicrophoneEnhancedMode;
 	import flash.media.MicrophoneEnhancedOptions;
+	import flash.media.SoundCodec;
 	import flash.media.SoundTransform;
 	import flash.net.NetStream;
 
@@ -41,7 +43,7 @@ package com.aimialesson.controllers
 			Media.getInstance().partnerNetStream.client = this;
 			Media.getInstance().partnerNetStream.maxPauseBufferTime = 0.1;
 			Media.getInstance().partnerNetStream.bufferTime = 0.02;
-			Media.getInstance().partnerNetStream.bufferTimeMax = 1;
+			Media.getInstance().partnerNetStream.bufferTimeMax = 0.2;
 			Media.getInstance().partnerNetStream.addEventListener( NetStatusEvent.NET_STATUS, netStatusHandler );
 			Media.getInstance().partnerNetStream.addEventListener( IOErrorEvent.IO_ERROR, netIOError );
 			Media.getInstance().partnerNetStream.addEventListener( AsyncErrorEvent.ASYNC_ERROR, netASyncError );
@@ -75,6 +77,11 @@ package com.aimialesson.controllers
 			Media.getInstance().cam = Camera.getCamera();
 			//Media.getInstance().mic = Microphone.getMicrophone(); 
 			Media.getInstance().mic = Microphone.getEnhancedMicrophone();
+			var options:MicrophoneEnhancedOptions = Media.getInstance().mic.enhancedOptions; 
+			//options.mode = MicrophoneEnhancedMode.FULL_DUPLEX; 
+			//options.echoPath = 256;
+		//	options.autoGain = true;
+			//options.nonLinearProcessing = true;
 			if (Media.getInstance().mic == null){
 				Media.getInstance().mic = Microphone.getMicrophone();
 			}
@@ -97,10 +104,11 @@ package com.aimialesson.controllers
 //				Media.getInstance().mic.encodeQuality = 10;
 				Media.getInstance().mic.setUseEchoSuppression(true);
 				Media.getInstance().mic.gain = 50;
-				Media.getInstance().mic.rate = 16;
-				Media.getInstance().mic.codec = "Speex";
-				Media.getInstance().mic.noiseSuppressionLevel = -15; 
-				Media.getInstance().mic.setSilenceLevel( 0);
+				Media.getInstance().mic.rate = 11;
+				Media.getInstance().mic.codec = SoundCodec.SPEEX;
+				Media.getInstance().mic.noiseSuppressionLevel = -30;
+				Media.getInstance().mic.framesPerPacket = 1;
+				Media.getInstance().mic.setSilenceLevel( 0, 2000);
 				Media.getInstance().myNetStream.attachAudio(Media.getInstance().mic);
 			}
 			//Media.getInstance().myNetStream.bufferTime = 2;

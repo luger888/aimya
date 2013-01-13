@@ -100,6 +100,17 @@ return array(
                 'resource'      => 'review',
                 'privilege'     => 'index',
             ),
+            array
+            (
+                'label' => 'MY ADMIN',
+                'tag' => 'leftMenu',
+                'route' => 'default',
+                'module' => 'default',
+                'controller' => 'admin',
+                'action' => 'index',
+                'resource'      => 'admin',
+                'privilege'     => 'index',
+            ),
 			array(
                 'label' => 'Inbox',
                 'tag' => 'messageMenu',
@@ -170,6 +181,58 @@ return array(
                 'resource'      => 'lesson',
                 'privilege'     => 'details',
             ),
+
+            array(
+                'label' => 'Aimya Content',
+                'tag' => 'adminMenu',
+                'route' => 'default',
+                'module' => 'default',
+                'controller' => 'admin',
+                'action' => 'index',
+                'resource'      => 'admin',
+                'privilege'     => 'index',
+            ),
+            array(
+                'label' => 'Users',
+                'tag' => 'adminMenu',
+                'route' => 'default',
+                'module' => 'default',
+                'controller' => 'admin',
+                'action' => 'users',
+                'resource'      => 'admin',
+                'privilege'     => 'users',
+            ),
+            array(
+                'label' => 'Account payments',
+                'tag' => 'adminMenu',
+                'route' => 'default',
+                'module' => 'default',
+                'controller' => 'admin',
+                'action' => 'payments',
+                'resource'      => 'admin',
+                'privilege'     => 'payments',
+            ),
+            array(
+                'label' => 'Static pages',
+                'tag' => 'adminMenu',
+                'route' => 'default',
+                'module' => 'default',
+                'controller' => 'admin',
+                'action' => 'static',
+                'resource'      => 'admin',
+                'privilege'     => 'static',
+            ),
+            array(
+                'label' => 'Metrics',
+                'tag' => 'adminMenu',
+                'route' => 'default',
+                'module' => 'default',
+                'controller' => 'admin',
+                'action' => 'metrics',
+                'resource'      => 'admin',
+                'privilege'     => 'metrics',
+            ),
         )
+
     )
 );
