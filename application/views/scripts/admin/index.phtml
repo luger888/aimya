@@ -1,8 +1,30 @@
 <?php echo $this->partial('partials/adminNav.phtml') ?>
 <div class="mainContainer admin clearfix">
-    <div class="shadowSeparator clearfix">
-        <div class="shadowSeparatorBox clearfix">
+    <div class="shadowSeparatorBox clearfix">
+        <div class="categories floatLeft">
+            <div class="smallSeparatorTop">
+                <h1><?php echo $this->translate('define category:');?></h1>
+                <?php foreach ($this->categories as $cat) {
+                if ($cat['status'] == 1) {
+                    echo '<div class="formRow clearfix"><div class="category floatLeft">' . $cat['title'] . '</div><div class ="delete floatLeft"><input type="button" class = "button-2 delete"  onclick="removeCat(this, ' . $cat['id'] . ');return false;"></div></div>';
+                }
+            }
+                ?>
+                <div class="buttonsRow">
+                    <input type='button' id = "saveCat" class="button-2 save floatRight disable" value='save'
+                           onclick="saveCat(this);return false;">
+                    <input type='button' class="button-2 add floatRight" value='add'
+                           onclick="addCat(this);return false;">
+
+                </div>
+            </div>
+        </div>
+        <div class="duration floatLeft">
+            <div class="smallSeparatorTop">
+                <h1><?php echo $this->translate('define time period:');?></h1>
+            </div>
         </div>
     </div>
 </div>
+
 

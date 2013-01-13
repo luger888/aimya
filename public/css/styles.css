@@ -2138,3 +2138,28 @@ float:right;
     margin-bottom: 28px;
     margin-top: 7px;
 }
+
+/************************************** ADMIN *************************/
+.admin .categories, .admin .duration{
+    margin-right: 30px;
+    width: 370px;
+}
+.admin .categories .formRow{
+    padding:8px 0;
+}
+.admin .categories .category{
+    width:340px;
+}
+.admin .categories .formRow:nth-child(even){
+    background-color: #FCFCFC;
+}
+.admin h1{
+    padding-bottom: 15px;
+}
+.admin .categories .buttonsRow .button-2{
+    margin-right:13px;
+}
+.admin .categories .newCat{
+    width:300px;
+    margin-right: 28px;
+}
