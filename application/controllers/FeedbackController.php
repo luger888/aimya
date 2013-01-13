@@ -48,7 +48,7 @@ class FeedbackController extends Aimya_Controller_BaseController
                 $datediff = $your_date - $now;
                 $reviewDate = floor($datediff / (60 * 60 * 24) + 10);
                 $this->view->review = $review['review'];
-                $this->view->rate = $review['rate'];
+                $this->view->rate = $review['rating'];
                 $this->view->date = $reviewDate;
                 $this->view->feedback = $feedback;
                 $html = $this->view->render('feedback/view.phtml');

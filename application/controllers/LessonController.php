@@ -434,7 +434,7 @@ class LessonController extends Zend_Controller_Action
             $datediff = $your_date - $now;
             $reviewDate = floor($datediff / (60 * 60 * 24) + 10);
             $this->view->review = $review['review'];
-            $this->view->rate = $review['rate'];
+            $this->view->rate = $review['rating'];
             $this->view->date = $reviewDate;
             $this->view->notes = $fileContent;
         }
@@ -483,11 +483,15 @@ class LessonController extends Zend_Controller_Action
         if ($this->getRequest()->isXmlHttpRequest()) {
             $userId = Zend_Auth::getInstance()->getIdentity()->id;
             if ($this->getRequest()->getParam('rating')) {
+                $rating = $this->getRequest()->getParam('rating');
+                $reviewId = $this->getRequest()->getParam('review');
+                $lessonId = $this->getRequest()->getParam('lesson_id');
                 $reviewTable = new Application_Model_DbTable_Review();
-                $review = $reviewTable->getReviews($this->getRequest()->getParam('lesson_id'));
+                $review = $reviewTable->getReviews($lessonId);
                 if (!$review) {
-
-                    $result = $reviewTable->createReview($this->getRequest()->getParam('rating'), $this->getRequest()->getParam('review'), $this->getRequest()->getParam('lesson_id'), $userId);
+                    $lessonTable = new Application_Model_DbTable_Lesson();
+                    $lesson = $lessonTable->getItem($lessonId);
+                    $result = $reviewTable->createReview($rating, $reviewId, $lessonId, $userId, $lesson['booking_id'], $lesson['creator_id']);
                     if ($result) {
                         $this->view->success = 1;
                     }

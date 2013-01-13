@@ -5,10 +5,11 @@ class Application_Model_DbTable_Review extends Application_Model_DbTable_Abstrac
     protected $_name = 'reviews';
 
 
-    public function createReview($rating=NULL, $review=NULL, $lesson_id, $user_id)
+    public function createReview($rating=NULL, $review=NULL, $lesson_id, $user_id, $bookingId, $creatorId)
     {
         $data = array(
-
+            'booking_id' => (int)$bookingId,
+            'recipient_id' => (int)$creatorId,
             'user_id' => (int)$user_id,
             'lesson_id' => (int)$lesson_id,
             'rating' => (int)$rating,
