@@ -1,0 +1,16 @@
+<div class="notes">
+    <div class="header clearfix">
+        <div class="focus cc floatLeft"><?php echo $this->translate('focus') . ': <span class ="focusDialog"></span>'; ?></div>
+        <div class="date  cc floatRight"><?php echo $this->translate('date') . ': <span class ="dateDialog"></span>' ?></div>
+    </div>
+    <div class="notesWindow"><?php //$this->feedback->content; ?></div>
+    <div class ="dialogFooter">
+        <div class ="timeLeft">You have <span class ="timeLeftSpan"></span><?php echo $this->translate('days left to rate this lesson')?>!</div>
+        <?php //if($this->view->review->getReviews()):?>
+        <div class ="rate cc"><?php echo $this->translate('rate lesson')?>:</div>
+        <div id ="starsBlockFeedback">
+        </div>
+        <div class ="comment cc"><?php echo $this->translate('comment')?>:<input class ="rateInput" type ="text"></div>
+        <input type = "button" id = "sendRating" class ="button floatRight" value ="OK" onClick="sendRating(this);">
+    </div>
+</div>

@@ -20,7 +20,7 @@ class Application_Model_DbTable_LessonFeedback extends Application_Model_DbTable
 
     }
 
-    public function createFeedback($lessonId, $teacherId, $content){
+    public function createFeedback($content, $teacherId, $lessonId){
 
         $data = array(
             'status' => 1,

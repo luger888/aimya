@@ -126,6 +126,12 @@ $(document).ready(function () {
         yearRange:"1910:2012" }).val();
     /* END DatePicker jquery UI */
     $('#starsBlock').raty();//stars rating
+    $('.stars').raty({
+        score: function() {
+            return $(this).attr('data-rating');
+        },
+        readOnly:true
+    });
     /* TABS with COOKIES jquery UI */
     $(function () {
         var cookieName, $tabs, stickyTab;
@@ -312,6 +318,17 @@ $(document).ready(function () {
 
 //LESSON DETAILS//
     $("#notes-dialog").dialog({
+        autoOpen:false,
+        height: 'auto',
+        width:450,
+        modal:true,
+        resizable:false,
+        close:function () {
+
+        }
+    });
+
+    $("#details-dialog").dialog({
         autoOpen:false,
         height: 'auto',
         width:450,
@@ -528,6 +545,76 @@ function getNotes(e,id){
                     readOnly : true,
                     score    : result.rate
                 });
+            }
+        }
+    });
+}
+
+function openFeedback(e, lessonId){
+
+    var pathName = $('#current_url').val();
+    jQuery("body").append('<div class="loadingIcon"></div>');
+    $.ajax({
+        url:pathName + "/feedback/view",
+        data: {
+            'lessonId': lessonId
+        },
+        type:"post",
+        success:function (result) {
+            if(result.feedback.content){
+
+                element = $(result.html);
+
+
+                element.find('#starsBlockFeedback').raty();
+                var parent = $(e).parents('tr');
+                var focusName = parent.find('.focus');
+                var dateLesson = parent.find('.date');
+                element.find('.notesWindow').html(result.feedback.content);
+                var id = parent.find('input[type=hidden]').val();
+                element.find('.focusDialog').html(focusName.text());
+                element.find('.dateDialog').html(result.feedback.created_at);
+
+                jQuery('.loadingIcon').remove();
+                //element.find('#feedbackDiv').html(result.feedback.content);
+                //alert(result.feedback.content);
+                $("#details-dialog").html(element);
+                $("#details-dialog").dialog("open");
+                element.find('.dialogFooter').prepend('<input type="hidden" name="les_id" value = "'+id+'">');
+                element.find('.timeLeftSpan').html(result.date + ' ');
+                if(result.review){
+                    element.find('#sendRating').remove();
+                    element.find('.timeLeft').remove();
+                    element.find('.comment').html('Comment: '+ result.review);
+                    element.find('#starsBlockFeedback').raty({
+                        readOnly : true,
+                        score    : result.rate
+                    });
+                }
+                return false;
+            }
+        }
+    });
+}
+
+function getFeedbackForm(e, lessonId){
+
+    var pathName = $('#current_url').val();
+    jQuery("body").append('<div class="loadingIcon"></div>');
+    $.ajax({
+        url:pathName + "/feedback/form",
+        data: {
+            'lessonId': lessonId
+        },
+        type:"post",
+        success:function (result) {
+            jQuery('.loadingIcon').remove();
+            if(result.html){
+                element = $(result.html)
+                jQuery('.loadingIcon').remove();
+                $("#details-dialog").html(element)
+                $("#details-dialog").dialog("open");
+                return false;
             }
         }
     });
