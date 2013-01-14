@@ -203,8 +203,8 @@ class LessonController extends Zend_Controller_Action
             die('server error');
         }*/
         $lessonModel = new Application_Model_Lesson();
-        $lessonTable = new Application_Model_DbTable_Lesson();
-        $activeLesson = $lessonTable->checkAvailableLesson(Zend_Auth::getInstance()->getIdentity()->id);
+        //$lessonTable = new Application_Model_DbTable_Lesson();
+        //$activeLesson = $lessonTable->checkAvailableLesson(Zend_Auth::getInstance()->getIdentity()->id);
         //$videoPath = $lessonModel->createVideoPath($res, $activeLesson['creator_id']);
 
         $openDispay = $lessonModel->openDisplay();
