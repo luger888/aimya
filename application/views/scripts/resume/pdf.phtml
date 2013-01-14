@@ -1,9 +1,9 @@
 <?php
 
-
+$pdfString = 'lol';
 $pdf = new Zend_Pdf();
 
-
+$pdf = Zend_Pdf::parse($pdfString, 1);
 
 // Load a PDF document from a string
 
