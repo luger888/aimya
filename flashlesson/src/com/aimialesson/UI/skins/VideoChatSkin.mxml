@@ -11,8 +11,8 @@
 			import com.aimialesson.UI.skins.elements.AimiaVideoSkin;
 			import com.aimialesson.model.Main;
 			import com.aimialesson.model.Media;
-			import com.aimialesson.model.User;
 			import com.aimialesson.model.Texts;
+			import com.aimialesson.model.User;
 			
 			import mx.events.FlexEvent;
 			
@@ -42,9 +42,12 @@
 				if (Main.getInstance().debugger != null)
 					Main.getInstance().debugger.text += mes + "\n";
 			}
-
+			
+			[Bindable]
+			private var partnerCamPaused:Boolean;
 		]]>
 	</fx:Script>
+	<!--fx:Binding source="{Media.getInstance().partnerCamPaused}" destination="partnerCamPaused" /-->
 	<s:VGroup>
 		<!--s:RichText text="{(Texts.getInstance().texts[Texts.VIDEO_CHAT] as String).toUpperCase()}" styleName="HeaderStyle" /-->
 		<s:VGroup id="chatGroup" gap="15">

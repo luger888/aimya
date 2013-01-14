@@ -95,4 +95,22 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
         $insert = $this->insert($data);
 
     }
+    public function getSubscriptionsIncome(){
+        $lastMonth = date("Y-m-d H:i:s", strtotime("-1 month"));
+        $income = array();
+        $total = $this->getAdapter()->select()
+            ->from($this->_name, array('sum(aimya_profit) as sum'))
+            ->where('status=?', 'paid');
+        $result = $total->query()->fetch();
+
+        $totalLM = $this->getAdapter()->select()
+            ->from($this->_name, array('sum(aimya_profit) as sum'))
+            ->where('status=?', 'paid')
+            ->where('created_at>=?', $lastMonth);
+        $resultLM = $totalLM->query()->fetch();
+
+        $income['allTime']['subscrIncome'] = $result;
+        $income['lastMonth']['subscrIncome'] = $resultLM;
+        return $income;
+    }
 }

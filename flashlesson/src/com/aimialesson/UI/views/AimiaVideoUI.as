@@ -106,6 +106,7 @@ package com.aimialesson.UI.views
 		private var _muteCam:Boolean;
 		[Bindable(Event="muteCamChange")]
 		public function set muteCam ( value : Boolean ) : void {
+			debug('AimiaVideoUI:muteCam ' + value.toString());
 			_muteCam = value;
 			dispatchEvent( new Event("muteCamChange") );
 		}

@@ -60,7 +60,8 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
     #Approve by e-mail
 
-    public function approve($mail, $query){
+    public function approve($mail, $query)
+    {
 
         $array = array(
 
@@ -72,13 +73,14 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         $where[] = $this->getAdapter()->quoteInto('email=?', $mail);
         $where[] = $this->getAdapter()->quoteInto('confirmation_token=?', $query);
 
-        return $this->update($array , $where);
+        return $this->update($array, $where);
 
     }
 
     #recoverPass
 
-    public function recoverPass($data){
+    public function recoverPass($data)
+    {
 
         $array = array(
 
@@ -92,17 +94,19 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
     }
 
-    public function getUser($user_id){
+    public function getUser($user_id)
+    {
         $user_id = (int)$user_id;
         $row = $this->fetchRow($this->select()->where('id = ?', $user_id));
-        if(!$row) {
+        if (!$row) {
             throw new Exception("There is no element with ID: $user_id");
         }
 
         return $row->toArray();
     }
 
-    public function getUserInfo($user_id){
+    public function getUserInfo($user_id)
+    {
         $data = $this->select()
             ->from('user', array('id', 'firstname', 'lastname', 'username', 'timezone', 'role'))
             ->where('id=?', (int)$user_id);
@@ -115,7 +119,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
         $data = array(
 
-            'firstname'=> preg_replace('#<(.*?)>#', '', $array['firstname']),
+            'firstname' => preg_replace('#<(.*?)>#', '', $array['firstname']),
             'lastname' => preg_replace('#<(.*?)>#', '', $array['lastname']),
             'gender' => preg_replace('#<(.*?)>#', '', $array['gender']),
             'timezone' => preg_replace('#<(.*?)>#', '', $array['timezone']),
@@ -128,7 +132,9 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         $this->update($data, $where);
 
     }
-    public function getLatestFeatured($role='0', $category = 'All', $offset = 0, $count = 5){
+
+    public function getLatestFeatured($role = '0', $category = 'All', $offset = 0, $count = 5)
+    {
 
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
 
@@ -138,24 +144,24 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
             ->having('user_id = sd.user_id');
 
         $data = $this->getAdapter()->select()
-            ->from(array('sd'=>'service_detail'), array('sd.lesson_category', 'sd.updated_at'))
+            ->from(array('sd' => 'service_detail'), array('sd.lesson_category', 'sd.updated_at'))
             ->joinLeft('user', 'user.id = sd.user_id', array('user.id', 'user.firstname', 'user.lastname', 'user.username', 'user.role', 'user.timezone'))
             ->joinLeft('account', 'account.user_id = sd.user_id', array('account.add_info'))
             ->where('sd.updated_at=?', $subQuery);
 
-            if(Zend_Auth::getInstance()->getIdentity()->role == 1) $role = 2;
-            if($role !== '0'){
-                $data  ->where('user.role=?', $role);
-            }
-            if($category!=='All'){
-                $data->where('sd.lesson_category=?', $category);
-            }
-            $data->order('sd.updated_at desc')
+        if (Zend_Auth::getInstance()->getIdentity()->role == 1) $role = 2;
+        if ($role !== '0') {
+            $data->where('user.role=?', $role);
+        }
+        if ($category !== 'All') {
+            $data->where('sd.lesson_category=?', $category);
+        }
+        $data->order('sd.updated_at desc')
             ->limit($count, $offset);
 
         $author = $data->query()->fetchAll();
 
-        foreach($author as $index=>$value){
+        foreach ($author as $index => $value) {
             $serviceOffered = $this->getAdapter()
                 ->select()
                 ->from('service_detail')
@@ -180,12 +186,13 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         return $author;
     }
 
-    public function getFullData($id){
+    public function getFullData($id)
+    {
 
         $data = $this->getAdapter()
             ->select()
             ->from($this->_name)
-            //->joinLeft('account', $where)
+        //->joinLeft('account', $where)
             ->joinLeft('account', 'account.user_id = user.id')
             ->where('user.id=?', $id);
         $services = $this->getAdapter()
@@ -227,7 +234,8 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
     }
 
-    public function getFeaturedCount($role='0', $category = 'All') {
+    public function getFeaturedCount($role = '0', $category = 'All')
+    {
 
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
 
@@ -237,18 +245,86 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
             ->having('user_id = sd.user_id');
 
         $data = $this->getAdapter()->select()
-            ->from(array('sd'=>'service_detail'), array('featuredCount' => 'count(sd.updated_at)'))
+            ->from(array('sd' => 'service_detail'), array('featuredCount' => 'count(sd.updated_at)'))
             ->joinLeft('user', 'user.id = sd.user_id', array('user.id'))
             ->where('sd.updated_at=?', $subQuery);
 
-        if(Zend_Auth::getInstance()->getIdentity()->role == 1) $role = 1;
-        if($role !== '0'){
-            $data  ->where('user.role=?', $role);
+        if (Zend_Auth::getInstance()->getIdentity()->role == 1) $role = 1;
+        if ($role !== '0') {
+            $data->where('user.role=?', $role);
         }
-        if($category!=='All'){
+        if ($category !== 'All') {
             $data->where('sd.lesson_category=?', $category);
         }
 
         return $data->query()->fetch();
+    }
+
+    public function getUsersCount()
+    {
+        $lastMonth = date("Y-m-d H:i:s", strtotime("-1 month"));
+        $usersCount = array();
+        $total = $this->getAdapter()->select()
+            ->from($this->_name, 'COUNT(*) AS COUNT');
+        $result = $total->query()->fetch();
+
+        $students = $this->getAdapter()->select()
+            ->from($this->_name, 'COUNT(*) AS COUNT')
+            ->where('role = ?', 1);
+        $studentRes = $students->query()->fetch();
+
+        $teachers = $this->getAdapter()->select()
+            ->from($this->_name, 'COUNT(*) AS COUNT')
+            ->where('role = ?', 2);
+        $teacherRes = $teachers->query()->fetch();
+
+
+        $totalLM = $this->getAdapter()->select()
+            ->from($this->_name, 'COUNT(*) AS COUNT')
+            ->where('created_at>=?', $lastMonth);
+        $resultLM = $totalLM->query()->fetch();
+
+        $studentsLM = $this->getAdapter()->select()
+            ->from($this->_name, 'COUNT(*) AS COUNT')
+            ->where('role = ?', 1)
+            ->where('created_at>=?', $lastMonth);
+
+        $studentResLM = $studentsLM->query()->fetch();
+
+        $teachersLM = $this->getAdapter()->select()
+            ->from($this->_name, 'COUNT(*) AS COUNT')
+            ->where('role = ?', 2)
+            ->where('created_at>=?', $lastMonth);
+        $teacherResLM = $teachersLM->query()->fetch();
+
+
+
+        $usersCount['allTime']['total'] = $result['COUNT'];
+        $usersCount['allTime']['students'] = $studentRes['COUNT'];
+        $usersCount['allTime']['teachers'] = $teacherRes['COUNT'];
+
+        $usersCount['lastMonth']['total'] = $resultLM['COUNT'];
+        $usersCount['lastMonth']['students'] = $studentResLM['COUNT'];
+        $usersCount['lastMonth']['teachers'] = $teacherResLM['COUNT'];
+        return $usersCount;
+    }
+
+    public function getUsers(){
+        $students = $this->getAdapter()->select()
+            ->from($this->_name, array('firstname', 'lastname', 'username', 'role', 'status'))
+        ->where('status>=?', 1);
+        return $students->query()->fetchAll();
+    }
+
+    public function changeUserStatus($id, $status){
+        $array = array(
+
+            'status' => $status
+
+        );
+
+        $where = $this->getAdapter()->quoteInto('id=?', $id);
+
+        return $this->update($array, $where);
     }
 }

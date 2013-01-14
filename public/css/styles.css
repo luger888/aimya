@@ -1,5 +1,3 @@
-.titleInfo .degreee
-
 /*=============================================
   Page
 =============================================*/
@@ -385,6 +383,12 @@ input.button-2 {
     background: url(../images/icons/block.png) no-repeat 0 3px;
 }
 .button-2.block:hover {
+    background-position: 0 -16px;
+}
+.button-2.unblock {
+    background: url(../images/icons/unblock.png) no-repeat 0 3px;
+}
+.button-2.unblock:hover {
     background-position: 0 -16px;
 }
 .button-2.add:hover {
@@ -1778,7 +1782,7 @@ float:right;
     width:150px;
 }
 .userRelationsTab.lesson td.startTime{
-    width:104px;
+    width:118px;
 }
 .userRelationsTab.lesson td.focusName{
     width:140px;
@@ -2144,22 +2148,40 @@ float:right;
     margin-right: 30px;
     width: 370px;
 }
-.admin .categories .formRow{
+.admin .categories .formRow, .admin .duration .formRow{
     padding:8px 0;
 }
-.admin .categories .category{
+.admin .categories .category, .admin .duration .category{
     width:340px;
 }
-.admin .categories .formRow:nth-child(even){
+.admin .categories .formRow:nth-child(even), .admin .duration .formRow:nth-child(even){
     background-color: #FCFCFC;
 }
 .admin h1{
     padding-bottom: 15px;
 }
-.admin .categories .buttonsRow .button-2{
+.admin .categories .buttonsRow .button-2, .admin .duration .buttonsRow .button-2{
     margin-right:13px;
 }
-.admin .categories .newCat{
+.admin .categories .newCat, .admin .duration .newCat{
     width:300px;
     margin-right: 28px;
+}
+.admin .metricItem .formRow{
+    padding:8px 0;
+}
+.admin .metricItem  h1{
+    padding-top:15px;
+}
+.admin .metricItem .head{
+    display: inline-block;
+    padding-left: 30px;
+    text-transform: capitalize;
+    width: 100px;
+}
+.admin .metricItem .formRow:nth-child(even){
+    background-color: #FCFCFC;
+}
+.userRelationsTab.admin table tbody td {
+    padding-left: 5px;
 }
