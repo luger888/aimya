@@ -1,7 +1,51 @@
 <?php
+$stylesheet = file_get_contents('./css/styles.css');
 
-$pdfString = 'lol';
-$pdf = new Zend_Pdf();
+
+$html = "<div class='resumeOnlineMain'>
+    <div class='shadowSeparator'>
+    <div class='shadowSeparatorBox'>
+
+    <div class='title'>" . $this->user['firstname'] . " " . $this->user['lastname'] . "</div>
+            <div class='titleInfo'><span
+                class='degree'> " . $this->profile['degree'] . "</span> <span class = 'language'>" . $this->profile['language'] . "</span>
+            </div>
+            ";
+
+$html .= "<h1>" . 'objective' . ":</h1>
+                <div class='textBlock'>" . $this->profile['objective'] . "</div>";
+
+if ($this->experience) {
+    foreach ($this->experience as $value) {
+        $html .= "<h1>" . $this->translate('experience') . ":</h1>
+    <div class='textBlock'>" . $value['content'] . "</div>";
+    }
+}
+if ($this->education) {
+    foreach ($this->education as $value) {
+        $html .= "<h1>" . $this->translate('education') . ":</h1>
+    <div class='textBlock'>" . $value['content'] . "</div>";
+    }
+}
+
+if ($this->skills) {
+    foreach ($this->skills as $value) {
+        $html .= "<h1>" . $this->translate('skill') . ":</h1>
+    <div class='textBlock'>" . $value['content'] . "</div>";
+    }
+}
+
+
+$html .= "</div>
+    </div>
+</div>";
+
+$mpdf = new Aimya_Mpdf_mPDF();
+$mpdf->WriteHTML($stylesheet, 1);
+$mpdf->WriteHTML($html, 2);
+$mpdf->Output();
+exit;
+
 
 $pdf = Zend_Pdf::parse($pdfString, 1);
 

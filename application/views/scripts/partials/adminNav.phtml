@@ -1,0 +1,9 @@
+<div id="tabsNavigation" class="clearfix">
+    <?php
+    echo $this->navigation()
+        ->menu()
+        ->setMaxDepth(0)
+        ->setUlClass('nav nav-tabs nav-stacked messageTabs')
+        ->render(new Aimya_Navigation($this->navigation()->findAllBy('tag', 'adminMenu', true)));
+    ?>
+</div>

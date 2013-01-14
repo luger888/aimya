@@ -13,6 +13,7 @@ package com.aimialesson.model
 		public static const USER_IS_ONLINE_CHANGE:String = "userIsOnlineChange";
 		public static const PARTNER_IS_ONLINE_CHANGE:String = "partnerIsOnlineChange";
 		
+		public static const SERVER:String = "3";
 		public static const TEACHER:String = "2";
 		public static const STUDENT:String = "1";
 		

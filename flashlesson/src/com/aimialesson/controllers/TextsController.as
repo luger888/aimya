@@ -22,6 +22,7 @@ package com.aimialesson.controllers
 	public class TextsController extends EventDispatcher
 	{
 		public const text_xml_url:String = "/flash/lessontexts.xml";
+		//public const text_xml_url:String = "lessontexts.xml";
 		private var loader:URLLoader = new URLLoader();
 		public var textsXML:XML;
 	
@@ -37,6 +38,7 @@ package com.aimialesson.controllers
 			loader.addEventListener(IOErrorEvent.IO_ERROR, onIOError);
 			loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError);
 			var urlRequest:URLRequest = new URLRequest(Actions.getInstance().domain + text_xml_url);
+			//var urlRequest:URLRequest = new URLRequest(text_xml_url);
 			/*var obj:Object = new Object();
 			if (User.getInstance().sessionID){
 				obj.PHPSESSID = User.getInstance().sessionID;
@@ -48,7 +50,7 @@ package com.aimialesson.controllers
 		private function onLoaded(e:Event) : void {
 			debug ("onLoaded");
 			textsXML = new XML(e.target.data);
-			debug (textsXML.toString());
+			//debug (textsXML.toString());
 			Texts.getInstance().ruTexts = getLangTextsAC (Texts.RU);
 			Texts.getInstance().enTexts = getLangTextsAC (Texts.EN);
 			Texts.getInstance().jaTexts = getLangTextsAC (Texts.JA);
@@ -58,13 +60,13 @@ package com.aimialesson.controllers
 		}
 		
 		private function getLangTextsAC ( lang : String ) : Array {
-			debug ("getLangTextsAC:" + lang);
+			//debug ("getLangTextsAC:" + lang);
 			var texts:Array = new Array();
 		//	var textsXMLLC:XMLListCollection = textsXML.childNodes;
 			for each( var text:XML in textsXML..text){
-				debug (text.toString());
-				debug (text.@id.toString());
-				debug (text[lang].toString());
+				//debug (text.toString());
+				//debug (text.@id.toString());
+				//debug (text[lang].toString());
 				texts[text.@id.toString()] = text[lang].toString();
 			} 
 			return texts;

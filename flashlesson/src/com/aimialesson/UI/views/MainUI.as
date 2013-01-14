@@ -4,6 +4,7 @@ package com.aimialesson.UI.views
 	import com.aimialesson.UI.views.elements.*;
 	import com.aimialesson.UI.views.windows.FinishPopUpWindow;
 	import com.aimialesson.UI.views.windows.PopUpWindow;
+	import com.aimialesson.UI.views.windows.TimeWarningWindow;
 	import com.aimialesson.events.AppEvent;
 	import com.aimialesson.events.MediaEvent;
 	import com.aimialesson.events.NotesEvent;
@@ -11,6 +12,8 @@ package com.aimialesson.UI.views
 	import com.aimialesson.events.PresentationEvent;
 	import com.aimialesson.model.Main;
 	import com.aimialesson.model.Media;
+	import com.aimialesson.model.Time;
+	import com.aimialesson.model.User;
 	
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
@@ -74,6 +77,12 @@ package com.aimialesson.UI.views
 			this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			Main.getInstance().addEventListener(Main.LESSON_FINISHED_CHANGED, onLessonFinished);
 			Media.getInstance().addEventListener(Media.CONNECTED_CHANGED, onConnectChanged);
+			if (User.getInstance().partnerRoleID == User.STUDENT)
+			{
+				Time.getInstance().addEventListener(Time.SHOW_FIRST_WARNING, showWarning);
+				Time.getInstance().addEventListener(Time.SHOW_SECOND_WARNING, showWarning);
+			}
+			
 		}
 		
 		override protected function partAdded ( partName : String, instance : Object) : void
@@ -208,6 +217,14 @@ package com.aimialesson.UI.views
 			return finishpopup; 
 		}
 		
+		private var timeWarning:TimeWarningWindow;
+		public function get timeWarningUI () : TimeWarningWindow {
+			if (!timeWarning) {
+				timeWarning = new TimeWarningWindow();
+				timeWarning.addEventListener(PopUpEvent.CLOSE, onTimeWarningEvent);
+			}
+			return timeWarning; 
+		}
 		
 		public function onConnectChanged ( event : Event ) : void {
 			debug("onConnectChanged");
@@ -249,6 +266,10 @@ package com.aimialesson.UI.views
 			PopUpManager.removePopUp(popupUI);
 		}
 		
+		private function onTimeWarningEvent ( event : PopUpEvent ) : void {
+			PopUpManager.removePopUp(timeWarningUI);
+		}
+		
 		private function onLessonFinished ( event : Event  ) : void {
 			videoChat.onLessonFinished();
 			PopUpManager.addPopUp(finishpopupUI, this, true);
@@ -258,6 +279,18 @@ package com.aimialesson.UI.views
 		private function onPresentationEvent ( event : PresentationEvent ) : void {
 			debug("MainUI:onPresentationEvent " + event.type);
 			this.dispatchEvent ( event );
+		}
+		
+		private function showWarning ( event : Event ) : void {
+			switch (event.type) {
+				case (Time.SHOW_FIRST_WARNING)	:	timeWarningUI.minValue = Time.FIRST_WARNING_VALUE;
+													break;
+				case (Time.SHOW_SECOND_WARNING)	:	timeWarningUI.minValue = Time.SECOND_WARNING_VALUE;
+													break;
+			}
+			PopUpManager.removePopUp(timeWarningUI);
+			PopUpManager.addPopUp(timeWarningUI, this, true);
+			PopUpManager.centerPopUp(timeWarningUI);
 		}
 		
 		private function onTextChatEvent ( event : NotesEvent ) : void {

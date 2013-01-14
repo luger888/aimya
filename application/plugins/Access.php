@@ -37,25 +37,28 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         $acl->addResource('message');
         $acl->addResource('resume');
         $acl->addResource('admin');
+        $acl->addResource('feedback');
         $acl->addResource('friends');
         $acl->addResource('search');
         $acl->addResource('booking');
         $acl->addResource('payment');
+        $acl->addResource('review');
         $acl->addResource('test');
 
         #allow to user
-        $acl->allow(self::STUDENT , 'user', array('logout'));
-        $acl->allow(self::STUDENT , 'lesson', array('index', 'details', 'join', 'upload'));
+        $acl->allow(self::STUDENT , 'user', array('logout', 'timezone'));
+        $acl->allow(self::STUDENT , 'lesson', array('index', 'details', 'join', 'upload', 'notes', 'correspondence'));
         $acl->allow(self::STUDENT , 'account', array('index', 'features', 'online', 'offline'));
         $acl->allow(self::STUDENT , 'resume', array('index'));
         $acl->allow(self::STUDENT , 'friends', array('list', 'send'));
         $acl->allow(self::STUDENT , 'message', array('inbox', 'send', 'sent', 'trash', 'archived'));
         $acl->allow(self::STUDENT , 'search', array('search'));
         $acl->allow(self::STUDENT , 'booking', array('index'));
-        $acl->allow(self::TEACHER , 'payment', array('index', 'pay', 'email', 'subscribe', 'unsubscribe'));
+        $acl->allow(self::STUDENT , 'feedback', array('create', 'form', 'view'));
+        $acl->allow(self::TEACHER , 'payment', array('index', 'pay', 'email', 'subscribe', 'unsubscribe', 'remained'));
         $acl->deny(self::STUDENT ,  'user', array('index', 'registration', 'login'));
         $acl->allow(self::TEACHER , 'lesson', array('setup', 'upload'));
-
+        $acl->allow(self::TEACHER , 'review', array('index'));
         #allow to guest
         $acl->deny(self::GUEST , 'user', array('logout'));
         $acl->deny(self::GUEST , 'account', array('index'));
@@ -63,11 +66,12 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         $acl->allow(self::GUEST , 'user', array('index','registration', 'login'));
         $acl->allow(self::GUEST , 'error', array('index'));
         $acl->allow(self::GUEST , 'test', array('index', 'paypal', 'response', 'responsenew'));
-        $acl->allow(self::GUEST , 'payment', array('ipn', 'subscribenew', 'subscribe'));
+        $acl->allow(self::GUEST , 'payment', array('ipn', 'subscribenew'));
         #allow to admin
-        $acl->allow(self::ADMIN , 'admin', array('index', 'payments', 'metrics'));
+        $acl->allow(self::ADMIN , 'admin', array('index', 'users', 'payments', 'static', 'metrics'));
         $acl->allow(self::ADMIN , 'search', array('reindex'));
         $acl->allow(self::ADMIN , 'test', array('index', 'paypal'));
+        $acl->allow(self::ADMIN , 'lesson', array('recording'));
 
         Zend_Registry::set('Zend_Acl',$acl);
 

@@ -4,12 +4,13 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
     private $videoCost = 3;
     private $notesCost = 2;
     private $feedbackCost = 2;
+    private $subscriptionCost = 30;
 
     public function init()
     {
         $this->_helper->layout->setLayout("layoutInner");
         $this->_helper->AjaxContext()
-            //->addActionContext('ajax', 'json')
+            ->addActionContext('remained', 'json')
             ->initContext('json');
     }
 
@@ -150,65 +151,46 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
     public function subscribeAction()
     {
-        $payPalModel = new Application_Model_PayPal();
-        $gateway = $payPalModel->getGateway();
+        $period = $this->getRequest()->getParam('period');
 
-        $obj = new Aimya_PayPal_RecurringPayment;
+        if(isset($period)) {
+            $payPalModel = new Application_Model_PayPal();
 
-        $obj->environment = $gateway['testMode'];	// or 'beta-sandbox' or 'live'
-        $obj->paymentType = urlencode('Authorization');				// or 'Sale' or 'Order'
+            $subscriptionTable = new Application_Model_DbTable_Subscriptions();
 
-        // Set request-specific fields.
-        $obj->startDate = urlencode("2013-01-04T0:0:0");
-        $obj->billingPeriod = urlencode("Month");				// or "Day", "Week", "SemiMonth", "Year"
-        $obj->billingFreq = urlencode("1");						// combination of this and billingPeriod must be at most a year
-        $obj->paymentAmount = urlencode('30');
-        $obj->totalBillingCycles = urlencode('10');
-        $obj->currencyID = urlencode('USD');							// or other currency code ('GBP', 'EUR', 'JPY', 'CAD', 'AUD')
+            $aimyaProfit = $period * $this->subscriptionCost;
+            $activeTo = date('Y-m-d h:i:s', strtotime("+$period month"));
 
-        /* PAYPAL API  DETAILS */
-        $obj->API_UserName = urlencode($gateway['apiUsername']);
-        $obj->API_Password = urlencode($gateway['apiPassword']);
-        $obj->API_Signature = urlencode($gateway['apiSignature']);
-        $obj->API_Endpoint = "https://api-3t.sandbox.paypal.com/nvp";
+            $lastId = $subscriptionTable->getAdapter()->lastInsertId();
 
-        /*SET SUCCESS AND FAIL URL*/
-        $obj->returnURL = urlencode($gateway['returnUrl']);
-        $obj->cancelURL = urlencode($gateway['cancelUrl']);
+            $requestData = $payPalModel->generateSubscriptionXml($lastId, $aimyaProfit);
 
+            $response = $payPalModel->getAdaptivUrl($requestData);
 
-        if(!$_GET['task']) {
-            $task="setExpressCheckout"; //set initial task as Express Checkout
-        } else {
-            $task=$_GET['task'];
-        }
+            if($response) {
 
-        switch($task)
-        {
-            case "setExpressCheckout":
-                $obj->setExpressCheckout();
-                exit;
-            case "getExpressCheckout":
-                $result = $obj->getExpressCheckout();
-                if($result['ACK'] == 'Success') {
-                    if($this->getRequest()->getParam('userId')){
-                        $subscriptionTable = new Application_Model_DbTable_Subscriptions();
-                        $ifExistAccount = $subscriptionTable->getSubscription($this->getRequest()->getParam('userId'));
+                $isAlreadyExist = $subscriptionTable->getPayKeyFromOrder($lastId);
 
-                        if($ifExistAccount) {
-                            $subscriptionTable->updateSubscription($ifExistAccount['id'], 'paid');
-                        } else {
-                            $subscriptionTable->createSubscription($this->getRequest()->getParam('userId'), $obj->paymentAmount);
-                        }
-                    } else {
-                        echo 'fail';
-                        die;
-                    }
+                if(!$isAlreadyExist) {
+                    $data = array(
+                        'user_id' => Zend_Auth::getInstance()->getIdentity()->id,
+                        'aimya_profit' => $aimyaProfit,
+                        'pay_key' => $response['pay_key'],
+                        'status' => 'pending',
+                        'active_to' => $activeTo,
+                        'created_at' => date('Y-m-d H:i:s'),
+                        'updated_at' => date('Y-m-d H:i:s')
+                    );
+
+                    $subscriptionTable->createSubscription($data);
                 }
-                exit;
-            case "error":
-                echo "setExpress checkout failed";
-                exit;
+
+                $this->redirect($response['url']);
+            } else {
+                $this->redirect('/payment');
+            }
+        } else {
+            $this->_helper->flashMessenger->addMessage(array('failure'=>'Problem with parameters'));
         }
     }
 
@@ -270,6 +252,24 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
     public function unsubscribeAction()
     {
 
+    }
+
+    public function remainedAction() {
+
+        $subscriptionTable = new Application_Model_DbTable_Subscriptions();
+        $activeTo = $subscriptionTable->getTimeLeft();
+
+        if($activeTo['active_to'] == NULL && Zend_Auth::getInstance()->getIdentity()->role > 1) {
+            $subscriptionTable->setDefaultPeriod();
+        }
+
+        $now = time(); // or your date as well
+        $your_date = strtotime($activeTo['active_to']);
+        $datediff = $now - $your_date;
+        $timeLeft = floor($datediff/(60*60*24));
+        $timeLeft = substr($timeLeft, 1);
+
+        $this->view->timeLeft = $timeLeft;
     }
 
     public function writeLog($data)

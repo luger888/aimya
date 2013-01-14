@@ -7,6 +7,9 @@ package com.aimialesson.controllers
 	import flash.events.*;
 	import flash.media.Camera;
 	import flash.media.Microphone;
+	import flash.media.MicrophoneEnhancedMode;
+	import flash.media.MicrophoneEnhancedOptions;
+	import flash.media.SoundCodec;
 	import flash.media.SoundTransform;
 	import flash.net.NetStream;
 
@@ -24,7 +27,14 @@ package com.aimialesson.controllers
 			Media.getInstance().myNetStream.addEventListener( NetStatusEvent.NET_STATUS, netStatusHandler );
 			Media.getInstance().myNetStream.addEventListener( IOErrorEvent.IO_ERROR, netIOError );
 			Media.getInstance().myNetStream.addEventListener( AsyncErrorEvent.ASYNC_ERROR, netASyncError );
-			myVideoInit();
+			if (Main.getInstance().isServer){
+				Media.getInstance().myNetStream.client = this;
+				Media.getInstance().myNetStream.maxPauseBufferTime = 0.1;
+				Media.getInstance().myNetStream.bufferTime = 0.02;
+				Media.getInstance().myNetStream.play(Media.getInstance().myStreamName);
+			} else {
+				myVideoInit();
+			}
 		}
 		
 		public function initPartnerNetStream () : void {
@@ -32,8 +42,8 @@ package com.aimialesson.controllers
 			Media.getInstance().partnerNetStream = new NetStream(Media.getInstance().nc);
 			Media.getInstance().partnerNetStream.client = this;
 			Media.getInstance().partnerNetStream.maxPauseBufferTime = 0.1;
-			Media.getInstance().partnerNetStream.bufferTime = 2;
-			Media.getInstance().partnerNetStream.bufferTimeMax = 2;
+			Media.getInstance().partnerNetStream.bufferTime = 0.02;
+			Media.getInstance().partnerNetStream.bufferTimeMax = 0.2;
 			Media.getInstance().partnerNetStream.addEventListener( NetStatusEvent.NET_STATUS, netStatusHandler );
 			Media.getInstance().partnerNetStream.addEventListener( IOErrorEvent.IO_ERROR, netIOError );
 			Media.getInstance().partnerNetStream.addEventListener( AsyncErrorEvent.ASYNC_ERROR, netASyncError );
@@ -47,14 +57,14 @@ package com.aimialesson.controllers
 		}
 				
 		protected function netStatusHandler( event : NetStatusEvent ) : void {
-			debug("netStatusHandler");
+		//	debug("netStatusHandler");
 			
-			for ( var prop:String in event.info)
+		/*	for ( var prop:String in event.info)
 			{
 				debug("prop : "+prop+" = "+event.info[prop]);
 			}
 			
-			debug(event.info.code);
+			debug(event.info.code);*/
 			
 			if (event.info.code == "NetStream.Connect.Success"){
 				//this.dispatchEvent( new AppEvent ( AppEvent.MY_STREAM_INIT_COMPLETE));
@@ -65,7 +75,16 @@ package com.aimialesson.controllers
 		public function myVideoInit():void {
 			debug("StreamController:myVideoInit");
 			Media.getInstance().cam = Camera.getCamera();
-			Media.getInstance().mic = Microphone.getMicrophone();
+			//Media.getInstance().mic = Microphone.getMicrophone(); 
+			Media.getInstance().mic = Microphone.getEnhancedMicrophone();
+			var options:MicrophoneEnhancedOptions = Media.getInstance().mic.enhancedOptions; 
+			//options.mode = MicrophoneEnhancedMode.FULL_DUPLEX; 
+			//options.echoPath = 256;
+		//	options.autoGain = true;
+			//options.nonLinearProcessing = true;
+			if (Media.getInstance().mic == null){
+				Media.getInstance().mic = Microphone.getMicrophone();
+			}
 			if ( Media.getInstance().cam != null ) 
 			{
 				debug("StreamController:myNetStream.attachCamera");
@@ -81,12 +100,15 @@ package com.aimialesson.controllers
 				var transform : SoundTransform = Media.getInstance().mic.soundTransform;
 				transform.volume = 0;
 				Media.getInstance().mic.soundTransform = transform;
-				//Media.getInstance().mic.setLoopBack( true );
+				Media.getInstance().mic.setLoopBack(false);
 //				Media.getInstance().mic.encodeQuality = 10;
 				Media.getInstance().mic.setUseEchoSuppression(true);
-				//Media.getInstance().mic.gain = 50;
-				//Media.getInstance().mic.rate = 22;
-				Media.getInstance().mic.setSilenceLevel( 1, 2000 );
+				Media.getInstance().mic.gain = 50;
+				Media.getInstance().mic.rate = 11;
+				Media.getInstance().mic.codec = SoundCodec.SPEEX;
+				Media.getInstance().mic.noiseSuppressionLevel = -30;
+				Media.getInstance().mic.framesPerPacket = 1;
+				Media.getInstance().mic.setSilenceLevel( 0, 2000);
 				Media.getInstance().myNetStream.attachAudio(Media.getInstance().mic);
 			}
 			//Media.getInstance().myNetStream.bufferTime = 2;

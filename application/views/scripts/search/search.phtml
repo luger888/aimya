@@ -1,19 +1,113 @@
-<?php $hits = $this->hits; ?>
-<?php echo "Search result for: \"{$_GET['search_string']}\""?>
-<div class="messageContent">
-    <?php if(count($hits)):?>
-        <?php foreach ($hits as $hit) { ?>
-        <h3><?php echo "Lessun Category: " . $hit->lesson_category ?></h3>
-        <p>
-             <?php echo "Lessun Name: " . $hit->subcategory ?>
-        </p>
-        <p>
-            <a href="<?php echo "/user/" . $hit->user_id ?>">Read more…</a>
-        </p>
-        <?php }
-        //echo $this->paginationControl($hits, 'Sliding','partials/p.phtml');
-        ?>
-    <?php else: ?>
-        <?php echo "Your search returns no results."?>
-    <?php endif; ?>
+<div class="searchTab mainContainer clearfix">
+
+    <?php $hits = $this->users; ?>
+
+    <?php $profileModel = new Application_Model_Profile(); ?>
+    <h1><?php echo "Search results for: \"{$_GET['search_string']}\""?></h1>
+
+    <div class="shadowSeparator clearfix">
+        <div class="shadowSeparatorBox clearfix">
+            <div class="messageContent">
+                <?php if (count($hits)): ?>
+                <?php foreach ($this->users as $person): ?>
+<!--                    --><?php //Zend_Debug::dump($person)?>
+                <div class="shadowSeparator clearfix">
+                    <div class="shadowSeparatorBoxSmall clearfix">
+                        <div class="featureItem clearfix">
+
+                            <?php $avatarPath = $profileModel->getAvatarPath($person['id'], 'medium') ?>
+                            <div class="imageBlock boxShadow"><img src="<?php echo $avatarPath;?>"></div>
+                            <div class="featuredButtonsTop clearfix">
+
+                                <?php echo '<a class ="button-2 view viewProfile" href="' . $this->baseUrl() . '/user/' . $person['id'] . '">VIEW PROFILE</a>'; ?>
+                                <?php $friendTable = new Application_Model_DbTable_Friends(); ?>
+                                <?php $isFriend = $friendTable->isFriend($person['id']); ?>
+                                <?php $isPending = $friendTable->isPending($person['id']); ?>
+                                <?php if(Zend_Auth::getInstance()->getIdentity()->id != $person['id']): ?>
+                                <?php  if($isFriend){ // if friend, dont show the add to account button
+                                    echo "<a class ='sendMessage' onclick='sendMessage(" . $person['id'] . ", this)' href='javascript:void(1)'>" . $this->translate('SEND MESSAGE') . "</a>";
+                                }elseif($isPending){
+                                    echo "<span class ='request_sent'>" . $this->translate('REQUEST SENT') . "</span>";
+                                }else{
+                                    echo "<a class ='button-2 add addAccount' onclick='addToFriend(" . $person['id'] . ", this);' href='javascript:void(1)'>" . $this->translate('ADD TO MY ACCOUNT') . "</a>";
+                                }
+                                ?>
+                                <?php endif;?>
+                                <?php echo '<input type="hidden" value = "' .$person["id"]. '">';?>
+
+                            </div><!--End featuredButtonsTop-->
+                            <ul class="featuredInfo">
+                                <li class="clearfix">
+                                    <span class="title"><?php echo $this->translate('Name:') ?></span>
+                                    <div class="featuredTxt"><?php echo  ' ' .$person['firstname'] . ' ' . $person['lastname'];?></div>
+                                </li>
+
+                                <li class="clearfix">
+                                    <span class="title"><?php echo $this->translate('Time zone:') ?></span>
+                                    <div class="featuredTxt"><?php echo ' UTC ' . $person['timezone'];?></div>
+                                </li>
+
+                                <?php if (count($person['services']) > 0):?>
+                                <li class="clearfix">
+                                    <span class="title"><?php echo $this->translate('Services:') ?></span>
+                                    <div class="featuredTxt">
+                                        <?php
+                                        $i = 0;
+                                        foreach ($person['services'] as $index => $service) {
+                                            echo $service['subcategory'];
+                                            if(count($person['services']) - 1 != $i) echo ', ';
+                                            $i++;
+                                        }
+                                        ?>
+                                    </div>
+                                </li>
+                                <?php endif; ?>
+<!--                                --><?php //if (count($person['service_requested']) > 0):?>
+<!--                                <li class="clearfix">-->
+<!--                                    <span class="title">--><?php //echo $this->translate('Service requested:') ?><!--</span>-->
+<!--                                    <div class="featuredTxt">-->
+<!--                                        --><?php
+//                                        $i = 0;
+//                                        foreach ($person['service_requested'] as $index => $service) {
+//                                            echo $service['subcategory'];
+//                                            if(count($person['service_requested']) - 1 != $i) echo ', ';
+//                                            $i++;
+//                                        }
+//                                        ?>
+<!--                                    </div>-->
+<!--                                </li>-->
+<!--                                --><?php //endif; ?>
+                                <?php if (count($person['add_info']) > 0):?>
+                                <li class="clearfix">
+                                    <span class="title"><?php echo $this->translate('About me:') ?></span>
+                                    <div class="featuredTxt more"><?php echo $person['add_info'];?></div>
+                                </li>
+                                <?php endif; ?>
+                            </ul><!--End featuredInfo -->
+
+                        </div><!--End featureItem -->
+                    </div><!--End shadowSeparatorBox-->
+                </div><!--End shadowSeparator-->
+
+
+                <?php endforeach; ?>
+                <div class="feauteresButtons clearfix">
+                    <input class ="showMore button-2 more" type="button" value = "<?php echo $this->translate('VIEW MORE') ?>">
+                    </div><!--End feauteresButtons-->
+
+                <?php else: ?>
+                <?php echo "Your search returns no results." ?>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $(".more").shorten({
+            "showChars" : 200
+        });
+
+    });
+</script>

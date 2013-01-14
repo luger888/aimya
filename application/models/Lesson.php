@@ -20,33 +20,76 @@ class Application_Model_Lesson
     {
 
         $identityId = Zend_Auth::getInstance()->getIdentity()->id;
-        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation');
-        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . $identityId);
-        $presPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR;
+        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users');
+        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $identityId);
+        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $lessonId);
+        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'presentation');
+        $presPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR;
         @mkdir($presPath);
+
+        return $presPath;
+    }
+
+    public function createNotesPath($lessonId, $teacherId)
+    {
+
+        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users');
+        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId);
+        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId . DIRECTORY_SEPARATOR . $lessonId);
+        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'notes');
+        $notePath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'notes' . DIRECTORY_SEPARATOR;
+        @mkdir($notePath);
 
         //$this->write(' / ' . $identityId . " / \n");
 
-        return $presPath;
+        return $notePath;
+    }
+
+    public function createNote($notePath, $userName, $message, $time)
+    {
+        $string = '<li class="note"><p class="username">' . $userName . '</p><p class="time">' . $time . '</p><p class="message">' . $message  . '</p></li>';
+
+        $fp = fopen($notePath . "notes.txt", "a+");
+
+        fwrite($fp, $string);
+
+        fclose($fp);
+    }
+
+    public function getNotes($lessonId, $teacherId)
+    {
+        $notePath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'notes' . DIRECTORY_SEPARATOR . 'notes.txt';
+        $fileContent = file_get_contents($notePath);
+        return $fileContent;
     }
 
     public function getImages($lessonId)
     {
         $lessonTable = new Application_Model_DbTable_Lesson();
         $lessonData = $lessonTable->getItem($lessonId);
-        $imagesPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . $lessonData['creator_id'] . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'jpges' . DIRECTORY_SEPARATOR;
+        $imagesPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $lessonData['creator_id'] . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . 'jpges' . DIRECTORY_SEPARATOR;
         //$imagesPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR . "1" . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'jpges' . DIRECTORY_SEPARATOR;
-        $imageNames = scandir($imagesPath);
-        $imagePath = array();
-        foreach ($imageNames as $name) {
-            if (strlen($name) > 3) {
-                $search = realpath(APPLICATION_PATH . '/../public/');
-                $cutedPath = str_replace($search, "", $imagesPath);
-                $imagePath[] = $cutedPath . $name;
-            }
-        }
+        if(is_dir($imagesPath)) {
+            $imageNames = scandir($imagesPath);
+            if($imageNames && is_array($imageNames)) {
+                $imagePath = array();
+                foreach ($imageNames as $name) {
+                    if (strlen($name) > 3) {
+                        $search = realpath(APPLICATION_PATH . '/../public/');
+                        $cutedPath = str_replace($search, "", $imagesPath);
+                        $imagePath[] = $cutedPath . $name;
+                        natsort($imagePath);
+                        $imagePath = array_merge(array(),$imagePath);
+                    }
+                }
 
-        return $imagePath;
+                return $imagePath;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
 
@@ -110,6 +153,16 @@ class Application_Model_Lesson
             $joinLesson = $lessonTable->checkAvailableLesson($lesson['userData']['id']);
             $lessonDuration = $lesson['booking']['duration'] *60; //lesson duration in seconds
             $starting_time = strtotime($lesson['booking']['started_at']); //booking started_at time to UNIX stamp
+            if($lesson['booking']['sender_id'] != $identity->id){
+                $separatedData = explode(':',  $lesson['booking']['creator_tz']); //exploding HH: MM by ':'
+                $minutesInHours = $separatedData[0] * 60; // HH -> minutes
+                $minutesInDecimals = $separatedData[1]; // MM -> minutes
+                $totalCreatorTZ = $minutesInHours + $minutesInDecimals; //converted timezone to minutes
+
+
+                $starting_time = ($starting_time + $totalMinutes * 60) - $totalCreatorTZ * 60;
+
+            }
             $currentTimeUtc = strtotime($dateWithUTC); //currentTime + UTC of user to UNIX stamp
             $timeDifference = $starting_time - $currentTimeUtc;
             if ($timeDifference <= $reserveSeconds && $timeDifference > 0){ //if difference between current time and starting is 10 minutes or less, but not less than 0
@@ -152,7 +205,7 @@ class Application_Model_Lesson
 
             $lesson['booking']['isOnline'] = $isOnline;//adding is online attr to lesson
             $lesson['booking']['isTeacher']  = $isTeacher;//adding is teacher attr to lesson
-
+            $lesson['booking']['startingTime']  = date('m/d/Y H:i', $starting_time);;//starting time with user utc
             $lessons[] = $lesson;
 
         }//END FOREACH

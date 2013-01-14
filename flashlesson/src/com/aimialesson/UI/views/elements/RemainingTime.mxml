@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx">
+		 xmlns:mx="library://ns.adobe.com/flex/mx" creationComplete="group1_creationCompleteHandler(event)">
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
@@ -9,12 +9,27 @@
 		<![CDATA[
 			import com.aimialesson.model.Main;
 			import com.aimialesson.model.Texts;
+			import com.aimialesson.model.Time;
+			
+			import mx.events.FlexEvent;
+
+			protected function group1_creationCompleteHandler(event:FlexEvent):void
+			{
+				Time.getInstance().addEventListener(Time.REMAINING_TIME_CHANGED, onTimeChanged);
+			}
+			
+			[Bindable]
+			private var remainingTime:int = 0;
+			private function onTimeChanged ( event : Event ) : void {
+				remainingTime = Math.ceil((Time.getInstance().remainingTime / 60))
+			}
+
 		]]>
 	</fx:Script>
 	<s:HGroup id="hgr" verticalAlign="bottom">
 		<s:RichText text="{Texts.getInstance().getText(Texts.REMAINING_TIME)}" styleName="TimeTextStyle"/>
 		<s:Group height="{hgr.height}">
-			<s:RichText text="{Math.ceil((Main.getInstance().remainingTime / 60))}" id="timeLeft" styleName="TimeValueStyle"  fontFamily="Arial" verticalCenter="0"/>	
+			<s:RichText text="{remainingTime}" id="timeLeft" styleName="TimeValueStyle"  fontFamily="Arial" verticalCenter="0"/>	
 		</s:Group>
 		<s:RichText text="{Texts.getInstance().getText(Texts.MIN)}" styleName="TimeMinStyle"/>
 	</s:HGroup>

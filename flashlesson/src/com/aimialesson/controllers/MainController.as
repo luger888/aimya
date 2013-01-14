@@ -1,11 +1,7 @@
 package com.aimialesson.controllers
 {
 	import com.aimialesson.events.*;
-	import com.aimialesson.model.Main;
-	import com.aimialesson.model.Media;
-	import com.aimialesson.model.Notes;
-	import com.aimialesson.model.Presentation;
-	import com.aimialesson.model.User;
+	import com.aimialesson.model.*;
 	
 	import flash.events.EventDispatcher;
 	
@@ -13,6 +9,7 @@ package com.aimialesson.controllers
 
 	[Event (name="timeIsOut", type="com.aimialesson.events.AppEvent")]
 	[Event (name="connectInitComplete", type="com.aimialesson.events.AppEvent")]
+	[Event (name="changeScreenState", type="com.aimialesson.events.AppEvent")]
 	[Event (name="sharedPresentationUploaded", type="com.aimialesson.events.SharedObjectEvent")]
 	public class MainController extends EventDispatcher
 	{
@@ -31,12 +28,13 @@ package com.aimialesson.controllers
 		
 		public function init ( parameters : Object ) : void {
 			debug("MainController:init");
+			setParams(parameters);
 			mediaController = new MediaController();
-			mediaController.setParameters(parameters);
+		//	mediaController.setParameters(parameters);
 			mediaController.addEventListener(AppEvent.CONNECT_INIT_COMPLETE, appNetConnectHandler);
 			mediaController.initConnection();
 			userController = new UserController();
-			userController.setParameters(parameters);
+			//userController.setParameters(parameters);
 			streamController = new StreamController();
 			presentationController = new PresentationController();
 			textsController = new TextsController();
@@ -52,6 +50,87 @@ package com.aimialesson.controllers
 			/*recorderController = new RecorderController();
 			recorderController.init(mainUI);
 			recorderController.startTransferring();*/
+		}
+		
+		private function setParams ( parameters : Object ) : void {
+			for (var i in parameters){
+				debug (i+":"+parameters[i]);
+			}
+			if (parameters.myStreamName){
+				Media.getInstance().myStreamName = parameters.myStreamName;
+				debug (parameters.myStreamName);
+			}
+			if (parameters.partnerStreamName){
+				Media.getInstance().partnerStreamName = parameters.partnerStreamName;
+				debug (parameters.partnerStreamName);
+			}
+			if (parameters.soID){
+				Media.getInstance().soID = parameters.soID;
+				debug (parameters.soID);
+			}
+			if (parameters.domain){
+				Actions.getInstance().domain = parameters.domain;
+				debug (parameters.domain);
+			}
+			if (parameters.lang){
+				Texts.getInstance().lang = String(parameters.lang).substring(1);
+				Actions.getInstance().domain_add = parameters.lang;
+				debug (parameters.lang);
+			}
+			if (parameters.focus_name){
+				Main.getInstance().topic = parameters.focus_name;
+				debug (parameters.topic);
+			}
+			if (parameters.booking_id){
+				Main.getInstance().booking_id = parameters.booking_id;
+				debug (parameters.booking_id);
+			}
+			if (parameters.total_time){
+				Time.getInstance().totalTime = parameters.total_time;
+				//		Main.getInstance().remainingTime = parameters.total_time;
+				debug (parameters.total_time);
+			}
+			if (parameters.fs_mode){
+				Main.getInstance().fsMode = (parameters.fs_mode == "1");
+				debug (parameters.fs_mode);
+			}
+			if (parameters.userName){
+				User.getInstance().userName = parameters.userName;
+				debug ("userName:" + parameters.userName);
+			}
+			if (parameters.userRole){
+				debug ("userRole:" + parameters.userRole);
+				if (parameters.userRole == User.SERVER){
+					Main.getInstance().isServer = true;
+					User.getInstance().userRoleID = User.STUDENT;
+				} else {
+					User.getInstance().userRoleID = parameters.userRole;
+				}
+			}
+			if (parameters.partnerName){
+				User.getInstance().partnerName = parameters.partnerName;
+				debug ("partnerName:" + parameters.partnerName);
+			}
+			if (parameters.PHPSESSID){
+				User.getInstance().sessionID = parameters.PHPSESSID;
+				debug ("sessionID(PHPSESSID):" + parameters.PHPSESSID);
+			}
+			if (parameters.lesson_id){
+				User.getInstance().lesson_id = parameters.lesson_id;
+				debug ("lessonID:" + parameters.lesson_id);
+			}
+			if (parameters.partnerId){
+				User.getInstance().partnerID = parameters.partnerId;
+				debug ("partnerId:" + parameters.partnerId);
+			}
+			if (parameters.userId){
+				User.getInstance().userID = parameters.userId;
+				debug ("userId:" + parameters.userId);
+			}
+			if (parameters.userTZ){
+				User.getInstance().timeZone = Number((parameters.userTZ as String).substr(0,3));
+				debug ("timeZone:" + parameters.userTZ);
+			}
 		}
 		
 		//event handling
@@ -97,14 +176,15 @@ package com.aimialesson.controllers
 			soController.closeConnect();
 			streamController.closeConnect();
 			// the sharedobject can not send the end lesson message that fast. need to close netconnect somehow later...
-			mediaController.closeConnect();
 			presentationController.clearImages();
 			Notes.getInstance().clear();
 			Main.getInstance().lesson_finished_by = initiator_id;
 			if (timerController) timerController.stop();
 			Main.getInstance().lesson_finished = true;
-			//if(Main.getInstance().fsMode)
-				//soController.setSOProperty('screenMode' + User.getInstance().userID, (!Main.getInstance().fsMode).toString());
+			mediaController.closeConnect();
+			if(Main.getInstance().fsMode)
+				this.dispatchEvent( new AppEvent ( AppEvent.CHANGE_SCREEN_STATE ) );
+//				soController.setSOProperty('screenMode' + User.getInstance().userID, (!Main.getInstance().fsMode).toString());
 		}
 		
 		public function onTextChatEvent ( event : NotesEvent ) : void {
@@ -123,8 +203,8 @@ package com.aimialesson.controllers
 				case (ServiceEvent.SESSION_IS_STOPPED_RESULT) : 		Main.getInstance().session_started = false;
 																		soController.setSOProperty('endLesson' + User.getInstance().userID, "true");
 																		break;
-				case (ServiceEvent.GET_CURRENT_TIME_RESULT) :	 		Main.getInstance().remainingTime = event.value.data as int;
-																		break;
+/*				case (ServiceEvent.GET_CURRENT_TIME_RESULT) :	 		Time.getInstance().remainingTime = event.value.data as int;
+																		break;*/
 				case (ServiceEvent.RESIZE_RESULT) :				 		break;
 			}
 		}
@@ -180,6 +260,7 @@ package com.aimialesson.controllers
 		}*/
 		
 		private function loadTextsHandler ( event : AppEvent ) : void {
+			debug("MainController:loadTextsHandler");
 			Main.getInstance().texts_loaded = true;
 			initCompleteCheck();
 		}
@@ -194,6 +275,7 @@ package com.aimialesson.controllers
 		private function debug ( str : String ) : void {
 			if (Main.getInstance().debugger != null)
 				Main.getInstance().debugger.text += str + "\n";
+			trace(str);
 		}
 	}
 }

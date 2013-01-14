@@ -9,11 +9,11 @@ class Application_Form_Subscriptions extends Zend_Form
     public function init()
     {
 
-        $dateFrom = new Zend_Form_Element_Text('date_from');
+        /*$dateFrom = new Zend_Form_Element_Text('date_from');
         $dateFrom ->setAttrib('id', 'date_from')
             ->setAttrib('class', 't-165')
             ->addFilters($this->basicFilters)
-            ->setDecorators($this->basicDecorators);
+            ->setDecorators($this->basicDecorators);*/
 
         $period = new Zend_Form_Element_Select('period');
         $period->setAttrib('placeholder', 'Period')
@@ -51,7 +51,7 @@ class Application_Form_Subscriptions extends Zend_Form
             ->setDecorators($this->basicDecorators);
 
 
-        $this->addElements(array($dateFrom, $period, $subscribe, $unSubscribe));
+        $this->addElements(array($period, $subscribe, $unSubscribe));
 
     }
 

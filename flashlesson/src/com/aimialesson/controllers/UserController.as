@@ -14,7 +14,7 @@ package com.aimialesson.controllers
 			debug ("UserController");
 		}
 		
-		public function setParameters ( parameters : Object ) : void {
+		/*public function setParameters ( parameters : Object ) : void {
 			if (parameters.userName){
 				User.getInstance().userName = parameters.userName;
 				debug ("userName:" + parameters.userName);
@@ -47,7 +47,7 @@ package com.aimialesson.controllers
 				User.getInstance().timeZone = Number((parameters.userTZ as String).substr(0,3));
 				debug ("timeZone:" + parameters.userTZ);
 			}
-		}
+		}*/
 		
 
 		private function debug ( str : String ) : void {

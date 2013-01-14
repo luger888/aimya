@@ -17,6 +17,7 @@ class Application_Model_PayPal
     private $adaptivUrl = 'https://svcs.sandbox.paypal.com/AdaptivePayments/Pay';
     private $amiyaPayPalEmail = 'aim_pr_1356696524_biz@mail.ru';
     private $testMode = 'sandbox';
+    private $subscriptionCost = 30;
 
     public function generateXml($sellerId, $bookingId, $userProfit, $aimyaProfit) {
 
@@ -103,46 +104,43 @@ class Application_Model_PayPal
         }
     }
 
-    public function generateSubscriptionXml($sellerId, $period, $dateFrom) {
+    public function generateSubscriptionXml($subscribeId, $aimyaProfit) {
 
-        $pp = new Aimya_PayPal_Subscription();
+        $request = Zend_Controller_Front::getInstance()->getRequest();
 
-        $pp->test = true; // connect to the test sandbox or live server
-        $pp->requestHeaderArr['user'] = $this->payPalApiLogin;
-        $pp->requestHeaderArr['pwd'] = $this->payPalApiPassword;
-        $pp->requestHeaderArr['signature'] = $this->payPalSignature;
-        $pp->requestHeaderArr['countrycode'] = "US";
-        $pp->requestHeaderArr['billingperiod'] = "Month"; // bill per month
-        $pp->requestHeaderArr['billingfrequency'] = 1; // bill once every month
-        $pp->requestHeaderArr['currencycode'] = "USD";
-        $pp->requestHeaderArr['amt'] = 9.95; // amount to bill per month
-        $pp->requestHeaderArr['initamt'] = 0.00; // setup fee
-        $pp->requestHeaderArr['taxamt'] = $pp->requestHeaderArr['amt'] * .07; // 0 for no tax
-        $pp->requestHeaderArr['desc'] = "Super Deluxe Package";
+        $buyerId = Zend_Auth::getInstance()->getIdentity()->id;
 
-        // most likely won't need to edit below here
+        $cancelUrl = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment';
+        $returnURL = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment';
+        $ipnURL = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment/ipn?user_id=' . $buyerId;
 
-        $pp->requestHeaderArr['creditcardtype'] = $_REQUEST["cardtype"];
-        $pp->requestHeaderArr['acct'] = $_REQUEST["cardnumber"];
-        $pp->requestHeaderArr['expdate'] = str_pad($_REQUEST["cardexpm"],2,'0', STR_PAD_LEFT)  .  $_REQUEST["cardexpy"];
-        $pp->requestHeaderArr['firstname'] = $_REQUEST["f_nm"];
-        $pp->requestHeaderArr['lastname'] = $_REQUEST["l_nm"];
-        $pp->requestHeaderArr['profilestartdate'] = gmdate("Y-m-d\TH:i:s\Z");
-        $pp->requestHeaderArr['totalbillingcycles'] = $_REQUEST["period"];
-        $pp->requestHeaderArr['email'] = $_POST['email'];
-        $pp->requestHeaderArr['payerstatus'] = "verified";
+        /*$userTable = new Application_Model_DbTable_Users();
+        $user = $userTable->getFullData($buyerId);*/
 
-        $ppResponse = $pp->PPHttpPost(); // make the connection to paypal and get a response
+        $itemName = 'Aimya Subscription';
 
-        $viewResponse = Array();
+        $body_data  = "<?xml version='1.0'?>";
+        $body_data .= "<payRequest>";
+        $body_data .= "<actionType>PAY</actionType>";
+        $body_data .= "<itemName>{$itemName}</itemName>";
+        $body_data .= "<cancelUrl>{$cancelUrl}</cancelUrl>";
+        $body_data .= "<returnUrl>{$returnURL}</returnUrl>";
+        $body_data .= "<currencyCode>USD</currencyCode>";
+        $body_data .= "<feesPayer>SENDER</feesPayer>";
+        $body_data .= "<receiverList>";
+        $body_data .= "<receiver>";
+        $body_data .= "<amount>{$aimyaProfit}</amount>";
+        $body_data .= "<email>{$this->amiyaPayPalEmail}</email>";
+        $body_data .= "<invoiceId>{$subscribeId}</invoiceId>";
+        $body_data .= "</receiver>";
+        $body_data .= "</receiverList>";
+        $body_data .= "<requestEnvelope>";
+        $body_data .= "<errorLanguage>en_US</errorLanguage>";
+        $body_data .= "</requestEnvelope>";
+        $body_data .= "<ipnNotificationUrl>{$ipnURL}</ipnNotificationUrl>";
+        $body_data .= "</payRequest>";
 
-        if(isset($ppResponse['L_ERRORCODE0']))
-            $viewResponse['error'] = "Error: {$ppResponse['L_LONGMESSAGE0']}";
-        else if(isset($ppResponse['ACK']) && $ppResponse['ACK'] == ('Success' || 'SuccessWithWarning'))
-            $viewResponse['success'] = "Your subscription has been processed.";
-
-        echo json_encode($viewResponse);
-        die;
+        return $body_data;
 
     }
 

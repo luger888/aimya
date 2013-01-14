@@ -1,6 +1,101 @@
-<?php echo $this->partial('partials/lesson.phtml')?>
-<div class= "messageContent">
-    <div id="details">
-        <?php echo "details"; ?>
+<?php $studentLessons = $this->studentLessons; ?>
+<?php $feedbackTable = $this->feedbackTable; ?>
+<?php $bookingTable = $this->bookingTable; ?>
+<?php $feedbackForm = $this->feedbackForm ?>
+<?php echo $this->partial('partials/lesson.phtml') ?>
+<div class="mainContainer userRelationsTab lesson clearfix">
+    <div class="shadowSeparator clearfix">
+        <div class="lessonFilterBlock clearfix">
+            <div class="filters">
+                <?php echo $this->translate('from') ?><?php echo $this->filterForm->fromPeriod; ?>
+                <?php echo $this->translate('to') ?><?php echo $this->filterForm->toPeriod; ?>
+            </div>
+            <a class="button-2 display floatRight"><?php echo $this->translate('display') ?></a>
+        </div>
+        <div class="shadowSeparatorBoxSmall clearfix">
+        </div>
+        <div class="shadowSeparator clearfix">
+        </div>
+        <div class="shadowSeparatorBox clearfix">
+            <table class="table">
+                <thead>
+                <tr>
+                    <td> <?php echo $this->translate('Date') ?></td>
+                    <td> <?php echo $this->translate('Time') ?></td>
+                    <td> <?php echo $this->translate('Focus Name') ?></td>
+                    <td> <?php echo $this->translate('Video REC') ?></td>
+                    <td> <?php echo $this->translate('Feedback') ?></td>
+                    <td> <?php echo $this->translate('Notes') ?></td>
+                </tr>
+                </thead>
+
+                <tbody>
+                <?php foreach ($studentLessons as $lesson): ?>
+                    <?php $date = substr($lesson['started_at'], 0, 10);
+                    $time = substr($lesson['started_at'], 10);
+                    $feedback = $feedbackTable->getFeedbackByLesson($lesson['id']);
+                    ?>
+
+                <tr>
+                    <input type ="hidden" value="<?php echo $lesson['id'] ?>">
+                    <td class ="date"><?php echo $date; ?></td>
+                    <td class ="time"><?php echo $time; ?></td>
+                    <td class ="focus"><?php echo $lesson['focus_name']?></td>
+                    <td class="center">
+                        <?php if ($lesson['video']): ?>
+                        <a href="#" class="button-2 open center"><?php echo $this->translate('Open') ?></a>
+                        <?php endif;?>
+                    </td>
+                    <td class="center">
+                        <?php if ($lesson['feedback']): ?>
+                            <?php if($feedback): ?>
+                                <?php if($feedback['status'] == 0 && $feedback['teacher_id'] == Zend_Auth::getInstance()->getIdentity()->id):?>
+                                    <a href="#" onClick="getFeedbackForm(this,  <?php echo $lesson['id']; ?>);" class="button-2 open center"><?php echo $this->translate('Create') ?></a>
+                                <?php else: ?>
+                                    <a href="#" onClick="openFeedback(this, <?php echo $lesson['id'];?>);" class="button-2 open center"><?php echo $this->translate('Open') ?></a>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        <?php endif;?>
+                    </td>
+                    <td class="center">
+                        <?php if ($lesson['notes']): ?>
+                        <a href="#" onClick="getNotes(this, <?php echo $lesson['id'];?>);"
+                           class="button-2 open "><?php echo $this->translate('Open') ?></a>
+                        <?php endif;?>
+                    </td>
+                </tr>
+                    <?php endforeach; ?>
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div id="notes-dialog" title="<?php echo $this->translate('recorded notes:') ?>">
+        <div class="notes">
+            <div class="header clearfix">
+                <div class="focus cc floatLeft"><?php echo $this->translate('focus') . ': <span class ="focusDialog"></span>'; ?></div>
+                <div class="date  cc floatRight"><?php echo $this->translate('date') . ': <span class ="dateDialog"></span>' ?></div>
+            </div>
+            <div class="notesWindow"></div>
+            <div class ="dialogFooter">
+                <div class ="timeLeft">You have <span class ="timeLeftSpan"></span><?php echo $this->translate('days left to rate this lesson')?>!</div>
+                <?php //if($this->view->review->getReviews()):?>
+                <div class ="rate cc"><?php echo $this->translate('rate lesson')?>:</div>
+                <div id ="starsBlock">
+                </div>
+                <div class ="comment cc"><?php echo $this->translate('comment')?>:<input class ="rateInput" type ="text"></div>
+                <input type = "button" id = "sendRating" class ="button floatRight" value ="OK" onClick="sendRating(this);">
+            </div>
+        </div>
+    </div>
+    <div id='details-dialog' title="<?php echo $this->translate('details') ?>">
+        <div class="dialog-wrapper">
+        </div>
     </div>
 </div>
+
+
+<script type="text/javascript">
+
+</script>

@@ -6,6 +6,7 @@ package com.aimialesson.events
 	{
 		public static const YES_POP_UP_BTN:String = "yesPopUpBtn";
 		public static const NO_POP_UP_BTN:String = "noPopUpBtn";
+		public static const CLOSE:String = "closeBtn";
 		
 		public function PopUpEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
 		{

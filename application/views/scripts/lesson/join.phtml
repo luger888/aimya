@@ -1,75 +1,79 @@
 <div id="lessonTabs" class="tabsHolder clearfix">
     <?php echo $this->partial('partials/lesson.phtml')?>
-    <div id="flashContainer" class="mainContainer clearfix" style="width: 870px; height: 1190px">
+    <div id="flashContainer" class="mainContainer clearfix" style="width: 870px; height: 950px">
 <!--<div class= "messageContent" style="height:1190px; width:870px">-->
         <div id="flash_element" style="height:100%">
             <?php if($this->flashObj == NULL):?>
                 <h4><?php echo 'There are no any active lessons'; ?></h4>
             <?php else:?>
-                <?php //echo $this->flashObj; ?>
+            <script type="text/javascript">
+                $(document).ready(function() {
+
+                    var element = '<?php echo $this->flashObj; ?>';
+                    $.ajax({
+                        url: "<?php echo $this->baseUrl()?>/lesson/getsize",
+                        type: "post",
+                        data: {
+                            'lesson_id' : '<?php echo $this->responce['id']?>'
+                        },
+                        success: function(result) {
+                            //flashObf = jQuery('#flash_element');
+                            if(result.flashSize == 1) {
+                                $('#flash_element').html('');
+                                jQuery('#page').hide();
+                                jQuery('#leftBg').hide();
+                                $('#flash_div').show();
+                                jQuery('#flash_div').append(element);
+                            } else {
+                                $('#flash_div').html('');
+                                $('#flash_div').hide();
+                                jQuery('#page').show();
+                                jQuery('#leftBg').show();
+                                jQuery('#flash_element').append(element);
+                            }
+                        }
+                    });
+                });
+
+                function changeFlashLayout(flashType) {
+
+                    //var element = '<?php echo $this->flashObj; ?>';
+                    $.ajax({
+                        url: "<?php echo $this->baseUrl()?>/lesson/updatesize",
+                        type: "post",
+                        data: {
+                            'flash_size': flashType,
+                            'lesson_id': '<?php echo $this->responce['id']?>'
+
+                        },
+                        success: function(result) {
+                        }
+                    });
+
+                    $.ajax({
+                        url: "<?php echo $this->baseUrl()?>/lesson/join",
+                        type: "post",
+                        success: function(result) {
+                            element = result.flashObj;
+                            if(flashType == 1) {
+                                $('#flash_element').html('');
+                                jQuery('#page').hide();
+                                jQuery('#leftBg').hide();
+                                $('#flash_div').show();
+                                jQuery('#flash_div').append(element);
+                            } else{
+                                $('#flash_div').html('');
+                                $('#flash_div').hide();
+                                jQuery('#page').show();
+                                jQuery('#leftBg').show();
+                                jQuery('#flash_element').append(element);
+                            }
+                        }
+                    });
+
+                }
+            </script>
             <?php endif;?>
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    $(document).ready(function() {
-
-        var element = '<?php echo $this->flashObj; ?>';
-        $.ajax({
-            url: "<?php echo $this->baseUrl()?>/lesson/getsize",
-            type: "post",
-            data: {
-                'lesson_id' : '<?php echo $this->responce['id']?>'
-            },
-            success: function(result) {
-                //flashObf = jQuery('#flash_element');
-                if(result.flashSize == 1) {
-                    $('#flash_element').html('');
-                    jQuery('#page').hide();
-                    jQuery('#leftBg').hide();
-                    $('#flash_div').show();
-                    jQuery('#flash_div').append(element);
-                } else {
-                    $('#flash_div').html('');
-                    $('#flash_div').hide();
-                    jQuery('#page').show();
-                    jQuery('#leftBg').show();
-                    jQuery('#flash_element').append(element);
-                }
-            }
-        });
-    });
-
-    function changeFlashLayout(flashType) {
-
-        var element = '<?php echo $this->flashObj; ?>';
-        $.ajax({
-            url: "<?php echo $this->baseUrl()?>/lesson/updatesize",
-            type: "post",
-            data: {
-                'flash_size': flashType,
-                'lesson_id': '<?php echo $this->responce['id']?>'
-
-            },
-            success: function(result) {
-
-            }
-        });
-
-        //flashObf = jQuery('#flash_element');
-        if(flashType == 1) {
-            $('#flash_element').html('');
-            jQuery('#page').hide();
-            jQuery('#leftBg').hide();
-            $('#flash_div').show();
-            jQuery('#flash_div').append(element);
-        } else{
-            $('#flash_div').html('');
-            $('#flash_div').hide();
-            jQuery('#page').show();
-            jQuery('#leftBg').show();
-            jQuery('#flash_element').append(element);
-        }
-
-    }
-</script>

@@ -1,3 +1,5 @@
+.titleInfo .degreee
+
 /*=============================================
   Page
 =============================================*/
@@ -256,7 +258,10 @@ nav ul:after {
     padding: 18px 0 24px 0;
     background: url(../images/bg/bottom-shadow-line.png) no-repeat center bottom;
 }
-
+.shadowSeparatorBoxSmall{
+    padding: 18px 0 24px 0;
+    background: url(../images/bg/bottom-shadow-line.png) no-repeat center bottom;
+}
 #content h1, #content h2 {
     font-size: 12px;
     line-height: 16px;
@@ -470,6 +475,26 @@ input.button-2 {
     background-position: 0 -19px;
 }
 .button-2.play.disable {
+    background-position: 0 -44px;
+}
+.button-2.open {
+    background: url(../images/icons/open.png) no-repeat 0 2px;
+}
+
+.button-2.open:hover {
+    background-position: 0 -17px;
+}
+.button-2.open.disable {
+    background-position: 0 -44px;
+}
+
+.button-2.display {
+    background: url(../images/icons/display.png) no-repeat 0 2px;
+}
+.button-2.display:hover {
+    background-position: 0 -18px;
+}
+.button-2.display.disable {
     background-position: 0 -44px;
 }
 .disable{
@@ -907,7 +932,10 @@ input.button-2 {
 }
 
 .feauteresButtons .button-2 {
+    bottom: 14px;
     float: right;
+    position: absolute;
+    right: 25px;
 }
 
 /*---Services tab-----------------------------------------------------------------*/
@@ -1117,6 +1145,7 @@ input.button-2 {
 }
 .userRelationsTab table{
     border:1px solid #dbdbde;
+    width:100%;
 }
 .userRelationsTab  table tbody tr{
     height:35px;
@@ -1131,6 +1160,7 @@ input.button-2 {
 }
 .userRelationsTab table thead tr td{
     padding: 7px;
+    text-transform: capitalize;
 }
 .userRelationsTab.profile  .button-2{
     padding-right: 20px;
@@ -1218,7 +1248,7 @@ input.button-2 {
     height: auto;
     min-height: 49px !important;
     width: auto;
-    padding: 21px 0 0 13px !important;
+    padding: 21px 0 0 13px;
 }
 #block-confirm, #delete-confirm{
     display: none;
@@ -1502,23 +1532,12 @@ input.button-2 {
     -webkit-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2); /* Для Safari и Chrome */
     box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
 }
-.alert{
-    font: 11px Arial !important;
-    color:#ad4c4c !important;
-    background-color: #fae9e9 !important;
-    border: 1px solid #ebb7b7 !important;
-    border-radius:2px;
-}
 
-.alert .flash-warning{
-    font: 700 11px Arial !important;
-    color: #981919 !important;
-}
 
-.alert .close{
+
+.alert .close, .alert-block .close{
     background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat;
-    top: -17px !important;
-    left: 30px !important;
+
     line-height: 20px;
     position: relative;
     width:12px;
@@ -1554,7 +1573,7 @@ input.button-2 {
     font: 11px Arial !important;
     color:#ad4c4c !important;
     background-color: #fae9e9 !important;
-    border: 1px solid #ebb7b7 !important;
+    /*border: 1px solid #ebb7b7 !important;*/
     border-radius:2px;
 }
 
@@ -1563,16 +1582,7 @@ input.button-2 {
     color: #981919 !important;
 }
 
-.alert .close{
-    background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat;
-    top: -17px !important;
-    left: 30px !important;
-    line-height: 20px;
-    position: relative;
-    width:12px;
-    height: 12px;
-    opacity: 1 !important;
-}
+
 /*JSMessenger, attention (yellow)*/
 .attention{
     font: 11px Arial !important;
@@ -1588,8 +1598,6 @@ input.button-2 {
 }
 .attention .close {
     background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat 0 25%;
-    top: -17px !important;
-    left: 30px !important;
     line-height: 20px;
     position: relative;
     width:12px;
@@ -1604,6 +1612,7 @@ input.button-2 {
     background-color: #cce8bf !important;
     border: 1px solid #a0c58e !important;
     border-radius:2px;
+    padding: 5px;
 }
 
 .alert .success .flash-success{
@@ -1612,20 +1621,22 @@ input.button-2 {
 }
 .alert .success .close {
     background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat 33% 0;
-    top: -17px !important;
-    left: 30px !important;
     line-height: 20px;
     position: relative;
     width:12px;
     height: 12px;
     opacity: 1 !important;
+    float:right;
 }
-
+.alert-block .header{
+    text-transform: capitalize;
+}
 /*--- RESUME -----------------------------------------------------------------*/
-.resumeGeneral .shadowSeparatorBox{
+.resumeGeneral .shadowSeparatorBox, .reviews .shadowSeparatorBox, .admin .shadowSeparatorBox {
     padding-top:0;
     min-height: 416px;
 }
+
 .resumeGeneral .shadowSeparator{
     padding-top:27px;
 }
@@ -1804,7 +1815,77 @@ float:right;
 .checBoxGrey.empty{
     background-position: -16px 6px;
 }
+.lessonFilterBlock{
+    padding-top:15px;
+}
+.lessonFilterBlock .filters{
+    float:left;
+}
+.lessonFilterBlock .filters h1{
+    padding-top:5px;
+}
+.notes .notesWindow{
+    border: 1px solid #B5B5B5;
+    border-radius: 2px 2px 2px 2px;
+    height: 200px;
+    margin: 10px 0 23px 0;
+    overflow: auto;
+    width: 420px;
+}
+.note:nth-child(even){
+    background-color: #FCFCFC;
+}
+.note{
+    padding: 3px 0 3px 8px;
+    list-style: none;
+}
+.note p{
+    padding: 0;
+}
+.cc{
+  text-transform: capitalize;
+}
+.notes{
+    width:424px;
+}
+.notes .time{
+    padding-left: 300px;
+    color:#949494;
+}
 
+.notes .username{
+    float:left;
+}
+.notes .rateInput{
+    margin: 0 0 15px 26px;
+    width: 327px;
+}
+.smallSeparatorBot {
+    background: url("../images/elem/smallSeparator.png") no-repeat scroll center 0 transparent;
+    margin-bottom: 9px;
+    padding: 1px 0 0;
+    position: relative;
+    top: 12px;
+}
+.smallSeparatorTop {
+    background: url("../images/elem/smallSeparator.png") no-repeat scroll center 0 transparent;
+    margin-bottom: 3px;
+    padding: 1px 0 0;
+    position: relative;
+    bottom: 3px;
+}
+.ui-dialog-title{
+    text-transform: uppercase;
+}
+.dialogFooter .button{
+    padding: 0 25px 2px;
+    font: 12px dosis-semibold-middle;
+}
+
+.dialogFooter .starsBlock, .dialogFooter .rate{
+    float:left;
+    margin-right: 10px;
+}
 /** ********************* user profile tab ***************************************************************/
 
 /*User profile*/
@@ -1996,4 +2077,89 @@ float:right;
     margin-bottom: 25px;
     margin-top: 30px;
     width: 800px;
+}
+/*---SEARCH----------------------------------------------------------------*/
+
+.searchTab .shadowSeparatorBox{
+    min-height:415px;
+}
+/*---timepicker----------------------------------------------------------------*/
+.android-ics .dw{
+    color:#4E5C2D !important;
+    background :none repeat scroll 0 0 #B8CD85 !important
+}
+.android-ics .dwv{
+    border-bottom: 2px solid #4E5C2D !important;
+}
+
+.android-ics .dw .dwwb{
+    background: none repeat scroll 0 0 #839A4C !important;
+}
+.android-ics .dwwbm:after{
+    border-color: transparent transparent #3A4422  !important;
+}
+ .android-ics .dwwbp:after{
+     border-color: #3A4422 transparent transparent  !important;
+}
+
+.android-ics .dw .dwwol{
+    border-bottom: 1px solid #555555 !important;
+    border-top: 1px solid #333333 !important;
+}
+.android-ics  .dwbw {
+    background-color: #6C803F !important;
+
+}
+.dwa{
+    background: transparent;
+}
+
+/********** REVIEWS ************/
+#mainContent .starsUL li{
+    float:none;
+}
+
+.userRelationsTab.reviews h1{
+    padding:10px 0;
+}
+.starsUL{
+    padding-left:0;
+}
+.userRelationsTab.reviews table tbody td{
+    padding-left:5px;
+}
+.userRelationsTab.reviews .stars{
+    padding-right: 10px;
+}
+.userRelationsTab.reviews .shadowSeparatorBoxSmall{
+    padding-top:3px;
+}
+.userRelationsTab.reviews .shadowSeparator{
+    margin-bottom: 28px;
+    margin-top: 7px;
+}
+
+/************************************** ADMIN *************************/
+.admin .categories, .admin .duration{
+    margin-right: 30px;
+    width: 370px;
+}
+.admin .categories .formRow{
+    padding:8px 0;
+}
+.admin .categories .category{
+    width:340px;
+}
+.admin .categories .formRow:nth-child(even){
+    background-color: #FCFCFC;
+}
+.admin h1{
+    padding-bottom: 15px;
+}
+.admin .categories .buttonsRow .button-2{
+    margin-right:13px;
+}
+.admin .categories .newCat{
+    width:300px;
+    margin-right: 28px;
 }

@@ -19,7 +19,14 @@ class SearchController extends Aimya_Controller_BaseController
         $paginator = Zend_Paginator::factory($hits);
         //$paginator->setCurrentPageNumber($this->_getParam('page'));
         //$paginator->setItemCountPerPage(10);
+
+        $userTable = new Application_Model_DbTable_Users();
+        $usersArray = array();
+        foreach($paginator as $item){
+            $usersArray[]= $userTable->getFullData($item->user_id);
+        }
         $this->view->hits=$paginator;
+        $this->view->users=$usersArray;
     }
 
     public function reindexAction()
@@ -30,7 +37,10 @@ class SearchController extends Aimya_Controller_BaseController
         @mkdir(realpath(APPLICATION_PATH) . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'search_indexes');
 
         $index = Zend_Search_Lucene::create(realpath(APPLICATION_PATH . '/data/search_indexes'));
+        $dbUserModel = new Application_Model_DbTable_Users();
+
         $services = $serviceTable->getServices();
+
         foreach($services as $service)
         {
             $doc = new Zend_Search_Lucene_Document();

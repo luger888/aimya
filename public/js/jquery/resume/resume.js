@@ -40,7 +40,8 @@ function saveResume() {
             'education' : $('.userInfo .education input').val(),
             'degree' : $('.userInfo .degree input').val(),
             'address' : $('.userInfo .address input').val(),
-            'phone' : $('.userInfo .phone input').val()
+            'phone' : $('.userInfo .phone input').val(),
+            'resumeMain' : 1
         },
         success:function (response) {
             $('.userInfo .education').html($('.userInfo .education input').val());
@@ -82,7 +83,7 @@ function saveResumeItem(tab) {
                     $("#" + key).attr("placeholder", response.errors[key]);
 
                 }
-                if (response.result) { //if success
+                if (response.success) { //if success
 
 //                    $('#experience').val('');
 //                    var content = '  <div class="experienceItem clearfix">' +
@@ -159,6 +160,10 @@ function updateResumeItem(e, tab) {
             success:function (response) {
                 $('#file_upload').data('uploadifive').settings.formData = { 'resumeType':tab, 'resumeTypeId':id};
                 $('#file_upload').uploadifive('upload');
+                $('.button-2:not(".save, .upload")').removeClass("disable");
+                experienceWrapper.find('.formRow').html(resumeContent);
+                $(e).remove();
+                experienceWrapper.find('.uploadWrapper').remove();
             }
         }
 
@@ -197,6 +202,7 @@ function updateObjective() {
     )
 }
 function uploadify() {
+
     var baseUrl = $('#current_url').val();
     $('#file_upload').uploadifive({
             'auto':false,

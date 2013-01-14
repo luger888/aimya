@@ -7,6 +7,7 @@ class UserController extends Zend_Controller_Action
         $this->_helper->AjaxContext()
             ->addActionContext('registration','json')
             ->addActionContext('login','json')
+            ->addActionContext('timezone','json')
             ->initContext('json');
     }
 
@@ -160,5 +161,26 @@ class UserController extends Zend_Controller_Action
     {
         Zend_Auth::getInstance()->clearIdentity();
         $this->_helper->redirector('index', 'index');
+    }
+
+    public function timezoneAction()
+    {
+        if($this->getRequest()->getParam('timezone')) {
+            $timezone = $this->getRequest()->getParam('timezone');
+
+            $userTable = new Application_Model_DbTable_Users();
+
+            $result = $userTable->getTimeZone();
+            if($result['timezone'] == '') {
+                $status = $userTable->setDefaultTimezone($timezone);
+                if($status) {
+                    $this->view->status = 'success';
+                } else {
+                    $this->view->status = 'error';
+                }
+            } else {
+                $this->view->status = 'error';
+            }
+        }
     }
 }
