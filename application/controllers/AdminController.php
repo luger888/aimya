@@ -19,10 +19,22 @@ class AdminController extends Zend_Controller_Action
         $categories = $lessonCatDb->getLessonCategories();
         $this->view->categories = $categories;
 
+        $lessonDurDb = new Application_Model_DbTable_LessonDuration();
+        $durations = $lessonDurDb->getLessonDurations();
+        $this->view->durations = $durations;
         if ($this->getRequest()->isPost()) {
 
-            if ($this->getRequest()->getParam('deleteId')) {
-                $result = $lessonCatDb->removeCat($this->getRequest()->getParam('deleteId'));
+            if ($this->getRequest()->getParam('deleteCat')) {
+                $result = $lessonCatDb->removeCat($this->getRequest()->getParam('deleteCat'));
+                if ($result) {
+                    $this->view->result = 1;
+                } else {
+                    $this->view->fail = 1;
+                }
+            }
+
+            if ($this->getRequest()->getParam('deleteDur')) {
+                $result = $lessonDurDb->removeDuration($this->getRequest()->getParam('deleteDur'));
                 if ($result) {
                     $this->view->result = 1;
                 } else {
@@ -32,6 +44,9 @@ class AdminController extends Zend_Controller_Action
 
             if ($this->getRequest()->getParam('categories')) {
                  $lessonCatDb->addCats($this->getRequest()->getParams());
+            }
+            if ($this->getRequest()->getParam('durations')) {
+                $lessonDurDb->addDurations($this->getRequest()->getParams());
             }
         }
     }
