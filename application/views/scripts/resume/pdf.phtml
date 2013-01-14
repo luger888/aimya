@@ -1,6 +1,7 @@
 <?php
 $stylesheet = file_get_contents('./css/styles.css');
 
+
 $html = "<div class='resumeOnlineMain'>
     <div class='shadowSeparator'>
     <div class='shadowSeparatorBox'>
@@ -39,13 +40,11 @@ $html .= "</div>
     </div>
 </div>";
 
-$mpdf = new Aimya_Mpdf_mPDF();
+$mpdf = new Aimya_Mpdf_mpdf();
 $mpdf->WriteHTML($stylesheet, 1);
 $mpdf->WriteHTML($html, 2);
 $mpdf->Output();
 exit;
-
-
 
 
 // Load a PDF document from a string

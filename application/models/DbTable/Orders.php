@@ -50,4 +50,26 @@ class Application_Model_DbTable_Orders extends Application_Model_DbTable_Abstrac
 
         return $data->query()->fetch();
     }
+
+    public function getLessonIncome(){
+
+        $lastMonth = date("Y-m-d H:i:s", strtotime("-1 month"));
+        $income = array();
+        $total = $this->getAdapter()->select()
+            ->from($this->_name,  array('sum(aimya_profit) as sum'))
+            ->where('status=?', 'complete');
+        $result = $total->query()->fetch();
+
+        $totalLM = $this->getAdapter()->select()
+          ->from($this->_name, array('sum(aimya_profit) as sum'))
+            ->where('status=?', 'complete')
+            ->where('created_at>=?', $lastMonth);
+        $resultLM = $totalLM->query()->fetch();
+
+        $income['allTime']['lessonIncome'] = $result;
+        $income['lastMonth']['lessonIncome'] = $resultLM;
+
+        return $income;
+    }
+
 }

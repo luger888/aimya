@@ -1,17 +1,17 @@
 <?php
-class Application_Model_DbTable_LessonCategory extends Application_Model_DbTable_Abstract
+class Application_Model_DbTable_LessonDuration extends Application_Model_DbTable_Abstract
 {
-    protected $_name = 'lesson_category';
+    protected $_name = 'lesson_duration';
 
-    public function getLessonCategories(){
+    public function getLessonDurations(){
 
         $data = $this   ->select()
-            ->from('lesson_category', (array('id', 'title', 'status')));
+            ->from('lesson_duration', (array('id', 'duration', 'status')));
 
         return $data->query()->fetchAll();
 
     }
-    public function removeCat($id)
+    public function removeDuration($id)
     {
         $data = array(
             'status' => 0,
@@ -26,11 +26,11 @@ class Application_Model_DbTable_LessonCategory extends Application_Model_DbTable
 
     }
 
-    public function  addCats($cats){
+    public function  addDurations($dur){
 
-        for($i=0;$i<count($cats['categories']);$i++){
+        for($i=0;$i<count($dur['durations']);$i++){
             $data = array(
-                'title' => $cats['categories'][$i],
+                'duration' => (int)$dur['durations'][$i],
                 'status' => 1,
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')

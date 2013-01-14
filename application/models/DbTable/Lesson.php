@@ -157,4 +157,20 @@ class Application_Model_DbTable_Lesson extends Application_Model_DbTable_Abstrac
         return $data->query()->fetch();
     }
 
+    public function getLessons(){
+        $lastMonth = date("Y-m-d H:i:s", strtotime("-1 month"));
+        $lessonsCount = array();
+        $total = $this->getAdapter()->select()
+            ->from($this->_name, 'COUNT(*) AS COUNT');
+        $result = $total->query()->fetch();
+
+        $totalLM = $this->getAdapter()->select()
+            ->from($this->_name, 'COUNT(*) AS COUNT')
+            ->where('created_at>=?', $lastMonth);
+        $resultLM = $totalLM->query()->fetch();
+
+        $lessonsCount['allTime']['total'] = $result['COUNT'];
+        $lessonsCount['lastMonth']['total'] = $resultLM['COUNT'];
+        return $lessonsCount;
+    }
 }
