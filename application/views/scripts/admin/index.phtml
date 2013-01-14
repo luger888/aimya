@@ -22,6 +22,20 @@
         <div class="duration floatLeft">
             <div class="smallSeparatorTop">
                 <h1><?php echo $this->translate('define time period:');?></h1>
+
+                <?php foreach ($this->durations as $cat) {
+                if ($cat['status'] == 1) {
+                    echo '<div class="formRow clearfix"><div class="category floatLeft">' . $cat['duration'] . '</div><div class ="delete floatLeft"><input type="button" class = "button-2 delete"  onclick="removeDur(this, ' . $cat['id'] . ');return false;"></div></div>';
+                }
+            }
+                ?>
+                <div class="buttonsRow">
+                    <input type='button' id = "saveDur" class="button-2 save floatRight disable" value='save'
+                           onclick="saveDur(this);return false;">
+                    <input type='button' class="button-2 add floatRight" value='add'
+                           onclick="addDur(this);return false;">
+
+                </div>
             </div>
         </div>
     </div>
