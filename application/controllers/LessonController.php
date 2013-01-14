@@ -160,7 +160,7 @@ class LessonController extends Zend_Controller_Action
 
     public function recordingAction()
     {
-        if ($this->getRequest()->getParam('partner_id')) {
+        /*if ($this->getRequest()->getParam('partner_id')) {
             $userId = $this->getRequest()->getParam('partner_id');
             $lessonTable = new Application_Model_DbTable_Lesson();
             $this->view->lessonStatus = 1;
@@ -201,7 +201,13 @@ class LessonController extends Zend_Controller_Action
             }
         } else {
             die('server error');
-        }
+        }*/
+        $lessonModel = new Application_Model_Lesson();
+        $lessonTable = new Application_Model_DbTable_Lesson();
+        $activeLesson = $lessonTable->checkAvailableLesson(Zend_Auth::getInstance()->getIdentity()->id);
+        //$videoPath = $lessonModel->createVideoPath($res, $activeLesson['creator_id']);
+
+        $openDispay = $lessonModel->openDisplay();
     }
 
     public function detailsAction()
