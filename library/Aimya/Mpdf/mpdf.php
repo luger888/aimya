@@ -54,7 +54,7 @@ if (!defined('PHP_VERSION_ID')) {
     define('PHP_VERSION_ID', ($version[0] * 10000 + $version[1] * 100 + $version[2]));
 }
 
-class Aimya_Mpdf_mPDF
+class Aimya_Mpdf_mpdf
 {
 
 ///////////////////////////////
