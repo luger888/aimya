@@ -385,6 +385,12 @@ input.button-2 {
 .button-2.block:hover {
     background-position: 0 -16px;
 }
+.button-2.unblock {
+    background: url(../images/icons/unblock.png) no-repeat 0 3px;
+}
+.button-2.unblock:hover {
+    background-position: 0 -16px;
+}
 .button-2.add:hover {
     background-position: 0 -20px;
 }
@@ -2175,4 +2181,7 @@ float:right;
 }
 .admin .metricItem .formRow:nth-child(even){
     background-color: #FCFCFC;
+}
+.userRelationsTab.admin table tbody td {
+    padding-left: 5px;
 }

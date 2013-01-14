@@ -21,18 +21,30 @@
                     <?php //Zend_Debug::dump($booking)?>
                 <tr>
                     <td class="username">
-                        <?php echo $users[''];?>
+                        <?php echo $user['username'];?>
                     </td>
                     <td class="name">
+                        <?php echo $user['firstname'];?>
                     </td>
                     <td class="lastname">
-
+                        <?php echo $user['lastname'];?>
                     </td>
                     <td class="role">
-
+                    <?php if($user['role']==1){
+                        $role='Student';
+                    }
+                        else{
+                            $role='Instructor';
+                        }
+                        echo $role;?>
                     </td>
                     <td class="suspend center">
-
+                        <?php if($user['status']==1){
+                        echo '<input type="button" class="button-2 block" value ="suspend">';
+                    }
+                    else if($user['status']==2){
+                        echo '<input type="button" class="button-2 unblock" value ="restore">';
+                    }?>
                     </td>
                 </tr>
                     <?php endforeach; ?>

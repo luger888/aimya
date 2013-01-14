@@ -308,4 +308,23 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         $usersCount['lastMonth']['teachers'] = $teacherResLM['COUNT'];
         return $usersCount;
     }
+
+    public function getUsers(){
+        $students = $this->getAdapter()->select()
+            ->from($this->_name, array('firstname', 'lastname', 'username', 'role', 'status'))
+        ->where('status>=?', 1);
+        return $students->query()->fetchAll();
+    }
+
+    public function changeUserStatus($id, $status){
+        $array = array(
+
+            'status' => $status
+
+        );
+
+        $where = $this->getAdapter()->quoteInto('id=?', $id);
+
+        return $this->update($array, $where);
+    }
 }

@@ -648,3 +648,4 @@ function sendRating(e){
         }
     });
 }
+
