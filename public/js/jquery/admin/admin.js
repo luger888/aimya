@@ -114,3 +114,8 @@ function removeDur(e, id) {
     }
     return false;
 }
+function suspension(e, status){
+    if(status == 1){
+        var answer = confirm("Suspend user?");
+    }
+}

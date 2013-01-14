@@ -53,6 +53,15 @@ class AdminController extends Zend_Controller_Action
 
     public function usersAction()
     {
+        $usersDb = new Application_Model_DbTable_Users();
+        $this->view->userList = $usersDb->getUsers();
+
+        if ($this->getRequest()->isPost()) {
+
+            if ($this->getRequest()->getParam('suspendId')) {
+               $usersDb->changeUserStatus($this->getRequest()->getParam('suspendId'), $this->getRequest()->getParam('status'));
+            }
+        }
 
     }
 

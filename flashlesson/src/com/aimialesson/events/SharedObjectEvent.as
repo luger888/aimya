@@ -7,6 +7,7 @@ package com.aimialesson.events
 		public static const SHARED_PRESENTATION_UPLOADED:String = "sharedPresentationUploaded";
 		public static const LESSON_IS_FINISHED:String = "lessonIsFinished";
 		public static const TIME_IS_OUT:String = "timeIsOut";
+		public static const PARTNER_VIDEO_MUTE_CHANGE:String = "partnerVideoMuteChange";
 		
 		public var value:String;
 		

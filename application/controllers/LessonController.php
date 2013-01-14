@@ -80,6 +80,16 @@ class LessonController extends Zend_Controller_Action
                 $lessonFeadbackTable = new Application_Model_DbTable_LessonFeedback();
                 $lessonFeadbackTable->createDefaultFeedback($res, Zend_Auth::getInstance()->getIdentity()->id);
             }
+            if ($booking['video']) {
+                $lessonTable = new Application_Model_DbTable_Lesson();
+                $activeLesson = $lessonTable->checkAvailableLesson(Zend_Auth::getInstance()->getIdentity()->id);
+                $videoPath = $lessonModel->createVideoPath($res, $activeLesson['creator_id']);
+
+                $openDispay = $lessonModel->openDisplay();
+
+                exec("recording.sh {$videoPath}");
+
+            }
 
             $this->_helper->redirector('join', 'lesson');
         }

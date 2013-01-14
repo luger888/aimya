@@ -76,9 +76,9 @@ package com.aimialesson.controllers
 			debug("StreamController:myVideoInit");
 			Media.getInstance().cam = Camera.getCamera();
 			//Media.getInstance().mic = Microphone.getMicrophone(); 
-			Media.getInstance().mic = Microphone.getEnhancedMicrophone();
+		/*	Media.getInstance().mic = Microphone.getEnhancedMicrophone();
 			var options:MicrophoneEnhancedOptions = Media.getInstance().mic.enhancedOptions; 
-			//options.mode = MicrophoneEnhancedMode.FULL_DUPLEX; 
+			options.mode = MicrophoneEnhancedMode.HEADSET;*/ 
 			//options.echoPath = 256;
 		//	options.autoGain = true;
 			//options.nonLinearProcessing = true;

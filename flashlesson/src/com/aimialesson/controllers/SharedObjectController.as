@@ -21,6 +21,7 @@ package com.aimialesson.controllers
 	import mx.core.FlexGlobals;
 	
 	[Event (name="sharedPresentationUploaded", type="com.aimialesson.events.SharedObjectEvent")]
+	[Event (name="lessonIsFinished", type="com.aimialesson.events.SharedObjectEvent")]
 	public class SharedObjectController extends EventDispatcher
 	{
 		public function SharedObjectController(target:IEventDispatcher=null)
@@ -62,10 +63,6 @@ package com.aimialesson.controllers
 				Notes.getInstance().notesAC = new ArrayCollection(so.data["notes"] as Array);
 				debug (so.data["notes"].length);
 			}
-			/*if (so.data['chatMessageData'] != null){
-				Notes.getInstance().newLineData = so.data['chatMessageData'];
-				setSOProperty('notes', Notes.getInstance().notesAC.source);				
-			}*/
 			Presentation.getInstance().currentImageNumber = so.data['imageN'];
 			/*if (so.data['uploaded'] == "true"){
 				so.data['uploaded'] = "false";
@@ -90,6 +87,9 @@ package com.aimialesson.controllers
 			}
 			if (so.data['endLesson' + User.getInstance().userID] == "true"){
 				dispatchEvent( new SharedObjectEvent ( SharedObjectEvent.LESSON_IS_FINISHED, User.getInstance().userName  ) );
+			}
+			if (so.data['videoMute' + User.getInstance().partnerID] ){
+				Media.getInstance().partnerCamPaused =  (so.data['videoMute' + User.getInstance().partnerID] == "true") ? true : false;
 			}
 			/*if (so.data['screenMode' + User.getInstance().userID] == "true"){
 				// hack for usual case (not for refreshing on maximize mode in webkit based browsers etc...)
@@ -162,6 +162,9 @@ package com.aimialesson.controllers
 																					partnerIsOnlineTimer.start();
 																				}
 																				break;
+					case 'videoMute' + User.getInstance().partnerID : 	debug(changedList[i].name);
+																		Media.getInstance().partnerCamPaused =  (so.data[changedList[i].name] == "true") ? true : false;
+																		break;
 					case 'endLesson'  + User.getInstance().partnerID		:	if (so.data[changedList[i].name] == "true"){
 																					dispatchEvent( new SharedObjectEvent ( SharedObjectEvent.LESSON_IS_FINISHED, User.getInstance().partnerName ) );
 																				}
