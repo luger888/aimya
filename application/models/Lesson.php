@@ -62,7 +62,7 @@ class Application_Model_Lesson
 
     public function openDisplay()
     {
-        passthru("open_disp.sh 3", $display);
+        passthru("open_disp2.sh 3", $display);
         var_dump($display);
         die;
 
