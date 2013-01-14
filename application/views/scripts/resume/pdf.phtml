@@ -40,7 +40,7 @@ $html .= "</div>
     </div>
 </div>";
 
-$mpdf = new Aimya_Mpdf_mPDF();
+$mpdf = new Aimya_Mpdf_mpdf();
 $mpdf->WriteHTML($stylesheet, 1);
 $mpdf->WriteHTML($html, 2);
 $mpdf->Output();

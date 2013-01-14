@@ -1,7 +1,43 @@
 <?php echo $this->partial('partials/adminNav.phtml') ?>
-<div class="mainContainer admin clearfix">
+<div class="mainContainer  userRelationsTab usersAdmin admin clearfix">
     <div class="shadowSeparator clearfix">
         <div class="shadowSeparatorBox clearfix">
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <td> <?php echo $this->translate('user') ?></td>
+                    <!--<td> <?php /*echo $this->translate('Status') */?></td>-->
+                    <td> <?php echo $this->translate('name') ?></td>
+                    <td> <?php echo $this->translate('last name') ?></td>
+                    <td> <?php echo $this->translate('role') ?></td>
+                    <td> <?php echo $this->translate('suspend') ?></td>
+
+                </tr>
+                </thead>
+                <tbody>
+                <?php   $users = $this->userList;
+                foreach ($users as $user): ?>
+                    <?php //Zend_Debug::dump($booking)?>
+                <tr>
+                    <td class="username">
+                        <?php echo $users[''];?>
+                    </td>
+                    <td class="name">
+                    </td>
+                    <td class="lastname">
+
+                    </td>
+                    <td class="role">
+
+                    </td>
+                    <td class="suspend center">
+
+                    </td>
+                </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
