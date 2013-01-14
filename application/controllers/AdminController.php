@@ -68,6 +68,7 @@ class AdminController extends Zend_Controller_Action
 
     public function metricsAction()
     {
-
+      $userDb = new Application_Model_DbTable_Users();
+      $this->view->usersCount = $userDb->getUsersCount();
     }
 }

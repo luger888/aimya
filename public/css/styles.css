@@ -2161,3 +2161,18 @@ float:right;
     width:300px;
     margin-right: 28px;
 }
+.admin .metricItem .formRow{
+    padding:8px 0;
+}
+.admin .metricItem  h1{
+    padding-top:15px;
+}
+.admin .metricItem .head{
+    display: inline-block;
+    padding-left: 30px;
+    text-transform: capitalize;
+    width: 100px;
+}
+.admin .metricItem .formRow:nth-child(even){
+    background-color: #FCFCFC;
+}
