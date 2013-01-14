@@ -161,7 +161,8 @@ package com.aimialesson.controllers
 		public function onMediaEvent ( event : MediaEvent ) : void {
 			debug("MainController:onAppEvent");
 			switch (event.type){
-				case (MediaEvent.MY_CAM_PAUSE_TOGGLE ):	streamController.myVideoMute();	
+				case (MediaEvent.MY_CAM_PAUSE_TOGGLE ):	streamController.myVideoMute();
+														soController.setSOProperty('videoMute' + User.getInstance().userID, (Media.getInstance().camPaused).toString());
 														break;
 				case (MediaEvent.MY_MIC_PAUSE_TOGGLE ):	streamController.myAudioMute();	
 														break;
