@@ -43,7 +43,7 @@ class AdminController extends Zend_Controller_Action
             }
 
             if ($this->getRequest()->getParam('categories')) {
-                 $lessonCatDb->addCats($this->getRequest()->getParams());
+                $lessonCatDb->addCats($this->getRequest()->getParams());
             }
             if ($this->getRequest()->getParam('durations')) {
                 $lessonDurDb->addDurations($this->getRequest()->getParams());
@@ -68,7 +68,17 @@ class AdminController extends Zend_Controller_Action
 
     public function metricsAction()
     {
-      $userDb = new Application_Model_DbTable_Users();
-      $this->view->usersCount = $userDb->getUsersCount();
+        $userDb = new Application_Model_DbTable_Users();
+        $subscrDb = new Application_Model_DbTable_Subscriptions();
+        $lessonDb = new Application_Model_DbTable_Lesson();
+        $ordersDb = new Application_Model_DbTable_Orders();
+        $this->view->usersCount = $userDb->getUsersCount();
+        $this->view->lessonsCount = $lessonDb->getLessons();
+        $incomeLessons = $ordersDb->getLessonIncome();
+        $incomeSubscr = $subscrDb->getSubscriptionsIncome();
+        $income = array();
+        $income['totalIncome'] = $incomeLessons['allTime']['lessonIncome']['sum'] + $incomeSubscr['allTime']['subscrIncome']['sum'];
+        $income['lastMonthIncome'] = $incomeLessons['lastMonth']['lessonIncome']['sum'] + $incomeSubscr['lastMonth']['subscrIncome']['sum'];
+        $this->view->income = $income;
     }
 }

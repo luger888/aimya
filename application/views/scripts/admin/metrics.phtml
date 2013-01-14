@@ -22,15 +22,15 @@
             <div class="shadowSeparator"> </div>
             <div class="metricItem">
                 <h1><?php echo $this->translate('aimya income:')?></h1>
-                <div class="formRow"><span class="head"><?php echo $this->translate('year to date:')?></span></div>
-                <div class="formRow"><span class="head"><?php echo $this->translate('month to date:')?></span></div>
+                <div class="formRow"><span class="head"><?php echo $this->translate('total:')?></span><?php echo $this->income['totalIncome'];?></div>
+                <div class="formRow"><span class="head"><?php echo $this->translate('last month:')?></span><?php echo $this->income['lastMonthIncome'];?></div>
             </div>
             <div class="shadowSeparatorBoxSmall"> </div>
             <div class="shadowSeparator"> </div>
             <div class="metricItem">
                 <h1><?php echo $this->translate('lessons:')?></h1>
-                <div class="formRow"><span class="head"><?php echo $this->translate('this year:')?></span></div>
-                <div class="formRow"><span class="head"><?php echo $this->translate('last month:')?></span></div>
+                <div class="formRow"><span class="head"><?php echo $this->translate('total:')?></span><?php echo $this->lessonsCount['allTime']['total'];?></div>
+                <div class="formRow"><span class="head"><?php echo $this->translate('last month:')?></span><?php echo $this->lessonsCount['lastMonth']['total'];?></div>
             </div>
 
 
