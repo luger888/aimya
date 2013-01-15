@@ -7,7 +7,7 @@ body {
 
 #page {
     min-height: 100%;
-    background: url(../images/bg/home-light.jpg) no-repeat center 0 #d5e4ad;
+    background-color: #f2f1da;
     min-width: 980px;
     position: relative;
 }
@@ -209,7 +209,7 @@ input.btnLogin {
     font-family: 'dosissemibold';
     text-transform: uppercase;
     text-shadow: 0px 1px 2px #fff;
-    background: url(../images/elem/home-title-line.png) no-repeat 0 bottom;
+    background: url(../images/elem/shadow_separator.png) no-repeat 0 bottom;
     padding: 0 0 27px 5px;
     margin-bottom: 11px;
 }

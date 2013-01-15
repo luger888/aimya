@@ -35,17 +35,18 @@ class CmsController extends Aimya_Controller_BaseController
 
                 $name = $this->getRequest()->getParam('name');
                 $uri = $this->getRequest()->getParam('uri');
-                $content = $this->getRequest()->getParam('content');
+                $content = $this->getRequest()->getParam('contentCKE');
 
                 $cms = new Application_Model_DbTable_Cms();
                 $check = $cms->getPageByUri($uri);
-                if($check['id']){
+                if ($check['id']) {
+                    $this->_helper->flashMessenger->addMessage(array('fail' => 'this uri already exists'));
+                    $this->_helper->redirector('new', 'cms');
 
-                    $this->view->message = 'this uri already exists';
 
-                }else{
+                } else {
 
-                    $cms->createStatisPage($name, $uri, $content);
+                    $cms->createStaticPage($name, $uri, $content);
                     $this->_helper->redirector('index', 'cms');
 
                 }
@@ -61,10 +62,11 @@ class CmsController extends Aimya_Controller_BaseController
 
     public function deleteAction()
     {
-
-        $cms = new Application_Model_DbTable_Cms();
-        $cms->deleteItem($this->getRequest()->getParam('id'));
-        $this->_helper->redirector('index', 'cms');
+        if ($this->getRequest()->isGet()) {
+            $cms = new Application_Model_DbTable_Cms();
+            $cms->deletePage($this->getRequest()->getParam('id'));
+            $this->_helper->redirector('index', 'cms');
+        }
 
     }
 
@@ -84,17 +86,26 @@ class CmsController extends Aimya_Controller_BaseController
                 $id = $this->getRequest()->getParam('id');
                 $name = $this->getRequest()->getParam('name');
                 $uri = $this->getRequest()->getParam('uri');
-                $content = $this->getRequest()->getParam('content');
+                $content = $this->getRequest()->getParam('contentCKE');
+                $cms = new Application_Model_DbTable_Cms();
+                $check = $cms->getPageByUri($uri);
+                if (!$check['id']) {
+                    $cms->updateStaticPage($id, $name, $uri, $content);
+                    $this->_helper->redirector('index', 'cms');
+                } else {
+                    $this->_helper->flashMessenger->addMessage(array('fail' => 'this uri already exists'));
+                    $this->_helper->redirector('new', 'cms');
 
-                $cms->updateStaticPage($id, $name, $uri, $content);
-
+                }
             } else {
                 $this->view->errors = $form->getErrors();
             }
 
         }
         $c = $cms->getItem($id);
-        if(!$c) { $this->_helper->redirector('page404', 'error'); }
+        if (!$c) {
+            $this->_helper->redirector('page404', 'error');
+        }
 
         $this->view->form = $form->populate($c);
     }
@@ -106,7 +117,7 @@ class CmsController extends Aimya_Controller_BaseController
         $cms = new Application_Model_DbTable_Cms();
         $data = $cms->getPageByUri($uri);
 
-        if(!$data)$this->_helper->redirector('page404', 'error');
+        if (!$data) $this->_helper->redirector('page404', 'error');
 
         $this->view->content = $data;
 

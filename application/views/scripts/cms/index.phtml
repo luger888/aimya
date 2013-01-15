@@ -1,23 +1,37 @@
-<div class = "deleteList">
-    <table border = "1" cellpadding="5" cellspacing="5">
-        <tr>
-            <td>№</td><td>Name</td><td>Uri</td><td>Edit</td><td>Delete</td>
-        </tr>
-        <?php
+<?php echo $this->partial('partials/adminNav.phtml') ?>
+<div class="mainContainer userRelationsTab admin clearfix">
+    <div class="shadowSeparator clearfix">
+        <div class="shadowSeparatorBox clearfix">
 
-        foreach($this->list as $key => $value){
+            <div class="deleteList">
+                <table>
+                    <thead>
+                    <tr>
+                        <td>№</td>
+                        <td>Name</td>
+                        <td>Uri</td>
+                        <td>Edit</td>
+                        <td>Delete</td>
+                    </tr>
+                    </thead>
+                    <?php
 
-            echo '<tr>';
-                echo '<td>' . $value['id'] . '</td>'
-                    .'<td>' . $value['name'] . '</td>'
-                    .'<td>' . $value['uri'] . '</td>'
-                    .'<td><a href = "' . $this->baseUrl() . '/cms/edit/id/'.$value['id'].'">edit</a></td>'
-                    .'<td><a href = "' . $this->baseUrl() . '/cms/delete/id/'.$value['id'].'">delete</a></td>';
-            echo '</tr>';
+                    foreach ($this->list as $key => $value) {
 
-        }
+                        echo '<tr>';
+                        echo '<td>' . $value['id'] . '</td>'
+                            . '<td>' . $value['name'] . '</td>'
+                            . '<td>' . $value['uri'] . '</td>'
+                            . '<td><a href = "' . $this->baseUrl() . '/cms/edit/id/' . $value['id'] . '" class ="button-2 edit">edit</a></td>'
+                            . '<td><a href = "' . $this->baseUrl() . '/cms/delete/id/' . $value['id'] . '" class ="button-2 delete">delete</a></td>';
+                        echo '</tr>';
 
-        ?>
-    </table>
-    <a href = "<?php echo $this->baseUrl() ?>/cms/new">add new</a>
+                    }
+
+                    ?>
+                </table>
+                <a href="<?php echo $this->baseUrl() ?>/cms/new" class="button-2 add floatRight">add new</a>
+            </div>
+        </div>
+    </div>
 </div>

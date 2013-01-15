@@ -262,6 +262,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
     public function getUsersCount()
     {
+
         $lastMonth = date("Y-m-d H:i:s", strtotime("-1 month"));
         $usersCount = array();
         $total = $this->getAdapter()->select()
