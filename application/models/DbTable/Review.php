@@ -52,7 +52,7 @@ class Application_Model_DbTable_Review extends Application_Model_DbTable_Abstrac
         $data = $this->getAdapter()->select()
             ->from($this->_name)
             ->joinLeft('booking', 'booking.id = reviews.booking_id', array('booking.focus_name', 'booking.rate', 'booking.duration', 'booking.started_at'))
-            ->joinLeft('user', 'reviews.user_id = user.id', array('user.firstname', 'user.lastname'))
+            ->joinLeft('user', 'reviews.user_id = user.id', array('user.firstname', 'user.lastname', 'reviews.review_date'))
             ->where('(' . $this->getAdapter()->quoteInto('reviews.recipient_id=?', $user_id) . ') ');
         if ($from != NULL && $to != NULL) {
             $data->where('(' . $this->getAdapter()->quoteInto('reviews.review_date>=?', $from) . ') ')
