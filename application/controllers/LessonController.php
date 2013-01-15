@@ -213,11 +213,9 @@ class LessonController extends Zend_Controller_Action
 
         //}
 
-        /*$seleniumModel = new Application_Model_Selenium();
+        $seleniumModel = new Application_Model_Selenium();
         $result = $seleniumModel->openLessonPage();
-        var_dump($result);*/
-
-        echo phpinfo();
+        var_dump($result);
         die;
 
     }
