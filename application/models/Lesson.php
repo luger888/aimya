@@ -62,8 +62,8 @@ class Application_Model_Lesson
 
     public function openDisplay()
     {
-        passthru("open_disp.sh 3", $display);
-        var_dump($display);
+        exec("open_disp.sh 3 4444");
+        //var_dump($display);
         die;
 
         return $display;
