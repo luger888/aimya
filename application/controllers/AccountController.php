@@ -201,8 +201,9 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                 $servicesForm = new Application_Form_ServiceDetails();
                 $this->view->servicesForm = $servicesForm;
                 $lessonDbModel = new Application_Model_DbTable_LessonCategory();
+                $durationDbModel = new Application_Model_DbTable_LessonDuration();
                 $this->view->categories = $lessonDbModel->getLessonCategories();
-
+                $this->view->durations = $durationDbModel->getLessonDurations();
             }
             /*  Users tab, update relations    */
             if($this->getRequest()->getParam('updateUserId')){

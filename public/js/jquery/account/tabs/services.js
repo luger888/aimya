@@ -48,16 +48,20 @@ function editService(e, service_type, url){
         success: function(response){
             url = "'" + url + "'";
             var lesson_categories = response.categories;//lesson categories from DB
+            var lesson_durations = response.durations;
             var options = [];
             for(var key in lesson_categories) {
                 options += '<option value ="'+lesson_categories[key]["title"]+'">'+lesson_categories[key]['title']+'</option>';
             }
-
+            var periods = [];
+            for(var key in lesson_durations) {
+                periods += '<option value ="'+lesson_durations[key]["duration"]+'">'+lesson_durations[key]['duration']+' min</option>';
+            }
             var serviceWrapper  = $(e).parents('.shadowSeparatorBox'); //parent div
             var id = $(e).nextAll('input[type=hidden]:first').val();//id of service
             /* Getting values from elements */
             var categoriesDropdown =  '<select id="lesson_categoryEditInput">'+options+'</select>';//Lesson categories select
-            var durationDropdown =  '<select id="durationEditInput"><option value="15 min">15 min</option><option value="45 min">45 min</option><option value="hour">hour</option><option value="lesson">lesson</option></select>';//Duration categories select
+            var durationDropdown =  '<select id="durationEditInput">'+periods+'</select>';//Duration categories select
             var lesson_category = serviceWrapper.find('#lesson_category').html();
             var subcategory = serviceWrapper.find('#subcategory').html().substr(0, serviceWrapper.find('#subcategory').html().length - 1);
             var rate = serviceWrapper.find('#rate').html();
