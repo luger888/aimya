@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by  Volodymyr Pasika.
- * Date: 15.03.12
- * Time: 9:23
- * Skype: passika_web
- */
 require_once APPLICATION_PATH . '/../public/js/ckeditor/ckeditor.php';
 
 class Aimya_View_Helper_Wysiwyg extends Zend_View_Helper_FormElement
@@ -29,7 +23,7 @@ class Aimya_View_Helper_Wysiwyg extends Zend_View_Helper_FormElement
         $editor->config['width'] = 600;
 
         // $value
-        return $editor->editor('content', $value);
+        return $editor->editor('contentCKE', $value);
     }
 
 }

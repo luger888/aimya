@@ -72,7 +72,7 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         $acl->allow(self::ADMIN , 'search', array('reindex'));
         $acl->allow(self::ADMIN , 'test', array('index', 'paypal'));
         $acl->allow(self::ADMIN , 'lesson', array('recording'));
-
+        $acl->allow(self::ADMIN , 'cms', array('index', 'new', 'edit', 'delete', 'view'));
         Zend_Registry::set('Zend_Acl',$acl);
 
         $identity = Zend_Auth::getInstance()->getStorage()->read();

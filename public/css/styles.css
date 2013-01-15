@@ -1574,11 +1574,13 @@ input.button-2 {
 }
 
 .alert{
+
     font: 11px Arial !important;
     color:#ad4c4c !important;
     background-color: #fae9e9 !important;
-    /*border: 1px solid #ebb7b7 !important;*/
+    border: 1px solid #ebb7b7 !important ;
     border-radius:2px;
+    padding: 5px;
 }
 
 .alert .flash-warning{
@@ -1611,26 +1613,25 @@ input.button-2 {
 /*JSMessenger, success (green)*/
 
 .alert .success{
-    font: 11px Arial !important;
     color:#537e6a !important;
     background-color: #cce8bf !important;
     border: 1px solid #a0c58e !important;
-    border-radius:2px;
-    padding: 5px;
 }
 
 .alert .success .flash-success{
     font: 700 11px Arial !important;
     color: #315b47 !important;
 }
-.alert .success .close {
-    background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat 33% 0;
+.alert .close {
     line-height: 20px;
     position: relative;
     width:12px;
     height: 12px;
     opacity: 1 !important;
     float:right;
+}
+.alert .success .close {
+    background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat 33% 0;
 }
 .alert-block .header{
     text-transform: capitalize;
@@ -2184,4 +2185,11 @@ float:right;
 }
 .userRelationsTab.admin table tbody td {
     padding-left: 5px;
+}
+.admin .deleteList{
+    margin: 30px 0 10px 0;
+}
+
+#cke_contentCKE{
+    width: 100% !important;
 }
