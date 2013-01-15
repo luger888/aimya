@@ -10,11 +10,11 @@ class Application_Form_ServiceDetails extends Zend_Form
 
         $lessonDbModel = new Application_Model_DbTable_LessonCategory();
         $lessonCategories = $lessonDbModel->getLessonCategories();//category from db
+        $durationDbModel = new Application_Model_DbTable_LessonDuration();
+        $lessonPeriods =  $durationDbModel->getLessonDurations();
 
-        $categories = array();
-        foreach($lessonCategories as $value){
-            $categories[$value['title']] = $value['title'];
-        }
+
+
         $this->setName('serviceDetails');
 
         $action = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
@@ -55,12 +55,10 @@ class Application_Form_ServiceDetails extends Zend_Form
         $duration->setAttrib('id', 'durationInput')
             ->setAttrib('class', 'input-small')
             ->addFilters($this->basicFilters)
-            ->setDecorators($this->basicDecorators)
-            ->addMultiOptions(array('15 min'   => '15 min',
-            '45 min'   => '45 min',
-            'hour'   => 'hour',
-            'lesson'   => 'lesson'
-        ));
+            ->setDecorators($this->basicDecorators);
+        foreach ($lessonPeriods as  $value) {
+            $duration->addMultiOption($value['duration'], $value['duration'].' min');
+        }
 
         $description = new Zend_Form_Element_Textarea('description');
         $description->setLabel('Describe Your Service Details')

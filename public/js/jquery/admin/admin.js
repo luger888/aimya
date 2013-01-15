@@ -115,7 +115,40 @@ function removeDur(e, id) {
     return false;
 }
 function suspension(e, status){
-    if(status == 1){
+    var id = $(e).nextAll('input[type=hidden]:first').val();
+    var baseUrl = $('#current_url').val();
+    if(status == 2){
         var answer = confirm("Suspend user?");
+        if (answer) {
+
+            $.ajax({
+                    url:baseUrl + "/admin/users",
+                    type:"post",
+                    data:{'suspendId':id,
+                    'status': 2},
+                    success:function (response) {
+                        if (response) {
+                            window.location.reload();
+                        }
+
+                    }
+                }
+            );
+        }
+    }else{
+        $.ajax({
+                url:baseUrl + "/admin/users",
+                type:"post",
+                data:{'suspendId':id,
+                    'status': 1},
+                success:function (response) {
+                    if (response) {
+                        window.location.reload();
+                    }
+
+                }
+            }
+        );
     }
+    return false;
 }

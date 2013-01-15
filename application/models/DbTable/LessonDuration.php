@@ -6,7 +6,8 @@ class Application_Model_DbTable_LessonDuration extends Application_Model_DbTable
     public function getLessonDurations(){
 
         $data = $this   ->select()
-            ->from('lesson_duration', (array('id', 'duration', 'status')));
+            ->from('lesson_duration', (array('id', 'duration', 'status')))
+            ->where('status=?', 1);
 
         return $data->query()->fetchAll();
 

@@ -45,6 +45,45 @@ class Application_Model_Lesson
         return $notePath;
     }
 
+    public function createVideoPath($lessonId, $teacherId)
+    {
+
+        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users');
+        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId);
+        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId . DIRECTORY_SEPARATOR . $lessonId);
+        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'video');
+        $notePath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'video' . DIRECTORY_SEPARATOR;
+        @mkdir($notePath);
+
+        //$this->write(' / ' . $identityId . " / \n");
+
+        return $notePath;
+    }
+
+    public function openDisplay($lessonId)
+    {
+
+        $port = rand(4000, 4999);
+        passthru("rec.sh $lessonId $port", $result);
+        if($result == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function closeDisplay()
+    {
+        $result = exec('close_display.sh');
+        return $result;
+    }
+
+    public function startRecording()
+    {
+        $result = exec('start_recording.sh');
+        return $result;
+    }
+
     public function createNote($notePath, $userName, $message, $time)
     {
         $string = '<li class="note"><p class="username">' . $userName . '</p><p class="time">' . $time . '</p><p class="message">' . $message  . '</p></li>';

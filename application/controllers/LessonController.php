@@ -80,6 +80,16 @@ class LessonController extends Zend_Controller_Action
                 $lessonFeadbackTable = new Application_Model_DbTable_LessonFeedback();
                 $lessonFeadbackTable->createDefaultFeedback($res, Zend_Auth::getInstance()->getIdentity()->id);
             }
+            if ($booking['video']) {
+                $lessonTable = new Application_Model_DbTable_Lesson();
+                $activeLesson = $lessonTable->checkAvailableLesson(Zend_Auth::getInstance()->getIdentity()->id);
+                $videoPath = $lessonModel->createVideoPath($res, $activeLesson['creator_id']);
+
+                $openDispay = $lessonModel->openDisplay(225);
+
+                exec("recording.sh {$videoPath}");
+
+            }
 
             $this->_helper->redirector('join', 'lesson');
         }
@@ -150,7 +160,7 @@ class LessonController extends Zend_Controller_Action
 
     public function recordingAction()
     {
-        if ($this->getRequest()->getParam('partner_id')) {
+        /*if ($this->getRequest()->getParam('partner_id')) {
             $userId = $this->getRequest()->getParam('partner_id');
             $lessonTable = new Application_Model_DbTable_Lesson();
             $this->view->lessonStatus = 1;
@@ -191,7 +201,23 @@ class LessonController extends Zend_Controller_Action
             }
         } else {
             die('server error');
-        }
+        }*/
+        $lessonModel = new Application_Model_Lesson();
+        //$lessonTable = new Application_Model_DbTable_Lesson();
+        //$activeLesson = $lessonTable->checkAvailableLesson(Zend_Auth::getInstance()->getIdentity()->id);
+        //$videoPath = $lessonModel->createVideoPath($res, $activeLesson['creator_id']);
+
+        //$openDispay = $lessonModel->openDisplay(225);
+
+        //if($openDispay){
+
+        //}
+
+        $seleniumModel = new Application_Model_Selenium();
+        $result = $seleniumModel->openLessonPage();
+        var_dump($result);
+        die;
+
     }
 
     public function detailsAction()
