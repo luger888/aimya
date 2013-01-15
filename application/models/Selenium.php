@@ -1,6 +1,8 @@
 <?php
-require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
-class Application_Model_Selenium extends PHPUnit_Extensions_SeleniumTestCase
+require_once 'Testing/Selenium.php';
+require_once 'PHPUnit/Framework/TestCase.php';
+
+class Application_Model_Selenium extends PHPUnit_Framework_TestCase
 {
 
     private $_host = 'aimya.svitla.com';
@@ -12,6 +14,10 @@ class Application_Model_Selenium extends PHPUnit_Extensions_SeleniumTestCase
     private $_waitTime = '120';
 
     protected function setUp() {
+
+        /*cmd=getNewBrowserSession&1=*firefox&2=http://aimya.svitla.com
+        cmd=open&1=http://aimya.svitla.com&sessionId=1ac47ac3e26a4eac992125c1c28e085e*/
+
 
         $this->setHost($this->_host);
         $this->setPort($this->_port);
