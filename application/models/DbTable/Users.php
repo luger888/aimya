@@ -311,8 +311,11 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
     public function getUsers(){
         $students = $this->getAdapter()->select()
-            ->from($this->_name, array('id', 'firstname', 'lastname', 'username', 'role', 'status'))
-        ->where('status>=?', 1);
+            ->from(array('us' => $this->_name), array('id', 'firstname', 'lastname', 'username', 'role', 'status', 'created_at'))
+            ->joinLeft('subscription_history', 'us.id = subscription_history.user_id', array('active_to', 'updated_at'))
+            ->where('us.status>=?', 1);
+
+
         return $students->query()->fetchAll();
     }
 
