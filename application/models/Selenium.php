@@ -1,4 +1,5 @@
 <?php
+require_once 'PHPUnit/Autoload.php';
 require_once 'Testing/Selenium.php';
 require_once 'PHPUnit/Framework/TestCase.php';
 
