@@ -65,11 +65,11 @@ class Application_Model_Lesson
 
         $port = rand(4000, 4999);
         passthru("rec.sh $lessonId $port", $result);
-        var_dump($result);
-        die;
-
-
-        return $display;
+        if($result == 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function closeDisplay()
