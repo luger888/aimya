@@ -12,11 +12,13 @@
 			import com.aimialesson.model.Main;
 			import com.aimialesson.model.Presentation;
 			import com.aimialesson.model.User;
+			import com.aimialesson.model.Texts;
 		]]>
 	</fx:Script>
 	<s:Group  width="100%" height="100%" >
 		<s:BitmapImage visible="{!Presentation.getInstance().loaded}" id="presantationBG" source="@Embed('flashassets/lesson_presentation_background.png')" width="100%" height="100%"  />
 		<s:Button id="uploadBtn" right="-7" bottom="-30" skinClass="com.aimialesson.UI.skins.elements.buttons.PresentationUploadBtnSkin" useHandCursor="true" buttonMode="true" enabled="{Main.getInstance().session_started}" visible="{User.getInstance().partnerRoleID == User.STUDENT}"/>
+		<s:RichText  id="generatingRT" left="0" bottom="-30" text="{(Texts.getInstance().texts[Texts.SLIDES_ARE_GENERATING] as String)}" styleName="PresentationProgressTextStyle"/>
 		<elements:PresentationProgressBar id="progressBar" left="0" bottom="-30" width="{presantationBG.width - uploadBtn.width}"/>
 	</s:Group>
 	
