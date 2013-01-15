@@ -64,7 +64,7 @@ class Application_Model_Lesson
     {
 
         $port = rand(4000, 4999);
-        passthru("open_disp.sh $lessonId $port", $result);
+        passthru("rec.sh $lessonId $port", $result);
         var_dump($result);
         die;
 
