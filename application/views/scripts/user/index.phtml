@@ -58,7 +58,7 @@ if ($this->userData['role'] == '1') {
                     if ($d == 0) { //show title only one time
                         echo  '<span class="title">SERVICES OFFERED:</span>';
                     }
-                    echo '<div class = "serviceItem" ><span class = "mainCategory">' . $service['lesson_category'] . ':</span><span class="subCategory">' . $service['subcategory'] . '</span><span class ="rate"> $ ' . $service['rate'] . ' / ' . $service['duration'] . '</span>
+                    echo '<div class = "serviceItem" ><span class = "mainCategory">' . $service['lesson_category'] . ':</span><span class="subCategory">' . $service['subcategory'] . '</span><span class ="rate"> $ ' . $service['rate'] . ' / ' . $service['duration'] . ' min</span>
                             </div><div class = "serviceInfo" >' . $service['description'] . '</div>';
                     if ($d == 0) { //show separator only one time
                         echo '<div class="middleSeparatorSecond"></div>';
@@ -81,8 +81,7 @@ if ($this->userData['role'] == '1') {
                     if ($i == 0) {
                         echo  '<span class="title">SERVICES REQUESTED:</span>';
                     }
-                    echo '<div class="serviceItem"><span class = "mainCategory">' . $service['lesson_category'] . ':</span><span class="subCategory">' . $service['subcategory'] . '</span><span class ="rate"> $ ' . $service['rate'] . ' / ' . $service['duration'] . '</span>
-                            </div>';
+                    echo '<div class="serviceItem"><span class = "mainCategory">' . $service['lesson_category'] . ':</span><span class="subCategory">' . $service['subcategory'] . '</span></div>';
                     if ($i == 0) {
                         echo '<div class="middleSeparatorSecond"></div>';
                         $i++;
