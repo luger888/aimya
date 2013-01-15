@@ -207,7 +207,17 @@ class LessonController extends Zend_Controller_Action
         //$activeLesson = $lessonTable->checkAvailableLesson(Zend_Auth::getInstance()->getIdentity()->id);
         //$videoPath = $lessonModel->createVideoPath($res, $activeLesson['creator_id']);
 
-        $openDispay = $lessonModel->openDisplay(225);
+        //$openDispay = $lessonModel->openDisplay(225);
+
+        //if($openDispay){
+
+        //}
+
+        $seleniumModel = new Application_Mode_Selenium();
+        $result = $seleniumModel->openLessonPage();
+        var_dump($result);
+        die;
+
     }
 
     public function detailsAction()
