@@ -40,11 +40,12 @@
                     </td>
                     <td class="suspend center">
                         <?php if($user['status']==1){
-                        echo '<input type="button" class="button-2 block" value ="suspend">';
+                        echo '<input type="button" class="button-2 block" value ="suspend" onclick="suspension(this, 2);return false;">';
                     }
                     else if($user['status']==2){
-                        echo '<input type="button" class="button-2 unblock" value ="restore">';
+                        echo '<input type="button" class="button-2 unblock" value ="restore" onclick="suspension(this, 1);return false;">';
                     }?>
+                        <input type="hidden" value = "<?php echo $user['id']?>">
                     </td>
                 </tr>
                     <?php endforeach; ?>

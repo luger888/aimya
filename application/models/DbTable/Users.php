@@ -311,7 +311,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
     public function getUsers(){
         $students = $this->getAdapter()->select()
-            ->from($this->_name, array('firstname', 'lastname', 'username', 'role', 'status'))
+            ->from($this->_name, array('id', 'firstname', 'lastname', 'username', 'role', 'status'))
         ->where('status>=?', 1);
         return $students->query()->fetchAll();
     }
