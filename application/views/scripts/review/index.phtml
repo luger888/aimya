@@ -2,71 +2,86 @@
     <div class="shadowSeparator clearfix">
         <div class="shadowSeparatorBox clearfix">
             <div class="lessonFilterBlock clearfix">
-                <div class="filters">
-                    <?php echo $this->translate('from') ?><?php echo $this->filterForm->fromPeriod; ?>
-                    <?php echo $this->translate('to') ?><?php echo $this->filterForm->toPeriod; ?>
+                <form action="" method="POST">
+                    <div class="filters">
+                        <span><?php echo $this->translate('from') ?></span><?php echo $this->filterForm->fromPeriod; ?>
+                        <span><?php echo $this->translate('to') ?></span><?php echo $this->filterForm->toPeriod; ?>
+                    </div>
+                    <?php echo $this->filterForm->filter; ?>
+                    <!--                <a class="button-2 display floatRight">-->
+                    <?php //echo $this->translate('display') ?><!--</a>-->
+                </form>
+            </div>
+            <div class="shadowSeparatorBoxSmall"></div>
+            <div class="shadowSeparator">
+
+                <h1><?php echo $this->translate('total reviews:')?></h1>
+                <ul class="starsUL">
+                    <li><span data-rating="5" class="stars five"></span><span
+                        class="total"><?php echo '(' . $this->stars['five'] . ')';?></span><span class="info"> View list of comments</span>
+                    </li>
+                    <li><span data-rating="4" class="stars four"></span><span
+                        class="total"><?php echo '(' . $this->stars['four'] . ')';?></span><span class="info"> View list of comments</span>
+                    </li>
+                    <li><span data-rating="3" class="stars three"></span><span
+                        class="total"><?php echo '(' . $this->stars['three'] . ')';?></span><span class="info"> View list of comments</span>
+                    </li>
+                    <li><span data-rating="2" class="stars two"></span><span
+                        class="total"><?php echo '(' . $this->stars['two'] . ')';?></span><span class="info"> View list of comments</span>
+                    </li>
+                    <li><span data-rating="1" class="stars one"></span><span
+                        class="total"><?php echo '(' . $this->stars['one'] . ')';?></span><span class="info"> View list of comments</span>
+                    </li>
+                </ul>
+
+                <div class="shadowSeparatorBoxSmall"></div>
+                <div class="shadowSeparator">
+
                 </div>
-                <a class="button-2 display floatRight"><?php echo $this->translate('display') ?></a>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <td> <?php echo $this->translate('ranking') ?></td>
+                        <td> <?php echo $this->translate('user name') ?></td>
+                        <td> <?php echo $this->translate('focus name') ?></td>
+                        <td> <?php echo $this->translate('date/time') ?></td>
+                        <td> <?php echo $this->translate('rate') ?></td>
+                        <td> <?php echo $this->translate('comment') ?></td>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <?php $reviews = $this->reviews;
+                    if (isset($reviews)) {
+
+
+                        foreach ($reviews as $review): ?>
+                            <?php //Zend_Debug::dump($booking)?>
+                        <tr>
+                            <td class="ranking">
+                                <span data-rating="<?php echo $review['rating']?>" class="stars"></span>
+                            </td>
+                            <td class="username"><?php echo $review['firstname'] . ' ' . $review['lastname']; ?></td>
+                            <td class="focusName"><?php echo $review['focus_name']; ?></td>
+
+                            <td class="startingTime">
+                                <?php echo $review['started_at']; ?>
+                            </td>
+                            <!--END payment -->
+                            <td class="rate">
+                                <?php echo '$' . $review['rate'] . '/' . $review['duration'] . 'min'; ?>
+                            </td>
+
+                            <td class="comment">
+                                <?php echo $review['review']; ?>
+                            </td>
+                        </tr>
+                            <?php endforeach;
+                    }?>
+                    </tbody>
+                </table>
+
             </div>
-            <div class="shadowSeparatorBoxSmall"> </div>
-            <div class="shadowSeparator">
-
-<h1><?php echo $this->translate('total reviews:')?></h1>
-      <ul class="starsUL">
-          <li><span data-rating="5" class ="stars five"></span><span class ="total"><?php echo '('. $this->stars['five']. ')';?></span><span class ="info"> View list of comments</span></li>
-          <li><span data-rating="4" class ="stars four"></span><span class ="total"><?php echo '('. $this->stars['four']. ')';?></span><span class ="info"> View list of comments</span></li>
-          <li><span data-rating="3" class ="stars three"></span><span class ="total"><?php echo '('. $this->stars['three']. ')';?></span><span class ="info"> View list of comments</span></li>
-          <li><span data-rating="2" class ="stars two"></span><span class ="total"><?php echo '('. $this->stars['two']. ')';?></span><span class ="info"> View list of comments</span></li>
-          <li><span data-rating="1" class ="stars one"></span><span class ="total"><?php echo '('. $this->stars['one']. ')';?></span><span class ="info"> View list of comments</span></li>
-      </ul>
-
-            <div class="shadowSeparatorBoxSmall"> </div>
-            <div class="shadowSeparator">
-
-            </div>
-            <table class="table">
-                <thead>
-                <tr>
-                    <td> <?php echo $this->translate('ranking') ?></td>
-                    <td> <?php echo $this->translate('user name') ?></td>
-                    <td> <?php echo $this->translate('focus name') ?></td>
-                    <td> <?php echo $this->translate('date/time') ?></td>
-                    <td> <?php echo $this->translate('rate') ?></td>
-                    <td> <?php echo $this->translate('comment') ?></td>
-
-                </tr>
-                </thead>
-                <tbody>
-
-                <?php $reviews = $this->reviews;
-                if(isset($reviews)){
-
-
-                foreach ($reviews as $review): ?>
-                    <?php //Zend_Debug::dump($booking)?>
-                <tr>
-                    <td class="ranking">
-                        <span data-rating="<?php echo $review['rating']?>" class ="stars"></span>
-                    </td>
-                    <td class="username"><?php echo $review['firstname'] . ' ' . $review['lastname']; ?></td>
-                    <td class="focusName"><?php echo $review['focus_name']; ?></td>
-
-                    <td class="startingTime">
-                        <?php echo $review['started_at']; ?>
-                    </td><!--END payment -->
-                    <td class="rate">
-                        <?php echo '$'.$review['rate'] . '/' .$review['duration'].'min'; ?>
-                    </td>
-
-                    <td class="comment">
-                        <?php echo $review['review']; ?>
-                    </td>
-                </tr>
-                    <?php endforeach;
-                }?>
-                </tbody>
-            </table>
-
         </div>
     </div>
-</div>

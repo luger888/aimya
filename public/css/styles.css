@@ -2143,7 +2143,14 @@ float:right;
     margin-bottom: 28px;
     margin-top: 7px;
 }
-
+.reviews .timePickerFilter{
+    width:150px;
+    margin-right:15px;
+}
+.reviews .filters span{
+    margin-right: 9px;
+    text-transform: capitalize;
+}
 /************************************** ADMIN *************************/
 .admin .categories, .admin .duration{
     margin-right: 30px;
