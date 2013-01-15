@@ -67,7 +67,10 @@ class AdminController extends Zend_Controller_Action
 
     public function paymentsAction()
     {
-
+        $usersDb = new Application_Model_DbTable_Users();
+        $subscrDb = new Application_Model_DbTable_Subscriptions();
+        $this->view->userList = $usersDb->getUsers();
+       // $subscrDb->getLatestSubscription();
     }
 
     public function staticAction()

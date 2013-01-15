@@ -8,7 +8,8 @@ class Application_Form_Booking extends Zend_Form
     public function init()
     {
         $identity = Zend_Auth::getInstance()->getStorage()->read();//user identity
-
+        $durationDbModel = new Application_Model_DbTable_LessonDuration();
+        $lessonPeriods =  $durationDbModel->getLessonDurations();
         $profileModel = new Application_Model_Profile();
         $friendsArray = $profileModel->getFriends($identity->id);//pull friends from db
 
@@ -86,12 +87,10 @@ class Application_Form_Booking extends Zend_Form
         $duration = new Zend_Form_Element_Select('duration');
         $duration->setAttrib('id', 'duration')
             ->addFilters($this->basicFilters)
-            ->setDecorators($this->basicDecorators)
-            ->addMultiOptions(array('15'   => '15 min',
-            '30'   => '30 min',
-            '45'   => '45 min',
-            '60'   => '60 min'
-        ));
+            ->setDecorators($this->basicDecorators);
+        foreach ($lessonPeriods as  $value) {
+            $duration->addMultiOption($value['duration'], $value['duration'].' min');
+        }
 
         $video = new Zend_Form_Element_Checkbox('video');
         $video->setAttrib('class', 'checkboxlist')

@@ -27,7 +27,7 @@ class Application_Form_Friend extends Zend_Form
         $send = new Zend_Form_Element_Submit('sendbutton');
         $send ->setLabel('ADD TO MY ACCOUNT')
             ->setAttrib('id', 'sendbutton')
-            ->setAttrib('class', 'addAccount')
+            ->setAttrib('class', 'button-2 addAccount')
             ->setDecorators($this->basicDecorators);
 
         $this->addElements(array($friendId, $url, $send));

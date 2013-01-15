@@ -1,8 +1,63 @@
 <?php echo $this->partial('partials/adminNav.phtml') ?>
-<div class="mainContainer admin clearfix">
+<div class="mainContainer userRelationsTab usersAdmin admin clearfix">
     <div class="shadowSeparator clearfix">
         <div class="shadowSeparatorBox clearfix">
+            <table class="table">
+                <thead>
+                <tr>
+                    <td> <?php echo $this->translate('user') ?></td>
+                    <td> <?php echo $this->translate('name') ?></td>
+                    <td> <?php echo $this->translate('last name') ?></td>
+                    <td> <?php echo $this->translate('role') ?></td>
+                    <td> <?php echo $this->translate('member since') ?></td>
+                    <td> <?php echo $this->translate('last payment') ?></td>
+                    <td> <?php echo $this->translate('valid till') ?></td>
+                    <td> <?php echo $this->translate('request for refund') ?></td>
 
+                </tr>
+                </thead>
+                <tbody>
+                <?php   $users = $this->userList;
+                foreach ($users as $user): ?>
+                    <?php //Zend_Debug::dump($booking)?>
+                <tr>
+                    <td class="username">
+                        <?php echo $user['username'];?>
+                    </td>
+                    <td class="name">
+                        <?php echo $user['firstname'];?>
+                    </td>
+                    <td class="lastname">
+                        <?php echo $user['lastname'];?>
+                    </td>
+                    <td class="role">
+                        <?php if($user['role']==1){
+                        $role='Student';
+                    }
+                    else{
+                        $role='Instructor';
+                    }
+                        echo $role;?>
+                    </td>
+                    <td>
+                        <?php echo date("d-m-Y", strtotime($user['created_at']));?>
+                    </td>
+                    <?php if($user['active_to']!=null){
+                        $validTill = date("d-m-Y", strtotime($user['active_to']));
+                        $lastPaid = date("d-m-Y", strtotime($user['updated_at']));
+                    }else{
+                    $lastPaid = '';
+                    $validTill = '';
+                }?>
+                    <td><?php echo $lastPaid;?></td>
+                    <td><?php echo $validTill;?></td>
+                    <td class="suspend center">
+
+                    </td>
+                </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

@@ -60,11 +60,14 @@ class Application_Model_Lesson
         return $notePath;
     }
 
-    public function openDisplay()
+    public function openDisplay($lessonId)
     {
-        exec("open_disp.sh 3 4444");
-        //var_dump($display);
+
+        $port = rand(4000, 4999);
+        passthru("open_disp.sh $lessonId $port", $result);
+        var_dump($result);
         die;
+
 
         return $display;
     }

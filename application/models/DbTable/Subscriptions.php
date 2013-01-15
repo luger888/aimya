@@ -5,7 +5,7 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
 
     protected $_name = 'subscription_history';
 
-    public function createSubscription($data  = array())
+    public function createSubscription($data = array())
     {
 
         $data = array(
@@ -19,7 +19,7 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
         );
 
         $insert = $this->insert($data);
-        if($insert) {
+        if ($insert) {
             return true;
         } else {
             return false;
@@ -27,61 +27,68 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
 
     }
 
-    public function updateSubscription($subscriptionId, $status) {
+    public function updateSubscription($subscriptionId, $status)
+    {
 
         $data = array(
             'status' => $status,
             'updated_at' => date('Y-m-d H:i:s')
         );
 
-        $where[] = $this->getAdapter()->quoteInto('id=?', $subscriptionId);;
+        $where[] = $this->getAdapter()->quoteInto('id=?', $subscriptionId);
+        ;
 
-        $this->update($data , $where);
+        $this->update($data, $where);
     }
 
-    public function getSubscription($userId) {
+    public function getSubscription($userId)
+    {
 
         $data = $this->select()
             ->from($this->_name, array('id'))
-            ->where('user_id=?' , (int)$userId);
+            ->where('user_id=?', (int)$userId);
 
         return $data->query()->fetch();
     }
 
-    public function getLastId() {
+    public function getLastId()
+    {
         $data = $this->select()
             ->from($this->_name, array('MAX(id)'));
 
         return $data->query()->fetch();
     }
 
-    public function getPayKeyFromOrder($subscriptionId) {
+    public function getPayKeyFromOrder($subscriptionId)
+    {
         $subscriptionId = (int)$subscriptionId;
 
         $data = $this->select()
             ->from($this->_name, array('pay_key'))
-            ->where('id=?' , $subscriptionId);
+            ->where('id=?', $subscriptionId);
 
         return $data->query()->fetch();
     }
 
-    public function getTimeLeft() {
+    public function getTimeLeft()
+    {
 
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
 
         $data = $this->select()
             ->from($this->_name, array('active_to' => 'MAX(active_to)'))
-            ->where('user_id=?' , (int)$userId)
-            ->where('status=?' , 'paid');
+            ->where('user_id=?', (int)$userId)
+            ->where('status=?', 'paid');
 
         return $data->query()->fetch();
 
     }
 
-    public function setDefaultPeriod() {
+    public function setDefaultPeriod()
+    {
 
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
-        $date = date("Y-m-d h:i:s",strtotime("+5 day"));
+        $date = date("Y-m-d h:i:s", strtotime("+5 day"));
 
         $data = array(
             'user_id' => (int)$userId,
@@ -95,7 +102,9 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
         $insert = $this->insert($data);
 
     }
-    public function getSubscriptionsIncome(){
+
+    public function getSubscriptionsIncome()
+    {
         $lastMonth = date("Y-m-d H:i:s", strtotime("-1 month"));
         $income = array();
         $total = $this->getAdapter()->select()
@@ -112,5 +121,13 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
         $income['allTime']['subscrIncome'] = $result;
         $income['lastMonth']['subscrIncome'] = $resultLM;
         return $income;
+    }
+
+    public function getLatestSubscription($user_id)
+    {
+          $data = $this->select()
+                ->from($this->_name, array(new Zend_Db_Expr('max(created_at) as maxId')))
+                ->where('user_id =?', $user_id);
+        return $data->query()->fetch();
     }
 }

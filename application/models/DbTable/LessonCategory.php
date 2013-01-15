@@ -6,7 +6,8 @@ class Application_Model_DbTable_LessonCategory extends Application_Model_DbTable
     public function getLessonCategories(){
 
         $data = $this   ->select()
-            ->from('lesson_category', (array('id', 'title', 'status')));
+            ->from('lesson_category', (array('id', 'title', 'status')))
+            ->where('status=?', 1);
 
         return $data->query()->fetchAll();
 
