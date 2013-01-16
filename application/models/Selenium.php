@@ -40,6 +40,9 @@ class Application_Model_Selenium extends PHPUnit_Extensions_SeleniumTestCase //P
     public function openLessonPage()
     {
 
+        echo $this->_browserUrl;
+        die;
+
         $this->open($this->_browserUrl);
         $this->type("id=username-login", "server");
         $this->type("id=password-login", "AimyaServer123");
