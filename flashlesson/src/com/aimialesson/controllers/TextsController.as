@@ -74,10 +74,12 @@ package com.aimialesson.controllers
 		
 		private function onIOError ( event : IOErrorEvent ) : void {
 			debug ("onIOError");
+			this.dispatchEvent( new AppEvent ( AppEvent.LOAD_TEXTS_FAILED ) );
 		}
 		
 		private function onSecurityError ( event : SecurityErrorEvent ) : void {
 			debug ("onSecurityError");
+			this.dispatchEvent( new AppEvent ( AppEvent.LOAD_TEXTS_FAILED ) );
 		}
 		
 		private function debug ( str : String ) : void {

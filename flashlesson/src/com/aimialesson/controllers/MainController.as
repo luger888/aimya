@@ -10,6 +10,7 @@ package com.aimialesson.controllers
 	[Event (name="timeIsOut", type="com.aimialesson.events.AppEvent")]
 	[Event (name="connectInitComplete", type="com.aimialesson.events.AppEvent")]
 	[Event (name="changeScreenState", type="com.aimialesson.events.AppEvent")]
+	[Event (name="connectionFailed", type="com.aimialesson.events.AppEvent")]
 	[Event (name="sharedPresentationUploaded", type="com.aimialesson.events.SharedObjectEvent")]
 	public class MainController extends EventDispatcher
 	{
@@ -32,6 +33,7 @@ package com.aimialesson.controllers
 			mediaController = new MediaController();
 		//	mediaController.setParameters(parameters);
 			mediaController.addEventListener(AppEvent.CONNECT_INIT_COMPLETE, appNetConnectHandler);
+			mediaController.addEventListener(AppEvent.CONNECTION_FAILED, appNetConnectionFailedHandler);
 			mediaController.initConnection();
 			userController = new UserController();
 			//userController.setParameters(parameters);
@@ -39,6 +41,7 @@ package com.aimialesson.controllers
 			presentationController = new PresentationController();
 			textsController = new TextsController();
 			textsController.addEventListener(AppEvent.LOAD_TEXTS_COMPLETE, loadTextsHandler);
+			textsController.addEventListener(AppEvent.LOAD_TEXTS_FAILED, loadTextsFailedHandler);
 			textsController.loadXML();
 			soController = new SharedObjectController();
 			soController.addEventListener(SharedObjectEvent.SHARED_PRESENTATION_UPLOADED, onSharedObjectEvent);
@@ -251,6 +254,16 @@ package com.aimialesson.controllers
 			}
 			Media.getInstance().connected = true;
 			initCompleteCheck();
+		}
+		
+		private function appNetConnectionFailedHandler ( event : AppEvent ) : void {
+			debug("MainController:appNetConnectionFailedHandler");
+			this.dispatchEvent(event);
+		}
+		
+		private function loadTextsFailedHandler ( event : AppEvent ) : void {
+			debug("MainController:loadTextsFailedHandler");
+			this.dispatchEvent(event);
 		}
 		
 /*		public function initSO():void {

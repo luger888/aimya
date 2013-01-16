@@ -28,6 +28,7 @@ package com.aimialesson.model
 		public static const THE_LESSON_IS_FINISHED:String = "lessonIsFinished";
 		public static const ALERT:String = "alert";
 		public static const ARE_YOU_SURE_YOU_WANT_TO_END_THE_LESSON:String = "wantEndLesson";
+		public static const SLIDES_ARE_GENERATING:String = "slidesAreGenerating";
 		public static const YES:String = "yes";
 		public static const OK:String = "ok";
 		public static const NO:String = "no";

@@ -1,7 +1,7 @@
 package com.aimialesson.model
 {
-	import com.aimialesson.model.Main;
 	import com.aimialesson.model.Actions;
+	import com.aimialesson.model.Main;
 	
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
@@ -10,6 +10,8 @@ package com.aimialesson.model
 
 	public class Presentation extends EventDispatcher
 	{
+		
+		public static const LOADED_CHANGE:String = "loadedChange";
 		
 		//private var fakeImages:Array = ["images/IMG_1120.JPG","images/IMG_1121.JPG","images/IMG_1122.JPG","images/IMG_1123.JPG","images/IMG_1124.JPG"];
 		private var fakeImages:Array = ["http://www.phlmetropolis.com/Cats.jpg","http://www.i-love-cats.com/software/Adorable-Cats-Screensaver.jpg","http://muslimmedianetwork.com/mmn/windows-live-pictures/CatsandIslam_C53D/cats_012.jpg","http://pages.swcp.com/~jamii/OtherCats/924174b-500x375.jpg"];
@@ -20,12 +22,12 @@ package com.aimialesson.model
 		public function set imageUrls ( value : ArrayCollection ) : void {
 			dispatchEvent( new Event ( "currentImageURLChange" ) );
 			presentationImageUrls = value;
-			dispatchEvent( new Event ( "loadedChange" ) );
+			dispatchEvent( new Event ( Presentation.LOADED_CHANGE ) );
 			currentImageNumber = 0;
 			//dispatchEvent( new Event ( "currentImageURLChange" ) );
 		}
 		
-		[Bindable(Event="loadedChange")]
+		[Bindable(Event=Presentation.LOADED_CHANGE)]
 		public function set loaded ( value : Boolean) : void {
 		}
 		
