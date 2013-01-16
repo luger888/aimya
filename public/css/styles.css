@@ -1637,7 +1637,7 @@ input.button-2 {
     text-transform: capitalize;
 }
 /*--- RESUME -----------------------------------------------------------------*/
-.resumeGeneral .shadowSeparatorBox, .reviews .shadowSeparatorBox, .admin .shadowSeparatorBox {
+.resumeGeneral .shadowSeparatorBox, .reviews .shadowSeparatorBox, .admin .shadowSeparatorBox, .paymentsTab .shadowSeparatorBox  {
     padding-top:0;
     min-height: 416px;
 }
@@ -2199,4 +2199,20 @@ float:right;
 
 #cke_contentCKE{
     width: 100% !important;
+}
+
+/*******************PAYMENTS ********************/
+.paymentsTab h1{
+    padding-bottom: 25px;
+}
+
+.paymentsTab .formRow select{
+     width:139px;
+ }
+.paymentsTab .formRow input[type="text"]{
+    width:150px;
+}
+.paymentsTab .buttonRow .button{
+    padding:0 5px;
+    margin-left:15px;
 }
