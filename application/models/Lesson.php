@@ -72,6 +72,17 @@ class Application_Model_Lesson
         }
     }
 
+    public function openLesson($lessonId, $port)
+    {
+
+        exec("phpunit " . APPLICATION_PATH . "/../tmp/test.php $lessonId $port");
+        /*if($result == 0) {
+            return true;
+        } else {
+            return false;
+        }*/
+    }
+
     public function closeDisplay()
     {
         $result = exec('close_display.sh');

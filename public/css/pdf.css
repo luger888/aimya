@@ -1,0 +1,11 @@
+h1{
+    font-size: 12px;
+    line-height: 16px;
+    color: #1d3300;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: 'helvetica-light-rnormal';
+}
+.degree{
+    background: url("../img/design/accountLayout/glyphicons/degree.png") no-repeat scroll 0 42% transparent;
+}

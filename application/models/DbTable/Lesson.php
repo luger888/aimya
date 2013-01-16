@@ -132,7 +132,7 @@ class Application_Model_DbTable_Lesson extends Application_Model_DbTable_Abstrac
         }
     }
 
-    public function getStudentLessons() {
+    public function getStudentLessons($from=NULL, $to=NULL) {
         $userId = (int)Zend_Auth::getInstance()->getIdentity()->id;
 
         $data = $this->getAdapter()->select()
@@ -141,7 +141,10 @@ class Application_Model_DbTable_Lesson extends Application_Model_DbTable_Abstrac
             ->where('(' . $this->getAdapter()->quoteInto('creator_id=?' , $userId) . ' OR ' . $this->getAdapter()->quoteInto('partner_id=?' , $userId) .') ')
             ->where($this->getAdapter()->quoteInto('status=?' , 2))
             ->order((array('id DESC')));
-
+        if ($from != NULL && $to != NULL) {
+            $data->where('(' . $this->getAdapter()->quoteInto('lessons.created_at>=?', $from) . ') ')
+                ->where('(' . $this->getAdapter()->quoteInto('lessons.created_at<=?', $to) . ') ');
+        }
         return $data->query()->fetchAll();
     }
 
