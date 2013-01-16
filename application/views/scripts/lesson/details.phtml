@@ -6,17 +6,25 @@
 <div class="mainContainer userRelationsTab lesson clearfix">
     <div class="shadowSeparator clearfix">
         <div class="lessonFilterBlock clearfix">
-            <div class="filters">
-                <?php echo $this->translate('from') ?><?php echo $this->filterForm->fromPeriod; ?>
-                <?php echo $this->translate('to') ?><?php echo $this->filterForm->toPeriod; ?>
-            </div>
-            <a class="button-2 display floatRight"><?php echo $this->translate('display') ?></a>
+            <form action="" method="POST">
+                <div class="filters">
+                    <span><?php echo $this->translate('from') ?></span><?php echo $this->filterForm->fromPeriod; ?>
+                    <span><?php echo $this->translate('to') ?></span><?php echo $this->filterForm->toPeriod; ?>
+                </div>
+                <?php echo $this->filterForm->filter; ?>
+                <!--                <a class="button-2 display floatRight">-->
+                <?php //echo $this->translate('display') ?><!--</a>-->
+            </form>
         </div>
         <div class="shadowSeparatorBoxSmall clearfix">
         </div>
         <div class="shadowSeparator clearfix">
         </div>
         <div class="shadowSeparatorBox clearfix">
+            <?php if ($this->filterInfo) {
+            echo $this->filterInfo;
+        }
+            ?>
             <table class="table">
                 <thead>
                 <tr>
