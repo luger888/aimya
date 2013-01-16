@@ -119,11 +119,11 @@ $(document).ready(function () {
     $('#fromPeriod').datepicker({ dateFormat:'yy-mm-dd',
         changeMonth:true,
         changeYear:true,
-        yearRange:"1910:2012" }).val();
+        yearRange:"2012:2015" }).val();
     $('#toPeriod').datepicker({ dateFormat:'yy-mm-dd',
         changeMonth:true,
         changeYear:true,
-        yearRange:"1910:2012" }).val();
+        yearRange:"2012:2015" }).val();
     /* END DatePicker jquery UI */
     $('#starsBlock').raty();//stars rating
     $('.stars').raty({

@@ -1,14 +1,14 @@
 <?php
-$stylesheet = file_get_contents('./css/styles.css');
+$stylesheet = file_get_contents('./css/onlineResume.css');
 
 
 $html = "<div class='resumeOnlineMain'>
     <div class='shadowSeparator'>
-    <div class='shadowSeparatorBox'>
+
 
     <div class='title'>" . $this->user['firstname'] . " " . $this->user['lastname'] . "</div>
-            <div class='titleInfo'><span
-                class='degree'> " . $this->profile['degree'] . "</span> <span class = 'language'>" . $this->profile['language'] . "</span>
+            <div class='titleInfo'><div
+                class='degree'> " . $this->profile['degree'] . "</div> <div class = 'language'>" . $this->profile['language'] . "</div>
             </div>
             ";
 
@@ -37,10 +37,11 @@ if ($this->skills) {
 
 
 $html .= "</div>
-    </div>
 </div>";
 
 $mpdf = new Aimya_Mpdf_mpdf();
+$mpdf->showImageErrors = true;
+$mpdf->SetDisplayMode('fullpage');
 $mpdf->WriteHTML($stylesheet, 1);
 $mpdf->WriteHTML($html, 2);
 $mpdf->Output();

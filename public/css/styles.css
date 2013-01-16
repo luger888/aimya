@@ -1574,11 +1574,13 @@ input.button-2 {
 }
 
 .alert{
+
     font: 11px Arial !important;
     color:#ad4c4c !important;
     background-color: #fae9e9 !important;
-    /*border: 1px solid #ebb7b7 !important;*/
+    border: 1px solid #ebb7b7 !important ;
     border-radius:2px;
+    padding: 5px;
 }
 
 .alert .flash-warning{
@@ -1611,20 +1613,16 @@ input.button-2 {
 /*JSMessenger, success (green)*/
 
 .alert .success{
-    font: 11px Arial !important;
     color:#537e6a !important;
     background-color: #cce8bf !important;
     border: 1px solid #a0c58e !important;
-    border-radius:2px;
-    padding: 5px;
 }
 
 .alert .success .flash-success{
     font: 700 11px Arial !important;
     color: #315b47 !important;
 }
-.alert .success .close {
-    background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat 33% 0;
+.alert .close {
     line-height: 20px;
     position: relative;
     width:12px;
@@ -1632,11 +1630,14 @@ input.button-2 {
     opacity: 1 !important;
     float:right;
 }
+.alert .success .close {
+    background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat 33% 0;
+}
 .alert-block .header{
     text-transform: capitalize;
 }
 /*--- RESUME -----------------------------------------------------------------*/
-.resumeGeneral .shadowSeparatorBox, .reviews .shadowSeparatorBox, .admin .shadowSeparatorBox {
+.resumeGeneral .shadowSeparatorBox, .reviews .shadowSeparatorBox, .admin .shadowSeparatorBox, .paymentsTab .shadowSeparatorBox  {
     padding-top:0;
     min-height: 416px;
 }
@@ -2142,7 +2143,14 @@ float:right;
     margin-bottom: 28px;
     margin-top: 7px;
 }
-
+.reviews .timePickerFilter, .lesson .timePickerFilter{
+    width:150px;
+    margin-right:15px;
+}
+.reviews .filters span, .lesson .filters span{
+    margin-right: 9px;
+    text-transform: capitalize;
+}
 /************************************** ADMIN *************************/
 .admin .categories, .admin .duration{
     margin-right: 30px;
@@ -2184,4 +2192,27 @@ float:right;
 }
 .userRelationsTab.admin table tbody td {
     padding-left: 5px;
+}
+.admin .deleteList{
+    margin: 30px 0 10px 0;
+}
+
+#cke_contentCKE{
+    width: 100% !important;
+}
+
+/*******************PAYMENTS ********************/
+.paymentsTab h1{
+    padding-bottom: 25px;
+}
+
+.paymentsTab .formRow select{
+     width:139px;
+ }
+.paymentsTab .formRow input[type="text"]{
+    width:150px;
+}
+.paymentsTab .buttonRow .button{
+    padding:0 12px;
+    margin-left:15px;
 }

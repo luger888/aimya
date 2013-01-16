@@ -213,9 +213,9 @@ class LessonController extends Zend_Controller_Action
 
         //}
 
-        $seleniumModel = new Application_Model_Selenium();
-        $result = $seleniumModel->openLessonPage();
-        var_dump($result);
+        $lessonModel->openLesson('226', 4469);
+        //$result = $seleniumModel->openLessonPage();
+        //var_dump($result);
         die;
 
     }
@@ -223,16 +223,24 @@ class LessonController extends Zend_Controller_Action
     public function detailsAction()
     {
         //$this->_helper->layout()->disableLayout();
+        $identity = Zend_Auth::getInstance()->getStorage()->read();
+        $reviewDb = new Application_Model_DbTable_Review();
         $lessonTable = new Application_Model_DbTable_Lesson();
         $studentLessons = $lessonTable->getStudentLessons();
         $filterForm = new Application_Form_LessonFilter();
         $feedbackForm = new Application_Form_Feedback();
         $feedbackTable = new Application_Model_DbTable_LessonFeedback();
         $bookingTable = new Application_Model_DbTable_Booking();
+        if ($this->getRequest()->isPost()) {
+            $this->view->filterInfo = '<div class="floatRight">From: ' .$this->getRequest()->getParam('fromPeriod') .' To: ' .$this->getRequest()->getParam('toPeriod') .'</div>';
+            $this->view->studentLessons = $lessonTable->getStudentLessons($this->getRequest()->getParam('fromPeriod'), $this->getRequest()->getParam('toPeriod'));
+        }else{
+            $this->view->studentLessons = $lessonTable->getStudentLessons();
 
+        }
         $this->view->feedbackForm = $feedbackForm;
         $this->view->filterForm = $filterForm;
-        $this->view->studentLessons = $studentLessons;
+        //$this->view->studentLessons = $studentLessons;
         $this->view->review = new Application_Model_DbTable_Review();
         $this->view->feedbackTable = new $feedbackTable;
         $this->view->bookingTable = new $bookingTable;

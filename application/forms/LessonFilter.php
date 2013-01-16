@@ -20,6 +20,7 @@ class Application_Form_LessonFilter extends Zend_Form
 
         $fromPeriod = new Zend_Form_Element_Text('fromPeriod');
         $fromPeriod ->setAttrib('id', 'fromPeriod')
+            ->setAttrib('class', 'timePickerFilter')
             ->setRequired(true)
             ->addValidator('NotEmpty')
             ->addFilters($this->basicFilters)
@@ -27,11 +28,18 @@ class Application_Form_LessonFilter extends Zend_Form
 
         $toPeriod = new Zend_Form_Element_Text('toPeriod');
         $toPeriod ->setAttrib('id', 'toPeriod')
+            ->setAttrib('class', 'timePickerFilter')
             ->setRequired(true)
             ->addValidator('NotEmpty')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
-        $this->addElements(array($details, $fromPeriod, $toPeriod));
+
+
+        $submit = new Zend_Form_Element_Submit('filter');
+        $submit->setAttrib('class', 'button-2 display floatRight')
+        ->setLabel('display')
+            ->setDecorators($this->basicDecorators);
+        $this->addElements(array($details, $fromPeriod, $toPeriod, $submit));
     }
 }
 
