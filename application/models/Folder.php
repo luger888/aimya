@@ -11,7 +11,7 @@ class Application_Model_Folder
         foreach ($path as $folder) {
             $currentDir .= $folder . DIRECTORY_SEPARATOR; //each iterations append next folder with separator
             if (!file_exists($currentDir) OR !is_dir($currentDir)) { //if there is no such folder ->
-                mkdir($currentDir); // create ! <-
+                if(!mkdir($currentDir)) die('Can\'t create dir'); // create ! <-
             }
 
         }
