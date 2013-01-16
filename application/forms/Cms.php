@@ -26,11 +26,12 @@ class Application_Form_Cms extends Zend_Form
             ->setAttrib('id', 'cmsUri')
             ->addValidator('stringLength', false, array(2, 50));
 
-        $content = new Aimya_Form_Element_Wysiwyg('content');
-        $content->setLabel('Page content');
+        $content = new Aimya_Form_Element_Wysiwyg('contentCKE');
+       // $content->setLabel('Page content');
 
         $submit = new Zend_Form_Element_Submit('submit');
-        $submit->setAttrib('id', 'cmsSubmit');
+        $submit->setAttrib('id', 'cmsSubmit')
+                ->setAttrib('class', 'button floatRight');
 
         $this->addElements(array($id, $name, $uri, $content, $submit));
 

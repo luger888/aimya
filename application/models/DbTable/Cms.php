@@ -5,11 +5,10 @@ class Application_Model_DbTable_Cms extends Application_Model_DbTable_Abstract
 
     protected $_name = 'static_page';
 
-    public function createStatisPage($name, $uri, $wysiwyg){
+    public function createStaticPage($name, $uri, $wysiwyg){
 
         $data = array(
 
-            'id' => 'NULL',
             'name' => $name,
             'uri' => preg_replace('# #' , '_' , trim($uri)),
             'content' => $wysiwyg,
@@ -18,8 +17,7 @@ class Application_Model_DbTable_Cms extends Application_Model_DbTable_Abstract
 
         );
 
-        $this->createItem($data);
-
+      $this->createItem($data);
     }
 
     public function updateStaticPage($id, $name, $uri, $content){
@@ -39,15 +37,23 @@ class Application_Model_DbTable_Cms extends Application_Model_DbTable_Abstract
     public function getPageByUri($uri){
 
         $data = $this   ->select()
-                        ->from('static_page',array('name' , 'content'))
-                        ->where('uri=?' , $uri);
+                        ->from('static_page',array('id', 'name' , 'content'))
+                        ->where('uri=?' , preg_replace('# #' , '_' , trim($uri)));
 
         $userData = $data->query();
         return $userData->fetch();
 
     }
 
+    public function deletePage($id)
+    {
+        $where = array(
 
+            $this->getAdapter()->quoteInto('id =?', (int)$id)
+        );
+        $this->delete($where);
+
+    }
 
 }
 
