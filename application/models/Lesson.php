@@ -18,16 +18,12 @@ class Application_Model_Lesson
 
     public function createPresentationPath($lessonId)
     {
-
         $identityId = Zend_Auth::getInstance()->getIdentity()->id;
-        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users');
-        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $identityId);
-        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $lessonId);
-        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'presentation');
-        $presPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR;
-        @mkdir($presPath);
 
-        return $presPath;
+        $folderModel = new Application_Model_Folder();
+        $notePath = 'users/' . $identityId . '/' . $lessonId . '/presentation/';
+        $folderModel->createFolderChain($notePath, '/');
+        return $notePath;
     }
 
     public function createNotesPath($lessonId, $teacherId)
@@ -41,16 +37,11 @@ class Application_Model_Lesson
     public function createVideoPath($lessonId, $teacherId)
     {
 
-        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users');
-        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId);
-        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId . DIRECTORY_SEPARATOR . $lessonId);
-        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'video');
-        $notePath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'video' . DIRECTORY_SEPARATOR;
-        @mkdir($notePath);
-
-        //$this->write(' / ' . $identityId . " / \n");
-
+        $folderModel = new Application_Model_Folder();
+        $notePath = 'users/' . $teacherId . '/' . $lessonId . '/video/';
+        $folderModel->createFolderChain($notePath, '/');
         return $notePath;
+
     }
 
     public function openDisplay($lessonId)
