@@ -36,13 +36,9 @@ class Application_Model_Lesson
         if (!file_exists($notePath) OR !is_dir($notePath)) {
             if (!mkdir($notePath, '0777', true)) {
                 die('Can\'t create directory');
-            } else {
-                return $notePath;
-            }
-
-        } else {
-
+            }            
         }
+        return $notePath;
     }
 
     public function createVideoPath($lessonId, $teacherId)
