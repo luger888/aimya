@@ -1,5 +1,5 @@
 <?php
-//require_once 'PHPUnit/Autoload.php';
+require_once 'PHPUnit/Autoload.php';
 
 class Application_Model_Selenium extends PHPUnit_Extensions_SeleniumTestCase //PHPUnit_Framework_TestCase
 {
