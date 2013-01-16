@@ -22,11 +22,6 @@ class Application_Model_Selenium extends PHPUnit_Extensions_SeleniumTestCase //P
         //DISPLAY=:555 java -jar /usr/local/lib/selenium/selenium-server-standalone-2.4.0.jar \ -port 4459 > /var/log/selenium/selenium-output.log \ 2> /var/log/selenium/selenium-error.log &
 
         $this->setHost($this->_host);
-
-        echo $this->_host;
-        die;
-
-
         $this->setPort($this->_port);
         $this->setBrowser($this->_browser);
         $this->setBrowserUrl($this->_browserUrl);
@@ -39,9 +34,6 @@ class Application_Model_Selenium extends PHPUnit_Extensions_SeleniumTestCase //P
 
     public function openLessonPage()
     {
-
-        echo $this->_browserUrl;
-        die;
 
         $this->open($this->_browserUrl);
         $this->type("id=username-login", "server");
