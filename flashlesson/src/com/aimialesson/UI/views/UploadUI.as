@@ -5,6 +5,7 @@ package com.aimialesson.UI.views
 	import com.aimialesson.model.Actions;
 	import com.aimialesson.model.Main;
 	import com.aimialesson.model.Media;
+	import com.aimialesson.model.Presentation;
 	import com.aimialesson.model.User;
 	
 	import flash.display.LoaderInfo;
@@ -20,6 +21,7 @@ package com.aimialesson.UI.views
 	
 	import spark.components.Button;
 	import spark.components.Label;
+	import spark.components.RichText;
 	import spark.components.supportClasses.SkinnableComponent;
 	import spark.primitives.BitmapImage;
 
@@ -30,14 +32,14 @@ package com.aimialesson.UI.views
 		import flash.events.MouseEvent;
 		import flash.events.ProgressEvent;
 		
-		[SkinPart (required="false")]
+		[SkinPart (required="true")]
 		public var uploadBtn:Button;
 		[SkinPart (required="false")]
-		public var uploadMoreBtn:Button;
-		[SkinPart (required="false")]
 		public var message:Label;
-		[SkinPart (required="false")]
+		[SkinPart (required="true")]
 		public var progressBar:PresentationProgressBar;
+		[SkinPart (required="true")]
+		public var generatingRT:RichText;
 		[SkinPart (required="true")]
 		public var presantationBG:BitmapImage;
 		
@@ -50,10 +52,12 @@ package com.aimialesson.UI.views
 		
 		override protected function partAdded ( partName : String, instance : Object) : void
 		{ 
-			if (instance == uploadBtn || instance == uploadMoreBtn){
+			if (instance == uploadBtn){
 				uploadBtn.addEventListener(MouseEvent.CLICK,browseAndUpload);
 			} else if (instance == progressBar) {
 				progressBar.visible = false;
+			} else if (instance == generatingRT) {
+				generatingRT.visible = false;
 			}
 		}
 		
@@ -91,6 +95,11 @@ package com.aimialesson.UI.views
 			fileRef.addEventListener(Event.SELECT, fileRef_select);
 			//fileRef.addEventListener(Event.COMPLETE, fileRef_complete);
 			fileRef.addEventListener(IOErrorEvent.IO_ERROR, onIOErrorEvent);
+			Presentation.getInstance().addEventListener(Presentation.LOADED_CHANGE, onLoadedChange);
+		}
+		
+		private function onLoadedChange ( event : Event ) : void {
+			generatingRT.visible = false;
 		}
 		
 		private function browseAndUpload(event:MouseEvent):void {
@@ -126,6 +135,7 @@ package com.aimialesson.UI.views
 				if (evt.bytesLoaded / evt.bytesTotal == 1){
 					fileRef.removeEventListener(ProgressEvent.PROGRESS, fileRef_progress);
 					progressBar.visible = false;
+					generatingRT.visible = true;
 					this.dispatchEvent(new PresentationEvent ( PresentationEvent.PRESENTATION_UPLOADED ));
 				}
 			}
@@ -134,6 +144,7 @@ package com.aimialesson.UI.views
 		private function fileRef_complete(evt:Event):void {
 			debug (" (complete)" );
 			progressBar.visible = false;
+			generatingRT.visible = true;
 			this.dispatchEvent(new PresentationEvent ( PresentationEvent.PRESENTATION_UPLOADED ));
 		}
 		

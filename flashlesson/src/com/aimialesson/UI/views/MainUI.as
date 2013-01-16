@@ -43,26 +43,26 @@ package com.aimialesson.UI.views
 	[Event (name="partnerMicPauseToggle", type="com.aimialesson.events.MediaEvent")]
 	public class MainUI extends SkinnableComponent
 	{
-		[SkinPart (required="false")]
+		[SkinPart (required="true")]
 		public var videoChatContainer:MainUIContainer;
-		[SkinPart (required="false")]
+		[SkinPart (required="true")]
 		public var notesContainer:MainUIContainer;
-		[SkinPart (required="false")]
+		[SkinPart (required="true")]
 		public var tPresentationContainer:MainUIContainer;
+		[SkinPart (required="true")]
+		public var remainingTimeContainer:MainUIContainer;
+		[SkinPart (required="true")]
+		public var goFSBtn:Button;
+		[SkinPart (required="false")]
+		public var startSessionBtn:Button;
+		[SkinPart (required="true")]
+		public var stopSessionBtn:Button;
 		[SkinPart (required="false")]
 		public var presentationTitleContainer:MainUIContainer;
-		[SkinPart (required="false")]
-		public var remainingTimeContainer:MainUIContainer;
 		[SkinPart (required="false")]
 		public var totalTimeContainer:MainUIContainer;
 		[SkinPart (required="false")]
 		public var onlineStudentContainer:MainUIContainer;
-		[SkinPart (required="false")]
-		public var goFSBtn:Button;
-		[SkinPart (required="false")]
-		public var startSessionBtn:Button;
-		[SkinPart (required="false")]
-		public var stopSessionBtn:Button;
 		[SkinPart (required="false")]
 		public var debugger:TextArea;
 		[Bindable]

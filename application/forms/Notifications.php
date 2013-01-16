@@ -26,7 +26,7 @@ class Application_Form_Notifications extends Zend_Form
         $alert->addMultiOption('email', 'Receive Alerts via Email');
         $alert->addMultiOption('message', 'Receive Alert when I have a new message');
         $alert->addMultiOption('payment', 'Receive Alert when payment is made to me');
-        if($identity->role == $this->student){
+        if($identity->role != $this->student){
             $alert->addMultiOption('review', 'Receive Alert when someone wrote review on my page');
         }
         /* END -- Alerts */

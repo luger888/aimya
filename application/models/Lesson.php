@@ -99,7 +99,7 @@ class Application_Model_Lesson
     {
         $string = '<li class="note"><p class="username">' . $userName . '</p><p class="time">' . $time . '</p><p class="message">' . $message  . '</p></li>';
 
-        $fp = fopen($notePath . "notes.txt", "a+");
+        $fp = fopen($notePath . "notes.txt", "a");
 
         fwrite($fp, $string);
 

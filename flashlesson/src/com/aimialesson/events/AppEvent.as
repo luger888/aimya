@@ -5,7 +5,9 @@ package com.aimialesson.events
 	public class AppEvent extends Event
 	{
 		public static const CONNECT_INIT_COMPLETE:String = "connectInitComplete";
+		public static const CONNECTION_FAILED:String = "connectionFailed";
 		public static const LOAD_TEXTS_COMPLETE:String = "loadTextsComplete";
+		public static const LOAD_TEXTS_FAILED:String = "loadTextsFailed";
 		public static const INIT_COMPLETE:String = "initComplete";
 		public static const CHANGE_SCREEN_STATE:String = "changeScreenState";
 		public static const EXIT_FROM_FULL_SCREEN_STATE:String = "exitFromFullScreenState";
