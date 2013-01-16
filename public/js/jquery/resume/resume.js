@@ -72,8 +72,8 @@ function saveResumeItem(tab) {
             data:dataObject,
             success:function (response) {
 
-                    $('#file_upload').data('uploadifive').settings.formData = { 'resumeType':tab, 'resumeTypeId':response.lastId };
-                    $('#file_upload').uploadifive('upload');
+                    $('#file_upload'+tab).data('uploadifive').settings.formData = { 'resumeType':tab, 'resumeTypeId':response.lastId };
+                    $('#file_upload'+tab).uploadifive('upload');
 
 
 
@@ -137,12 +137,12 @@ function editResumeItem(e, tab) {
     experienceWrapper.children('.resumeItemBody').html(content);
     experienceWrapper.children('.resumeItemBody').children('.formRow').children('.resumeEditInput').val($.trim(resumeContent));
     experienceWrapper.children('.resumeItemBody').after('<div class = "uploadWrapper">' +
-        '<input id="file_upload" name="file_upload" type="file">' +
+        '<input id="file_upload'+tab+'" name="file_upload" type="file">' +
         '<input type="button" value="save" class="button-2 save floatRight" onclick=updateResumeItem(this,"' + tab + '");>' +
         '</div>' +
         '<div id="queue"></div>');
     $('.button-2:not(".save, .upload")').addClass("disable");
-    uploadify();
+    uploadify(tab);
 }
 
 function updateResumeItem(e, tab) {
@@ -158,8 +158,8 @@ function updateResumeItem(e, tab) {
             type:"post",
             data:dataObject,
             success:function (response) {
-                $('#file_upload').data('uploadifive').settings.formData = { 'resumeType':tab, 'resumeTypeId':id};
-                $('#file_upload').uploadifive('upload');
+                $('#file_upload'+tab).data('uploadifive').settings.formData = { 'resumeType':tab, 'resumeTypeId':id};
+                $('#file_upload'+tab).uploadifive('upload');
                 $('.button-2:not(".save, .upload")').removeClass("disable");
                 experienceWrapper.find('.formRow').html(resumeContent);
                 $(e).remove();
@@ -201,10 +201,10 @@ function updateObjective() {
         }
     )
 }
-function uploadify() {
+function uploadify(tab) {
 
     var baseUrl = $('#current_url').val();
-    $('#file_upload').uploadifive({
+    $('#file_upload'+tab).uploadifive({
             'auto':false,
             'formData':{'resumeType':'skills', 'resumeTypeId':'1'},
             'queueID':'queue',

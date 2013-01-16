@@ -1,7 +1,7 @@
 <?php $this->headScript()->appendFile('/js/jquery/jquery.uploadifive.js');?>
 <?php echo $this->headScript();?>
 <script type="text/javascript">
-    uploadify();
+    uploadify('experience');
 </script>
 <div class="resumeGeneral clearfix">
 
@@ -45,7 +45,7 @@
             </div>
             <div class="uploadWrapper">
 
-                <input id="file_upload" name="file_upload" type="file" multiple="true">
+                <input id="file_uploadexperience" name="file_upload" type="file" multiple="true">
                 <input type="button" value="save" class="button-2 save floatRight"
                        onclick="saveResumeItem('experience');">
             </div>
