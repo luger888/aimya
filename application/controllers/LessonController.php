@@ -83,11 +83,18 @@ class LessonController extends Zend_Controller_Action
             if ($booking['video']) {
                 $lessonTable = new Application_Model_DbTable_Lesson();
                 $activeLesson = $lessonTable->checkAvailableLesson(Zend_Auth::getInstance()->getIdentity()->id);
+
                 $videoPath = $lessonModel->createVideoPath($res, $activeLesson['creator_id']);
 
-                $openDispay = $lessonModel->openDisplay(225);
+                $openDispay = $lessonModel->openDisplay($activeLesson['id']);
+                if($openDispay !== FALSE){
+                    $res = $lessonTable->setSeleniumPort($activeLesson['id'], $openDispay);
 
-                exec("recording.sh {$videoPath}");
+                    if($res) {
+                        $lessonModel->openLesson($activeLesson['id'], $openDispay);
+                        $lessonModel->startRecording($activeLesson['id'], $videoPath . 'video_lesson', $booking['duration']);
+                    }
+                }
 
             }
 
@@ -204,21 +211,6 @@ class LessonController extends Zend_Controller_Action
         } else {
             die('server error');
         }
-        $lessonModel = new Application_Model_Lesson();
-        //$lessonTable = new Application_Model_DbTable_Lesson();
-        //$activeLesson = $lessonTable->checkAvailableLesson(Zend_Auth::getInstance()->getIdentity()->id);
-        //$videoPath = $lessonModel->createVideoPath($res, $activeLesson['creator_id']);
-
-        //$openDispay = $lessonModel->openDisplay(225);
-
-        //if($openDispay){
-
-        //}
-
-        //$lessonModel->openLesson('226', 4469);
-        //$result = $seleniumModel->openLessonPage();
-        //var_dump($result);
-        //die;
 
     }
 
@@ -370,6 +362,12 @@ class LessonController extends Zend_Controller_Action
                 $lessonTable = new Application_Model_DbTable_Lesson();
                 $bookingTable = new Application_Model_DbTable_Booking();
                 $bookingStatus = $bookingTable->changeStatus($bookingId);
+                $booking = $bookingTable->getItem($bookingId);
+                if($booking['video']) {
+                    $lesson = $lessonTable->getItem($lessonId);
+                    $seleniumPort = $lesson['selenium_port'];
+                    exec("phase3_kill.sh $lessonId $seleniumPort");
+                }
                 $status = $lessonTable->changeStatus($lessonId);
                 if ($status && $bookingStatus) {
                     $this->view->answer = 'success';
