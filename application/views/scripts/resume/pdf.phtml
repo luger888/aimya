@@ -1,5 +1,5 @@
 <?php
-$stylesheet = file_get_contents('./css/styles.css');
+$stylesheet = file_get_contents('./css/onlineResume.css');
 
 
 $html = "<div class='resumeOnlineMain'>
@@ -40,9 +40,11 @@ $html .= "</div>
     </div>
 </div>";
 
-$mpdf = new Aimya_Mpdf_mpdf();
+$mpdf = new Aimya_Mpdf_mpdf('c');
+
+$mpdf->SetDisplayMode('fullpage');
 $mpdf->WriteHTML($stylesheet, 1);
-$mpdf->WriteHTML($html, 2);
+$mpdf->WriteHTML($html);
 $mpdf->Output();
 exit;
 
