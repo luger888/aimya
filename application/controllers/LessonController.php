@@ -213,7 +213,7 @@ class LessonController extends Zend_Controller_Action
 
         //}
 
-        $lessonModel->openLesson('225', 4459);
+        $lessonModel->openLesson('226', 4469);
         //$result = $seleniumModel->openLessonPage();
         //var_dump($result);
         die;
