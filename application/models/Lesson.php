@@ -50,7 +50,7 @@ class Application_Model_Lesson
         $port = rand(4000, 4999);
         passthru("rec.sh $lessonId $port", $result);
         if($result == 0) {
-            return true;
+            return $port;
         } else {
             return false;
         }
@@ -73,10 +73,12 @@ class Application_Model_Lesson
         return $result;
     }
 
-    public function startRecording()
+    public function startRecording($display, $path, $time)
     {
-        $result = exec('start_recording.sh');
-        return $result;
+        $seconds = $time * 60;
+        $time = gmdate("H:i:s", $seconds);
+        exec("phase2_rec.sh $display $path $time");
+        return true;
     }
 
     public function createNote($notePath, $userName, $message, $time)

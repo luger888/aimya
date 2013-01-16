@@ -94,6 +94,27 @@ class Application_Model_DbTable_Lesson extends Application_Model_DbTable_Abstrac
 
     }
 
+    public function setSeleniumPort($lessonId, $port)
+    {
+        $where   = array(
+            $this->getAdapter()->quoteInto('id=?', (int)$lessonId),
+        );
+
+        $data = array(
+            'updated_at' => date('Y-m-d H:m:s'),
+            'selenium_port' => $port
+        );
+
+        $result = $this->update($data, $where);
+
+        if($result) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
     public function getFlashSize($lessonId) {
         $userId = (int)Zend_Auth::getInstance()->getIdentity()->id;
         $lessonId = (int)$lessonId;
