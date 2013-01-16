@@ -32,17 +32,17 @@ class Application_Model_Lesson
 
     public function createNotesPath($lessonId, $teacherId)
     {
+        $notePath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'notes'  . DIRECTORY_SEPARATOR;
+        if (!file_exists($notePath) OR !is_dir($notePath)) {
+            if (!mkdir($notePath, '0777', true)) {
+                die('Can\'t create directory');
+            } else {
+                return $notePath;
+            }
 
-        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users');
-        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId);
-        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId . DIRECTORY_SEPARATOR . $lessonId);
-        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'notes');
-        $notePath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'notes' . DIRECTORY_SEPARATOR;
-        @mkdir($notePath);
-
-        //$this->write(' / ' . $identityId . " / \n");
-
-        return $notePath;
+        } else {
+               
+        }
     }
 
     public function createVideoPath($lessonId, $teacherId)
