@@ -34,7 +34,7 @@ class Application_Model_Lesson
     {
         $notePath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'notes'  . DIRECTORY_SEPARATOR;
         if (!file_exists($notePath) OR !is_dir($notePath)) {
-            if (!mkdir($notePath, '0755', true)) {
+            if (!mkdir($notePath, '0777', true)) {
                 die('Can\'t create directory');
             } else {
                 return $notePath;
