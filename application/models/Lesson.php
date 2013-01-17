@@ -59,13 +59,15 @@ class Application_Model_Lesson
     public function openLesson($lessonId, $port)
     {
 
+        var_dump("phpunit " . realpath(APPLICATION_PATH . "/../tmp/test.php") . " $lessonId $port");
+        die;
 
         exec("phpunit " . realpath(APPLICATION_PATH . "/../tmp/test.php") . " $lessonId $port");
-        /*if($result == 0) {
+        if($result == 0) {
             return true;
         } else {
             return false;
-        }*/
+        }
     }
 
     public function closeDisplay()
