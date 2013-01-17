@@ -59,7 +59,8 @@ class Application_Model_Lesson
     public function openLesson($lessonId, $port)
     {
 
-
+        echo "phpunit " . realpath(APPLICATION_PATH . "/../tmp/test.php") . " $lessonId $port";
+        die;
 
         exec("phpunit " . realpath(APPLICATION_PATH . "/../tmp/test.php") . " $lessonId $port");
         /*if($result == 0) {
