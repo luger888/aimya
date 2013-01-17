@@ -81,7 +81,7 @@ class LessonController extends Zend_Controller_Action
                 $lessonFeadbackTable->createDefaultFeedback($res, Zend_Auth::getInstance()->getIdentity()->id);
             }
             if ($booking['video']) {
-                $lessonTable = new Application_Model_DbTable_Lesson();
+                /*$lessonTable = new Application_Model_DbTable_Lesson();
                 $activeLesson = $lessonTable->checkAvailableLesson(Zend_Auth::getInstance()->getIdentity()->id);
 
                 $videoPath = $lessonModel->createVideoPath($res, $activeLesson['creator_id']);
@@ -94,7 +94,7 @@ class LessonController extends Zend_Controller_Action
                         $lessonModel->openLesson($activeLesson['id'], $openDispay);
                         $lessonModel->startRecording($activeLesson['id'], $videoPath . 'video_lesson', $booking['duration']);
                     }
-                }
+                }*/
 
             }
 
@@ -167,7 +167,7 @@ class LessonController extends Zend_Controller_Action
 
     public function recordingAction()
     {
-        if ($this->getRequest()->getParam('lessonId')) {
+        /*if ($this->getRequest()->getParam('lessonId')) {
             //$userId = $this->getRequest()->getParam('partner_id');
             $lessonTable = new Application_Model_DbTable_Lesson();
             //$this->view->lessonStatus = 1;
@@ -210,6 +210,21 @@ class LessonController extends Zend_Controller_Action
             }
         } else {
             die('server error');
+        }*/
+        $lessonModel = new Application_Model_Lesson();
+        $lessonTable = new Application_Model_DbTable_Lesson();
+        $activeLesson = $lessonTable->getItem(325);
+
+        //$videoPath = $lessonModel->createVideoPath(325, $activeLesson['creator_id']);
+
+        $openDispay = $lessonModel->openDisplay($activeLesson['id']);
+        if($openDispay != FALSE){
+            $res = $lessonTable->setSeleniumPort($activeLesson['id'], $openDispay);
+
+            if($res) {
+                $lessonModel->openLesson($activeLesson['id'], $openDispay);
+                //$lessonModel->startRecording($activeLesson['id'], $videoPath . 'video_lesson', 15);
+            }
         }
 
     }
