@@ -12,7 +12,7 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
             'user_id' => $data['user_id'],
             'aimya_profit' => $data['aimya_profit'],
             'pay_key' => $data['pay_key'],
-            'status' => 'paid',
+            'status' => 'pending',
             'active_to' => $data['active_to'],
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
