@@ -468,6 +468,22 @@ function massArchive(current_action, url) {
     });
 }
 
+function getTimeLeft() {
+    var baseUrl = $('#current_url').val();
+    $.ajax({
+        'url':baseUrl + '/payment/remained/',
+        'dataType':'json',
+        'type':'post',
+        success:function (data) {
+            if(data.status == 'success') {
+                if ($(".newMessagesCount").length) $(".newMessagesCount").remove();
+                inboxLi = $('.leftNavigation').find($('a[href="' + pathName + '/payment"]')).parent();
+                inboxLi.append('<span class="newMessagesCount">' + data.timeLeft + '</span>')
+            }
+        }
+    });
+}
+
 function setDefaultTimezone() {
     var baseUrl = $('#current_url').val();
     var d=new Date(Date.now()); // sets your date to variable d

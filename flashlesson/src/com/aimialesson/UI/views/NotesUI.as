@@ -6,6 +6,9 @@ package com.aimialesson.UI.views
 	import com.aimialesson.model.Notes;
 	import com.aimialesson.model.User;
 	
+	import caurina.transitions.Tweener;
+	import caurina.transitions.properties.CurveModifiers;
+	
 	import flash.events.*;
 	
 	import mx.collections.ArrayCollection;
@@ -28,6 +31,9 @@ package com.aimialesson.UI.views
 		public var messageInput:TextArea;
 		[SkinPart (required="true")]
 		public var sendBtn:Button;
+		
+		private var motionEasing:String = "linear";
+		private var motionTime:Number = 0.5;
 		
 		public function NotesUI()
 		{
@@ -59,14 +65,16 @@ package com.aimialesson.UI.views
 		
 		private function onNewLine( event : Event ) : void {
 			trace("NotesUI:onNewLine");
-			if (notesList.dataProvider as ArrayCollection) 
-				(notesList.dataProvider as ArrayCollection).refresh();
-			callLater(setVerticalPosition);
+//			if (notesList.dataProvider as ArrayCollection) 
+	//			(notesList.dataProvider as ArrayCollection).refresh();
 			skin.currentState = "changedState";
+			notesList.layout.verticalScrollPosition=notesList.dataGroup.contentHeight - notesList.height;
+			callLater(setVerticalPosition);
 		}
 		
 		private function setVerticalPosition(): void {
-			notesList.layout.verticalScrollPosition = notesList.dataGroup.contentHeight - notesList.height;
+			Tweener.addTween(notesList.layout, {verticalScrollPosition:notesList.dataGroup.contentHeight - notesList.height, time:motionTime,  transition:this.motionEasing});
+//			notesList.layout.verticalScrollPosition = notesList.dataGroup.contentHeight - notesList.height;
 		}
 		
 		private function onClickSendBtn ( event : MouseEvent ) : void

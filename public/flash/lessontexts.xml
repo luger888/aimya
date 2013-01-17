@@ -17,7 +17,7 @@
 		<ru>Оставшееся Время</ru>
 	</text>
 	<text id="lessonFocus">
-		<en>focus name:</en>
+		<en>session focus:</en>
 		<ru>тема Урока</ru>
 	</text>
 	<text id="lessonPresentation">
@@ -75,6 +75,10 @@
 	<text id="wantEndLesson">
 		<en>Are you sure you want to end the lesson?</en>
 		<ru>Вы действительно хотите закончить урок?</ru>
+	</text>
+	<text id="slidesAreGenerating">
+		<en>Slides are generating...</en>
+		<ru>Подождите...</ru>
 	</text>
 	<text id="yes">
 		<en>yes</en>

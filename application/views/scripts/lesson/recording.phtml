@@ -25,53 +25,16 @@
                                 $('#flash_div').show();
                                 jQuery('#flash_div').append(element);
                             } else {
-                                $('#flash_div').html('');
-                                $('#flash_div').hide();
-                                jQuery('#page').show();
-                                jQuery('#leftBg').show();
-                                jQuery('#flash_element').append(element);
-                            }
-                        }
-                    });
-                });
-
-                function changeFlashLayout(flashType) {
-
-                    //var element = '<?php echo $this->flashObj; ?>';
-                    $.ajax({
-                        url: "<?php echo $this->baseUrl()?>/lesson/updatesize",
-                        type: "post",
-                        data: {
-                            'flash_size': flashType,
-                            'lesson_id': '<?php echo $this->responce['id']?>'
-
-                        },
-                        success: function(result) {
-                        }
-                    });
-
-                    $.ajax({
-                        url: "<?php echo $this->baseUrl()?>/lesson/join",
-                        type: "post",
-                        success: function(result) {
-                            element = result.flashObj;
-                            if(flashType == 1) {
                                 $('#flash_element').html('');
                                 jQuery('#page').hide();
                                 jQuery('#leftBg').hide();
                                 $('#flash_div').show();
                                 jQuery('#flash_div').append(element);
-                            } else{
-                                $('#flash_div').html('');
-                                $('#flash_div').hide();
-                                jQuery('#page').show();
-                                jQuery('#leftBg').show();
-                                jQuery('#flash_element').append(element);
                             }
                         }
                     });
+                });
 
-                }
             </script>
             <?php endif;?>
         </div>

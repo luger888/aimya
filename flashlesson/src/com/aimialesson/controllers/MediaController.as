@@ -110,6 +110,13 @@ package com.aimialesson.controllers
 					if (!timer.running) timer.start();
 				}
 			}
+			
+			if (event.info.code == "NetConnection.Connect.Failed") 
+			{
+				this.dispatchEvent( new AppEvent(AppEvent.CONNECTION_FAILED));
+//				timer.stop();
+			}
+			
 		}
 		
 		private function reconnect(event:TimerEvent) : void {
