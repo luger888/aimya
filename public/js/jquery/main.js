@@ -476,9 +476,9 @@ function getTimeLeft() {
         'type':'post',
         success:function (data) {
             if(data.status == 'success') {
-                if ($(".newMessagesCount").length) $(".newMessagesCount").remove();
+                if ($(".trialAlert").length) $(".trialAlert").remove();
                 inboxLi = $('.leftNavigation').find($('a[href="' + pathName + '/payment"]')).parent();
-                inboxLi.append('<span class="newMessagesCount">' + data.timeLeft + '</span>')
+                inboxLi.append('<span class="trialAlert"><span class="txt">' + data.timeLeft + ' days left</span></span>')
             }
         }
     });
