@@ -226,7 +226,7 @@ class LessonController extends Zend_Controller_Action
 
             if($res) {
                 $lessonModel->openLesson($activeLesson['id'], $openDispay);
-                $lessonModel->startRecording($activeLesson['id'], $videoPath . 'video_lesson', 5);
+                //$lessonModel->startRecording($activeLesson['id'], $videoPath . 'video_lesson', 5);
             }
         }
 
