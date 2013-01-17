@@ -217,15 +217,15 @@ class LessonController extends Zend_Controller_Action
 
         //$videoPath = $lessonModel->createVideoPath(325, $activeLesson['creator_id']);
 
-        //$openDispay = $lessonModel->openDisplay($activeLesson['id']);
-        //if($openDispay != FALSE){
+        $openDispay = $lessonModel->openDisplay($activeLesson['id']);
+        if($openDispay != FALSE){
             //$res = $lessonTable->setSeleniumPort($activeLesson['id'], $openDispay);
 
             //if($res) {
-                $lessonModel->openLesson($activeLesson['id'], 4919);
+                $lessonModel->openLesson($activeLesson['id'], 4459);
                 //$lessonModel->startRecording($activeLesson['id'], $videoPath . 'video_lesson', 15);
             //}
-        //}
+        }
 
     }
 
