@@ -49,9 +49,6 @@ class Application_Model_Lesson
 
         $port = rand(4000, 4999);
         passthru("phase1_startenv.sh $lessonId $port", $result);
-
-        var_dump($result);
-        die;
         if($result == 0) {
             return $port;
         } else {
