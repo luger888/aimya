@@ -51,7 +51,8 @@
                     <td class ="focus"><?php echo $lesson['focus_name']?></td>
                     <td class="center">
                         <?php if ($lesson['video']): ?>
-                        <a href="#" class="button-2 open center"><?php echo $this->translate('Open') ?></a>
+                        <a href="#" onClick="getVideo(this, <?php echo $lesson['id'];?>);"
+                           class="button-2 open "><?php echo $this->translate('Open') ?></a>
                         <?php endif;?>
                     </td>
                     <td class="center">
