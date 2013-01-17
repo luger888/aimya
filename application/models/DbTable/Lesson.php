@@ -14,7 +14,7 @@ class Application_Model_DbTable_Lesson extends Application_Model_DbTable_Abstrac
             'so_id' => $array['so_id'],
             'booking_id' => $array['booking_id'],
             'status' => $array['status'],
-            'created_at' => date('Y-m-d H:m:s')
+            'created_at' => date('Y-m-d H:i:s')
         );
 
         return $this->insert($data);
@@ -50,7 +50,7 @@ class Application_Model_DbTable_Lesson extends Application_Model_DbTable_Abstrac
         //Zend_Debug::dump($where);
         $data = array(
             'status'=> 2,
-            'updated_at' => date('Y-m-d H:m:s')
+            'updated_at' => date('Y-m-d H:i:s')
         );
 
         $result = $this->update($data, $where);
@@ -101,7 +101,7 @@ class Application_Model_DbTable_Lesson extends Application_Model_DbTable_Abstrac
         );
 
         $data = array(
-            'updated_at' => date('Y-m-d H:m:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
             'selenium_port' => $port
         );
 
