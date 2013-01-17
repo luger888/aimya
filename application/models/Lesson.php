@@ -78,7 +78,7 @@ class Application_Model_Lesson
     {
         $seconds = $time * 60;
         $time = gmdate("H:i:s", $seconds);
-        exec("phase2_rec.sh $display $path $time");
+        exec("phase2_rec.sh $display $path $time > /dev/null 2>/dev/null &");
         return true;
     }
 
