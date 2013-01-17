@@ -258,7 +258,6 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
         $subscriptionTable = new Application_Model_DbTable_Subscriptions();
         $activeTo = $subscriptionTable->getTimeLeft();
-
         if($activeTo['active_to'] == NULL && Zend_Auth::getInstance()->getIdentity()->role > 1) {
             $subscriptionTable->setDefaultPeriod();
         }

@@ -60,7 +60,7 @@ class Application_Model_Lesson
     {
 
 
-        exec("phpunit " . realpath(APPLICATION_PATH . "/../tmp/test.php") . " $lessonId $port");
+        exec("sudo phpunit " . realpath(APPLICATION_PATH . "/../tmp/test.php") . " $lessonId $port");
         /*if($result == 0) {
             return true;
         } else {
