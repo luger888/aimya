@@ -222,6 +222,8 @@ class LessonController extends Zend_Controller_Action
 
         $openDispay = $lessonModel->openDisplay($activeLesson['id']);
         if($openDispay !== FALSE){
+            var_dump($openDispay);
+            die;
             $res = $lessonTable->setSeleniumPort($activeLesson['id'], $openDispay);
 
             if($res) {
