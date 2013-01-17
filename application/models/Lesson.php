@@ -48,7 +48,7 @@ class Application_Model_Lesson
     {
 
         $port = rand(4000, 4999);
-        passthru("phase1_startenv.sh $lessonId $port", $result);
+        passthru("sudo phase1_startenv.sh $lessonId $port", $result);
         if($result == 0) {
             return $port;
         } else {
@@ -60,7 +60,7 @@ class Application_Model_Lesson
     {
 
 
-        exec("sudo phpunit " . realpath(APPLICATION_PATH . "/../tmp/test.php") . " $lessonId $port");
+        exec("phpunit " . realpath(APPLICATION_PATH . "/../tmp/test.php") . " $lessonId $port");
         /*if($result == 0) {
             return true;
         } else {
