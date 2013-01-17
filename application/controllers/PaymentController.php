@@ -268,7 +268,12 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         $timeLeft = floor($datediff/(60*60*24));
         $timeLeft = substr($timeLeft, 1);
 
-        $this->view->timeLeft = $timeLeft;
+        if($timeLeft <= 5) {
+            $this->view->status = 'success';
+            $this->view->timeLeft = $timeLeft;
+        } else {
+            $this->view->status = 'failure';
+        }
     }
 
     public function writeLog($data)
