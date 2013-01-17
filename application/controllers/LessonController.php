@@ -216,7 +216,7 @@ class LessonController extends Zend_Controller_Action
     {
         $lessonModel = new Application_Model_Lesson();
         $lessonTable = new Application_Model_DbTable_Lesson();
-        $activeLesson = $lessonTable->getItem('325');
+        $activeLesson = $lessonTable->getItem('326');
 
         $videoPath = $lessonModel->createVideoPath($activeLesson['id'], $activeLesson['creator_id']);
 
