@@ -78,7 +78,7 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
         $data = $this->select()
             ->from($this->_name, array('active_to' => 'MAX(active_to)'))
             ->where('user_id=?', (int)$userId)
-            ->where('status=?', 'paid');
+            ->where('(' . $this->getAdapter()->quoteInto('status=?', 'paid') . ') OR (' . $this->getAdapter()->quoteInto('status=?', 'trial') . ')');
 
         return $data->query()->fetch();
 
