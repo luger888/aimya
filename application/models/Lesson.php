@@ -18,55 +18,39 @@ class Application_Model_Lesson
 
     public function createPresentationPath($lessonId)
     {
-
         $identityId = Zend_Auth::getInstance()->getIdentity()->id;
-        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users');
-        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $identityId);
-        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $lessonId);
-        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'presentation');
-        $presPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'presentation' . DIRECTORY_SEPARATOR;
-        @mkdir($presPath);
 
-        return $presPath;
+        $folderModel = new Application_Model_Folder();
+        $notePath = 'users/' . $identityId . '/' . $lessonId . '/presentation/';
+        $folderModel->createFolderChain($notePath, '/');
+        return $notePath;
     }
 
     public function createNotesPath($lessonId, $teacherId)
     {
-
-        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users');
-        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId);
-        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId . DIRECTORY_SEPARATOR . $lessonId);
-        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'notes');
-        $notePath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'notes' . DIRECTORY_SEPARATOR;
-        @mkdir($notePath);
-
-        //$this->write(' / ' . $identityId . " / \n");
-
+        $folderModel = new Application_Model_Folder();
+        $notePath = 'users/' . $teacherId . '/' . $lessonId . '/notes/';
+        $folderModel->createFolderChain($notePath, '/');
         return $notePath;
     }
 
     public function createVideoPath($lessonId, $teacherId)
     {
 
-        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users');
-        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId);
-        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId . DIRECTORY_SEPARATOR . $lessonId);
-        @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'video');
-        $notePath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'video' . DIRECTORY_SEPARATOR;
-        @mkdir($notePath);
-
-        //$this->write(' / ' . $identityId . " / \n");
-
+        $folderModel = new Application_Model_Folder();
+        $notePath = 'users/' . $teacherId . '/' . $lessonId . '/video/';
+        $folderModel->createFolderChain($notePath, '/');
         return $notePath;
+
     }
 
     public function openDisplay($lessonId)
     {
 
         $port = rand(4000, 4999);
-        passthru("rec.sh $lessonId $port", $result);
+        passthru("phase1_startenv.sh $lessonId $port", $result);
         if($result == 0) {
-            return true;
+            return $port;
         } else {
             return false;
         }
@@ -75,7 +59,8 @@ class Application_Model_Lesson
     public function openLesson($lessonId, $port)
     {
 
-        exec("phpunit " . APPLICATION_PATH . "/../tmp/test.php $lessonId $port");
+
+        exec("phpunit " . realpath(APPLICATION_PATH . "/../tmp/test.php") . " $lessonId $port");
         /*if($result == 0) {
             return true;
         } else {
@@ -89,17 +74,19 @@ class Application_Model_Lesson
         return $result;
     }
 
-    public function startRecording()
+    public function startRecording($display, $path, $time)
     {
-        $result = exec('start_recording.sh');
-        return $result;
+        $seconds = $time * 60;
+        $time = gmdate("H:i:s", $seconds);
+        exec("phase2_rec.sh $display $path $time");
+        return true;
     }
 
     public function createNote($notePath, $userName, $message, $time)
     {
         $string = '<li class="note"><p class="username">' . $userName . '</p><p class="time">' . $time . '</p><p class="message">' . $message  . '</p></li>';
 
-        $fp = fopen($notePath . "notes.txt", "a+");
+        $fp = fopen($notePath . "notes.txt", "a");
 
         fwrite($fp, $string);
 
