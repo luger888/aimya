@@ -298,8 +298,9 @@ class LessonController extends Zend_Controller_Action
             $pdfPath = $presPath . $pdfName;
 
             //$this->write(' / ' . $pdfPath . " / \n");
-
-            @mkdir($presPath . 'jpges' . DIRECTORY_SEPARATOR);
+            if (!file_exists($presPath . 'jpges' . DIRECTORY_SEPARATOR) OR !is_dir($presPath . 'jpges' . DIRECTORY_SEPARATOR)) {
+                mkdir($presPath . 'jpges' . DIRECTORY_SEPARATOR);
+            }
             $imgsPath = $presPath . 'jpges' . DIRECTORY_SEPARATOR;
 
             $files = glob($imgsPath . '*'); // get all file names
