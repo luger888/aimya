@@ -68,15 +68,11 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
         }
 
         $dbSkills = new Application_Model_DbTable_ResumeSkills();
-        $this->view->skillList = $dbSkills->getSkills($identity->id);
-//        if ($handle = opendir('./img/uploads/'.$identity->id .'/certificate/skill/21/')) {
-//            $certificates = array();
-//            while (false !== ($entry = readdir($handle))) {
-//                $certificates[] .= $entry;
-//            }
-//
-//        }
+        $skillList = $dbSkills->getSkills($identity->id);
+        $this->view->skillList = $skillList;
+
     }
+
     public function onlineAction()
     {
         $this->_helper->layout()->disableLayout();
@@ -97,7 +93,8 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
         $this->view->skills = $dbSkills->getSkills($identity->id);
     }
 
-    public function pdfAction(){
+    public function pdfAction()
+    {
         $identity = Zend_Auth::getInstance()->getStorage()->read();
 
         $dbProfile = new Application_Model_DbTable_Profile();
@@ -115,6 +112,7 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
 
 
     }
+
     public function ajaxAction()
     {
         $identity = Zend_Auth::getInstance()->getStorage()->read();
@@ -204,14 +202,11 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
             /*  END --  OBJECTIVE TAB*/
 
 
-
-
-
             if ($this->getRequest()->getParam('resumeMain')) {
 
                 $dbTable = new Application_Model_DbTable_Profile();
 
-                    $dbTable->updateResume($data, $identity->id);
+                $dbTable->updateResume($data, $identity->id);
 
 
             }
