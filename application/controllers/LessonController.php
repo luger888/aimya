@@ -494,7 +494,8 @@ class LessonController extends Zend_Controller_Action
             $this->view->rate = $review['rating'];
             $this->view->date = $reviewDate;
             $this->view->notes = $fileContent;
-            $this->view->user_id = $identityId;
+
+            $this->view->creator_id = $lesson['creator_id'];
         }
     }
 

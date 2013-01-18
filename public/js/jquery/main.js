@@ -599,7 +599,7 @@ function getVideo(e, id) {
             flashvars.width = '500';
             flashvars.height = '350';
             flashvars.imagepath = '../../images/content/videoPlayer.png';
-            flashvars.videopath = '../../users/'+result.user_id +'/'+id+'/video/cvideo.flv';
+            flashvars.videopath = '../../users/'+result.creator_id +'/'+id+'/video/cvideo.flv';
             //flashvars.color='0x2C75A3'
             flashvars.volume = '0.3';
             flashvars.fullscreenbutton = 'on';
