@@ -29,6 +29,7 @@
     font: 700 13px arial;
     width: 125px;
     margin: 0 auto;
+    padding-top: 5px;
 }
 
 .titleInfo .degree{
@@ -54,6 +55,10 @@ h1{
     padding-top: 47px;
 }
 .textBlock{
+    padding: 29px 0 0 44px;
+    font: 16px arial;
+}
+.resumeItemCertificates{
     padding: 29px 0 0 44px;
     font: 16px arial;
 }

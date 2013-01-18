@@ -1,12 +1,13 @@
-<?php $this->headScript()->appendFile('/js/jquery/jquery.uploadifive.js');?>
-<?php echo $this->headScript();?>
+<?php $this->headScript()->appendFile('/js/jquery/jquery.uploadifive.js'); ?>
+<?php echo $this->headScript(); ?>
 <script type="text/javascript">
     uploadify('education');
 </script>
 <div class="resumeGeneral clearfix">
-        <div class="shadowSeparatorBox clearfix">
-            <div class="resumeList clearfix">
-                <?php
+    <div class="shadowSeparatorBox clearfix">
+        <div class="resumeList clearfix">
+            <?php
+            if ($this->educationList) {
                 foreach ($this->educationList as $value):?>
                     <div class="shadowSeparator clearfix">
                         <div class="shadowSeparatorBot clearfix">
@@ -25,32 +26,51 @@
                                 <div class="resumeItemBody clearfix">
                                     <?php echo $value['content'];?>
                                 </div>
+
+                                <?php if (isset($value['certificate'])) {
+                                echo '<div class="resumeItemCertificates clearfix">Certificates:';
+                                foreach ($value['certificate'] as $index => $cert) {
+                                    echo '<div><a class="certificate" href="../' . $value['certificateUrl'][$index] . '/' . $cert . '">' . $cert . '</a></div>';
+                                }
+                                echo '</div>';
+                            }
+                                ?>
                             </div>
                         </div>
                     </div>
-                    <?php endforeach;?>
-            </div>
-            <div class="buttonsRow clearfix">
-                <input type="button" class="button-2 add addResumeItem floatRight" value="add education"
-                       onclick="addResumeItem();">
-            </div>
-            <div class="resumeItemForm">
-                <h1>Add new education:</h1>
+                    <?php endforeach;
+                echo '</div>
+                        <div class="buttonsRow clearfix">
+                         <input type="button" class="button-2 add addResumeItem floatRight" value="add skill"
+                             onclick="addResumeItem();">
+                        </div>';
+            } else {
+                echo '<script>addResumeItem()</script>';
+            }
+            ?>
 
-                <div class="formRow clearfix">
-                    <?php
-                    echo $this->educationForm->getElement('education');
-                    ?>
-                </div>
-                <div class="uploadWrapper">
-
-                    <input id="file_uploadeducation" name="file_upload" type="file" multiple="true">
-                    <input type="button" value="save" class="button-2 save floatRight"
-                           onclick="saveResumeItem('education');">
-                </div>
-                <div id="queue"></div>
-            </div>
         </div>
+        <div class="buttonsRow clearfix">
+            <input type="button" class="button-2 add addResumeItem floatRight" value="add education"
+                   onclick="addResumeItem();">
+        </div>
+        <div class="resumeItemForm">
+            <h1>Add new education:</h1>
+
+            <div class="formRow clearfix">
+                <?php
+                echo $this->educationForm->getElement('education');
+                ?>
+            </div>
+            <div class="uploadWrapper">
+
+                <input id="file_uploadeducation" name="file_upload" type="file" multiple="true">
+                <input type="button" value="save" class="button-2 save floatRight"
+                       onclick="saveResumeItem('education');">
+            </div>
+            <div id="queue"></div>
+        </div>
+    </div>
 
     <?php echo $this->partial('partials/resumeFooter.phtml') ?>
 </div>

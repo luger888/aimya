@@ -3,14 +3,15 @@
         <div class="shadowSeparatorBox clearfix">
             <div class="headRow clearfix">
                 <h1>describe objective:</h1>
-                <div class="buttonRow">
-                    <input type="button" class = "button-2 save" value="save" onclick=updateObjective();>
-                </div>
+
             </div>
             <div class="formRow clearfix objective">
                 <?php
                 echo $this->objectiveForm->objective;
                 ?>
+            </div>
+            <div class="buttonRow">
+                <input type="button" class = "button-2 save floatRight"  value="save" onclick=updateObjective();>
             </div>
         </div>
 

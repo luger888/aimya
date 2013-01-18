@@ -1,5 +1,5 @@
-<?php $this->headScript()->appendFile('/js/jquery/jquery.uploadifive.js');?>
-<?php echo $this->headScript('skill');?>
+<?php $this->headScript()->appendFile('/js/jquery/jquery.uploadifive.js'); ?>
+<?php echo $this->headScript('skill'); ?>
 <script type="text/javascript">
     uploadify('skill');
 
@@ -9,52 +9,65 @@
     <div class="shadowSeparatorBox clearfix">
         <div class="experienceList clearfix">
             <?php
-            foreach ($this->skillList as $value):?>
-                <div class="shadowSeparator clearfix">
-                    <div class="shadowSeparatorBot clearfix">
-                        <div class="resumeItem clearfix">
-                            <div class="headRow clearfix">
-                                <h1>skill:</h1>
+            if ($this->educationList) {
+                foreach ($this->skillList as $value):?>
+                    <div class="shadowSeparator clearfix">
+                        <div class="shadowSeparatorBot clearfix">
+                            <div class="resumeItem clearfix">
+                                <div class="headRow clearfix">
+                                    <h1>skill:</h1>
 
-                                <div class="buttonRow clearfix">
-                                    <input type="button" value="edit" class="button-2 edit"
-                                           onclick="editResumeItem(this,'skill');">
-                                    <input type="button" value="delete" class="button-2 delete"
-                                           onclick="deleteResumeItem(this, 'skill')";>
-                                    <input type="hidden" value="<?php echo $value['id'];?>">
+                                    <div class="buttonRow clearfix">
+                                        <input type="button" value="edit" class="button-2 edit"
+                                               onclick="editResumeItem(this,'skill');">
+                                        <input type="button" value="delete" class="button-2 delete"
+                                               onclick="deleteResumeItem(this, 'skill')";>
+                                        <input type="hidden" value="<?php echo $value['id'];?>">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="resumeItemBody clearfix">
-                                <?php echo $value['content'];?>
-                            </div>
+                                <div class="resumeItemBody clearfix">
+                                    <?php echo $value['content'];?>
+                                </div>
+                                <?php if (isset($value['certificate'])) {
+                                echo '<div class="resumeItemCertificates clearfix">Certificates:';
+                                foreach ($value['certificate'] as $index => $cert) {
+                                    echo '<div><a class="certificate" href="../' . $value['certificateUrl'][$index] . '/' . $cert . '">' . $cert . '</a></div>';
+                                }
+                                echo '</div>';
+                            }
+                                ?>
 
-
+                            </div>
                         </div>
                     </div>
-                </div>
-                <?php endforeach; ?>
-        </div>
-        <div class="buttonsRow clearfix">
-            <input type="button" class="button-2 add addResumeItem floatRight" value="add skill"
+                    <?php endforeach;
+                echo '</div>
+                <div class="buttonsRow clearfix">
+                    <input type="button" class="button-2 add addResumeItem floatRight" value="add skill"
                    onclick="addResumeItem();">
+                </div>';
+            } else {
+                echo '<script>addResumeItem()</script>';
+            }
+            ?>
         </div>
-        <div class="resumeItemForm">
-            <h1>Add new skill:</h1>
+            <div class="resumeItemForm">
+                <h1>Add new skill:</h1>
 
-            <div class="formRow clearfix">
-                <?php
-                echo $this->skillsForm->getElement('skill');
-                ?>
-            </div>
-            <div class="uploadWrapper">
+                <div class="formRow clearfix">
+                    <?php
+                    echo $this->skillsForm->getElement('skill');
+                    ?>
+                </div>
+                <div class="uploadWrapper">
 
-                <input id="file_uploadskill" type="file" name="file_upload" />
-                <input type="button" value="save" class="button-2 save floatRight"
-                       onclick="saveResumeItem('skill');">
+                    <input id="file_uploadskill" type="file" name="file_upload"/>
+                    <input type="button" value="save" class="button-2 save floatRight"
+                           onclick="saveResumeItem('skill');">
+                </div>
+                <div id="queue"></div>
             </div>
-            <div id="queue"></div>
         </div>
+        <?php echo $this->partial('partials/resumeFooter.phtml');?>
+
     </div>
-    <?php echo $this->partial('partials/resumeFooter.phtml');?>
-
-</div>

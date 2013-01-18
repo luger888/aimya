@@ -26,6 +26,9 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         } else {
             $this->view->emailForm = $emailForm;
         }
+
+        $subscriptionForm->unsubscribe->setAttrib('disabled', 'disabled');
+
         $this->view->subscriptionForm = $subscriptionForm;
     }
 
@@ -114,6 +117,41 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
                 if($payKey['pay_key'] = $_POST['pay_key']) {
                     $orderTable->updatePaymentStatus($bookingId);
                     $bookingTable->payLesson($bookingId);
+                }
+            }
+
+        }else{
+            $this->writeLog("INVALID IPN");
+            $this->writeLog($listener->getTextReport());
+
+        }
+    }
+
+    public function subsipnAction()
+    {
+        $listener = new Aimya_PayPal_IpnListener();
+
+        // tell the IPN listener to use the PayPal test sandbox
+        $listener->use_sandbox = true;
+
+        // try to process the IPN POST
+        try {
+            $listener->requirePostMethod();
+            $verified = $listener->processIpn();
+        } catch (Exception $e) {
+            $this->writeLog($e->getMessage());
+            exit(0);
+        }
+
+        if($verified){
+            $this->writeLog("VALID IPN");
+            $this->writeLog($listener->getTextReport());
+            if($_GET['user_id']) {
+                $userId = $_GET['user_id'];
+                $subscriptionTable = new Application_Model_DbTable_Subscriptions();
+                $payKey = $subscriptionTable->getPayKeyFromSebscription($userId);
+                if($payKey['pay_key'] = $_POST['pay_key']) {
+                    $subscriptionTable->updateSubscriptionStatus($userId);
                 }
             }
 
@@ -258,7 +296,6 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
         $subscriptionTable = new Application_Model_DbTable_Subscriptions();
         $activeTo = $subscriptionTable->getTimeLeft();
-
         if($activeTo['active_to'] == NULL && Zend_Auth::getInstance()->getIdentity()->role > 1) {
             $subscriptionTable->setDefaultPeriod();
         }
@@ -269,7 +306,12 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         $timeLeft = floor($datediff/(60*60*24));
         $timeLeft = substr($timeLeft, 1);
 
-        $this->view->timeLeft = $timeLeft;
+        if($timeLeft <= 5) {
+            $this->view->status = 'success';
+            $this->view->timeLeft = $timeLeft;
+        } else {
+            $this->view->status = 'failure';
+        }
     }
 
     public function writeLog($data)

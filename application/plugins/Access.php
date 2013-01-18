@@ -55,7 +55,8 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         $acl->allow(self::STUDENT , 'search', array('search'));
         $acl->allow(self::STUDENT , 'booking', array('index'));
         $acl->allow(self::STUDENT , 'feedback', array('create', 'form', 'view'));
-        $acl->allow(self::TEACHER , 'payment', array('index', 'pay', 'email', 'subscribe', 'unsubscribe', 'remained'));
+        $acl->allow(self::STUDENT , 'payment', array('remained'));
+        $acl->allow(self::TEACHER , 'payment', array('index', 'pay', 'email', 'subscribe', 'unsubscribe'));
         $acl->deny(self::STUDENT ,  'user', array('index', 'registration', 'login'));
         $acl->allow(self::TEACHER , 'lesson', array('setup', 'upload'));
         $acl->allow(self::TEACHER , 'review', array('index'));
@@ -66,12 +67,12 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         $acl->allow(self::GUEST , 'user', array('index','registration', 'login'));
         $acl->allow(self::GUEST , 'error', array('index'));
         $acl->allow(self::GUEST , 'test', array('index', 'paypal', 'response', 'responsenew'));
-        $acl->allow(self::GUEST , 'payment', array('ipn', 'subscribenew'));
+        $acl->allow(self::GUEST , 'payment', array('ipn', 'subscribenew'. 'subsipn'));
         #allow to admin
         $acl->allow(self::ADMIN , 'admin', array('index', 'users', 'payments', 'static', 'metrics'));
         $acl->allow(self::ADMIN , 'search', array('reindex'));
         $acl->allow(self::ADMIN , 'test', array('index', 'paypal'));
-        $acl->allow(self::ADMIN , 'lesson', array('recording'));
+        $acl->allow(self::ADMIN , 'lesson', array('recording', 'temp'));
         $acl->allow(self::ADMIN , 'cms', array('index', 'new', 'edit', 'delete', 'view'));
         Zend_Registry::set('Zend_Acl',$acl);
 

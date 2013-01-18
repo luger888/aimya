@@ -35,13 +35,13 @@ class Application_Model_User
             $dbAvailability->createAvailability($lastId);
             $dbNotifications->createNotifications($lastId);
 
-            @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img');
-            @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'uploads');
-            @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $lastId);
-            @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $lastId . DIRECTORY_SEPARATOR . 'avatar');
-            @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $lastId . DIRECTORY_SEPARATOR . 'avatar' . DIRECTORY_SEPARATOR . 'base');
-            @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $lastId . DIRECTORY_SEPARATOR . 'avatar' . DIRECTORY_SEPARATOR . 'medium');
-            @mkdir(realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $lastId . DIRECTORY_SEPARATOR . 'avatar' . DIRECTORY_SEPARATOR . 'thumbnail');
+            $folderModel = new Application_Model_Folder();
+            $basePath = 'img/uploads/' . $lastId . '/avatar/base/';
+            $mediumPath = 'img/uploads/' . $lastId . '/avatar/medium/';
+            $thumbnailPath = 'img/uploads/' . $lastId . '/avatar/thumbnail/';
+            $folderModel->createFolderChain($basePath, '/');
+            $folderModel->createFolderChain($mediumPath, '/');
+            $folderModel->createFolderChain($thumbnailPath, '/');
 
             return true;
 

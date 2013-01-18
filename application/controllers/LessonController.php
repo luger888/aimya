@@ -20,6 +20,7 @@ class LessonController extends Zend_Controller_Action
             ->addActionContext('correspondence', 'json')
             ->addActionContext('pay', 'json')
             ->addActionContext('review', 'json')
+            ->addActionContext('video', 'json')
             ->initContext('json');
     }
 
@@ -81,20 +82,21 @@ class LessonController extends Zend_Controller_Action
                 $lessonFeadbackTable->createDefaultFeedback($res, Zend_Auth::getInstance()->getIdentity()->id);
             }
             if ($booking['video']) {
-                /*$lessonTable = new Application_Model_DbTable_Lesson();
+                $lessonTable = new Application_Model_DbTable_Lesson();
                 $activeLesson = $lessonTable->checkAvailableLesson(Zend_Auth::getInstance()->getIdentity()->id);
 
                 $videoPath = $lessonModel->createVideoPath($res, $activeLesson['creator_id']);
 
                 $openDispay = $lessonModel->openDisplay($activeLesson['id']);
-                if($openDispay !== FALSE){
+                sleep(4);
+                if ($openDispay !== FALSE) {
                     $res = $lessonTable->setSeleniumPort($activeLesson['id'], $openDispay);
 
-                    if($res) {
+                    if ($res) {
                         $lessonModel->openLesson($activeLesson['id'], $openDispay);
                         $lessonModel->startRecording($activeLesson['id'], $videoPath . 'video_lesson', $booking['duration']);
                     }
-                }*/
+                }
 
             }
 
@@ -167,7 +169,7 @@ class LessonController extends Zend_Controller_Action
 
     public function recordingAction()
     {
-        /*if ($this->getRequest()->getParam('lessonId')) {
+        if ($this->getRequest()->getParam('lessonId')) {
             //$userId = $this->getRequest()->getParam('partner_id');
             $lessonTable = new Application_Model_DbTable_Lesson();
             //$this->view->lessonStatus = 1;
@@ -197,35 +199,41 @@ class LessonController extends Zend_Controller_Action
 
                 $flashObj = '<object clsid:d27cdb6e-ae6d-11cf-96b8-444553540000 width="100%" height="100%" id="aimia_lesson"><param name="movie" value="' . $baseLink . '/flash/aimia_lesson.swf" /><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" /><param name="allowScriptAccess" value="sameDomain" /><param name="allowFullScreen" value="true" /><param name="flashvars" value="userName=' . $studentName . '&partnerName=' . $teacherName . '&partnerId=' . $teacherId . '&userId=' . $studentId . '&userRole=3&userTZ=' . $timeZone['timezone'] . '&total_time=' . $booking['duration'] * 60 . '&focus_name=' . addslashes($booking['focus_name']) . '&fs_mode=1&myStreamName=' . $myStreamName . '&partnerStreamName=' . $partnerStreamName . '&lang=' . Zend_Controller_Front::getInstance()->getBaseUrl() . '&soID=' . $result['so_id'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink . '&lesson_id=' . $result['id'] . '&booking_id=' . $result['booking_id'] . '"><object type="application/x-shockwave-flash" data="' . $baseLink . '/flash/aimia_lesson.swf" width="100%" height="100%"><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" /><param name="allowScriptAccess" value="sameDomain" /><param name="allowFullScreen" value="true" /><param name="flashvars" value="userName=' . $studentName . '&partnerName=' . $teacherName . '&partnerId=' . $teacherId . '&userId=' . $studentId . '&userRole=' . $userRole . '&userTZ=' . $timeZone['timezone'] . '&total_time=' . $booking['duration'] * 60 . '&focus_name=' . addslashes($booking['focus_name']) . '&fs_mode=' . $fsMode . '&myStreamName=' . $myStreamName . '&partnerStreamName=' . $partnerStreamName . '&soID=' . $result['so_id'] . '&PHPSESSID=' . Zend_Session::getId() . '&domain=' . $baseLink . '&lesson_id=' . $result['id'] . '&booking_id=' . $result['booking_id'] . '"><p>Either scripts and active content are not permitted to run or Adobe Flash Player version10.0.0 or greater is not installed.</p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash Player" /></a></object></object>';
 
-                if ($this->getRequest()->isXmlHttpRequest()) {
-                    $this->view->flashObj = $flashObj;
-                } else {
-                    $this->view->flashObj = $flashObj;
-                    $this->view->responce = $result;
-                    $this->view->result = true;
-                }
+
+                $this->view->flashObj = $flashObj;
+                $this->view->responce = $result;
+                $this->view->result = true;
+
 
             } else {
                 $this->view->result = false;
             }
         } else {
             die('server error');
-        }*/
+        }
+
+    }
+
+    public function tempAction()
+    {
         $lessonModel = new Application_Model_Lesson();
         $lessonTable = new Application_Model_DbTable_Lesson();
-        $activeLesson = $lessonTable->getItem(325);
+        $activeLesson = $lessonTable->getItem('326');
 
-        //$videoPath = $lessonModel->createVideoPath(325, $activeLesson['creator_id']);
+        $videoPath = $lessonModel->createVideoPath($activeLesson['id'], $activeLesson['creator_id']);
 
         $openDispay = $lessonModel->openDisplay($activeLesson['id']);
-        if($openDispay != FALSE){
-            //$res = $lessonTable->setSeleniumPort($activeLesson['id'], $openDispay);
+        sleep(4);
+        if ($openDispay !== FALSE) {
 
-            //if($res) {
-                //$lessonModel->openLesson($activeLesson['id'], $openDispay);
-                //$lessonModel->startRecording($activeLesson['id'], $videoPath . 'video_lesson', 15);
-            //}
+            $res = $lessonTable->setSeleniumPort($activeLesson['id'], $openDispay);
+
+            if ($res) {
+                $lessonModel->openLesson($activeLesson['id'], $openDispay);
+                //$lessonModel->startRecording($activeLesson['id'], $videoPath . 'video_lesson', 5);
+            }
         }
+
 
     }
 
@@ -241,9 +249,9 @@ class LessonController extends Zend_Controller_Action
         $feedbackTable = new Application_Model_DbTable_LessonFeedback();
         $bookingTable = new Application_Model_DbTable_Booking();
         if ($this->getRequest()->isPost()) {
-            $this->view->filterInfo = '<div class="floatRight">From: ' .$this->getRequest()->getParam('fromPeriod') .' To: ' .$this->getRequest()->getParam('toPeriod') .'</div>';
+            $this->view->filterInfo = '<div class="floatRight">From: ' . $this->getRequest()->getParam('fromPeriod') . ' To: ' . $this->getRequest()->getParam('toPeriod') . '</div>';
             $this->view->studentLessons = $lessonTable->getStudentLessons($this->getRequest()->getParam('fromPeriod'), $this->getRequest()->getParam('toPeriod'));
-        }else{
+        } else {
             $this->view->studentLessons = $lessonTable->getStudentLessons();
 
         }
@@ -287,20 +295,23 @@ class LessonController extends Zend_Controller_Action
             //$text .= session_id();
             $this->write($text);*/
 
-            exec("conv.sh {$filePath}");
+            exec("conv.sh {$filePath}", $result);
+            var_dump($result);
+
             $info = pathinfo($filePath);
             $pdfName = $info['filename'] . '.pdf';
 
             $pdfPath = $presPath . $pdfName;
 
             //$this->write(' / ' . $pdfPath . " / \n");
-
-            @mkdir($presPath . 'jpges' . DIRECTORY_SEPARATOR);
+            if (!file_exists($presPath . 'jpges' . DIRECTORY_SEPARATOR) OR !is_dir($presPath . 'jpges' . DIRECTORY_SEPARATOR)) {
+                mkdir($presPath . 'jpges' . DIRECTORY_SEPARATOR);
+            }
             $imgsPath = $presPath . 'jpges' . DIRECTORY_SEPARATOR;
 
             $files = glob($imgsPath . '*'); // get all file names
-            foreach($files as $file){ // iterate files
-                if(is_file($file))
+            foreach ($files as $file) { // iterate files
+                if (is_file($file))
                     unlink($file); // delete file
             }
 
@@ -378,7 +389,7 @@ class LessonController extends Zend_Controller_Action
                 $bookingTable = new Application_Model_DbTable_Booking();
                 $bookingStatus = $bookingTable->changeStatus($bookingId);
                 $booking = $bookingTable->getItem($bookingId);
-                if($booking['video']) {
+                if ($booking['video']) {
                     $lesson = $lessonTable->getItem($lessonId);
                     $seleniumPort = $lesson['selenium_port'];
                     exec("phase3_kill.sh $lessonId $seleniumPort");
@@ -466,6 +477,30 @@ class LessonController extends Zend_Controller_Action
         }
     }
 
+    public function videoAction()
+    {
+        $lessonId = $this->getRequest()->getParam('lesson_id');
+        if ($lessonId) {
+            $lessonTable = new Application_Model_DbTable_Lesson();
+            $reviewTable = new Application_Model_DbTable_Review();
+            $lessonModel = new Application_Model_Lesson();
+            $lesson = $lessonTable->getLessonByUser($lessonId);
+            $identityId = Zend_Auth::getInstance()->getIdentity()->id;
+            $fileContent = $lessonModel->getNotes($lessonId, $lesson['creator_id']);
+            $review = $reviewTable->getReviews($lessonId);
+
+            $now = time(); // or your date as well
+            $your_date = strtotime($lesson['created_at']);
+            $datediff = $your_date - $now;
+            $reviewDate = floor($datediff / (60 * 60 * 24) + 10);
+            $this->view->review = $review['review'];
+            $this->view->rate = $review['rating'];
+            $this->view->date = $reviewDate;
+            $this->view->notes = $fileContent;
+            $this->view->user_id = $identityId;
+        }
+    }
+
     public function correspondenceAction()
     {
         $lessonId = $this->getRequest()->getParam('lesson_id');
@@ -544,7 +579,7 @@ class LessonController extends Zend_Controller_Action
                     if ($result) {
                         $this->view->success = 1;
                     }
-                }else{
+                } else {
                     echo 'already reviewed';
                 }
             }

@@ -98,9 +98,6 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
     {
         $user_id = (int)$user_id;
         $row = $this->fetchRow($this->select()->where('id = ?', $user_id));
-        if (!$row) {
-            throw new Exception("There is no element with ID: $user_id");
-        }
 
         return $row->toArray();
     }

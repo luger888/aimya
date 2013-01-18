@@ -6,7 +6,7 @@
     <div class="messageTab">
         <div class="shadowSeparator clearfix">
             <div class="shadowSeparatorBox clearfix">
-	<form method="post" action="/message/reply/">
+	<form method="post" action="<?php echo $this->baseUrl()?>/message/reply/">
         <div class="sendMessageBox clearfix">
             <div class="formRow clearfix">
                 <div class="label messageReplyInbox">To:</div> <?php echo $form->message_id->setValue(Zend_Controller_Front::getInstance()->getRequest()->getParam('message_id'));?>
