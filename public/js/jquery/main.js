@@ -545,9 +545,13 @@ function getVideo(e, id) {
         success:function (result) {
             $("#notes-dialog").dialog("open");
             $('.notesWindow').html('<div align="center" valign="middle" id="vp1" >You need to upgrade your flash player</div>');
+            $('.notesWindow').css('width', '500px');
+            $('.notesWindow').css('height', '350px');
             var parent = $(e).parents('tr');
             var id = parent.find('input[type=hidden]').val();
-
+            $("#notes-dialog").dialog({
+                width:850, height:500
+            });
             var focusName = parent.find('.focus');
             var dateLesson = parent.find('.date');
             $('.focusDialog').html(focusName.text());
@@ -570,8 +574,8 @@ function getVideo(e, id) {
             var attributes = {};
 
             params.codebase = 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0';
-            params.width = '640';
-            params.height = '360';
+            params.width = '320';
+            params.height = '240';
             params.quality = 'high';
             params.align = 'middle';
             params.play = 'true';
@@ -586,10 +590,10 @@ function getVideo(e, id) {
 
             // SETUP
             /* <![CDATA[ */
-            flashvars.width = '800';
-            flashvars.height = '600';
+            flashvars.width = '500';
+            flashvars.height = '350';
             flashvars.imagepath = '../../flash/images/IMG_1120.jpg';
-            flashvars.videopath = '../../users/53/237/video/cvideo.flv';
+            flashvars.videopath = '../../users/'+result.user_id +'/'+id+'/video/cvideo.flv';
             //flashvars.color='0x2C75A3'
             flashvars.volume = '0.3';
             flashvars.fullscreenbutton = 'on';
@@ -602,7 +606,7 @@ function getVideo(e, id) {
             attributes.id = 'vp1';
             /* ]]> */
 
-            swfobject.embedSWF('../../flash/aimia_lesson.swf', 'vp1', '800', '600', '9.0.0', 'js/expressInstall.swf', flashvars, params, attributes);
+            swfobject.embedSWF('../../flash/videoplayer.swf', 'vp1', '510', '360', '9.0.0', 'js/expressInstall.swf', flashvars, params, attributes);
         }
     });
 }
