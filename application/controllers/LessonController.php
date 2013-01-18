@@ -296,7 +296,8 @@ class LessonController extends Zend_Controller_Action
             $this->write($text);*/
 
             exec("conv.sh {$filePath}", $convResult);
-            //var_dump($result);
+            $this->write($convResult);
+            $this->write($filePath);
 
             $info = pathinfo($filePath);
             $pdfName = $info['filename'] . '.pdf';
