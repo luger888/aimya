@@ -20,18 +20,11 @@ class Application_Model_DbTable_Refund extends Application_Model_DbTable_Abstrac
 
     }
 
-    public function cancelRefund($subscriptionId, $status)
+    public function cancelRefund($subscriptionId)
     {
+        $where = $this->getAdapter()->quoteInto('subscription_id=?', $subscriptionId);
 
-        $data = array(
-            'status' => $status,
-            'updated_at' => date('Y-m-d H:i:s')
-        );
-
-        $where[] = $this->getAdapter()->quoteInto('id=?', $subscriptionId);
-
-
-        $this->update($data, $where);
+        $this->delete($where);
     }
 
     public function getRefunds($userId)
@@ -46,11 +39,11 @@ class Application_Model_DbTable_Refund extends Application_Model_DbTable_Abstrac
         return $data->query()->fetch();
     }
 
-    public function approveRefund($subscriptionId, $status)
+    public function approveRefund($subscriptionId)
     {
 
         $data = array(
-            'status' => $status,
+            'status' => 1,
             'updated_at' => date('Y-m-d H:i:s')
         );
 

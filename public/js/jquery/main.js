@@ -795,4 +795,19 @@ function refund() {
     });
     return false;
 }
+function cancelRefund(e){
+    var id = $(e).nextAll('input[type=hidden]:first').val();
+    var pathName = $('#current_url').val();
+    jQuery("body").append('<div class="loadingIcon"></div>');
+    $.ajax({
+        url: pathName + "/payment/unsubscribe",
+        type: "post",
+        data: {
+            'cancelRefund':id
+        },
+        success: function(response){
+            window.location.reload();
+        }
+    });
+}
 

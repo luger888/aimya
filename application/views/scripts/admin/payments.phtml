@@ -19,7 +19,8 @@
                 <tbody>
                 <?php   $users = $this->userList;
                 foreach ($users as $user): ?>
-                    <?php //Zend_Debug::dump($booking)?>
+
+                    <?php //=Zend_Debug::dump($booking)?>
                 <tr>
                     <td class="username">
                         <?php echo $user['username'];?>
@@ -52,8 +53,9 @@
                     <td><?php echo $lastPaid;?></td>
                     <td><?php echo $validTill;?></td>
                     <td class="suspend center">
-                        <input type="button" class="button-2 refund" value ="refund" onclick="return false;">
-                        <input type="button" class="button-2 delete" value ="cancel" onclick="return false;">
+                        <input type="button" class="button-2 refund" value ="refund" onclick="approveRefund(this);return false;">
+                        <input type="button" class="button-2 delete" value ="cancel" onclick="cancelRefund(this);return false;">
+                        <input type="hidden" value = "<?php echo $user['subscription_id'];?>">
                     </td>
                 </tr>
                     <?php endforeach; ?>
