@@ -2216,3 +2216,23 @@ float:right;
     padding:0 12px;
     margin-left:15px;
 }
+.leftNavigation .trialAlert{
+    background: url("../images/elem/cloudAlert.png") no-repeat scroll 0 53% transparent;
+    color: white;
+    display: inline-block;
+    float: left;
+    font-size: 9px;
+    margin-left: -72px;
+    margin-top: -43px;
+    padding-left: 4px;
+    position: absolute;
+    width: 68px;
+}
+.leftNavigation .trialAlert .txt{
+    bottom: 4px;
+    color: #3F0505;
+    margin-bottom: 4px;
+    padding: 0 0 0 13px;
+    position: relative;
+    text-shadow: 1px 1px 1px #ffffff;
+}
