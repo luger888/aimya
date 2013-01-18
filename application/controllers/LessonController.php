@@ -20,6 +20,7 @@ class LessonController extends Zend_Controller_Action
             ->addActionContext('correspondence', 'json')
             ->addActionContext('pay', 'json')
             ->addActionContext('review', 'json')
+            ->addActionContext('video', 'json')
             ->initContext('json');
     }
 
@@ -481,7 +482,7 @@ class LessonController extends Zend_Controller_Action
             $reviewTable = new Application_Model_DbTable_Review();
             $lessonModel = new Application_Model_Lesson();
             $lesson = $lessonTable->getLessonByUser($lessonId);
-
+            $identityId = Zend_Auth::getInstance()->getIdentity()->id;
             $fileContent = $lessonModel->getNotes($lessonId, $lesson['creator_id']);
             $review = $reviewTable->getReviews($lessonId);
 
@@ -493,6 +494,7 @@ class LessonController extends Zend_Controller_Action
             $this->view->rate = $review['rating'];
             $this->view->date = $reviewDate;
             $this->view->notes = $fileContent;
+            $this->view->user_id = $identityId;
         }
     }
 
