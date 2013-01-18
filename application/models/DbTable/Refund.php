@@ -45,7 +45,7 @@ class Application_Model_DbTable_Refund extends Application_Model_DbTable_Abstrac
 
         $data = $this->getAdapter()->select()
             ->from($this->_name, array('id'))
-            ->joinLeft('user', 'user.id =' . $this->_name . '.user_id', array('user.firstname', 'user.lastname', 'user.username', 'user.role', 'user.created_at'))
+            ->joinLeft('user', 'user.id =' . $this->_name . '.user_id', array('user.firstname', 'user.lastname', 'user.username', 'user.role', 'user.created_at '))
             ->where('user_id=?', (int)$userId)
             ->where('status=?', 1);
 
