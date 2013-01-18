@@ -136,7 +136,7 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
     {
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
         $data = $this->getAdapter()->select()
-            ->from($this->_name, array(new Zend_Db_Expr('max(created_at) as maxId')))
+            ->from($this->_name, array(new Zend_Db_Expr('max(created_at) as maxId'), 'id'))
             ->where( $this->getAdapter()->quoteInto('user_id=?', $userId))
             ->where( $this->getAdapter()->quoteInto('status=?', 'paid'));
         $result = $data->query()->fetch();
@@ -147,7 +147,7 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
         $ref = new DateTime($endDate);
         $diff = $now->diff($ref);
         if($diff->m > 0 || $diff->y > 0) {
-            return true;
+            return $result['id'];
         }else{
             return false;
         }
