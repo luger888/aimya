@@ -5,11 +5,13 @@ $(document).ready(function () {
     });
 
     //timepicker
-
+    var oldDateObj = new Date();
+    var today = new Date(oldDateObj.getTime() + 10*60000);
     $(function () {
 
-        $('#started_at_time').scroller({ preset:'time', theme:'android-ics', ampm:false, timeFormat:'HH:ii' });
+        $('#started_at_time').scroller({ preset:'time', theme:'android-ics', ampm:false, timeFormat:'HH:ii',minDate: today});
     });
+
 //    $.ajaxSetup({
 //        beforeSend: function(jqXHR, settings) {
 //            jQuery("body").append('<div class="loadingIcon"></div>');
