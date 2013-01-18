@@ -30,7 +30,7 @@ package com.aimialesson.model
 			dispatchEvent ( new Event ( Main.FS_MODE_CHANGED ));
 		}
 		public function get fsMode () : Boolean {
-			return _fsMode;
+			return _fsMode || isServer; // we need having fsMode == true always for server user
 		}
 		
 		/*private var _screenMode:String = "normal";

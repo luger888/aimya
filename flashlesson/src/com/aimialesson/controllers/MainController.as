@@ -71,6 +71,14 @@ package com.aimialesson.controllers
 				Media.getInstance().soID = parameters.soID;
 				debug (parameters.soID);
 			}
+			if (parameters.rtmp){
+				Media.getInstance().rtmp = parameters.rtmp;
+				debug ("rtmp:" + parameters.rtmp);
+			}
+			if (parameters.text_xml_url){
+				Texts.getInstance().text_xml_url = parameters.text_xml_url;
+				debug ("text_xml_url:" + parameters.text_xml_url);
+			}
 			if (parameters.domain){
 				Actions.getInstance().domain = parameters.domain;
 				debug (parameters.domain);

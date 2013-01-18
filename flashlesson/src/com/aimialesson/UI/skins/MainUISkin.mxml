@@ -46,6 +46,7 @@
 					<views:MainUIContainer id="videoChatContainer"/>
 				</s:VGroup>
 				<views:MainUIContainer id="tPresentationContainer"  right="0" bottom="0" height="400" width="{TPresentationUI.PRESENTATION_TRUE_WIDTH}"/>
+				<!--s:TextArea id="debugger"  width="100%" height="200"  right="0" bottom="0"/-->
 			</s:Group>
 			<s:VGroup gap="30" width="100%" enabled="false">
 				<s:BitmapImage source="@Embed('flashassets/1page_middle_separator.png')" width="100%"/>
