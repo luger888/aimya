@@ -141,12 +141,19 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
             ->where( $this->getAdapter()->quoteInto('status=?', 'paid'));
         $result = $data->query()->fetch();
 
+
+        $data = $this->getAdapter()->select()
+            ->from('refund_history')
+            ->where( $this->getAdapter()->quoteInto('user_id=?', $userId));
+        $refund = $data->query()->fetch();
+
+
         $now = new DateTime(date("Y-m-d H:i:s"));
 
         $endDate = $result['maxId'];
         $ref = new DateTime($endDate);
         $diff = $now->diff($ref);
-        if($diff->m > 0 || $diff->y > 0) {
+        if(($diff->m > 0 || $diff->y > 0) && !$refund) {
             return $result['id'];
         }else{
             return false;
