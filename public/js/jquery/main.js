@@ -563,6 +563,13 @@ function getVideo(e, id) {
             $('.note:nth-child(even)').prepend('<div class ="smallSeparatorTop"></div>');
             $('.dialogFooter').prepend('<input type="hidden" name="les_id" value = "' + id + '">');
             $('.timeLeftSpan').html(result.date + ' ');
+            if(result.isTeacher && !result.rate){
+                element.find('#sendRating').remove();
+                element.find('.timeLeft').remove();
+                element.find('.comment').remove();
+                element.find('#starsBlockFeedback').remove();
+                element.find('.rate').remove();
+            }
             if (result.rate) {
                 $('#sendRating').remove();
                 $('.timeLeft').remove();
@@ -601,7 +608,7 @@ function getVideo(e, id) {
             flashvars.width = '500';
             flashvars.height = '350';
             flashvars.imagepath = '../../images/content/videoPlayer.png';
-            flashvars.videopath = '../../users/'+result.creator_id +'/'+id+'/video/cvideo.flv';
+            flashvars.videopath = '../../users/'+result.creator_id +'/'+id+'/video/video_lesson.flv';
             //flashvars.color='0x2C75A3'
             flashvars.volume = '0.3';
             flashvars.fullscreenbutton = 'on';
@@ -642,6 +649,13 @@ function getNotes(e, id) {
             $('.note:nth-child(even)').prepend('<div class ="smallSeparatorTop"></div>');
             $('.dialogFooter').prepend('<input type="hidden" name="les_id" value = "' + id + '">');
             $('.timeLeftSpan').html(result.date + ' ');
+            if(result.isTeacher && !result.rate){
+                element.find('#sendRating').remove();
+                element.find('.timeLeft').remove();
+                element.find('.comment').remove();
+                element.find('#starsBlockFeedback').remove();
+                element.find('.rate').remove();
+            }
             if (result.rate) {
                 $('#sendRating').remove();
                 $('.timeLeft').remove();
@@ -673,7 +687,7 @@ function openFeedback(e, lessonId) {
         success:function (result) {
             if (result.feedback.content) {
 
-                element = $(result.html);
+                var element = $(result.html);
 
 
                 element.find('#starsBlockFeedback').raty();
@@ -692,6 +706,13 @@ function openFeedback(e, lessonId) {
                 $("#details-dialog").dialog("open");
                 element.find('.dialogFooter').prepend('<input type="hidden" name="les_id" value = "' + id + '">');
                 element.find('.timeLeftSpan').html(result.date + ' ');
+                if(result.isTeacher && !result.rate){
+                    element.find('#sendRating').remove();
+                    element.find('.timeLeft').remove();
+                    element.find('.comment').remove();
+                    element.find('#starsBlockFeedback').remove();
+                    element.find('.rate').remove();
+                }
                 if (result.rate) {
                     element.find('#sendRating').remove();
                     element.find('.timeLeft').remove();
