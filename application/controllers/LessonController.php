@@ -296,8 +296,8 @@ class LessonController extends Zend_Controller_Action
             //$text .= session_id();
             $this->write($text);*/
 
-            exec("/usr/local/bin/conv.sh $filePath", $convResult);
-            $this->write($convResult);
+            exec('sudo /usr/local/bin/conv.sh /var/www/aimya/Aimya/public/users/54/331/presentation/Svitla_Presentation_Kyiv2011.PPT');
+            //$this->write($convResult);
             $this->write("/usr/local/bin/conv.sh $filePath");
 
             $info = pathinfo($filePath);
