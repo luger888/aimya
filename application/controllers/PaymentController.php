@@ -305,6 +305,10 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
                 $refundDb->cancelRefund($this->getRequest()->getParam('cancelRefund'));
             }
+            if ($this->getRequest()->getParam('approveRefund')) {
+
+                $refundDb->approveRefund($this->getRequest()->getParam('approveRefund'));
+            }
         }
 
     }

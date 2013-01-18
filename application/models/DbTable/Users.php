@@ -322,7 +322,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
             ->joinLeft('subscription_history', 'us.id = subscription_history.user_id', array('active_to', 'updated_at'))
             ->joinLeft('refund_history', 'us.id = refund_history.user_id', array('subscription_id', 'created_at', 'status'))
             ->where('us.status>=?', 1)
-            ->where('refund_history.status>=?', 0);
+            ->where('refund_history.status=?', 0);
 
 
         return $students->query()->fetchAll();
