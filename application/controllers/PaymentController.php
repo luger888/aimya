@@ -26,6 +26,9 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         } else {
             $this->view->emailForm = $emailForm;
         }
+
+        $subscriptionForm->unsubscribe->setAttrib('disabled', 'disabled');
+
         $this->view->subscriptionForm = $subscriptionForm;
     }
 
