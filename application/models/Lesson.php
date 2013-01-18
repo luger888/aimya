@@ -21,7 +21,7 @@ class Application_Model_Lesson
         $identityId = Zend_Auth::getInstance()->getIdentity()->id;
 
         $folderModel = new Application_Model_Folder();
-        $notePath = 'users/' . $identityId . '/' . $lessonId . '/presentation/';
+        $notePath = 'users/' . $identityId . '/' . $lessonId . '/presentation';
         $folderModel->createFolderChain($notePath, '/');
         return $notePath;
     }
