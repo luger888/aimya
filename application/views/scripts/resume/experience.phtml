@@ -8,7 +8,7 @@
     <div class="shadowSeparatorBox clearfix">
         <div class="resumeList clearfix">
             <?php
-    if($this->educationList){
+    if($this->experienceList){
             foreach ($this->experienceList as $value):?>
                 <div class="shadowSeparator clearfix">
                     <div class="shadowSeparatorBot clearfix">
@@ -42,7 +42,7 @@
                 <?php endforeach;
         echo '</div>
                 <div class="buttonsRow clearfix">
-                    <input type="button" class="button-2 add addResumeItem floatRight" value="add skill"
+                    <input type="button" class="button-2 add addResumeItem floatRight" value="add experience"
                    onclick="addResumeItem();">
                 </div>';
     }else{
@@ -50,10 +50,7 @@
     }
             ?>
         </div>
-        <div class="buttonsRow clearfix">
-            <input type="button" class="button-2 add addResumeItem floatRight" value="add experience"
-                   onclick="addResumeItem();">
-        </div>
+
         <div class="resumeItemForm">
            <h1>Add new experience:</h1>
             <div class="formRow clearfix">

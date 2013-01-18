@@ -295,8 +295,8 @@ class LessonController extends Zend_Controller_Action
             //$text .= session_id();
             $this->write($text);*/
 
-            exec("conv.sh {$filePath}", $result);
-            var_dump($result);
+            exec("conv.sh {$filePath}", $convResult);
+            //var_dump($result);
 
             $info = pathinfo($filePath);
             $pdfName = $info['filename'] . '.pdf';
@@ -497,7 +497,8 @@ class LessonController extends Zend_Controller_Action
             $this->view->rate = $review['rating'];
             $this->view->date = $reviewDate;
             $this->view->notes = $fileContent;
-            $this->view->user_id = $identityId;
+
+            $this->view->creator_id = $lesson['creator_id'];
         }
     }
 
