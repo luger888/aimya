@@ -277,6 +277,7 @@ class LessonController extends Zend_Controller_Action
         $activeLesson = $lessonTable->checkAvailableLesson($identityId);
 
         $presPath = $lessonModel->createPresentationPath($activeLesson['id']);
+        $presPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . $presPath;
 
         //$this->write($presPath);
 
