@@ -59,9 +59,8 @@ class Application_Model_Lesson
     public function openLesson($lessonId, $port)
     {
 
-        exec("phpscr.sh $lessonId $port", $result);
-        var_dump($result);
-        die;
+        exec("phpscr.sh $lessonId $port > /dev/null 2>/dev/null &", $result);
+
         if($result == 0) {
             return true;
         } else {
