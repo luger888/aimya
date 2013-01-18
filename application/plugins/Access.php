@@ -67,7 +67,7 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         $acl->allow(self::GUEST , 'user', array('index','registration', 'login'));
         $acl->allow(self::GUEST , 'error', array('index'));
         $acl->allow(self::GUEST , 'test', array('index', 'paypal', 'response', 'responsenew'));
-        $acl->allow(self::GUEST , 'payment', array('ipn', 'subscribenew'));
+        $acl->allow(self::GUEST , 'payment', array('ipn', 'subscribenew'. 'subsipn'));
         #allow to admin
         $acl->allow(self::ADMIN , 'admin', array('index', 'users', 'payments', 'static', 'metrics'));
         $acl->allow(self::ADMIN , 'search', array('reindex'));

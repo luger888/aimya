@@ -150,4 +150,27 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
         }
 
     }
+
+    public function getPayKeyFromSebscription($userId) {
+        $userId = (int)$userId;
+
+        $data = $this->select()
+            ->from($this->_name, array('pay_key'))
+            ->where('user_id=?' , $userId);
+
+        return $data->query()->fetch();
+    }
+
+    public function updateSubscriptionStatus($userId) {
+
+        $data = array(
+            'status' => 'paid',
+            'updated_at' => date('Y-m-d H:i:s')
+        );
+
+        $where[] = $this->getAdapter()->quoteInto('user_id=?', $userId);;
+
+        $this->update($data , $where);
+    }
+
 }
