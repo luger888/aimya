@@ -26,9 +26,6 @@ class Application_Model_DbTable_Review extends Application_Model_DbTable_Abstrac
     public function getReviews($lesson_id)
     {
         $row = $this->fetchRow($this->select()->where('lesson_id=?', (int)$lesson_id));
-        if (!$row) {
-            //throw new Exception("There is no element with ID: $user_id");
-        }
         if ($row == '0') {
             $row = array();
         }

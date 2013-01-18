@@ -83,8 +83,8 @@
     <div id="notes-dialog" title="<?php echo $this->translate('recorded notes:') ?>">
         <div class="notes">
             <div class="header clearfix">
-                <div class="focus cc floatLeft"><?php echo $this->translate('focus') . ': <span class ="focusDialog"></span>'; ?></div>
-                <div class="date  cc floatRight"><?php echo $this->translate('date') . ': <span class ="dateDialog"></span>' ?></div>
+                <div class="focus cc floatLeft"><div class ="focusDialog"></div></div>
+                <div class="date  cc floatRight"> <div class ="dateDialog"></div></div>
             </div>
             <div class="notesWindow"></div>
             <div class ="dialogFooter">
@@ -94,7 +94,8 @@
                 <div id ="starsBlock">
                 </div>
                 <div class ="comment cc"><?php echo $this->translate('comment')?>:<input class ="rateInput" type ="text"></div>
-                <input type = "button" id = "sendRating" class ="button floatRight" value ="OK" onClick="sendRating(this);">
+               <div> <input type = "button" id = "sendRating" class ="button floatRight" value ="OK" onClick="sendRating(this);"></div>
+
             </div>
         </div>
     </div>

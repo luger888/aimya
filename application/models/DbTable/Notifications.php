@@ -30,9 +30,7 @@ class Application_Model_DbTable_Notifications extends Application_Model_DbTable_
     {
         $user_id = (int)$user_id;
         $row = $this->fetchRow($this->select()->where('user_id=?' , (int)$user_id));
-        if(!$row) {
-            throw new Exception("There is no element with ID: $user_id");
-        }
+
         $row = unserialize($row['settings']);
 
         if($row == '0'){

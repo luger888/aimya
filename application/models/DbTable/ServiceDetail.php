@@ -72,9 +72,7 @@ class Application_Model_DbTable_ServiceDetail extends Application_Model_DbTable_
             $this->select()
                 ->where('(' . $this->getAdapter()->quoteInto('user_id=?' , (int)$user_id) . ') AND (' . $this->getAdapter()->quoteInto('service_type=?' , (int)$serviceType) . ')')
         );
-        if (!$row) {
-            throw new Exception("There is no element with ID: $user_id");
-        }
+
 
         return $row->toArray();
     }
