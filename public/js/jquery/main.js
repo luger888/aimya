@@ -764,4 +764,34 @@ function sendRating(e) {
         }
     });
 }
+function refund() {
+    $(function() {
+        $( "#unsubscribe-confirm" ).dialog({
+            resizable: false,
+            height:140,
+            width:360,
+            modal: true,
+            buttons: {
+                "Yes": function() {
+                    $( this ).dialog( "close" );
+//                    $.ajax({
+//                        url: url,
+//                        type: "post",
+//                        data: {
+//                            'updateUserId':id, 'status': blockedUser
+//                        },
+//                        success: function(response){
+//                            //window.location.reload();
+//                        }
+//                    });
+                },
+                No: function() {
+                    $( this ).dialog( "close" );
+                }
+            }
+        });
+        $('.ui-icon-alert').remove();
+    });
+    return false;
+}
 
