@@ -22,12 +22,11 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
         $profileTable = new Application_Model_DbTable_Profile();
         $email = $profileTable->getPayPalEmail($userId);
-        if($email) {
+        if ($email) {
             $this->view->emailForm = $emailForm->populate($profileTable->getPayPalEmail($userId));
         } else {
             $this->view->emailForm = $emailForm;
         }
-
 
 
         $this->view->subscriptionForm = $subscriptionForm;
@@ -38,20 +37,20 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         $teacherId = $this->getRequest()->getParam('teacher_id');
         $bookingId = $this->getRequest()->getParam('booking_id');
 
-        if(isset($teacherId) && isset($bookingId)) {
+        if (isset($teacherId) && isset($bookingId)) {
             $payPalModel = new Application_Model_PayPal();
             $bookingTable = new Application_Model_DbTable_Booking();
             $booking = $bookingTable->getItem($bookingId);
 
             $rate = $booking['rate'];
             $aimyaProfit = 0;
-            if($booking['video'] == 1) {
+            if ($booking['video'] == 1) {
                 $aimyaProfit += $this->videoCost;
             }
-            if($booking['notes'] == 1) {
+            if ($booking['notes'] == 1) {
                 $aimyaProfit += $this->notesCost;
             }
-            if($booking['feedback'] == 1) {
+            if ($booking['feedback'] == 1) {
                 $aimyaProfit += $this->feedbackCost;
             }
             $userProfit = $rate - $aimyaProfit;
@@ -61,12 +60,12 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
             $response = $payPalModel->getAdaptivUrl($xml);
 
-            if($response) {
+            if ($response) {
                 $paymentTable = new Application_Model_DbTable_Orders();
 
                 $isAlreadyExist = $paymentTable->getPayKeyFromOrder($bookingId);
 
-                if(!$isAlreadyExist) {
+                if (!$isAlreadyExist) {
                     $data = array(
                         'payer_id' => Zend_Auth::getInstance()->getIdentity()->id,
                         'seller_id' => $teacherId,
@@ -87,7 +86,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
                 $this->redirect('/lesson/index');
             }
         } else {
-            $this->_helper->flashMessenger->addMessage(array('failure'=>'Problem with parameters'));
+            $this->_helper->flashMessenger->addMessage(array('failure' => 'Problem with parameters'));
         }
     }
 
@@ -107,21 +106,21 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
             exit(0);
         }
 
-        if($verified){
+        if ($verified) {
             $this->writeLog("VALID IPN");
             $this->writeLog($listener->getTextReport());
-            if($_GET['booking_id']) {
+            if ($_GET['booking_id']) {
                 $bookingId = $_GET['booking_id'];
                 $bookingTable = new Application_Model_DbTable_Booking();
                 $orderTable = new Application_Model_DbTable_Orders();
                 $payKey = $orderTable->getPayKeyFromOrder($bookingId);
-                if($payKey['pay_key'] = $_POST['pay_key']) {
+                if ($payKey['pay_key'] = $_POST['pay_key']) {
                     $orderTable->updatePaymentStatus($bookingId);
                     $bookingTable->payLesson($bookingId);
                 }
             }
 
-        }else{
+        } else {
             $this->writeLog("INVALID IPN");
             $this->writeLog($listener->getTextReport());
 
@@ -144,19 +143,19 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
             exit(0);
         }
 
-        if($verified){
+        if ($verified) {
             $this->writeLog("VALID IPN");
             $this->writeLog($listener->getTextReport());
-            if($_GET['user_id']) {
+            if ($_GET['user_id']) {
                 $userId = $_GET['user_id'];
                 $subscriptionTable = new Application_Model_DbTable_Subscriptions();
                 $payKey = $subscriptionTable->getPayKeyFromSebscription($userId);
-                if($payKey['pay_key'] = $_POST['pay_key']) {
+                if ($payKey['pay_key'] = $_POST['pay_key']) {
                     $subscriptionTable->updateSubscriptionStatus($userId);
                 }
             }
 
-        }else{
+        } else {
             $this->writeLog("INVALID IPN");
             $this->writeLog($listener->getTextReport());
 
@@ -170,19 +169,19 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
             $formData = $this->getRequest()->getPost();
 
             if ($form->isValid($formData)) {
-                    $userId = Zend_Auth::getInstance()->getIdentity()->id;
-                    $profileTable = new Application_Model_DbTable_Profile();
-                    $status = $profileTable->updatePaypalEmail($formData['paypal_email'], $userId);
+                $userId = Zend_Auth::getInstance()->getIdentity()->id;
+                $profileTable = new Application_Model_DbTable_Profile();
+                $status = $profileTable->updatePaypalEmail($formData['paypal_email'], $userId);
 
-                    if($status) {
-                        $this->_helper->flashMessenger->addMessage(array('success'=>'Email successfully save'));
-                        $this->_helper->redirector('index', 'payment');
-                    } else {
-                        $this->_helper->flashMessenger->addMessage(array('failure'=>'Problem with saving. Please try again later'));
-                        $this->_helper->redirector('index', 'payment');
-                    }
+                if ($status) {
+                    $this->_helper->flashMessenger->addMessage(array('success' => 'Email successfully save'));
+                    $this->_helper->redirector('index', 'payment');
+                } else {
+                    $this->_helper->flashMessenger->addMessage(array('failure' => 'Problem with saving. Please try again later'));
+                    $this->_helper->redirector('index', 'payment');
+                }
             } else {
-                $this->_helper->flashMessenger->addMessage(array('failure'=>'Please insert corect email'));
+                $this->_helper->flashMessenger->addMessage(array('failure' => 'Please insert corect email'));
                 $this->_helper->redirector('index', 'payment');
             }
         }
@@ -192,7 +191,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
     {
         $period = $this->getRequest()->getParam('period');
 
-        if(isset($period)) {
+        if (isset($period)) {
             $payPalModel = new Application_Model_PayPal();
 
             $subscriptionTable = new Application_Model_DbTable_Subscriptions();
@@ -206,11 +205,11 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
             $response = $payPalModel->getAdaptivUrl($requestData);
 
-            if($response) {
+            if ($response) {
 
                 $isAlreadyExist = $subscriptionTable->getPayKeyFromOrder($lastId);
 
-                if(!$isAlreadyExist) {
+                if (!$isAlreadyExist) {
                     $data = array(
                         'user_id' => Zend_Auth::getInstance()->getIdentity()->id,
                         'aimya_profit' => $aimyaProfit,
@@ -229,7 +228,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
                 $this->redirect('/payment');
             }
         } else {
-            $this->_helper->flashMessenger->addMessage(array('failure'=>'Problem with parameters'));
+            $this->_helper->flashMessenger->addMessage(array('failure' => 'Problem with parameters'));
         }
     }
 
@@ -241,7 +240,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         Aimya_PayPal_RecurringPayment_PaypalConfiguration::username($gateway['apiUsername']);
         Aimya_PayPal_RecurringPayment_PaypalConfiguration::password($gateway['apiPassword']);
         Aimya_PayPal_RecurringPayment_PaypalConfiguration::signature($gateway['apiSignature']);
-        Aimya_PayPal_RecurringPayment_PaypalConfiguration::business_name( 'Aimya Store' );
+        Aimya_PayPal_RecurringPayment_PaypalConfiguration::business_name('Aimya Store');
 
         Aimya_PayPal_RecurringPayment_PaypalConfiguration::return_url($gateway['returnUrl']);
         Aimya_PayPal_RecurringPayment_PaypalConfiguration::cancel_url($gateway['cancelUrl']);
@@ -251,32 +250,32 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         //Aimya_PayPal_RecurringPayment_PaypalDigitalGoods::environment( 'live' );
 
         $subscription_details = array(
-            'description'        => 'Example Subscription: $10 sign-up fee then $2/week for the next four weeks.',
-            'initial_amount'     => '10.00',
-            'amount'             => '2.00',
-            'period'             => 'Week',
-            'frequency'          => '1',
-            'total_cycles'       => '4',
+            'description' => 'Example Subscription: $10 sign-up fee then $2/week for the next four weeks.',
+            'initial_amount' => '10.00',
+            'amount' => '2.00',
+            'period' => 'Week',
+            'frequency' => '1',
+            'total_cycles' => '4',
         );
 
         $paypal_subscription = new Aimya_PayPal_RecurringPayment_PaypalSubscription($subscription_details);
         $html = "";
-        if( isset( $_GET['paypal'] ) && $_GET['paypal'] == 'cancel' ){
+        if (isset($_GET['paypal']) && $_GET['paypal'] == 'cancel') {
 
             //$html .= "<script>if (window!=top) {top.location.replace(document.location);}</script>";
             $html .= '<p>Your subscription has been cancelled. <a href="#" target="_top">Try again?</a></p>';
 
-        } elseif( isset( $_GET['paypal'] ) && $_GET['paypal'] == 'paid' ){
+        } elseif (isset($_GET['paypal']) && $_GET['paypal'] == 'paid') {
 
             // Process the payment or start the Subscription
-            if( isset( $_GET['PayerID'] ) ) {
+            if (isset($_GET['PayerID'])) {
                 $response = $paypal_subscription->process_payment();
             } else {
                 $response = $paypal_subscription->start_subscription();
             }
 
             $html .= '<h3>Payment Complete!</h3>';
-            if( isset( $_GET['PayerID'] ) ) {
+            if (isset($_GET['PayerID'])) {
                 $html .= "<p>Your Transaction ID is {$response['PAYMENTINFO_0_TRANSACTIONID']}</p>";
                 $html .= '<p>You can use this Transaction ID to see the details of your subscription like so:</p>';
             } else {
@@ -290,24 +289,38 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
     public function unsubscribeAction()
     {
+        if ($this->getRequest()->isPost()) {
+            $user_id = Zend_Auth::getInstance()->getIdentity()->id;
+            $refundDb = new Application_Model_DbTable_Refund();
+            $subscriptionDb = new Application_Model_DbTable_Subscriptions();
+            if ($this->getRequest()->getParam('unsubscribeRequest')) {
+                if ($subId = $subscriptionDb->isRefundEnable()) {
+                    {
+                        $result = $refundDb->createRefund($subId, $user_id);
+                    }
+                }
+
+            }
+        }
 
     }
 
-    public function remainedAction() {
+    public function remainedAction()
+    {
 
         $subscriptionTable = new Application_Model_DbTable_Subscriptions();
         $activeTo = $subscriptionTable->getTimeLeft();
-        if($activeTo['active_to'] == NULL && Zend_Auth::getInstance()->getIdentity()->role > 1) {
+        if ($activeTo['active_to'] == NULL && Zend_Auth::getInstance()->getIdentity()->role > 1) {
             $subscriptionTable->setDefaultPeriod();
         }
 
         $now = time(); // or your date as well
         $your_date = strtotime($activeTo['active_to']);
         $datediff = $now - $your_date;
-        $timeLeft = floor($datediff/(60*60*24));
+        $timeLeft = floor($datediff / (60 * 60 * 24));
         $timeLeft = substr($timeLeft, 1);
 
-        if($timeLeft <= 5) {
+        if ($timeLeft <= 5) {
             $this->view->status = 'success';
             $this->view->timeLeft = $timeLeft;
         } else {
@@ -318,17 +331,16 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
     public function writeLog($data)
     {
 
-        if( $fh = @fopen("./img/paypal.txt", "a+") )
-        {
+        if ($fh = @fopen("./img/paypal.txt", "a+")) {
 
             $data = print_r($data, 1);
             fwrite($fh, $data);
-            fclose( $fh );
-            return( true );
+            fclose($fh);
+            return (true);
         }
         else
         {
-            return( false );
+            return (false);
         }
 
     }

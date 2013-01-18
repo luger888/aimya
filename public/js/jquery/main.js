@@ -765,6 +765,7 @@ function sendRating(e) {
     });
 }
 function refund() {
+    var pathName = $('#current_url').val();
     $(function() {
         $( "#unsubscribe-confirm" ).dialog({
             resizable: false,
@@ -774,16 +775,16 @@ function refund() {
             buttons: {
                 "Yes": function() {
                     $( this ).dialog( "close" );
-//                    $.ajax({
-//                        url: url,
-//                        type: "post",
-//                        data: {
-//                            'updateUserId':id, 'status': blockedUser
-//                        },
-//                        success: function(response){
-//                            //window.location.reload();
-//                        }
-//                    });
+                    $.ajax({
+                        url: pathName + "/payment/unsubscribe",
+                        type: "post",
+                        data: {
+                            'unsubscribeRequest':1
+                        },
+                        success: function(response){
+                            window.location.reload();
+                        }
+                    });
                 },
                 No: function() {
                     $( this ).dialog( "close" );
