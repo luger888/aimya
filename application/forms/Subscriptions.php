@@ -49,7 +49,7 @@ class Application_Form_Subscriptions extends Zend_Form
             ->setDecorators($this->basicDecorators);
 
         if($subscriptionDb->isRefundEnable()){
-
+            $unSubscribe->setAttrib('onClick', 'refund();');
         }else{
             $unSubscribe->setAttrib('class', 'disable button');
 
