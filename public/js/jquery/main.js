@@ -547,10 +547,11 @@ function getVideo(e, id) {
             $('.notesWindow').html('<div align="center" valign="middle" id="vp1" >You need to upgrade your flash player</div>');
             $('.notesWindow').css('width', '500px');
             $('.notesWindow').css('height', '350px');
+            $('.notesWindow').css('overflow', 'hidden');
             var parent = $(e).parents('tr');
             var id = parent.find('input[type=hidden]').val();
             $("#notes-dialog").dialog({
-                width:850, height:500
+                width:546, height:550
             });
             var focusName = parent.find('.focus');
             var dateLesson = parent.find('.date');
@@ -592,7 +593,7 @@ function getVideo(e, id) {
             /* <![CDATA[ */
             flashvars.width = '500';
             flashvars.height = '350';
-            flashvars.imagepath = '../../flash/images/IMG_1120.jpg';
+            flashvars.imagepath = '../../images/content/videoPlayer.png';
             flashvars.videopath = '../../users/'+result.user_id +'/'+id+'/video/cvideo.flv';
             //flashvars.color='0x2C75A3'
             flashvars.volume = '0.3';
