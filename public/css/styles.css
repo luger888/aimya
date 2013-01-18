@@ -343,6 +343,18 @@ input.button-2 {
     background-position: 0 -31px;
 }
 
+.button-2.refund {
+    background: url(../images/icons/refund.png) no-repeat 0 3px;
+}
+
+.button-2.refund:hover {
+    background-position: 0 -20px;
+}
+
+.button-2.refund.disable {
+    background-position: 0 -31px;
+}
+
 .button-2.upload {
     background: url(../images/icons/upload.png) no-repeat 0 3px;
 }
