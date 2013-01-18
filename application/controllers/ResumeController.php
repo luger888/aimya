@@ -173,7 +173,7 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
             if ($this->getRequest()->getParam('education')) {
                 $form = new Application_Form_ResumeEducation();
                 if ($form->isValid($data)) {
-                    $dbEducation->createEducation($data, $identity->id);
+                    $this->view->lastId =$dbEducation->createEducation($data, $identity->id);
                     $this->view->success = '1';
                 } else {
 
