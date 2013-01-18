@@ -88,7 +88,7 @@ class LessonController extends Zend_Controller_Action
                 $videoPath = $lessonModel->createVideoPath($res, $activeLesson['creator_id']);
 
                 $openDispay = $lessonModel->openDisplay($activeLesson['id']);
-                sleep(4);
+                sleep(6);
                 if ($openDispay !== FALSE) {
                     $res = $lessonTable->setSeleniumPort($activeLesson['id'], $openDispay);
 
@@ -296,7 +296,7 @@ class LessonController extends Zend_Controller_Action
             //$text .= session_id();
             $this->write($text);*/
 
-            exec("conv.sh $filePath", $convResult);
+            exec("conv.sh $filePath");
             /*$this->write($convResult);
             $this->write($filePath);*/
 
