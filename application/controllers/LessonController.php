@@ -296,9 +296,9 @@ class LessonController extends Zend_Controller_Action
             //$text .= session_id();
             $this->write($text);*/
 
-            exec('sudo /usr/local/bin/conv.sh /var/www/aimya/Aimya/public/users/54/331/presentation/Svitla_Presentation_Kyiv2011.PPT');
-            //$this->write($convResult);
-            $this->write("/usr/local/bin/conv.sh $filePath");
+            exec("conv.sh $filePath", $convResult);
+            /*$this->write($convResult);
+            $this->write($filePath);*/
 
             $info = pathinfo($filePath);
             $pdfName = $info['filename'] . '.pdf';
