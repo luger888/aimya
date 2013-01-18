@@ -191,13 +191,9 @@ function updateObjective() {
 
         function (response) {
 
+        window.location.reload();
 
-            for (key in response.errors) {
 
-
-                $("#" + key).attr("placeholder", response.errors[key]);
-
-            }
         }
     )
 }

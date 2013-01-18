@@ -551,7 +551,7 @@ function getVideo(e, id) {
             var parent = $(e).parents('tr');
             var id = parent.find('input[type=hidden]').val();
             $("#notes-dialog").dialog({
-                width:546, height:550
+                width:546
             });
             var focusName = parent.find('.focus');
             var dateLesson = parent.find('.date');
@@ -561,10 +561,15 @@ function getVideo(e, id) {
             $('.note:nth-child(even)').prepend('<div class ="smallSeparatorTop"></div>');
             $('.dialogFooter').prepend('<input type="hidden" name="les_id" value = "' + id + '">');
             $('.timeLeftSpan').html(result.date + ' ');
-            if (result.review) {
+            if (result.rate) {
                 $('#sendRating').remove();
                 $('.timeLeft').remove();
-                $('.comment').html('Comment: ' + result.review);
+                if(result.review){
+                    $('.comment').html('Comment: ' + result.review);
+                }else{
+                    $('.comment').remove();
+                }
+
                 $('#starsBlock').raty({
                     readOnly:true,
                     score:result.rate
@@ -635,10 +640,15 @@ function getNotes(e, id) {
             $('.note:nth-child(even)').prepend('<div class ="smallSeparatorTop"></div>');
             $('.dialogFooter').prepend('<input type="hidden" name="les_id" value = "' + id + '">');
             $('.timeLeftSpan').html(result.date + ' ');
-            if (result.review) {
+            if (result.rate) {
                 $('#sendRating').remove();
                 $('.timeLeft').remove();
-                $('.comment').html('Comment: ' + result.review);
+                if(result.review){
+                    $('.comment').html('Comment: ' + result.review);
+                }else{
+                    $('.comment').remove();
+                }
+
                 $('#starsBlock').raty({
                     readOnly:true,
                     score:result.rate
@@ -680,10 +690,15 @@ function openFeedback(e, lessonId) {
                 $("#details-dialog").dialog("open");
                 element.find('.dialogFooter').prepend('<input type="hidden" name="les_id" value = "' + id + '">');
                 element.find('.timeLeftSpan').html(result.date + ' ');
-                if (result.review) {
+                if (result.rate) {
                     element.find('#sendRating').remove();
                     element.find('.timeLeft').remove();
-                    element.find('.comment').html('Comment: ' + result.review);
+                    if(result.review){
+                        element.find('.comment').html('Comment: ' + result.review);
+                    }else{
+                        element.find('.comment').remove();
+                    }
+
                     element.find('#starsBlockFeedback').raty({
                         readOnly:true,
                         score:result.rate
@@ -742,6 +757,7 @@ function sendRating(e) {
                     score:rating
                 });
                 $(e).remove();
+                $('.timeLeft').remove();
             }
         }
     });

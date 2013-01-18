@@ -127,6 +127,41 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         }
     }
 
+    public function subsipnAction()
+    {
+        $listener = new Aimya_PayPal_IpnListener();
+
+        // tell the IPN listener to use the PayPal test sandbox
+        $listener->use_sandbox = true;
+
+        // try to process the IPN POST
+        try {
+            $listener->requirePostMethod();
+            $verified = $listener->processIpn();
+        } catch (Exception $e) {
+            $this->writeLog($e->getMessage());
+            exit(0);
+        }
+
+        if($verified){
+            $this->writeLog("VALID IPN");
+            $this->writeLog($listener->getTextReport());
+            if($_GET['user_id']) {
+                $userId = $_GET['user_id'];
+                $subscriptionTable = new Application_Model_DbTable_Subscriptions();
+                $payKey = $subscriptionTable->getPayKeyFromSebscription($userId);
+                if($payKey['pay_key'] = $_POST['pay_key']) {
+                    $subscriptionTable->updateSubscriptionStatus($userId);
+                }
+            }
+
+        }else{
+            $this->writeLog("INVALID IPN");
+            $this->writeLog($listener->getTextReport());
+
+        }
+    }
+
     public function emailAction()
     {
         $form = new Application_Form_PaypalEmail();

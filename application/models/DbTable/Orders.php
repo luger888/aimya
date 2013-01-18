@@ -32,7 +32,7 @@ class Application_Model_DbTable_Orders extends Application_Model_DbTable_Abstrac
     public function updatePaymentStatus($bookingId) {
 
         $data = array(
-            'status' => 'complete',
+            'status' => 'paid',
             'updated_at' => date('Y-m-d H:i:s')
         );
 
