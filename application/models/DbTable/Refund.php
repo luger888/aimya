@@ -5,24 +5,18 @@ class Application_Model_DbTable_Refund extends Application_Model_DbTable_Abstrac
 
     protected $_name = 'refund_history';
 
-    public function createRefund($data = array())
+    public function createRefund($subId, $user_id)
     {
 
         $data = array(
-            'subscription_id' => $data['subscription_id'],
-            'user_id' => $data['user_id'],
-            'period' => $data['period'],
-            'refunded_money' => $data['refunded_money'],
+            'subscription_id' => $subId,
+            'user_id' => $user_id,
+            'status' => 0,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
         );
 
-        $insert = $this->insert($data);
-        if ($insert) {
-            return true;
-        } else {
-            return false;
-        }
+        return $this->insert($data);
 
     }
 

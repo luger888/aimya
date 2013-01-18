@@ -10,8 +10,6 @@ class Application_Form_Subscriptions extends Zend_Form
     {
         $subscriptionDb = new Application_Model_DbTable_Subscriptions();
 
-
-
         $period = new Zend_Form_Element_Select('period');
         $period->setAttrib('placeholder', 'Period')
             ->setRequired(true)
