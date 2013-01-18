@@ -42,13 +42,18 @@ class FeedbackController extends Aimya_Controller_BaseController
                 $reviewTable = new Application_Model_DbTable_Review();
                 $lesson = $lessonTable->getLessonByUser($this->getRequest()->getParam('lessonId'));
                 $review = $reviewTable->getReviews($this->getRequest()->getParam('lessonId'));
-
+                $identity = Zend_Auth::getInstance()->getStorage()->read();
                 $now = time(); // or your date as well
                 $your_date = strtotime($lesson['created_at']);
                 $datediff = $your_date - $now;
                 $reviewDate = floor($datediff / (60 * 60 * 24) + 10);
                 $this->view->review = $review['review'];
                 $this->view->rate = $review['rating'];
+                $bookingDb = new Application_Model_DbTable_Booking();
+                $isTeacher = $bookingDb->isTeacher($lesson['booking_id'], $identity->id);
+                if($isTeacher){
+                    $this->view->isTeacher = $isTeacher;
+                }
                 $this->view->date = $reviewDate;
                 $this->view->feedback = $feedback;
                 $html = $this->view->render('feedback/view.phtml');

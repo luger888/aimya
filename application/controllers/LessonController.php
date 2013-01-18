@@ -88,7 +88,7 @@ class LessonController extends Zend_Controller_Action
                 $videoPath = $lessonModel->createVideoPath($res, $activeLesson['creator_id']);
 
                 $openDispay = $lessonModel->openDisplay($activeLesson['id']);
-                sleep(6);
+                sleep(4);
                 if ($openDispay !== FALSE) {
                     $res = $lessonTable->setSeleniumPort($activeLesson['id'], $openDispay);
 
@@ -296,9 +296,9 @@ class LessonController extends Zend_Controller_Action
             //$text .= session_id();
             $this->write($text);*/
 
-            exec("conv.sh $filePath");
-            /*$this->write($convResult);
-            $this->write($filePath);*/
+            exec("/usr/local/bin/conv.sh $filePath", $convResult);
+            $this->write($convResult);
+            $this->write($filePath);
 
             $info = pathinfo($filePath);
             $pdfName = $info['filename'] . '.pdf';
@@ -496,6 +496,12 @@ class LessonController extends Zend_Controller_Action
             $datediff = $your_date - $now;
             $reviewDate = floor($datediff / (60 * 60 * 24) + 10);
             $this->view->review = $review['review'];
+            $identity = Zend_Auth::getInstance()->getStorage()->read();
+            $bookingDb = new Application_Model_DbTable_Booking();
+            $isTeacher = $bookingDb->isTeacher($lesson['booking_id'], $identity->id);
+            if($isTeacher){
+                $this->view->isTeacher = $isTeacher;
+            }
             $this->view->rate = $review['rating'];
             $this->view->date = $reviewDate;
             $this->view->notes = $fileContent;
@@ -521,6 +527,12 @@ class LessonController extends Zend_Controller_Action
             $datediff = $your_date - $now;
             $reviewDate = floor($datediff / (60 * 60 * 24) + 10);
             $this->view->review = $review['review'];
+            $identity = Zend_Auth::getInstance()->getStorage()->read();
+            $bookingDb = new Application_Model_DbTable_Booking();
+            $isTeacher = $bookingDb->isTeacher($lesson['booking_id'], $identity->id);
+            if($isTeacher){
+                $this->view->isTeacher = $isTeacher;
+            }
             $this->view->rate = $review['rating'];
             $this->view->date = $reviewDate;
             $this->view->notes = $fileContent;
@@ -578,10 +590,15 @@ class LessonController extends Zend_Controller_Action
                 if (!$review) {
                     $lessonTable = new Application_Model_DbTable_Lesson();
                     $lesson = $lessonTable->getItem($lessonId);
-                    $result = $reviewTable->createReview($rating, $reviewId, $lessonId, $userId, $lesson['booking_id'], $lesson['creator_id']);
-                    if ($result) {
-                        $this->view->success = 1;
+                    $bookingDb = new Application_Model_DbTable_Booking();
+                    $isTeacher = $bookingDb->isTeacher($lesson['booking_id'], $userId);
+                    if(!$isTeacher){
+                        $result = $reviewTable->createReview($rating, $reviewId, $lessonId, $userId, $lesson['booking_id'], $lesson['creator_id']);
+                        if ($result) {
+                            $this->view->success = 1;
+                        }
                     }
+
                 } else {
                     echo 'already reviewed';
                 }
