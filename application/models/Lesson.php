@@ -62,7 +62,7 @@ class Application_Model_Lesson
         /*var_dump("phpunit " . realpath(APPLICATION_PATH . "/../tmp/test.php") . " $lessonId $port");
         die;*/
 
-        exec("phpscript.sh $lessonId $port", $result);
+        exec("phpscr.sh $lessonId $port", $result);
         if($result == 0) {
             return true;
         } else {
