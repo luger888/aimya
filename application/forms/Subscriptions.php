@@ -8,12 +8,9 @@ class Application_Form_Subscriptions extends Zend_Form
 
     public function init()
     {
+        $subscriptionDb = new Application_Model_DbTable_Subscriptions();
 
-        /*$dateFrom = new Zend_Form_Element_Text('date_from');
-        $dateFrom ->setAttrib('id', 'date_from')
-            ->setAttrib('class', 't-165')
-            ->addFilters($this->basicFilters)
-            ->setDecorators($this->basicDecorators);*/
+
 
         $period = new Zend_Form_Element_Select('period');
         $period->setAttrib('placeholder', 'Period')
@@ -44,11 +41,19 @@ class Application_Form_Subscriptions extends Zend_Form
             ->setAttrib('class', 'button')
             ->setDecorators($this->basicDecorators);
 
+
         $unSubscribe = new Zend_Form_Element_Button('unsubscribe');
         $unSubscribe->setAttrib('id', 'unsubscribe')
             ->setLabel('Unsubscribe')
             ->setAttrib('class', 'button')
             ->setDecorators($this->basicDecorators);
+
+        if($subscriptionDb->isRefundEnable()){
+
+        }else{
+            $unSubscribe->setAttrib('class', 'disable button');
+
+        }
 
 
         $this->addElements(array($period, $subscribe, $unSubscribe));

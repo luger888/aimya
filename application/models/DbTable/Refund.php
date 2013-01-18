@@ -35,7 +35,7 @@ class Application_Model_DbTable_Refund extends Application_Model_DbTable_Abstrac
         );
 
         $where[] = $this->getAdapter()->quoteInto('id=?', $subscriptionId);
-        ;
+
 
         $this->update($data, $where);
     }
@@ -61,7 +61,7 @@ class Application_Model_DbTable_Refund extends Application_Model_DbTable_Abstrac
         );
 
         $where[] = $this->getAdapter()->quoteInto('id=?', $subscriptionId);
-        ;
+
 
         $this->update($data, $where);
     }

@@ -254,7 +254,12 @@ input.button {
 .button:hover {
     background-position: 0 -28px;
 }
-
+.button.disable {
+    background: url(../images/elem/button-dis.png) repeat-x 0 0;
+    border: 1px solid #ababab;
+    color:#454343;
+    text-shadow: 1px 1px 1px #fff;
+}
 .socialIcons {
     padding: 0;
 }

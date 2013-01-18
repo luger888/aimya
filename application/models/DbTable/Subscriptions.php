@@ -135,18 +135,21 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
     public function isRefundEnable()
     {
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
-
-        $where[] = $this->getAdapter()->quoteInto('user_id=?', $userId);
-        $where[] = $this->getAdapter()->quoteInto('status=?', 'paid');
-
         $data = $this->getAdapter()->select()
             ->from($this->_name, array(new Zend_Db_Expr('max(created_at) as maxId')))
-            ->where($where);
-
+            ->where( $this->getAdapter()->quoteInto('user_id=?', $userId))
+            ->where( $this->getAdapter()->quoteInto('status=?', 'paid'));
         $result = $data->query()->fetch();
-        $endDate = $result['maxId'];
-        if($result['maxId']) {
 
+        $now = new DateTime(date("Y-m-d H:i:s"));
+
+        $endDate = $result['maxId'];
+        $ref = new DateTime($endDate);
+        $diff = $now->diff($ref);
+        if($diff->m > 0 || $diff->y > 0) {
+            return true;
+        }else{
+            return false;
         }
 
     }

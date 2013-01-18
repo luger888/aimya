@@ -19,6 +19,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
         $emailForm = new Application_Form_PaypalEmail();
         $subscriptionForm = new Application_Form_Subscriptions();
+
         $profileTable = new Application_Model_DbTable_Profile();
         $email = $profileTable->getPayPalEmail($userId);
         if($email) {
@@ -27,7 +28,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
             $this->view->emailForm = $emailForm;
         }
 
-        $subscriptionForm->unsubscribe->setAttrib('disabled', 'disabled');
+
 
         $this->view->subscriptionForm = $subscriptionForm;
     }
