@@ -296,7 +296,7 @@ class LessonController extends Zend_Controller_Action
             //$text .= session_id();
             $this->write($text);*/
 
-            exec("/usr/local/bin/conv.sh $filePath", $convResult);
+            exec("sudo /usr/local/bin/conv.sh $filePath", $convResult);
             $this->write($convResult);
             $this->write("/usr/local/bin/conv.sh $filePath");
 
