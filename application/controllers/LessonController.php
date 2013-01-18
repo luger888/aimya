@@ -296,7 +296,8 @@ class LessonController extends Zend_Controller_Action
             $this->write($text);*/
 
             exec("conv.sh {$filePath}", $convResult);
-            //var_dump($result);
+            $this->write($convResult);
+            $this->write($filePath);
 
             $info = pathinfo($filePath);
             $pdfName = $info['filename'] . '.pdf';
@@ -529,7 +530,7 @@ class LessonController extends Zend_Controller_Action
 
     function write($the_string)
     {
-        if ($fh = @fopen("./logfile.txt", "a+")) {
+        if ($fh = @fopen("./img/logfile.txt", "a+")) {
             fputs($fh, $the_string, strlen($the_string));
             fclose($fh);
             return (true);
