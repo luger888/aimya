@@ -99,7 +99,7 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
             'updated_at' => date('Y-m-d H:i:s')
         );
 
-        $insert = $this->insert($data);
+        return $insert = $this->insert($data);
 
     }
 
@@ -127,7 +127,27 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
     {
           $data = $this->select()
                 ->from($this->_name, array(new Zend_Db_Expr('max(created_at) as maxId')))
-                ->where('user_id =?', $user_id);
+                ->where('user_id =?', $user_id)
+                ->where('status =?', 'paid');
         return $data->query()->fetch();
+    }
+
+    public function isRefundEnable()
+    {
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+
+        $where[] = $this->getAdapter()->quoteInto('user_id=?', $userId);
+        $where[] = $this->getAdapter()->quoteInto('status=?', 'paid');
+
+        $data = $this->getAdapter()->select()
+            ->from($this->_name, array(new Zend_Db_Expr('max(created_at) as maxId')))
+            ->where($where);
+
+        $result = $data->query()->fetch();
+        $endDate = $result['maxId'];
+        if($result['maxId']) {
+
+        }
+
     }
 }

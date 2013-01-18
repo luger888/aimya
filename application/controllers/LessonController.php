@@ -87,10 +87,10 @@ class LessonController extends Zend_Controller_Action
                 $videoPath = $lessonModel->createVideoPath($res, $activeLesson['creator_id']);
 
                 $openDispay = $lessonModel->openDisplay($activeLesson['id']);
-                if($openDispay !== FALSE){
+                if ($openDispay !== FALSE) {
                     $res = $lessonTable->setSeleniumPort($activeLesson['id'], $openDispay);
 
-                    if($res) {
+                    if ($res) {
                         $lessonModel->openLesson($activeLesson['id'], $openDispay);
                         $lessonModel->startRecording($activeLesson['id'], $videoPath . 'video_lesson', $booking['duration']);
                     }
@@ -221,11 +221,11 @@ class LessonController extends Zend_Controller_Action
         $videoPath = $lessonModel->createVideoPath($activeLesson['id'], $activeLesson['creator_id']);
 
         $openDispay = $lessonModel->openDisplay($activeLesson['id']);
-        if($openDispay !== FALSE){
+        if ($openDispay !== FALSE) {
 
             $res = $lessonTable->setSeleniumPort($activeLesson['id'], $openDispay);
 
-            if($res) {
+            if ($res) {
                 $lessonModel->openLesson($activeLesson['id'], $openDispay);
                 //$lessonModel->startRecording($activeLesson['id'], $videoPath . 'video_lesson', 5);
             }
@@ -246,9 +246,9 @@ class LessonController extends Zend_Controller_Action
         $feedbackTable = new Application_Model_DbTable_LessonFeedback();
         $bookingTable = new Application_Model_DbTable_Booking();
         if ($this->getRequest()->isPost()) {
-            $this->view->filterInfo = '<div class="floatRight">From: ' .$this->getRequest()->getParam('fromPeriod') .' To: ' .$this->getRequest()->getParam('toPeriod') .'</div>';
+            $this->view->filterInfo = '<div class="floatRight">From: ' . $this->getRequest()->getParam('fromPeriod') . ' To: ' . $this->getRequest()->getParam('toPeriod') . '</div>';
             $this->view->studentLessons = $lessonTable->getStudentLessons($this->getRequest()->getParam('fromPeriod'), $this->getRequest()->getParam('toPeriod'));
-        }else{
+        } else {
             $this->view->studentLessons = $lessonTable->getStudentLessons();
 
         }
@@ -305,8 +305,8 @@ class LessonController extends Zend_Controller_Action
             $imgsPath = $presPath . 'jpges' . DIRECTORY_SEPARATOR;
 
             $files = glob($imgsPath . '*'); // get all file names
-            foreach($files as $file){ // iterate files
-                if(is_file($file))
+            foreach ($files as $file) { // iterate files
+                if (is_file($file))
                     unlink($file); // delete file
             }
 
@@ -384,7 +384,7 @@ class LessonController extends Zend_Controller_Action
                 $bookingTable = new Application_Model_DbTable_Booking();
                 $bookingStatus = $bookingTable->changeStatus($bookingId);
                 $booking = $bookingTable->getItem($bookingId);
-                if($booking['video']) {
+                if ($booking['video']) {
                     $lesson = $lessonTable->getItem($lessonId);
                     $seleniumPort = $lesson['selenium_port'];
                     exec("phase3_kill.sh $lessonId $seleniumPort");
@@ -472,6 +472,29 @@ class LessonController extends Zend_Controller_Action
         }
     }
 
+    public function videoAction()
+    {
+        $lessonId = $this->getRequest()->getParam('lesson_id');
+        if ($lessonId) {
+            $lessonTable = new Application_Model_DbTable_Lesson();
+            $reviewTable = new Application_Model_DbTable_Review();
+            $lessonModel = new Application_Model_Lesson();
+            $lesson = $lessonTable->getLessonByUser($lessonId);
+
+            $fileContent = $lessonModel->getNotes($lessonId, $lesson['creator_id']);
+            $review = $reviewTable->getReviews($lessonId);
+
+            $now = time(); // or your date as well
+            $your_date = strtotime($lesson['created_at']);
+            $datediff = $your_date - $now;
+            $reviewDate = floor($datediff / (60 * 60 * 24) + 10);
+            $this->view->review = $review['review'];
+            $this->view->rate = $review['rating'];
+            $this->view->date = $reviewDate;
+            $this->view->notes = $fileContent;
+        }
+    }
+
     public function correspondenceAction()
     {
         $lessonId = $this->getRequest()->getParam('lesson_id');
@@ -550,7 +573,7 @@ class LessonController extends Zend_Controller_Action
                     if ($result) {
                         $this->view->success = 1;
                     }
-                }else{
+                } else {
                     echo 'already reviewed';
                 }
             }

@@ -1,14 +1,14 @@
 $(document).ready(function () {
 
-    $('.alert-block .close').click(function(){
+    $('.alert-block .close').click(function () {
         $(this).parents('.alert-block').remove();
     });
 
     //timepicker
 
-    $(function(){
+    $(function () {
 
-        $('#started_at_time').scroller({ preset: 'time', theme: 'android-ics', ampm: false, timeFormat: 'HH:ii' });
+        $('#started_at_time').scroller({ preset:'time', theme:'android-ics', ampm:false, timeFormat:'HH:ii' });
     });
 //    $.ajaxSetup({
 //        beforeSend: function(jqXHR, settings) {
@@ -46,19 +46,19 @@ $(document).ready(function () {
         $(this).find('.txt').appendTo($(this).find('.radioBoxWrapper'));
     });
 
-    jQuery.fn.shorten = function(settings) {
+    jQuery.fn.shorten = function (settings) {
         var config = {
-            showChars : 100,
-            ellipsesText : "...",
-            moreText : "more",
-            lessText : "less"
+            showChars:100,
+            ellipsesText:"...",
+            moreText:"more",
+            lessText:"less"
         };
 
         if (settings) {
             $.extend(config, settings);
         }
 
-        $('.morelink').live('click', function() {
+        $('.morelink').live('click', function () {
             var $this = $(this);
             if ($this.hasClass('less')) {
                 $this.removeClass('less');
@@ -72,13 +72,13 @@ $(document).ready(function () {
             return false;
         });
 
-        return this.each(function() {
+        return this.each(function () {
             var $this = $(this);
 
             var content = $this.html();
             if (content.length > config.showChars) {
                 var c = content.substr(0, config.showChars);
-                var h = content.substr(config.showChars , content.length - config.showChars);
+                var h = content.substr(config.showChars, content.length - config.showChars);
                 var html = c + '<span class="moreellipses">' + config.ellipsesText + '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="javascript:void(0)" class="morelink">' + config.moreText + '</a></span>';
                 $this.html(html);
                 $(".morecontent span").hide();
@@ -127,7 +127,7 @@ $(document).ready(function () {
     /* END DatePicker jquery UI */
     $('#starsBlock').raty();//stars rating
     $('.stars').raty({
-        score: function() {
+        score:function () {
             return $(this).attr('data-rating');
         },
         readOnly:true
@@ -268,7 +268,7 @@ $(document).ready(function () {
 
                             lesson.append('<span class="newBookingCount">!</span>');
 
-                            var payButtonCode = '<form method="POST" id="pay_55' /*+ result.bookingPaymentStatus.booking.id */+
+                            var payButtonCode = '<form method="POST" id="pay_55' /*+ result.bookingPaymentStatus.booking.id */ +
                                 '" action="' + pathName + '/payment/pay/">' +
                                 '<input name="teacher_id" type="hidden" value="' + result.bookingPaymentStatus.userdata.id + '">' +
                                 '<input name="booking_id" type="hidden" value="' + result.bookingPaymentStatus.booking.id + '">' +
@@ -288,27 +288,27 @@ $(document).ready(function () {
                     }
                     if (result.bookingPaymentStatus.booking.paid) {
                         for (var v = 0; v < $(result.bookingPaymentStatus.booking.paid).length; v++) {
-                            var  paidCode = '<span class="result success">Paid</span>';
+                            var paidCode = '<span class="result success">Paid</span>';
                             lesson.parents('tr:first').find(paymentTd).html(paidCode);
                         }
                     }
                     if (result.bookingPaymentStatus.booking.start) {
                         var actionTd = $('td.action');
                         for (var s = 0; s < $(result.bookingPaymentStatus.booking.start).length; s++) {
-                            var startButtonCode = '<form method="POST"'+
-                            '" action="' + pathName + '/lesson/setup/">' +
-                                '<input name="student_id" type="hidden" value="' + result.bookingPaymentStatus.userdata.id + '">'+
-                                    '<input name="booking_id" type="hidden" value="' + result.bookingPaymentStatus.booking.id + '">'+
-                                        '<a href="#" id="' + result.bookingPaymentStatus.userdata.id + '"'+
-                                        'onclick=startLesson(this)><span class="button-2 play">Start</span></a>'+
-                                    '</form>';
+                            var startButtonCode = '<form method="POST"' +
+                                '" action="' + pathName + '/lesson/setup/">' +
+                                '<input name="student_id" type="hidden" value="' + result.bookingPaymentStatus.userdata.id + '">' +
+                                '<input name="booking_id" type="hidden" value="' + result.bookingPaymentStatus.booking.id + '">' +
+                                '<a href="#" id="' + result.bookingPaymentStatus.userdata.id + '"' +
+                                'onclick=startLesson(this)><span class="button-2 play">Start</span></a>' +
+                                '</form>';
                             lesson.parents('tr:first').find(actionTd).html(startButtonCode);
                         }
                     }
 
                     if (result.bookingPaymentStatus.booking.join && window.location.pathname == pathName + "/lesson") {
 
-                        window.location.href =  pathName + '/lesson/join/';
+                        window.location.href = pathName + '/lesson/join/';
                     }
                 }
             }
@@ -319,7 +319,7 @@ $(document).ready(function () {
 //LESSON DETAILS//
     $("#notes-dialog").dialog({
         autoOpen:false,
-        height: 'auto',
+        height:'auto',
         width:450,
         modal:true,
         resizable:false,
@@ -330,7 +330,7 @@ $(document).ready(function () {
 
     $("#details-dialog").dialog({
         autoOpen:false,
-        height: 'auto',
+        height:'auto',
         width:450,
         modal:true,
         resizable:false,
@@ -475,7 +475,7 @@ function getTimeLeft() {
         'dataType':'json',
         'type':'post',
         success:function (data) {
-            if(data.status == 'success') {
+            if (data.status == 'success') {
                 if ($(".trialAlert").length) $(".trialAlert").remove();
                 inboxLi = $('.leftNavigation').find($('a[href="' + pathName + '/payment"]')).parent();
                 inboxLi.append('<span class="trialAlert"><span class="txt">' + data.timeLeft + ' days left</span></span>')
@@ -486,29 +486,33 @@ function getTimeLeft() {
 
 function setDefaultTimezone() {
     var baseUrl = $('#current_url').val();
-    var d=new Date(Date.now()); // sets your date to variable d
+    var d = new Date(Date.now()); // sets your date to variable d
 
-    function repeat(str,count) { // EXTENSION
-        return new Array(count+1).join(str);
-    };
+    function repeat(str, count) { // EXTENSION
+        return new Array(count + 1).join(str);
+    }
 
-    function padLeft(str,length,char) { // EXTENSION
-        return length<=str.length ? str.substr(0,length) : repeat(String(char||" ").substr(0,1),length-str.length)+str;
-    };
+    ;
 
-    var str=padLeft(String(d.getFullYear()),4,"0")+"-"+
-        padLeft(String(d.getMonth()),2,"0")+"-"+
-        padLeft(String(d.getDate()),2,"0")+"T"+
-        padLeft(String(d.getHours()),2,"0")+":"+
-        padLeft(String(d.getMinutes()),2,"0")+":"+
-        padLeft(String(d.getSeconds()),2,"0")+"."+
+    function padLeft(str, length, char) { // EXTENSION
+        return length <= str.length ? str.substr(0, length) : repeat(String(char || " ").substr(0, 1), length - str.length) + str;
+    }
+
+    ;
+
+    var str = padLeft(String(d.getFullYear()), 4, "0") + "-" +
+        padLeft(String(d.getMonth()), 2, "0") + "-" +
+        padLeft(String(d.getDate()), 2, "0") + "T" +
+        padLeft(String(d.getHours()), 2, "0") + ":" +
+        padLeft(String(d.getMinutes()), 2, "0") + ":" +
+        padLeft(String(d.getSeconds()), 2, "0") + "." +
         d.getMilliseconds();
     //str+=" GMT";
-    var o=d.getTimezoneOffset(),s=o<0?"+":"-",h,m;
-    h=Math.floor(Math.abs(o)/60);
-    m=Math.abs(o)-h*60;
+    var o = d.getTimezoneOffset(), s = o < 0 ? "+" : "-", h, m;
+    h = Math.floor(Math.abs(o) / 60);
+    m = Math.abs(o) - h * 60;
 
-    str+=" "+s+padLeft(String(h),2,"0")+padLeft(String(m),2,"0");
+    str += " " + s + padLeft(String(h), 2, "0") + padLeft(String(m), 2, "0");
     var str = str.substr(str.length - 5);
     var first = str.slice(0, 3);
     var second = str.slice(3, 5);
@@ -516,11 +520,11 @@ function setDefaultTimezone() {
 
     $.ajax({
         'url':baseUrl + '/user/timezone/',
-        'data':({timezone: newTimeZone}),
+        'data':({timezone:newTimeZone}),
         'dataType':'json',
         'type':'post',
         success:function (data) {
-            if(data.status == 'success') {
+            if (data.status == 'success') {
                 $("#timezone").val(newTimeZone);
             }
         }
@@ -528,8 +532,81 @@ function setDefaultTimezone() {
 }
 
 
+function getVideo(e, id) {
 
-function getNotes(e,id){
+    var pathName = $('#current_url').val();
+    //jQuery("body").append('<div class="loadingIcon"></div>');
+    $.ajax({
+        url:pathName + "/lesson/video",
+        type:"post",
+        data:{
+            'lesson_id':id
+        },
+        success:function (result) {
+            $("#notes-dialog").dialog("open");
+            $('.notesWindow').html('<div align="center" valign="middle" id="vp1" >You need to upgrade your flash player</div>');
+            var parent = $(e).parents('tr');
+            var id = parent.find('input[type=hidden]').val();
+
+            var focusName = parent.find('.focus');
+            var dateLesson = parent.find('.date');
+            $('.focusDialog').html(focusName.text());
+            $('.dateDialog').html(dateLesson.text());
+            $('.note:nth-child(even)').append('<div class ="smallSeparatorBot"></div>');
+            $('.note:nth-child(even)').prepend('<div class ="smallSeparatorTop"></div>');
+            $('.dialogFooter').prepend('<input type="hidden" name="les_id" value = "' + id + '">');
+            $('.timeLeftSpan').html(result.date + ' ');
+            if (result.review) {
+                $('#sendRating').remove();
+                $('.timeLeft').remove();
+                $('.comment').html('Comment: ' + result.review);
+                $('#starsBlock').raty({
+                    readOnly:true,
+                    score:result.rate
+                });
+            }
+            var flashvars = {};
+            var params = {};
+            var attributes = {};
+
+            params.codebase = 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0';
+            params.width = '640';
+            params.height = '360';
+            params.quality = 'high';
+            params.align = 'middle';
+            params.play = 'true';
+            params.loop = 'true';
+            params.scale = 'showall';
+            params.wmode = 'transparent';
+            params.devicefont = 'false';
+            params.bgcolor = '#2e2e2e';
+            params.allowFullScreen = 'true';
+            params.allowScriptAccess = 'sameDomain';
+            params.salign = '';
+
+            // SETUP
+            /* <![CDATA[ */
+            flashvars.width = '800';
+            flashvars.height = '600';
+            flashvars.imagepath = '../../flash/images/IMG_1120.jpg';
+            flashvars.videopath = '../../users/53/237/video/cvideo.flv';
+            //flashvars.color='0x2C75A3'
+            flashvars.volume = '0.3';
+            flashvars.fullscreenbutton = 'on';
+            flashvars.infobutton = 'on';
+            flashvars.volumebutton = 'on';
+            flashvars.titletext = 'Dynamic Video Player V5';
+            flashvars.descriptiontext = 'you can write a short description for your movie';
+            flashvars.autoplay = 'true';
+
+            attributes.id = 'vp1';
+            /* ]]> */
+
+            swfobject.embedSWF('../../flash/aimia_lesson.swf', 'vp1', '800', '600', '9.0.0', 'js/expressInstall.swf', flashvars, params, attributes);
+        }
+    });
+}
+function getNotes(e, id) {
     var pathName = $('#current_url').val();
     jQuery("body").append('<div class="loadingIcon"></div>');
     $.ajax({
@@ -551,33 +628,33 @@ function getNotes(e,id){
             $('.dateDialog').html(dateLesson.text());
             $('.note:nth-child(even)').append('<div class ="smallSeparatorBot"></div>');
             $('.note:nth-child(even)').prepend('<div class ="smallSeparatorTop"></div>');
-            $('.dialogFooter').prepend('<input type="hidden" name="les_id" value = "'+id+'">');
+            $('.dialogFooter').prepend('<input type="hidden" name="les_id" value = "' + id + '">');
             $('.timeLeftSpan').html(result.date + ' ');
-            if(result.review){
+            if (result.review) {
                 $('#sendRating').remove();
                 $('.timeLeft').remove();
-                $('.comment').html('Comment: '+ result.review);
+                $('.comment').html('Comment: ' + result.review);
                 $('#starsBlock').raty({
-                    readOnly : true,
-                    score    : result.rate
+                    readOnly:true,
+                    score:result.rate
                 });
             }
         }
     });
 }
 
-function openFeedback(e, lessonId){
+function openFeedback(e, lessonId) {
 
     var pathName = $('#current_url').val();
     jQuery("body").append('<div class="loadingIcon"></div>');
     $.ajax({
         url:pathName + "/feedback/view",
-        data: {
-            'lessonId': lessonId
+        data:{
+            'lessonId':lessonId
         },
         type:"post",
         success:function (result) {
-            if(result.feedback.content){
+            if (result.feedback.content) {
 
                 element = $(result.html);
 
@@ -596,15 +673,15 @@ function openFeedback(e, lessonId){
                 //alert(result.feedback.content);
                 $("#details-dialog").html(element);
                 $("#details-dialog").dialog("open");
-                element.find('.dialogFooter').prepend('<input type="hidden" name="les_id" value = "'+id+'">');
+                element.find('.dialogFooter').prepend('<input type="hidden" name="les_id" value = "' + id + '">');
                 element.find('.timeLeftSpan').html(result.date + ' ');
-                if(result.review){
+                if (result.review) {
                     element.find('#sendRating').remove();
                     element.find('.timeLeft').remove();
-                    element.find('.comment').html('Comment: '+ result.review);
+                    element.find('.comment').html('Comment: ' + result.review);
                     element.find('#starsBlockFeedback').raty({
-                        readOnly : true,
-                        score    : result.rate
+                        readOnly:true,
+                        score:result.rate
                     });
                 }
                 return false;
@@ -613,19 +690,19 @@ function openFeedback(e, lessonId){
     });
 }
 
-function getFeedbackForm(e, lessonId){
+function getFeedbackForm(e, lessonId) {
 
     var pathName = $('#current_url').val();
     jQuery("body").append('<div class="loadingIcon"></div>');
     $.ajax({
         url:pathName + "/feedback/form",
-        data: {
-            'lessonId': lessonId
+        data:{
+            'lessonId':lessonId
         },
         type:"post",
         success:function (result) {
             jQuery('.loadingIcon').remove();
-            if(result.html){
+            if (result.html) {
                 element = $(result.html)
                 jQuery('.loadingIcon').remove();
                 $("#details-dialog").html(element)
@@ -636,7 +713,7 @@ function getFeedbackForm(e, lessonId){
     });
 }
 
-function sendRating(e){
+function sendRating(e) {
     var pathName = $('#current_url').val();
     var parent = $(e).parents('.dialogFooter');
     var id = parent.find('input[name=les_id]').val();
@@ -653,14 +730,14 @@ function sendRating(e){
         },
         success:function (result) {
             jQuery('.loadingIcon').remove();
-                if(result.success){
-                    $('.comment').html('Comment: '+ review);
-                    $('#starsBlock').raty({
-                        readOnly : true,
-                        score    : rating
-                    });
-                    $(e).remove();
-                }
+            if (result.success) {
+                $('.comment').html('Comment: ' + review);
+                $('#starsBlock').raty({
+                    readOnly:true,
+                    score:rating
+                });
+                $(e).remove();
+            }
         }
     });
 }
