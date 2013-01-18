@@ -31,9 +31,6 @@ class Application_Model_DbTable_Availability extends Application_Model_DbTable_A
     {
         $user_id = (int)$user_id;
         $row = $this->fetchRow($this->select()->where('user_id=?' , (int)$user_id));
-        if(!$row) {
-            //throw new Exception("There is no element with ID: $user_id");
-        }
         $row = unserialize($row['available_at']);
         if($row == '0'){
             $row = array();

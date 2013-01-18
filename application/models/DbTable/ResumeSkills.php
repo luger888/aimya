@@ -40,11 +40,6 @@ class Application_Model_DbTable_ResumeSkills extends Application_Model_DbTable_A
         $identity = Zend_Auth::getInstance()->getStorage()->read();
         $data = $this->select()->where('user_id=?' , (int)$user_id)->order('id');
         $array = $data->query()->fetchAll();
-
-
-        if(!$array) {
-            throw new Exception("There is no element with ID: $user_id");
-        }
         if($array == '0'){
             $array = array();
         }

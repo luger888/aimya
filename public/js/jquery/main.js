@@ -555,8 +555,8 @@ function getVideo(e, id) {
             });
             var focusName = parent.find('.focus');
             var dateLesson = parent.find('.date');
-            $('.focusDialog').html(focusName.text());
-            $('.dateDialog').html(dateLesson.text());
+            $('.focusDialog').html('Focus: ' + focusName.text());
+            $('.dateDialog').html('Date: '+ dateLesson.text());
             $('.note:nth-child(even)').append('<div class ="smallSeparatorBot"></div>');
             $('.note:nth-child(even)').prepend('<div class ="smallSeparatorTop"></div>');
             $('.dialogFooter').prepend('<input type="hidden" name="les_id" value = "' + id + '">');
@@ -629,8 +629,8 @@ function getNotes(e, id) {
 
             var focusName = parent.find('.focus');
             var dateLesson = parent.find('.date');
-            $('.focusDialog').html(focusName.text());
-            $('.dateDialog').html(dateLesson.text());
+            $('.focusDialog').html('Focus: ' + focusName.text());
+            $('.dateDialog').html('Date: '+ dateLesson.text());
             $('.note:nth-child(even)').append('<div class ="smallSeparatorBot"></div>');
             $('.note:nth-child(even)').prepend('<div class ="smallSeparatorTop"></div>');
             $('.dialogFooter').prepend('<input type="hidden" name="les_id" value = "' + id + '">');

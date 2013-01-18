@@ -1851,7 +1851,7 @@ float:right;
   text-transform: capitalize;
 }
 .notes{
-    width:424px;
+    width:auto;
 }
 .notes .time{
     padding-left: 300px;
@@ -1864,6 +1864,12 @@ float:right;
 .notes .rateInput{
     margin: 0 0 15px 26px;
     width: 327px;
+}
+.focusDialog, .dateDialog{
+    width:150px;
+}
+.dateDialog{
+    float:right;
 }
 .smallSeparatorBot {
     background: url("../images/elem/smallSeparator.png") no-repeat scroll center 0 transparent;
