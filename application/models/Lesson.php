@@ -59,13 +59,9 @@ class Application_Model_Lesson
     public function openLesson($lessonId, $port)
     {
 
-        /*var_dump("phpunit " . realpath(APPLICATION_PATH . "/../tmp/test.php") . " $lessonId $port");
-        die;*/
-
-        echo "phpscr.sh $lessonId $port";
-        die;
-
         exec("phpscr.sh $lessonId $port", $result);
+        var_dump($result);
+        die;
         if($result == 0) {
             return true;
         } else {
