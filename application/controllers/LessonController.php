@@ -221,6 +221,7 @@ class LessonController extends Zend_Controller_Action
         $videoPath = $lessonModel->createVideoPath($activeLesson['id'], $activeLesson['creator_id']);
 
         $openDispay = $lessonModel->openDisplay($activeLesson['id']);
+        sleep(10);
         if ($openDispay !== FALSE) {
 
             $res = $lessonTable->setSeleniumPort($activeLesson['id'], $openDispay);
