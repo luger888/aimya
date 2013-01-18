@@ -144,7 +144,8 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
 
         $data = $this->getAdapter()->select()
             ->from('refund_history')
-            ->where( $this->getAdapter()->quoteInto('user_id=?', $userId));
+            ->where( $this->getAdapter()->quoteInto('user_id=?', $userId))
+            ->where($this->getAdapter()->quoteInto('status!=?', 1));
         $refund = $data->query()->fetch();
 
 

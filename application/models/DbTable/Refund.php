@@ -47,7 +47,7 @@ class Application_Model_DbTable_Refund extends Application_Model_DbTable_Abstrac
             'updated_at' => date('Y-m-d H:i:s')
         );
 
-        $where[] = $this->getAdapter()->quoteInto('id=?', $subscriptionId);
+        $where[] = $this->getAdapter()->quoteInto('subscription_id=?', $subscriptionId);
 
 
         $this->update($data, $where);
