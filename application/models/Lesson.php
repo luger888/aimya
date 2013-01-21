@@ -50,14 +50,11 @@ class Application_Model_Lesson
         $port = rand(4000, 4999);
         passthru("/usr/local/bin/phase1_startenv.sh $lessonId $port", $result);
 
-        var_dump($result);
-        die;
-
-        //if ($result == 0) {
-            //return $port;
-        //} else {
+        if ($result == 0) {
+            return $port;
+        } else {
             return false;
-        //}
+        }
     }
 
     public function openLesson($lessonId, $port)
