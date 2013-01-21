@@ -48,7 +48,7 @@ class Application_Model_Lesson
     {
 
         $port = rand(4000, 4999);
-        exec("sudo /usr/local/bin/phase1_startenv.sh $lessonId $port", $result);
+        exec("sudo -u testuser /usr/local/bin/phase1_startenv.sh $lessonId $port", $result);
         if ($result == 0) {
             return $port;
         } else {

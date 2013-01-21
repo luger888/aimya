@@ -154,6 +154,18 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
         $endDate = $result['maxId'];
         $ref = new DateTime($endDate);
         $diff = $now->diff($ref);
+
+        $d1 = new DateTime('2011-09-01 12:12:12');
+        $d2 = new DateTime('2012-06-06 12:12:12');
+
+        // @link http://www.php.net/manual/en/class.dateinterval.php
+        $interval = $d2->diff($d1);
+
+        //$interval->format('%m months');
+
+        var_dump((int)$interval->format('%m'));
+        die;
+
         if(($diff->m > 0 || $diff->y > 0) && !$refund) {
             return $result['id'];
         }else{
