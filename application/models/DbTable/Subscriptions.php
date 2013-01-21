@@ -136,7 +136,7 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
     {
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
         $data = $this->getAdapter()->select()
-            ->from($this->_name, array(new Zend_Db_Expr('max(created_at) as maxId'), 'id'))
+            ->from($this->_name, array(new Zend_Db_Expr('max(active_to) as maxId'), 'id'))
             ->where( $this->getAdapter()->quoteInto('user_id=?', $userId))
             ->where( $this->getAdapter()->quoteInto('status=?', 'paid'));
         $result = $data->query()->fetch();
@@ -154,18 +154,6 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
         $endDate = $result['maxId'];
         $ref = new DateTime($endDate);
         $diff = $now->diff($ref);
-
-        /*$d1 = new DateTime('2011-09-01 12:12:12');
-        $d2 = new DateTime('2012-06-06 12:12:12');
-
-        // @link http://www.php.net/manual/en/class.dateinterval.php
-        $interval = $d2->diff($d1);
-
-        //$interval->format('%m months');
-
-        var_dump((int)$interval->format('%m'));
-        die*/;
-
         if(($diff->m > 0 || $diff->y > 0) && !$refund) {
             return $result['id'];
         }else{
