@@ -9,7 +9,11 @@
             <li><a href="<?php echo $this->baseUrl()?>/account/availability">availability</a></li>
             <li><a href="<?php echo $this->baseUrl()?>/account/notifications">notifications/account settings</a></li>
             <li><a href="<?php echo $this->baseUrl()?>/account/users">users</a></li>
-            <li><a href="<?php echo $this->baseUrl()?>/account/metrics">my metrics</a></li>
+            <?php if($this->role !== '1'){
+            echo '<li><a href="'. $this->baseUrl().'/account/metrics">my metrics</a></li>';
+}
+?>
+
         </ul>
 
     </div><!--End tabsNavigation-->
