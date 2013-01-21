@@ -205,6 +205,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
             $response = $payPalModel->getAdaptivUrl($requestData);
 
+
             if ($response) {
 
                 $isAlreadyExist = $subscriptionTable->getPayKeyFromOrder($lastId);
