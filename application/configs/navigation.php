@@ -58,7 +58,7 @@ return array(
             ),
             array
             (
-                'label' => 'MY BOOKING',
+                'label' => 'MY BOOKINGS',
                 'tag' => 'leftMenu',
                 'route' => 'default',
                 'module' => 'default',
