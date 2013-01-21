@@ -210,6 +210,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
                 $isAlreadyExist = $subscriptionTable->getPayKeyFromOrder($lastId);
 
                 if (!$isAlreadyExist) {
+                    $userId = Zend_Auth::getInstance()->getIdentity()->id;
                     $data = array(
                         'user_id' => Zend_Auth::getInstance()->getIdentity()->id,
                         'aimya_profit' => $aimyaProfit,
@@ -220,7 +221,12 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
                         'updated_at' => date('Y-m-d H:i:s')
                     );
 
-                    $subscriptionTable->createSubscription($data);
+                    $latestSubscription = $subscriptionTable->getLatestSubscription($userId);
+                    $activeToDate = $latestSubscription['maxId'];
+
+
+
+                    $subscriptionTable->createSubscription($data, $date);
                 }
 
                 $this->redirect($response['url']);
