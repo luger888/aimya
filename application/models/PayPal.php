@@ -66,6 +66,7 @@ class Application_Model_PayPal
     }
 
     public function getAdaptivUrl($xml) {
+        die(0);
         $params = array(
             "http" => array(
                 "method" => "POST",
