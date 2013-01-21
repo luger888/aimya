@@ -5,7 +5,7 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
 
     protected $_name = 'subscription_history';
 
-    public function createSubscription($data = array(), $date)
+    public function createSubscription($data = array())
     {
 
         $data = array(
@@ -13,7 +13,7 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
             'aimya_profit' => $data['aimya_profit'],
             'pay_key' => $data['pay_key'],
             'status' => 'pending',
-            'active_to' => $date,
+            'active_to' => $data['active_to'],
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
         );
