@@ -146,13 +146,13 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         if ($verified) {
             $this->writeLog("VALID IPN");
             $this->writeLog($listener->getTextReport());
-            if ($_GET['user_id'] && $_GET['subscription_id']) {
+            if ($_GET['user_id']) {
                 $userId = $_GET['user_id'];
-                $subscriptionId = $_GET['subscription_id'];
+                //$subscriptionId = $_GET['subscription_id'];
                 $subscriptionTable = new Application_Model_DbTable_Subscriptions();
-                $payKey = $subscriptionTable->getPayKeyFromSebscription($userId, $subscriptionId);
+                $payKey = $subscriptionTable->getPayKeyFromSebscription($userId);
                 if ($payKey['pay_key'] = $_POST['pay_key']) {
-                    $subscriptionTable->updateSubscriptionStatus($userId, $subscriptionId);
+                    $subscriptionTable->updateSubscriptionStatus($userId);
                 }
             }
 
@@ -212,21 +212,21 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
                 if (!$isAlreadyExist) {
 
                     $latestSubscription = $subscriptionTable->getLatestSubscription(Zend_Auth::getInstance()->getIdentity()->id);
-                    //$activeToDate = $latestSubscription['maxId'];
+                    $activeToDate = $latestSubscription['maxId'];
 
-                    //$current = new DateTime();
-                    //$activeTo = new DateTime();
-                    $activeTo = date('Y-m-d h:i:s', strtotime("+$period month"));
-                    /*if($current < $activeTo) {
-                        $activeTo = date($activeToDate, strtotime("+$period month"));
-                    }*/
+                    $current = new DateTime();
+                    $activeTo = new DateTime();
+                    $activeToField = date('Y-m-d h:i:s', strtotime("+$period month"));
+                    if($current < $activeTo) {
+                        $activeToField = date($activeToDate, strtotime("+$period month"));
+                    }
 
                     $data = array(
                         'user_id' => Zend_Auth::getInstance()->getIdentity()->id,
                         'aimya_profit' => $aimyaProfit,
                         'pay_key' => $response['pay_key'],
                         'status' => 'pending',
-                        'active_to' => $activeTo,
+                        'active_to' => $activeToField,
                         'created_at' => date('Y-m-d H:i:s'),
                         'updated_at' => date('Y-m-d H:i:s')
                     );
