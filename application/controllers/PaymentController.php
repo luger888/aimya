@@ -146,12 +146,13 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         if ($verified) {
             $this->writeLog("VALID IPN");
             $this->writeLog($listener->getTextReport());
-            if ($_GET['user_id']) {
+            if ($_GET['user_id'] && $_GET['subscription_id']) {
                 $userId = $_GET['user_id'];
+                $subscriptionId = $_GET['subscription_id'];
                 $subscriptionTable = new Application_Model_DbTable_Subscriptions();
-                $payKey = $subscriptionTable->getPayKeyFromSebscription($userId);
+                $payKey = $subscriptionTable->getPayKeyFromSebscription($userId, $subscriptionId);
                 if ($payKey['pay_key'] = $_POST['pay_key']) {
-                    $subscriptionTable->updateSubscriptionStatus($userId);
+                    $subscriptionTable->updateSubscriptionStatus($userId, $subscriptionId);
                 }
             }
 
@@ -214,7 +215,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
                     $activeToDate = $latestSubscription['maxId'];
 
                     $current = new DateTime();
-                    $activeTo = new DateTime($activeToDate);
+                    $activeTo = new DateTime();
                     $activeTo = date('Y-m-d h:i:s', strtotime("+$period month"));
                     if($current < $activeTo) {
                         $activeTo = date($activeToDate, strtotime("+$period month"));
