@@ -1,12 +1,30 @@
 <div class="shadowSeparator clearfix">
     <div class="shadowSeparatorBox clearfix">
         <div class="metricItem">
-            <h1><?php echo $this->translate('total peers joined me')?></h1>
+            <h1><?php echo $this->translate('users')?></h1>
             <div class="formRow">
-                <div class="formRow">
-
-                </div>
+                <span class="head"><?php echo $this->translate('total peers joined me:'); ?></span>
+                <?php $this->totalPeersCount?>
+            </div>
+            <div class="formRow">
+                <span class="head"><?php echo $this->translate('peers joined last month:'); ?></span>
+                <?php $this->monthPeersCount?>
             </div>
         </div>
+        <div class="shadowSeparatorBoxSmall"> </div>
+        <div class="shadowSeparator"> </div>
+        <div class="metricItem">
+            <h1><?php echo $this->translate('income')?></h1>
+            <div class="formRow">
+                <span class="head"><?php echo $this->translate('total peers joined me:'); ?></span>
+                <?php $this->totalPeersCount?>
+            </div>
+            <div class="formRow">
+                <span class="head"><?php echo $this->translate('peers joined last month:'); ?></span>
+                <?php $this->monthPeersCount?>
+            </div>
+        </div>
+        <div class="shadowSeparatorBoxSmall"> </div>
+        <div class="shadowSeparator"> </div>
     </div>
 </div>
