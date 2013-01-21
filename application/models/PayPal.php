@@ -112,7 +112,7 @@ class Application_Model_PayPal
 
         $cancelUrl = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment';
         $returnURL = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment';
-        $ipnURL = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment/subsipn?user_id=' . $buyerId . '&subscription_id=' . $subscribeId;
+        $ipnURL = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment/subsipn?subscription_id=' . $subscribeId;
 
         /*$userTable = new Application_Model_DbTable_Users();
         $user = $userTable->getFullData($buyerId);*/

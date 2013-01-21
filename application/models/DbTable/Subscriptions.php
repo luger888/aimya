@@ -162,25 +162,25 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
 
     }
 
-    public function getPayKeyFromSebscription($userId, $subscriptionId) {
-        $userId = (int)$userId;
+    public function getPayKeyFromSebscription($subscriptionId) {
+        //$userId = (int)$userId;
 
         $data = $this->select()
             ->from($this->_name, array('pay_key'))
-            ->where('user_id=?' , $userId)
+            //->where('user_id=?' , $userId)
             ->where('id=?' , (int)$subscriptionId);
 
         return $data->query()->fetch();
     }
 
-    public function updateSubscriptionStatus($userId, $subscriptionId) {
+    public function updateSubscriptionStatus($subscriptionId) {
 
         $data = array(
             'status' => 'paid',
             'updated_at' => date('Y-m-d H:i:s')
         );
 
-        $where[] = $this->getAdapter()->quoteInto('user_id=?', $userId);
+        //$where[] = $this->getAdapter()->quoteInto('user_id=?', $userId);
         $where[] = $this->getAdapter()->quoteInto('id=?', (int)$subscriptionId);
 
         $this->update($data , $where);
