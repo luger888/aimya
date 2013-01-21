@@ -226,12 +226,12 @@ class LessonController extends Zend_Controller_Action
         sleep(5);
         if ($openDispay !== FALSE) {
 
-            $res = $lessonTable->setSeleniumPort($activeLesson['id'], $openDispay);
+            //$res = $lessonTable->setSeleniumPort($activeLesson['id'], $openDispay);
 
-            if ($res) {
+            //if ($res) {
                 $lessonModel->openLesson($activeLesson['id'], $openDispay);
                 //$lessonModel->startRecording($activeLesson['id'], $videoPath . 'video_lesson', 5);
-            }
+            //}
         }
 
 
