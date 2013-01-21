@@ -197,7 +197,6 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
             $subscriptionTable = new Application_Model_DbTable_Subscriptions();
 
             $aimyaProfit = $period * $this->subscriptionCost;
-            $activeTo = date('Y-m-d h:i:s', strtotime("+$period month"));
 
             $lastId = $subscriptionTable->getAdapter()->lastInsertId();
 
@@ -210,7 +209,17 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
                 $isAlreadyExist = $subscriptionTable->getPayKeyFromOrder($lastId);
 
                 if (!$isAlreadyExist) {
-                    $userId = Zend_Auth::getInstance()->getIdentity()->id;
+
+                    $latestSubscription = $subscriptionTable->getLatestSubscription(Zend_Auth::getInstance()->getIdentity()->id);
+                    $activeToDate = $latestSubscription['maxId'];
+
+                    $current = new DateTime();
+                    $activeTo = new DateTime($activeToDate);
+                    $activeTo = date('Y-m-d h:i:s', strtotime("+$period month"));
+                    if($current < $activeTo) {
+                        $activeTo = date($activeToDate, strtotime("+$period month"));
+                    }
+
                     $data = array(
                         'user_id' => Zend_Auth::getInstance()->getIdentity()->id,
                         'aimya_profit' => $aimyaProfit,
@@ -221,12 +230,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
                         'updated_at' => date('Y-m-d H:i:s')
                     );
 
-                    $latestSubscription = $subscriptionTable->getLatestSubscription($userId);
-                    $activeToDate = $latestSubscription['maxId'];
-
-
-
-                    $subscriptionTable->createSubscription($data, $date);
+                    $subscriptionTable->createSubscription($data);
                 }
 
                 $this->redirect($response['url']);
