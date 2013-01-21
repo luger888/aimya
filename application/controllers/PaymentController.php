@@ -212,14 +212,14 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
                 if (!$isAlreadyExist) {
 
                     $latestSubscription = $subscriptionTable->getLatestSubscription(Zend_Auth::getInstance()->getIdentity()->id);
-                    $activeToDate = $latestSubscription['maxId'];
+                    //$activeToDate = $latestSubscription['maxId'];
 
-                    $current = new DateTime();
-                    $activeTo = new DateTime();
+                    //$current = new DateTime();
+                    //$activeTo = new DateTime();
                     $activeTo = date('Y-m-d h:i:s', strtotime("+$period month"));
-                    if($current < $activeTo) {
+                    /*if($current < $activeTo) {
                         $activeTo = date($activeToDate, strtotime("+$period month"));
-                    }
+                    }*/
 
                     $data = array(
                         'user_id' => Zend_Auth::getInstance()->getIdentity()->id,
