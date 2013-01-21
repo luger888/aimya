@@ -4,11 +4,11 @@
             <h1><?php echo $this->translate('users')?></h1>
             <div class="formRow">
                 <span class="head"><?php echo $this->translate('total peers joined me:'); ?></span>
-                <?php $this->totalPeersCount?>
+                <?php echo $this->totalPeersCount?>
             </div>
             <div class="formRow">
                 <span class="head"><?php echo $this->translate('peers joined last month:'); ?></span>
-                <?php $this->monthPeersCount?>
+                <?php echo $this->monthPeersCount?>
             </div>
         </div>
         <div class="shadowSeparatorBoxSmall"> </div>
@@ -16,15 +16,17 @@
         <div class="metricItem">
             <h1><?php echo $this->translate('income')?></h1>
             <div class="formRow">
-                <span class="head"><?php echo $this->translate('total peers joined me:'); ?></span>
-                <?php $this->totalPeersCount?>
+                <span class="head"><?php echo $this->translate('total income since became member:'); ?></span>
+                <?php echo $this->totalIncome?>
             </div>
             <div class="formRow">
-                <span class="head"><?php echo $this->translate('peers joined last month:'); ?></span>
-                <?php $this->monthPeersCount?>
+                <span class="head"><?php echo $this->translate('YTD income:'); ?></span>
+                <?php echo $this->yearIncome?>
+            </div>
+            <div class="formRow">
+                <span class="head"><?php echo $this->translate('last month income:'); ?></span>
+                <?php echo $this->monthIncome?>
             </div>
         </div>
-        <div class="shadowSeparatorBoxSmall"> </div>
-        <div class="shadowSeparator"> </div>
     </div>
 </div>

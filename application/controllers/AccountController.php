@@ -186,11 +186,17 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         $friendsDb = new Application_Model_DbTable_Friends();
         $ordersDb = new Application_Model_DbTable_Orders();
 
-        $this->view->totalPeersCount = $friendsDb->getJoinedPeers();
-        $this->view->monthPeersCount = $friendsDb->getJoinedPeers(date('Y-m-d h:i:s'));
-        $this->view->totalIncome = $ordersDb->getIncome();
-        $this->view->yearIncome = $ordersDb->getIncome('year');
-        $this->view->monthIncome = $ordersDb->getIncome('month');
+        $totalPeersCount = $friendsDb->getJoinedPeers();
+        $monthPeersCount = $friendsDb->getJoinedPeers('month');
+        $this->view->totalPeersCount = $totalPeersCount['peers_count'];
+        $this->view->monthPeersCount = $monthPeersCount['peers_count'];
+
+        $totalIncome = $ordersDb->getUserIncome();
+        $monthIncome = $ordersDb->getUserIncome('month');
+        $yearIncome = $ordersDb->getUserIncome('year');
+        $this->view->totalIncome = $totalIncome['user_profit'];
+        $this->view->yearIncome = $yearIncome['user_profit'];;
+        $this->view->monthIncome = $monthIncome['user_profit'];;
 
     }
 
