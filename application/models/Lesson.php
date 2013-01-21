@@ -66,7 +66,7 @@ class Application_Model_Lesson
     public function openLesson($lessonId, $port)
     {
 
-        exec("phpscr.sh $lessonId $port > /dev/null 2>/dev/null &", $result);
+        exec("sudo /usr/local/bin/phpscr.sh $lessonId $port > /dev/null 2>/dev/null &", $result);
 
         if($result == 0) {
             return true;
