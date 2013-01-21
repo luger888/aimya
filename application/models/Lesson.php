@@ -52,7 +52,7 @@ class Application_Model_Lesson
 
         $fp = fopen("./img/logfile.txt", "a");
 
-        fwrite($fp, serialize($result) . "y1_\n");
+        fwrite($fp, array_shift($result) . "y1_\n");
 
         fclose($fp);
 
