@@ -225,7 +225,7 @@ class LessonController extends Zend_Controller_Action
         $openDispay = $lessonModel->openDisplay($activeLesson['id']);
         sleep(5);
 
-        $this->write($openDispay);
+        $this->write('1');
 
         if ($openDispay !== FALSE) {
 
