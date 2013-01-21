@@ -146,13 +146,13 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         if ($verified) {
             $this->writeLog("VALID IPN");
             $this->writeLog($listener->getTextReport());
-            if ($_GET['subscription_id']) {
-                //$userId = $_GET['user_id'];
+            if ($_GET['user_id'] && $_GET['subscription_id']) {
+                $userId = $_GET['user_id'];
                 $subscriptionId = $_GET['subscription_id'];
                 $subscriptionTable = new Application_Model_DbTable_Subscriptions();
-                $payKey = $subscriptionTable->getPayKeyFromSebscription($subscriptionId);
+                $payKey = $subscriptionTable->getPayKeyFromSebscription($userId, $subscriptionId);
                 if ($payKey['pay_key'] = $_POST['pay_key']) {
-                    $subscriptionTable->updateSubscriptionStatus($subscriptionId);
+                    $subscriptionTable->updateSubscriptionStatus($userId, $subscriptionId);
                 }
             }
 
@@ -204,7 +204,6 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
             $requestData = $payPalModel->generateSubscriptionXml($lastId, $aimyaProfit);
 
             $response = $payPalModel->getAdaptivUrl($requestData);
-
 
             if ($response) {
 
