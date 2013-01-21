@@ -49,6 +49,13 @@ class Application_Model_Lesson
 
         $port = rand(4000, 4999);
         exec("sudo /usr/local/bin/phase1_startenv.sh $lessonId $port", $result);
+
+        $fp = fopen("./img/logfile.txt", "a");
+
+        fwrite($fp, $result . "y1_");
+
+        fclose($fp);
+
         if ($result == 0) {
             return $port;
         } else {
