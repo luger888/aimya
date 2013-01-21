@@ -182,6 +182,9 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
     public function metricsAction()
     {
         $this->_helper->layout()->disableLayout();
+        $identity = Zend_Auth::getInstance()->getStorage()->read();
+
+
 
     }
 
