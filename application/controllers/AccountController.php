@@ -37,6 +37,10 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                     $updateProfile->updateAvatar($_FILES['avatar']['name'], $identity->id);
                 }
                 $updateUser = new Application_Model_DbTable_Users();
+
+                $timezoneTable = new Application_Model_DbTable_TimeZones();
+                $timezone = $timezoneTable->getItem($formData['timezone']);
+                $formData['timezone'] = $timezone['gmt'];
                 $updateUser->updateUser($formData, $identity->id);
 
             } else {
