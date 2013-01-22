@@ -1183,7 +1183,7 @@ input.button-2 {
     text-transform: capitalize;
 }
 .userRelationsTab.profile  .button-2{
-    padding-right: 20px;
+    padding-right: 11px;
 }
 #block-confirm, #delete-confirm, #cancel-confirm{
     display: none;

@@ -37,7 +37,7 @@
         <div class="shadowSeparator clearfix">
         <div class="shadowSeparatorBox bg-none clearfix">
 
-            <form method="post" name="serviceDetails" action="<?php echo $this->baseUrl()?>/account/services" id="serviceForm" class = "serviceForm">
+            <form method="post" name="serviceDetails" action="<?php echo $this->baseUrl()?>/account/services" id="serviceForm" class = "serviceForm" onsubmit="return validateService();">
                 <div class="formRow clearfix">
                     <?php echo $this->servicesForm->service_type; ?>
                     <span class="s-116"><?php echo $this->servicesForm->lesson_category; ?></span>

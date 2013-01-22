@@ -40,9 +40,11 @@ class Application_Form_ServiceDetails extends Zend_Form
 
         $subcategory = new Zend_Form_Element_Text('subcategory');
         $subcategory ->setAttrib('placeholder', 'Specify Category')
+            ->addValidator('Digits')
             ->setAttrib('id', 'subcategoryInput')
             ->addFilters($this->basicFilters)
-            ->setDecorators($this->basicDecorators);
+            ->setDecorators($this->basicDecorators)
+            ->setErrorMessages(array('This must be a number. Currency is in US Dollars.'));
 
         $rate = new Zend_Form_Element_Text('rate');
         $rate ->setAttrib('class', 'required input-small')
@@ -70,12 +72,15 @@ class Application_Form_ServiceDetails extends Zend_Form
         $submit = new Zend_Form_Element_Submit('saveService');
         $submit ->setLabel('Save')
             ->setAttrib('id', 'saveService')
+           // ->setAttrib('onClick', 'validateService();return false;')
             ->setAttrib('class', 'button-2 save')
             ->setDecorators($this->basicDecorators);
+
         $submitReq = new Zend_Form_Element_Submit('saveService');
         $submitReq ->setLabel('Save')
             ->setAttrib('id', 'saveRequestedService')
             ->setAttrib('class', 'button-2 save')
+
             ->setDecorators($this->basicDecorators);
 
         if($action == 'requestservices') {

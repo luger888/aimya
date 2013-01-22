@@ -166,3 +166,15 @@ function updateService(e, service_type, url){
 
 
 }
+function validateService(){
+    if($('#rateInput').val() % 1 === 0){
+        return true;
+    }else{
+        $('#rateInput').val('Integer only');
+        return false;
+    }
+
+
+
+
+}
