@@ -494,7 +494,12 @@ function getTimeLeft() {
             if (data.status == 'success') {
                 if ($(".trialAlert").length) $(".trialAlert").remove();
                 inboxLi = $('.leftNavigation').find($('a[href="' + pathName + '/payment"]')).parent();
-                inboxLi.append('<span class="trialAlert"><span class="txt">' + data.timeLeft + ' days left</span></span>')
+                if(data.timeLeft){
+                    inboxLi.append('<span class="trialAlert"><span class="txt">' + data.timeLeft + ' days left</span></span>')
+                }else{
+                    inboxLi.append('<span class="trialAlert"><span class="txt">End of trial !</span></span>')
+                }
+
             }
         }
     });
@@ -578,11 +583,11 @@ function getVideo(e, id) {
             $('.dialogFooter').prepend('<input type="hidden" name="les_id" value = "' + id + '">');
             $('.timeLeftSpan').html(result.date + ' ');
             if(result.isTeacher && !result.rate){
-                element.find('#sendRating').remove();
-                element.find('.timeLeft').remove();
-                element.find('.comment').remove();
-                element.find('#starsBlockFeedback').remove();
-                element.find('.rate').remove();
+                $('#sendRating').remove();
+                $('.timeLeft').remove();
+                $('.comment').remove();
+                $('#starsBlock').remove();
+                $('.rate').remove();
             }
             if (result.rate) {
                 $('#sendRating').remove();

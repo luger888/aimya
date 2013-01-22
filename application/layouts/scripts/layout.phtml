@@ -52,11 +52,7 @@ $controllerName = $front->getRequest()->getControllerName();
                 <div class="signInButton">
                     <?php echo $this->login['login'] ?>
                 </div><!--End signInButton-->
-                <div class="signInBox">
-                    <label class="title"><?php echo $this->translate("password") ?>:</label>
-                    <?php echo$this->login['password'] ?>
-                    <a href="<?php echo$this->baseUrl()?>#"><?php echo $this->translate("forgot your password")?>?</a>
-                </div><!--End signInBox-->
+
                 <div class="signInBox">
                     <label class="title"><?php echo $this->translate("login or email") ?>:</label>
                     <?php echo $this->login['username'] ?>
@@ -65,6 +61,11 @@ $controllerName = $front->getRequest()->getControllerName();
                         <label><?php echo $this->translate("keep me signed in") ?></label>
                     </div><!--End loginRemember-->
                 </div><!--End signInBox-->
+                    <div class="signInBox">
+                        <label class="title"><?php echo $this->translate("password") ?>:</label>
+                        <?php echo$this->login['password'] ?>
+                        <a href="<?php echo$this->baseUrl()?>#"><?php echo $this->translate("forgot your password")?>?</a>
+                    </div><!--End signInBox-->
                 </form>
             </div>
             <!-- END /LOGIN -->
