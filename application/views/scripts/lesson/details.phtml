@@ -51,7 +51,7 @@
                     <td class ="focus"><?php echo $lesson['focus_name']?></td>
                     <td class="center">
                         <?php if ($lesson['video']): ?>
-                        <a href="#" onClick="getVideo(this, <?php echo $lesson['id'];?>);"
+                        <a href="#" onClick="getVideo(this, <?php echo $lesson['id'];?>); return false;"
                            class="button-2 open "><?php echo $this->translate('Open') ?></a>
                         <?php endif;?>
                     </td>
@@ -59,16 +59,16 @@
                         <?php if ($lesson['feedback']): ?>
                             <?php if($feedback): ?>
                                 <?php if($feedback['status'] == 0 && $feedback['teacher_id'] == Zend_Auth::getInstance()->getIdentity()->id):?>
-                                    <a href="#" onClick="getFeedbackForm(this,  <?php echo $lesson['id']; ?>);" class="button-2 open center"><?php echo $this->translate('Create') ?></a>
+                                    <a href="#" onClick="getFeedbackForm(this,  <?php echo $lesson['id']; ?>); return false;" class="button-2 open center"><?php echo $this->translate('Create') ?></a>
                                 <?php else: ?>
-                                    <a href="#" onClick="openFeedback(this, <?php echo $lesson['id'];?>);" class="button-2 open center"><?php echo $this->translate('Open') ?></a>
+                                    <a href="#" onClick="openFeedback(this, <?php echo $lesson['id'];?>); return false;" class="button-2 open center"><?php echo $this->translate('Open') ?></a>
                                 <?php endif; ?>
                             <?php endif; ?>
                         <?php endif;?>
                     </td>
                     <td class="center">
                         <?php if ($lesson['notes']): ?>
-                        <a href="#" onClick="getNotes(this, <?php echo $lesson['id'];?>);"
+                        <a href="#" onClick="getNotes(this, <?php echo $lesson['id'];?>); return false;"
                            class="button-2 open "><?php echo $this->translate('Open') ?></a>
                         <?php endif;?>
                     </td>
