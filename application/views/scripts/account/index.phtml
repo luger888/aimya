@@ -4,13 +4,13 @@
 
         <ul>
             <li><a href="#tabs-1">general</a></li>
-            <?php if($this->role !== '1'){echo  '<li><a href="' . $this->baseUrl() . '/account/services">SERVICE DETAILS</a></li>';}?>
-            <li><a href="<?php echo $this->baseUrl()?>/account/requestservices">request services</a></li>
-            <li><a href="<?php echo $this->baseUrl()?>/account/availability">availability</a></li>
-            <li><a href="<?php echo $this->baseUrl()?>/account/notifications">notifications/account settings</a></li>
-            <li><a href="<?php echo $this->baseUrl()?>/account/users">users</a></li>
+            <?php if($this->role !== '1'){echo  '<li><a href="' . $this->baseUrl() . '/account/services">' . $this->translate('offer service') . '</a></li>';}?>
+            <li><a href="<?php echo $this->baseUrl()?>/account/requestservices"><?php echo $this->translate('request service') ?></a></li>
+            <li><a href="<?php echo $this->baseUrl()?>/account/availability"><?php echo $this->translate('availability') ?></a></li>
+            <li><a href="<?php echo $this->baseUrl()?>/account/notifications"><?php echo $this->translate('notifications/account settings') ?></a></li>
+            <li><a href="<?php echo $this->baseUrl()?>/account/users"><?php echo $this->translate('users') ?></a></li>
             <?php if($this->role !== '1'){
-            echo '<li><a href="'. $this->baseUrl().'/account/metrics">my metrics</a></li>';
+            echo '<li><a href="'. $this->baseUrl().'/account/metrics">' . $this->translate('my metrics') . '</a></li>';
 }
 ?>
 
