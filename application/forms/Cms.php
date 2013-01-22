@@ -4,7 +4,7 @@ class Application_Form_Cms extends Zend_Form
 {
     public $basicDecorators = array('ViewHelper', 'Errors');
     public $basicFilters = array('StripTags', 'StringTrim');
-    
+
     public function init()
     {
         #hidden field for editing cms pages
