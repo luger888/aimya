@@ -35,6 +35,7 @@ class CmsController extends Aimya_Controller_BaseController
 
                 $name = $this->getRequest()->getParam('name');
                 $uri = $this->getRequest()->getParam('uri');
+                $language = $this->getRequest()->getParam('language');
                 $content = $this->getRequest()->getParam('contentCKE');
 
                 $cms = new Application_Model_DbTable_Cms();
@@ -46,7 +47,7 @@ class CmsController extends Aimya_Controller_BaseController
 
                 } else {
 
-                    $cms->createStaticPage($name, $uri, $content);
+                    $cms->createStaticPage($name, $uri, $language, $content);
                     $this->_helper->redirector('index', 'cms');
 
                 }
@@ -86,11 +87,12 @@ class CmsController extends Aimya_Controller_BaseController
                 $id = $this->getRequest()->getParam('id');
                 $name = $this->getRequest()->getParam('name');
                 $uri = $this->getRequest()->getParam('uri');
+                $language = $this->getRequest()->getParam('language');
                 $content = $this->getRequest()->getParam('contentCKE');
                 $cms = new Application_Model_DbTable_Cms();
                 $check = $cms->getPageByUri($uri);
                 if (!$check['id']) {
-                    $cms->updateStaticPage($id, $name, $uri, $content);
+                    $cms->updateStaticPage($id, $name, $uri, $language, $content);
                     $this->_helper->redirector('index', 'cms');
                 } else {
                     $this->_helper->flashMessenger->addMessage(array('fail' => 'this uri already exists'));

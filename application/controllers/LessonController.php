@@ -299,7 +299,7 @@ class LessonController extends Zend_Controller_Action
             //$text .= session_id();
             $this->write($text);*/
 
-            exec("/usr/local/bin/conv.sh $filePath", $convResult);
+            exec("sudo /usr/local/bin/conv.sh $filePath", $convResult);
             $this->write($convResult);
             $this->write($filePath);
 
@@ -491,7 +491,7 @@ class LessonController extends Zend_Controller_Action
             $lessonModel = new Application_Model_Lesson();
             $lesson = $lessonTable->getLessonByUser($lessonId);
             $identityId = Zend_Auth::getInstance()->getIdentity()->id;
-            //$fileContent = $lessonModel->getNotes($lessonId, $lesson['creator_id']);
+            $fileContent = $lessonModel->getNotes($lessonId, $lesson['creator_id']);
             $review = $reviewTable->getReviews($lessonId);
 
             $now = time(); // or your date as well
@@ -507,7 +507,7 @@ class LessonController extends Zend_Controller_Action
             }
             $this->view->rate = $review['rating'];
             $this->view->date = $reviewDate;
-            //$this->view->notes = $fileContent;
+            $this->view->notes = $fileContent;
 
             $this->view->creator_id = $lesson['creator_id'];
         }
