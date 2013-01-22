@@ -12,8 +12,8 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
         $row = $this->fetchAll(
             $this->select()
                 ->where($this->getAdapter()->quoteInto('sender_id=?' , $userId) . ' OR ' . $this->getAdapter()->quoteInto('friend_id=?' , $userId))
-                ->where('sender_status=?' , 1)
-                ->where('recipient_status=?' , 1)
+                ->where('sender_status!=?' , 3)
+                ->where('recipient_status!=?' , 3)
                 ->group('id')
         );
         if (!$row) {

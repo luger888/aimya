@@ -750,7 +750,11 @@ input.button-2 {
 .profileGeneral #gender-element {
     float: left;
 }
-
+.profileGeneral .info{
+    float:left;
+    color: #8D8D8D;
+    font-size:11px;
+}
 .hasDatepicker {
     width: 80px;
     background: url(../images/icons/datapicer.png) no-repeat right 2px;

@@ -55,7 +55,7 @@ body {
 }
 
 .signInBox {
-    float: right;
+    float: left;
     width: 185px;
     margin-top: 14px;
     margin-left: 0px;
