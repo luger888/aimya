@@ -119,7 +119,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
             'firstname' => preg_replace('#<(.*?)>#', '', $array['firstname']),
             'lastname' => preg_replace('#<(.*?)>#', '', $array['lastname']),
             'gender' => preg_replace('#<(.*?)>#', '', $array['gender']),
-            'timezone' => preg_replace('#<(.*?)>#', '', $array['timezone']),
+            'timezone' => $array['timezone'],
             'email' => preg_replace('#<(.*?)>#', '', $array['email']),
             'username' => preg_replace('#<(.*?)>#', '', $array['username']),
             'updated_at' => date('Y-m-d H:i:s')
