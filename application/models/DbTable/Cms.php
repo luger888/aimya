@@ -12,7 +12,7 @@ class Application_Model_DbTable_Cms extends Application_Model_DbTable_Abstract
             'name' => $name,
             'uri' => preg_replace('# #' , '_' , trim($uri)),
             'language' => preg_replace('# #' , '_' , trim($language)),
-            'content' => $wysiwyg,
+            'contentCKE' => $wysiwyg,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
 
@@ -28,7 +28,7 @@ class Application_Model_DbTable_Cms extends Application_Model_DbTable_Abstract
             'name' => $name,
             'uri' => preg_replace('# #' , '_' , trim($uri)),
             'language' => preg_replace('# #' , '_' , trim($language)),
-            'content' => $content,
+            'contentCKE' => $content,
 
         );
 
@@ -36,11 +36,25 @@ class Application_Model_DbTable_Cms extends Application_Model_DbTable_Abstract
         $this->updateItem($data , $id);
     }
 
-    public function getPageByUri($uri){
+    public function getPageByUri($uri, $language){
 
         $data = $this   ->select()
-                        ->from('static_page',array('id', 'name' , 'content', 'language'))
-                        ->where('uri=?' , preg_replace('# #' , '_' , trim($uri)));
+                        ->from('static_page',array('id', 'name' , 'contentCKE', 'language'))
+                        ->where('uri=?' , preg_replace('# #' , '_' , trim($uri)))
+                        ->where('language=?' , preg_replace('# #' , '_' , trim($language)));
+
+        $userData = $data->query();
+        return $userData->fetch();
+
+    }
+
+    public function ifAlreadyExist($id, $uri, $language){
+
+        $data = $this   ->select()
+            ->from('static_page',array('id', 'name' , 'contentCKE', 'language'))
+            ->where('uri=?' , preg_replace('# #' , '_' , trim($uri)))
+            ->where('language=?' , preg_replace('# #' , '_' , trim($language)))
+            ->where('id<>?', (int)$id);
 
         $userData = $data->query();
         return $userData->fetch();

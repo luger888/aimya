@@ -39,7 +39,7 @@ class CmsController extends Aimya_Controller_BaseController
                 $content = $this->getRequest()->getParam('contentCKE');
 
                 $cms = new Application_Model_DbTable_Cms();
-                $check = $cms->getPageByUri($uri);
+                $check = $cms->getPageByUri($uri, $language);
                 if ($check['id']) {
                     $this->_helper->flashMessenger->addMessage(array('fail' => 'this uri already exists'));
                     $this->_helper->redirector('new', 'cms');
@@ -90,13 +90,13 @@ class CmsController extends Aimya_Controller_BaseController
                 $language = $this->getRequest()->getParam('language');
                 $content = $this->getRequest()->getParam('contentCKE');
                 $cms = new Application_Model_DbTable_Cms();
-                $check = $cms->getPageByUri($uri);
+                $check = $cms->ifAlreadyExist($id, $uri, $language);
                 if (!$check['id']) {
                     $cms->updateStaticPage($id, $name, $uri, $language, $content);
                     $this->_helper->redirector('index', 'cms');
                 } else {
                     $this->_helper->flashMessenger->addMessage(array('fail' => 'this uri already exists'));
-                    $this->_helper->redirector('new', 'cms');
+                    //$this->_helper->redirector('new', 'cms');
 
                 }
             } else {
@@ -115,9 +115,11 @@ class CmsController extends Aimya_Controller_BaseController
     public function viewAction()
     {
 
+        $language = substr(Zend_Controller_Front::getInstance()->getBaseUrl(), '1');
+
         $uri = $this->getRequest()->getParam('uri');
         $cms = new Application_Model_DbTable_Cms();
-        $data = $cms->getPageByUri($uri);
+        $data = $cms->getPageByUri($uri, $language);
 
         if (!$data) $this->_helper->redirector('page404', 'error');
 
