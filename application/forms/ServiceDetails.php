@@ -39,7 +39,7 @@ class Application_Form_ServiceDetails extends Zend_Form
         }
 
         $subcategory = new Zend_Form_Element_Text('subcategory');
-        $subcategory ->setAttrib('placeholder', 'Specify Category')
+        $subcategory ->setAttrib('placeholder', 'specify your area of expertise')
             ->setAttrib('id', 'subcategoryInput')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
