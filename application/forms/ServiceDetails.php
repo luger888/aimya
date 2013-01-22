@@ -39,8 +39,7 @@ class Application_Form_ServiceDetails extends Zend_Form
         }
 
         $subcategory = new Zend_Form_Element_Text('subcategory');
-        $subcategory ->setAttrib('placeholder', 'Specify Category')
-            ->addValidator('Digits')
+        $subcategory ->setAttrib('placeholder', 'specify your area of expertise')
             ->setAttrib('id', 'subcategoryInput')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators)
@@ -48,6 +47,7 @@ class Application_Form_ServiceDetails extends Zend_Form
 
         $rate = new Zend_Form_Element_Text('rate');
         $rate ->setAttrib('class', 'required input-small')
+            ->addValidator('Digits')
             ->setAttrib('placeholder', 'rate')
             ->setAttrib('id', 'rateInput')
             ->addFilters($this->basicFilters)

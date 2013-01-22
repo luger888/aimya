@@ -101,7 +101,7 @@ class Application_Form_Profile extends Zend_Form
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
             foreach ($timeZones as  $value) {
-              $timeZone->addMultiOption($value['gmt'], $value['name']);
+              $timeZone->addMultiOption($value['id'], $value['name']);
             }
         $intro = new Zend_Form_Element_Textarea('add_info');
         $intro->setLabel('Introduce Yourself')

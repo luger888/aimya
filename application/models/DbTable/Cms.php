@@ -5,13 +5,14 @@ class Application_Model_DbTable_Cms extends Application_Model_DbTable_Abstract
 
     protected $_name = 'static_page';
 
-    public function createStaticPage($name, $uri, $wysiwyg){
+    public function createStaticPage($name, $uri, $language, $wysiwyg){
 
         $data = array(
 
             'name' => $name,
             'uri' => preg_replace('# #' , '_' , trim($uri)),
-            'content' => $wysiwyg,
+            'language' => preg_replace('# #' , '_' , trim($language)),
+            'contentCKE' => $wysiwyg,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
 
@@ -20,13 +21,14 @@ class Application_Model_DbTable_Cms extends Application_Model_DbTable_Abstract
       $this->createItem($data);
     }
 
-    public function updateStaticPage($id, $name, $uri, $content){
+    public function updateStaticPage($id, $name, $uri, $language, $content){
 
         $data = array(
 
             'name' => $name,
             'uri' => preg_replace('# #' , '_' , trim($uri)),
-            'content' => $content,
+            'language' => preg_replace('# #' , '_' , trim($language)),
+            'contentCKE' => $content,
 
         );
 
@@ -34,11 +36,25 @@ class Application_Model_DbTable_Cms extends Application_Model_DbTable_Abstract
         $this->updateItem($data , $id);
     }
 
-    public function getPageByUri($uri){
+    public function getPageByUri($uri, $language){
 
         $data = $this   ->select()
-                        ->from('static_page',array('id', 'name' , 'content'))
-                        ->where('uri=?' , preg_replace('# #' , '_' , trim($uri)));
+                        ->from('static_page',array('id', 'name' , 'contentCKE', 'language'))
+                        ->where('uri=?' , preg_replace('# #' , '_' , trim($uri)))
+                        ->where('language=?' , preg_replace('# #' , '_' , trim($language)));
+
+        $userData = $data->query();
+        return $userData->fetch();
+
+    }
+
+    public function ifAlreadyExist($id, $uri, $language){
+
+        $data = $this   ->select()
+            ->from('static_page',array('id', 'name' , 'contentCKE', 'language'))
+            ->where('uri=?' , preg_replace('# #' , '_' , trim($uri)))
+            ->where('language=?' , preg_replace('# #' , '_' , trim($language)))
+            ->where('id<>?', (int)$id);
 
         $userData = $data->query();
         return $userData->fetch();
