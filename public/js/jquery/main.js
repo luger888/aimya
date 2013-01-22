@@ -815,6 +815,7 @@ function refund() {
             buttons: {
                 "Yes": function() {
                     $( this ).dialog( "close" );
+                    jQuery("body").append('<div class="loadingIcon"></div>');
                     $.ajax({
                         url: pathName + "/payment/unsubscribe",
                         type: "post",
@@ -838,17 +839,35 @@ function refund() {
 function cancelRefund(e){
     var id = $(e).nextAll('input[type=hidden]:first').val();
     var pathName = $('#current_url').val();
-    jQuery("body").append('<div class="loadingIcon"></div>');
-    $.ajax({
-        url: pathName + "/payment/unsubscribe",
-        type: "post",
-        data: {
-            'cancelRefund':id
-        },
-        success: function(response){
-            window.location.reload();
-        }
+    $(function() {
+        $("#cancel-unsubscribe" ).dialog({
+            resizable: false,
+            height:140,
+            width:360,
+            modal: true,
+            buttons: {
+                "Send": function() {
+                    $( this ).dialog( "close" );
+                    jQuery("body").append('<div class="loadingIcon"></div>');
+                    $.ajax({
+                        url: pathName + "/payment/unsubscribe",
+                        type: "post",
+                        data: {
+                            'cancelRefund':id
+                        },
+                        success: function(response){
+                            window.location.reload();
+                        }
+                    });
+                },
+                "Cancel": function() {
+                    $( this ).dialog( "close" );
+                }
+            }
+        });
+        $('.ui-icon-alert').remove();
     });
+    return false;
 }
 
 function approveRefund(e){
@@ -859,7 +878,9 @@ function approveRefund(e){
         url: pathName + "/payment/unsubscribe",
         type: "post",
         data: {
-            'approveRefund':id
+            'approveRefund':id,
+            /*'periodRefund': $('#periodRefund'),
+            'pmoneyRefund': $('#periodRefund')*/
         },
         success: function(response){
             window.location.reload();

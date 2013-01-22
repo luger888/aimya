@@ -145,7 +145,7 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
         $data = $this->getAdapter()->select()
             ->from('refund_history')
             ->where( $this->getAdapter()->quoteInto('user_id=?', $userId))
-            ->where($this->getAdapter()->quoteInto('status!=?', 1));
+            ->where($this->getAdapter()->quoteInto('status=?', 0));
         $refund = $data->query()->fetch();
 
 
@@ -162,28 +162,43 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
 
     }
 
-    public function getPayKeyFromSebscription($subscriptionId) {
-        //$userId = (int)$userId;
+    public function getPayKeyFromSebscription($userId) {
+        $userId = (int)$userId;
 
         $data = $this->select()
             ->from($this->_name, array('pay_key'))
-            //->where('user_id=?' , $userId)
-            ->where('id=?' , (int)$subscriptionId);
+            ->where('user_id=?' , $userId);
 
         return $data->query()->fetch();
     }
 
-    public function updateSubscriptionStatus($subscriptionId) {
+    public function updateSubscriptionStatus($userId) {
 
         $data = array(
             'status' => 'paid',
             'updated_at' => date('Y-m-d H:i:s')
         );
 
-        //$where[] = $this->getAdapter()->quoteInto('user_id=?', $userId);
-        $where[] = $this->getAdapter()->quoteInto('id=?', (int)$subscriptionId);
+        $where[] = $this->getAdapter()->quoteInto('user_id=?', $userId);;
 
         $this->update($data , $where);
+    }
+
+    public function refundSubscription($subscriptionId, $activeTo, $aimyaProfit)
+    {
+
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+        $data = array(
+            'aimya_profit' => $aimyaProfit,
+            'active_to' => $activeTo,
+            'updated_at' => date('Y-m-d H:i:s')
+        );
+
+        $where[] = $this->getAdapter()->quoteInto('id=?', $subscriptionId);
+        $where[] = $this->getAdapter()->quoteInto('user_id=?', $userId);
+
+
+        return $this->update($data, $where);
     }
 
 }

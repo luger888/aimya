@@ -48,13 +48,7 @@ class Application_Model_Lesson
     {
 
         $port = rand(4000, 4999);
-        exec("sudo /usr/local/bin/phase1_startenv.sh $lessonId $port", $result);
-
-        $fp = fopen("./img/logfile.txt", "a");
-
-        fwrite($fp, array_shift($result) . "y1_\n");
-
-        fclose($fp);
+        passthru("/usr/local/bin/phase1_startenv.sh $lessonId $port", $result);
 
         if ($result == 0) {
             return $port;
@@ -66,7 +60,7 @@ class Application_Model_Lesson
     public function openLesson($lessonId, $port)
     {
 
-        exec("sudo /usr/local/bin/phpscr.sh $lessonId $port > /dev/null 2>/dev/null &", $result);
+        exec("/usr/local/bin/phpscr.sh $lessonId $port > /dev/null 2>/dev/null &", $result);
 
         if($result == 0) {
             return true;

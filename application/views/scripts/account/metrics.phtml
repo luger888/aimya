@@ -1,8 +1,32 @@
-<?php
-/**
- * Created by JetBrains PhpStorm.
- * User: Dima
- * Date: 30.10.12
- * Time: 11:44
- * To change this template use File | Settings | File Templates.
- */
+<div class="shadowSeparator clearfix">
+    <div class="shadowSeparatorBox clearfix">
+        <div class="metricItem">
+            <h1><?php echo $this->translate('users')?></h1>
+            <div class="formRow">
+                <span class="head"><?php echo $this->translate('total peers joined me:'); ?></span>
+                <?php echo $this->totalPeersCount?>
+            </div>
+            <div class="formRow">
+                <span class="head"><?php echo $this->translate('peers joined last month:'); ?></span>
+                <?php echo $this->monthPeersCount?>
+            </div>
+        </div>
+        <div class="shadowSeparatorBoxSmall"> </div>
+        <div class="shadowSeparator"> </div>
+        <div class="metricItem">
+            <h1><?php echo $this->translate('income')?></h1>
+            <div class="formRow">
+                <span class="head"><?php echo $this->translate('total income since became member:'); ?></span>
+                <?php echo $this->totalIncome?>
+            </div>
+            <div class="formRow">
+                <span class="head"><?php echo $this->translate('YTD income:'); ?></span>
+                <?php echo $this->yearIncome?>
+            </div>
+            <div class="formRow">
+                <span class="head"><?php echo $this->translate('last month income:'); ?></span>
+                <?php echo $this->monthIncome?>
+            </div>
+        </div>
+    </div>
+</div>

@@ -146,13 +146,13 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         if ($verified) {
             $this->writeLog("VALID IPN");
             $this->writeLog($listener->getTextReport());
-            if ($_GET['subscription_id']) {
-                //$userId = $_GET['user_id'];
-                $subscriptionId = $_GET['subscription_id'];
+            if ($_GET['user_id']) {
+                $userId = $_GET['user_id'];
+                //$subscriptionId = $_GET['subscription_id'];
                 $subscriptionTable = new Application_Model_DbTable_Subscriptions();
-                $payKey = $subscriptionTable->getPayKeyFromSebscription($subscriptionId);
+                $payKey = $subscriptionTable->getPayKeyFromSebscription($userId);
                 if ($payKey['pay_key'] = $_POST['pay_key']) {
-                    $subscriptionTable->updateSubscriptionStatus($subscriptionId);
+                    $subscriptionTable->updateSubscriptionStatus($userId);
                 }
             }
 
@@ -205,7 +205,6 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
             $response = $payPalModel->getAdaptivUrl($requestData);
 
-
             if ($response) {
 
                 $isAlreadyExist = $subscriptionTable->getPayKeyFromOrder($lastId);
@@ -217,9 +216,9 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
                     $current = new DateTime();
                     $activeTo = new DateTime();
-                    $activeTo = date('Y-m-d h:i:s', strtotime("+$period month"));
+                    $activeToField = date('Y-m-d h:i:s', strtotime("+$period month"));
                     if($current < $activeTo) {
-                        $activeTo = date($activeToDate, strtotime("+$period month"));
+                        $activeToField = date($activeToDate, strtotime("+$period month"));
                     }
 
                     $data = array(
@@ -227,7 +226,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
                         'aimya_profit' => $aimyaProfit,
                         'pay_key' => $response['pay_key'],
                         'status' => 'pending',
-                        'active_to' => $activeTo,
+                        'active_to' => $activeToField,
                         'created_at' => date('Y-m-d H:i:s'),
                         'updated_at' => date('Y-m-d H:i:s')
                     );
@@ -318,7 +317,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
                 $refundDb->cancelRefund($this->getRequest()->getParam('cancelRefund'));
             }
             if ($this->getRequest()->getParam('approveRefund')) {
-
+                //$subscriptionDB->refundSubscription($this->getRequest()->getParam('approveRefund'))
                 $refundDb->approveRefund($this->getRequest()->getParam('approveRefund'));
             }
         }

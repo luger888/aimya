@@ -218,20 +218,23 @@ class LessonController extends Zend_Controller_Action
     {
         $lessonModel = new Application_Model_Lesson();
         $lessonTable = new Application_Model_DbTable_Lesson();
-        $activeLesson = $lessonTable->getItem('347');
+        $activeLesson = $lessonTable->getItem($this->getRequest()->getParam('display_id'));
 
         $videoPath = $lessonModel->createVideoPath($activeLesson['id'], $activeLesson['creator_id']);
 
         $openDispay = $lessonModel->openDisplay($activeLesson['id']);
         sleep(5);
+
+        $this->write($openDispay);
+
         if ($openDispay !== FALSE) {
 
-            $res = $lessonTable->setSeleniumPort($activeLesson['id'], $openDispay);
+            //$res = $lessonTable->setSeleniumPort($activeLesson['id'], $openDispay);
 
-            if ($res) {
+            //if ($res) {
                 $lessonModel->openLesson($activeLesson['id'], $openDispay);
                 //$lessonModel->startRecording($activeLesson['id'], $videoPath . 'video_lesson', 5);
-            }
+            //}
         }
 
 

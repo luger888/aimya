@@ -150,4 +150,22 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
 
         return $result;
     }
+
+    public function getJoinedPeers($perion = 'total') {
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+
+        $data = $this->getAdapter()->select()
+            ->from($this->_name, array('peers_count' => 'COUNT(updated_at)'))
+            ->where('(' . $this->getAdapter()->quoteInto('sender_id=?' , $userId) . ' OR ' . $this->getAdapter()->quoteInto('friend_id=?' , $userId) . ')')
+            ->where($this->getAdapter()->quoteInto('sender_status=?' , 1))
+            ->where($this->getAdapter()->quoteInto('recipient_status=?' , 1));
+            if($perion != 'total') {
+                $data->where('(updated_at >= DATE_SUB(NOW(), INTERVAL 1 MONTH) AND updated_at < NOW())');
+                /*} else {
+                    $data->where('YEAR(updated_at) = YEAR(CURRENT_DATE)');
+                }*/
+            }
+
+        return $data->query()->fetch();
+    }
 }
