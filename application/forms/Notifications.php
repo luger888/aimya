@@ -68,7 +68,7 @@ class Application_Form_Notifications extends Zend_Form
 
         $this->addElement($alert);
         $this->addElements(array($oldPassword, $newPassword, $newPasswordConfirm));
-        if($identity->role == $this->teacher){
+        if($identity->role != $this->student){
             $this->addElement($notify);
         }
         $this->addElement($submit);
