@@ -101,12 +101,14 @@ function addToFriend(id, obj) {
         },
 
         function (response) {
+            jQuery('.loadingIcon').remove();
             if(response.alertFlash){
                 $('.alertBlock .alert').remove();
-
+                $('.modal').css('visibility', 'visible');
 
                 $('.alertBlock').append('<div class="alert"><div class = "flash-warning">Warning!</div>'+response.alertFlash+'<button type="button" class="close" data-dismiss="alert"></button></div>');
-                $('html, body').animate({scrollTop:0}, 'fast');
+                $('.modal').fadeIn(1000).delay(800).fadeOut(1000);
+                //$('html, body').animate({scrollTop:0}, 'fast');
 
 
 
@@ -123,7 +125,7 @@ function addToFriend(id, obj) {
                     element.parent().append('<a class="sendMessage" href="javascript:void(1)" onclick="sendMessage(' + id + ')">SEND MESSAGE</a>');
                     element.remove();
                 }
-                jQuery('.loadingIcon').remove();
+
             }
 
         })
