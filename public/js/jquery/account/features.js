@@ -108,7 +108,7 @@ function showMoreUsers (){
             $('.feauteresButtons').remove();
             $('.messageContent').append(result.featuredHtml);
             totalCount = $('.shadowSeparator').length + viewMorButton.children('.shadowSeparator').length;
-            if(totalCount != $('#featured_count').val() ) {
+            if(totalCount < $('#featured_count').val() ) {
                 $('.messageContent').append(viewMorButton);
             }
             jQuery('.loadingIcon').remove();

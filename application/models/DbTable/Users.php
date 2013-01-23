@@ -158,7 +158,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
             $data->where('sd.lesson_category=?', $category);
         }
         $data->order('sd.updated_at desc')
-            ->limit($count, $offset);
+            ->limit((int)$count, (int)$offset);
 
         $author = $data->query()->fetchAll();
 
