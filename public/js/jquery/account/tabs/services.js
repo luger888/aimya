@@ -77,6 +77,7 @@ function editService(e, service_type, url){
                             '<span class = "field-66"><input id="rateEditInput" value ="'+rate+'"></span><span class = "txt"> per </span>' +
                             '<span class = "s-86">' + durationDropdown + '</span>' +
                         '</div>'+
+                        '<div class ="errorBlock"></div>'+
                         '<div class="serviceDesc clearfix">' +
                             '<h2>DESCRIBE YOUR SERVICE DETAILS:</h2>' +
                             '<textarea  id="descriptionEditInput">'+description+'</textarea>'+
@@ -126,6 +127,8 @@ function updateService(e, service_type, url){
     var rate = serviceWrapper.find('#rateEditInput').val();
     var duration = serviceWrapper.find('#durationEditInput').val();
     var description = serviceWrapper.find('#descriptionEditInput').val();
+    if($('#rateEditInput').val() % 1 === 0){
+
     if(service_type == 1){
         $.ajax({
             url: url,
@@ -163,6 +166,10 @@ function updateService(e, service_type, url){
         });
     }
 
+    }else{
+        $('.errorBlock').html('<span class = "error">This must be a number.  Currency is in US Dollars.</span>');
+        return false;
+    }
 
 
 }
@@ -170,7 +177,7 @@ function validateService(){
     if($('#rateInput').val() % 1 === 0){
         return true;
     }else{
-        $('#rateInput').val('Integer only');
+        $('.errorBlock').html('<span class = "error">This must be a number.  Currency is in US Dollars.</span>');
         return false;
     }
 

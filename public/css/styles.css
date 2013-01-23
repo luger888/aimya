@@ -2265,3 +2265,7 @@ float:right;
     position: relative;
     text-shadow: 1px 1px 1px #ffffff;
 }
+.error {
+    color: #9E4444;
+    font-size: 11px;
+}
