@@ -95,9 +95,11 @@
         
 
         <?php endforeach; ?>
-        <div class="feauteresButtons clearfix">
-            <input class ="showMore button-2 more" type="button" value = "<?php echo $this->translate('VIEW MORE') ?>">
-        </div><!--End feauteresButtons-->
+        <?php if($this->featuredCount['featuredCount'] > 5): ?>
+            <div class="feauteresButtons clearfix">
+                <input class ="showMore button-2 more" onclick="showMoreUsers(); return false;" type="button" value = "<?php echo $this->translate('VIEW MORE') ?>">
+            </div><!--End feauteresButtons-->
+        <?php endif; ?>
     </div><!--End messageContent -->
 
 
