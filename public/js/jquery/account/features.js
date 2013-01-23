@@ -57,7 +57,7 @@ $(document).ready(function () {
         });
     };
 
-    $('.showMore').click(function () {
+    /*$('.showMore').click(function () {
         var baseUrl = $('#current_url').val();
         var elementCount = $('.shadowSeparator').length;
         jQuery("body").append('<div class="loadingIcon"></div>');
@@ -84,9 +84,37 @@ $(document).ready(function () {
             }
         });
 
-    });
+    });*/
 
 });
+
+function showMoreUsers (){
+    var baseUrl = $('#current_url').val();
+    var elementCount = $('.shadowSeparator').length;
+    jQuery("body").append('<div class="loadingIcon"></div>');
+
+
+
+    $.ajax({
+        url: baseUrl +"/account/features",
+        type: "post",
+        data: {
+            'offset': elementCount,
+            'count': 5
+
+        },
+        success: function(result) {
+            var viewMorButton = $('.feauteresButtons');
+            $('.feauteresButtons').remove();
+            $('.messageContent').append(result.featuredHtml);
+            totalCount = $('.shadowSeparator').length + viewMorButton.children('.shadowSeparator').length;
+            if(totalCount != $('#featured_count').val() ) {
+                $('.messageContent').append(viewMorButton);
+            }
+            jQuery('.loadingIcon').remove();
+        }
+    });
+}
 
 function addToFriend(id, obj) {
     element = $(obj);
