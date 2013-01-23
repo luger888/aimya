@@ -298,7 +298,7 @@ class LessonController extends Zend_Controller_Action
             $presentationForm->Filedata->receive();
 
             //$fileName = $_FILES['Filedata']['name'];
-            $filePath = $presPath . DIRECTORY_SEPARATOR . $formData['Filename'];
+            $filePath = $presPath . DIRECTORY_SEPARATOR . $newFilename;
 
             /*$text = json_encode($filePath);
             //$text .= session_id();
