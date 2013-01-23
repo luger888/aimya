@@ -130,7 +130,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
     }
 
-    public function getLatestFeatured($role = '0', $category = 'All', $offset = 0, $count = 5)
+    public function getLatestFeatured($role = 0, $category = 'All', $offset = 0, $count = 5)
     {
 
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
@@ -147,8 +147,12 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
             ->where('sd.updated_at=?', $subQuery);
 
         if (Zend_Auth::getInstance()->getIdentity()->role == 1) $role = 2;
-        if ($role !== '0') {
-            $data->where('user.role=?', $role);
+        if ($role !== 0) {
+            if($role == 1) {
+                $data->where('user.role=?', (int)$role);
+            } else {
+                $data->where('user.role>?', 1);
+            }
         }
         if ($category !== 'All') {
             $data->where('sd.lesson_category=?', $category);
@@ -231,7 +235,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
     }
 
-    public function getFeaturedCount($role = '0', $category = 'All')
+    public function getFeaturedCount($role = 0, $category = 'All')
     {
 
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
@@ -246,11 +250,15 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
             ->joinLeft('user', 'user.id = sd.user_id', array('user.id'))
             ->where('sd.updated_at=?', $subQuery);
 
-        if (Zend_Auth::getInstance()->getIdentity()->role == 1) $role = 1;
-        if ($role !== '0') {
-            $data->where('user.role=?', $role);
+        if (Zend_Auth::getInstance()->getIdentity()->role == 1) $role = 2;
+        if ($role != 0) {
+            if($role == 1) {
+                $data->where('user.role=?', (int)$role);
+            } else {
+                $data->where('user.role>?', 1);
+            }
         }
-        if ($category !== 'All') {
+        if ($category != 'All') {
             $data->where('sd.lesson_category=?', $category);
         }
 
