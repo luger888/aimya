@@ -132,7 +132,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
     public function getLatestFeatured($role = 0, $category = 'All', $offset = 0, $count = 5)
     {
-
+        $role = (int)$role;
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
 
         $subQuery = $this->getAdapter()->select()
@@ -149,7 +149,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         if (Zend_Auth::getInstance()->getIdentity()->role == 1) $role = 2;
         if ($role !== 0) {
             if($role == 1) {
-                $data->where('user.role=?', (int)$role);
+                $data->where('user.role=?', $role);
             } else {
                 $data->where('user.role>?', 1);
             }
@@ -237,7 +237,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
     public function getFeaturedCount($role = 0, $category = 'All')
     {
-
+        $role = (int)$role;
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
 
         $subQuery = $this->getAdapter()->select()
@@ -253,7 +253,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         if (Zend_Auth::getInstance()->getIdentity()->role == 1) $role = 2;
         if ($role != 0) {
             if($role == 1) {
-                $data->where('user.role=?', (int)$role);
+                $data->where('user.role=?', $role);
             } else {
                 $data->where('user.role>?', 1);
             }
