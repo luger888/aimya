@@ -344,7 +344,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                     $featuredHtml .= "
                                             <li class='clearfix'>
                                                 <span class='title'>" . $this->view->translate('About me:') . " </span>
-                                                <div class='featuredTxt more'><" . $person['add_info'] . "</div>
+                                                <div class='featuredTxt more'>" . $person['add_info'] . "</div>
                                             </li>";
                 }
                 $featuredHtml .= "
