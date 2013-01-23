@@ -151,7 +151,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
             if($role == 1) {
                 $data->where('user.role=?', $role);
             } else {
-                $data->where('user.role>=?', 2);
+                $data->where('user.role>=?', (int)2);
             }
         }
         if ($category !== 'All') {
@@ -255,7 +255,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
             if($role == 1) {
                 $data->where('user.role=?', $role);
             } else {
-                $data->where('user.role>?', 1);
+                $data->where('user.role>=?', (int)2);
             }
         }
         if ($category != 'All') {
