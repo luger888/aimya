@@ -142,6 +142,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         $identity = Zend_Auth::getInstance()->getStorage()->read();
         $dbNotifications = new Application_Model_DbTable_Notifications();
         $notificationForm = new Application_Form_Notifications();
+        $usersDb = new Application_Model_DbTable_Users();
         $this->view->notificationsForm = $notificationForm->populate($dbNotifications->getNotifications($identity->id));
 
         if ($this->getRequest()->isPost()) {
@@ -149,6 +150,25 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
 
             if($this->getRequest()->getParam('newPassword') !=''){
 
+                $password = md5($this->getRequest()->getParam('oldPassword'));
+                Zend_Auth::getInstance()->getStorage()->read();
+
+                $authAdapter = new Zend_Auth_Adapter_DbTable(Zend_Db_Table::getDefaultAdapter());
+
+                $authAdapter->setTableName('user')
+                    ->setIdentityColumn('username')
+                    ->setCredentialColumn('password')
+                    ->setIdentity($identity->username)
+                    ->setCredential($password);
+
+                $auth = Zend_Auth::getInstance();
+                $result = $auth->authenticate($authAdapter);
+
+                if ($result->isValid()) {
+                        $usersDb->changePass($this->getRequest()->getParam('newPassword'), $identity->id);
+                }else{
+                    $this->view->passError = 'Wrong password!';
+                }
             }
 
                 $formData = $this->getRequest()->getPost();

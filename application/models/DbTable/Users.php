@@ -76,7 +76,20 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         return $this->update($array, $where);
 
     }
+    public function changePass($pass, $user_id)
+    {
 
+        $array = array(
+
+            'password' => preg_replace('#<(.*?)>#', '', md5($pass))
+
+        );
+        $where = $this->getAdapter()->quoteInto('id=?', $user_id);
+
+
+        $this->update($array, $where);
+
+    }
     #recoverPass
 
     public function recoverPass($data)
