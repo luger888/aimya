@@ -5,6 +5,7 @@ class Application_Model_DbTable_Notifications extends Application_Model_DbTable_
     protected $_name = 'notification_settings';
 
     public function createNotifications($user_id){
+
     $data = array(
 
         'user_id' => (int)$user_id

@@ -1183,7 +1183,7 @@ input.button-2 {
     text-transform: capitalize;
 }
 .userRelationsTab.profile  .button-2{
-    padding-right: 20px;
+    padding-right: 11px;
 }
 #block-confirm, #delete-confirm, #cancel-confirm{
     display: none;
@@ -2264,4 +2264,8 @@ float:right;
     padding: 0 0 0 13px;
     position: relative;
     text-shadow: 1px 1px 1px #ffffff;
+}
+.error {
+    color: #9E4444;
+    font-size: 11px;
 }
