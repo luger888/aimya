@@ -289,6 +289,11 @@ class LessonController extends Zend_Controller_Action
         if (isset($_FILES['Filedata']['name']) && $_FILES['Filedata']['name'] != '') {
             //$lessonModel->delTree($presPath);
             $presentationForm = new Application_Form_Presentation();
+
+            $originalFilename = pathinfo($presentationForm->Filedata->getFileName());
+            $newFilename = 'pres-' . uniqid() . '.' . $originalFilename['extension'];
+
+            $presentationForm->Filedata->addFilter('Rename', $newFilename);
             $presentationForm->getElement("Filedata")->setDestination($presPath);
             $presentationForm->Filedata->receive();
 
