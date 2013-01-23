@@ -147,11 +147,11 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
             ->where('sd.updated_at=?', $subQuery);
 
         if ((int)Zend_Auth::getInstance()->getIdentity()->role == 1) $role = 2;
-        if ($role !== 0) {
+        if ($role != 0) {
             if($role == 1) {
                 $data->where('user.role=?', $role);
             } else {
-                $data->where('user.role>?', 1);
+                $data->where('user.role=>?', 2);
             }
         }
         if ($category !== 'All') {
