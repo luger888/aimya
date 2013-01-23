@@ -411,3 +411,27 @@ input.btnLogin {
     width: 12px;
 }
 
+.footerNav{
+    float:right;
+
+}
+
+.footerNav li{
+    list-style: none;
+    float:left;
+    padding-right:10px;
+    /*background: url("../images/elem/navFooterSeparator.png") no-repeat scroll 0 center transparent;*/
+    padding-left: 15px;
+}
+.footerNav li:first-child {
+    background: none repeat scroll 0 0 transparent;
+}
+.footerNav li:last-of-type{
+    margin-right:10px;
+}
+.footerNav li:first-letter{
+    text-transform: uppercase;
+}
+.copyright div:nth-child(even){
+    float:left;
+}
