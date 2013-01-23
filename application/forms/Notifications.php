@@ -16,7 +16,7 @@ class Application_Form_Notifications extends Zend_Form
         $notify = new Zend_Form_Element_MultiCheckbox('notify');
         $notify->setDecorators($this->basicDecorators);
         for ($i=5;$i>0;$i--) {
-        $notify->addMultiOption($i, 'I want to notify me when I receive ' . $i . ' star rating');
+        $notify->addMultiOption($i, 'I want to notify me when I receive ' . $i . ' star lesson rating');
         }
         /* END -- Teacher Star Notifications */
 
@@ -25,9 +25,12 @@ class Application_Form_Notifications extends Zend_Form
         $alert->setDecorators($this->basicDecorators);
         $alert->addMultiOption('email', 'Receive Alerts via Email');
         $alert->addMultiOption('message', 'Receive Alert when I have a new message');
-        $alert->addMultiOption('payment', 'Receive Alert when payment is made to me');
+        if($identity->role == $this->student){
+            $alert->addMultiOption('refund', 'Receive Alert when Refund is made to me');
+        }
         if($identity->role != $this->student){
-            $alert->addMultiOption('review', 'Receive Alert when someone wrote review on my page');
+            $alert->addMultiOption('payment', 'Receive Alert when payment is made to me');
+            $alert->addMultiOption('review', 'Receive Alert when someone wrote lesson review on my page');
         }
         /* END -- Alerts */
 
