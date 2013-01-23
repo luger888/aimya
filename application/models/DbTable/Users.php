@@ -146,9 +146,9 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
             ->joinLeft('account', 'account.user_id = sd.user_id', array('account.add_info'))
             ->where('sd.updated_at=?', $subQuery);
 
-        if ((int)Zend_Auth::getInstance()->getIdentity()->role == 1) $role = 2;
-        if ($role != 0) {
-            if($role == 1) {
+        if ((int)Zend_Auth::getInstance()->getIdentity()->role == (int)1) $role = 2;
+        if ($role != (int)0) {
+            if($role == (int)1) {
                 $data->where('user.role=?', $role);
             } else {
                 $data->where('user.role>=?', (int)2);
@@ -250,9 +250,9 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
             ->joinLeft('user', 'user.id = sd.user_id', array('user.id'))
             ->where('sd.updated_at=?', $subQuery);
 
-        if ((int)Zend_Auth::getInstance()->getIdentity()->role == 1) $role = 2;
-        if ($role != 0) {
-            if($role == 1) {
+        if ((int)Zend_Auth::getInstance()->getIdentity()->role == (int)1) $role = 2;
+        if ($role != (int)0) {
+            if($role == (int)1) {
                 $data->where('user.role=?', $role);
             } else {
                 $data->where('user.role>=?', (int)2);
