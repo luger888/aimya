@@ -208,9 +208,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         $yearIncome = $ordersDb->getUserIncome('year');
         $this->view->totalIncome = $totalIncome['user_profit'];
         $this->view->yearIncome = $yearIncome['user_profit'];
-        ;
         $this->view->monthIncome = $monthIncome['user_profit'];
-        ;
 
     }
 

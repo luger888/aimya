@@ -12,8 +12,8 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
         $row = $this->fetchAll(
             $this->select()
                 ->where($this->getAdapter()->quoteInto('sender_id=?' , $userId) . ' OR ' . $this->getAdapter()->quoteInto('friend_id=?' , $userId))
-                ->where('sender_status!=?' , 3)
-                ->where('recipient_status!=?' , 3)
+                ->where('(' . $this->getAdapter()->quoteInto('sender_status=?' , 1) . ') OR (' . $this->getAdapter()->quoteInto('sender_status=?' , 2) . ')')
+                ->where('(' . $this->getAdapter()->quoteInto('recipient_status=?' , 1) . ') OR (' . $this->getAdapter()->quoteInto('recipient_status=?' , 2) . ')')
                 ->group('id')
         );
         if (!$row) {
@@ -31,12 +31,11 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
             'updated_at' => date('Y-m-d H:i:s')
 
         );
-        $where = array(
-
-            $this->getAdapter()->quoteInto('friend_id=?', $array['updateUserId']),
-            $this->getAdapter()->quoteInto('sender_id=?', $user_id)
-
-        );
+        $where =
+            ('(' . $this->getAdapter()->quoteInto('friend_id=?' , $array['updateUserId']) . ') OR (' . $this->getAdapter()->quoteInto('sender_id=?' , $array['updateUserId']) . ')')
+            //$this->getAdapter()->quoteInto('friend_id=?', $array['updateUserId']),
+           // $this->getAdapter()->quoteInto('sender_id=?', $user_id)
+        ;
         $this->update($data, $where);
     }
 
