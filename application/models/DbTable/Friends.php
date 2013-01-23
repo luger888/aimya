@@ -25,18 +25,19 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
     public function updateUserStatus($array = array(), $user_id)
     {
 
-        $data = array(
+        $friendField = $this->isInList($array['updateUserId']);
+        if($friendField) {
 
-            'sender_status'=> $array['status'],
-            'updated_at' => date('Y-m-d H:i:s')
+            $where = $this->getAdapter()->quoteInto('id=?', $friendField['id']);
 
-        );
-        $where =
-            ('(' . $this->getAdapter()->quoteInto('friend_id=?' , $array['updateUserId']) . ') OR (' . $this->getAdapter()->quoteInto('sender_id=?' , $array['updateUserId']) . ')')
-            //$this->getAdapter()->quoteInto('friend_id=?', $array['updateUserId']),
-           // $this->getAdapter()->quoteInto('sender_id=?', $user_id)
-        ;
-        $this->update($data, $where);
+            if($friendField['sender_id'] == $user_id) {
+                $data = array('sender_status'=> $array['status'], 'updated_at' => date('Y-m-d H:i:s'));
+            } else {
+                $data = array('recipient_status'=> $array['status'], 'updated_at' => date('Y-m-d H:i:s'));
+            }
+
+            $this->update($data, $where);
+        }
     }
 
     public function isFriend($friendId)
