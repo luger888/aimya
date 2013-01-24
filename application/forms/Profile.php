@@ -35,6 +35,7 @@ class Application_Form_Profile extends Zend_Form
         $avatar = new Zend_Form_Element_File('avatar');
         $avatar
             ->setAttrib('id', 'avatar')
+            ->setAttrib('onchange', 'showFilename(this.value);')
             ->addValidator('Size', false, 1024000)
             ->addValidator('Extension', false, 'jpg,png,gif,jpeg')
             ->addFilter($filterChain)
