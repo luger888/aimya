@@ -2270,3 +2270,6 @@ float:right;
     color: #9E4444;
     font-size: 11px;
 }
+tr.blocked td{
+    color:grey;
+}
