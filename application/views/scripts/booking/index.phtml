@@ -272,7 +272,7 @@ ul li {
                 <div><?php echo $this->bookingForm->started_at_time;?></div>
             </div>
             <div class="formRow clearfix">
-                <div class="label">Focus Name:</div>
+                <div class="label">Session Focus:</div>
                 <div><?php echo $this->bookingForm->focus_name;?></div>
             </div>
             <div class="formRow clearfix">
@@ -395,8 +395,9 @@ jQuery(document).ready(function () {
                         }else{
                             dateTime = msg.booking[c].started_at;
                         }
-
-
+                        console.log(start);//pre
+                        console.log(recipient_utc);//utc
+                        console.log(dateTime);//final
                         events.push({
                             title:msg.booking[c].focus_name,
                             start:dateTime,

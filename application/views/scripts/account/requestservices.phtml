@@ -1,55 +1,71 @@
-
 <div class="servicesTab clearfix">
+    <?php if ($this->services) {
+    foreach ($this->services as $value): ?>
 
-    <?php foreach ($this->services as $value): ?>
+        <div class='service clearfix'>
+            <div class="shadowSeparator clearfix">
+                <div class="shadowSeparatorBox clearfix">
 
-    <div class='service clearfix'>
-    <div class="shadowSeparator clearfix">
-    <div class="shadowSeparatorBox clearfix">
+                    <div class="titleRow clearfix">
+                        <h2 id="lesson_category"><?php echo $value['lesson_category'];?></h2>
 
-        <div class="titleRow clearfix">
-            <h2 id="lesson_category"><?php echo $value['lesson_category'];?></h2>
-            <div class="buttons clearfix">
-                <input type='button' id='deleteService' class = "button-2 delete" value='Delete' onclick="deleteService(this, '<?php echo $this->baseUrl()?>/account/edit');return false;">
-                <input type='button' id='editService' class = "button-2 edit" value='Edit'  onclick="editService(this, 2, '<?php echo $this->baseUrl()?>/account/edit');return false;">
+                        <div class="buttons clearfix">
+                            <input type='button' id='deleteService' class="button-2 delete" value='Delete'
+                                   onclick="deleteService(this, '<?php echo $this->baseUrl()?>/account/edit');return false;">
+                            <input type='button' id='editService' class="button-2 edit" value='Edit'
+                                   onclick="editService(this, 2, '<?php echo $this->baseUrl()?>/account/edit');return false;">
 
-                <input type='hidden' value=" <?php echo $value['id'];?>">
-            </div><!--End buttons-->
-        </div><!--End titleRow-->
+                            <input type='hidden' value=" <?php echo $value['id'];?>">
+                        </div>
+                        <!--End buttons-->
+                    </div>
+                    <!--End titleRow-->
 
-        <div class = "serviceBody short clearfix">
-            <span id="subcategory"><?php echo $value['subcategory'];?></span>
-        </div>
+                    <div class="serviceBody short clearfix">
+                        <span id="subcategory"><?php echo $value['subcategory'];?></span>
+                    </div>
 
 
-        
+                </div>
+                <!--End shadowSeparatorBox-->
+            </div>
+            <!--End shadowSeparator-->
+        </div><!--End service -->
 
-    </div><!--End shadowSeparatorBox-->
-    </div><!--End shadowSeparator-->
-    </div><!--End service -->
-
-    <?php endforeach;?>
+        <?php endforeach;
+} else {
+    echo '<script>addRequestService()</script>';
+}
+    ?>
     <!-- END LIST OF SERVICES -->
 
     <div id="addRequestService">
-    <div class="shadowSeparator clearfix">
-    <div class="shadowSeparatorBox bg-none clearfix">
-        <form method="post" name="serviceDetails" action="<?php echo $this->baseUrl()?>/account/services" id="serviceRequestForm" class = "serviceForm">
-            <div class="formRow clearfix">
-                    <?php echo $this->servicesForm->service_type; ?>
-                    <span class="s-116"><?php echo $this->servicesForm->lesson_category; ?></span>
-                    <span class="field-116"><?php echo $this->servicesForm->subcategory; ?></span>
-            </div><!--End formRow -->
-            <div class="buttonsRow clearfix">
-                <?php echo $this->servicesForm->saveService; ?>
-            </div><!--End buttonsRow-->
-        </form>
-        <div class="buttonsRow clearfix">
-            <input type="button" class = "button-2 add" id="addMoreRequestServices" value="Add More" onclick="addRequestService();">
-        </div><!--End buttonsRow-->
-    </div><!--End shadowSeparatorBox-->
-    </div><!--End shadowSeparator-->    
-    </div><!--End addRequestService -->
+        <div class="shadowSeparator clearfix">
+            <div class="shadowSeparatorBox bg-none clearfix">
+                <form method="post" name="serviceDetails" action="<?php echo $this->baseUrl()?>/account/services"
+                      id="serviceRequestForm" class="serviceForm">
+                    <div class="formRow clearfix">
+                        <?php echo $this->servicesForm->service_type; ?>
+                        <span class="s-116"><?php echo $this->servicesForm->lesson_category; ?></span>
+                        <span class="field-116"><?php echo $this->servicesForm->subcategory; ?></span>
+                    </div>
+                    <!--End formRow -->
+                    <div class="buttonsRow clearfix">
+                        <?php echo $this->servicesForm->saveService; ?>
+                    </div>
+                    <!--End buttonsRow-->
+                </form>
+                <div class="buttonsRow clearfix">
+                    <input type="button" class="button-2 add" id="addMoreRequestServices" value="Add More"
+                           onclick="addRequestService();">
+                </div>
+                <!--End buttonsRow-->
+            </div>
+            <!--End shadowSeparatorBox-->
+        </div>
+        <!--End shadowSeparator-->
+    </div>
+    <!--End addRequestService -->
 
 
 </div>

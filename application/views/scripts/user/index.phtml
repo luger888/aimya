@@ -10,7 +10,9 @@ if ($this->userData['role'] == '1') {
 }
 ?>
 <div class="userProfileTab">
-    <div class="firstSeparator"></div>
+    <div class="firstSeparator">
+        <div class="timezone">Time Zone: <?php echo $this->userData['timezone']?> UTC</div>
+    </div>
 
     <div class="imageBlock"><img src="<?php echo $this->avatarPath;?>"></div>
     <div
@@ -21,14 +23,15 @@ if ($this->userData['role'] == '1') {
     <?php $friendTable = new Application_Model_DbTable_Friends(); ?>
     <?php $isFriend = $friendTable->isFriend($userData['id']); ?>
     <?php if (!$isFriend): ?>
-    <?php $sendRequestForm = new Application_Form_Friend(); ?>
-    <?php $sendRequestForm->friend_id->setValue($userData['id']); ?>
-    <form action="<?php echo $this->baseUrl();?>/friends/send/" method="post" id="send_request">
-        <?php echo $sendRequestForm->friend_id; ?>
-        <?php echo $sendRequestForm->url;?>
-        <?php echo $sendRequestForm->sendbutton; ?>
-
-    </form>
+        <?php $sendRequestForm = new Application_Form_Friend(); ?>
+        <?php $sendRequestForm->friend_id->setValue($userData['id']); ?>
+        <?php if(!($this->userData['role'] == '1' && Zend_Auth::getInstance()->getIdentity()->role == '1')):?>
+            <form action="<?php echo $this->baseUrl();?>/friends/send/" method="post" id="send_request">
+                <?php echo $sendRequestForm->friend_id; ?>
+                <?php echo $sendRequestForm->url;?>
+                <?php echo $sendRequestForm->sendbutton; ?>
+            </form>
+        <?php endif; ?>
     <?php endif; ?>
     <ul class="userInfo">
         <?php if ($this->profile['birthday']) echo '<li class = "birthday">' . $this->profile["birthday"] . '</li><br>';?>
@@ -98,8 +101,6 @@ if ($this->userData['role'] == '1') {
     <?php if ($this->availability): ?>
     <div class="availability clearfix">
         <span class="title">AVAILABLE:</span>
-
-        <div class="timezone">Time Zone: <?php echo $this->userData['timezone']?> UTC</div>
         <?php ?>
         <ul>
             <li><span class="day">Monday</span><span

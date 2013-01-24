@@ -1993,6 +1993,12 @@ float:right;
     font: 13px helvetica;
 
 }
+.featuresTab .profileRole{
+    font: 11px helvetica;
+    position: relative;
+    right: -19px;
+    top: -17px;
+}
 .userProfileTab .profileRole{
     font: 11px helvetica;
     right: 1px;
@@ -2109,6 +2115,10 @@ float:right;
     font:11px arial;
     position: relative;
     right: 29px;
+}
+
+.userProfileTab .firstSeparator .timezone {
+    float: right; position: relative; font-size: 14px; margin-top: -15px;
 }
 .userProfileTab  .lastSeparator{
     background: url("../img/design/accountLayout/2page_middle_separator.png") no-repeat scroll 0 0 transparent;
