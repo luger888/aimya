@@ -1998,12 +1998,16 @@ float:right;
     display: inline-block;
     padding-left: 15px;
 }
-
+.userProfileTab  .gender.female{
+    background: url("../img/design/accountLayout/glyphicons/female.png") no-repeat scroll 2px 42% transparent;
+}
+.userProfileTab  .gender.male{
+    background: url("../img/design/accountLayout/glyphicons/male.png") no-repeat scroll 1% 42% transparent;
+}
 .userProfileTab  .gender{
-    background: url("../img/design/accountLayout/glyphicons/gift.png") no-repeat scroll 0 42% transparent;
-    display: inline-block;
     padding-left: 15px;
 }
+
 .userProfileTab  .education{
     background: url("../img/design/accountLayout/glyphicons/university.png") no-repeat scroll 0 42% transparent;
     display: inline-block;
