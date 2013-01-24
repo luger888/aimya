@@ -48,24 +48,24 @@
                 echo '<script>addResumeItem()</script>';
             }
             ?>
+            <div class="resumeItemForm">
+                <h1>Add new education:</h1>
 
-        </div>
-        <div class="resumeItemForm">
-            <h1>Add new education:</h1>
+                <div class="formRow clearfix">
+                    <?php
+                    echo $this->educationForm->getElement('education');
+                    ?>
+                </div>
+                <div class="uploadWrapper">
 
-            <div class="formRow clearfix">
-                <?php
-                echo $this->educationForm->getElement('education');
-                ?>
+                    <input id="file_uploadeducation" name="file_upload" type="file" multiple="true">
+                    <input type="button" value="save" class="button-2 save floatRight"
+                           onclick="saveResumeItem('education');">
+                </div>
+                <div id="queue"></div>
             </div>
-            <div class="uploadWrapper">
-
-                <input id="file_uploadeducation" name="file_upload" type="file" multiple="true">
-                <input type="button" value="save" class="button-2 save floatRight"
-                       onclick="saveResumeItem('education');">
-            </div>
-            <div id="queue"></div>
         </div>
+
     </div>
 
     <?php echo $this->partial('partials/resumeFooter.phtml') ?>
