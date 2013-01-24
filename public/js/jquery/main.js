@@ -484,6 +484,28 @@ function massArchive(current_action, url) {
     });
 }
 
+function massRestore(current_action, url) {
+    jQuery("body").append('<div class="loadingIcon"></div>');
+    ids = [];
+    $('.messageCheckboxes:checkbox:checked').each(function () {
+        ids.push($(this).val());
+    });
+
+    idsString = ids.toString();
+    $.ajax({
+        url:url + "/message/massrestore",
+        type:"post",
+        data:{
+            'message_ids':idsString,
+            'current_action':current_action
+        },
+        success:function (result) {
+            jQuery('.loadingIcon').remove();
+            window.location.href = url + "/message/" + current_action + "/current_action/" + current_action;
+        }
+    });
+}
+
 function getTimeLeft() {
     var baseUrl = $('#current_url').val();
     $.ajax({
@@ -886,4 +908,11 @@ function approveRefund(e){
             window.location.reload();
         }
     });
+}
+
+function showFilename(fileName) {
+    avatarBlock = $('.profileAvatar');
+    if ($(".avatar_name").length) $(".avatar_name").remove();
+    avatarBlock.append('<p class="avatar_name">' + fileName + '</p>');
+    return false;
 }
