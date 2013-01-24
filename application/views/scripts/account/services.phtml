@@ -1,8 +1,8 @@
 <div id="tabs-2">
     <!--LIST OF SERVICES -->
     <div class="servicesTab clearfix">
-
-        <?php foreach ($this->services as $value): ?>
+        <?php if ($this->services) {
+        foreach ($this->services as $value): ?>
         <div class='service clearfix'>
         <div class="shadowSeparator clearfix">
         <div class="shadowSeparatorBox clearfix">
@@ -30,7 +30,11 @@
         </div><!--End shadowSeparatorBox-->
         </div><!--End shadowSeparator-->
         </div><!--End service -->
-        <?php endforeach;?>
+        <?php endforeach;
+}else{
+        echo '<script>addService()</script>';
+    }
+        ?>
         <!-- END LIST OF SERVICES -->
 
         <div id="addService">

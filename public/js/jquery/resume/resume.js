@@ -71,9 +71,11 @@ function saveResumeItem(tab) {
             type:"post",
             data:dataObject,
             success:function (response) {
+                    if(response.lastId){
+                        $('#file_upload'+tab).data('uploadifive').settings.formData = { 'resumeType':tab, 'resumeTypeId':53 };
+                        $('#file_upload'+tab).uploadifive('upload');
+                    }
 
-                    $('#file_upload'+tab).data('uploadifive').settings.formData = { 'resumeType':tab, 'resumeTypeId':response.lastId };
-                    $('#file_upload'+tab).uploadifive('upload');
 
 
 
