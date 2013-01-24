@@ -1270,7 +1270,7 @@ input.button-2 {
     width: auto;
     padding: 21px 0 0 13px;
 }
-#block-confirm, #delete-confirm, #unsubscribe-confirm{
+#block-confirm, #delete-confirm, #unsubscribe-confirm, #unblock-confirm{
     display: none;
 }
 .ui-dialog-buttonset button{
