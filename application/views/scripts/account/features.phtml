@@ -29,7 +29,7 @@
                 <?php $isPending = $friendTable->isPending($person['id']); ?>
                 <?php if(Zend_Auth::getInstance()->getIdentity()->id != $person['id']): ?>
                     <?php  if($isFriend){ // if friend, dont show the add to account button
-                        echo "<a class ='sendMessage' onclick='sendMessage(" . $person['id'] . ", this)' href='javascript:void(1)'>" . $this->translate('SEND MESSAGE') . "</a>";
+                        echo "<a class ='sendMessage createMessage button-2 floatLeft' onclick='sendMessage(" . $person['id'] . ", this)' href='javascript:void(1)'>" . $this->translate('SEND MESSAGE') . "</a>";
                     }elseif($isPending){
                         echo "<span class ='request_sent'>" . $this->translate('REQUEST SENT') . "</span>";
                     }else{

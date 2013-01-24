@@ -16,9 +16,9 @@ $html .= "<h1>" . 'objective' . ":</h1>
                 <div class='textBlock'>" . $this->profile['objective'] . "</div>";
 
 if ($this->experience) {
+      $html .= "<h1>" . $this->translate('experience') . ":</h1>";
     foreach ($this->experience as $value) {
-        $html .= "<h1>" . $this->translate('experience') . ":</h1>
-    <div class='textBlock'>" . $value['content'] . "</div>";
+        $html .="<div class='textBlock'>" . $value['content'] . "</div>";
         if (isset($value['certificate'])) {
             $html .=  '<div class="resumeItemCertificates clearfix">Certificates:';
             foreach ($value['certificate'] as $index => $cert) {
@@ -30,9 +30,9 @@ if ($this->experience) {
     }
 }
 if ($this->education) {
+    $html .= "<h1>" . $this->translate('education') . ":</h1>";
     foreach ($this->education as $value) {
-        $html .= "<h1>" . $this->translate('education') . ":</h1>
-    <div class='textBlock'>" . $value['content'] . "</div>";
+        $html .= "<div class='textBlock'>" . $value['content'] . "</div>";
         if (isset($value['certificate'])) {
             $html .=  '<div class="resumeItemCertificates clearfix">Certificates:';
             foreach ($value['certificate'] as $index => $cert) {
@@ -44,9 +44,9 @@ if ($this->education) {
 }
 
 if ($this->skills) {
+    $html .= "<h1>" . $this->translate('skill') . ":</h1>";
     foreach ($this->skills as $value) {
-        $html .= "<h1>" . $this->translate('skill') . ":</h1>
-    <div class='textBlock'>" . $value['content'] . "</div>";
+        $html .= "<div class='textBlock'>" . $value['content'] . "</div>";
         if (isset($value['certificate'])) {
             $html .=  '<div class="resumeItemCertificates clearfix">Certificates:';
             foreach ($value['certificate'] as $index => $cert) {

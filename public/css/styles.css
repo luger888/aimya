@@ -376,6 +376,7 @@ input.button-2 {
 
 .button-2.delete {
     background: url(../images/icons/delete.png) no-repeat 0 3px;
+    float: right;
 }
 
 
@@ -465,6 +466,7 @@ input.button-2 {
     background: url("../images/icons/moveInbox.png") no-repeat scroll 0 2px transparent;
     padding-left: 15px;
     margin: 0 15px;
+    float: right;
 }
 .button-2.inbox:hover{
     background-position: 0 -21px;
@@ -792,6 +794,11 @@ input.button-2 {
     width: 143px;
     height: 142px;
     overflow: hidden;
+}
+
+.profileAvatar .avatar_name {
+    color: #1D3300;
+    margin: 5px 0 0 10px;
 }
 
 .profileAvaImg {
@@ -1270,7 +1277,7 @@ input.button-2 {
     width: auto;
     padding: 21px 0 0 13px;
 }
-#block-confirm, #delete-confirm, #unsubscribe-confirm{
+#block-confirm, #delete-confirm, #unsubscribe-confirm, #unblock-confirm{
     display: none;
 }
 .ui-dialog-buttonset button{
@@ -1943,7 +1950,7 @@ float:right;
     float:left;
     margin-left: 6px;
     margin-right: 22px;
-    margin-bott: 100px;
+    margin-bottom: 100px;
 }
 .userProfileTab ul{
     margin-top:28px;
@@ -1998,12 +2005,16 @@ float:right;
     display: inline-block;
     padding-left: 15px;
 }
-
+.userProfileTab  .gender.female{
+    background: url("../img/design/accountLayout/glyphicons/female.png") no-repeat scroll 2px 42% transparent;
+}
+.userProfileTab  .gender.male{
+    background: url("../img/design/accountLayout/glyphicons/male.png") no-repeat scroll 1% 42% transparent;
+}
 .userProfileTab  .gender{
-    background: url("../img/design/accountLayout/glyphicons/gift.png") no-repeat scroll 0 42% transparent;
-    display: inline-block;
     padding-left: 15px;
 }
+
 .userProfileTab  .education{
     background: url("../img/design/accountLayout/glyphicons/university.png") no-repeat scroll 0 42% transparent;
     display: inline-block;
@@ -2269,4 +2280,7 @@ float:right;
 .error {
     color: #9E4444;
     font-size: 11px;
+}
+tr.blocked td{
+    color:grey;
 }
