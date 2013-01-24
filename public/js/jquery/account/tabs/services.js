@@ -127,7 +127,8 @@ function updateService(e, service_type, url){
     var rate = serviceWrapper.find('#rateEditInput').val();
     var duration = serviceWrapper.find('#durationEditInput').val();
     var description = serviceWrapper.find('#descriptionEditInput').val();
-    if($('#rateEditInput').val() % 1 === 0){
+
+    if($('#rateEditInput').val() % 1 === 0 || service_type == 2){
 
     if(service_type == 1){
         $.ajax({
@@ -147,7 +148,7 @@ function updateService(e, service_type, url){
             }
 
         });
-    }else{
+    }else if(service_type == 2){
         $.ajax({
             url: url,
             type: "post",
