@@ -1993,6 +1993,12 @@ float:right;
     font: 13px helvetica;
 
 }
+.featuresTab .profileRole{
+    font: 11px helvetica;
+    position: relative;
+    right: -6px;
+    top: -17px;
+}
 .userProfileTab .profileRole{
     font: 11px helvetica;
     right: 1px;
