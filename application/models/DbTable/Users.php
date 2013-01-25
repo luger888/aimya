@@ -95,9 +95,6 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
     public function recoverPass($data)
     {
 
-        var_dump($data);
-        die;
-
         $array = array(
 
             'password' => preg_replace('#<(.*?)>#', '', md5($data['password']))
