@@ -11,7 +11,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
     {
 
         $data = $this->select()
-            ->from('user', array('id', 'username', 'firstname', 'lastname', 'password'))
+            ->from('user', array('id', 'username', 'firstname', 'lastname', 'password', 'email'))
             ->where('email=?', $email);
 
         return $data->query()->fetch();

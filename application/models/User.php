@@ -101,26 +101,26 @@ class Application_Model_User
                 $pass .= substr($char_list,(rand()%(strlen($char_list))), 1);
             }
 
-            $data['password'] = $pass;
+            $userData['password'] = $pass;
 
             #update password
 
 
             #send e-mail
             $mail = new Aimya_Mail;
-            $mail->setRecipient($data['email']);
+            $mail->setRecipient($userData['email']);
             $mail->setTemplate(Aimya_Mail::FORGOT_PASSWORD);
             $mail->firstName = $userData['firstname'];
             $mail->lastName = $userData['lastname'];
-            $mail->email = $data['email'];
-            $mail->password = $data['password'];
+            $mail->email = $userData['email'];
+            $mail->password = $userData['password'];
             $mail->baseLink = "http://" . $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance()->getBaseUrl();
 
             if($mail->send()){
-                $db->recoverPass($data);
+                $db->recoverPass($userData['password']);
             }
 
-            return 'done';
+            //return 'done';
 
         }else{
 
