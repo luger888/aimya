@@ -107,9 +107,9 @@ class Application_Model_User
             $db->recoverPass($data);
 
             #send e-mail
-            $mail = new Ohana_Mail;
+            $mail = new Aimya_Mail;
             $mail->setRecipient($data['email']);
-            $mail->setTemplate(Ohana_Mail::FORGOT_PASSWORD);
+            $mail->setTemplate(Aimya_Mail::FORGOT_PASSWORD);
             $mail->firstName = $userData['firstname'];
             $mail->lastName = $userData['lastname'];
             $mail->email = $data['email'];

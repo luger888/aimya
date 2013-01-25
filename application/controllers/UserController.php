@@ -62,16 +62,26 @@ class UserController extends Zend_Controller_Action
 
     public function recoveryAction()
     {
-        if($this->getRequest()->isPost()){
+        $this->_helper->layout->setLayout("layout");
+        $this->view->headScript()->appendFile('../../js/jquery/validation/registrationValidation.js');
+        $login = new Application_Form_Login();
+        $recoveryForm = new Application_Form_Recovery();
 
-            $model = new Application_Model_User();
-            $email = $this->getRequest()->getPost('email');
-            if ($email) {
-                $this->view->message = $model->passRecovery($email);
+        $this->view->login = $login->getElements();
+        $this->view->recovery = $recoveryForm->getElements();
+
+        if($formData = $this->getRequest()->getParams()){
+            if ($recoveryForm->isValid($formData)) {
+                $model = new Application_Model_User();
+                $email = $this->getRequest()->getParam('email');
+                if ($email) {
+                    $this->view->message = $model->passRecovery($email);
+                } else {
+                    $this->view->message = 'no e-mail';
+                }
             } else {
-                $this->view->message = 'no e-mail';
+                $this->view->message = 'form data is not valid';
             }
-
         }
     }
 
@@ -110,7 +120,6 @@ class UserController extends Zend_Controller_Action
                     $authStorage->write($identity);
 
                     $this->view->status = $identity->status;
-
 
                 }else{
 
