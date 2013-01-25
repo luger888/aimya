@@ -578,7 +578,7 @@ function setDefaultTimezone() {
 function getVideo(e, id) {
 
     var pathName = $('#current_url').val();
-    //jQuery("body").append('<div class="loadingIcon"></div>');
+    jQuery("body").append('<div class="loadingIcon"></div>');
     $.ajax({
         url:pathName + "/lesson/video",
         type:"post",
@@ -677,40 +677,46 @@ function getNotes(e, id) {
         },
         success:function (result) {
             jQuery('.loadingIcon').remove();
-            $("#notes-dialog").dialog("open");
-            $('.notesWindow').html(result.notes);
-            var parent = $(e).parents('tr');
-            var id = parent.find('input[type=hidden]').val();
+            if(result.notes){
+                $("#notes-dialog").dialog("open");
 
-            var focusName = parent.find('.focus');
-            var dateLesson = parent.find('.date');
-            $('.focusDialog').html('Focus: ' + focusName.text());
-            $('.dateDialog').html('Date: '+ dateLesson.text());
-            $('.note:nth-child(even)').append('<div class ="smallSeparatorBot"></div>');
-            $('.note:nth-child(even)').prepend('<div class ="smallSeparatorTop"></div>');
-            $('.dialogFooter').prepend('<input type="hidden" name="les_id" value = "' + id + '">');
-            $('.timeLeftSpan').html(result.date + ' ');
-            if(result.isTeacher && !result.rate){
-                element.find('#sendRating').remove();
-                element.find('.timeLeft').remove();
-                element.find('.comment').remove();
-                element.find('#starsBlockFeedback').remove();
-                element.find('.rate').remove();
-            }
-            if (result.rate) {
-                $('#sendRating').remove();
-                $('.timeLeft').remove();
-                if(result.review){
-                    $('.comment').html('Comment: ' + result.review);
-                }else{
-                    $('.comment').remove();
+                $('.notesWindow').html(result.notes);
+                var parent = $(e).parents('tr');
+                var id = parent.find('input[type=hidden]').val();
+
+                var focusName = parent.find('.focus');
+                var dateLesson = parent.find('.date');
+                $('.focusDialog').html('Focus: ' + focusName.text());
+                $('.dateDialog').html('Date: '+ dateLesson.text());
+                $('.note:nth-child(even)').append('<div class ="smallSeparatorBot"></div>');
+                $('.note:nth-child(even)').prepend('<div class ="smallSeparatorTop"></div>');
+                $('.dialogFooter').prepend('<input type="hidden" name="les_id" value = "' + id + '">');
+                $('.timeLeftSpan').html(result.date + ' ');
+                if(result.isTeacher && !result.rate){
+                    element.find('#sendRating').remove();
+                    element.find('.timeLeft').remove();
+                    element.find('.comment').remove();
+                    element.find('#starsBlockFeedback').remove();
+                    element.find('.rate').remove();
                 }
+                if (result.rate) {
+                    $('#sendRating').remove();
+                    $('.timeLeft').remove();
+                    if(result.review){
+                        $('.comment').html('Comment: ' + result.review);
+                    }else{
+                        $('.comment').remove();
+                    }
 
-                $('#starsBlock').raty({
-                    readOnly:true,
-                    score:result.rate
-                });
+                    $('#starsBlock').raty({
+                        readOnly:true,
+                        score:result.rate
+                    });
+                }
+            }else{
+                alert('No such file on server. Please contact support');
             }
+
         }
     });
 }
@@ -900,7 +906,7 @@ function approveRefund(e){
         url: pathName + "/payment/unsubscribe",
         type: "post",
         data: {
-            'approveRefund':id,
+            'approveRefund':id
             /*'periodRefund': $('#periodRefund'),
             'pmoneyRefund': $('#periodRefund')*/
         },

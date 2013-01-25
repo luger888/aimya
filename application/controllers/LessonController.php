@@ -543,7 +543,10 @@ class LessonController extends Zend_Controller_Action
             }
             $this->view->rate = $review['rating'];
             $this->view->date = $reviewDate;
-            $this->view->notes = $fileContent;
+            if($fileContent){
+                $this->view->notes = $fileContent;
+            }
+
         }
 
 

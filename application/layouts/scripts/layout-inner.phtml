@@ -70,11 +70,11 @@ if (Zend_Registry::isRegistered('username')) {
 <div id="page" class="clearfix">
 
     <div id="globalWrapper" class="clearfix">
-        
+
         <div id="wrapper" class="clearfix">
 
                 <div id="header" class="clearfix">
-                    
+
                     <a href="<?php echo $this->baseUrl() ?>/booking" id="logo"></a>
                     <input id="user_activity" type="hidden" value="1">
                     <input id="current_url" type="hidden" value="<?php echo $this->baseUrl()?>">
@@ -104,9 +104,9 @@ if (Zend_Registry::isRegistered('username')) {
 
                 </div><!--End header-->
 
-                
+
                 <div id="content" class="clearfix">
-                    
+
                     <div id="leftSideBar" class="clearfix">
                         <div class="profileTab clearfix">
                             <h3> <?php echo $username;?></h3>
@@ -118,10 +118,7 @@ if (Zend_Registry::isRegistered('username')) {
                                     echo '<div class = "leftServices clearfix">';
                                     foreach($services as $value){
                                         if($value['rate']){
-
                                              echo '<p>'. $value['subcategory'] .', $' .$value['rate'].' per ' . $value['duration'].'min</p>';
-
-
                                         }else{
                                             echo '<p>' . $value['subcategory'].'</p>';
                                         }
@@ -130,7 +127,7 @@ if (Zend_Registry::isRegistered('username')) {
                                     echo '</div>';
                                 }
                                 ?>
-                            
+
                             <div class="leftNavigation clearfix">
                                 <?php
                                 echo $this->navigation()

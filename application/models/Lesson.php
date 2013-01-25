@@ -97,8 +97,14 @@ class Application_Model_Lesson
     public function getNotes($lessonId, $teacherId)
     {
         $notePath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'notes' . DIRECTORY_SEPARATOR . 'notes.txt';
-        $fileContent = file_get_contents($notePath);
-        return $fileContent;
+        if(file_exists($notePath) OR is_dir($notePath)){
+            $fileContent = file_get_contents($notePath);
+            return $fileContent;
+        }else{
+            return false;
+        }
+
+
     }
 
     public function getVideo($lessonId)
