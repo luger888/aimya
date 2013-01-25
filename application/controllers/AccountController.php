@@ -20,9 +20,13 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         $this->view->role = $identity->role;
         $this->view->headScript()->appendFile('../../../js/jquery/account/tabs/services.js');
         $this->view->headScript()->appendFile('../../../js/jquery/account/tabs/users.js');
+        $timezoneTable = new Application_Model_DbTable_TimeZones();
         $profileForm = new Application_Form_Profile();
         $profileModel = new Application_Model_Profile();
-        $this->view->profile = $profileForm->populate($profileModel->getProfileAccount($identity->id));
+        $accountData = $profileModel->getProfileAccount($identity->id);
+        $timezoneId = $timezoneTable->getTimezoneByGmt($accountData['timezone']);
+        $accountData['timezone'] = $timezoneId['id'];
+        $this->view->profile = $profileForm->populate($accountData);
         $this->view->avatarPath = $profileModel->getAvatarPath($identity->id, 'medium'); //path to avatar
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
@@ -37,8 +41,6 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                     $updateProfile->updateAvatar($_FILES['avatar']['name'], $identity->id);
                 }
                 $updateUser = new Application_Model_DbTable_Users();
-
-                $timezoneTable = new Application_Model_DbTable_TimeZones();
                 $timezone = $timezoneTable->getItem($formData['timezone']);
                 $formData['timezone'] = $timezone['gmt'];
                 $updateUser->updateUser($formData, $identity->id);

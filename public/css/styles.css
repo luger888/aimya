@@ -2116,6 +2116,10 @@ float:right;
     position: relative;
     right: 29px;
 }
+
+.userProfileTab .firstSeparator .timezone {
+    float: right; position: relative; font-size: 14px; margin-top: -15px;
+}
 .userProfileTab  .lastSeparator{
     background: url("../img/design/accountLayout/2page_middle_separator.png") no-repeat scroll 0 0 transparent;
     height: 33px;
