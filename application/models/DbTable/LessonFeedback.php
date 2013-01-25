@@ -44,7 +44,12 @@ class Application_Model_DbTable_LessonFeedback extends Application_Model_DbTable
             ->from($this->_name)
             ->where('lesson_id=?' , $lessonId);
 
-        return $data->query()->fetch();
+        $result= $data->query()->fetch();
+        if($result){
+            return $result;
+        }else{
+            return false;
+        }
     }
 
 }
