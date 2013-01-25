@@ -11,9 +11,9 @@ class Application_Form_Availability extends Zend_Form
 
         /* HOURS array for SELECT */
         $hours = array();
-        foreach (range(1,24) as $fullhour) {
+        foreach (range(0,24) as $fullhour) {
             $parthour = $fullhour > 12 ? $fullhour - 12 : $fullhour;
-            $parthour .= $fullhour > 12 ? " pm" : " am";
+            $parthour .= $fullhour > 11 ? " pm" : " am";
             $hours[$parthour] = $parthour;
         }
         $addon =array('...' => '...');

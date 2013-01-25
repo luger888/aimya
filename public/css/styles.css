@@ -1673,7 +1673,9 @@ input.button-2 {
     background: url(../images/bg/bottom-shadow-line.png) no-repeat center bottom;
 
 }
-
+.underline{
+    text-decoration: underline;
+}
 .resumeGeneral .headRow h1{
     float:left;
 }

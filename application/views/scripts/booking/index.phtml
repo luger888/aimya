@@ -8,6 +8,7 @@
     float: right;
     margin-right: 2px;
     cursor:pointer;
+    height:19px;
 }
 .isTeacher {
     display: none;
@@ -80,7 +81,10 @@ table:not(.fc-agenda-days) .fc-today {
 ul li {
     text-decoration: none;
 }
-
+.mainCalendar .button.book{
+    margin-bottom: 5px;
+    padding: 0 26px;
+}
 #dialog-form .mainBooking {
     padding: 18px 29px 0 18px
 }
@@ -395,9 +399,6 @@ jQuery(document).ready(function () {
                         }else{
                             dateTime = msg.booking[c].started_at;
                         }
-                        console.log(start);//pre
-                        console.log(recipient_utc);//utc
-                        console.log(dateTime);//final
                         events.push({
                             title:msg.booking[c].focus_name,
                             start:dateTime,
@@ -470,21 +471,21 @@ jQuery(document).ready(function () {
                     feedbackActivity ='passive'
                 }
                 element.find(".fc-event-head").append('<div class ="fc-event-focusName">Focus name: "' + event.title + '"</div>');
-                if(event.booking_status == '1' && event.is_cancel =='0'){
-                    element.find(".fc-event-head").append('<a class ="fc-event-cancel" onclick ="cancelBooking(this);">X</a>');
-                    element.find(".fc-event-head").append('<input type = "hidden" value = '+ event.booking_id +'>');
-                    if(event.user_id == event.recipient_id){
-                        element.find(".fc-event-head").append('<input type = "hidden" value = '+ event.sender_id +'>');
-                    }else{
-                        element.find(".fc-event-head").append('<input type = "hidden" value = '+ event.recipient_id +'>');
-                    }
-                }
+
 
                 element.find(".fc-event-head").append('<div class = "fc-event-rate">Rate: $' + event.rate + ' / ' + duration + '</div>');
                 element.find(".fc-event-content").append('<div class = "fc-event-content-alt floatRight"><span class = "videoRec '+ colorAlt+' '+videoActivity+'"></span> <span class = "feedback '+ colorAlt+' '+feedbackActivity+'"></span><span class = "notes '+ colorAlt+' '+notesActivity+'"></span></div>');
                 element.find(".fc-event-content").append('<div class = "fc-event-content-description"> Description: ' + event.add_info + '</div>');
                 element.find(".fc-event-content").append('<div class = "fc-event-content-requested">Request from: ' + sender + ' , to:  ' + recipient + '</div>');
-
+                if(event.booking_status == '1' && event.is_cancel =='0'){
+                    element.find(".fc-event-content").append('<input type="button" value="Cancel" class ="button fc-event-cancel" onclick ="cancelBooking(this);">');
+                    element.find(".fc-event-content").append('<input type = "hidden" value = '+ event.booking_id +'>');
+                    if(event.user_id == event.recipient_id){
+                        element.find(".fc-event-content").append('<input type = "hidden" value = '+ event.sender_id +'>');
+                    }else{
+                        element.find(".fc-event-content").append('<input type = "hidden" value = '+ event.recipient_id +'>');
+                    }
+                }
                 if (event.booking_status == '0' && event.user_id == event.recipient_id) {
                     element.find(".fc-event-content").append('<input type = "button"  id ="rejectBooking" onclick="rejectBooking(this)" value = "Reject"  class="fc-event-content-reject fc-button reject">');
                     element.find(".fc-event-content").append('<input type = "button" id ="confirmBooking" onclick="confirmBooking(this)" value = "Confirm" class = "fc-event-content-confirm fc-button">');
@@ -495,6 +496,7 @@ jQuery(document).ready(function () {
                 } else {
                     element.find(".fc-event-content").append('<div class="fc-event-content-approve pending"><span>Pending</span></div>');
                 }
+
                 if(event.user_id != event.is_cancel && event.is_cancel != '0'){
                         element.find(".fc-event-content").append('<input type = "button" id ="confirmCancellation" onclick="confirmCancellation(this)" value = "Confirm Cancellation" class = "button cancellation">');
                         element.find(".fc-event-content").append('<input type = "button"  id ="rejectCancellation" onclick="rejectCancellation(this)" value = "Reject Cancellation"  class="button cancellation">');
@@ -507,7 +509,7 @@ jQuery(document).ready(function () {
     });
 
 //FORM DIALOG JQUERY
-    $('.fc-header tbody').append('<tr><td><input type="button" id="bookLesson" class = "button-2 book" value="book lesson"><td></tr>');
+    $('.fc-header tbody').append('<tr><td><input type="button" id="bookLesson" class = "button book" value="book lesson"><td></tr>');
 
     $("#dialog-form").dialog({
         autoOpen:false,
@@ -692,7 +694,7 @@ function cancelBooking(e) {
                             'recipient_id':recipient_id
                         },
                         success: function(response){
-                            //window.location.reload();
+                            window.location.reload();
                         }
                     });
                 },

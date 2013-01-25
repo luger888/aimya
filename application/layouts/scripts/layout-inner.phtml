@@ -120,12 +120,12 @@ if (Zend_Registry::isRegistered('username')) {
                                     foreach($services as $value){
 
                                         if($value['rate']){
-                                             if($i==0)echo 'Offered services:<br>';
+                                             if($i==0)echo '<span class="underline">Offered services:</span><br>';
                                              echo '<p>'. $value['subcategory'] .', $' .$value['rate'].' per ' . $value['duration'].'min</p>';
                                             $i++;
                                         }else{
                                             if($d==0)echo 'Requested services:<br>';
-                                            echo '<p>' . $value['subcategory'].'</p>';
+                                            echo '<p>' . $value['subcategory'] .'</p>';
                                             $d++;
                                         }
 

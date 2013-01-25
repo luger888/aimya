@@ -95,6 +95,11 @@ function editService(e, service_type, url){
                             '<span class = "s-116">' + categoriesDropdown + '</span>' +
                             '<span class = "field-116"> <input id="subcategoryEditInput" value ="'+subcategory+'"></span>' +
                         '</div>'+
+                        '<div class ="errorBlock"></div>'+
+                        '<div class="serviceDesc clearfix">' +
+                            '<h2>DESCRIBE YOUR SERVICE DETAILS:</h2>' +
+                            '<textarea  id="descriptionEditInput">'+description+'</textarea>'+
+                        '</div>' +
                         '<div class="buttonsRow clearfix">'+
                             '<input type = "button" value="save" class="updateService button-2 save" onclick="updateService(this, 2, ' + url + ')";>'+
                             '<input type = "hidden" value="'+ id +'">'+
@@ -158,7 +163,7 @@ function updateService(e, service_type, url){
                 'subcategory': subcategory,
                 'rate': '',
                 'duration': '',
-                'description': '',
+                'description': description,
                 'service_type': 2
             },
             success: function (response){

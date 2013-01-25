@@ -84,7 +84,7 @@ class Application_Form_ServiceDetails extends Zend_Form
             ->setDecorators($this->basicDecorators);
 
         if($action == 'requestservices') {
-            $this->addElements(array($serviceType, $lesson_category, $subcategory, $submitReq));
+            $this->addElements(array($serviceType, $lesson_category, $subcategory, $description, $submitReq));
         }
         if($action == 'services') {
             $this->addElements(array($serviceType, $lesson_category, $subcategory, $rate, $duration, $description, $submit));
