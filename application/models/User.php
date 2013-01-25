@@ -104,7 +104,7 @@ class Application_Model_User
             $data['password'] = $pass;
 
             #update password
-            $db->recoverPass($data);
+
 
             #send e-mail
             $mail = new Aimya_Mail;
@@ -115,7 +115,10 @@ class Application_Model_User
             $mail->email = $data['email'];
             $mail->password = $data['password'];
             $mail->baseLink = "http://" . $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance()->getBaseUrl();
-            $mail->send();
+
+            if($mail->send()){
+                $db->recoverPass($data);
+            }
 
             return 'done';
 
