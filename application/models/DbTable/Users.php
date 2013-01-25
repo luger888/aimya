@@ -103,7 +103,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         $where = $this->getAdapter()->quoteInto('email=?', $data['email']);
 
 
-        $this->update($array, $where);
+        return $this->update($array, $where);
 
     }
 
