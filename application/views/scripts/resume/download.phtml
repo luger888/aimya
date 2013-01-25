@@ -1,0 +1,78 @@
+<?php
+$stylesheet = file_get_contents('./css/onlineResume.css');
+
+
+$html = "<div class='resumeOnlineMain'>
+    <div class='shadowSeparator'>
+
+
+    <div class='title'>" . $this->user['firstname'] . " " . $this->user['lastname'] . "</div>
+            <div class='titleInfo'><div
+                class='degree'> " . $this->profile['degree'] . "</div> <div class = 'language'>" . $this->profile['language'] . "</div>
+            </div>
+            ";
+
+$html .= "<h1>" . 'objective' . ":</h1>
+                <div class='textBlock'>" . $this->profile['objective'] . "</div>";
+
+if ($this->experience) {
+      $html .= "<h1>" . $this->translate('experience') . ":</h1>";
+    foreach ($this->experience as $value) {
+        $html .="<div class='textBlock'>" . $value['content'] . "</div>";
+        if (isset($value['certificate'])) {
+            $html .=  '<div class="resumeItemCertificates clearfix">Certificates:';
+            foreach ($value['certificate'] as $index => $cert) {
+                $html .=  '<div><a class="certificate" href="/' . $value['certificateUrl'][$index] . '/' . $cert . '">' . $cert . '</a></div>';
+            }
+            $html .=  '</div>';
+        }
+
+    }
+}
+if ($this->education) {
+    $html .= "<h1>" . $this->translate('education') . ":</h1>";
+    foreach ($this->education as $value) {
+        $html .= "<div class='textBlock'>" . $value['content'] . "</div>";
+        if (isset($value['certificate'])) {
+            $html .=  '<div class="resumeItemCertificates clearfix">Certificates:';
+            foreach ($value['certificate'] as $index => $cert) {
+                $html .=  '<div><a class="certificate" href="/' . $value['certificateUrl'][$index] . '/' . $cert . '">' . $cert . '</a></div>';
+            }
+            $html .=  '</div>';
+        }
+    }
+}
+
+if ($this->skills) {
+    $html .= "<h1>" . $this->translate('skill') . ":</h1>";
+    foreach ($this->skills as $value) {
+        $html .= "<div class='textBlock'>" . $value['content'] . "</div>";
+        if (isset($value['certificate'])) {
+            $html .=  '<div class="resumeItemCertificates clearfix">Certificates:';
+            foreach ($value['certificate'] as $index => $cert) {
+                $html .=  '<div><a class="certificate" href="/' . $value['certificateUrl'][$index] . '/' . $cert . '">' . $cert . '</a></div>';
+            }
+            $html .=  '</div>';
+        }
+    }
+}
+
+
+$html .= "</div>
+</div>";
+
+$pdfName = $this->user['firstname'] . "_" . $this->user['lastname'];
+
+$mpdf = new Aimya_Mpdf_mpdf();
+$mpdf->showImageErrors = false;
+$mpdf->SetDisplayMode('fullpage');
+$mpdf->WriteHTML($stylesheet, 1);
+$mpdf->WriteHTML($html, 2);
+$mpdf->Output($pdfName, 'D');
+exit;
+
+
+// Load a PDF document from a string
+
+
+?>
