@@ -70,12 +70,21 @@ class UserController extends Zend_Controller_Action
         $this->view->login = $login->getElements();
         $this->view->recovery = $recoveryForm->getElements();
 
-        if($formData = $this->getRequest()->getParams()){
+        if($this->getRequest()->isPost()){
+            $formData = $this->getRequest()->getParams();
             if ($recoveryForm->isValid($formData)) {
                 $model = new Application_Model_User();
                 $email = $this->getRequest()->getParam('email');
                 if ($email) {
                     $this->view->message = $model->passRecovery($email);
+                    $result = $model->passRecovery($email);
+                    if($result) {
+                        $this->_helper->flashMessenger->addMessage(array('success'=>'Your password was successfully changed. Please check your email to get new password'));
+                        $this->_helper->redirector('recovery', 'user');
+                    } else {
+                        $this->_helper->flashMessenger->addMessage(array('failure'=>'Problem with sending email'));
+                        $this->_helper->redirector('recovery', 'user');
+                    }
                 } else {
                     $this->view->message = 'no e-mail';
                 }
