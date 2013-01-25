@@ -55,7 +55,10 @@ class FeedbackController extends Aimya_Controller_BaseController
                     $this->view->isTeacher = $isTeacher;
                 }
                 $this->view->date = $reviewDate;
-                $this->view->feedback = $feedback;
+                if($feedback){
+                    $this->view->feedback = $feedback;
+                }
+
                 $html = $this->view->render('feedback/view.phtml');
                 $this->view->html = $html;
 

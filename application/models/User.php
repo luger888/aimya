@@ -117,7 +117,7 @@ class Application_Model_User
             $mail->baseLink = "http://" . $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance()->getBaseUrl();
 
             if($mail->send()){
-                $db->recoverPass($userData['password']);
+                $db->recoverPass($userData);
             }
 
             //return 'done';
