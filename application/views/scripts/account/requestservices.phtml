@@ -24,6 +24,9 @@
                     <div class="serviceBody short clearfix">
                         <span id="subcategory"><?php echo $value['subcategory'];?></span>
                     </div>
+                    <h2> Service Description :</h2>
+
+                    <div id="description"><?php echo $value['description'];?></div>
 
 
                 </div>
@@ -50,6 +53,11 @@
                         <span class="field-116"><?php echo $this->servicesForm->subcategory; ?></span>
                     </div>
                     <!--End formRow -->
+                    <div class ="errorBlock"></div>
+                    <div class="serviceDesc clearfix">
+                        <h2>DESCRIBE YOUR SERVICE DETAILS:</h2>
+                        <?php echo $this->servicesForm->description; ?>
+                    </div><!--End serviceDesc -->
                     <div class="buttonsRow clearfix">
                         <?php echo $this->servicesForm->saveService; ?>
                     </div>
