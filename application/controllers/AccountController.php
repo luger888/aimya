@@ -26,8 +26,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         $accountData = $profileModel->getProfileAccount($identity->id);
         $timezoneId = $timezoneTable->getTimezoneByGmt($accountData['timezone']);
         $accountData['timezone'] = $timezoneId['id'];
-        $this->view->profile = $profileForm->populate($accountData);
-        $this->view->avatarPath = $profileModel->getAvatarPath($identity->id, 'medium'); //path to avatar
+
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
 
@@ -51,6 +50,8 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
 
             }
         }
+        $this->view->profile = $profileForm->populate($accountData);
+        $this->view->avatarPath = $profileModel->getAvatarPath($identity->id, 'medium'); //path to avatar
     }
 
     public function servicesAction()
