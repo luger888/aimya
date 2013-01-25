@@ -62,7 +62,7 @@ class Application_Model_Lesson
 
         exec("/usr/local/bin/phpscr.sh $lessonId $port > /dev/null 2>/dev/null &", $result);
 
-        if($result == 0) {
+        if ($result == 0) {
             return true;
         } else {
             return false;
@@ -97,21 +97,29 @@ class Application_Model_Lesson
     public function getNotes($lessonId, $teacherId)
     {
         $notePath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'notes' . DIRECTORY_SEPARATOR . 'notes.txt';
-        if(file_exists($notePath) OR is_dir($notePath)){
+        if (file_exists($notePath) OR is_dir($notePath)) {
             $fileContent = file_get_contents($notePath);
             return $fileContent;
-        }else{
+        } else {
             return false;
         }
 
 
     }
 
-    public function getVideo($lessonId)
+    public function getVideo($lessonCreatorId, $id)
     {
-        $identityId = Zend_Auth::getInstance()->getIdentity()->id;
-        $notePath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'notes' . DIRECTORY_SEPARATOR . 'notes.txt';
-
+        $path = '../../users/' . $lessonCreatorId . '/' . $id . '/video/video_lesson.flv';
+        $pathMkv = '../../users/' . $lessonCreatorId . '/' . $id . '/video/video_lesson.mkv';
+        if ((file_exists($path) OR is_dir($path))) {
+            if (!file_exists($pathMkv) OR !is_dir($pathMkv)) {
+                return $path;
+            } else {
+                return 2;
+            }
+        } else {
+            return false;
+        }
 
 
     }

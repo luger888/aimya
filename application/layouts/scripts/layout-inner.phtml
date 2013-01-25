@@ -115,12 +115,18 @@ if (Zend_Registry::isRegistered('username')) {
                             <div class = "leftNavPhoto clearfix"><img src="<?php echo $avatarPath;?>"></div>
                                 <?php
                                 if($services){
+                                    $i=0;$d=0;
                                     echo '<div class = "leftServices clearfix">';
                                     foreach($services as $value){
+
                                         if($value['rate']){
+                                             if($i==0)echo 'Offered services:<br>';
                                              echo '<p>'. $value['subcategory'] .', $' .$value['rate'].' per ' . $value['duration'].'min</p>';
+                                            $i++;
                                         }else{
+                                            if($d==0)echo 'Requested services:<br>';
                                             echo '<p>' . $value['subcategory'].'</p>';
+                                            $d++;
                                         }
 
                                     }

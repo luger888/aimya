@@ -491,6 +491,7 @@ class LessonController extends Zend_Controller_Action
     {
         $lessonId = $this->getRequest()->getParam('lesson_id');
         if ($lessonId) {
+
             $lessonTable = new Application_Model_DbTable_Lesson();
             $reviewTable = new Application_Model_DbTable_Review();
             $lessonModel = new Application_Model_Lesson();
@@ -510,12 +511,17 @@ class LessonController extends Zend_Controller_Action
             if($isTeacher){
                 $this->view->isTeacher = $isTeacher;
             }
+            $videoPath = $lessonModel->getVideo($identity->id, $lesson['creator_id']);
+           if($videoPath){
+                   $this->view->videoPath = $videoPath;
+           }
             $this->view->rate = $review['rating'];
             $this->view->date = $reviewDate;
             //$this->view->notes = $fileContent;
 
-            $this->view->creator_id = $lesson['creator_id'];
+
         }
+
     }
 
     public function correspondenceAction()
