@@ -225,7 +225,7 @@ class Application_Model_Lesson
             }
             $currentTimeUtc = strtotime($dateWithUTC); //currentTime + UTC of user to UNIX stamp
             $timeDifference = $starting_time - $currentTimeUtc;
-            if ($timeDifference <= $reserveSeconds && $timeDifference > 0) { //if difference between current time and starting is 10 minutes or less, but not less than 0
+            if ($timeDifference <= $reserveSeconds && $timeDifference > 0) { //if difference between starting time and current is 10 minutes or less, but not less than 0
                 $isOnline = 1;
 
                 if ($bookingTable->isTeacher($lesson['booking']['id'], $identity->id)) { //if user is a teacher in current lesson
@@ -259,7 +259,13 @@ class Application_Model_Lesson
                 }
 
             } else {
-                $lesson['booking']['waiting'] = 1;
+                if($timeDifference < 0){
+                    $lesson['booking']['expired'] = 1;
+                }else{
+                    $lesson['booking']['waiting'] = 1;
+                }
+
+
                 $isOnline = 0;
             }
 
