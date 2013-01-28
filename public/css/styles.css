@@ -1676,6 +1676,10 @@ input.button-2 {
     background: url(../images/bg/bottom-shadow-line.png) no-repeat center bottom;
 
 }
+
+.resumeGeneral .headRow .button-2{
+    float: left;
+}
 .underline{
     text-decoration: underline;
 }

@@ -110,15 +110,16 @@ input.btnLogin {
 
 .loginRemember .checkboxBox {
     float: left;
+
 }
 
 .loginRemember label {
+    color: #D0E4A0;
     float: left;
     font-size: 11px;
     line-height: 14px;
-    color: #d0e4a0;
-    text-decoration: none;
     padding-left: 6px;
+    text-decoration: none;
 }
 
 
