@@ -48,10 +48,8 @@
 				//UIEventHandling();
 				
 				Main.getInstance().addEventListener(Main.FS_MODE_CHANGED, onFSModeChange);
-			//	Main.getInstance().addEventListener(Main.SCREEN_MODE_CHANGED, onScreenModeChange);
 				
 				this.currentState = "loaded";
-			//	this.currentState = (Main.getInstance().fsMode)?"fullScreen":"notFullScreen";
 				debug("app:onInit");
 			}
 			
@@ -59,8 +57,9 @@
 				debug( "toggleFullScreen" );
 				//Main.getInstance().fsMode = !Main.getInstance().fsMode;
 			//	if (event) mainController.onAppEvent(event);
-				Main.getInstance().fsMode = !Main.getInstance().fsMode;
-				var param:int = (Main.getInstance().fsMode)?1:0;
+				//need to uncomment it if you want to change the screen mode without flash reloading  
+				//Main.getInstance().fsMode = !Main.getInstance().fsMode;
+				var param:int = (Main.getInstance().fsMode)?0:1;
 				ExternalInterface.call("changeFlashLayout", param);
 			}
 			
@@ -69,15 +68,15 @@
 				this.currentState = (Main.getInstance().fsMode)?"fullScreen":"notFullScreen";
 			}
 			
-			private function onScreenModeChange ( event : Event ) : void {
+			/*private function onScreenModeChange ( event : Event ) : void {
 				debug( "onScreenModeChange" );
 			//	this.currentState = (Main.getInstance().fsMode)?"fullScreen":"notFullScreen";
 				var param:int = (Main.getInstance().fsMode)?1:0;
 				ExternalInterface.call("changeFlashLayout", param);
-			}
+			}*/
 			
 			private function onInitComplete ( event : AppEvent ) : void {
-				debug("app:connectInitComplete");
+				debug("app:connectInitComplete:" + Main.getInstance().fsMode.toString());
 				this.currentState = (Main.getInstance().fsMode)?"fullScreen":"notFullScreen";
 			}
 			

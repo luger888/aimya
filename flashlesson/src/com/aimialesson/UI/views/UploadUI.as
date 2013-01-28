@@ -32,15 +32,15 @@ package com.aimialesson.UI.views
 		import flash.events.MouseEvent;
 		import flash.events.ProgressEvent;
 		
-		[SkinPart (required="true")]
+		[SkinPart (required="false")]
 		public var uploadBtn:Button;
 		[SkinPart (required="false")]
 		public var message:Label;
-		[SkinPart (required="true")]
+		[SkinPart (required="false")]
 		public var progressBar:PresentationProgressBar;
-		[SkinPart (required="true")]
+		[SkinPart (required="false")]
 		public var generatingRT:RichText;
-		[SkinPart (required="true")]
+		[SkinPart (required="false")]
 		public var presantationBG:BitmapImage;
 		
 		private var fileRef:FileReference;

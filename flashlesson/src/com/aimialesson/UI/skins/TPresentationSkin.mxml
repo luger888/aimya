@@ -32,6 +32,6 @@
 				</s:fill>
 			</s:Rect>
 			<views:PresentationUI id="presentation"  visible="{Presentation.getInstance().loaded}" includeInLayout="{Presentation.getInstance().loaded}" width="{rectBG.width-10}" height="{rectBG.height-10}" x="{rectBG.x + 5}" y="{rectBG.y + 5 }"/>
-			<views:UploadUI id="upload"   x="{rectBG.x + 5}" y="{rectBG.y + 5 }" width="{rectBG.width - 10}" height="{rectBG.height - 10}"/>
+			<views:UploadUI id="upload"   x="5" y="5" width="{group.width - 10}" height="{group.height - 10}"/>
 		</s:Group>
 </s:Skin>

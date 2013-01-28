@@ -76,7 +76,6 @@ class UserController extends Zend_Controller_Action
                 $model = new Application_Model_User();
                 $email = $this->getRequest()->getParam('email');
                 if ($email) {
-                    $this->view->message = $model->passRecovery($email);
                     $result = $model->passRecovery($email);
                     if($result) {
                         $this->_helper->flashMessenger->addMessage(array('success'=>'Your password was successfully changed. Please check your email to get new password'));
