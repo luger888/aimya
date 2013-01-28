@@ -30,7 +30,8 @@ class Application_Form_Login extends Zend_Form
             ->setDecorators($this->basicDecorators);
 
         $remember = new Zend_Form_Element_Checkbox('remember');
-        $remember->setDecorators($this->basicDecorators);
+        $remember->setDecorators($this->basicDecorators)
+        ->setAttrib('tabindex ', '-1');
 
 
         $submit = new Zend_Form_Element_Submit('login');
