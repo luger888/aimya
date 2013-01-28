@@ -37,7 +37,7 @@ package com.aimialesson.model
 		public var partnerMicPaused:Boolean = false;
 		
 		private var _connected:Boolean = false;
-		[Bindable(Event=Media.CONNECTED_CHANGED)]
+		[Bindable(Event="connectedChange")]
 		public function set connected ( value : Boolean ) : void {
 			if (value != _connected){
 				_connected = value;

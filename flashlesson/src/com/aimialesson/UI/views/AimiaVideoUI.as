@@ -37,10 +37,11 @@ package com.aimialesson.UI.views
 		public var unMuteCamBtn:Button;
 
 		
-		public const VIDEO_CHAT_WINDOW_HEIGHT_MIN_MODE:int = 105;
-		public const VIDEO_CHAT_WINDOW_WIDTH_MIN_MODE:int = 140;
-		public const VIDEO_CHAT_WINDOW_HEIGHT_MAX_MODE:int = 120;//150;//160;
-		public const VIDEO_CHAT_WINDOW_WIDTH_MAX_MODE:int = 160;//200;//214;
+		public static const VIDEO_CHAT_WINDOW_HEIGHT_MIN_MODE:int = 105;
+		public static const VIDEO_CHAT_WINDOW_WIDTH_MIN_MODE:int = 140;
+		public static const VIDEO_CHAT_WINDOW_HEIGHT_MAX_MODE:int = 120;//150;//160;
+		public static const VIDEO_CHAT_WINDOW_WIDTH_MAX_MODE:int = 160;//200;//214;
+		public static const VIDEO_CHAT_WINDOW_WIDTH_MAX_MODE_FULL:int = 160 + 12;
 
 		private var _video:Video;
 		

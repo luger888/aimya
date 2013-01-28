@@ -20,7 +20,7 @@ package com.aimialesson.model
 		private var secondWarningIsShown:Boolean = false;
 		
 		private var _remainingTime:int = 0;
-		[Bindable(Event=Time.REMAINING_TIME_CHANGED)]
+		[Bindable(Event="remainingTimeChanged")]
 		public function set remainingTime ( value : int ) : void {
 			if (_remainingTime == 0 && value >= 0 ){
 				initWarnings(value);
