@@ -75,7 +75,7 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
 
     }
 
-    public function addFriend($friendId) {
+    public function addFriend($friendId, $message) {
         $status = false;
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
 
@@ -98,7 +98,7 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
                 $data = array(
                     'sender_id' => $userId,
                     'recipient_id' => $friendId,
-                    'content' => 'Hello ' . $friend["username"] . ', I have approved your request. My Account page is <a href="' . $accountPage . '">' . $user["username"] . '</a>' ,
+                    'content' => $message . ' My Account page is <a href="' . $accountPage . '">' . $user["username"] . '</a>' ,
                     'subject' => "Add to Friend Request",
                 );
                 $messageTable->sendMessage($data);
@@ -128,7 +128,7 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
             $data = array(
                         'sender_id' => $userId,
                         'recipient_id' => $friendId,
-                        'content' => 'Hello ' . $friend["username"] . ', I\'d like add you to my account. My Account page is <a href="' . $accountPage . '">' . $user["username"] . '</a>' ,
+                        'content' => $message . ' My Account page is <a href="' . $accountPage . '">' . $user["username"] . '</a>' ,
                         'subject' => "Add to Friend Request",
                     );
             $messageTable->sendMessage($data);

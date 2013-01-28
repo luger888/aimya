@@ -22,8 +22,8 @@ class FriendsController extends Zend_Controller_Action
                 $friendTable = new Application_Model_DbTable_Friends();
                 $url = $this->getRequest()->getParam('url');
                 $url = substr($url, 3);
-
-                $result = $friendTable->addFriend($friendId);
+                $message = $this->getRequest()->getParam('request_comment');
+                $result = $friendTable->addFriend($friendId, $message);
 
                 if($result) {
                     $this->_helper->flashMessenger->addMessage(array('success'=>'Request successfully sent'));
@@ -37,8 +37,8 @@ class FriendsController extends Zend_Controller_Action
                 $friendId = $this->getRequest()->getParam('friend_id');
                 $friendTable = new Application_Model_DbTable_Friends();
 
-
-                $result = $friendTable->addFriend($friendId);
+                $message = $this->getRequest()->getParam('request_comment');
+                $result = $friendTable->addFriend($friendId, $message);
 
                 if($result) {
                     $this->view->result = $result;

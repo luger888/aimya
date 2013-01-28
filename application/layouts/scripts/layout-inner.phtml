@@ -52,11 +52,9 @@ if($username['role'] == '1'){
 }else if($username['role'] == '3'){
     $role = 'Admin';
 }
-if($username['role'] == 1) {
-    $services = $servicesModel->getServiceByUser($identity->id, 2);
-} else {
-    $services = $servicesModel->getServiceByUser($identity->id, 1);
-}
+$servicesOffered = $servicesModel->getServiceByUser($identity->id, 1);
+$servicesRequested = $servicesModel->getServiceByUser($identity->id, 2);
+
 if (Zend_Registry::isRegistered('username')) {
     $username = Zend_Registry::get('username');
 } else {
@@ -114,22 +112,24 @@ if (Zend_Registry::isRegistered('username')) {
 
                             <div class = "leftNavPhoto clearfix"><img src="<?php echo $avatarPath;?>"></div>
                                 <?php
-                                if($services){
+                                if($servicesOffered || $servicesRequested){
                                     $i=0;$d=0;
                                     echo '<div class = "leftServices clearfix">';
-                                    foreach($services as $value){
-
-                                        if($value['rate']!=''){
-                                             if($i==0)echo '<span class="underline">Offered services:</span><br>';
-                                             echo '<p>'. $value['subcategory'] .', $' .$value['rate'].' per ' . $value['duration'].'min</p>';
+                                    if($servicesOffered){
+                                        foreach($servicesOffered as $value){
+                                            if($i==0) echo '<span class="underline">' . $this->translate('Offered services:') . '</span><br>';
+                                            echo '<p>'. $value['subcategory'] .', $' .$value['rate'].' per ' . $value['duration'].'min</p>';
                                             $i++;
-                                        }else{
-                                            if($d==0)echo 'Requested services:<br>';
+                                        }
+                                    }
+                                    if($servicesRequested){
+                                        foreach($servicesRequested as $value){
+                                            if($d==0) echo '<span class="underline">' . $this->translate('Requested services:') . '</span><br>';
                                             echo '<p>' . $value['subcategory'] .'</p>';
                                             $d++;
                                         }
-
                                     }
+
                                     echo '</div>';
                                 }
                                 ?>
