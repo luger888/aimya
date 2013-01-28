@@ -66,13 +66,14 @@ function saveResumeItem(tab) {
     var resumeContent = $('#' + tab).val();
     var baseUrl = $('#current_url').val();
     dataObject[tab] = resumeContent;
+    jQuery("body").append('<div class="loadingIcon"></div>');
     $.ajax({
             url:baseUrl + "/resume/ajax",
             type:"post",
             data:dataObject,
             success:function (response) {
                     if(response.lastId){
-                        $('#file_upload'+tab).data('uploadifive').settings.formData = { 'resumeType':tab, 'resumeTypeId':53 };
+                        $('#file_upload'+tab).data('uploadifive').settings.formData = { 'resumeType':tab, 'resumeTypeId':response.lastId };
                         $('#file_upload'+tab).uploadifive('upload');
                     }
 
@@ -85,23 +86,7 @@ function saveResumeItem(tab) {
                     $("#" + key).attr("placeholder", response.errors[key]);
 
                 }
-                if (response.success) { //if success
 
-//                    $('#experience').val('');
-//                    var content = '  <div class="experienceItem clearfix">' +
-//                        '<div class="headRow clearfix">' +
-//                        '<h1>experience:</h1>' +
-//                        '<div class="buttonRow clearfix">' +
-//                        '<input type = "button" value ="edit" class="button-2 edit" onclick="editResumeItem(this, '+tab+');">' +
-//                        '<input type = "button" value ="delete" class="button-2 delete" onclick="deleteResumeItem(this, '+tab+');">' +
-//                        '<input type = "hidden" value="' + response.lastId + '">' +
-//                        '</div>' +
-//                        '</div>' +
-//                        '<div class = "resumeItemBody">' + resumeContent + '</div>' +
-//                        '</div>';
-//                    $('.resumeList').append(content);
-                    window.location.reload();
-                }
 
             }
         }
@@ -142,12 +127,13 @@ function editResumeItem(e, tab) {
         '<input id="file_upload'+tab+'" name="file_upload" type="file">' +
         '<input type="button" value="save" class="button-2 save floatRight" onclick=updateResumeItem(this,"' + tab + '");>' +
         '</div>' +
-        '<div id="queue"></div>');
+        '<div id="queue'+tab+'"></div>');
     $('.button-2:not(".save, .upload")').addClass("disable");
     uploadify(tab);
 }
 
 function updateResumeItem(e, tab) {
+    jQuery("body").append('<div class="loadingIcon"></div>');
     var experienceWrapper = $(e).parents('.resumeItem'); //parent div
     var id = experienceWrapper.children('.headRow').children('.buttonRow').children('input[type=hidden]').val();
     var resumeContent = experienceWrapper.children('.resumeItemBody').children('.formRow').children('.resumeEditInput').val();
@@ -205,7 +191,7 @@ function uploadify(tab) {
     $('#file_upload'+tab).uploadifive({
             'auto':false,
             'formData':{'resumeType':'skills', 'resumeTypeId':'1'},
-            'queueID':'queue',
+            'queueID':'queue'+tab,
             'uploadScript':baseUrl + '/resume/upload',
             'buttonText':'upload file',
             'height':20,
