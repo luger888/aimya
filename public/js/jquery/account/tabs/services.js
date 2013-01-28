@@ -5,14 +5,14 @@ $(document).ready(function() {
 function addService(){
 
     $("#serviceForm").css('display', 'block');
-    $('.button-2:not(".save")').addClass("disable");
+    $('.button-2:not(".save, .upload")').addClass("disable");
     $('#addMoreServices').remove();
 }
 
 function addRequestService(){
 
     $("#serviceRequestForm").css('display', 'block');
-    $('.button-2:not(".save")').addClass("disable");
+    $('.button-2:not(".save, .upload")').addClass("disable");
     $('#addMoreRequestServices').remove();
 }
 /* Picking ID of service from hidden input and sending on controller to DELETE service*/
