@@ -1082,9 +1082,10 @@ input.button-2 {
     font-size: 9px;
     margin-left: 6px;
     margin-top: -36px;
-    padding-left: 4px;
+    /*padding-left: 4px;*/
     position: absolute;
-    width: 20px;
+    width: 12px;
+    text-align:center;
 }
 
 .profileTab .leftNavigation .newBookingCount {
@@ -1095,9 +1096,10 @@ input.button-2 {
     font-size: 9px;
     margin-left: 6px;
     margin-top: -36px;
-    padding-left: 4px;
+    /*padding-left: 4px;*/
     position: absolute;
-    width: 20px;
+    text-align:center;
+    width: 12px;
 }
 
 #addRequestService .buttonsRow {
@@ -1791,9 +1793,10 @@ float:right;
     font-size: 9px;
     margin-left: 74px;
     margin-top: -48px;
-    padding-left: 4px;
+  /*  padding-left: 4px;*/
     position: absolute;
-    width: 20px;
+    text-align:center;
+    width: 12px;
 }
 .userRelationsTab.lesson .newBookingCount {
     background: url("../img/design/accountLayout/glyphicons/alertMessage.png") no-repeat scroll 0 53% transparent;
@@ -1802,9 +1805,10 @@ float:right;
     float: left;
     font-size: 9px;
     margin-left: 6px;
-    padding-left: 4px;
+   /* padding-left: 4px;*/
     position: absolute;
-    width: 20px;
+    text-align:center;
+    width: 12px;
 }
 .userRelationsTab.lesson tbody td{
     padding-left: 4px;
