@@ -11,7 +11,7 @@ if ($this->userData['role'] == '1') {
 ?>
 <div class="userProfileTab">
     <div class="firstSeparator">
-        <div class="timezone">Time Zone: <?php echo $this->userData['timezone']?> UTC</div>
+        <div class="timezone"><?php echo $this->translate('time zone') ?>: <?php echo $this->userData['timezone']?><?php echo $this->translate('UTC') ?></div>
     </div>
 
     <div class="imageBlock"><img src="<?php echo $this->avatarPath;?>"></div>
@@ -22,15 +22,19 @@ if ($this->userData['role'] == '1') {
     <?php $userData = $this->userData; ?>
     <?php $friendTable = new Application_Model_DbTable_Friends(); ?>
     <?php $isFriend = $friendTable->isFriend($userData['id']); ?>
+    <?php $isInList = $friendTable->isInList($userData['id']); ?>
+    <?php $defaultRequestText = ''; ?>
     <?php if (!$isFriend): ?>
-        <?php $sendRequestForm = new Application_Form_Friend(); ?>
-        <?php $sendRequestForm->friend_id->setValue($userData['id']); ?>
-        <?php if(!($this->userData['role'] == '1' && Zend_Auth::getInstance()->getIdentity()->role == '1')):?>
-            <form action="<?php echo $this->baseUrl();?>/friends/send/" method="post" id="send_request">
-                <?php echo $sendRequestForm->friend_id; ?>
-                <?php echo $sendRequestForm->url;?>
-                <?php echo $sendRequestForm->sendbutton; ?>
-            </form>
+        <?php if($isInList): ?>
+            <?php if($isInList['sender_id'] == Zend_Auth::getInstance()->getIdentity()->id && $isInList['sender_status'] == 1): ?>
+                <span class="addAccount" style="background: none"><?php echo $this->translate('REQUEST SENT')?></span>
+            <?php else: ?>
+                <?php $defaultRequestText = 'Hello ' . $this->userData['username'] . ', I have approved your request.'?>
+                <input id="sendbutton" class="button-2 addAccount" type="button" onclick="showFriendForm('<?php echo $userData['id']; ?>', '<?php echo $defaultRequestText; ?>', this)" value="ADD TO MY ACCOUNT" name="sendbutton">
+            <?php endif; ?>
+        <?php else: ?>
+            <?php $defaultRequestText = 'Hello ' . $this->userData['username'] . ', I would like add you to my account.'?>
+            <input id="sendbutton" class="button-2 addAccount" type="button" onclick="showFriendForm('<?php echo $userData['id']; ?>', '<?php echo $defaultRequestText; ?>', this)" value="ADD TO MY ACCOUNT" name="sendbutton">
         <?php endif; ?>
     <?php endif; ?>
     <ul class="userInfo">
@@ -44,7 +48,7 @@ if ($this->userData['role'] == '1') {
     <div class="middleSeparator"></div>
     <?php if ($this->profile['add_info']): ?>
     <div class="aboutBlock">
-        <span class="title">ABOUT ME:</span>
+        <span class="title"><?php echo $this->translate('ABOUT ME') ?>:</span>
 
         <div class="aboutMe"><?php echo $this->profile['add_info'];?></div>
     </div>
@@ -133,5 +137,20 @@ if ($this->userData['role'] == '1') {
     <div class="lastSeparator"></div>
 
 </div>
+<?php if (!$isFriend): ?>
+    <div id="friend-request-dialog" title="<?php echo $this->translate('add to account') ?>:">
+        <div class="dialog-wrapper">
+            <?php $sendRequestForm = new Application_Form_Friend(); ?>
+            <?php if(!($this->userData['role'] == '1' && Zend_Auth::getInstance()->getIdentity()->role == '1')):?>
+                <form action="<?php echo $this->baseUrl();?>/friends/send/" method="post" id="send_request">
+                    <?php echo $sendRequestForm->friend_id; ?>
+                    <?php echo $sendRequestForm->url;?>
+                    <?php echo $sendRequestForm->request_comment;?>
+                    <?php echo $sendRequestForm->sendbutton; ?>
+                </form>
+            <?php endif; ?>
+        </div>
+    </div>
+<?php endif; ?>
 
 

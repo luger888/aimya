@@ -355,6 +355,16 @@ $(document).ready(function () {
         }
     });
 
+    $("#friend-request-dialog").dialog({
+        autoOpen:false,
+        height:'auto',
+        width:450,
+        modal:true,
+        resizable:false,
+        close:function () {
+
+        }
+    });
     // END LESSON DETAILS//
 });
 //function uploadify(){
@@ -933,5 +943,31 @@ function showFilename(fileName) {
     avatarBlock = $('.profileAvatar');
     if ($(".avatar_name").length) $(".avatar_name").remove();
     avatarBlock.append('<p class="avatar_name">' + fileName + '</p>');
+    return false;
+}
+
+function showFriendForm(userId, defaultText, e) {
+
+    var pathName = $('#current_url').val();
+    $("#friend-request-dialog").dialog("open");
+    var requestForm = $('#send_request');
+
+    requestForm.find('#friend_id').val(userId);
+    requestForm.find('#url').val(pathName + '/user/' + userId);
+    requestForm.find('#request_comment').val(defaultText);
+
+    return false;
+}
+
+function showFriendFormFeatured(userId, defaultText, e) {
+
+    var pathName = $('#current_url').val();
+    $("#friend-request-dialog").dialog("open");
+    var requestForm = $('#send_request');
+
+    requestForm.find('#friend_id').val(userId);
+    requestForm.find('#url').val(pathName + '/account/features/');
+    requestForm.find('#request_comment').val(defaultText);
+
     return false;
 }
