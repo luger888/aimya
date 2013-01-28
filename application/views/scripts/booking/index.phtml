@@ -488,15 +488,22 @@ jQuery(document).ready(function () {
                         element.find(".fc-event-content").append('<input type = "hidden" value = '+ event.recipient_id +'>');
                     }
                 }
+                var start = event.started_at;
+
+                start = start.replace(" ","T");
+                start = new Date(start);
+                var current = new Date();
                 if (event.booking_status == '0' && event.user_id == event.recipient_id) {
                     element.find(".fc-event-content").append('<input type = "button"  id ="rejectBooking" onclick="rejectBooking(this)" value = "Reject"  class="fc-event-content-reject fc-button reject">');
                     element.find(".fc-event-content").append('<input type = "button" id ="confirmBooking" onclick="confirmBooking(this)" value = "Confirm" class = "fc-event-content-confirm fc-button">');
                     element.find(".fc-event-content").append('<input type = "hidden" id = "booking_id"  value = ' + event.booking_id + ' >');
                     element.find(".fc-event-content").append('<input type = "hidden" id = "sender_id"  value = ' + event.sender_id + ' >');
-                } else if (event.booking_status == '1') {
+                } else if (event.booking_status == '1' && start>current) {
                     element.find(".fc-event-content").append('<div class="fc-event-content-approve"><span>Approved</span></div>');
-                } else {
+                } else if(event.booking_status == '0' && start>current) {
                     element.find(".fc-event-content").append('<div class="fc-event-content-approve pending"><span>Pending</span></div>');
+                }else{
+                    element.find(".fc-event-content").append('<div class="fc-event-content-approve pending"><span>Expired</span></div>');
                 }
 
                 if(event.user_id != event.is_cancel && event.is_cancel != '0'){
