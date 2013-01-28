@@ -156,7 +156,7 @@ $(document).ready(function () {
         $tabs = $('#tabs');
 
         $tabs.tabs(
-            {cache:true,
+            {cache:false,
                 load:function (e, ui) {
                     $(ui.panel).find(".tab-loading").remove();
 //                    uploadify();
