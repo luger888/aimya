@@ -81,11 +81,19 @@ class BookingController extends Zend_Controller_Action
         if ($this->getRequest()->isPost()) {
 
             if ($this->getRequest()->getParam('booking_id')) {
-
+                $userTable = new Application_Model_DbTable_Users();
                 $bookingDbTable = new Application_Model_DbTable_Booking();
+
+                $bookingItem = $bookingDbTable->getItem($this->getRequest()->getParam('booking_id'));
+                $user = $userTable->getItem($this->getRequest()->getParam('sender_id'));
+
+                $messageTable = new Application_Model_DbTable_Message();
+                $message = array('sender_id'=>$identity->id,
+                    'recipient_id'=>$this->getRequest()->getParam('sender_id'),
+                    'content'=>"Dear ".$user['username'].". I am rejecting Lesson on ".$bookingItem['started_at']." .",
+                    'subject'=>"Lesson Rejection!");
+                $messageTable->sendMessage($message);
                 $bookingDbTable->rejectBooking($this->getRequest()->getParam('booking_id'), $identity->id);
-
-
             }
         }
     }
