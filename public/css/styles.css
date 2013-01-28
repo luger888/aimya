@@ -1081,11 +1081,12 @@ input.button-2 {
     float: left;
     font-size: 9px;
     margin-left: 6px;
-    margin-top: -36px;
+    margin-top: -24px;
     /*padding-left: 4px;*/
     position: absolute;
     width: 12px;
     text-align:center;
+    line-height: 13px;
 }
 
 .profileTab .leftNavigation .newBookingCount {
@@ -1095,11 +1096,12 @@ input.button-2 {
     float: left;
     font-size: 9px;
     margin-left: 6px;
-    margin-top: -36px;
+    margin-top: -24px;
     /*padding-left: 4px;*/
     position: absolute;
     text-align:center;
     width: 12px;
+    line-height: 13px;
 }
 
 #addRequestService .buttonsRow {
