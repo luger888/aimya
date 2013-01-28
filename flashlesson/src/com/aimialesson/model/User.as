@@ -47,7 +47,7 @@ package com.aimialesson.model
 		}
 		
 		private var _isOnline:Boolean = true;
-		[Bindable(Event=User.USER_IS_ONLINE_CHANGE)]
+		[Bindable(Event="userIsOnlineChange")]
 		public function set isOnline ( value : Boolean ) : void {
 			_isOnline = value;
 			this.dispatchEvent( new Event ( User.USER_IS_ONLINE_CHANGE ) );
@@ -87,7 +87,7 @@ package com.aimialesson.model
 		}
 		
 		private var _partnerIsOnline:Boolean = false;
-		[Bindable(Event=User.PARTNER_IS_ONLINE_CHANGE)]
+		[Bindable(Event="partnerIsOnlineChange")]
 		public function set partnerIsOnline ( value : Boolean ) : void {
 			_partnerIsOnline = value;
 			debug("User:partnerIsOnline");

@@ -47,6 +47,8 @@ package com.aimialesson.model
 		[Bindable]
 		public var texts:Array;
 		
+		public var text_xml_url:String = "/flash/lessontexts.xml";
+		
 		public function setTexts():void { // just an attempt to fix the emty strings issue - on first loading. texts shoul
 			switch (lang){
 				case (Texts.EN)	:	texts = enTexts;

@@ -28,6 +28,9 @@ package com.aimialesson.UI.views
 		public var myAimiaVideo:AimiaVideoUI;
 		[SkinPart (required="true")]
 		public var partnerAimiaVideo:AimiaVideoUI;
+		
+		// need this for the layout purpose... weird...
+		public static const CHAT_MAX_WIDTH:int = AimiaVideoUI.VIDEO_CHAT_WINDOW_WIDTH_MAX_MODE_FULL * 2 + 30;
 
 		private var myNS:NetStream;
 		private var partnerNS:NetStream;

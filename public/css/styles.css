@@ -1135,9 +1135,10 @@ input.button-2 {
 /*Availability td padding-right */
 .availabilityTab table tr td:nth-child(1){padding-right: 34px;}
 .availabilityTab table tr td:nth-child(2){padding-right: 290px; font-family: 'helvetica-light-rnormal';}
-.availabilityTab table tr td:nth-child(3){padding-right: 40px;}
-.availabilityTab table tr td:nth-child(4){padding-right: 39px; }
-.availabilityTab table tr td:nth-child(5){padding-right: 150px;}
+.availabilityTab table tr td:nth-child(3){padding-right: 37px;}
+.availabilityTab table tr td:nth-child(4){padding-right: 37px;}
+.availabilityTab table tr td:nth-child(5){padding-right: 35px; }
+.availabilityTab table tr td:nth-child(6){padding-right: 100px;}
 
 .availabilityTab select{
     width:69px;

@@ -245,7 +245,7 @@ package com.aimialesson.UI.views
 											
 											PopUpManager.addPopUp(popupUI,this, true);
 											PopUpManager.centerPopUp(popupUI);
-											
+											if (!Main.getInstance().fsMode) popupUI.y = this.height / 3 - popupUI.height / 2;											
 											//dispatchEvent( new AppEvent ( AppEvent.STOP_SESSION ) );
 											break;
 			}			
@@ -274,6 +274,7 @@ package com.aimialesson.UI.views
 			videoChat.onLessonFinished();
 			PopUpManager.addPopUp(finishpopupUI, this, true);
 			PopUpManager.centerPopUp(finishpopupUI);
+			if (!Main.getInstance().fsMode) finishpopupUI.y = this.height / 3 - finishpopupUI.height / 2;
 		}
 		
 		private function onPresentationEvent ( event : PresentationEvent ) : void {
@@ -291,6 +292,7 @@ package com.aimialesson.UI.views
 			PopUpManager.removePopUp(timeWarningUI);
 			PopUpManager.addPopUp(timeWarningUI, this, true);
 			PopUpManager.centerPopUp(timeWarningUI);
+			if (!Main.getInstance().fsMode) timeWarningUI.y = this.height / 3 - timeWarningUI.height / 2; 
 		}
 		
 		private function onTextChatEvent ( event : NotesEvent ) : void {
