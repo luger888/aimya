@@ -2174,7 +2174,7 @@ ul.messageTabs{
     float: left;
     font-size: 9px;
     margin-left: 6px;
-    margin-top: -36px;
+    margin-top: -24px;
     /*padding-left: 4px;*/
     position: absolute;
     text-align:center;
@@ -2188,9 +2188,10 @@ ul.messageTabs{
     float: left;
     font-size: 9px;
     margin-left: 6px;
-    margin-top: -36px;
+    margin-top: -24px;
     /*padding-left: 4px;*/
     position: absolute;
     text-align:center;
     width: 12px;
+    line-height: 13px;
 }
