@@ -492,21 +492,28 @@ jQuery(document).ready(function () {
                 }
                 var startLesson = event.started_at;
                 //startLesson = startLesson.replace(" ","T");
-                var starting_time = new Date(startLesson);
+               if(typeof(startLesson) =='string'){
+                    startLesson = new Date(startLesson);
+               }
+
                 var current = new Date();
-                if (event.booking_status == '0' && event.user_id == event.recipient_id && starting_time>current) {
+
+                if (event.booking_status == '0' && event.user_id == event.recipient_id && startLesson>current) {
+
                     element.find(".fc-event-content").append('<input type = "button"  id ="rejectBooking" onclick="rejectBooking(this)" value = "Reject"  class="fc-event-content-reject fc-button reject">');
                     element.find(".fc-event-content").append('<input type = "button" id ="confirmBooking" onclick="confirmBooking(this)" value = "Confirm" class = "fc-event-content-confirm fc-button">');
                     element.find(".fc-event-content").append('<input type = "hidden" id = "booking_id"  value = ' + event.booking_id + ' >');
                     element.find(".fc-event-content").append('<input type = "hidden" id = "sender_id"  value = ' + event.sender_id + ' >');
-                } else if (event.booking_status == '1' && starting_time>current) {
+                } else if (event.booking_status == '1' && startLesson>current) {
+
                     element.find(".fc-event-content").append('<div class="fc-event-content-approve"><span>Approved</span></div>');
-                } else if(event.booking_status == '0' && starting_time>current) {
+                } else if(event.booking_status == '0' && startLesson>current) {
+
                     element.find(".fc-event-content").append('<div class="fc-event-content-approve pending"><span>Pending</span></div>');
                 }else{
+
                     element.find(".fc-event-content").append('<div class="fc-event-content-approve pending"><span>Expired</span></div>');
                 }
-
                 if(event.user_id != event.is_cancel && event.is_cancel != '0'){
                         element.find(".fc-event-content").append('<input type = "button" id ="confirmCancellation" onclick="confirmCancellation(this)" value = "Confirm Cancellation" class = "button cancellation">');
                         element.find(".fc-event-content").append('<input type = "button"  id ="rejectCancellation" onclick="rejectCancellation(this)" value = "Reject Cancellation"  class="button cancellation">');
@@ -514,8 +521,6 @@ jQuery(document).ready(function () {
                 }
             }
         }
-
-
     });
 
 //FORM DIALOG JQUERY
@@ -644,7 +649,8 @@ function rejectBooking(e) {
     $.post(
 
         pathName + "/booking/reject/0/controller%3D%3Ebooking/1/action%3D%3Ereject", {
-            "booking_id":$(e).nextAll('#booking_id:first').val()
+            "booking_id":$(e).nextAll('#booking_id:first').val(),
+            "sender_id":$(e).nextAll('#sender_id:first').val()
         },
         function (response) {
             e.parentNode.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode.parentNode);
