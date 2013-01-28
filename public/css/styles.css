@@ -343,6 +343,18 @@ input.button-2 {
     background-position: 0 -31px;
 }
 
+.button-2.refund {
+    background: url(../images/icons/refund.png) no-repeat 0 3px;
+}
+
+.button-2.refund:hover {
+    background-position: 0 -20px;
+}
+
+.button-2.refund.disable {
+    background-position: 0 -31px;
+}
+
 .button-2.upload {
     background: url(../images/icons/upload.png) no-repeat 0 3px;
 }
@@ -364,6 +376,7 @@ input.button-2 {
 
 .button-2.delete {
     background: url(../images/icons/delete.png) no-repeat 0 3px;
+    float: right;
 }
 
 
@@ -453,6 +466,7 @@ input.button-2 {
     background: url("../images/icons/moveInbox.png") no-repeat scroll 0 2px transparent;
     padding-left: 15px;
     margin: 0 15px;
+    float: right;
 }
 .button-2.inbox:hover{
     background-position: 0 -21px;
@@ -738,7 +752,11 @@ input.button-2 {
 .profileGeneral #gender-element {
     float: left;
 }
-
+.profileGeneral .info{
+    float:left;
+    color: #8D8D8D;
+    font-size:11px;
+}
 .hasDatepicker {
     width: 80px;
     background: url(../images/icons/datapicer.png) no-repeat right 2px;
@@ -776,6 +794,11 @@ input.button-2 {
     width: 143px;
     height: 142px;
     overflow: hidden;
+}
+
+.profileAvatar .avatar_name {
+    color: #1D3300;
+    margin: 5px 0 0 10px;
 }
 
 .profileAvaImg {
@@ -1112,9 +1135,10 @@ input.button-2 {
 /*Availability td padding-right */
 .availabilityTab table tr td:nth-child(1){padding-right: 34px;}
 .availabilityTab table tr td:nth-child(2){padding-right: 290px; font-family: 'helvetica-light-rnormal';}
-.availabilityTab table tr td:nth-child(3){padding-right: 40px;}
-.availabilityTab table tr td:nth-child(4){padding-right: 39px; }
-.availabilityTab table tr td:nth-child(5){padding-right: 150px;}
+.availabilityTab table tr td:nth-child(3){padding-right: 37px;}
+.availabilityTab table tr td:nth-child(4){padding-right: 37px;}
+.availabilityTab table tr td:nth-child(5){padding-right: 35px; }
+.availabilityTab table tr td:nth-child(6){padding-right: 100px;}
 
 .availabilityTab select{
     width:69px;
@@ -1167,7 +1191,7 @@ input.button-2 {
     text-transform: capitalize;
 }
 .userRelationsTab.profile  .button-2{
-    padding-right: 20px;
+    padding-right: 11px;
 }
 #block-confirm, #delete-confirm, #cancel-confirm{
     display: none;
@@ -1254,7 +1278,7 @@ input.button-2 {
     width: auto;
     padding: 21px 0 0 13px;
 }
-#block-confirm, #delete-confirm{
+#block-confirm, #delete-confirm, #unsubscribe-confirm, #unblock-confirm{
     display: none;
 }
 .ui-dialog-buttonset button{
@@ -1650,7 +1674,9 @@ input.button-2 {
     background: url(../images/bg/bottom-shadow-line.png) no-repeat center bottom;
 
 }
-
+.underline{
+    text-decoration: underline;
+}
 .resumeGeneral .headRow h1{
     float:left;
 }
@@ -1927,6 +1953,7 @@ float:right;
     float:left;
     margin-left: 6px;
     margin-right: 22px;
+    margin-bottom: 100px;
 }
 .userProfileTab ul{
     margin-top:28px;
@@ -1969,6 +1996,12 @@ float:right;
     font: 13px helvetica;
 
 }
+.featuresTab .profileRole{
+    font: 11px helvetica;
+    position: relative;
+    right: -19px;
+    top: -17px;
+}
 .userProfileTab .profileRole{
     font: 11px helvetica;
     right: 1px;
@@ -1981,12 +2014,16 @@ float:right;
     display: inline-block;
     padding-left: 15px;
 }
-
+.userProfileTab  .gender.female{
+    background: url("../img/design/accountLayout/glyphicons/female.png") no-repeat scroll 2px 42% transparent;
+}
+.userProfileTab  .gender.male{
+    background: url("../img/design/accountLayout/glyphicons/male.png") no-repeat scroll 1% 42% transparent;
+}
 .userProfileTab  .gender{
-    background: url("../img/design/accountLayout/glyphicons/gift.png") no-repeat scroll 0 42% transparent;
-    display: inline-block;
     padding-left: 15px;
 }
+
 .userProfileTab  .education{
     background: url("../img/design/accountLayout/glyphicons/university.png") no-repeat scroll 0 42% transparent;
     display: inline-block;
@@ -2081,6 +2118,10 @@ float:right;
     font:11px arial;
     position: relative;
     right: 29px;
+}
+
+.userProfileTab .firstSeparator .timezone {
+    float: right; position: relative; font-size: 14px; margin-top: -15px;
 }
 .userProfileTab  .lastSeparator{
     background: url("../img/design/accountLayout/2page_middle_separator.png") no-repeat scroll 0 0 transparent;
@@ -2193,6 +2234,13 @@ float:right;
     text-transform: capitalize;
     width: 100px;
 }
+
+.ui-tabs .metricItem .head{
+    display: inline-block;
+    padding-left: 30px;
+    text-transform: capitalize;
+    width: 230px;
+}
 .admin .metricItem .formRow:nth-child(even){
     background-color: #FCFCFC;
 }
@@ -2241,4 +2289,11 @@ float:right;
     padding: 0 0 0 13px;
     position: relative;
     text-shadow: 1px 1px 1px #ffffff;
+}
+.error {
+    color: #9E4444;
+    font-size: 11px;
+}
+tr.blocked td{
+    color:grey;
 }

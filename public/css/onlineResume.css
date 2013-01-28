@@ -6,17 +6,17 @@
 
 .shadowSeparatorBox {
     padding: 27px 0 70px;
-    background: url(http://aimya.local/images/bg/bottom-shadow-line.png) no-repeat center bottom;
+    background: url(http://aimya.svitla.com/images/bg/bottom-shadow-line.png) no-repeat center bottom;
     min-height: 400px;
 }
 .shadowSeparator {
     padding: 13px 0 0 0;
-    background: url(http://aimya.local/images/bg/top-shadow-line.png) no-repeat center 0;
+    background: url(http://aimya.svitla.com/images/bg/top-shadow-line.png) no-repeat center 0;
     margin-bottom: 9px;
 }
 .shadowSeparatorBoxMid {
     padding: 18px 0 24px 0;
-    background: url(http://aimya.local/images/bg/bottom-shadow-line.png) no-repeat center bottom;
+    background: url(http://aimya.svitla.com/images/bg/bottom-shadow-line.png) no-repeat center bottom;
 }
 .title{
     margin-bottom: 32px;
@@ -25,26 +25,29 @@
 }
 
 .titleInfo{
-    text-align: center;
     font: 700 13px arial;
-    width: 125px;
     margin: 0 auto;
     padding-top: 5px;
+    min-height: 15px;
+    display: inline-block;
+    width: auto;
 }
 
 .titleInfo .degree{
-    background: url(http://aimya.local/img/design/accountLayout/glyphicons/degree.png) no-repeat scroll 0 42% transparent;
+    background: url(http://aimya.svitla.com/img/design/accountLayout/glyphicons/degree.png) no-repeat scroll 0 42% transparent;
     padding-left:15px;
-    width: 28px;
+    margin-left: 10px;
     float:left;
 }
 .titleInfo .language{
-    background: url(http://aimya.local/img/design/accountLayout/glyphicons/language.png) no-repeat scroll 0 42% transparent;
+    background: url(http://aimya.svitla.com/img/design/accountLayout/glyphicons/language.png) no-repeat scroll 0 42% transparent;
     padding-left:15px;
-    width: 38px;
+    margin-left: 10px;
     float:left;
 }
-
+.titlesWrapper {
+    text-align: center;
+}
 h1{
     font-size: 18px;
     line-height: 16px;

@@ -7,70 +7,76 @@
         <div class="shadowSeparatorBox">
 
             <div class="title"><?php echo $this->user['firstname'] . ' ' . $this->user['lastname'] ?></div>
-            <div class="titleInfo"><div
-                class="degree"><?php echo $this->profile['degree'] . '</div> <div class = "language">' . $this->profile['language'] . '</div>' ?>
+            <div class ="titlesWrapper">
+            <span class="titleInfo">
+                <div
+                    class="degree"><?php echo $this->profile['degree'] . '</div> <div class = "language">' . $this->profile['language'] . '</div>' ?>
+                </span>
             </div>
-            <div class="shadowSeparator">
-                <div class="shadowSeparatorBoxMid">
+                <div class="shadowSeparator">
+                    <div class="shadowSeparatorBoxMid">
+                    </div>
                 </div>
-            </div>
-            <!--            OBJECTIVE-->
-            <?php if ($this->profile['objective']): ?>
-            <h1><?php echo $this->translate('objective') .':';?></h1>
-            <div class="textBlock"><?php echo $this->profile['objective']; ?></div>
-            <?php endif;?>
-            <!--      END     OBJECTIVE-->
+                <!--            OBJECTIVE-->
+                <?php if ($this->profile['objective']): ?>
+                <h1><?php echo $this->translate('objective') . ':';?></h1>
+                <div class="textBlock"><?php echo $this->profile['objective']; ?></div>
+                <?php endif;?>
+                <!--      END     OBJECTIVE-->
 
-            <!--            EXPERIENCE -->
-            <?php if ($this->experience): ?>
-            <?php foreach ($this->experience as $value): ?>
-                <h1><?php echo $this->translate('experience') .':';?></h1>
-                <div class="textBlock"><?php echo $value['content']; ?></div>
-                        <?php if (isset($value['certificate'])) {
-                            echo  '<div class="resumeItemCertificates clearfix">Certificates:';
-                            foreach ($value['certificate'] as $index => $cert) {
-                                echo  '<div><a class="certificate" href="/' . $value['certificateUrl'][$index] . '/' . $cert . '">' . $cert . '</a></div>';
-                            }
-                            echo  '</div>';
-                        }
-                        ?>
-                <?php endforeach; ?>
-            <?php endif;?>
-            <!--        END  EXPERIENCE -->
+                <!--            EXPERIENCE -->
+                <?php if ($this->experience): ?>
+                <h1><?php echo $this->translate('experience') . ':';?></h1>
+                <?php foreach ($this->experience as $value): ?>
 
-            <!--            EDUCATION -->
-            <?php if ($this->education): ?>
-            <?php foreach ($this->education as $value): ?>
-                <h1><?php echo $this->translate('education') .':';?></h1>
-                <div class="textBlock"><?php echo $value['content']; ?></div>
-                       <?php if (isset($value['certificate'])) {
+                    <div class="textBlock"><?php echo $value['content']; ?></div>
+                    <?php if (isset($value['certificate'])) {
                         echo  '<div class="resumeItemCertificates clearfix">Certificates:';
-                            foreach ($value['certificate'] as $index => $cert) {
-                                echo  '<div><a class="certificate" href="/' . $value['certificateUrl'][$index] . '/' . $cert . '">' . $cert . '</a></div>';
-                            }
-                            echo  '</div>';
+                        foreach ($value['certificate'] as $index => $cert) {
+                            echo  '<div><a class="certificate" href="/' . $value['certificateUrl'][$index] . '/' . $cert . '">' . $cert . '</a></div>';
                         }
-                        ?>
-                <?php endforeach; ?>
-            <?php endif;?>
-            <!--      END    EDUCATION -->
+                        echo  '</div>';
+                    }
+                    ?>
+                    <?php endforeach; ?>
+                <?php endif;?>
+                <!--        END  EXPERIENCE -->
 
-            <!--            SKILLS -->
-            <?php if ($this->skills): ?>
-            <?php foreach ($this->skills as $value): ?>
-                <h1><?php echo $this->translate('skill') .':';?></h1>
-                <div class="textBlock"><?php echo $value['content']; ?></div>
-                        <?php if (isset($value['certificate'])) {
-                            echo  '<div class="resumeItemCertificates clearfix">Certificates:';
-                            foreach ($value['certificate'] as $index => $cert) {
-                                echo  '<div><a class="certificate" href="/' . $value['certificateUrl'][$index] . '/' . $cert . '">' . $cert . '</a></div>';
-                            }
-                            echo  '</div>';
+                <!--            EDUCATION -->
+                <?php if ($this->education): ?>
+                <h1><?php echo $this->translate('education') . ':';?></h1>
+                <?php foreach ($this->education as $value): ?>
+
+                    <div class="textBlock"><?php echo $value['content']; ?></div>
+                    <?php if (isset($value['certificate'])) {
+                        echo  '<div class="resumeItemCertificates clearfix">Certificates:';
+                        foreach ($value['certificate'] as $index => $cert) {
+                            echo  '<div><a class="certificate" href="/' . $value['certificateUrl'][$index] . '/' . $cert . '">' . $cert . '</a></div>';
                         }
-                        ?>
-                <?php endforeach; ?>
-            <?php endif;?>
-            <!--      END    SKILLS -->
+                        echo  '</div>';
+                    }
+                    ?>
+                    <?php endforeach; ?>
+                <?php endif;?>
+                <!--      END    EDUCATION -->
+
+                <!--            SKILLS -->
+                <?php if ($this->skills): ?>
+                <h1><?php echo $this->translate('skill') . ':';?></h1>
+                <?php foreach ($this->skills as $value): ?>
+
+                    <div class="textBlock"><?php echo $value['content']; ?></div>
+                    <?php if (isset($value['certificate'])) {
+                        echo  '<div class="resumeItemCertificates clearfix">Certificates:';
+                        foreach ($value['certificate'] as $index => $cert) {
+                            echo  '<div><a class="certificate" href="/' . $value['certificateUrl'][$index] . '/' . $cert . '">' . $cert . '</a></div>';
+                        }
+                        echo  '</div>';
+                    }
+                    ?>
+                    <?php endforeach; ?>
+                <?php endif;?>
+                <!--      END    SKILLS -->
+            </div>
         </div>
     </div>
-</div>

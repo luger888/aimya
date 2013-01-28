@@ -6,10 +6,24 @@ $(document).ready(function () {
 
     //timepicker
     var oldDateObj = new Date();
-    var today = new Date(oldDateObj.getTime() + 10*60000);
-    $(function () {
+    var today = oldDateObj.getDate();
 
-        $('#started_at_time').scroller({ preset:'time', theme:'android-ics', ampm:false, timeFormat:'HH:ii',minDate: today});
+    var currentTime = new Date(oldDateObj.getTime() + 10 * 60000);
+
+
+    $(function () {
+        $('#started_at_time').scroller({ preset:'time', theme:'android-ics', ampm:false, timeFormat:'HH:ii'});
+        $('#started_at').change(function () {
+
+            var choosenDate = new Date($('#started_at').val()).getDate();
+            if (choosenDate == today) {
+                $('#started_at_time').val('');
+                $('#started_at_time').scroller({ preset:'time', theme:'android-ics', ampm:false, timeFormat:'HH:ii', minDate:currentTime});
+            } else {
+                $('#started_at_time').scroller({ preset:'time', theme:'android-ics', ampm:false, timeFormat:'HH:ii'});
+            }
+        });
+
     });
 
 //    $.ajaxSetup({
@@ -470,6 +484,28 @@ function massArchive(current_action, url) {
     });
 }
 
+function massRestore(current_action, url) {
+    jQuery("body").append('<div class="loadingIcon"></div>');
+    ids = [];
+    $('.messageCheckboxes:checkbox:checked').each(function () {
+        ids.push($(this).val());
+    });
+
+    idsString = ids.toString();
+    $.ajax({
+        url:url + "/message/massrestore",
+        type:"post",
+        data:{
+            'message_ids':idsString,
+            'current_action':current_action
+        },
+        success:function (result) {
+            jQuery('.loadingIcon').remove();
+            window.location.href = url + "/message/" + current_action + "/current_action/" + current_action;
+        }
+    });
+}
+
 function getTimeLeft() {
     var baseUrl = $('#current_url').val();
     $.ajax({
@@ -480,7 +516,12 @@ function getTimeLeft() {
             if (data.status == 'success') {
                 if ($(".trialAlert").length) $(".trialAlert").remove();
                 inboxLi = $('.leftNavigation').find($('a[href="' + pathName + '/payment"]')).parent();
-                inboxLi.append('<span class="trialAlert"><span class="txt">' + data.timeLeft + ' days left</span></span>')
+                if (data.timeLeft) {
+                    inboxLi.append('<span class="trialAlert"><span class="txt">' + data.timeLeft + ' days left</span></span>')
+                } else {
+                    inboxLi.append('<span class="trialAlert"><span class="txt">End of trial !</span></span>')
+                }
+
             }
         }
     });
@@ -537,7 +578,7 @@ function setDefaultTimezone() {
 function getVideo(e, id) {
 
     var pathName = $('#current_url').val();
-    //jQuery("body").append('<div class="loadingIcon"></div>');
+    jQuery("body").append('<div class="loadingIcon"></div>');
     $.ajax({
         url:pathName + "/lesson/video",
         type:"post",
@@ -545,78 +586,95 @@ function getVideo(e, id) {
             'lesson_id':id
         },
         success:function (result) {
-            $("#notes-dialog").dialog("open");
-            $('.notesWindow').html('<div align="center" valign="middle" id="vp1" >You need to upgrade your flash player</div>');
-            $('.notesWindow').css('width', '500px');
-            $('.notesWindow').css('height', '350px');
-            $('.notesWindow').css('overflow', 'hidden');
-            var parent = $(e).parents('tr');
-            var id = parent.find('input[type=hidden]').val();
-            $("#notes-dialog").dialog({
-                width:546
-            });
-            var focusName = parent.find('.focus');
-            var dateLesson = parent.find('.date');
-            $('.focusDialog').html('Focus: ' + focusName.text());
-            $('.dateDialog').html('Date: '+ dateLesson.text());
-            $('.note:nth-child(even)').append('<div class ="smallSeparatorBot"></div>');
-            $('.note:nth-child(even)').prepend('<div class ="smallSeparatorTop"></div>');
-            $('.dialogFooter').prepend('<input type="hidden" name="les_id" value = "' + id + '">');
-            $('.timeLeftSpan').html(result.date + ' ');
-            if (result.rate) {
-                $('#sendRating').remove();
-                $('.timeLeft').remove();
-                if(result.review){
-                    $('.comment').html('Comment: ' + result.review);
-                }else{
-                    $('.comment').remove();
+            jQuery('.loadingIcon').remove();
+            if (result.videoPath) {
+                if (result.videoPath != 2) {
+                    $("#notes-dialog").dialog("open");
+                    $('.notesWindow').html('<div align="center" valign="middle" id="vp1" >You need to upgrade your flash player</div>');
+                    $('.notesWindow').css('width', '500px');
+                    $('.notesWindow').css('height', '350px');
+                    $('.notesWindow').css('overflow', 'hidden');
+                    var parent = $(e).parents('tr');
+                    var id = parent.find('input[type=hidden]').val();
+                    $("#notes-dialog").dialog({
+                        width:546
+                    });
+                    var focusName = parent.find('.focus');
+                    var dateLesson = parent.find('.date');
+                    $('.focusDialog').html('Focus: ' + focusName.text());
+                    $('.dateDialog').html('Date: ' + dateLesson.text());
+                    $('.note:nth-child(even)').append('<div class ="smallSeparatorBot"></div>');
+                    $('.note:nth-child(even)').prepend('<div class ="smallSeparatorTop"></div>');
+                    $('.dialogFooter').prepend('<input type="hidden" name="les_id" value = "' + id + '">');
+                    $('.timeLeftSpan').html(result.date + ' ');
+                    if (result.isTeacher && !result.rate) {
+                        $('#sendRating').remove();
+                        $('.timeLeft').remove();
+                        $('.comment').remove();
+                        $('#starsBlock').remove();
+                        $('.rate').remove();
+                    }
+                    if (result.rate) {
+                        $('#sendRating').remove();
+                        $('.timeLeft').remove();
+                        if (result.review) {
+                            $('.comment').html('Comment: ' + result.review);
+                        } else {
+                            $('.comment').remove();
+                        }
+
+                        $('#starsBlock').raty({
+                            readOnly:true,
+                            score:result.rate
+                        });
+                    }
+                    var flashvars = {};
+                    var params = {};
+                    var attributes = {};
+
+                    params.codebase = 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0';
+                    params.width = '320';
+                    params.height = '240';
+                    params.quality = 'high';
+                    params.align = 'middle';
+                    params.play = 'true';
+                    params.loop = 'true';
+                    params.scale = 'showall';
+                    params.wmode = 'transparent';
+                    params.devicefont = 'false';
+                    params.bgcolor = '#2e2e2e';
+                    params.allowFullScreen = 'true';
+                    params.allowScriptAccess = 'sameDomain';
+                    params.salign = '';
+
+                    // SETUP
+                    /* <![CDATA[ */
+                    flashvars.width = '500';
+                    flashvars.height = '350';
+                    flashvars.imagepath = '../../images/content/videoPlayer.png';
+                    flashvars.videopath = result.videopath;
+                    //flashvars.color='0x2C75A3'
+                    flashvars.volume = '0.3';
+                    flashvars.fullscreenbutton = 'on';
+                    flashvars.infobutton = 'on';
+                    flashvars.volumebutton = 'on';
+                    flashvars.titletext = 'Dynamic Video Player V5';
+                    flashvars.descriptiontext = 'you can write a short description for your movie';
+                    flashvars.autoplay = 'true';
+
+                    attributes.id = 'vp1';
+                    /* ]]> */
+
+                    swfobject.embedSWF('../../flash/videoplayer.swf', 'vp1', '510', '360', '9.0.0', 'js/expressInstall.swf', flashvars, params, attributes);
+                } else {
+                    alert('Video is converting right now, please try again later.');
                 }
-
-                $('#starsBlock').raty({
-                    readOnly:true,
-                    score:result.rate
-                });
+            }else{
+                alert('Cannot find video on server. Please contact support.');
             }
-            var flashvars = {};
-            var params = {};
-            var attributes = {};
-
-            params.codebase = 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0';
-            params.width = '320';
-            params.height = '240';
-            params.quality = 'high';
-            params.align = 'middle';
-            params.play = 'true';
-            params.loop = 'true';
-            params.scale = 'showall';
-            params.wmode = 'transparent';
-            params.devicefont = 'false';
-            params.bgcolor = '#2e2e2e';
-            params.allowFullScreen = 'true';
-            params.allowScriptAccess = 'sameDomain';
-            params.salign = '';
-
-            // SETUP
-            /* <![CDATA[ */
-            flashvars.width = '500';
-            flashvars.height = '350';
-            flashvars.imagepath = '../../images/content/videoPlayer.png';
-            flashvars.videopath = '../../users/'+result.creator_id +'/'+id+'/video/cvideo.flv';
-            //flashvars.color='0x2C75A3'
-            flashvars.volume = '0.3';
-            flashvars.fullscreenbutton = 'on';
-            flashvars.infobutton = 'on';
-            flashvars.volumebutton = 'on';
-            flashvars.titletext = 'Dynamic Video Player V5';
-            flashvars.descriptiontext = 'you can write a short description for your movie';
-            flashvars.autoplay = 'true';
-
-            attributes.id = 'vp1';
-            /* ]]> */
-
-            swfobject.embedSWF('../../flash/videoplayer.swf', 'vp1', '510', '360', '9.0.0', 'js/expressInstall.swf', flashvars, params, attributes);
         }
     });
+
 }
 function getNotes(e, id) {
     var pathName = $('#current_url').val();
@@ -629,33 +687,46 @@ function getNotes(e, id) {
         },
         success:function (result) {
             jQuery('.loadingIcon').remove();
-            $("#notes-dialog").dialog("open");
-            $('.notesWindow').html(result.notes);
-            var parent = $(e).parents('tr');
-            var id = parent.find('input[type=hidden]').val();
+            if (result.notes) {
+                $("#notes-dialog").dialog("open");
 
-            var focusName = parent.find('.focus');
-            var dateLesson = parent.find('.date');
-            $('.focusDialog').html('Focus: ' + focusName.text());
-            $('.dateDialog').html('Date: '+ dateLesson.text());
-            $('.note:nth-child(even)').append('<div class ="smallSeparatorBot"></div>');
-            $('.note:nth-child(even)').prepend('<div class ="smallSeparatorTop"></div>');
-            $('.dialogFooter').prepend('<input type="hidden" name="les_id" value = "' + id + '">');
-            $('.timeLeftSpan').html(result.date + ' ');
-            if (result.rate) {
-                $('#sendRating').remove();
-                $('.timeLeft').remove();
-                if(result.review){
-                    $('.comment').html('Comment: ' + result.review);
-                }else{
-                    $('.comment').remove();
+                $('.notesWindow').html(result.notes);
+                var parent = $(e).parents('tr');
+                var id = parent.find('input[type=hidden]').val();
+
+                var focusName = parent.find('.focus');
+                var dateLesson = parent.find('.date');
+                $('.focusDialog').html('Focus: ' + focusName.text());
+                $('.dateDialog').html('Date: ' + dateLesson.text());
+                $('.note:nth-child(even)').append('<div class ="smallSeparatorBot"></div>');
+                $('.note:nth-child(even)').prepend('<div class ="smallSeparatorTop"></div>');
+                $('.dialogFooter').prepend('<input type="hidden" name="les_id" value = "' + id + '">');
+                $('.timeLeftSpan').html(result.date + ' ');
+                if (result.isTeacher && !result.rate) {
+                    element.find('#sendRating').remove();
+                    element.find('.timeLeft').remove();
+                    element.find('.comment').remove();
+                    element.find('#starsBlockFeedback').remove();
+                    element.find('.rate').remove();
                 }
+                if (result.rate) {
+                    $('#sendRating').remove();
+                    $('.timeLeft').remove();
+                    if (result.review) {
+                        $('.comment').html('Comment: ' + result.review);
+                    } else {
+                        $('.comment').remove();
+                    }
 
-                $('#starsBlock').raty({
-                    readOnly:true,
-                    score:result.rate
-                });
+                    $('#starsBlock').raty({
+                        readOnly:true,
+                        score:result.rate
+                    });
+                }
+            } else {
+                alert('No such file on server. Please contact support');
             }
+
         }
     });
 }
@@ -671,9 +742,10 @@ function openFeedback(e, lessonId) {
         },
         type:"post",
         success:function (result) {
+            jQuery('.loadingIcon').remove();
             if (result.feedback.content) {
 
-                element = $(result.html);
+                var element = $(result.html);
 
 
                 element.find('#starsBlockFeedback').raty();
@@ -685,19 +757,26 @@ function openFeedback(e, lessonId) {
                 element.find('.focusDialog').html(focusName.text());
                 element.find('.dateDialog').html(result.feedback.created_at);
 
-                jQuery('.loadingIcon').remove();
+
                 //element.find('#feedbackDiv').html(result.feedback.content);
                 //alert(result.feedback.content);
                 $("#details-dialog").html(element);
                 $("#details-dialog").dialog("open");
                 element.find('.dialogFooter').prepend('<input type="hidden" name="les_id" value = "' + id + '">');
                 element.find('.timeLeftSpan').html(result.date + ' ');
+                if (result.isTeacher && !result.rate) {
+                    element.find('#sendRating').remove();
+                    element.find('.timeLeft').remove();
+                    element.find('.comment').remove();
+                    element.find('#starsBlockFeedback').remove();
+                    element.find('.rate').remove();
+                }
                 if (result.rate) {
                     element.find('#sendRating').remove();
                     element.find('.timeLeft').remove();
-                    if(result.review){
+                    if (result.review) {
                         element.find('.comment').html('Comment: ' + result.review);
-                    }else{
+                    } else {
                         element.find('.comment').remove();
                     }
 
@@ -707,6 +786,8 @@ function openFeedback(e, lessonId) {
                     });
                 }
                 return false;
+            } else {
+                alert('No feedback on server. Instructor hadn\'t granted it yet.')
             }
         }
     });
@@ -764,4 +845,93 @@ function sendRating(e) {
         }
     });
 }
+function refund() {
+    var pathName = $('#current_url').val();
+    $(function () {
+        $("#unsubscribe-confirm").dialog({
+            resizable:false,
+            height:140,
+            width:360,
+            modal:true,
+            buttons:{
+                "Yes":function () {
+                    $(this).dialog("close");
+                    jQuery("body").append('<div class="loadingIcon"></div>');
+                    $.ajax({
+                        url:pathName + "/payment/unsubscribe",
+                        type:"post",
+                        data:{
+                            'unsubscribeRequest':1
+                        },
+                        success:function (response) {
+                            window.location.reload();
+                        }
+                    });
+                },
+                No:function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+        $('.ui-icon-alert').remove();
+    });
+    return false;
+}
+function cancelRefund(e) {
+    var id = $(e).nextAll('input[type=hidden]:first').val();
+    var pathName = $('#current_url').val();
+    $(function () {
+        $("#cancel-unsubscribe").dialog({
+            resizable:false,
+            height:140,
+            width:360,
+            modal:true,
+            buttons:{
+                "Send":function () {
+                    $(this).dialog("close");
+                    jQuery("body").append('<div class="loadingIcon"></div>');
+                    $.ajax({
+                        url:pathName + "/payment/unsubscribe",
+                        type:"post",
+                        data:{
+                            'cancelRefund':id
+                        },
+                        success:function (response) {
+                            window.location.reload();
+                        }
+                    });
+                },
+                "Cancel":function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+        $('.ui-icon-alert').remove();
+    });
+    return false;
+}
 
+function approveRefund(e) {
+    var id = $(e).nextAll('input[type=hidden]:first').val();
+    var pathName = $('#current_url').val();
+    jQuery("body").append('<div class="loadingIcon"></div>');
+    $.ajax({
+        url:pathName + "/payment/unsubscribe",
+        type:"post",
+        data:{
+            'approveRefund':id
+            /*'periodRefund': $('#periodRefund'),
+             'pmoneyRefund': $('#periodRefund')*/
+        },
+        success:function (response) {
+            window.location.reload();
+        }
+    });
+}
+
+function showFilename(fileName) {
+    avatarBlock = $('.profileAvatar');
+    if ($(".avatar_name").length) $(".avatar_name").remove();
+    avatarBlock.append('<p class="avatar_name">' + fileName + '</p>');
+    return false;
+}

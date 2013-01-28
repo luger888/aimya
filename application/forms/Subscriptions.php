@@ -10,8 +10,6 @@ class Application_Form_Subscriptions extends Zend_Form
     {
         $subscriptionDb = new Application_Model_DbTable_Subscriptions();
 
-
-
         $period = new Zend_Form_Element_Select('period');
         $period->setAttrib('placeholder', 'Period')
             ->setRequired(true)
@@ -49,7 +47,7 @@ class Application_Form_Subscriptions extends Zend_Form
             ->setDecorators($this->basicDecorators);
 
         if($subscriptionDb->isRefundEnable()){
-
+            $unSubscribe->setAttrib('onClick', 'refund();');
         }else{
             $unSubscribe->setAttrib('class', 'disable button');
 

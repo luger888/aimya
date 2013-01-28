@@ -49,9 +49,9 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         $acl->allow(self::STUDENT , 'user', array('logout', 'timezone'));
         $acl->allow(self::STUDENT , 'lesson', array('index', 'details', 'join', 'upload', 'notes', 'correspondence'));
         $acl->allow(self::STUDENT , 'account', array('index', 'features', 'online', 'offline'));
-        $acl->allow(self::STUDENT , 'resume', array('index'));
+
         $acl->allow(self::STUDENT , 'friends', array('list', 'send'));
-        $acl->allow(self::STUDENT , 'message', array('inbox', 'send', 'sent', 'trash', 'archived'));
+        $acl->allow(self::STUDENT , 'message', array('inbox', 'send', 'sent', 'trash', 'archived', 'masstrash', 'massdelete', 'massarchive', 'massrestore'));
         $acl->allow(self::STUDENT , 'search', array('search'));
         $acl->allow(self::STUDENT , 'booking', array('index'));
         $acl->allow(self::STUDENT , 'feedback', array('create', 'form', 'view'));
@@ -60,6 +60,7 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         $acl->deny(self::STUDENT ,  'user', array('index', 'registration', 'login'));
         $acl->allow(self::TEACHER , 'lesson', array('setup', 'upload'));
         $acl->allow(self::TEACHER , 'review', array('index'));
+        $acl->allow(self::TEACHER , 'resume', array('index', 'pdf', 'download'));
         #allow to guest
         $acl->deny(self::GUEST , 'user', array('logout'));
         $acl->deny(self::GUEST , 'account', array('index'));

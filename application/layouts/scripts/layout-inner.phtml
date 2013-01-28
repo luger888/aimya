@@ -70,12 +70,12 @@ if (Zend_Registry::isRegistered('username')) {
 <div id="page" class="clearfix">
 
     <div id="globalWrapper" class="clearfix">
-        
+
         <div id="wrapper" class="clearfix">
 
                 <div id="header" class="clearfix">
-                    
-                    <a href="<?php echo $this->baseUrl() ?>/booking" id="logo"></a>
+
+                    <a href="<?php echo $this->baseUrl() ?>/account/features" id="logo"></a>
                     <input id="user_activity" type="hidden" value="1">
                     <input id="current_url" type="hidden" value="<?php echo $this->baseUrl()?>">
                     <div class="searchForm headerSearch">
@@ -89,9 +89,9 @@ if (Zend_Registry::isRegistered('username')) {
                     <nav id="globalNav">
                         <ul>
                             <li><a href="<?php echo $this->baseUrl() ?>/booking"><?php echo $this->translate("HOME"); ?></a></li>
-                            <li><a href="<?php echo $this->baseUrl() ?>#">PRIVACY POLICY</a></li>
-                            <li><a href="<?php echo $this->baseUrl() ?>/about.thml">ABOUT AIMYA</a></li>
-                            <li><a href="<?php echo $this->baseUrl() ?>#">HELP</a></li>
+                            <li><a href="<?php echo $this->baseUrl() ?>/policy.html">PRIVACY POLICY</a></li>
+                            <li><a href="<?php echo $this->baseUrl() ?>/about.html">ABOUT AIMYA</a></li>
+                            <li><a href="<?php echo $this->baseUrl() ?>/help.html">HELP</a></li>
                             <li><a href="<?php echo $this->baseUrl() ?>/user/logout/">SIGN OUT</a></li>
                             <li class="last"><a href="#"><?php echo $this->translate('language')?></a>
                             <ul>
@@ -104,9 +104,9 @@ if (Zend_Registry::isRegistered('username')) {
 
                 </div><!--End header-->
 
-                
+
                 <div id="content" class="clearfix">
-                    
+
                     <div id="leftSideBar" class="clearfix">
                         <div class="profileTab clearfix">
                             <h3> <?php echo $username;?></h3>
@@ -115,19 +115,25 @@ if (Zend_Registry::isRegistered('username')) {
                             <div class = "leftNavPhoto clearfix"><img src="<?php echo $avatarPath;?>"></div>
                                 <?php
                                 if($services){
+                                    $i=0;$d=0;
                                     echo '<div class = "leftServices clearfix">';
                                     foreach($services as $value){
+
                                         if($value['rate']){
-                                            echo '<p>$ '.$value['rate']. ' / ' .$value['duration'] . '  ' . $value['subcategory'].'</p>';
+                                             if($i==0)echo '<span class="underline">Offered services:</span><br>';
+                                             echo '<p>'. $value['subcategory'] .', $' .$value['rate'].' per ' . $value['duration'].'min</p>';
+                                            $i++;
                                         }else{
-                                            echo '<p>' . $value['subcategory'].'</p>';
+                                            if($d==0)echo 'Requested services:<br>';
+                                            echo '<p>' . $value['subcategory'] .'</p>';
+                                            $d++;
                                         }
 
                                     }
                                     echo '</div>';
                                 }
                                 ?>
-                            
+
                             <div class="leftNavigation clearfix">
                                 <?php
                                 echo $this->navigation()

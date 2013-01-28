@@ -69,7 +69,7 @@ class AdminController extends Zend_Controller_Action
     {
         $usersDb = new Application_Model_DbTable_Users();
         $subscrDb = new Application_Model_DbTable_Subscriptions();
-        $this->view->userList = $usersDb->getUsers();
+        $this->view->userList = $usersDb->getUsersRefunds();
        // $subscrDb->getLatestSubscription();
     }
 

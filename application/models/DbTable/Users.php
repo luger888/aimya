@@ -11,7 +11,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
     {
 
         $data = $this->select()
-            ->from('user', array('id', 'username', 'firstname', 'lastname', 'password'))
+            ->from('user', array('id', 'username', 'firstname', 'lastname', 'password', 'email'))
             ->where('email=?', $email);
 
         return $data->query()->fetch();
@@ -76,7 +76,20 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         return $this->update($array, $where);
 
     }
+    public function changePass($pass, $user_id)
+    {
 
+        $array = array(
+
+            'password' => preg_replace('#<(.*?)>#', '', md5($pass))
+
+        );
+        $where = $this->getAdapter()->quoteInto('id=?', $user_id);
+
+
+        $this->update($array, $where);
+
+    }
     #recoverPass
 
     public function recoverPass($data)
@@ -90,7 +103,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         $where = $this->getAdapter()->quoteInto('email=?', $data['email']);
 
 
-        $this->update($array, $where);
+        return $this->update($array, $where);
 
     }
 
@@ -119,7 +132,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
             'firstname' => preg_replace('#<(.*?)>#', '', $array['firstname']),
             'lastname' => preg_replace('#<(.*?)>#', '', $array['lastname']),
             'gender' => preg_replace('#<(.*?)>#', '', $array['gender']),
-            'timezone' => preg_replace('#<(.*?)>#', '', $array['timezone']),
+            'timezone' => $array['timezone'],
             'email' => preg_replace('#<(.*?)>#', '', $array['email']),
             'username' => preg_replace('#<(.*?)>#', '', $array['username']),
             'updated_at' => date('Y-m-d H:i:s')
@@ -130,9 +143,9 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
     }
 
-    public function getLatestFeatured($role = '0', $category = 'All', $offset = 0, $count = 5)
+    public function getLatestFeatured($role = 0, $category = 'All', $offset = 0, $count = 5)
     {
-
+        $role = (int)$role;
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
 
         $subQuery = $this->getAdapter()->select()
@@ -146,15 +159,19 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
             ->joinLeft('account', 'account.user_id = sd.user_id', array('account.add_info'))
             ->where('sd.updated_at=?', $subQuery);
 
-        if (Zend_Auth::getInstance()->getIdentity()->role == 1) $role = 2;
-        if ($role !== '0') {
-            $data->where('user.role=?', $role);
+        if ((int)Zend_Auth::getInstance()->getIdentity()->role == (int)1) $role = 2;
+        if ($role != (int)0) {
+            if($role == (int)1) {
+                $data->where('user.role=?', $role);
+            } else {
+                $data->where('user.role>=?', (int)2);
+            }
         }
         if ($category !== 'All') {
             $data->where('sd.lesson_category=?', $category);
         }
         $data->order('sd.updated_at desc')
-            ->limit($count, $offset);
+            ->limit((int)$count, (int)$offset);
 
         $author = $data->query()->fetchAll();
 
@@ -231,9 +248,9 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
     }
 
-    public function getFeaturedCount($role = '0', $category = 'All')
+    public function getFeaturedCount($role = 0, $category = 'All')
     {
-
+        $role = (int)$role;
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
 
         $subQuery = $this->getAdapter()->select()
@@ -246,11 +263,15 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
             ->joinLeft('user', 'user.id = sd.user_id', array('user.id'))
             ->where('sd.updated_at=?', $subQuery);
 
-        if (Zend_Auth::getInstance()->getIdentity()->role == 1) $role = 1;
-        if ($role !== '0') {
-            $data->where('user.role=?', $role);
+        if ((int)Zend_Auth::getInstance()->getIdentity()->role == (int)1) $role = 2;
+        if ($role != (int)0) {
+            if($role == (int)1) {
+                $data->where('user.role=?', $role);
+            } else {
+                $data->where('user.role>=?', (int)2);
+            }
         }
-        if ($category !== 'All') {
+        if ($category != 'All') {
             $data->where('sd.lesson_category=?', $category);
         }
 
@@ -309,9 +330,20 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
     public function getUsers(){
         $students = $this->getAdapter()->select()
+            ->from(array($this->_name), array('id', 'firstname', 'lastname', 'username', 'role', 'status', 'created_at'))
+
+            ->where('status>=?', 1);
+
+
+        return $students->query()->fetchAll();
+    }
+    public function getUsersRefunds(){
+        $students = $this->getAdapter()->select()
             ->from(array('us' => $this->_name), array('id', 'firstname', 'lastname', 'username', 'role', 'status', 'created_at'))
             ->joinLeft('subscription_history', 'us.id = subscription_history.user_id', array('active_to', 'updated_at'))
-            ->where('us.status>=?', 1);
+            ->joinLeft('refund_history', 'us.id = refund_history.user_id', array('subscription_id', 'created_at', 'status'))
+            ->where('us.status>=?', 1)
+            ->where('refund_history.status=?', 0);
 
 
         return $students->query()->fetchAll();

@@ -57,7 +57,7 @@ $(document).ready(function () {
         });
     };
 
-    $('.showMore').click(function () {
+    /*$('.showMore').click(function () {
         var baseUrl = $('#current_url').val();
         var elementCount = $('.shadowSeparator').length;
         jQuery("body").append('<div class="loadingIcon"></div>');
@@ -84,9 +84,50 @@ $(document).ready(function () {
             }
         });
 
-    });
+    });*/
 
 });
+
+function showMoreUsers (){
+    var baseUrl = $('#current_url').val();
+    var elementCount = $('.shadowSeparator').length;
+    jQuery("body").append('<div class="loadingIcon"></div>');
+
+
+
+    $.ajax({
+        url: baseUrl +"/account/features",
+        type: "post",
+        data: {
+            'offset': elementCount,
+            'count': 5
+
+        },
+        success: function(result) {
+            var viewMorButton = $('.feauteresButtons');
+            $('.feauteresButtons').remove();
+            $('.messageContent').append(result.featuredHtml);
+            totalCount = $('.shadowSeparator').length + viewMorButton.children('.shadowSeparator').length;
+            if(totalCount < $('#featured_count').val() ) {
+                $('.messageContent').append(viewMorButton);
+            }
+            jQuery('.loadingIcon').remove();
+        }
+    });
+}
+
+function getParameters() {
+    var searchString = window.location.search.substring(1)
+        , params = searchString.split("&")
+        , hash = {}
+        ;
+
+    for (var i = 0; i < params.length; i++) {
+        var val = params[i].split("=");
+        hash[unescape(val[0])] = unescape(val[1]);
+    }
+    return hash;
+}
 
 function addToFriend(id, obj) {
     element = $(obj);
@@ -101,12 +142,14 @@ function addToFriend(id, obj) {
         },
 
         function (response) {
+            jQuery('.loadingIcon').remove();
             if(response.alertFlash){
                 $('.alertBlock .alert').remove();
-
+                $('.modal').css('visibility', 'visible');
 
                 $('.alertBlock').append('<div class="alert"><div class = "flash-warning">Warning!</div>'+response.alertFlash+'<button type="button" class="close" data-dismiss="alert"></button></div>');
-                $('html, body').animate({scrollTop:0}, 'fast');
+                $('.modal').fadeIn(1000).delay(800).fadeOut(1000);
+                //$('html, body').animate({scrollTop:0}, 'fast');
 
 
 
@@ -123,7 +166,7 @@ function addToFriend(id, obj) {
                     element.parent().append('<a class="sendMessage" href="javascript:void(1)" onclick="sendMessage(' + id + ')">SEND MESSAGE</a>');
                     element.remove();
                 }
-                jQuery('.loadingIcon').remove();
+
             }
 
         })

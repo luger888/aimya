@@ -4,12 +4,16 @@
 
         <ul>
             <li><a href="#tabs-1">general</a></li>
-            <?php if($this->role !== '1'){echo  '<li><a href="' . $this->baseUrl() . '/account/services">SERVICE DETAILS</a></li>';}?>
-            <li><a href="<?php echo $this->baseUrl()?>/account/requestservices">request services</a></li>
-            <li><a href="<?php echo $this->baseUrl()?>/account/availability">availability</a></li>
-            <li><a href="<?php echo $this->baseUrl()?>/account/notifications">notifications/account settings</a></li>
-            <li><a href="<?php echo $this->baseUrl()?>/account/users">users</a></li>
-            <li><a href="<?php echo $this->baseUrl()?>/account/metrics">my metrics</a></li>
+            <?php if($this->role !== '1'){echo  '<li><a href="' . $this->baseUrl() . '/account/services">' . $this->translate('offer service') . '</a></li>';}?>
+            <li><a href="<?php echo $this->baseUrl()?>/account/requestservices"><?php echo $this->translate('request service') ?></a></li>
+            <li><a href="<?php echo $this->baseUrl()?>/account/availability"><?php echo $this->translate('availability') ?></a></li>
+            <li><a href="<?php echo $this->baseUrl()?>/account/notifications"><?php echo $this->translate('notifications/account settings') ?></a></li>
+            <li><a href="<?php echo $this->baseUrl()?>/account/users"><?php echo $this->translate('users') ?></a></li>
+            <?php if($this->role !== '1'){
+            echo '<li><a href="'. $this->baseUrl().'/account/metrics">' . $this->translate('my metrics') . '</a></li>';
+}
+?>
+
         </ul>
 
     </div><!--End tabsNavigation-->
@@ -29,7 +33,7 @@
 
                         <div class="leftCol">
 
-                            <h1>YOUR BASIC INFORMATION:</h1>
+                            <h1><?php echo $this->translate('Mandatory Information:');?></h1>
 
                             
                             <div class="formRow clearfix"> 
@@ -70,14 +74,19 @@
                             <div class="formRow clearfix"> 
                                 <label class="title">Time Zone:</label>
                                 <div class="formElem"><?php echo $this->profile->timezone; ?></div>
-                            </div><!--End formRow--> 
-                            
+                            </div><!--End formRow-->
+
                         </div><!--End leftCol-->
 
                         <div class="rightCol">
 
                             <div class="profileAvatar">
                                 <div class="profileAvaBox clearfix">
+                                    <?php /*$profileModel = new Application_Model_Profile();
+                                    $servicesModel  = new Application_Model_DbTable_ServiceDetail();
+                                    $username = $userModel->getUser($identity->id);
+                                    $avatarPath = $profileModel->getAvatarPath($identity->id, 'medium');*/
+                                    ?>
                                     <div class="profileAvaImg"><img src="<?php echo $this->avatarPath;?>" alt="avatar"></div>
                                 </div><!--End profileAvaBox-->
                                 <div class="profileAvaButtons clearfix">
@@ -89,8 +98,9 @@
                             
                         </div><!--End rightCol-->
 
-
+                        <div class="info">Your Address, phone number(s), and date of birth will not be viewable by any user on the site. They will only be displayed in PDF format for online and printable resumes</div>
                     </div><!--End shadowSeparatorBox-->
+
                     </div><!--End shadowSeparator--> 
 
                     <div class="shadowSeparator clearfix">

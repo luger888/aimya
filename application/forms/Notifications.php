@@ -16,7 +16,7 @@ class Application_Form_Notifications extends Zend_Form
         $notify = new Zend_Form_Element_MultiCheckbox('notify');
         $notify->setDecorators($this->basicDecorators);
         for ($i=5;$i>0;$i--) {
-        $notify->addMultiOption($i, 'I want to notify me when I receive ' . $i . ' star rating');
+        $notify->addMultiOption($i, 'I want to notify me when I receive ' . $i . ' star lesson rating');
         }
         /* END -- Teacher Star Notifications */
 
@@ -25,30 +25,33 @@ class Application_Form_Notifications extends Zend_Form
         $alert->setDecorators($this->basicDecorators);
         $alert->addMultiOption('email', 'Receive Alerts via Email');
         $alert->addMultiOption('message', 'Receive Alert when I have a new message');
-        $alert->addMultiOption('payment', 'Receive Alert when payment is made to me');
+        if($identity->role == $this->student){
+            $alert->addMultiOption('refund', 'Receive Alert when Refund is made to me');
+        }
         if($identity->role != $this->student){
-            $alert->addMultiOption('review', 'Receive Alert when someone wrote review on my page');
+            $alert->addMultiOption('payment', 'Receive Alert when payment is made to me');
+            $alert->addMultiOption('review', 'Receive Alert when someone wrote lesson review on my page');
         }
         /* END -- Alerts */
 
 
         /* Change password */
         $oldPassword = new Zend_Form_Element_Password('oldPassword');
-        $oldPassword->addValidator('stringLength', false, array(6, 200))
+        $oldPassword//->addValidator('stringLength', false, array(6, 200))
             ->setAttrib('class', 'clearInput required')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators)
             ->setErrorMessages(array('Insert your old password'));
 
         $newPassword = new Zend_Form_Element_Password('newPassword');
-        $newPassword ->addValidator('stringLength', false, array(6, 200))
+        $newPassword //->addValidator('stringLength', false, array(6, 200))
             ->setAttrib('class', 'clearInput required')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators)
             ->setErrorMessages(array('Insert your password'));
 
         $newPasswordConfirm = new Zend_Form_Element_Password('newPasswordConfirm');
-        $newPasswordConfirm->addValidator('stringLength', false, array(6, 200))
+        $newPasswordConfirm//->addValidator('stringLength', false, array(6, 200))
             ->setAttrib('class', 'clearInput required')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators)
@@ -65,7 +68,7 @@ class Application_Form_Notifications extends Zend_Form
 
         $this->addElement($alert);
         $this->addElements(array($oldPassword, $newPassword, $newPasswordConfirm));
-        if($identity->role == $this->teacher){
+        if($identity->role != $this->student){
             $this->addElement($notify);
         }
         $this->addElement($submit);

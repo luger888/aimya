@@ -5,39 +5,26 @@ class Application_Model_DbTable_Refund extends Application_Model_DbTable_Abstrac
 
     protected $_name = 'refund_history';
 
-    public function createRefund($data = array())
+    public function createRefund($subId, $user_id)
     {
 
         $data = array(
-            'subscription_id' => $data['subscription_id'],
-            'user_id' => $data['user_id'],
-            'period' => $data['period'],
-            'refunded_money' => $data['refunded_money'],
+            'subscription_id' => $subId,
+            'user_id' => $user_id,
+            'status' => 0,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
         );
 
-        $insert = $this->insert($data);
-        if ($insert) {
-            return true;
-        } else {
-            return false;
-        }
+        return $this->insert($data);
 
     }
 
-    public function cancelRefund($subscriptionId, $status)
+    public function cancelRefund($subscriptionId)
     {
+        $where = $this->getAdapter()->quoteInto('subscription_id=?', $subscriptionId);
 
-        $data = array(
-            'status' => $status,
-            'updated_at' => date('Y-m-d H:i:s')
-        );
-
-        $where[] = $this->getAdapter()->quoteInto('id=?', $subscriptionId);
-
-
-        $this->update($data, $where);
+        $this->delete($where);
     }
 
     public function getRefunds($userId)
@@ -52,15 +39,15 @@ class Application_Model_DbTable_Refund extends Application_Model_DbTable_Abstrac
         return $data->query()->fetch();
     }
 
-    public function approveRefund($subscriptionId, $status)
+    public function approveRefund($subscriptionId)
     {
 
         $data = array(
-            'status' => $status,
+            'status' => 1,
             'updated_at' => date('Y-m-d H:i:s')
         );
 
-        $where[] = $this->getAdapter()->quoteInto('id=?', $subscriptionId);
+        $where[] = $this->getAdapter()->quoteInto('subscription_id=?', $subscriptionId);
 
 
         $this->update($data, $where);

@@ -2,6 +2,8 @@
 
 class Application_Form_Cms extends Zend_Form
 {
+    public $basicDecorators = array('ViewHelper', 'Errors');
+    public $basicFilters = array('StripTags', 'StringTrim');
 
     public function init()
     {
@@ -26,6 +28,18 @@ class Application_Form_Cms extends Zend_Form
             ->setAttrib('id', 'cmsUri')
             ->addValidator('stringLength', false, array(2, 50));
 
+        $language = new Zend_Form_Element_Select('language');
+        $language->setRequired(true)
+            ->setAttrib('id', 'language')
+            ->setErrorMessages(array('please choose page language'))
+            ->addFilters($this->basicFilters)
+            ->setDecorators($this->basicDecorators)
+            ->addMultiOptions(array(
+            'en'   => 'english',
+            'ja'   => 'japanese',
+            'zh'   => 'chinese',
+        ));
+
         $content = new Aimya_Form_Element_Wysiwyg('contentCKE');
        // $content->setLabel('Page content');
 
@@ -33,7 +47,7 @@ class Application_Form_Cms extends Zend_Form
         $submit->setAttrib('id', 'cmsSubmit')
                 ->setAttrib('class', 'button floatRight');
 
-        $this->addElements(array($id, $name, $uri, $content, $submit));
+        $this->addElements(array($id, $name, $uri, $language, $content, $submit));
 
     }
 

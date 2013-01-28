@@ -61,12 +61,14 @@ if ($this->skills) {
 $html .= "</div>
 </div>";
 
+$pdfName = $this->user['firstname'] . "_" . $this->user['lastname'];
+
 $mpdf = new Aimya_Mpdf_mpdf();
 $mpdf->showImageErrors = false;
 $mpdf->SetDisplayMode('fullpage');
 $mpdf->WriteHTML($stylesheet, 1);
 $mpdf->WriteHTML($html, 2);
-$mpdf->Output();
+$mpdf->Output($pdfName, 'D');
 exit;
 
 

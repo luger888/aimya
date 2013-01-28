@@ -36,7 +36,21 @@
                 });
 
                 function changeFlashLayout(flashType) {
-
+                    if(flashType == 1) {
+                        if($("#flash_div").children('span').length < 1) {
+                            $("#flash_div").append('<span></span>');
+                        } else {
+                            return false;
+                        }
+                    }
+                    if(flashType == 0) {
+                        if($("#flash_element").children('span').length < 1) {
+                            $("#flash_element").append('<span></span>');
+                        } else {
+                            return false;
+                        }
+                    }
+                    //jQuery("body").append('<div class="loadingIcon"></div>');
                     //var element = '<?php echo $this->flashObj; ?>';
                     $.ajax({
                         url: "<?php echo $this->baseUrl()?>/lesson/updatesize",
@@ -47,30 +61,35 @@
 
                         },
                         success: function(result) {
-                        }
-                    });
+                            if(result.answer == 'success') {
 
-                    $.ajax({
-                        url: "<?php echo $this->baseUrl()?>/lesson/join",
-                        type: "post",
-                        success: function(result) {
-                            element = result.flashObj;
-                            if(flashType == 1) {
-                                $('#flash_element').html('');
-                                jQuery('#page').hide();
-                                jQuery('#leftBg').hide();
-                                $('#flash_div').show();
-                                jQuery('#flash_div').append(element);
-                            } else{
-                                $('#flash_div').html('');
-                                $('#flash_div').hide();
-                                jQuery('#page').show();
-                                jQuery('#leftBg').show();
-                                jQuery('#flash_element').append(element);
+                                $.ajax({
+                                    url: "<?php echo $this->baseUrl()?>/lesson/join",
+                                    type: "post",
+                                    success: function(result) {
+                                        //jQuery('.loadingIcon').remove();
+                                        element = result.flashObj;
+                                        if(flashType == 1) {
+                                            $('#flash_element').html('');
+                                            jQuery('#page').hide();
+                                            jQuery('#leftBg').hide();
+                                            $('#flash_div').show();
+                                            //$("#flash_div").find('span').remove()
+                                            jQuery('#flash_div').append(element);
+                                        } else{
+                                            $('#flash_div').html('');
+                                            $('#flash_div').hide();
+                                            jQuery('#page').show();
+                                            jQuery('#leftBg').show();
+                                            //$("#flash_element").find('span').remove()
+                                            jQuery('#flash_element').append(element);
+                                        }
+                                    }
+                                });
+
                             }
                         }
                     });
-
                 }
             </script>
             <?php endif;?>

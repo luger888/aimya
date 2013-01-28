@@ -55,7 +55,7 @@ body {
 }
 
 .signInBox {
-    float: right;
+    float: left;
     width: 185px;
     margin-top: 14px;
     margin-left: 0px;
@@ -407,7 +407,50 @@ input.btnLogin {
     left: 1px !important;
     opacity: 1 !important;
     position: relative;
-    top: -16px !important;
     width: 12px;
 }
+.alert.success{
+    color:#537e6a !important;
+    background-color: #cce8bf !important;
+    border: 1px solid #a0c58e !important;
+}
 
+.alert.success .flash-success{
+    font: 700 11px Arial !important;
+    color: #315b47 !important;
+}
+.alert .close {
+    line-height: 20px;
+    position: relative;
+    width:12px;
+    height: 12px;
+    opacity: 1 !important;
+    float:right;
+}
+.alert.success .close {
+    background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat 33% 0;
+}
+.footerNav{
+    float:right;
+
+}
+
+.footerNav li{
+    list-style: none;
+    float:left;
+    padding-right:10px;
+    /*background: url("../images/elem/navFooterSeparator.png") no-repeat scroll 0 center transparent;*/
+    padding-left: 15px;
+}
+.footerNav li:first-child {
+    background: none repeat scroll 0 0 transparent;
+}
+.footerNav li:last-of-type{
+    margin-right:10px;
+}
+.footerNav li:first-letter{
+    text-transform: uppercase;
+}
+.copyright div:nth-child(even){
+    float:left;
+}

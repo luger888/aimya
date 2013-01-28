@@ -113,6 +113,26 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
 
     }
 
+    public function downloadAction()
+    {
+        $identity = Zend_Auth::getInstance()->getStorage()->read();
+
+        $dbProfile = new Application_Model_DbTable_Profile();
+        $dbUser = new Application_Model_DbTable_Users();
+        $dbExperience = new Application_Model_DbTable_ResumeExperience();
+        $dbEducation = new Application_Model_DbTable_ResumeEducation();
+        $dbSkills = new Application_Model_DbTable_ResumeSkills();
+
+
+        $this->view->profile = $dbProfile->getItem($identity->id);
+        $this->view->user = $dbUser->getItem($identity->id);
+        $this->view->experience = $dbExperience->getExperiences($identity->id);
+        $this->view->education = $dbEducation->getEducations($identity->id);
+        $this->view->skills = $dbSkills->getSkills($identity->id);
+
+
+    }
+
     public function ajaxAction()
     {
         $identity = Zend_Auth::getInstance()->getStorage()->read();
@@ -224,7 +244,6 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
         // Set the upload directory
         // $_POST['resumeType']  == experience, education or skill
         $uploadDir = '/img/uploads/' . $identity->id . '/certificate/' . $_POST['resumeType'] . '/' . $_POST['resumeTypeId'] . '/';
-
 
         // Set the allowed file extensions
         $fileTypes = array('jpg', 'jpeg', 'gif', 'png'); // Allowed file extensions

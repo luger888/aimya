@@ -77,6 +77,7 @@ function editService(e, service_type, url){
                             '<span class = "field-66"><input id="rateEditInput" value ="'+rate+'"></span><span class = "txt"> per </span>' +
                             '<span class = "s-86">' + durationDropdown + '</span>' +
                         '</div>'+
+                        '<div class ="errorBlock"></div>'+
                         '<div class="serviceDesc clearfix">' +
                             '<h2>DESCRIBE YOUR SERVICE DETAILS:</h2>' +
                             '<textarea  id="descriptionEditInput">'+description+'</textarea>'+
@@ -94,6 +95,11 @@ function editService(e, service_type, url){
                             '<span class = "s-116">' + categoriesDropdown + '</span>' +
                             '<span class = "field-116"> <input id="subcategoryEditInput" value ="'+subcategory+'"></span>' +
                         '</div>'+
+                        '<div class ="errorBlock"></div>'+
+                        '<div class="serviceDesc clearfix">' +
+                            '<h2>DESCRIBE YOUR SERVICE DETAILS:</h2>' +
+                            '<textarea  id="descriptionEditInput">'+description+'</textarea>'+
+                        '</div>' +
                         '<div class="buttonsRow clearfix">'+
                             '<input type = "button" value="save" class="updateService button-2 save" onclick="updateService(this, 2, ' + url + ')";>'+
                             '<input type = "hidden" value="'+ id +'">'+
@@ -126,6 +132,9 @@ function updateService(e, service_type, url){
     var rate = serviceWrapper.find('#rateEditInput').val();
     var duration = serviceWrapper.find('#durationEditInput').val();
     var description = serviceWrapper.find('#descriptionEditInput').val();
+
+    if($('#rateEditInput').val() % 1 === 0 || service_type == 2){
+
     if(service_type == 1){
         $.ajax({
             url: url,
@@ -144,7 +153,7 @@ function updateService(e, service_type, url){
             }
 
         });
-    }else{
+    }else if(service_type == 2){
         $.ajax({
             url: url,
             type: "post",
@@ -154,7 +163,7 @@ function updateService(e, service_type, url){
                 'subcategory': subcategory,
                 'rate': '',
                 'duration': '',
-                'description': '',
+                'description': description,
                 'service_type': 2
             },
             success: function (response){
@@ -162,6 +171,22 @@ function updateService(e, service_type, url){
             }
         });
     }
+
+    }else{
+        $('.errorBlock').html('<span class = "error">This must be a number.  Currency is in US Dollars.</span>');
+        return false;
+    }
+
+
+}
+function validateService(){
+    if($('#rateInput').val() % 1 === 0){
+        return true;
+    }else{
+        $('.errorBlock').html('<span class = "error">This must be a number.  Currency is in US Dollars.</span>');
+        return false;
+    }
+
 
 
 

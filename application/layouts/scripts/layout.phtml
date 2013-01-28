@@ -52,11 +52,7 @@ $controllerName = $front->getRequest()->getControllerName();
                 <div class="signInButton">
                     <?php echo $this->login['login'] ?>
                 </div><!--End signInButton-->
-                <div class="signInBox">
-                    <label class="title"><?php echo $this->translate("password") ?>:</label>
-                    <?php echo$this->login['password'] ?>
-                    <a href="<?php echo$this->baseUrl()?>#"><?php echo $this->translate("forgot your password")?>?</a>
-                </div><!--End signInBox-->
+
                 <div class="signInBox">
                     <label class="title"><?php echo $this->translate("login or email") ?>:</label>
                     <?php echo $this->login['username'] ?>
@@ -65,6 +61,11 @@ $controllerName = $front->getRequest()->getControllerName();
                         <label><?php echo $this->translate("keep me signed in") ?></label>
                     </div><!--End loginRemember-->
                 </div><!--End signInBox-->
+                    <div class="signInBox">
+                        <label class="title"><?php echo $this->translate("password") ?>:</label>
+                        <?php echo$this->login['password'] ?>
+                        <a href="<?php echo$this->baseUrl()?>/user/recovery"><?php echo $this->translate("forgot your password")?>?</a>
+                    </div><!--End signInBox-->
                 </form>
             </div>
             <!-- END /LOGIN -->
@@ -90,8 +91,15 @@ $controllerName = $front->getRequest()->getControllerName();
 
 <div id='footer' class="clearfix">
     <div class="copyright">
-        <p>Copyright 2012 Aimya</p>
-        <p>Created by <a href="#" title="Svitla Systems">Svitla.com</a></p>
+        <div>Copyright 2012 Aimya</div>
+        <div>Created by <a href="#" title="Svitla Systems">Svitla.com</a></div>
+        <ul class="footerNav">
+
+            <li><a href="<?php echo $this->baseUrl() ?>/about.html"><?php echo $this->translate('about')?></a></li>
+            <li><a href="<?php echo $this->baseUrl() ?>/help.html"><?php echo $this->translate('contact us')?></a></li>
+            <li><a href="<?php echo $this->baseUrl() ?>/policy.html"><?php echo $this->translate('privacy policy')?></a></li>
+            <li><a href="<?php echo $this->baseUrl() ?>/help.html"><?php echo $this->translate('terms and conditions')?></a></li>
+                <ul>
     </div><!--End copyright-->
 </div><!--End footer-->
 

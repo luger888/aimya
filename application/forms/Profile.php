@@ -19,22 +19,23 @@ class Application_Form_Profile extends Zend_Form
         // Create one big image with at most 143x300 pixel
 
         $filterChain->appendFilter(new Aimya_Filter_File_Resize(array(
-        'directory' => './img/uploads/'.$identity->id.'/avatar/base/',
-        'width' => 143,
-        'height' => 270,
-        'keepRatio' => true,
-    )));
+            'directory' => './img/uploads/'.$identity->id.'/avatar/base/',
+            'width' => 143,
+            'height' => 142,
+            'keepRatio' => false,
+        )));
         // Create a medium image with at most 104x220 pixels
         $filterChain->appendFilter(new Aimya_Filter_File_Resize(array(
             'directory' => './img/uploads/'.$identity->id.'/avatar/medium/',
             'width' => 127,
-            'height' => 240,
-            'keepRatio' => true,
+            'height' => 126,
+            'keepRatio' => false,
         )));
 
         $avatar = new Zend_Form_Element_File('avatar');
         $avatar
             ->setAttrib('id', 'avatar')
+            ->setAttrib('onchange', 'showFilename(this.value);')
             ->addValidator('Size', false, 1024000)
             ->addValidator('Extension', false, 'jpg,png,gif,jpeg')
             ->addFilter($filterChain)
@@ -101,7 +102,7 @@ class Application_Form_Profile extends Zend_Form
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
             foreach ($timeZones as  $value) {
-              $timeZone->addMultiOption($value['gmt'], $value['name']);
+              $timeZone->addMultiOption($value['id'], $value['name']);
             }
         $intro = new Zend_Form_Element_Textarea('add_info');
         $intro->setLabel('Introduce Yourself')

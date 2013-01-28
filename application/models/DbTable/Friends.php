@@ -12,8 +12,8 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
         $row = $this->fetchAll(
             $this->select()
                 ->where($this->getAdapter()->quoteInto('sender_id=?' , $userId) . ' OR ' . $this->getAdapter()->quoteInto('friend_id=?' , $userId))
-                ->where('sender_status=?' , 1)
-                ->where('recipient_status=?' , 1)
+                ->where('(' . $this->getAdapter()->quoteInto('sender_status=?' , 1) . ') OR (' . $this->getAdapter()->quoteInto('sender_status=?' , 2) . ')')
+                ->where('(' . $this->getAdapter()->quoteInto('recipient_status=?' , 1) . ') OR (' . $this->getAdapter()->quoteInto('recipient_status=?' , 2) . ')')
                 ->group('id')
         );
         if (!$row) {
@@ -25,19 +25,19 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
     public function updateUserStatus($array = array(), $user_id)
     {
 
-        $data = array(
+        $friendField = $this->isInList($array['updateUserId']);
+        if($friendField) {
 
-            'sender_status'=> $array['status'],
-            'updated_at' => date('Y-m-d H:i:s')
+            $where = $this->getAdapter()->quoteInto('id=?', $friendField['id']);
 
-        );
-        $where = array(
+            if($friendField['sender_id'] == $user_id) {
+                $data = array('sender_status'=> $array['status'], 'updated_at' => date('Y-m-d H:i:s'));
+            } else {
+                $data = array('recipient_status'=> $array['status'], 'updated_at' => date('Y-m-d H:i:s'));
+            }
 
-            $this->getAdapter()->quoteInto('friend_id=?', $array['updateUserId']),
-            $this->getAdapter()->quoteInto('sender_id=?', $user_id)
-
-        );
-        $this->update($data, $where);
+            $this->update($data, $where);
+        }
     }
 
     public function isFriend($friendId)
@@ -149,5 +149,23 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
         $result = $data->query()->fetch();
 
         return $result;
+    }
+
+    public function getJoinedPeers($perion = 'total') {
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+
+        $data = $this->getAdapter()->select()
+            ->from($this->_name, array('peers_count' => 'COUNT(updated_at)'))
+            ->where('(' . $this->getAdapter()->quoteInto('sender_id=?' , $userId) . ' OR ' . $this->getAdapter()->quoteInto('friend_id=?' , $userId) . ')')
+            ->where($this->getAdapter()->quoteInto('sender_status=?' , 1))
+            ->where($this->getAdapter()->quoteInto('recipient_status=?' , 1));
+            if($perion != 'total') {
+                $data->where('(updated_at >= DATE_SUB(NOW(), INTERVAL 1 MONTH) AND updated_at < NOW())');
+                /*} else {
+                    $data->where('YEAR(updated_at) = YEAR(CURRENT_DATE)');
+                }*/
+            }
+
+        return $data->query()->fetch();
     }
 }

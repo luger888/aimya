@@ -48,7 +48,8 @@ class Application_Model_Lesson
     {
 
         $port = rand(4000, 4999);
-        passthru("phase1_startenv.sh $lessonId $port", $result);
+        passthru("/usr/local/bin/phase1_startenv.sh $lessonId $port", $result);
+
         if ($result == 0) {
             return $port;
         } else {
@@ -59,9 +60,9 @@ class Application_Model_Lesson
     public function openLesson($lessonId, $port)
     {
 
-        exec("phpscr.sh $lessonId $port > /dev/null 2>/dev/null &", $result);
+        exec("/usr/local/bin/phpscr.sh $lessonId $port > /dev/null 2>/dev/null &", $result);
 
-        if($result == 0) {
+        if ($result == 0) {
             return true;
         } else {
             return false;
@@ -96,15 +97,29 @@ class Application_Model_Lesson
     public function getNotes($lessonId, $teacherId)
     {
         $notePath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'notes' . DIRECTORY_SEPARATOR . 'notes.txt';
-        $fileContent = file_get_contents($notePath);
-        return $fileContent;
+        if (file_exists($notePath) OR is_dir($notePath)) {
+            $fileContent = file_get_contents($notePath);
+            return $fileContent;
+        } else {
+            return false;
+        }
+
+
     }
 
-    public function getVideo($lessonId)
+    public function getVideo($lessonCreatorId, $id)
     {
-        $identityId = Zend_Auth::getInstance()->getIdentity()->id;
-        $notePath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'notes' . DIRECTORY_SEPARATOR . 'notes.txt';
-
+        $path = '../../users/' . $lessonCreatorId . '/' . $id . '/video/video_lesson.flv';
+        $pathMkv = '../../users/' . $lessonCreatorId . '/' . $id . '/video/video_lesson.mkv';
+        if ((file_exists($path) OR is_dir($path))) {
+            if (!file_exists($pathMkv) OR !is_dir($pathMkv)) {
+                return $path;
+            } else {
+                return 2;
+            }
+        } else {
+            return false;
+        }
 
 
     }
@@ -153,7 +168,7 @@ class Application_Model_Lesson
 
     function write($the_string)
     {
-        if ($fh = @fopen("./logfile.txt", "a+")) {
+        if ($fh = @fopen("./img/logfile.txt", "a+")) {
             fputs($fh, $the_string, strlen($the_string));
             fclose($fh);
             return (true);
@@ -210,7 +225,7 @@ class Application_Model_Lesson
             }
             $currentTimeUtc = strtotime($dateWithUTC); //currentTime + UTC of user to UNIX stamp
             $timeDifference = $starting_time - $currentTimeUtc;
-            if ($timeDifference <= $reserveSeconds && $timeDifference > 0) { //if difference between current time and starting is 10 minutes or less, but not less than 0
+            if ($timeDifference <= $reserveSeconds && $timeDifference > 0) { //if difference between starting time and current is 10 minutes or less, but not less than 0
                 $isOnline = 1;
 
                 if ($bookingTable->isTeacher($lesson['booking']['id'], $identity->id)) { //if user is a teacher in current lesson
@@ -244,7 +259,13 @@ class Application_Model_Lesson
                 }
 
             } else {
-                $lesson['booking']['waiting'] = 1;
+                if($timeDifference < 0){
+                    $lesson['booking']['expired'] = 1;
+                }else{
+                    $lesson['booking']['waiting'] = 1;
+                }
+
+
                 $isOnline = 0;
             }
 

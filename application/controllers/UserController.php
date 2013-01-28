@@ -50,7 +50,7 @@ class UserController extends Zend_Controller_Action
                 $model = new Application_Model_User();
                 $this->view->message = $model->approveUser($data);
 
-                $this->_helper->flashMessenger->addMessage(array('success'=>'Account confirmed. Please login to your account'));
+                $this->_helper->flashMessenger->addMessage(array('success'=>'Your account has been confirmed. Please login'));
                 $this->_helper->redirector('index', 'index');
 
             }
@@ -62,16 +62,35 @@ class UserController extends Zend_Controller_Action
 
     public function recoveryAction()
     {
+        $this->_helper->layout->setLayout("layout");
+        $this->view->headScript()->appendFile('../../js/jquery/validation/registrationValidation.js');
+        $login = new Application_Form_Login();
+        $recoveryForm = new Application_Form_Recovery();
+
+        $this->view->login = $login->getElements();
+        $this->view->recovery = $recoveryForm->getElements();
+
         if($this->getRequest()->isPost()){
-
-            $model = new Application_Model_User();
-            $email = $this->getRequest()->getPost('email');
-            if ($email) {
-                $this->view->message = $model->passRecovery($email);
+            $formData = $this->getRequest()->getParams();
+            if ($recoveryForm->isValid($formData)) {
+                $model = new Application_Model_User();
+                $email = $this->getRequest()->getParam('email');
+                if ($email) {
+                    $this->view->message = $model->passRecovery($email);
+                    $result = $model->passRecovery($email);
+                    if($result) {
+                        $this->_helper->flashMessenger->addMessage(array('success'=>'Your password was successfully changed. Please check your email to get new password'));
+                        $this->_helper->redirector('recovery', 'user');
+                    } else {
+                        $this->_helper->flashMessenger->addMessage(array('failure'=>'Problem with sending email'));
+                        $this->_helper->redirector('recovery', 'user');
+                    }
+                } else {
+                    $this->view->message = 'no e-mail';
+                }
             } else {
-                $this->view->message = 'no e-mail';
+                $this->view->message = 'form data is not valid';
             }
-
         }
     }
 
@@ -110,7 +129,6 @@ class UserController extends Zend_Controller_Action
                     $authStorage->write($identity);
 
                     $this->view->status = $identity->status;
-
 
                 }else{
 
@@ -183,4 +201,5 @@ class UserController extends Zend_Controller_Action
             }
         }
     }
+
 }

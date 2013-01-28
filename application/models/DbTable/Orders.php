@@ -72,4 +72,22 @@ class Application_Model_DbTable_Orders extends Application_Model_DbTable_Abstrac
         return $income;
     }
 
+    public function getUserIncome($perion = 'total') {
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+
+        $data = $this->getAdapter()->select()
+            ->from($this->_name, array('user_profit' => 'SUM(teacher_profit)'))
+            ->where($this->getAdapter()->quoteInto('seller_id=?' , $userId))
+            ->where($this->getAdapter()->quoteInto('status=?' , 'complete'));
+        if($perion != 'total') {
+            if($perion == 'month') {
+            $data->where('(updated_at >= DATE_SUB(NOW(), INTERVAL 1 MONTH) AND updated_at < NOW())');
+            } else {
+                $data->where('YEAR(updated_at) = YEAR(CURRENT_DATE)');
+            }
+        }
+
+        return $data->query()->fetch();
+    }
+
 }
