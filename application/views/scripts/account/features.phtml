@@ -38,7 +38,7 @@
                         } elseif ($isPending) {
                             echo "<span class ='request_sent'>" . $this->translate('REQUEST SENT') . "</span>";
                         } else {
-                            if($isInList['friend_id'] == Zend_Auth::getInstance()->getIdentity()->id && $isInList['recipient_id'] == 0) {
+                            if($isInList['friend_id'] == Zend_Auth::getInstance()->getIdentity()->id && $isInList['recipient_status'] == 0) {
                                 $defaultRequestText = 'Hello ' . $person['username'] . ', I have approved your request.';
                                 echo "<a class ='button-2 add addAccount' onclick='showFriendFormFeatured(" . $person['id'] . ", \"$defaultRequestText\", this)' href='javascript:void(1)'>" . $this->translate('ADD TO MY ACCOUNT') . "</a>";
                             } else {

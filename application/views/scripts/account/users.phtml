@@ -7,6 +7,7 @@
                     <td> First Name</td>
                     <td> Last Name</td>
                     <td> User Name</td>
+                    <td> User Role</td>
                     <td> Time Zone</td>
                     <td> Block / Delete</td>
                 </tr>
@@ -18,12 +19,19 @@
                 if ($this->friends) {
                     foreach ($this->friends as $value) {
 
+                        if ($value['role'] == '1') {
+                            $role = 'Student';
+                        } else {
+                            $role = 'Instructor';
+                        }
+
                         if ($value['status'] != 2) {
 
                             echo '<tr>
         <td>' . $value['firstname'] . '</td>
         <td>' . $value['lastname'] . '</td>
         <td>' . $value['username'] . '</td>
+        <td>' . $role . '</td>
         <td>UTC ' . $value['timezone'] . '</td>
         <td><input type = "button" value="BLOCK" class = "button-2 block"  onclick ="blockUser(this, ' . $url . ');return false;"></div><input type = "button" value = "DELETE" class="button-2 delete" onclick="deleteUser(this, ' . $url . ');return false;"></div><input type = "hidden" value = ' . $value['id'] . '></td>
     </tr>';
