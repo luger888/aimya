@@ -4,12 +4,12 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <td> First Name</td>
-                    <td> Last Name</td>
-                    <td> User Name</td>
-                    <td> User Role</td>
-                    <td> Time Zone</td>
-                    <td> Block / Delete</td>
+                    <td><?php echo $this->translate('First Name') ?></td>
+                    <td><?php echo $this->translate('Last Name') ?></td>
+                    <td><?php echo $this->translate('User Name') ?></td>
+                    <td><?php echo $this->translate('User Role') ?></td>
+                    <td><?php echo $this->translate('Time Zone') ?></td>
+                    <td><?php echo $this->translate('Block / Delete') ?></td>
                 </tr>
                 </thead>
                 <tbody>
@@ -57,14 +57,14 @@
     </div>
 </div>
 <div class="usersAlert" id="delete-confirm" title="DELETE USER:">
-    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>By deleting user, he will
-        be erased from your user list permanently. Are you sure you want to proceed?</p>
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span><?php echo $this->translate('By deleting user, he will
+        be erased from your user list permanently. Are you sure you want to proceed?') ?></p>
 </div>
 
 <div class="usersAlert" id="block-confirm" title="BLOCK USER:">
-    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Block user?</p>
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span><?php echo $this->translate('Block user') ?>?</p>
 </div>
 
 <div class="usersAlert" id="unblock-confirm" title="UNBLOCK USER:">
-    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Unblock user?</p>
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span><?php echo $this->translate('Unblock user') ?>?</p>
 </div>
