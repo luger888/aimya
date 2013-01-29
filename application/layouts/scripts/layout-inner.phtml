@@ -54,6 +54,7 @@ if($username['role'] == '1'){
 }
 
 if($identity->role != $username['role']) {
+    die('1');
     $profileModel->overwriteSession($username['id']);
 }
 
