@@ -60,6 +60,7 @@ package com.aimialesson.model
 				case (Texts.RU)	:	texts = ruTexts;
 					break;
 			}
+			if (!texts[Texts.NO] && !texts[Texts.ALERT]) texts = enTexts;
 		}
 		
 		private static var instance : Texts;
@@ -79,9 +80,10 @@ package com.aimialesson.model
 		public function getText ( value : String, upperCase : Boolean = false) : String {
 			var text:String;
 			debug ("getText:" + value);
+			text = enTexts[value];
 			switch (lang){
-				case (Texts.EN)	:	text = enTexts[value];
-									break;
+				//case (Texts.EN)	:	text = enTexts[value];
+					//				break;
 				case (Texts.JA)	:	text = jaTexts[value];
 									break;
 				case (Texts.ZH)	:	text = zhTexts[value];
