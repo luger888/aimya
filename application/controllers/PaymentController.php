@@ -195,8 +195,6 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         if (isset($period)) {
             $payPalModel = new Application_Model_PayPal();
 
-            if($period >= 8 && $period <= 12) $period = 12;
-
             $subscriptionTable = new Application_Model_DbTable_Subscriptions();
 
             $aimyaProfit = $period * $this->subscriptionCost;
@@ -204,6 +202,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
             $lastId = $subscriptionTable->getLastSubscriptionId() + 1;
 
             $requestData = $payPalModel->generateSubscriptionXml($lastId, $aimyaProfit);
+            if($period >= 8 && $period <= 12) $period = 12;
 
             $response = $payPalModel->getAdaptivUrl($requestData);
 

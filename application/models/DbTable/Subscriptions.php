@@ -118,7 +118,7 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
     public function getLatestSubscription($user_id)
     {
           $data = $this->select()
-                ->from($this->_name, array(new Zend_Db_Expr('max(created_at) as maxId')))
+                ->from($this->_name, array(new Zend_Db_Expr('max(active_to) as maxId')))
                 ->where('user_id =?', $user_id)
                 ->where('status =?', 'paid');
         return $data->query()->fetch();
