@@ -172,14 +172,14 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
         return $data->query()->fetch();
     }
 
-    public function updateSubscriptionStatus($userId, $subscriptionId) {
+    public function updateSubscriptionStatus($subscriptionId) {
 
         $data = array(
             'status' => 'paid',
             'updated_at' => date('Y-m-d H:i:s')
         );
 
-        $where[] = $this->getAdapter()->quoteInto('user_id=?', (int)$userId);
+        //$where[] = $this->getAdapter()->quoteInto('user_id=?', (int)$userId);
         $where[] = $this->getAdapter()->quoteInto('id=?', (int)$subscriptionId);
 
         $this->update($data , $where);
