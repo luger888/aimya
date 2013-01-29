@@ -168,13 +168,13 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
                                 $auth = Zend_Auth::getInstance();
                                 $result = $auth->authenticate($authAdapter);
-
+                                $this->_helper->flashMessenger->addMessage(array('success'=>'Your account was successfully upgraded. Please make re-login on aimya to get additional features'));
                                 if ($result->isValid()) {
                                     Zend_Auth::getInstance()->clearIdentity();
                                     $identity = $authAdapter->getResultRowObject();
                                     $authStorage = $auth->getStorage();
                                     $authStorage->write($identity);
-                                    $this->_helper->flashMessenger->addMessage(array('success'=>'Your account was successfully upgraded. Please make re-login on aimya to get additional features'));
+                                    //$this->_helper->flashMessenger->addMessage(array('success'=>'Your account was successfully upgraded. Please make re-login on aimya to get additional features'));
                                 } else {
                                     $this->writeLog("can't overwrite session");
                                     $this->view->passError = 'Wrong password!';
