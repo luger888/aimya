@@ -144,17 +144,44 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         }
 
         if ($verified) {
-            $this->writeLog("VALID IPN");
-            $this->writeLog($listener->getTextReport());
             if ($_GET['subscription_id']) {
-                $this->writeLog('Isset GET: ' . $_GET['subscription_id']);
                 $subscriptionId = $_GET['subscription_id'];
                 //$userId = $_GET['user_id'];
                 $subscriptionTable = new Application_Model_DbTable_Subscriptions();
                 $payKey = $subscriptionTable->getPayKeyFromOrder($subscriptionId);
+                $userId = $payKey['user_id'];
                 if ($payKey['pay_key'] = $_POST['pay_key']) {
-                    $this->writeLog('Isset Pay Key: ' . $_POST['pay_key']);
-                    $subscriptionTable->updateSubscriptionStatus($subscriptionId);
+                    $res = $subscriptionTable->updateSubscriptionStatus($subscriptionId);
+                    if($res) {
+                        $userTable = new Application_Model_DbTable_Users();
+                        $user = $userTable->getItem($userId);
+                        if($user['role'] == 1) {
+                            $updateRes = $userTable->updateRole($userId, 2);
+                            if($updateRes) {
+                                $authAdapter = new Zend_Auth_Adapter_DbTable(Zend_Db_Table::getDefaultAdapter());
+
+                                $authAdapter->setTableName('user')
+                                    ->setIdentityColumn('username')
+                                    ->setCredentialColumn('password')
+                                    ->setIdentity($user['username'])
+                                    ->setCredential($user['password']);
+
+                                $auth = Zend_Auth::getInstance();
+                                $result = $auth->authenticate($authAdapter);
+                                $this->_helper->flashMessenger->addMessage(array('success'=>'Your account was successfully upgraded. Please make re-login on aimya to get additional features'));
+                                if ($result->isValid()) {
+                                    Zend_Auth::getInstance()->clearIdentity();
+                                    $identity = $authAdapter->getResultRowObject();
+                                    $authStorage = $auth->getStorage();
+                                    $authStorage->write($identity);
+                                    //$this->_helper->flashMessenger->addMessage(array('success'=>'Your account was successfully upgraded. Please make re-login on aimya to get additional features'));
+                                } else {
+                                    $this->writeLog("can't overwrite session");
+                                    $this->view->passError = 'Wrong password!';
+                                }
+                            }
+                        }
+                    }
                 }
             }
 
@@ -295,6 +322,19 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         } else {
             $this->view->status = 'failure';
         }
+    }
+
+    public function upgradeAction()
+    {
+        $subscriptionForm = new Application_Form_Subscriptions();
+
+        $this->view->subscriptionForm = $subscriptionForm;
+    }
+
+    public function downgradeAction()
+    {
+
+
     }
 
     public function writeLog($data)

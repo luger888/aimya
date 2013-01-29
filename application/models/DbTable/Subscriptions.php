@@ -56,7 +56,7 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
         $subscriptionId = (int)$subscriptionId;
 
         $data = $this->select()
-            ->from($this->_name, array('pay_key'))
+            ->from($this->_name, array('pay_key', 'user_id'))
             ->where('id=?', $subscriptionId);
 
         return $data->query()->fetch();
@@ -174,7 +174,7 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
         //$where[] = $this->getAdapter()->quoteInto('user_id=?', (int)$userId);
         $where[] = $this->getAdapter()->quoteInto('id=?', (int)$subscriptionId);
 
-        $this->update($data , $where);
+        return $this->update($data , $where);
     }
 
     public function refundSubscription($subscriptionId, $activeTo, $aimyaProfit)

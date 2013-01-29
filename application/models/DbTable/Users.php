@@ -360,4 +360,17 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
         return $this->update($array, $where);
     }
+
+    public function updateRole($userId, $role)
+    {
+
+        $array = array(
+            'role' => (int)$role,
+        );
+
+        $where[] = $this->getAdapter()->quoteInto('id=?', $userId);;
+
+        return $this->update($array, $where);
+
+    }
 }
