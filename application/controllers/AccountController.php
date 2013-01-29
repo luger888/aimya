@@ -183,11 +183,13 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
             if ($notificationForm->isValid($formData)) {
 
                 $dbNotifications->updateNotifications($formData, $identity->id);
+                $this->_helper->flashMessenger->addMessage(array('success'=>'Password successfully changed'));
                 $this->_helper->redirector('index', 'account');
 
             } else {
-
+                $this->_helper->flashMessenger->addMessage(array('failure'=>'Error with changing password, please try again later'));
                 $this->view->errors = $notificationForm->getErrors();
+                $this->_helper->redirector('index', 'account');
 
             }
         }

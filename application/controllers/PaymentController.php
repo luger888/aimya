@@ -149,8 +149,34 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
                 //$userId = $_GET['user_id'];
                 $subscriptionTable = new Application_Model_DbTable_Subscriptions();
                 $payKey = $subscriptionTable->getPayKeyFromOrder($subscriptionId);
+                $userId = $payKey['user_id'];
                 if ($payKey['pay_key'] = $_POST['pay_key']) {
-                    $subscriptionTable->updateSubscriptionStatus($subscriptionId);
+                    $res = $subscriptionTable->updateSubscriptionStatus($subscriptionId);
+                    if($res) {
+                        $userTable = new Application_Model_DbTable_Users();
+                        $user = $userTable->getItem($userId);
+                        if($user['role'] == 1) {
+                            $authAdapter = new Zend_Auth_Adapter_DbTable(Zend_Db_Table::getDefaultAdapter());
+
+                            $authAdapter->setTableName('user')
+                                ->setIdentityColumn('username')
+                                ->setCredentialColumn('password')
+                                ->setIdentity($user['username'])
+                                ->setCredential($user['password']);
+
+                            $auth = Zend_Auth::getInstance();
+                            $result = $auth->authenticate($authAdapter);
+
+                            if ($result->isValid()) {
+                                $identity = $authAdapter->getResultRowObject();
+                                $authStorage = $auth->getStorage();
+                                $authStorage->write($identity);
+                            } else {
+                                $this->writeLog("can't overwrite session");
+                                $this->view->passError = 'Wrong password!';
+                            }
+                        }
+                    }
                 }
             }
 
@@ -291,6 +317,19 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         } else {
             $this->view->status = 'failure';
         }
+    }
+
+    public function upgradeAction()
+    {
+        $subscriptionForm = new Application_Form_Subscriptions();
+
+        $this->view->subscriptionForm = $subscriptionForm;
+    }
+
+    public function downgradeAction()
+    {
+
+
     }
 
     public function writeLog($data)
