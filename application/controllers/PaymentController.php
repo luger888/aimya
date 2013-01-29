@@ -147,11 +147,13 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
             $this->writeLog("VALID IPN");
             $this->writeLog($listener->getTextReport());
             if ($_GET['subscription_id']) {
+                $this->writeLog('Isset GET: ' . $_GET['subscription_id']);
                 $subscriptionId = $_GET['subscription_id'];
                 //$userId = $_GET['user_id'];
                 $subscriptionTable = new Application_Model_DbTable_Subscriptions();
                 $payKey = $subscriptionTable->getPayKeyFromOrder($subscriptionId);
                 if ($payKey['pay_key'] = $_POST['pay_key']) {
+                    $this->writeLog('Isset Pay Key: ' . $_POST['pay_key']);
                     $subscriptionTable->updateSubscriptionStatus($subscriptionId);
                 }
             }
@@ -195,15 +197,14 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         if (isset($period)) {
             $payPalModel = new Application_Model_PayPal();
 
-            if($period >= 8 && $period <= 12) $period = 12;
-
             $subscriptionTable = new Application_Model_DbTable_Subscriptions();
 
             $aimyaProfit = $period * $this->subscriptionCost;
 
-            $lastId = $subscriptionTable->getAdapter()->lastInsertId();
+            $lastId = $subscriptionTable->getLastSubscriptionId() + 1;
 
             $requestData = $payPalModel->generateSubscriptionXml($lastId, $aimyaProfit);
+            if($period >= 8 && $period <= 12) $period = 12;
 
             $response = $payPalModel->getAdaptivUrl($requestData);
 
@@ -217,10 +218,12 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
                     $activeToDate = $latestSubscription['maxId'];
 
                     $current = new DateTime();
-                    $activeTo = new DateTime();
-                    $activeToField = date('Y-m-d h:i:s', strtotime("+$period month"));
+                    $activeTo = new DateTime($activeToDate);
+
                     if($current < $activeTo) {
                         $activeToField = date($activeToDate, strtotime("+$period month"));
+                    } else {
+                        $activeToField = date('Y-m-d h:i:s', strtotime("+$period month"));
                     }
 
                     $data = array(
