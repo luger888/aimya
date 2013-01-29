@@ -90,8 +90,8 @@ class BookingController extends Zend_Controller_Action
                 $messageTable = new Application_Model_DbTable_Message();
                 $message = array('sender_id'=>$identity->id,
                     'recipient_id'=>$this->getRequest()->getParam('sender_id'),
-                    'content'=>"Dear ".$user['username'].". I am rejecting Lesson on ".$bookingItem['started_at']." .",
-                    'subject'=>"Lesson Rejection!");
+                    'content'=>"The booked lesson with ".$user['username']." on ".$bookingItem['started_at']." has been rejected. Please, reply person for more details.",
+                    'subject'=>"Lesson has been rejected.");
                 $messageTable->sendMessage($message);
                 $bookingDbTable->rejectBooking($this->getRequest()->getParam('booking_id'), $identity->id);
             }
