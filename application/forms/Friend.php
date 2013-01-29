@@ -9,7 +9,7 @@ class Application_Form_Friend extends Zend_Form
     {
         $this->setName('friend');
 
-        $currentUrl = Zend_Controller_Front::getInstance()->getRequest()->getRequestUri();
+        //$currentUrl = Zend_Controller_Front::getInstance()->getRequest()->getRequestUri();
 
         $friendId = new Zend_Form_Element_Hidden('friend_id');
         $friendId->setAttrib('id', 'friend_id')
@@ -21,16 +21,23 @@ class Application_Form_Friend extends Zend_Form
         $url->setAttrib('id', 'url')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators)
-            ->setValue($currentUrl)
+            ->setRequired(true);
+
+        $requestComment = new Zend_Form_Element_Textarea('request_comment');
+        $requestComment->setAttrib('id', 'request_comment')
+            ->addFilters($this->basicFilters)
+            ->setDecorators($this->basicDecorators)
+            ->setAttrib('rows', '5')
+            ->setAttrib('cols', '55')
             ->setRequired(true);
 
         $send = new Zend_Form_Element_Submit('sendbutton');
-        $send ->setLabel('ADD TO MY ACCOUNT')
+        $send ->setLabel('send request')
             ->setAttrib('id', 'sendbutton')
-            ->setAttrib('class', 'button-2 addAccount')
+            ->setAttrib('class', 'button')
             ->setDecorators($this->basicDecorators);
 
-        $this->addElements(array($friendId, $url, $send));
+        $this->addElements(array($friendId, $url, $requestComment, $send));
     }
 }
 

@@ -304,6 +304,8 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                 $friendTable = new Application_Model_DbTable_Friends();
                 $isFriend = $friendTable->isFriend($person['id']);
                 $isPending = $friendTable->isPending($person['id']);
+                $isInList = $friendTable->isInList($person['id']);
+                $defaultRequestText = '';
                 $avatarPath = $profileModel->getAvatarPath($person['id'], 'medium');
                 $featuredHtml .= "
                     <div class='shadowSeparator clearfix'>
@@ -318,7 +320,15 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                     } elseif ($isPending) {
                         $featuredHtml .= "<span class ='request_sent'>" . $this->view->translate('REQUEST SENT') . "</span>";
                     } else {
-                        $featuredHtml .= "<a class ='button-2 add addAccount' onclick='addToFriend(" . $person['id'] . ", this);' href='javascript:void(1)'>" . $this->view->translate('ADD TO MY ACCOUNT') . "</a>";
+                        if($isInList['friend_id'] == Zend_Auth::getInstance()->getIdentity()->id && $isInList['recipient_status'] == 0) {
+                            $defaultRequestText = "Hello  {$person['username']}, I have approved your request.";
+                            $myText = "showFriendFormFeatured({$person['id']}, \"$defaultRequestText\", this)";
+                            $featuredHtml .= "<a class='button-2 add addAccount' onclick='$myText' href='javascript:void(1)'>" . $this->view->translate('ADD TO MY ACCOUNT') . "</a>";
+                        } else {
+                            $defaultRequestText = "Hello  {$person['username']}, I would like add you to my account.";
+                            $myText = "showFriendFormFeatured({$person['id']}, \"$defaultRequestText\", this)";
+                            $featuredHtml .= "<a class='button-2 add addAccount' onclick='$myText' href='javascript:void(1)'>" . $this->view->translate('ADD TO MY ACCOUNT') . "</a>";
+                        }
                     }
                 }
                 $featuredHtml .= "<input type='hidden' value='" . $person['id'] . "'>

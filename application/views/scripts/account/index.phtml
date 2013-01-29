@@ -3,7 +3,7 @@
     <div id="tabsNavigation" class="clearfix">
 
         <ul>
-            <li><a href="#tabs-1">general</a></li>
+            <li><a href="#tabs-1"><?php echo $this->translate('general') ?></a></li>
             <?php if($this->role !== '1'){echo  '<li><a href="' . $this->baseUrl() . '/account/services">' . $this->translate('offer service') . '</a></li>';}?>
             <li><a href="<?php echo $this->baseUrl()?>/account/requestservices"><?php echo $this->translate('request service') ?></a></li>
             <li><a href="<?php echo $this->baseUrl()?>/account/availability"><?php echo $this->translate('availability') ?></a></li>
@@ -37,42 +37,42 @@
 
                             
                             <div class="formRow clearfix"> 
-                                <label class="title">First Name:</label>
+                                <label class="title"><?php echo $this->translate('first name') ?>:</label>
                                 <div class="formElem"><?php echo $this->profile->firstname; ?></div>
                             </div><!--End formRow-->
 
                             <div class="formRow clearfix"> 
-                                <label class="title">Last Name:</label> 
+                                <label class="title"><?php echo $this->translate('last name') ?>:</label>
                                 <div class="formElem"><?php echo $this->profile->lastname; ?></div>
                             </div><!--End formRow-->
 
                             <div class="formRow radio clearfix"> 
-                                <label class="title">Gender:</label> 
+                                <label class="title"><?php echo $this->translate('gender') ?>:</label>
                                 <div class="formElem"><?php echo $this->profile->gender; ?></div>
                             </div><!--End formRow-->
 
                             <div class="formRow clearfix"> 
-                                <label class="title">Login:</label> 
+                                <label class="title"><?php echo $this->translate('login') ?>:</label>
                                 <div class="formElem"><?php echo $this->profile->username; ?></div>
                             </div><!--End formRow-->
 
                             <div class="formRow clearfix"> 
-                                <label class="title">DOB:</label>
+                                <label class="title"><?php echo $this->translate('DOB') ?>:</label>
                                 <div class="formElem"><?php echo $this->profile->birthday; ?> <span class="add-on"></span> </div>
                             </div><!--End formRow-->
 
                             <div class="formRow clearfix"> 
-                                <label class="title">Language:</label> 
+                                <label class="title"><?php echo $this->translate('language') ?>:</label>
                                 <div class="formElem"><?php echo $this->profile->language; ?></div>
                             </div><!--End formRow-->
 
                             <div class="formRow clearfix"> 
-                                <label class="title">Email:</label> 
+                                <label class="title"><?php echo $this->translate('email') ?>:</label>
                                 <div class="formElem"><?php echo $this->profile->email; ?></div>
                             </div><!--End formRow-->
 
                             <div class="formRow clearfix"> 
-                                <label class="title">Time Zone:</label>
+                                <label class="title"><?php echo $this->translate('time zone') ?>:</label>
                                 <div class="formElem"><?php echo $this->profile->timezone; ?></div>
                             </div><!--End formRow-->
 
