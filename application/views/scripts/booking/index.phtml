@@ -382,8 +382,22 @@ jQuery(document).ready(function () {
                         }
 
                         var start = msg.booking[c].started_at;
+
                         start = start.replace(" ","T");
-                        start = new Date(start);
+
+                        var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+
+                      if(is_chrome){
+                          var MS_PER_MINUTE = 60000;
+                          start = new Date(start);
+                          var offset =  start.getTimezoneOffset()*MS_PER_MINUTE;
+                          start = new Date(start - (offset)*-1);
+
+                      }else{
+
+                          start = new Date(start);
+                        
+                      }
                         var sender_utc = parseFloat(msg.booking[c].creator_tz.replace(':',"."));
                         var recipient_utc = parseFloat(msg.timezone.replace(':',"."));
                         var utc = recipient_utc - sender_utc;
@@ -392,16 +406,11 @@ jQuery(document).ready(function () {
 //                        var utc =  msg.booking[c].creator_tz.getTime() + ( msg.booking[c].creator_tz.getTimezoneOffset() * 60000);
 
                         if (msg.booking[c].recipient_id == msg.user_id) {
-
-
                             var unixStamp = Math.round((start).getTime() / 1000);
                             var dateTime = unixStamp+utc*3600;
-
-                            var dateTime = new Date(dateTime*1000);
-
+                             dateTime = new Date(dateTime*1000);
                         }else{
                             dateTime = msg.booking[c].started_at;
-
                         }
                         events.push({
                             title:msg.booking[c].focus_name,

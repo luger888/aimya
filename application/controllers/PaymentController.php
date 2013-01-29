@@ -149,39 +149,9 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
                 //$userId = $_GET['user_id'];
                 $subscriptionTable = new Application_Model_DbTable_Subscriptions();
                 $payKey = $subscriptionTable->getPayKeyFromOrder($subscriptionId);
-                $userId = $payKey['user_id'];
+                //$userId = $payKey['user_id'];
                 if ($payKey['pay_key'] = $_POST['pay_key']) {
-                    $res = $subscriptionTable->updateSubscriptionStatus($subscriptionId);
-                    if($res) {
-                        $userTable = new Application_Model_DbTable_Users();
-                        $user = $userTable->getItem($userId);
-                        if($user['role'] == 1) {
-                            $updateRes = $userTable->updateRole($userId, 2);
-                            if($updateRes) {
-                                $authAdapter = new Zend_Auth_Adapter_DbTable(Zend_Db_Table::getDefaultAdapter());
-
-                                $authAdapter->setTableName('user')
-                                    ->setIdentityColumn('username')
-                                    ->setCredentialColumn('password')
-                                    ->setIdentity($user['username'])
-                                    ->setCredential($user['password']);
-
-                                $auth = Zend_Auth::getInstance();
-                                $result = $auth->authenticate($authAdapter);
-                                $this->_helper->flashMessenger->addMessage(array('success'=>'Your account was successfully upgraded. Please make re-login on aimya to get additional features'));
-                                if ($result->isValid()) {
-                                    Zend_Auth::getInstance()->clearIdentity();
-                                    $identity = $authAdapter->getResultRowObject();
-                                    $authStorage = $auth->getStorage();
-                                    $authStorage->write($identity);
-                                    //$this->_helper->flashMessenger->addMessage(array('success'=>'Your account was successfully upgraded. Please make re-login on aimya to get additional features'));
-                                } else {
-                                    $this->writeLog("can't overwrite session");
-                                    $this->view->passError = 'Wrong password!';
-                                }
-                            }
-                        }
-                    }
+                    $subscriptionTable->updateSubscriptionStatus($subscriptionId);
                 }
             }
 
