@@ -15,7 +15,7 @@ class CmsController extends Aimya_Controller_BaseController
             ->initContext('json');
 
         $identity = Zend_Auth::getInstance()->getIdentity();
-        if(!$identity){
+        if(!$identity){// if no identity - show main page layout
 
             $this->_helper->layout->setLayout("layout");
             $this->view->headScript()->appendFile('../../js/jquery/validation/registrationValidation.js');
