@@ -151,7 +151,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         if ($this->getRequest()->isPost()) {
 
 
-            if($this->getRequest()->getParam('newPassword') !=''){
+            if ($this->getRequest()->getParam('newPassword') != '') {
 
                 $password = md5($this->getRequest()->getParam('oldPassword'));
                 Zend_Auth::getInstance()->getStorage()->read();
@@ -168,25 +168,29 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                 $result = $auth->authenticate($authAdapter);
 
                 if ($result->isValid()) {
-                        $usersDb->changePass($this->getRequest()->getParam('newPassword'), $identity->id);
-                }else{
+
+                    $usersDb->changePass($this->getRequest()->getParam('newPassword'), $identity->id);
+                    $identity = $authAdapter->getResultRowObject();
+                    $authStorage = $auth->getStorage();
+                    $authStorage->write($identity);
+                } else {
                     $this->view->passError = 'Wrong password!';
                 }
             }
 
-                $formData = $this->getRequest()->getPost();
+            $formData = $this->getRequest()->getPost();
 
-                if ($notificationForm->isValid($formData)) {
+            if ($notificationForm->isValid($formData)) {
 
-                    $dbNotifications->updateNotifications($formData, $identity->id);
-                    $this->_helper->redirector('index', 'account');
+                $dbNotifications->updateNotifications($formData, $identity->id);
+                $this->_helper->redirector('index', 'account');
 
-                } else {
+            } else {
 
-                    $this->view->errors = $notificationForm->getErrors();
+                $this->view->errors = $notificationForm->getErrors();
 
-                }
             }
+        }
 
 
     }
@@ -320,7 +324,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                     } elseif ($isPending) {
                         $featuredHtml .= "<span class ='request_sent'>" . $this->view->translate('REQUEST SENT') . "</span>";
                     } else {
-                        if($isInList['friend_id'] == Zend_Auth::getInstance()->getIdentity()->id && $isInList['recipient_status'] == 0) {
+                        if ($isInList['friend_id'] == Zend_Auth::getInstance()->getIdentity()->id && $isInList['recipient_status'] == 0) {
                             $defaultRequestText = "Hello  {$person['username']}, I have approved your request.";
                             $myText = "showFriendFormFeatured({$person['id']}, \"$defaultRequestText\", this)";
                             $featuredHtml .= "<a class='button-2 add addAccount' onclick='$myText' href='javascript:void(1)'>" . $this->view->translate('ADD TO MY ACCOUNT') . "</a>";
