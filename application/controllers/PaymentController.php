@@ -221,7 +221,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
                     $activeTo = new DateTime($activeToDate);
 
                     if($current < $activeTo) {
-                        $activeToField = date($activeToDate, strtotime("+$period month"));
+                        $activeToField = date('Y-m-d H:i:s', strtotime($activeToDate . " +$period month"));
                     } else {
                         $activeToField = date('Y-m-d h:i:s', strtotime("+$period month"));
                     }
