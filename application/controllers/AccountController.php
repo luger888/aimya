@@ -320,7 +320,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                     } elseif ($isPending) {
                         $featuredHtml .= "<span class ='request_sent'>" . $this->view->translate('REQUEST SENT') . "</span>";
                     } else {
-                        if($isInList['friend_id'] == Zend_Auth::getInstance()->getIdentity()->id && $isInList['recipient_id'] == 0) {
+                        if($isInList['friend_id'] == Zend_Auth::getInstance()->getIdentity()->id && $isInList['recipient_status'] == 0) {
                             $defaultRequestText = "Hello  {$person['username']}, I have approved your request.";
                             $myText = "showFriendFormFeatured({$person['id']}, \"$defaultRequestText\", this)";
                             $featuredHtml .= "<a class='button-2 add addAccount' onclick='$myText' href='javascript:void(1)'>" . $this->view->translate('ADD TO MY ACCOUNT') . "</a>";
