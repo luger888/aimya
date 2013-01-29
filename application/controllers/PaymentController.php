@@ -203,6 +203,9 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
             $lastId = $subscriptionTable->getAdapter()->lastInsertId();
 
+            var_dump($lastId);
+            die;
+
             $requestData = $payPalModel->generateSubscriptionXml($lastId, $aimyaProfit);
 
             $response = $payPalModel->getAdaptivUrl($requestData);
