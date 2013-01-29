@@ -183,8 +183,10 @@ if (Zend_Registry::isRegistered('username')) {
     </div><!--End page-->
 
 </div><!--End page-->
-<script type="text/javascript">
-    getTimeLeft();
-</script>
+<?php if((int)$identity->role != (int)$username['role'] && (int)$username['role'] != 3):?>
+    <script type="text/javascript">
+        getTimeLeft();
+    </script>
+<?php endif;?>
 </body>
 </html>
