@@ -158,6 +158,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
                         if($user['role'] == 1) {
                             $updateRes = $userTable->updateRole($userId, 2);
                             if($updateRes) {
+                                $this->writeLog("updated role");
                                 $authAdapter = new Zend_Auth_Adapter_DbTable(Zend_Db_Table::getDefaultAdapter());
 
                                 $authAdapter->setTableName('user')
@@ -170,7 +171,9 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
                                 $result = $auth->authenticate($authAdapter);
 
                                 if ($result->isValid()) {
+                                    Zend_Auth::getInstance()->clearIdentity();
                                     $identity = $authAdapter->getResultRowObject();
+                                    $this->writeLog("session overwrited");
                                     $authStorage = $auth->getStorage();
                                     $authStorage->write($identity);
                                 } else {
