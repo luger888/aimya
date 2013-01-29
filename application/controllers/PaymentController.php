@@ -156,24 +156,27 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
                         $userTable = new Application_Model_DbTable_Users();
                         $user = $userTable->getItem($userId);
                         if($user['role'] == 1) {
-                            $authAdapter = new Zend_Auth_Adapter_DbTable(Zend_Db_Table::getDefaultAdapter());
+                            $updateRes = $userTable->updateRole($userId, 2);
+                            if($updateRes) {
+                                $authAdapter = new Zend_Auth_Adapter_DbTable(Zend_Db_Table::getDefaultAdapter());
 
-                            $authAdapter->setTableName('user')
-                                ->setIdentityColumn('username')
-                                ->setCredentialColumn('password')
-                                ->setIdentity($user['username'])
-                                ->setCredential($user['password']);
+                                $authAdapter->setTableName('user')
+                                    ->setIdentityColumn('username')
+                                    ->setCredentialColumn('password')
+                                    ->setIdentity($user['username'])
+                                    ->setCredential($user['password']);
 
-                            $auth = Zend_Auth::getInstance();
-                            $result = $auth->authenticate($authAdapter);
+                                $auth = Zend_Auth::getInstance();
+                                $result = $auth->authenticate($authAdapter);
 
-                            if ($result->isValid()) {
-                                $identity = $authAdapter->getResultRowObject();
-                                $authStorage = $auth->getStorage();
-                                $authStorage->write($identity);
-                            } else {
-                                $this->writeLog("can't overwrite session");
-                                $this->view->passError = 'Wrong password!';
+                                if ($result->isValid()) {
+                                    $identity = $authAdapter->getResultRowObject();
+                                    $authStorage = $auth->getStorage();
+                                    $authStorage->write($identity);
+                                } else {
+                                    $this->writeLog("can't overwrite session");
+                                    $this->view->passError = 'Wrong password!';
+                                }
                             }
                         }
                     }
