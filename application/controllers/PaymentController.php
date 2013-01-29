@@ -310,7 +310,15 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
     public function downgradeAction()
     {
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
 
+        $userTable = new Application_Model_DbTable_Users();
+        $result = $userTable->updateRole($userId, 1);
+        if($result) {
+            $this->view->status = 'success';
+        } else {
+            $this->view->status = 'error';
+        }
 
     }
 
