@@ -529,7 +529,16 @@ function getTimeLeft() {
                 if (data.timeLeft) {
                     inboxLi.append('<span class="trialAlert"><span class="txt">' + data.timeLeft + ' days left</span></span>')
                 } else {
-                    inboxLi.append('<span class="trialAlert"><span class="txt">End of trial !</span></span>')
+                    $.ajax({
+                        'url':baseUrl + '/payment/downgrade/',
+                        'dataType':'json',
+                        'type':'post',
+                        success:function (data) {
+                            if (data.status == 'success') {
+                                inboxLi.append('<span class="trialAlert"><span class="txt">End of trial! Your account downgraded to "Student"</span></span>')
+                            }
+                        }
+                    });
                 }
 
             }
