@@ -201,7 +201,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
             $aimyaProfit = $period * $this->subscriptionCost;
 
-            $lastId = $subscriptionTable->getAdapter()->lastInsertId();
+            $lastId = $subscriptionTable->lastInsertId();
 
             var_dump($lastId);
             die;
