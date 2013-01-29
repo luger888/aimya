@@ -5,7 +5,7 @@ class CmsController extends Aimya_Controller_BaseController
 
     public function init()
     {
-        $this->_helper->layout->setLayout("layout");
+
         $this->_helper->AjaxContext()
             ->addActionContext('index', 'json')
             ->addActionContext('new', 'json')
@@ -13,12 +13,21 @@ class CmsController extends Aimya_Controller_BaseController
             ->addActionContext('delete', 'json')
             ->addActionContext('view', 'json')
             ->initContext('json');
-        $this->view->headScript()->appendFile('../../js/jquery/validation/registrationValidation.js');
-        $login = new Application_Form_Login();
-        $reg = new Application_Form_Registration();
 
-        $this->view->login = $login->getElements();
-        $this->view->reg = $reg->getElements();
+        $identity = Zend_Auth::getInstance()->getIdentity();
+        if(!$identity){
+
+            $this->_helper->layout->setLayout("layout");
+            $this->view->headScript()->appendFile('../../js/jquery/validation/registrationValidation.js');
+            $login = new Application_Form_Login();
+            $reg = new Application_Form_Registration();
+
+            $this->view->login = $login->getElements();
+            $this->view->reg = $reg->getElements();
+        }else{
+            $this->_helper->layout->setLayout("layoutInner");
+        }
+
     }
 
     public function indexAction()
