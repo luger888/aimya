@@ -91,6 +91,17 @@ return array(
             ),
             array
             (
+                'label' => 'ACCOUNTS/PAYMENTS',
+                'tag' => 'leftMenu',
+                'route' => 'default',
+                'module' => 'default',
+                'controller' => 'payment',
+                'action' => 'upgrade',
+                'resource'      => 'payment',
+                'privilege'     => 'upgrade',
+            ),
+            array
+            (
                 'label' => 'CUSTOMER REVIEWS',
                 'tag' => 'leftMenu',
                 'route' => 'default',
