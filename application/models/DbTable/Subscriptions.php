@@ -51,14 +51,6 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
         return $data->query()->fetch();
     }
 
-    public function getLastId()
-    {
-        $data = $this->select()
-            ->from($this->_name, array('MAX(id)'));
-
-        return $data->query()->fetch();
-    }
-
     public function getPayKeyFromOrder($subscriptionId)
     {
         $subscriptionId = (int)$subscriptionId;
@@ -200,6 +192,16 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
 
 
         return $this->update($data, $where);
+    }
+
+    public function getLastSubscriptionId()
+    {
+
+        $data = $this->select()
+            ->from($this->_name, array('maxId' => 'max(id)'));
+
+        $result = $data->query()->fetch();
+        return $result['maxId'];
     }
 
 }
