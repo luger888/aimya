@@ -216,7 +216,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
                     $activeToDate = $latestSubscription['maxId'];
 
                     $current = new DateTime();
-                    $activeTo = new DateTime();
+                    $activeTo = new DateTime($activeToDate);
                     $activeToField = date('Y-m-d h:i:s', strtotime("+$period month"));
                     if($current < $activeTo) {
                         $activeToField = date($activeToDate, strtotime("+$period month"));
