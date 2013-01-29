@@ -146,13 +146,13 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         if ($verified) {
             $this->writeLog("VALID IPN");
             $this->writeLog($listener->getTextReport());
-            if ($_GET['user_id']) {
+            if ($_GET['user_id'] && $_GET['subscription_id']) {
+                $subscriptionId = $_GET['subscription_id'];
                 $userId = $_GET['user_id'];
-                //$subscriptionId = $_GET['subscription_id'];
                 $subscriptionTable = new Application_Model_DbTable_Subscriptions();
-                $payKey = $subscriptionTable->getPayKeyFromSebscription($userId);
+                $payKey = $subscriptionTable->getPayKeyFromOrder($subscriptionId);
                 if ($payKey['pay_key'] = $_POST['pay_key']) {
-                    $subscriptionTable->updateSubscriptionStatus($userId);
+                    $subscriptionTable->updateSubscriptionStatus($userId, $subscriptionId);
                 }
             }
 
@@ -241,61 +241,6 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         } else {
             $this->_helper->flashMessenger->addMessage(array('failure' => 'Problem with parameters'));
         }
-    }
-
-    public function subscribenewAction()
-    {
-        $payPalModel = new Application_Model_PayPal();
-        $gateway = $payPalModel->getGatewayNew();
-
-        Aimya_PayPal_RecurringPayment_PaypalConfiguration::username($gateway['apiUsername']);
-        Aimya_PayPal_RecurringPayment_PaypalConfiguration::password($gateway['apiPassword']);
-        Aimya_PayPal_RecurringPayment_PaypalConfiguration::signature($gateway['apiSignature']);
-        Aimya_PayPal_RecurringPayment_PaypalConfiguration::business_name('Aimya Store');
-
-        Aimya_PayPal_RecurringPayment_PaypalConfiguration::return_url($gateway['returnUrl']);
-        Aimya_PayPal_RecurringPayment_PaypalConfiguration::cancel_url($gateway['cancelUrl']);
-        Aimya_PayPal_RecurringPayment_PaypalConfiguration::notify_url($gateway['notifyUrl']);
-
-
-        //Aimya_PayPal_RecurringPayment_PaypalDigitalGoods::environment( 'live' );
-
-        $subscription_details = array(
-            'description' => 'Example Subscription: $10 sign-up fee then $2/week for the next four weeks.',
-            'initial_amount' => '10.00',
-            'amount' => '2.00',
-            'period' => 'Week',
-            'frequency' => '1',
-            'total_cycles' => '4',
-        );
-
-        $paypal_subscription = new Aimya_PayPal_RecurringPayment_PaypalSubscription($subscription_details);
-        $html = "";
-        if (isset($_GET['paypal']) && $_GET['paypal'] == 'cancel') {
-
-            //$html .= "<script>if (window!=top) {top.location.replace(document.location);}</script>";
-            $html .= '<p>Your subscription has been cancelled. <a href="#" target="_top">Try again?</a></p>';
-
-        } elseif (isset($_GET['paypal']) && $_GET['paypal'] == 'paid') {
-
-            // Process the payment or start the Subscription
-            if (isset($_GET['PayerID'])) {
-                $response = $paypal_subscription->process_payment();
-            } else {
-                $response = $paypal_subscription->start_subscription();
-            }
-
-            $html .= '<h3>Payment Complete!</h3>';
-            if (isset($_GET['PayerID'])) {
-                $html .= "<p>Your Transaction ID is {$response['PAYMENTINFO_0_TRANSACTIONID']}</p>";
-                $html .= '<p>You can use this Transaction ID to see the details of your subscription like so:</p>';
-            } else {
-                $html .= '<p>You can use this Profile ID to see the details of your subscription like so:</p>';
-            }
-
-        }
-        $this->view->html = $html;
-        $this->view->obj = $paypal_subscription;
     }
 
     public function unsubscribeAction()

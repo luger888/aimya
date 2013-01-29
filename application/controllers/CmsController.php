@@ -5,7 +5,7 @@ class CmsController extends Aimya_Controller_BaseController
 
     public function init()
     {
-        $this->_helper->layout->setLayout("layoutInner");
+        $this->_helper->layout->setLayout("layout");
         $this->_helper->AjaxContext()
             ->addActionContext('index', 'json')
             ->addActionContext('new', 'json')
@@ -13,6 +13,9 @@ class CmsController extends Aimya_Controller_BaseController
             ->addActionContext('delete', 'json')
             ->addActionContext('view', 'json')
             ->initContext('json');
+        $login = new Application_Form_Login();
+
+        $this->view->login = $login->getElements();
     }
 
     public function indexAction()
