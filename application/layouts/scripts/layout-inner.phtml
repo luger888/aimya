@@ -55,6 +55,9 @@ if($username['role'] == '1'){
     $role = 'Admin';
 }
 
+var_dump($username['role']);
+die;
+
 if($identity->role != $username['role'] && $username['role'] == '2') {
     $profileModel->overwriteSession($username['id']);
 }
