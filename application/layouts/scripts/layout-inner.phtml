@@ -8,6 +8,8 @@
     $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=utf-8');
     $this->addHelperPath("ZendX/JQuery/View/Helper", "ZendX_JQuery_View_Helper");
     ?>
+    <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />
+    <meta content="telephone=no" name="format-detection">
     <?php  echo $this->jQuery(); ?>
     <?php $this->headLink()->appendStylesheet('/css/reset.css');?>
     <?php $this->headLink()->appendStylesheet('/css/fonts.css');?>
@@ -53,7 +55,9 @@ if($username['role'] == '1'){
     $role = 'Admin';
 }
 
-if((int)$identity->role != (int)$username['role'] && (int)$username['role'] != 3) {
+$roleInDb = $username['role'];
+
+if($identity->role != $username['role'] && $identity->role == '2') {
     $profileModel->overwriteSession($username['id']);
 }
 
@@ -183,7 +187,7 @@ if (Zend_Registry::isRegistered('username')) {
     </div><!--End page-->
 
 </div><!--End page-->
-<?php if((int)$identity->role != (int)$username['role'] && (int)$username['role'] != 3):?>
+<?php if($roleInDb == 2):?>
     <script type="text/javascript">
         getTimeLeft();
     </script>

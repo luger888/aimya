@@ -11,6 +11,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         $this->_helper->layout->setLayout("layoutInner");
         $this->_helper->AjaxContext()
             ->addActionContext('remained', 'json')
+            ->addActionContext('downgrade', 'json')
             ->initContext('json');
     }
 
@@ -317,11 +318,11 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
             $userId = Zend_Auth::getInstance()->getIdentity()->id;
 
             $userTable = new Application_Model_DbTable_Users();
-            $result = $userTable->updateRole($userId, 1);
+            $result = $userTable->updateRole($userId, '1');
             if($result) {
-                $this->view->status = 'success';
+                $this->view->answer = 'success';
             } else {
-                $this->view->status = 'error';
+                $this->view->answer = 'error';
             }
         }
 
