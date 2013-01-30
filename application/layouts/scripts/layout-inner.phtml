@@ -186,6 +186,8 @@ if (Zend_Registry::isRegistered('username')) {
 
 </div><!--End page-->
 <?php if((int)$username['role'] == 2):?>
+    <?php echo (int)$username['role'];
+    die;?>
     <script type="text/javascript">
         getTimeLeft();
     </script>
