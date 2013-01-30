@@ -315,6 +315,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
         if ($this->getRequest()->isXmlHttpRequest()) {
             $userId = Zend_Auth::getInstance()->getIdentity()->id;
+            $role =
 
             $userTable = new Application_Model_DbTable_Users();
             $result = $userTable->updateRole($userId, 1);
