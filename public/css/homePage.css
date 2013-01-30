@@ -140,7 +140,30 @@ input.btnLogin {
     position: relative;
     margin-bottom: 3px;
 }
+.underHeaderLang{
+    float:right;
+}
+.underHeaderLang  li{
+    list-style: none;
+    float:left;
+}
+.underHeaderLang  li .language{
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    padding: 0px 1px 0px 1px;
+    margin-top: 6px;
+}
 
+.underHeaderLang li .language.english{
+    background: url('../images/icons/lang/english.png') no-repeat 0 2px;
+}
+.underHeaderLang li .language.chinese{
+    background: url('../images/icons/lang/chinese.png') no-repeat 0 2px;
+}
+.underHeaderLang li .language.japanese{
+    background: url('../images/icons/lang/japanese.png') no-repeat 0 2px;
+}
 /*=================================================
   Footer
 =================================================*/

@@ -57,7 +57,7 @@ function saveResume() {
 function addResumeItem() {
 
     $(".resumeItemForm").css('display', 'block');
-    $('.button-2:not(".save, .upload")').addClass("disable");
+    $('.button-2:not(".save, .upload,  .resumeBut.edit")').addClass("disable");
     $('.addResumeItem').remove();
 }
 function saveResumeItem(tab) {
@@ -128,7 +128,7 @@ function editResumeItem(e, tab) {
         '<input type="button" value="save" class="button-2 save floatRight" onclick=updateResumeItem(this,"' + tab + '");>' +
         '</div>' +
         '<div id="queue'+tab+'"></div>');
-    $('.button-2:not(".save, .upload")').addClass("disable");
+    $('.button-2:not(".save, .upload, .resumeBut.edit")').addClass("disable");
     uploadify(tab);
 }
 
