@@ -59,4 +59,28 @@ class Application_Model_Profile
     }
 
 
+    public function overwriteSession($userId)
+    {
+        $userTable = new Application_Model_DbTable_Users();
+        $user = $userTable->getItem($userId);
+        $authAdapter = new Zend_Auth_Adapter_DbTable(Zend_Db_Table::getDefaultAdapter());
+
+        $authAdapter->setTableName('user')
+            ->setIdentityColumn('username')
+            ->setCredentialColumn('password')
+            ->setIdentity($user['username'])
+            ->setCredential($user['password']);
+
+        $auth = Zend_Auth::getInstance();
+        $result = $auth->authenticate($authAdapter);
+        if ($result->isValid()) {
+            Zend_Auth::getInstance()->clearIdentity();
+            $identity = $authAdapter->getResultRowObject();
+            $authStorage = $auth->getStorage();
+            $authStorage->write($identity);
+        } else {
+            $this->view->passError = 'Wrong password!';
+        }
+    }
+
 }

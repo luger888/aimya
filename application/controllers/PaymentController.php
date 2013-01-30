@@ -156,30 +156,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
                         $userTable = new Application_Model_DbTable_Users();
                         $user = $userTable->getItem($userId);
                         if($user['role'] == 1) {
-                            $updateRes = $userTable->updateRole($userId, 2);
-                            if($updateRes) {
-                                $authAdapter = new Zend_Auth_Adapter_DbTable(Zend_Db_Table::getDefaultAdapter());
-
-                                $authAdapter->setTableName('user')
-                                    ->setIdentityColumn('username')
-                                    ->setCredentialColumn('password')
-                                    ->setIdentity($user['username'])
-                                    ->setCredential($user['password']);
-
-                                $auth = Zend_Auth::getInstance();
-                                $result = $auth->authenticate($authAdapter);
-                                $this->_helper->flashMessenger->addMessage(array('success'=>'Your account was successfully upgraded. Please make re-login on aimya to get additional features'));
-                                if ($result->isValid()) {
-                                    Zend_Auth::getInstance()->clearIdentity();
-                                    $identity = $authAdapter->getResultRowObject();
-                                    $authStorage = $auth->getStorage();
-                                    $authStorage->write($identity);
-                                    //$this->_helper->flashMessenger->addMessage(array('success'=>'Your account was successfully upgraded. Please make re-login on aimya to get additional features'));
-                                } else {
-                                    $this->writeLog("can't overwrite session");
-                                    $this->view->passError = 'Wrong password!';
-                                }
-                            }
+                            $userTable->updateRole($userId, 2);
                         }
                     }
                 }
@@ -333,7 +310,20 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
     public function downgradeAction()
     {
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
 
+        if ($this->getRequest()->isXmlHttpRequest()) {
+            $userId = Zend_Auth::getInstance()->getIdentity()->id;
+
+            $userTable = new Application_Model_DbTable_Users();
+            $result = $userTable->updateRole($userId, 1);
+            if($result) {
+                $this->view->status = 'success';
+            } else {
+                $this->view->status = 'error';
+            }
+        }
 
     }
 
