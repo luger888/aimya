@@ -980,3 +980,51 @@ function showFriendFormFeatured(userId, defaultText, e) {
 
     return false;
 }
+
+function updateAvailaibility() {
+    $.ajax({
+        url:  pathName + "/account/updateavailability",
+        type: "post",
+        data: {
+            "checkboxMon":$('#checkboxMon').attr('checked') ? "1":"0",
+            "fromMon":$('#fromMon').val(),
+            "toMon":$('#toMon').val(),
+            "checkboxTue":$('#checkboxTue').attr('checked') ? "1":"0",
+            "fromTue":$('#fromTue').val(),
+            "toTue":$('#toTue').val(),
+            "checkboxWed":$('#checkboxWed').attr('checked') ? "1":"0",
+            "fromWed":$('#fromWed').val(),
+            "toWed":$('#toWed').val(),
+            "checkboxThu":$('#checkboxThu').attr('checked') ? "1":"0",
+            "fromThu":$('#fromThu').val(),
+            "toThu":$('#toThu').val(),
+            "checkboxFri":$('#checkboxFri').attr('checked') ? "1":"0",
+            "fromFri":$('#fromFri').val(),
+            "toFri":$('#toFri').val(),
+            "checkboxSat":$('#checkboxSat').attr('checked') ? "1":"0",
+            "fromSat":$('#fromSat').val(),
+            "toSat":$('#toSat').val(),
+            "checkboxSun":$('#checkboxSun').attr('checked') ? "1":"0",
+            "fromSun":$('#fromSun').val(),
+            "toSun":$('#toSun').val()
+        },
+        success: function(response){
+            $('.error').remove();
+            for (key in response.errors){
+                $("#" + key).removeClass("input-error");
+                $("#" + key).removeAttr('style');
+                if(response.errors[key].length>0){
+                    $("#" + key).parent().after('<div class="error">' +response.errors[key] + '</div>');
+                    $("#" + key).addClass("input-error");
+                    $("#" + key).change(function() {
+                        $(this).removeClass("input-error");
+                        $(this).parent().next().remove();
+                    });
+                }
+
+            }
+        }
+
+    });
+    return false;
+}
