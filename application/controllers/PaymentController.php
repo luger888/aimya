@@ -319,9 +319,9 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
             $userTable = new Application_Model_DbTable_Users();
             $result = $userTable->updateRole($userId, 1);
             if($result) {
-                $this->view->status = 'success';
+                $this->view->answer = 'success';
             } else {
-                $this->view->status = 'error';
+                $this->view->answer = 'error';
             }
         }
 

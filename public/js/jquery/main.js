@@ -533,8 +533,8 @@ function getTimeLeft() {
                         'url':baseUrl + '/payment/downgrade/',
                         'dataType':'json',
                         'type':'post',
-                        success:function (data) {
-                            if (data.status == 'success') {
+                        success:function (result) {
+                            if (result.answer == 'success') {
                                 inboxLi.append('<span class="trialAlert"><span class="txt">End of trial! Your account downgraded to "Student"</span></span>')
                             }
                         }
