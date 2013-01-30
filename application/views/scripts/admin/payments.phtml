@@ -53,7 +53,7 @@
                     <td><?php echo $lastPaid;?></td>
                     <td><?php echo $validTill;?></td>
                     <td class="suspend center">
-                        <input type="button" class="button-2 refund" value ="refund" onclick="approveRefund(this);return false;">
+                        <input type="button" class="button-2 refund" value ="refund" onclick='showRefundForm("<?php echo $this->translate("We have approved your refund. Please contact us if you have any questions."); ?>",this);return false;'>
                         <input type="button" class="button-2 delete" value ="cancel" onclick="cancelRefund(this);return false;">
                         <input type="hidden" value = "<?php echo $user['subscription_id'];?>">
                     </td>
@@ -66,4 +66,18 @@
 </div>
 <div class = "usersAlert" id="cancel-unsubscribe" title="UNSUBSCRIBE:">
     <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Unsubscribing isn't cool. Are you sure you want to proceed?</p>
+</div>
+<div id='refund-dialog' title="<?php echo $this->translate('form for refund') ?>">
+    <div class="refund-wrapper">
+        <?php $refundForm = new Application_Form_Refund(); ?>
+        <form action="<?php echo $this->baseUrl();?>/payment/unsubscribe/" method="post" id="refund_request">
+            <span class="user-name"></span>
+            <?php echo $refundForm->subscription_id; ?>
+            <?php echo $refundForm->url;?>
+            <?php echo $refundForm->period;?>
+            <?php echo $refundForm->amount;?>
+            <?php echo $refundForm->request_comment;?>
+            <?php echo $refundForm->sendbutton; ?>
+        </form>
+    </div>
 </div>

@@ -12,6 +12,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         $this->_helper->AjaxContext()
             ->addActionContext('remained', 'json')
             ->addActionContext('downgrade', 'json')
+            ->addActionContext('unsubscribe', 'json')
             ->initContext('json');
     }
 
@@ -272,8 +273,44 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
                 $refundDb->cancelRefund($this->getRequest()->getParam('cancelRefund'));
             }
             if ($this->getRequest()->getParam('approveRefund')) {
+                $refundForm = new Application_Form_Refund();
+                $data = $this->getRequest()->getPost();
+                if($refundForm->isValid($data)) {
+
+                    $period = $this->getRequest()->getParam('period');
+                    $amount = $this->getRequest()->getParam('amount');
+                    $requestComment = $this->getRequest()->getParam('request_comment');
+                    $subscriptionId = $this->getRequest()->getParam('subscription_id');
+
+                    $latestSubscription = $subscriptionDb->getItem($subscriptionId);
+                    $activeToDate = $latestSubscription['active_to'];
+                    $aimyaProfit = $latestSubscription['aimya_profit'];
+                    $userId = $latestSubscription['user_id'];
+
+                    $newAmount = $aimyaProfit - $amount;
+                    $activeTo = date('Y-m-d H:i:s', strtotime($activeToDate . " -$period month"));
+
+                    $result = $subscriptionDb->refundSubscription($subscriptionId, $user_id, $activeTo, $newAmount);
+                    if($result) {
+                        $refundDb->approveRefund($this->getRequest()->getParam('approveRefund'));
+                        $mesageTable = new Application_Model_DbTable_Message();
+                        $data = array(
+                            'sender_id' => $user_id,
+                            'recipient_id' => $userId,
+                            'content' => $requestComment,
+                            'subject' => 'Refund',
+                        );
+                        $mesageTable->sendMessage($data);
+                        $this->view->status = 'success';
+                    } else {
+                        $this->view->status = 'error';
+                    }
+                } else{
+                    $this->view->status = 'error';
+                    $this->view->errors = $refundForm->getErrors();
+                }
                 //$subscriptionDB->refundSubscription($this->getRequest()->getParam('approveRefund'))
-                $refundDb->approveRefund($this->getRequest()->getParam('approveRefund'));
+
             }
         }
 
