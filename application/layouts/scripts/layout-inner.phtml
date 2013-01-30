@@ -7,6 +7,8 @@
     <?php
     $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=utf-8');
     $this->addHelperPath("ZendX/JQuery/View/Helper", "ZendX_JQuery_View_Helper");
+    $this->headMeta('telephone=no', 'format-detection', $keyType = 'name', $modifiers = array(), $placement = 'APPEND');
+    $this->headMeta('SKYPE_TOOLBAR_PARSER_COMPATIBLE', 'SKYPE_TOOLBAR', $keyType = 'name', $modifiers = array(), $placement = 'APPEND');
     ?>
     <?php  echo $this->jQuery(); ?>
     <?php $this->headLink()->appendStylesheet('/css/reset.css');?>
