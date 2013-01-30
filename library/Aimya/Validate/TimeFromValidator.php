@@ -9,7 +9,7 @@
 
 class Aimya_Validate_TimeFromValidator extends Zend_Validate_Abstract
 {
-    const NOT_LESS = 'notLess';
+    const NOT_LESS = 'Not valid!';
 
     protected $_messageTemplates = array(
         self::NOT_LESS => "Not valid!"
