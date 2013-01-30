@@ -71,6 +71,13 @@ $controllerName = $front->getRequest()->getControllerName();
             <!-- END /LOGIN -->
         </div><!--End header-->
 
+        <ul class="underHeaderLang">
+
+            <li><a href="<?php echo $this->getHelper('baseUrl')->setBaseUrl('/en')->baseUrl(substr($_SERVER["REQUEST_URI"], 3));?>"><span class = "language english"></span></a></li>
+            <li><a href="<?php echo $this->getHelper('baseUrl')->setBaseUrl('/ja')->baseUrl(substr($_SERVER["REQUEST_URI"], 3));?>"><span class = "language japanese"></span></a></li>
+            <li><a href="<?php echo $this->getHelper('baseUrl')->setBaseUrl('/zh')->baseUrl(substr($_SERVER["REQUEST_URI"], 3));?>"><span class = "language chinese"></span></a></li>
+        </ul>
+
         <div class="alertBlock">
 
         </div>
@@ -149,7 +156,7 @@ $controllerName = $front->getRequest()->getControllerName();
             <li><a href="<?php echo $this->baseUrl() ?>/help.html"><?php echo $this->translate('contact us')?></a></li>
             <li><a href="<?php echo $this->baseUrl() ?>/policy.html"><?php echo $this->translate('privacy policy')?></a></li>
             <li><a href="<?php echo $this->baseUrl() ?>/help.html"><?php echo $this->translate('terms and conditions')?></a></li>
-                <ul>
+                </ul>
     </div><!--End copyright-->
 </div><!--End footer-->
 
