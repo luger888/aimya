@@ -185,12 +185,12 @@ if (Zend_Registry::isRegistered('username')) {
     </div><!--End page-->
 
 </div><!--End page-->
-<?php if((int)$username['role'] == 2):?>
-    <?php echo (int)$username['role'];
+<?php //if((int)$username['role'] == 2):?>
+    <?php var_dump((int)$username['role']);
     die;?>
     <script type="text/javascript">
         getTimeLeft();
     </script>
-<?php endif;?>
+<?php //endif;?>
 </body>
 </html>
