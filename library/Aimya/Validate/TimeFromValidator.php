@@ -30,6 +30,8 @@ class Aimya_Validate_TimeFromValidator extends Zend_Validate_Abstract
 
     public function isValid( $value, $context = null )
     {
+        if ($value == '...' || $this->_from->getValue() == '...')
+            return $value == $this->_from->getValue();
         $hour = substr($value,0,strlen($value) - 3);
         if (substr($value,strlen($value) - 2, 2) == 'pm'){
           $hour = $hour +12;
