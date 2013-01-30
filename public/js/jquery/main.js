@@ -355,6 +355,17 @@ $(document).ready(function () {
         }
     });
 
+    $("#refund-dialog").dialog({
+        autoOpen:false,
+        height:'auto',
+        width:450,
+        modal:true,
+        resizable:false,
+        close:function () {
+
+        }
+    });
+
     $("#friend-request-dialog").dialog({
         autoOpen:false,
         height:'auto',
@@ -930,20 +941,53 @@ function cancelRefund(e) {
     return false;
 }
 
-function approveRefund(e) {
-    var id = $(e).nextAll('input[type=hidden]:first').val();
+function showRefundForm(defaultText, e) {
+
+    var pathName = $('#current_url').val();
+    $("#refund-dialog").dialog("open");
+    var refundForm = $('#refund_request');
+    refundForm.find('.user-name').html($(e).parents('tr:first').find('.name').html() + ' ' + $(e).parents('tr:first').find('.lastname').html());
+    refundForm.find('#subscription_id').val($(e).nextAll('input[type=hidden]:first').val());
+    refundForm.find('#url').val(pathName + '/admin/payments');
+    refundForm.find('#request_comment').val(defaultText);
+
+    return false;
+}
+
+function approveRefund(subscriptionId) {
+    var id = subscriptionId;
     var pathName = $('#current_url').val();
     jQuery("body").append('<div class="loadingIcon"></div>');
     $.ajax({
         url:pathName + "/payment/unsubscribe",
         type:"post",
         data:{
-            'approveRefund':id
-            /*'periodRefund': $('#periodRefund'),
-             'pmoneyRefund': $('#periodRefund')*/
+            'approveRefund':id,
+            'subscription_id': $('#subscription_id').val(),
+            'period': $('#period').val(),
+            'amount': $('#amount').val(),
+            'request_comment': $('#request_comment').val()
         },
         success:function (response) {
-            window.location.reload();
+            if(response.status == 'success') {
+                window.location.reload();
+            } else {
+                jQuery('.loadingIcon').remove();
+                for (key in response.errors){
+                    $("#" + key).removeClass("input-error");
+                    $("#" + key).removeAttr('style');
+                    if(response.errors[key].length>0){
+                        $("#" + key).parent().after('<div class="error">' +response.errors[key] + '</div>');
+                        $("#" + key).addClass("input-error");
+                        $("#" + key).change(function() {
+                            $(this).removeClass("input-error");
+                            $(this).parent().next().remove();
+                        });
+                    }
+
+                }
+            }
+
         }
     });
 }
@@ -1028,3 +1072,5 @@ function updateAvailaibility() {
     });
     return false;
 }
+
+
