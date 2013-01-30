@@ -12,7 +12,7 @@ class Aimya_Validate_TimeFromValidator extends Zend_Validate_Abstract
     const NOT_LESS = 'notLess';
 
     protected $_messageTemplates = array(
-        self::NOT_LESS => "'%value%' is an incorrect value"
+        self::NOT_LESS => "Not valid!"
     );
 
     protected $_messageVariables = array(
@@ -30,8 +30,11 @@ class Aimya_Validate_TimeFromValidator extends Zend_Validate_Abstract
 
     public function isValid( $value, $context = null )
     {
-        if ($value == '...' || $this->_from->getValue() == '...')
-            return $value == $this->_from->getValue();
+        if ($value == '...' || $this->_from->getValue() == '...'){
+            $res =  $value == $this->_from->getValue();
+            if (!$res)     $this->_error(self::NOT_LESS);
+            return $res;
+        }
         $hour = substr($value,0,strlen($value) - 3);
         if (substr($value,strlen($value) - 2, 2) == 'pm'){
           $hour = $hour +12;
