@@ -55,8 +55,7 @@ if($username['role'] == '1'){
     $role = 'Admin';
 }
 
-if(!((int)$identity->role == (int)$username['role'] && (int)$username['role'] == 3)) {
-    die('123');
+if((int)$identity->role != (int)$username['role'] && (int)$username['role'] == 2) {
     $profileModel->overwriteSession($username['id']);
 }
 
@@ -186,7 +185,7 @@ if (Zend_Registry::isRegistered('username')) {
     </div><!--End page-->
 
 </div><!--End page-->
-<?php if(!((int)$identity->role == (int)$username['role'] && (int)$username['role'] == 3)):?>
+<?php if((int)$username['role'] == 2):?>
     <script type="text/javascript">
         getTimeLeft();
     </script>
