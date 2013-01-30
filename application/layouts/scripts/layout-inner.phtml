@@ -52,6 +52,12 @@ if($username['role'] == '1'){
 }else if($username['role'] == '3'){
     $role = 'Admin';
 }
+
+if((int)$identity->role != (int)$username['role'] && (int)$username['role'] != 3) {
+    $profileModel->overwriteSession($username['id']);
+}
+
+
 $servicesOffered = $servicesModel->getServiceByUser($identity->id, 1);
 $servicesRequested = $servicesModel->getServiceByUser($identity->id, 2);
 
@@ -177,8 +183,10 @@ if (Zend_Registry::isRegistered('username')) {
     </div><!--End page-->
 
 </div><!--End page-->
-<script type="text/javascript">
-    getTimeLeft();
-</script>
+<?php if((int)$identity->role != (int)$username['role'] && (int)$username['role'] != 3):?>
+    <script type="text/javascript">
+        getTimeLeft();
+    </script>
+<?php endif;?>
 </body>
 </html>
