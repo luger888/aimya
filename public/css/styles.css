@@ -1125,13 +1125,13 @@ input.button-2 {
 }
 .availabilityTab table tr td {
     padding: 14px 0;
-
 }
 .availabilityTab table tr td:nth-child(1){
     padding-left: 26px;
 }
 .availabilityTab table tr{
     padding-left: 25px;
+    vertical-align: top;
 }
 .availabilityTab table tr:nth-child(odd){
     background-color: #FBFCFC;

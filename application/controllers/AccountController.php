@@ -10,6 +10,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
             ->addActionContext('offline', 'json')
             ->addActionContext('online', 'json')
             ->addActionContext('features', 'json')
+            ->addActionContext('updateavailability', 'json')
             ->initContext('json');
     }
 
@@ -112,6 +113,32 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         $this->view->servicesForm = $servicesForm;
     }
 
+    public function updateavailabilityAction()
+    {
+        $this->_helper->layout()->disableLayout();
+        $identity = Zend_Auth::getInstance()->getStorage()->read();
+        $dbAvailability = new Application_Model_DbTable_Availability();
+        $dbUser = new Application_Model_DbTable_Users();
+        $this->view->user = $dbUser->getUser($identity->id);
+
+        $availabilityForm = new Application_Form_Availability();
+        $this->view->availabilityForm = $availabilityForm->populate($dbAvailability->getAvailability($identity->id));
+
+        if ($this->getRequest()->isPost()) {
+            $formData = $this->getRequest()->getPost();
+            if ($availabilityForm->isValid($formData)) {
+                $dbAvailability->updateAvailability($formData, $identity->id);
+
+                $this->_helper->redirector('index', 'account');
+                $this->view->success = 1;
+            } else {
+
+                $this->view->errors = $availabilityForm->getErrors();
+                $this->view->success = 0;
+            }
+        }
+    }
+
     public function availabilityAction()
     {
         $this->_helper->layout()->disableLayout();
@@ -122,19 +149,15 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
 
         $availabilityForm = new Application_Form_Availability();
         $this->view->availabilityForm = $availabilityForm->populate($dbAvailability->getAvailability($identity->id));
+
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
-
             if ($availabilityForm->isValid($formData)) {
                 $dbAvailability->updateAvailability($formData, $identity->id);
-
-                $this->_helper->redirector('index', 'account');
-
 
             } else {
 
                 $this->view->errors = $availabilityForm->getErrors();
-
             }
         }
     }
