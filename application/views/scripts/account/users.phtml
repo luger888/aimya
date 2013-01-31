@@ -40,6 +40,7 @@
         <td>' . $value['firstname'] . '</td>
         <td>' . $value['lastname'] . '</td>
         <td>' . $value['username'] . '</td>
+         <td>' . $role . '</td>
         <td>UTC ' . $value['timezone'] . '</td>
         <td><input type = "button" value="UNBLOCK" class = "button-2 block"  onclick ="unblockUser(this, ' . $url . ');return false;"></div><input type = "button" value = "DELETE" class="button-2 delete" onclick="deleteUser(this, ' . $url . ');return false;"></div><input type = "hidden" value = ' . $value['id'] . '></td>
     </tr>';
