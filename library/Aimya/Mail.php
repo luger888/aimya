@@ -6,7 +6,7 @@ class Aimya_Mail
     const FORGOT_PASSWORD            = "forgot_password";
     const SUBSCRIBE                  = "subscribe";
     const JOIN_CLUB_CONFIRMATION     = "join-club-confirmation";
-
+    const ALERT                      = "alert";
 
     protected $_viewSubject;
     protected $_viewContent;
