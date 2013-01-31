@@ -1,0 +1,1 @@
+Aimya notification for %1$s

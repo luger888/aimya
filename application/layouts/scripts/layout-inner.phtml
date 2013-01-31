@@ -146,6 +146,16 @@ if (Zend_Registry::isRegistered('username')) {
 
                             <div class="leftNavigation clearfix">
                                 <?php
+                                $controller = Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
+                                $action = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
+                                if($controller != 'account' && $action != 'features') {
+                                    $page = $this->navigation()->findOneByController($controller); /* @var $page Zend_Navigation_Page */
+                                    if ( $page ) {
+                                        $page->setActive();
+                                    }
+                                }
+
+
                                 echo $this->navigation()
                                     ->menu()
                                     ->setMaxDepth(0)
