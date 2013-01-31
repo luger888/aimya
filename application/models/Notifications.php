@@ -49,16 +49,7 @@ class Application_Model_Notifications
                     $mail->firstname = $userInfo['firstname'];
                     $mail->lastname = $userInfo['lastname'];
                     $mail->message = $message;
-                    $resultSend = $mail->send();
-
-                    Zend_Debug::dump('send resuklt : ' .$resultSend);
-                Zend_Debug::dump('current alert : '.$alert .' <br>');
-                Zend_Debug::dump('result for occurences :  ');
-                Zend_Debug::dump($result );
-                Zend_Debug::dump('message: '.$message .' <br>');
-                Zend_Debug::dump($userInfo );
-                    die;
-
+                    $mail->send();
 
             }
 
