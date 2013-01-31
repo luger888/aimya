@@ -288,7 +288,12 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
             }
             /*  Users tab, update relations    */
             if ($this->getRequest()->getParam('updateUserId')) {
-                $dbUserRelations->updateUserStatus($this->getRequest()->getPost(), $identity->id);
+                if($this->getRequest()->getParam('status')!=3){
+                    $dbUserRelations->updateUserStatus($this->getRequest()->getPost(), $identity->id);
+                }else{
+                    $dbUserRelations->deleteFriend($this->getRequest()->getPost());
+                }
+
             }
             if ($this->getRequest()->getParam('updateService')) {
 

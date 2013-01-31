@@ -3,14 +3,14 @@
 class Application_Model_Notifications
 {
 
-    public function array_searchRecursive( $needle, $haystack, $strict=false, $path=array() )
+    public function array_searchRecursive($needle, $haystack, $strict = false, $path = array())
     {
 
-        foreach( $haystack as $key => $val ) {
-            if( is_array($val) && $subPath = $this->array_searchRecursive($needle, $val, $strict, $path) ) {
+        foreach ($haystack as $key => $val) {
+            if (is_array($val) && $subPath = $this->array_searchRecursive($needle, $val, $strict, $path)) {
                 $path = array_merge($path, array($key), $subPath);
                 return $path;
-            } elseif( (!$strict && $val == $needle) || ($strict && $val === $needle) ) {
+            } elseif ((!$strict && $val == $needle) || ($strict && $val === $needle)) {
                 $path[] = $key;
                 return $path;
             }
@@ -18,16 +18,16 @@ class Application_Model_Notifications
         return false;
     }
 
-    public function sendAlerts($user_id, $alert=null)
+    public function sendAlerts($user_id, $alert = null)
     {
         $notesDb = new Application_Model_DbTable_Notifications();
 
         $notes = $notesDb->getNotifications($user_id);
 
-        if($alert){
+        if ($alert) {
             $result = $this->array_searchRecursive($alert, $notes);
 
-            if($result){
+            if ($result) {
 
                 switch ($alert) {
                     case 'friend':
@@ -36,26 +36,25 @@ class Application_Model_Notifications
                     case 'message':
                         $message = 'You got new message on Aimya.com!';
                         break;
-                    case 1||2||3||4||5:
-                        $message = 'You got new review on your lesson with rating of '.$alert.' on Aimya.com!';
+                    case 1 || 2 || 3 || 4 || 5:
+                        $message = 'You got new review on your lesson with rating of ' . $alert . ' on Aimya.com!';
                         break;
                 }
-                $userDb= new Application_Model_DbTable_Users();
-                $userInfo = $userDb->getUser($user_id);
-                $mail = new Aimya_Mail;
-                $mail->setRecipient($userInfo['email']);
-                $mail->setTemplate(Aimya_Mail::ALERT);
-                $mail->firstname = $userInfo['firstname'];
-                $mail->lastname = $userInfo['lastname'];
-                $mail->message = $message;
-                $mail->send();
-            }else{
-                return false;
+
+                    $userDb = new Application_Model_DbTable_Users();
+                    $userInfo = $userDb->getUser($user_id);
+                    $mail = new Aimya_Mail;
+                    $mail->setRecipient($userInfo['email']);
+                    $mail->setTemplate(Aimya_Mail::ALERT);
+                    $mail->firstname = $userInfo['firstname'];
+                    $mail->lastname = $userInfo['lastname'];
+                    $mail->message = $message;
+                    $mail->send();
+
             }
+
         }
-
-
-        Zend_Debug::dump($notes);
+        return false;
     }
 
 }

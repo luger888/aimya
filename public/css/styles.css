@@ -1197,7 +1197,7 @@ input.button-2 {
 .userRelationsTab.profile  .button-2{
     padding-right: 11px;
 }
-#block-confirm, #delete-confirm, #cancel-confirm{
+#block-confirm, #delete-confirm, #cancel-confirm, #cancel-unsubscribe{
     display: none;
 }
 /*Availability td padding-right */

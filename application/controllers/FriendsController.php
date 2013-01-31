@@ -27,6 +27,8 @@ class FriendsController extends Zend_Controller_Action
                 $result = $friendTable->addFriend($friendId, $message);
 
                 if($result) {
+                    $notesDb = new Application_Model_Notifications();
+                    $notesDb->sendAlerts($friendId, 'friend');//send email if needed
                     $this->_helper->flashMessenger->addMessage(array('success'=>'Request successfully sent'));
                     $this->redirect($url);
                 } else {
