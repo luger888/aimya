@@ -40,7 +40,7 @@ class Application_Model_Notifications
                         $message = 'You got new review on your lesson with rating of ' . $alert . ' on Aimya.com!';
                         break;
                 }
-                if(isset($message)){
+
                     $userDb = new Application_Model_DbTable_Users();
                     $userInfo = $userDb->getUser($user_id);
                     $mail = new Aimya_Mail;
@@ -49,7 +49,10 @@ class Application_Model_Notifications
                     $mail->firstname = $userInfo['firstname'];
                     $mail->lastname = $userInfo['lastname'];
                     $mail->message = $message;
-                    $mail->send();
+                    $resultSend = $mail->send();
+                if($resultSend){
+                    Zend_Debug::dump('send');
+                    die;
                 }
 
             }
