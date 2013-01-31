@@ -53,7 +53,8 @@ class Application_Model_Notifications
 
                     Zend_Debug::dump('send resuklt : ' .$resultSend);
                 Zend_Debug::dump('current alert : '.$alert .' <br>');
-                Zend_Debug::dump('result for occurences : '.$result .' <br>');
+                Zend_Debug::dump('result for occurences :  ');
+                Zend_Debug::dump($result );
                 Zend_Debug::dump('message: '.$message .' <br>');
                 Zend_Debug::dump($userInfo );
                     die;
