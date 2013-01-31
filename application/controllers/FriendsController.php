@@ -6,6 +6,7 @@ class FriendsController extends Zend_Controller_Action
         $this->_helper->layout->setLayout("layoutInner");
         $this   ->_helper->AjaxContext()
             ->addActionContext('send', 'json')
+            ->addActionContext('autocomplete', 'json')
             ->initContext('json');
     }
 
