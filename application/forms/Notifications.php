@@ -23,7 +23,7 @@ class Application_Form_Notifications extends Zend_Form
         /* Alerts */
         $alert = new Zend_Form_Element_MultiCheckbox('alert');
         $alert->setDecorators($this->basicDecorators);
-        $alert->addMultiOption('email', 'Receive Alert when I have a new friend request');
+        $alert->addMultiOption('friend', 'Receive Alert when I have a new friend request');
         $alert->addMultiOption('message', 'Receive Alert when I have a new message');
 //        if($identity->role == $this->student){
 //            $alert->addMultiOption('refund', 'Receive Alert when Refund is made to me');
