@@ -50,10 +50,10 @@ class Application_Model_Notifications
                     $mail->lastname = $userInfo['lastname'];
                     $mail->message = $message;
                     $resultSend = $mail->send();
-                if($resultSend){
+
                     Zend_Debug::dump($resultSend);
                     die;
-                }
+                
 
             }
 
