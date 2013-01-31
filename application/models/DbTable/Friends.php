@@ -26,6 +26,7 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
     {
 
         $friendField = $this->isInList($array['updateUserId']);
+
         if($friendField) {
 
             $where = $this->getAdapter()->quoteInto('id=?', $friendField['id']);
@@ -39,7 +40,11 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
             $this->update($data, $where);
         }
     }
-
+    public function deleteFriend($array = array()){
+        $friendField = $this->isInList($array['updateUserId']);
+        $where = $this->getAdapter()->quoteInto('id=?', $friendField['id']);
+        $this->delete($where);
+    }
     public function isFriend($friendId)
     {
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
