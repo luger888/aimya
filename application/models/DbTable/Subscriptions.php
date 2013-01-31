@@ -118,7 +118,7 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
     public function getLatestSubscription($user_id)
     {
           $data = $this->select()
-                ->from($this->_name, array(new Zend_Db_Expr('max(active_to) as maxId')))
+                ->from($this->_name, array('id', 'aimya_profit', 'user_id', new Zend_Db_Expr('max(active_to) as maxId')))
                 ->where('user_id =?', $user_id)
                 ->where('status =?', 'paid');
         return $data->query()->fetch();
@@ -177,18 +177,16 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
         return $this->update($data , $where);
     }
 
-    public function refundSubscription($subscriptionId, $activeTo, $aimyaProfit)
+    public function refundSubscription($subscriptionId, $userId, $activeTo, $aimyaProfit)
     {
-
-        $userId = Zend_Auth::getInstance()->getIdentity()->id;
         $data = array(
             'aimya_profit' => $aimyaProfit,
             'active_to' => $activeTo,
             'updated_at' => date('Y-m-d H:i:s')
         );
 
-        $where[] = $this->getAdapter()->quoteInto('id=?', $subscriptionId);
-        $where[] = $this->getAdapter()->quoteInto('user_id=?', $userId);
+        $where[] = $this->getAdapter()->quoteInto('id=?', (int)$subscriptionId);
+        $where[] = $this->getAdapter()->quoteInto('user_id=?', (int)$userId);
 
 
         return $this->update($data, $where);
