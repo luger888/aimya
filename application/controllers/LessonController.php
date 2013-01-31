@@ -613,7 +613,7 @@ class LessonController extends Zend_Controller_Action
                         $result = $reviewTable->createReview($rating, $reviewId, $lessonId, $userId, $lesson['booking_id'], $lesson['creator_id']);
                         if ($result) {
                             $notesDb = new Application_Model_Notifications();
-                            $notesDb->sendAlerts($lesson['creator_id'], 'message');//sending email if needed
+                            $notesDb->sendAlerts($lesson['creator_id'], $rating);//sending email if needed
                             $this->view->success = 1;
                         }
                     }
