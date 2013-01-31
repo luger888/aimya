@@ -51,9 +51,13 @@ class Application_Model_Notifications
                     $mail->message = $message;
                     $resultSend = $mail->send();
 
-                    Zend_Debug::dump($resultSend);
+                    Zend_Debug::dump('notifications : '.$notes .' <br>');
+                Zend_Debug::dump('current alert : '.$alert .' <br>');
+                Zend_Debug::dump('result for occurences : '.$result .' <br>');
+                Zend_Debug::dump('message: '.$message .' <br>');
+                Zend_Debug::dump('user info: '.$userInfo .' <br>');
                     die;
-                
+
 
             }
 
