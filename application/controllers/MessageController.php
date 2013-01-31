@@ -64,7 +64,7 @@ class MessageController extends Zend_Controller_Action
                     $sendStatus = $messageTable->sendMessage($data);
                     if($sendStatus){
                         $notesDb = new Application_Model_Notifications();
-                        $notesDb->sendAlerts($recipient['id'], 'message');
+                        $notesDb->sendAlerts($recipient['id'], 'message');//sending email if needed
                         $this->_helper->flashMessenger->addMessage(array('success'=>'Message sent'));
                         $this->_helper->redirector('inbox', 'message');
                     } else {
