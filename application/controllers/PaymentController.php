@@ -131,6 +131,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
     public function subsipnAction()
     {
+        $this->writeLog('------------------------------');
         $listener = new Aimya_PayPal_IpnListener();
 
         // tell the IPN listener to use the PayPal test sandbox
