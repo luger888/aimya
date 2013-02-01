@@ -225,7 +225,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
     public function getTimeZone()
     {
-        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+        $userId = '54'; //Zend_Auth::getInstance()->getIdentity()->id;
         $data = $this->select()
             ->from('user', array('timezone'))
             ->where('id=?', (int)$userId);
