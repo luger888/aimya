@@ -178,4 +178,26 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
 
         return $data->query()->fetch();
     }
+
+    public function getActiveFriends()
+    {
+        $userId = (int)Zend_Auth::getInstance()->getIdentity()->id;
+
+        $data = $this->getAdapter()->select()
+            ->from($this->_name)
+            ->where($this->getAdapter()->quoteInto('sender_id=?' , $userId) . ' OR ' . $this->getAdapter()->quoteInto('friend_id=?' , $userId))
+            ->where($this->getAdapter()->quoteInto('sender_status=?' , 1))
+            ->where($this->getAdapter()->quoteInto('recipient_status=?' , 1))
+            ->group('id');
+        $result = $data->query()->fetchAll();
+
+        $userTable = new Application_Model_DbTable_Users();
+        $friends = array();
+        foreach ($result as $index => $value) {
+            $friendId = ($userId == $value['friend_id']) ? $value['sender_id'] : $value['friend_id'];
+            $friends[$index] = $userTable->getItem($friendId);
+        }
+
+        return $friends;
+    }
 }

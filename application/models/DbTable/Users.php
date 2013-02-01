@@ -109,7 +109,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
     public function getUser($user_id)
     {
-        $user_id = (int)$user_id;
+        $user_id = 54; //(int)$user_id;
         $row = $this->fetchRow($this->select()->where('id = ?', $user_id));
 
         return $row->toArray();
@@ -225,7 +225,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
     public function getTimeZone()
     {
-        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+        $userId = '54'; //Zend_Auth::getInstance()->getIdentity()->id;
         $data = $this->select()
             ->from('user', array('timezone'))
             ->where('id=?', (int)$userId);

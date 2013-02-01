@@ -546,7 +546,7 @@ function getTimeLeft() {
                         'type':'post',
                         success:function (result) {
                             if (result.answer == 'success') {
-                                inboxLi.append('<span class="trialAlert"><span class="txt">End of trial!</span></span>')
+                                inboxLi.append('<span class="trialAlert"><span class="txt">End of trial!</span></span>');
                             }
                         }
                     });
@@ -555,6 +555,20 @@ function getTimeLeft() {
             }
         }
     });
+}
+
+function updateSesion() {
+    var baseUrl = $('#current_url').val();
+    /*$.ajax({
+        'url':baseUrl + '/payment/remained/',
+        'dataType':'json',
+        'type':'post',
+        success:function (data) {
+            if (data.status == 'success') {
+
+            }
+        }
+    });*/
 }
 
 function setDefaultTimezone() {

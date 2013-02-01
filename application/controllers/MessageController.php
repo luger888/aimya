@@ -83,6 +83,10 @@ class MessageController extends Zend_Controller_Action
         //$userData = $users->getUser($userId);
         //$form->populate($userData);
         //$this->view->data = $userData;
+        $friendTable = new Application_Model_DbTable_Friends();
+        $friends = $friendTable->getActiveFriends();
+
+        $this->view->friends = $friends;
     }
 
     public function sentAction()

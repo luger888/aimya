@@ -1,0 +1,6 @@
+<li class="note"><p class="username">bychkov</p><p class="time">1357665874656</p><p class="message">234
+</p></li><li class="note"><p class="username">bychkov</p><p class="time">1357665888078</p><p class="message">sdfgsdfg
+</p></li><li class="note"><p class="username">alex</p><p class="time">01.08.13 17:24</p><p class="message">saf3e4
+</p></li><li class="note"><p class="username">bychkov</p><p class="time">1357666067000</p><p class="message">aq
+</p></li><li class="note"><p class="username">bychkov</p><p class="time">1357666076203</p><p class="message">qw
+</p></li>
