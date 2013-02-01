@@ -46,8 +46,15 @@ class BookingController extends Zend_Controller_Action
                     $bookingDbTable = new Application_Model_DbTable_Booking();
                     $this->getRequest()->setParam('creator_tz', $userGmt['timezone']);
                     if($this->getRequest()->getParam('recipient_id')){
-                        $bookingDbTable->addBooking($this->getRequest()->getParams(), $identity->id);
-                        $this->view->success = 1;
+                        $isExist = $bookingDbTable->isExistBooking(null, $identity->id, $this->getRequest()->getParam('started_at'), $this->getRequest()->getParam('duration'));
+                        if(!$isExist){
+                            $bookingDbTable->addBooking($this->getRequest()->getParams(), $identity->id);
+                            $this->view->success = 1;
+                        }else{
+                            $this->view->fail = 1;
+                        }
+
+
                     }
 
                 }else{
