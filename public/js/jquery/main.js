@@ -1040,6 +1040,7 @@ function showFriendFormFeatured(userId, defaultText, e) {
 }
 
 function updateAvailaibility() {
+    jQuery("body").append('<div class="loadingIcon"></div>');
     $.ajax({
         url:  pathName + "/account/updateavailability",
         type: "post",
@@ -1081,6 +1082,7 @@ function updateAvailaibility() {
                 }
 
             }
+            jQuery('.loadingIcon').remove();
         }
 
     });
