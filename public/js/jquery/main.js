@@ -546,7 +546,7 @@ function getTimeLeft() {
                         'type':'post',
                         success:function (result) {
                             if (result.answer == 'success') {
-                                inboxLi.append('<span class="trialAlert"><span class="txt">End of trial!</span></span>')
+                                window.location.reload();
                             }
                         }
                     });
