@@ -45,7 +45,7 @@ $identity = Zend_Auth::getInstance()->getStorage()->read();
 $userModel = new Application_Model_DbTable_Users();
 $profileModel = new Application_Model_Profile();
 $servicesModel  = new Application_Model_DbTable_ServiceDetail();
-$identityId = '54'; //$identity->id;
+$identityId = $identity->id;
 $username = $userModel->getUser($identityId);
 $avatarPath = $profileModel->getAvatarPath($identityId, 'base'); //path to avatar
 if($username['role'] == '1'){
@@ -58,7 +58,7 @@ if($username['role'] == '1'){
 
 $roleInDb = $username['role'];
 
-if('3' != $username['role'] && '3' == '1') {
+if($identity->role != $username['role'] && $identity->role == '1') {
     $profileModel->overwriteSession($username['id']);
 }
 
