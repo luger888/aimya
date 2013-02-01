@@ -169,6 +169,7 @@ class LessonController extends Zend_Controller_Action
 
     public function recordingAction()
     {
+        $this->_helper->layout()->disableLayout();
         if ($this->getRequest()->getParam('lessonId')) {
             //$userId = $this->getRequest()->getParam('partner_id');
             $lessonTable = new Application_Model_DbTable_Lesson();
