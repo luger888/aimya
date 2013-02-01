@@ -38,6 +38,7 @@ function deleteService(e, url) {
 }
 /* Picking ID of service from hidden input and sending on controller to EDIT service*/
 function editService(e, service_type, url){
+
     //taking values for populating from DOM
     $.ajax({
         url: url,
@@ -124,6 +125,7 @@ function editService(e, service_type, url){
 }
 
 function updateService(e, service_type, url){
+    jQuery("body").append('<div class="loadingIcon"></div>');
     var id = $(e).nextAll('input[type=hidden]:first').val();//id of service
     var serviceWrapper  = $(e).parents('.shadowSeparatorBox'); //parent div
     /* getting values to post */

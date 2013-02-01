@@ -145,6 +145,9 @@ function updateResumeItem(e, tab) {
                 experienceWrapper.find('.formRow').html(resumeContent);
                 $(e).remove();
                 experienceWrapper.find('.uploadWrapper').remove();
+                if ($('#queue' + tab + ' .filename').text() == '') {
+                    window.location.reload();
+                }
             }
         }
 
