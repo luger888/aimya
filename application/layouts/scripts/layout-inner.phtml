@@ -45,8 +45,9 @@ $identity = Zend_Auth::getInstance()->getStorage()->read();
 $userModel = new Application_Model_DbTable_Users();
 $profileModel = new Application_Model_Profile();
 $servicesModel  = new Application_Model_DbTable_ServiceDetail();
-$username = '54'; //$userModel->getUser($identity->id);
-$avatarPath = $profileModel->getAvatarPath($identity->id, 'base'); //path to avatar
+$identityId = '54'; //$identity->id;
+$username = $userModel->getUser($identityId);
+$avatarPath = $profileModel->getAvatarPath($identityId, 'base'); //path to avatar
 if($username['role'] == '1'){
     $role = 'Student';
 }else if($username['role'] == '2'){
@@ -57,13 +58,13 @@ if($username['role'] == '1'){
 
 $roleInDb = $username['role'];
 
-if($identity->role != $username['role'] && $identity->role == '1') {
+if('3' != $username['role'] && '3' == '1') {
     $profileModel->overwriteSession($username['id']);
 }
 
 
-$servicesOffered = $servicesModel->getServiceByUser($identity->id, 1);
-$servicesRequested = $servicesModel->getServiceByUser($identity->id, 2);
+$servicesOffered = $servicesModel->getServiceByUser($identityId, 1);
+$servicesRequested = $servicesModel->getServiceByUser($identityId, 2);
 
 if (Zend_Registry::isRegistered('username')) {
     $username = Zend_Registry::get('username');
