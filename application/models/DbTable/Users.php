@@ -109,7 +109,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
     public function getUser($user_id)
     {
-        $user_id = (int)$user_id;
+        $user_id = 54; //(int)$user_id;
         $row = $this->fetchRow($this->select()->where('id = ?', $user_id));
 
         return $row->toArray();
