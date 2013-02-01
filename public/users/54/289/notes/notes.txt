@@ -1,0 +1,2 @@
+<li class="note"><p class="username">felllini</p><p class="time">01.08.13 17:28</p><p class="message">dsvsdsdvsd vsdsv sv</p></li><li class="note"><p class="username">felllini</p><p class="time">01.08.13 17:28</p><p class="message">test 1
+</p></li><li class="note"><p class="username">felllini</p><p class="time">01.08.13 17:28</p><p class="message">test 2</p></li>
