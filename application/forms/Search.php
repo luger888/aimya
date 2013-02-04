@@ -14,7 +14,7 @@ class Application_Form_Search extends Zend_Form
         $searchString
             ->setAttrib('id', 'search_string')
             ->setAttrib('class', 'searchField')
-            ->setAttrib('placeholder', 'Search services')
+            ->setAttrib('placeholder', $this->getView()->translate('Search services'))
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 
