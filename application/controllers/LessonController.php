@@ -270,10 +270,12 @@ class LessonController extends Zend_Controller_Action
     public function uploadAction()
     {
 
+        //$this->write('teeee');
         //$text = json_encode($_POST);
         //$text = session_id();
         //$this->write($text);
         $identityId = Zend_Auth::getInstance()->getIdentity()->id;
+        $this->write('teeeeqqq');
 
         $lessonModel = new Application_Model_Lesson();
         $lessonTable = new Application_Model_DbTable_Lesson();
@@ -282,7 +284,7 @@ class LessonController extends Zend_Controller_Action
         $presPath = $lessonModel->createPresentationPath($activeLesson['id']);
         $presPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . $presPath;
 
-        //$this->write($presPath);
+        $this->write($presPath);
 
         $formData = $this->getRequest()->getParams();
 
@@ -304,7 +306,7 @@ class LessonController extends Zend_Controller_Action
             //$text .= session_id();
             $this->write($text);*/
 
-            exec("sudo -u nginx /usr/local/bin/conv.sh $filePath", $convResult);
+            exec("sudo /usr/local/bin/conv.sh $filePath", $convResult);
             $this->write($convResult);
             $this->write($filePath);
 
