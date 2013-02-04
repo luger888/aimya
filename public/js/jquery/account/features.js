@@ -95,14 +95,21 @@ function showMoreUsers (){
 
 
 
+    var postData = {
+        'offset': elementCount,
+        'count': 5
+    };
+    if($.getUrlVar('category')) {
+        postData['category'] = $.getUrlVar('category');
+    }
+    if($.getUrlVar('user')) {
+        postData['user'] = $.getUrlVar('user');
+    }
+
     $.ajax({
         url: baseUrl +"/account/features",
         type: "post",
-        data: {
-            'offset': elementCount,
-            'count': 5
-
-        },
+        data: postData,
         success: function(result) {
             var viewMorButton = $('.feauteresButtons');
             $('.feauteresButtons').remove();
@@ -180,3 +187,20 @@ function sendMessage(id, element) {
     alert('in development');
     return false;
 }
+
+$.extend({
+    getUrlVars: function(){
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for(var i = 0; i < hashes.length; i++)
+        {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
+    },
+    getUrlVar: function(name){
+        return $.getUrlVars()[name];
+    }
+});
