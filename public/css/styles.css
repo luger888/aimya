@@ -555,6 +555,7 @@ input.button-2 {
 
 .leftNavigation {
     padding-top: 22px;
+    text-transform: uppercase;
 }
 
 .leftNavigation ul {
@@ -1497,6 +1498,7 @@ input.button-2 {
     width:60px;
     font-family: 'helvetica-light-rnormal';
     font-weight: 500;
+    text-transform: capitalize;
 }
 .sendMessageBox .buttonsRow{
     float:right;

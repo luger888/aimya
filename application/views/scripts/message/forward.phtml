@@ -10,12 +10,12 @@
 
                     <div class="sendMessageBox clearfix">
                         <div class="formRow clearfix">
-                            <div class="label messageForwardInbox">To:</div> <?php echo $form->message_id->setValue(Zend_Controller_Front::getInstance()->getRequest()->getParam('message_id'));?>
+                            <div class="label messageForwardInbox"><?php echo $this->translate('to');?>:</div> <?php echo $form->message_id->setValue(Zend_Controller_Front::getInstance()->getRequest()->getParam('message_id'));?>
                             <?php echo $form->username->setValue($sender['username']);?></div>
                         <div class="formRow clearfix">
-                            <div class="label">Subject:</div><?php echo  $form->subject->setValue($message['theme'])?></div>
+                            <div class="label"><?php echo $this->translate('subject');?>:</div><?php echo  $form->subject->setValue($message['theme'])?></div>
                         <div class="formRow clearfix">
-                            <div class="label">Text:</div><?php echo $form->content->setValue($message['text']); ?></div>
+                            <div class="label"><?php echo $this->translate('text');?>:</div><?php echo $form->content->setValue($message['text']); ?></div>
                         <div class="buttonsRow clearfix">
                             <?php echo $form->sendbutton?>
                         </div>

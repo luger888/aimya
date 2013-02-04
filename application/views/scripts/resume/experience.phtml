@@ -17,9 +17,9 @@
                                     <h1>experience:</h1>
 
                                     <div class="buttonRow">
-                                        <input type="button" value="edit" class="button-2 edit"
+                                        <input type="button" value="<?php echo $this->translate('edit');?>" class="button-2 edit"
                                                onclick="editResumeItem(this, 'experience');">
-                                        <input type="button" value="delete" class="button-2 delete"
+                                        <input type="button" value="<?php echo $this->translate('delete');?>" class="button-2 delete"
                                                onclick="deleteResumeItem(this, 'experience');">
                                         <input type="hidden" value="<?php echo $value['id'];?>">
                                     </div>
@@ -42,8 +42,7 @@
                     <?php endforeach;
                 echo '</div>
                 <div class="buttonsRow clearfix">
-                    <input type="button" class="button-2 add addResumeItem floatRight" value="add experience"
-                   onclick="addResumeItem();">
+                    <input type="button" class="button-2 add addResumeItem floatRight" value="'. $this->translate('add experience').'" onclick="addResumeItem();">
                 </div>';
             } else {
                 echo '<script>addResumeItem()</script>';
@@ -60,7 +59,7 @@
                 <div class="uploadWrapper">
 
                     <input id="file_uploadexperience" name="file_upload" type="file" multiple="true">
-                    <input type="button" value="save" class="button-2 save floatRight"
+                    <input type="button" value="<?php echo $this->translate('save');?>" class="button-2 save floatRight"
                            onclick="saveResumeItem('experience');">
                 </div>
                 <div id="queueexperience"></div>

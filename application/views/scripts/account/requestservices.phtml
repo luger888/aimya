@@ -10,9 +10,9 @@
                         <h2 id="lesson_category"><?php echo $value['lesson_category'];?></h2>
 
                         <div class="buttons clearfix">
-                            <input type='button' id='deleteService' class="button-2 delete" value='Delete'
+                            <input type='button' id='deleteService' class="button-2 delete" value="<?php echo $this->translate('delete'); ?>"
                                    onclick="deleteService(this, '<?php echo $this->baseUrl()?>/account/edit');return false;">
-                            <input type='button' id='editService' class="button-2 edit" value='Edit'
+                            <input type='button' id='editService' class="button-2 edit" value="<?php echo $this->translate('edit'); ?>"
                                    onclick="editService(this, 2, '<?php echo $this->baseUrl()?>/account/edit');return false;">
 
                             <input type='hidden' value=" <?php echo $value['id'];?>">

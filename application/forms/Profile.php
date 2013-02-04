@@ -65,8 +65,8 @@ class Application_Form_Profile extends Zend_Form
             ->setSeparator('');
         $gender->addMultiOptions(array(
 
-                'male' => 'Male',
-                'female' => 'Female'
+                'male' => $this->getView()->translate('male'),
+                'female' => $this->getView()->translate('female')
 
             )
         )

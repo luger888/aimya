@@ -16,9 +16,9 @@
                                     <h1>education:</h1>
 
                                     <div class="buttonRow">
-                                        <input type="button" value="edit" class="button-2 edit"
+                                        <input type="button" value="<?php echo $this->translate('edit');?>" class="button-2 edit"
                                                onclick="editResumeItem(this, 'education');">
-                                        <input type="button" value="delete" class="button-2 delete"
+                                        <input type="button" value="<?php echo $this->translate('delete');?>" class="button-2 delete"
                                                onclick="deleteResumeItem(this, 'education');">
                                         <input type="hidden" value="<?php echo $value['id'];?>">
                                     </div>
@@ -41,7 +41,7 @@
                     <?php endforeach;
                 echo '</div>
                         <div class="buttonsRow clearfix">
-                         <input type="button" class="button-2 add addResumeItem floatRight" value="add education"
+                         <input type="button" class="button-2 add addResumeItem floatRight" value="'. $this->translate('add education').'"
                              onclick="addResumeItem();">
                         </div>';
             } else {
@@ -59,7 +59,7 @@
                 <div class="uploadWrapper">
 
                     <input id="file_uploadeducation" name="file_upload" type="file" multiple="true">
-                    <input type="button" value="save" class="button-2 save floatRight"
+                    <input type="button" value="<?php echo $this->translate('save');?>" class="button-2 save floatRight"
                            onclick="saveResumeItem('education');">
                 </div>
                 <div id="queueeducation"></div>

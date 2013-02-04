@@ -5,10 +5,10 @@
     <div id="tabsNavigation" class="clearfix">
         <ul>
             <li><a href="#tabs-1">basic</a></li>
-            <li><a href="<?php echo $this->baseUrl()?>/resume/objective">objective</a></li>
-            <li><a href="<?php echo $this->baseUrl()?>/resume/experience">experience</a></li>
-            <li><a href="<?php echo $this->baseUrl()?>/resume/education">education</a></li>
-            <li><a href="<?php echo $this->baseUrl()?>/resume/skills">skills</a></li>
+            <li><a href="<?php echo $this->baseUrl()?>/resume/objective"><?php echo $this->translate('objective');?></a></li>
+            <li><a href="<?php echo $this->baseUrl()?>/resume/experience"><?php echo $this->translate('experience');?></a></li>
+            <li><a href="<?php echo $this->baseUrl()?>/resume/education"><?php echo $this->translate('education');?></a></li>
+            <li><a href="<?php echo $this->baseUrl()?>/resume/skills"><?php echo $this->translate('skills');?></a></li>
         </ul>
     </div>
     <!--End tabsNavigation-->
@@ -38,8 +38,8 @@
 
                         </div>
                         <div class="buttonsRow floatRight">
-                            <input type="button" class="button-2 edit resumeBut" value="edit" onclick="editResume()";>
-                            <input type="button" class="button-2 save saveResume" value="save" onclick="saveResume()";>
+                            <input type="button" class="button-2 edit resumeBut" value="<?php echo $this->translate('edit');?>" onclick="editResume()";>
+                            <input type="button" class="button-2 save saveResume" value="<?php echo $this->translate('save');?>" onclick="saveResume()";>
                         </div>
                     </div>
                     <!--End shadowSeparatorBox-->

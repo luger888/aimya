@@ -10,17 +10,17 @@
     <div class="shadowSeparator clearfix">
         <div class="shadowSeparatorBox clearfix">
             <div class="messageButtons clearfix">
-                <h1>Create New Message</h1>
+                <h1><?php echo $this->translate('create new message');?></h1>
             </div>
             <form method="post" action="<?php echo $this->baseUrl()?>/message/send/">
 
                 <div class="sendMessageBox clearfix">
                     <div class="formRow clearfix">
-                        <div class="label">To:</div><?php echo $form->username?></div>
+                        <div class="label"><?php echo $this->translate('to');?>:</div><?php echo $form->username?></div>
                     <div class="formRow clearfix">
-                        <div class="label">Subject:</div><?php echo $form->subject?></div>
+                        <div class="label"><?php echo $this->translate('subject');?>:</div><?php echo $form->subject?></div>
                     <div class="formRow clearfix">
-                        <div class="label">Text:</div><?php echo $form->content?></div>
+                        <div class="label"><?php echo $this->translate('text');?>:</div><?php echo $form->content?></div>
                     <div class="buttonsRow clearfix">
                         <?php echo $form->sendbutton?>
                     </div>
