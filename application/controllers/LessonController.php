@@ -274,6 +274,7 @@ class LessonController extends Zend_Controller_Action
         //$text = session_id();
         //$this->write($text);
         $identityId = Zend_Auth::getInstance()->getIdentity()->id;
+        $this->write($identityId);
 
         $lessonModel = new Application_Model_Lesson();
         $lessonTable = new Application_Model_DbTable_Lesson();
