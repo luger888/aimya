@@ -282,12 +282,13 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
             $row = $this->fetchRow($this->select()
                 ->where('('. $this->getAdapter()->quoteInto('sender_id=?' , (int)$userId) . ') OR (' . $this->getAdapter()->quoteInto('recipient_id=?' , (int)$userId) . ')')
                 ->where('started_at<=?', $started_atAdd )
-                ->where('started_at>=?', $current_at));//if there is booking previous to current
-
+                ->where('started_at>=?', $current_at)//if there is booking previous to current
+                ->where('booking_status!=?', 2));
             $row2 = $this->fetchRow($this->select()
                 ->where('('. $this->getAdapter()->quoteInto('sender_id=?' , (int)$userId) . ') OR (' . $this->getAdapter()->quoteInto('recipient_id=?' , (int)$userId) . ')')
                 ->where('started_at<=?', $current_at )
-                ->where('started_at>=?', $started_atSub));//if there is booking previous to current
+                ->where('started_at>=?', $started_atSub)//if there is booking previous to current
+                ->where('booking_status!=?', 2));
         }
 
 

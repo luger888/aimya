@@ -101,8 +101,8 @@ class Application_Form_Registration extends Zend_Form
         $type = new Zend_Form_Element_Radio('type');
         $type->addMultiOptions(array(
 
-                '2' => '<span class="txt">TEACHING MEMBER</span>',
-                '1' => '<span class="txt">LEARNING MEMBER</span>'
+                '2' => '<span class="txt">'.$this->getView()->translate('teaching member').'</span>',
+                '1' => '<span class="txt">'.$this->getView()->translate('learning member').'</span>'
 
             )
 
