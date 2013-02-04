@@ -97,11 +97,11 @@ if (Zend_Registry::isRegistered('username')) {
 
                     <nav id="globalNav">
                         <ul>
-                            <li><a href="<?php echo $this->baseUrl() ?>/booking"><?php echo $this->translate("HOME"); ?></a></li>
-                            <li><a href="<?php echo $this->baseUrl() ?>/policy.html">PRIVACY POLICY</a></li>
-                            <li><a href="<?php echo $this->baseUrl() ?>/about.html">ABOUT AIMYA</a></li>
-                            <li><a href="<?php echo $this->baseUrl() ?>/help.html">HELP</a></li>
-                            <li><a href="<?php echo $this->baseUrl() ?>/user/logout/">SIGN OUT</a></li>
+                            <li><a href="<?php echo $this->baseUrl() ?>/booking"><?php echo $this->translate("home"); ?></a></li>
+                            <li><a href="<?php echo $this->baseUrl() ?>/policy.html"><?php echo $this->translate("privacy policy"); ?></a></li>
+                            <li><a href="<?php echo $this->baseUrl() ?>/about.html"><?php echo $this->translate("about aimya"); ?></a></li>
+                            <li><a href="<?php echo $this->baseUrl() ?>/help.html"><?php echo $this->translate("help"); ?></a></li>
+                            <li><a href="<?php echo $this->baseUrl() ?>/user/logout/"><?php echo $this->translate("sign out"); ?></a></li>
                             <li class="last"><a href="#"><?php echo $this->translate('language')?></a>
                             <ul>
                                 <li><a href="<?php echo $this->getHelper('baseUrl')->setBaseUrl('/en')->baseUrl(substr($_SERVER["REQUEST_URI"], 3));?>"><span class = "language english"><?php echo $this->translate('english')?></span></a></li>
