@@ -44,13 +44,14 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                 $timezone = $timezoneTable->getItem($formData['timezone']);
                 $formData['timezone'] = $timezone['gmt'];
                 $updateUser->updateUser($formData, $identity->id);
-
+                $this->view->profile = $profileForm->populate($accountData);
             } else {
 
                 $this->view->errors = $profileForm->getErrors();
 
             }
         }
+        $accountData = $profileModel->getProfileAccount($identity->id);
         $this->view->profile = $profileForm->populate($accountData);
         $this->view->avatarPath = $profileModel->getAvatarPath($identity->id, 'medium'); //path to avatar
     }
