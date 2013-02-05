@@ -324,6 +324,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                 if(substr($profileModel->getAvatarPath($identity->id, 'base'), 0, 12)!='/img/design/'){
                     unlink(substr($profileModel->getAvatarPath($identity->id, 'base'), 1)); //substr first slah
                     unlink(substr($profileModel->getAvatarPath($identity->id, 'medium'), 1));
+
                 }
 
 
