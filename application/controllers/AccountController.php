@@ -58,9 +58,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                 $timezone = $timezoneTable->getItem($formData['timezone']);
                 $formData['timezone'] = $timezone['gmt'];
                 $updateUser->updateUser($formData, $identity->id);
-
             } else {
-
                 $this->view->errors = $profileForm->getErrors();
 
             }
@@ -68,6 +66,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         $accountData = $profileModel->getProfileAccount($identity->id);
         $timezoneId = $timezoneTable->getTimezoneByGmt($accountData['timezone']);
         $accountData['timezone'] = $timezoneId['id'];
+
 
         $this->view->profile = $profileForm->populate($accountData);
         $this->view->avatarPath = $profileModel->getAvatarPath($identity->id, 'medium'); //path to avatar
@@ -322,8 +321,11 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
 
                 $dbProfile = new Application_Model_DbTable_Profile();
                 $profileModel = new Application_Model_Profile();
-                unlink(substr($profileModel->getAvatarPath($identity->id, 'base'), 1)); //substr first slah
-                unlink(substr($profileModel->getAvatarPath($identity->id, 'medium'), 1));
+                if(substr($profileModel->getAvatarPath($identity->id, 'base'), 0, 12)!='/img/design/'){
+                    unlink(substr($profileModel->getAvatarPath($identity->id, 'base'), 1)); //substr first slah
+                    unlink(substr($profileModel->getAvatarPath($identity->id, 'medium'), 1));
+                }
+
 
                 $dbProfile->deleteAvatar($identity->id);
 
