@@ -9,6 +9,7 @@ class MessageController extends Zend_Controller_Action
             ->addActionContext('massdelete', 'json')
             ->addActionContext('massarchive', 'json')
             ->addActionContext('masstrash', 'json')
+            ->addActionContext('massrestore', 'json')
             ->initContext('json');
     }
 
