@@ -138,7 +138,7 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
             $data = array(
                         'sender_id' => $userId,
                         'recipient_id' => $friendId,
-                        'content' => $message . ' My Account page is <a href="' . $accountPage . '">' . $user["username"] . '</a>. Or click <a href="' . Zend_Controller_Front::getInstance()->getBaseUrl() . '/friends/send/?friend_id=' . $userId . '&url=' . $accountPage . '">this</a> to add this user to your account' ,
+                        'content' => $message . ' My Account page is <a href="' . $accountPage . '">' . $user["username"] . '</a>. Or click <a href="' . Zend_Controller_Front::getInstance()->getBaseUrl() . '/friends/send/?friend_id=' . $userId . '&url=' . $accountPage . '">here</a> to add this user to your account' ,
                         'subject' => "Add to Friend Request",
                     );
             $messageTable->sendMessage($data);
