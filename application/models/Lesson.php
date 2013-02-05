@@ -75,11 +75,13 @@ class Application_Model_Lesson
         return $result;
     }
 
-    public function startRecording($display, $path, $time)
+    public function startRecording($display, $path, $time, $teacherStream)
     {
         $seconds = $time * 60;
         $time = gmdate("H:i:s", $seconds);
         exec("phase2_rec.sh $display $path $time > /dev/null 2>/dev/null &");
+        exec("/usr/local/bin/phase2.1_rtmpdump.sh $teacherStream $path > /dev/null 2>/dev/null &");
+
         return true;
     }
 
