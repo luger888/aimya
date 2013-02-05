@@ -94,7 +94,10 @@ class LessonController extends Zend_Controller_Action
 
                     if ($res) {
                         $lessonModel->openLesson($activeLesson['id'], $openDispay);
-                        $lessonModel->startRecording($activeLesson['id'], $videoPath . 'video_lesson', $booking['duration'], $resultParams['teacherStream']);
+
+                        $stream = getHostByName(getHostName()) . '/oflaDemo/' . $resultParams['teacherStream'];
+
+                        $lessonModel->startRecording($activeLesson['id'], $videoPath . 'video_lesson', $booking['duration'], $stream);
                     }
                 }
 
@@ -142,6 +145,11 @@ class LessonController extends Zend_Controller_Action
                 $fsMode = $result['creator_flash_size'];
                 $partnerStreamName = $result['partner_stream_name'];
             }
+
+            $stream = getHostByName(getHostName()) . '/oflaDemo/' . $result['creator_stream_name'];
+
+            echo $stream;
+            die;
 
             $booking = $bookingTable->getItem($result['booking_id']);
 
