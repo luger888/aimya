@@ -419,6 +419,9 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                 $featuredHtml .= "
                                 </ul>
                             </div>
+                            <div class='profileRole'>";
+                            $role = ($person['role'] == '1' ? 'Student' : 'Instructor');
+                            $featuredHtml .= $role . "</div>
                         </div>
                     </div>";
             }
