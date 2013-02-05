@@ -3,7 +3,7 @@ class Application_Model_DbTable_Message extends Application_Model_DbTable_Abstra
 {
     protected $_name = 'messages';
 
-    public function sendMessage($array = array()){
+    public function sendMessage($array = array(), $recipient_status = 0){
 
         $data = array(
             'sender_id' => $array['sender_id'],
@@ -11,7 +11,7 @@ class Application_Model_DbTable_Message extends Application_Model_DbTable_Abstra
             'text' => $array['content'],
             'theme' => $array['subject'],
             'sender_status' => 1,
-            'recipient_status' => 0,
+            'recipient_status' => $recipient_status,
             'status' => 0,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')

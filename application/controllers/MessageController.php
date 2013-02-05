@@ -61,7 +61,14 @@ class MessageController extends Zend_Controller_Action
                     $messageTable = new Application_Model_DbTable_Message();
                     $data['sender_id'] = $userId;
                     $data['recipient_id'] = $recipient['id'];
-                    $sendStatus = $messageTable->sendMessage($data);
+                    $friendsDb= new Application_Model_DbTable_Friends();
+                    $isFriend = $friendsDb->isBlocked($recipient['id']);
+                    if($isFriend){
+                        $sendStatus = $messageTable->sendMessage($data);
+                    }else{
+                        $sendStatus = $messageTable->sendMessage($data, 4);
+                    }
+
                     if($sendStatus){
                         $notesDb = new Application_Model_Notifications();
                         $notesDb->sendAlerts($recipient['id'], 'message');//sending email if needed
