@@ -59,7 +59,7 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         $acl->deny(self::TEACHER , 'payment', array('upgrade'));
         $acl->allow(self::TEACHER , 'payment', array('index', 'pay', 'email', 'subscribe', 'unsubscribe', 'downgrade'));
         $acl->deny(self::STUDENT ,  'user', array('index', 'registration', 'login'));
-        $acl->allow(self::TEACHER , 'lesson', array('setup', 'upload'));
+        $acl->allow(self::TEACHER , 'lesson', array('setup'));
         $acl->allow(self::TEACHER , 'review', array('index'));
         $acl->allow(self::TEACHER , 'resume', array('index', 'pdf', 'download'));
         #allow to guest

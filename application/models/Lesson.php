@@ -19,9 +19,11 @@ class Application_Model_Lesson
     public function createPresentationPath($lessonId)
     {
         $identityId = Zend_Auth::getInstance()->getIdentity()->id;
+        $lessonTable = new Application_Model_DbTable_Lesson();
+        $activeLesson = $lessonTable->checkAvailableLesson($identityId);
 
         $folderModel = new Application_Model_Folder();
-        $notePath = 'users/' . $identityId . '/' . $lessonId . '/presentation/';
+        $notePath = 'users/' . $activeLesson['creator_id'] . '/' . $lessonId . '/presentation/';
         $folderModel->createFolderChain($notePath, '/');
         return $notePath;
     }
