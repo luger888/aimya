@@ -24,23 +24,23 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         $timezoneTable = new Application_Model_DbTable_TimeZones();
         $profileForm = new Application_Form_Profile();
         $profileModel = new Application_Model_Profile();
-        $accountData = $profileModel->getProfileAccount($identity->id);
-        $timezoneId = $timezoneTable->getTimezoneByGmt($accountData['timezone']);
-        $accountData['timezone'] = $timezoneId['id'];
+
 
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
 
             if ($profileForm->isValid($formData)) {
                 $updateUser = new Application_Model_DbTable_Users();
+                $currentUser = $updateUser->getItem($identity->id);
                 $checkByUsername = $updateUser->checkByUsername($formData['username']);
-                if($checkByUsername && $checkByUsername['username'] != $formData['username']) {
+
+                if($checkByUsername && $currentUser['username'] != $formData['username']) {
                     $this->_helper->flashMessenger->addMessage(array('failure'=>'This username already exist, please select another username'));
                     $formData['username'] = $checkByUsername['username'];
                     $this->_helper->redirector('index', 'account');
                 }
                 $checkByEmail = $updateUser->checkByMail($formData['email']);
-                if($checkByEmail && $checkByEmail['email'] != $formData['email']) {
+                if($checkByEmail && $currentUser['email'] != $formData['email']) {
                     $this->_helper->flashMessenger->addMessage(array('failure'=>'This email already exist, please select another email'));
                     $formData['email'] = $checkByEmail['email'];
                     $this->_helper->redirector('index', 'account');
@@ -58,14 +58,16 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                 $timezone = $timezoneTable->getItem($formData['timezone']);
                 $formData['timezone'] = $timezone['gmt'];
                 $updateUser->updateUser($formData, $identity->id);
-                $this->view->profile = $profileForm->populate($accountData);
             } else {
-
                 $this->view->errors = $profileForm->getErrors();
 
             }
         }
         $accountData = $profileModel->getProfileAccount($identity->id);
+        $timezoneId = $timezoneTable->getTimezoneByGmt($accountData['timezone']);
+        $accountData['timezone'] = $timezoneId['id'];
+
+
         $this->view->profile = $profileForm->populate($accountData);
         $this->view->avatarPath = $profileModel->getAvatarPath($identity->id, 'medium'); //path to avatar
     }
