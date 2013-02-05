@@ -146,11 +146,6 @@ class LessonController extends Zend_Controller_Action
                 $partnerStreamName = $result['partner_stream_name'];
             }
 
-            $stream = getHostByName(getHostName()) . '/oflaDemo/' . $result['creator_stream_name'];
-
-            echo $stream;
-            die;
-
             $booking = $bookingTable->getItem($result['booking_id']);
 
             if ($bookingTable->isTeacher($result['booking_id'], $userId)) {
