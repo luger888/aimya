@@ -94,7 +94,10 @@ class LessonController extends Zend_Controller_Action
 
                     if ($res) {
                         $lessonModel->openLesson($activeLesson['id'], $openDispay);
-                        $lessonModel->startRecording($activeLesson['id'], $videoPath . 'video_lesson', $booking['duration']);
+
+                        $stream = getHostByName(getHostName()) . '/oflaDemo/' . $resultParams['teacherStream'];
+
+                        $lessonModel->startRecording($activeLesson['id'], $videoPath . 'video_lesson', $booking['duration'], $stream);
                     }
                 }
 
@@ -225,7 +228,7 @@ class LessonController extends Zend_Controller_Action
         $openDispay = $lessonModel->openDisplay($activeLesson['id']);
         sleep(5);
 
-        $this->write($openDispay);
+        //$this->write($openDispay);
 
         if ($openDispay !== FALSE) {
 

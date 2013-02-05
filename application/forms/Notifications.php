@@ -44,8 +44,16 @@ class Application_Form_Notifications extends Zend_Form
             ->setErrorMessages(array('Insert your old password'));
 
         $newPassword = new Zend_Form_Element_Password('newPassword');
-        $newPassword //->addValidator('stringLength', false, array(6, 200))
-            ->setAttrib('class', 'clearInput required')
+        $newPassword ->addValidator('stringLength', false, array(6, 200));
+        $newPassword->addValidator('regex', true,
+            array(
+                'pattern' => '/[A-Za-z].*[0-9]|[0-9].*[A-Za-z]/',
+                'messages' => array(
+                    'regexNotMatch' => "Your password must contain letters and numbers.",
+                )
+            )
+        );
+        $newPassword->setAttrib('class', 'clearInput required')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators)
             ->setErrorMessages(array('Insert your password'));
