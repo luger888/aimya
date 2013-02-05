@@ -32,6 +32,20 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
             $formData = $this->getRequest()->getPost();
 
             if ($profileForm->isValid($formData)) {
+                $updateUser = new Application_Model_DbTable_Users();
+                $checkByUsername = $updateUser->checkByUsername($formData['username']);
+                if($checkByUsername && $checkByUsername['username'] != $formData['username']) {
+                    $this->_helper->flashMessenger->addMessage(array('failure'=>'This username already exist, please select another username'));
+                    $formData['username'] = $checkByUsername['username'];
+                    $this->_helper->redirector('index', 'account');
+                }
+                $checkByEmail = $updateUser->checkByMail($formData['email']);
+                if($checkByEmail && $checkByEmail['email'] != $formData['email']) {
+                    $this->_helper->flashMessenger->addMessage(array('failure'=>'This email already exist, please select another email'));
+                    $formData['email'] = $checkByEmail['email'];
+                    $this->_helper->redirector('index', 'account');
+                }
+
                 Zend_Registry::set('username', "{$formData['firstname']} {$formData['lastname']}");
                 $profileForm->avatar->receive();
 
@@ -40,7 +54,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                 if ($_FILES['avatar']['name']) { //if new avatar -> update db
                     $updateProfile->updateAvatar($_FILES['avatar']['name'], $identity->id);
                 }
-                $updateUser = new Application_Model_DbTable_Users();
+
                 $timezone = $timezoneTable->getItem($formData['timezone']);
                 $formData['timezone'] = $timezone['gmt'];
                 $updateUser->updateUser($formData, $identity->id);
