@@ -116,7 +116,7 @@ function editService(e, service_type, url){
             serviceWrapper.empty();//clean the div
             serviceWrapper.html(serviceItem);//insert edit form with populated values
             serviceWrapper.find('#lesson_categoryEditInput').val(lesson_category);
-            serviceWrapper.find('#durationEditInput').val($.trim(duration));
+            serviceWrapper.find('#durationEditInput').val($.trim(duration).substring(0,2));
         }
     });
 
