@@ -407,7 +407,8 @@ class LessonController extends Zend_Controller_Action
                 if ($booking['video']) {
                     $lesson = $lessonTable->getItem($lessonId);
                     $seleniumPort = $lesson['selenium_port'];
-                    exec("phase3_kill.sh $lessonId $seleniumPort");
+                    $lessonId = $lesson['id'];
+                    exec("phase3_kill.sh $lessonId $seleniumPort $lessonId");
                 }
                 $status = $lessonTable->changeStatus($lessonId);
                 if ($status && $bookingStatus) {
