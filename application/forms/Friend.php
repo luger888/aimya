@@ -32,7 +32,7 @@ class Application_Form_Friend extends Zend_Form
             ->setRequired(true);
 
         $send = new Zend_Form_Element_Submit('sendbutton');
-        $send ->setLabel('send request')
+        $send ->setLabel('send')
             ->setAttrib('id', 'sendbutton')
             ->setAttrib('class', 'button')
             ->setDecorators($this->basicDecorators);
