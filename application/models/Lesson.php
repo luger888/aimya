@@ -81,9 +81,8 @@ class Application_Model_Lesson
         $time = gmdate("H:i:s", $seconds);
         exec("phase2_rec.sh $display $path $time > /dev/null 2>/dev/null &");
         $res = exec("/usr/local/bin/phase2.1_rtmpdump.sh $teacherStream $path > /dev/null 2>/dev/null &");
-        echo $res . '<br>';
-        var_dump("/usr/local/bin/phase2.1_rtmpdump.sh $teacherStream $path > /dev/null 2>/dev/null &");
-        die;
+        $this->write($res . '<br>');
+        $this->write("/usr/local/bin/phase2.1_rtmpdump.sh $teacherStream $path > /dev/null 2>/dev/null &");
         return true;
     }
 
