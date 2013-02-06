@@ -75,6 +75,10 @@ package com.aimialesson.controllers
 				Media.getInstance().rtmp = parameters.rtmp;
 				debug ("rtmp:" + parameters.rtmp);
 			}
+			if (parameters.streamingtype){
+				Media.getInstance().type = parameters.streamingtype;
+				debug ("rtmp:" + parameters.rtmp);
+			}
 			if (parameters.text_xml_url){
 				Texts.getInstance().text_xml_url = parameters.text_xml_url;
 				debug ("text_xml_url:" + parameters.text_xml_url);

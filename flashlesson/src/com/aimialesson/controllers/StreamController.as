@@ -112,7 +112,7 @@ package com.aimialesson.controllers
 				Media.getInstance().myNetStream.attachAudio(Media.getInstance().mic);
 			}
 			//Media.getInstance().myNetStream.bufferTime = 2;
-			Media.getInstance().myNetStream.publish(Media.getInstance().myStreamName, "live");
+			Media.getInstance().myNetStream.publish(Media.getInstance().myStreamName, Media.getInstance().type);
 		}
 		
 

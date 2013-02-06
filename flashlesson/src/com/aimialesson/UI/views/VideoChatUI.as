@@ -63,10 +63,14 @@ package com.aimialesson.UI.views
 		
 		public function myVideoInit():void {
 			debug("VideoChat:myVideoInit");
-			if ( Media.getInstance().cam != null ) 
-			{
-				debug("myVideo.attachCamera");
-				myVideo.attachCamera(Media.getInstance().cam);
+			if (!Main.getInstance().isServer){
+				if ( Media.getInstance().cam != null ) 
+				{
+					debug("myVideo.attachCamera");
+					myVideo.attachCamera(Media.getInstance().cam);
+				}
+			} else {
+				myVideo.attachNetStream(Media.getInstance().myNetStream);
 			}
 		}
 		
