@@ -51,8 +51,8 @@ class Application_Model_DbTable_Review extends Application_Model_DbTable_Abstrac
             ->joinLeft('user', 'reviews.user_id = user.id', array('user.firstname', 'user.lastname', 'reviews.review_date'))
             ->where('(' . $this->getAdapter()->quoteInto('reviews.recipient_id=?', $user_id) . ') ');
         if ($from != NULL && $to != NULL) {
-            $data->where('(' . $this->getAdapter()->quoteInto('reviews.review_date>=?', $from) . ') ')
-                ->where('(' . $this->getAdapter()->quoteInto('reviews.review_date<=?', $to) . ') ');
+            $data->where($this->getAdapter()->quoteInto("DATE_FORMAT(reviews.review_date, '%Y-%m-%d')>=?", $from))
+                ->where($this->getAdapter()->quoteInto("DATE_FORMAT(reviews.review_date, '%Y-%m-%d')<=?", $to));
         }
 
 

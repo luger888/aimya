@@ -10,7 +10,8 @@ package com.aimialesson.model
 		public static var CONNECTED_CHANGED:String = "connectedChange";
 		
 		//public var rtmp:String = "rtmp://localhost/oflaDemo";
-		public var rtmp:String = "rtmp://66.199.229.115/oflaDemo";
+		public var rtmp:String = "rtmp://184.169.133.140/oflaDemo";
+		//public var rtmp:String = "rtmp://66.199.229.115/oflaDemo";
 		//public var rtmp:String = "rtmp://localhost/videorecording";
 		//public var rtmp:String = "rtmp://localhost/videochat";
 		//public var rtmp:String = "rtmp://localhost/savelive1";
@@ -27,6 +28,7 @@ package com.aimialesson.model
 		public var videoSocketPort:int;
 		public var cam:Camera;
 		public var mic:Microphone;
+		public var type:String = "live";
 		[Bindable]
 		public var camPaused:Boolean = false;
 		[Bindable]

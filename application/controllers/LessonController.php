@@ -97,7 +97,7 @@ class LessonController extends Zend_Controller_Action
 
                         $stream = getHostByName(getHostName()) . '/oflaDemo/' . $resultParams['teacherStream'];
 
-                        $lessonModel->startRecording($activeLesson['id'], $videoPath . 'video_lesson', $booking['duration'], $stream);
+                        $lessonModel->startRecording($activeLesson['id'], $videoPath . 'video_lesson', $booking['duration'], $stream, $activeLesson['id']);
                     }
                 }
 
@@ -273,12 +273,7 @@ class LessonController extends Zend_Controller_Action
     public function uploadAction()
     {
 
-        //$this->write('teeee');
-        //$text = json_encode($_POST);
-        //$text = session_id();
-        //$this->write($text);
         $identityId = Zend_Auth::getInstance()->getIdentity()->id;
-        $this->write('teeeeqqq');
 
         $lessonModel = new Application_Model_Lesson();
         $lessonTable = new Application_Model_DbTable_Lesson();
@@ -407,7 +402,8 @@ class LessonController extends Zend_Controller_Action
                 if ($booking['video']) {
                     $lesson = $lessonTable->getItem($lessonId);
                     $seleniumPort = $lesson['selenium_port'];
-                    exec("phase3_kill.sh $lessonId $seleniumPort");
+                    $lessonId = $lesson['id'];
+                    exec("phase3_kill.sh $lessonId $seleniumPort $lessonId");
                 }
                 $status = $lessonTable->changeStatus($lessonId);
                 if ($status && $bookingStatus) {

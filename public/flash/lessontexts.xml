@@ -1,100 +1,118 @@
 ﻿<?xml version="1.0" encoding="UTF-16"?>
 <lesson>
-	<text id="online">
-		<en>Online</en>
-		<ru>онлайн</ru>
+	<text id="onlineStudent">
+		<en>Online Student</en>
+		<ru>студент онлайн</ru>
+		<ch>线上学生</ch>
+	</text>
+	<text id="onlineTeacher">
+		<en>Online Teacher</en>
+		<ru>Учитель онлайн</ru>
+		<ch>教师</ch>
 	</text>
 	<text id="student">
 		<en>Student</en>
 		<ru>студент</ru>
+		<ch>学生</ch>
 	</text>
 	<text id="teacher">
 		<en>Instructor</en>
 		<ru>Инструктор</ru>
+		<ch>教师</ch>
 	</text>
 	<text id="remainingTime">
 		<en>Remaining Time:</en>
 		<ru>Оставшееся Время</ru>
-	</text>
-	<text id="lessonFocus">
-		<en>session focus:</en>
-		<ru>тема Урока</ru>
+		<ch>剩余时间</ch>
 	</text>
 	<text id="lessonPresentation">
 		<en>lesson presentation:</en>
 		<ru>Презентация Урока</ru>
+		<ch>课程介绍</ch>
 	</text>
 	<text id="min">
 		<en>min</en>
 		<ru>мин</ru>
+		<ch>分钟</ch>
 	</text>
 	<text id="vChat">
 		<en>video chat:</en>
 		<ru>Видео Чат</ru>
+		<ch>视频聊天</ch>
 	</text>
 	<text id="enter">
 		<en>enter</en>
 		<ru>ентер</ru>
+		<ch>输入</ch>
 	</text>
 	<text id="stopSession">
 		<en>stop session</en>
 		<ru>Стоп Сессия</ru>
+		<ch>结束课程</ch>
 	</text>
 	<text id="maximize">
 		<en>FULL SCREEN</en>
 		<ru>максимайз</ru>
+		<ch></ch>
 	</text>
 	<text id="minimize">
 		<en>Minimize</en>
 		<ru>Минимайз</ru>
-	</text>
-	<text id="totalLessonTime">
-		<en>Total lesson time:</en>
-		<ru>Общее время урока</ru>
+		<ch>缩小</ch>
 	</text>
 	<text id="lessonNotes">
 		<en>lesson notes:</en>
 		<ru>Заметки урока</ru>
-	</text>
-	<text id="upload">
-		<en>upload</en>
-		<ru>загрузить</ru>
+		<ch>课程笔记</ch>
 	</text>
 	<text id="uploadMore">
 		<en>upload more</en>
 		<ru>загрузить еще</ru>
+		<ch>上传更多</ch>
 	</text>
 	<text id="lessonIsFinished">
 		<en>The lesson is finished by</en>
 		<ru>Урок окончен</ru>
+		<ch></ch>
 	</text>
 	<text id="alert">
 		<en>Alert:</en>
 		<ru>Предупреждение</ru>
+		<ch></ch>
 	</text>
 	<text id="wantEndLesson">
 		<en>Are you sure you want to end the lesson?</en>
 		<ru>Вы действительно хотите закончить урок?</ru>
-	</text>
-	<text id="slidesAreGenerating">
-		<en>Slides are generating...</en>
-		<ru>Подождите...</ru>
+		<ch></ch>
 	</text>
 	<text id="yes">
 		<en>yes</en>
 		<ru>да</ru>
+		<ch></ch>
 	</text>
 	<text id="no">
 		<en>no</en>
 		<ru>нет</ru>
+		<ch></ch>
 	</text>
-	<text id="ok">
-		<en>ok</en>
-		<ru>ок</ru>
+	<text id="totalLessonTime">
+		<en>Total lesson time:</en>
+		<ru>Общее время урока</ru>
+		<ch>课程总时间</ch>
 	</text>
-	<text id="alert">
-		<en>Alert</en>
-		<ru>Внимание</ru>
+	<text id="upload">
+		<en>upload</en>
+		<ru>загрузить</ru>
+		<ch>上传更多</ch>
 	</text>
-
+	<text id="wantEndLesson">
+		<en>Are you sure you want to end the lesson?</en>
+		<ru>Вы действительно хотите закончить урок?</ru>
+		<ch></ch>
+	</text>
+	<text id="slidesAreGenerating">
+		<en>Slides are generating...</en>
+		<ru>Подождите...</ru>
+		<ch></ch>
+	</text>
 </lesson>
