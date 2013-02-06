@@ -11,6 +11,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
             ->addActionContext('online', 'json')
             ->addActionContext('features', 'json')
             ->addActionContext('updateavailability', 'json')
+            ->addActionContext('changepassword', 'json')
             ->initContext('json');
     }
 
@@ -34,14 +35,14 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                 $currentUser = $updateUser->getItem($identity->id);
                 $checkByUsername = $updateUser->checkByUsername($formData['username']);
 
-                if($checkByUsername && $currentUser['username'] != $formData['username']) {
-                    $this->_helper->flashMessenger->addMessage(array('failure'=>'This username already exist, please select another username'));
+                if ($checkByUsername && $currentUser['username'] != $formData['username']) {
+                    $this->_helper->flashMessenger->addMessage(array('failure' => 'This username already exist, please select another username'));
                     $formData['username'] = $checkByUsername['username'];
                     $this->_helper->redirector('index', 'account');
                 }
                 $checkByEmail = $updateUser->checkByMail($formData['email']);
-                if($checkByEmail && $currentUser['email'] != $formData['email']) {
-                    $this->_helper->flashMessenger->addMessage(array('failure'=>'This email already exist, please select another email'));
+                if ($checkByEmail && $currentUser['email'] != $formData['email']) {
+                    $this->_helper->flashMessenger->addMessage(array('failure' => 'This email already exist, please select another email'));
                     $formData['email'] = $checkByEmail['email'];
                     $this->_helper->redirector('index', 'account');
                 }
@@ -191,35 +192,6 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         if ($this->getRequest()->isPost()) {
 
 
-            if ($this->getRequest()->getParam('newPassword') != '') {
-
-                $password = md5($this->getRequest()->getParam('oldPassword'));
-                Zend_Auth::getInstance()->getStorage()->read();
-
-                $authAdapter = new Zend_Auth_Adapter_DbTable(Zend_Db_Table::getDefaultAdapter());
-
-                $authAdapter->setTableName('user')
-                    ->setIdentityColumn('username')
-                    ->setCredentialColumn('password')
-                    ->setIdentity($identity->username)
-                    ->setCredential($password);
-
-                $auth = Zend_Auth::getInstance();
-                $result = $auth->authenticate($authAdapter);
-
-                if ($result->isValid()) {
-
-                    $usersDb->changePass($this->getRequest()->getParam('newPassword'), $identity->id);
-                    $identity = $authAdapter->getResultRowObject();
-                    $authStorage = $auth->getStorage();
-                    $authStorage->write($identity);
-                    $this->_helper->flashMessenger->addMessage(array('success'=>'Password successfully changed'));
-                } else {
-                    $this->_helper->flashMessenger->addMessage(array('failure'=>'Error with changing password, please try again later'));
-                    $this->view->passError = 'Wrong password!';
-                }
-            }
-
             $formData = $this->getRequest()->getPost();
 
             if ($notificationForm->isValid($formData)) {
@@ -305,9 +277,9 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
             }
             /*  Users tab, update relations    */
             if ($this->getRequest()->getParam('updateUserId')) {
-                if($this->getRequest()->getParam('status')!=3){
+                if ($this->getRequest()->getParam('status') != 3) {
                     $dbUserRelations->updateUserStatus($this->getRequest()->getPost(), $identity->id);
-                }else{
+                } else {
                     $dbUserRelations->deleteFriend($this->getRequest()->getPost());
                 }
 
@@ -321,7 +293,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
 
                 $dbProfile = new Application_Model_DbTable_Profile();
                 $profileModel = new Application_Model_Profile();
-                if(substr($profileModel->getAvatarPath($identity->id, 'base'), 0, 12)!='/img/design/'){
+                if (substr($profileModel->getAvatarPath($identity->id, 'base'), 0, 12) != '/img/design/') {
                     unlink(substr($profileModel->getAvatarPath($identity->id, 'base'), 1)); //substr first slah
                     unlink(substr($profileModel->getAvatarPath($identity->id, 'medium'), 1));
 
@@ -334,6 +306,47 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
             }
 
 
+        }
+    }
+
+    public function changepasswordAction()
+    {
+        if ($this->getRequest()->isPost()) {
+            $identity = Zend_Auth::getInstance()->getStorage()->read();
+            $usersDb = new Application_Model_DbTable_Users();
+            $userInfo = $usersDb->getUserInfo($identity->id);
+            $userpassword = $userInfo['password'];
+            if ($this->getRequest()->getParam('newPassword') != '') {
+                //validators
+                $stringLengthValidator = new Zend_Validate_StringLength(6, 200); //addValidator('stringLength', false, array(6, 200));
+                $regexValidator = new Zend_Validate_Regex(array(
+                    'pattern' => '/[A-Za-z].*[0-9]|[0-9].*[A-Za-z]/',
+                    'messages' => array(
+                        'regexNotMatch' => "Your password must contain letters and numbers.",
+                    )
+                ));
+
+                if (!$stringLengthValidator->isValid($this->getRequest()->getParam('newPassword'))) {
+                    $this->view->errorLength = 1;
+                } else if (!$regexValidator->isValid($this->getRequest()->getParam('newPassword'))) {
+                    $this->view->errorReg = 1;
+                } else {
+
+
+                    $password = md5($this->getRequest()->getParam('oldPassword'));
+
+                    if ($userpassword==$password) {
+
+                        $usersDb->changePass($this->getRequest()->getParam('newPassword'), $identity->id);
+                        $this->_helper->flashMessenger->addMessage(array('success' => 'Password successfully changed'));
+                        $this->view->success = 1;
+
+                    } else {
+                        $this->_helper->flashMessenger->addMessage(array('failure' => 'Error with changing password, please try again later'));
+                        $this->view->passError = 'Wrong password!';
+                    }
+                }
+            }
         }
     }
 
@@ -441,8 +454,8 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                                 </ul>
                             </div>
                             <div class='profileRole'>";
-                            $role = ($person['role'] == '1' ? 'Student' : 'Instructor');
-                            $featuredHtml .= $role . "</div>
+                $role = ($person['role'] == '1' ? 'Student' : 'Instructor');
+                $featuredHtml .= $role . "</div>
                         </div>
                     </div>";
             }
