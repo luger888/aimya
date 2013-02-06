@@ -163,8 +163,8 @@ class Application_Model_DbTable_Lesson extends Application_Model_DbTable_Abstrac
             ->where($this->getAdapter()->quoteInto('status=?' , 2))
             ->order((array('id DESC')));
         if ($from != NULL && $to != NULL) {
-            $data->where('(' . $this->getAdapter()->quoteInto('lessons.created_at>=?', $from) . ') ')
-                ->where('(' . $this->getAdapter()->quoteInto('lessons.created_at<=?', $to) . ') ');
+            $data->where($this->getAdapter()->quoteInto("DATE_FORMAT(lessons.created_at, '%Y/%m/%d')>=?", $from))
+                 ->where($this->getAdapter()->quoteInto("DATE_FORMAT(lessons.created_at, '%Y/%m/%d')<=?", $to));
         }
         return $data->query()->fetchAll();
     }
