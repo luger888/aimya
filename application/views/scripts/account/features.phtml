@@ -20,10 +20,12 @@
         <div class="shadowSeparator clearfix">
             <div class="shadowSeparatorBox clearfix">
                 <div class="featureItem clearfix">
-                    <div class="featureItemWrapper">
+
                         <?php $avatarPath = $profileModel->getAvatarPath($person['id'], 'medium') ?>
 
-                        <div class="imageBlock boxShadow"><img src="<?php echo $avatarPath;?>"></div>
+                        <div class ="leftBlockFeature"><div class="imageBlock boxShadow"><img src="<?php echo $avatarPath;?>"></div><div class='profileRole'><?php $role = ($person['role'] == '1' ? 'Student' : 'Instructor');
+                            echo $role;?></div>
+                        </div>
 
                         <div class="featuredButtonsTop clearfix">
 
@@ -106,12 +108,9 @@
                             </li>
                             <?php endif; ?>
                         </ul>
-                    </div>
                     <!--End featuredInfo -->
-                    <div class='profileRole'><?php $role = ($person['role'] == '1' ? 'Student' : 'Instructor');
-                        echo $role;?></div>
-                </div>
 
+</div>
                 <!--End featureItem -->
             </div>
             <!--End shadowSeparatorBox-->

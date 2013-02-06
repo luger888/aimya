@@ -2016,9 +2016,10 @@ float:right;
 }
 .featuresTab .profileRole{
     font: 11px helvetica;
-    position: relative;
-    right: -12px;
-    top: -32px;
+    padding: 118px 0 0 15px;
+}
+.featuresTab .leftBlockFeature{
+    float:left;
 }
 .userProfileTab .profileRole{
     font: 11px helvetica;
