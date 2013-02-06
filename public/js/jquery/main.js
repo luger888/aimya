@@ -62,45 +62,8 @@ $(document).ready(function () {
         $(this).find('.txt').appendTo($(this).find('.radioBoxWrapper'));
     });
 
-    jQuery.fn.shorten = function (settings) {
-        var config = {
-            showChars:100,
-            ellipsesText:"...",
-            moreText:"more",
-            lessText:"less"
-        };
 
-        if (settings) {
-            $.extend(config, settings);
-        }
 
-        $('.morelink').live('click', function () {
-            var $this = $(this);
-            if ($this.hasClass('less')) {
-                $this.removeClass('less');
-                $this.html(config.moreText);
-            } else {
-                $this.addClass('less');
-                $this.html(config.lessText);
-            }
-            $this.parent().prev().toggle();
-            $this.prev().toggle();
-            return false;
-        });
-
-        return this.each(function () {
-            var $this = $(this);
-
-            var content = $this.html();
-            if (content.length > config.showChars) {
-                var c = content.substr(0, config.showChars);
-                var h = content.substr(config.showChars, content.length - config.showChars);
-                var html = c + '<span class="moreellipses">' + config.ellipsesText + '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="javascript:void(0)" class="morelink">' + config.moreText + '</a></span>';
-                $this.html(html);
-                $(".morecontent span").hide();
-            }
-        });
-    };
 //---Styling uploads--------------------------------------------------------------------------------
     $('#uploadAvatar').click(function () {
         $('#avatar').click();
@@ -1141,3 +1104,38 @@ function checkPassword(e) {
         e.submit();
     }
 }
+(function($) {
+    $.fn.trunc = function(numWords) {
+        this.each(function() {
+            var me = $(this);
+            var original = me.text();
+            var truncated = original.split(" ");
+            if (truncated.length <= numWords) {
+                return;
+            }
+            while (truncated.length > numWords) {
+                truncated.pop();
+            }
+            truncated = truncated.join(" ");
+            collapse();
+
+            function expand() {
+                me.empty();
+                me.text(original);
+                var link = $('<a href="#">see less</a>');
+                link.click(collapse);
+                me.append(' [').append(link).append(']');
+                return false;
+            }
+
+            function collapse() {
+                me.empty();
+                me.text(truncated + "... ");
+                var link = $('<a href="#">see more</a>');
+                link.click(expand);
+                me.append(' [').append(link).append(']');
+                return false;
+            }
+        });
+    };
+})(jQuery);
