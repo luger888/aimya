@@ -582,6 +582,11 @@ jQuery(document).ready(function () {
                 }
                 if(response.success == 1 ){
                     window.location.reload();
+
+                }
+                else if(response.blocked == 1){
+                    jQuery('.loadingIcon').remove();
+                    alert('You have been blocked. You can\'t book him! ')
                 }else if(response.success == 0 && response.fail ==0){
                     jQuery('.loadingIcon').remove();
                     $('#booking').find('.error').remove();

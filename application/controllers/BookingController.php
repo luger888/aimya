@@ -48,8 +48,15 @@ class BookingController extends Zend_Controller_Action
                     if($this->getRequest()->getParam('recipient_id')){
                         $isExist = $bookingDbTable->isExistBooking(null, $identity->id, $this->getRequest()->getParam('started_at'), $this->getRequest()->getParam('duration'));
                         if(!$isExist){
-                            $bookingDbTable->addBooking($this->getRequest()->getParams(), $identity->id);
-                            $this->view->success = 1;
+                            $friendsDb= new Application_Model_DbTable_Friends();
+                            $isBlocked = $friendsDb->isBlocked($this->getRequest()->getParam('recipient_id'));
+                            if(!$isBlocked){
+                                $bookingDbTable->addBooking($this->getRequest()->getParams(), $identity->id);
+                                $this->view->success = 1;
+                            }else{
+                                $this->view->blocked =1;
+                            }
+
                         }else{
                             $this->view->fail = 1;
                         }
