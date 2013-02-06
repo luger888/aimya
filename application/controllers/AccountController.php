@@ -24,14 +24,28 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         $timezoneTable = new Application_Model_DbTable_TimeZones();
         $profileForm = new Application_Form_Profile();
         $profileModel = new Application_Model_Profile();
-        $accountData = $profileModel->getProfileAccount($identity->id);
-        $timezoneId = $timezoneTable->getTimezoneByGmt($accountData['timezone']);
-        $accountData['timezone'] = $timezoneId['id'];
+
 
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
 
             if ($profileForm->isValid($formData)) {
+                $updateUser = new Application_Model_DbTable_Users();
+                $currentUser = $updateUser->getItem($identity->id);
+                $checkByUsername = $updateUser->checkByUsername($formData['username']);
+
+                if($checkByUsername && $currentUser['username'] != $formData['username']) {
+                    $this->_helper->flashMessenger->addMessage(array('failure'=>'This username already exist, please select another username'));
+                    $formData['username'] = $checkByUsername['username'];
+                    $this->_helper->redirector('index', 'account');
+                }
+                $checkByEmail = $updateUser->checkByMail($formData['email']);
+                if($checkByEmail && $currentUser['email'] != $formData['email']) {
+                    $this->_helper->flashMessenger->addMessage(array('failure'=>'This email already exist, please select another email'));
+                    $formData['email'] = $checkByEmail['email'];
+                    $this->_helper->redirector('index', 'account');
+                }
+
                 Zend_Registry::set('username', "{$formData['firstname']} {$formData['lastname']}");
                 $profileForm->avatar->receive();
 
@@ -40,17 +54,20 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                 if ($_FILES['avatar']['name']) { //if new avatar -> update db
                     $updateProfile->updateAvatar($_FILES['avatar']['name'], $identity->id);
                 }
-                $updateUser = new Application_Model_DbTable_Users();
+
                 $timezone = $timezoneTable->getItem($formData['timezone']);
                 $formData['timezone'] = $timezone['gmt'];
                 $updateUser->updateUser($formData, $identity->id);
-
             } else {
-
                 $this->view->errors = $profileForm->getErrors();
 
             }
         }
+        $accountData = $profileModel->getProfileAccount($identity->id);
+        $timezoneId = $timezoneTable->getTimezoneByGmt($accountData['timezone']);
+        $accountData['timezone'] = $timezoneId['id'];
+
+
         $this->view->profile = $profileForm->populate($accountData);
         $this->view->avatarPath = $profileModel->getAvatarPath($identity->id, 'medium'); //path to avatar
     }
@@ -196,7 +213,9 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                     $identity = $authAdapter->getResultRowObject();
                     $authStorage = $auth->getStorage();
                     $authStorage->write($identity);
+                    $this->_helper->flashMessenger->addMessage(array('success'=>'Password successfully changed'));
                 } else {
+                    $this->_helper->flashMessenger->addMessage(array('failure'=>'Error with changing password, please try again later'));
                     $this->view->passError = 'Wrong password!';
                 }
             }
@@ -206,11 +225,11 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
             if ($notificationForm->isValid($formData)) {
 
                 $dbNotifications->updateNotifications($formData, $identity->id);
-                $this->_helper->flashMessenger->addMessage(array('success'=>'Password successfully changed'));
+
                 $this->_helper->redirector('index', 'account');
 
             } else {
-                $this->_helper->flashMessenger->addMessage(array('failure'=>'Error with changing password, please try again later'));
+
                 $this->view->errors = $notificationForm->getErrors();
                 $this->_helper->redirector('index', 'account');
 
@@ -286,7 +305,12 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
             }
             /*  Users tab, update relations    */
             if ($this->getRequest()->getParam('updateUserId')) {
-                $dbUserRelations->updateUserStatus($this->getRequest()->getPost(), $identity->id);
+                if($this->getRequest()->getParam('status')!=3){
+                    $dbUserRelations->updateUserStatus($this->getRequest()->getPost(), $identity->id);
+                }else{
+                    $dbUserRelations->deleteFriend($this->getRequest()->getPost());
+                }
+
             }
             if ($this->getRequest()->getParam('updateService')) {
 
@@ -297,8 +321,12 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
 
                 $dbProfile = new Application_Model_DbTable_Profile();
                 $profileModel = new Application_Model_Profile();
-                unlink(substr($profileModel->getAvatarPath($identity->id, 'base'), 1)); //substr first slah
-                unlink(substr($profileModel->getAvatarPath($identity->id, 'medium'), 1));
+                if(substr($profileModel->getAvatarPath($identity->id, 'base'), 0, 12)!='/img/design/'){
+                    unlink(substr($profileModel->getAvatarPath($identity->id, 'base'), 1)); //substr first slah
+                    unlink(substr($profileModel->getAvatarPath($identity->id, 'medium'), 1));
+
+                }
+
 
                 $dbProfile->deleteAvatar($identity->id);
 
@@ -412,6 +440,9 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                 $featuredHtml .= "
                                 </ul>
                             </div>
+                            <div class='profileRole'>";
+                            $role = ($person['role'] == '1' ? 'Student' : 'Instructor');
+                            $featuredHtml .= $role . "</div>
                         </div>
                     </div>";
             }

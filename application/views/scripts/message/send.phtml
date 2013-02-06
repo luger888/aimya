@@ -1,30 +1,44 @@
 <?php echo $this->partial('partials/message.phtml') ?>
+<?php $friends = $this->friends;?>
+<?php $usernames = array()?>
+<?php foreach($friends as $friend):?>
+    <?php $usernames[] = $friend['username']?>
+<?php endforeach; ?>
+<?php $js_array = json_encode($usernames);?>
 <?php $form = $this->form; ?>
-    <div class="messageTab">
-        <div class="shadowSeparator clearfix">
-            <div class="shadowSeparatorBox clearfix">
-                <div class="messageButtons clearfix">
-                    <h1>Create New Message</h1>
-                </div>
-                <form method="post" action="<?php echo $this->baseUrl()?>/message/send/">
-
-                    <div class="sendMessageBox clearfix">
-                        <div class="formRow clearfix">
-                            <div class="label">To:</div><?php echo $form->username?></div>
-                        <div class="formRow clearfix">
-                            <div class="label">Subject:</div><?php echo $form->subject?></div>
-                        <div class="formRow clearfix">
-                            <div class="label">Text:</div><?php echo $form->content?></div>
-                        <div class="buttonsRow clearfix">
-                            <?php echo $form->sendbutton?>
-                        </div>
-                    </div>
-                </form>
-
+<div class="messageTab">
+    <div class="shadowSeparator clearfix">
+        <div class="shadowSeparatorBox clearfix">
+            <div class="messageButtons clearfix">
+                <h1><?php echo $this->translate('create new message');?></h1>
             </div>
-            <!-- END shadowSeparatorBox -->
+            <form method="post" action="<?php echo $this->baseUrl()?>/message/send/">
+
+                <div class="sendMessageBox clearfix">
+                    <div class="formRow clearfix">
+                        <div class="label"><?php echo $this->translate('to');?>:</div><?php echo $form->username?></div>
+                    <div class="formRow clearfix">
+                        <div class="label"><?php echo $this->translate('subject');?>:</div><?php echo $form->subject?></div>
+                    <div class="formRow clearfix">
+                        <div class="label"><?php echo $this->translate('text');?>:</div><?php echo $form->content?></div>
+                    <div class="buttonsRow clearfix">
+                        <?php echo $form->sendbutton?>
+                    </div>
+                </div>
+            </form>
+
         </div>
-        <!-- END shadowSeparator -->
+        <!-- END shadowSeparatorBox -->
     </div>
-    <!-- END messageTab -->
+    <!-- END shadowSeparator -->
+</div>
+<!-- END messageTab -->
+<script type="text/javascript">
+    $(function() {
+        var availableTags = <?php echo $js_array ?>;
+        $( "#username" ).autocomplete({
+            source: availableTags
+        });
+    });
+</script>
 

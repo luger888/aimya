@@ -107,10 +107,10 @@
                         <?php endif; ?>
                     </ul>
                     <!--End featuredInfo -->
-
+                    <div class='profileRole'><?php $role = ($person['role'] == '1' ? 'Student' : 'Instructor');
+                        echo $role;?></div>
                 </div>
-                <div class='profileRole'><?php $role = ($person['role'] == '1' ? 'Student' : 'Instructor');
-                    echo $role;?></div>
+
                 <!--End featureItem -->
             </div>
             <!--End shadowSeparatorBox-->

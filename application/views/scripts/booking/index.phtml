@@ -490,7 +490,7 @@ jQuery(document).ready(function () {
                 element.find(".fc-event-content").append('<div class = "fc-event-content-alt floatRight"><span class = "videoRec '+ colorAlt+' '+videoActivity+'"></span> <span class = "feedback '+ colorAlt+' '+feedbackActivity+'"></span><span class = "notes '+ colorAlt+' '+notesActivity+'"></span></div>');
                 element.find(".fc-event-content").append('<div class = "fc-event-content-description"> Description: ' + event.add_info + '</div>');
                 element.find(".fc-event-content").append('<div class = "fc-event-content-requested">Request from: ' + sender + ' , to:  ' + recipient + '</div>');
-                if(event.booking_status == '1' && event.is_cancel =='0'){
+                if(event.booking_status == '1' && event.is_cancel =='0' && startLesson>current){
                     element.find(".fc-event-content").append('<input type="button" value="Cancel" class ="button fc-event-cancel" onclick ="cancelBooking(this);">');
                     element.find(".fc-event-content").append('<input type = "hidden" value = '+ event.booking_id +'>');
                     if(event.user_id == event.recipient_id){
@@ -576,10 +576,13 @@ jQuery(document).ready(function () {
 
             },
             function (response) {
-
-                if(response.success == 1){
+                if(response.fail == 1){
+                    alert('You cannot double book!');
+                    jQuery('.loadingIcon').remove();
+                }
+                if(response.success == 1 ){
                     window.location.reload();
-                }else{
+                }else if(response.success == 0 && response.fail ==0){
                     jQuery('.loadingIcon').remove();
                     $('#booking').find('.error').remove();
 

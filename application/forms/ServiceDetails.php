@@ -70,14 +70,14 @@ class Application_Form_ServiceDetails extends Zend_Form
             -> setAttrib('rows', '7');
 
         $submit = new Zend_Form_Element_Submit('saveService');
-        $submit ->setLabel('Save')
+        $submit ->setLabel('save')
             ->setAttrib('id', 'saveService')
            // ->setAttrib('onClick', 'validateService();return false;')
             ->setAttrib('class', 'button-2 save')
             ->setDecorators($this->basicDecorators);
 
         $submitReq = new Zend_Form_Element_Submit('saveService');
-        $submitReq ->setLabel('Save')
+        $submitReq ->setLabel('save')
             ->setAttrib('id', 'saveRequestedService')
             ->setAttrib('class', 'button-2 save')
 

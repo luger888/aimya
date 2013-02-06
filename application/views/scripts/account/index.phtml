@@ -33,46 +33,46 @@
 
                         <div class="leftCol">
 
-                            <h1><?php echo $this->translate('Mandatory Information:');?></h1>
+                            <h1><?php echo $this->translate('mandatory information');?>:</h1>
 
                             
                             <div class="formRow clearfix"> 
-                                <label class="title"><?php echo $this->translate('first name') ?>:</label>
+                                <label class="title"><?php echo $this->translate('first name:') ?></label>
                                 <div class="formElem"><?php echo $this->profile->firstname; ?></div>
                             </div><!--End formRow-->
 
                             <div class="formRow clearfix"> 
-                                <label class="title"><?php echo $this->translate('last name') ?>:</label>
+                                <label class="title"><?php echo $this->translate('last name:') ?></label>
                                 <div class="formElem"><?php echo $this->profile->lastname; ?></div>
                             </div><!--End formRow-->
 
                             <div class="formRow radio clearfix"> 
-                                <label class="title"><?php echo $this->translate('gender') ?>:</label>
+                                <label class="title"><?php echo $this->translate('gender:') ?></label>
                                 <div class="formElem"><?php echo $this->profile->gender; ?></div>
                             </div><!--End formRow-->
 
                             <div class="formRow clearfix"> 
-                                <label class="title"><?php echo $this->translate('login') ?>:</label>
+                                <label class="title"><?php echo $this->translate('login:') ?></label>
                                 <div class="formElem"><?php echo $this->profile->username; ?></div>
                             </div><!--End formRow-->
 
                             <div class="formRow clearfix"> 
-                                <label class="title"><?php echo $this->translate('DOB') ?>:</label>
+                                <label class="title"><?php echo $this->translate('dob:') ?></label>
                                 <div class="formElem"><?php echo $this->profile->birthday; ?> <span class="add-on"></span> </div>
                             </div><!--End formRow-->
 
                             <div class="formRow clearfix"> 
-                                <label class="title"><?php echo $this->translate('language') ?>:</label>
+                                <label class="title"><?php echo $this->translate('language:') ?></label>
                                 <div class="formElem"><?php echo $this->profile->language; ?></div>
                             </div><!--End formRow-->
 
                             <div class="formRow clearfix"> 
-                                <label class="title"><?php echo $this->translate('email') ?>:</label>
+                                <label class="title"><?php echo $this->translate('email:') ?></label>
                                 <div class="formElem"><?php echo $this->profile->email; ?></div>
                             </div><!--End formRow-->
 
                             <div class="formRow clearfix"> 
-                                <label class="title"><?php echo $this->translate('time zone') ?>:</label>
+                                <label class="title"><?php echo $this->translate('time zone:') ?></label>
                                 <div class="formElem"><?php echo $this->profile->timezone; ?></div>
                             </div><!--End formRow-->
 
@@ -91,8 +91,8 @@
                                 </div><!--End profileAvaBox-->
                                 <div class="profileAvaButtons clearfix">
                                     <?php echo $this->profile->avatar; ?>
-                                    <input type="button" id="uploadAvatar" class="button-2 upload" value="UPLOAD" />
-                                    <input type="button" id="removeAvatar" class="button-2 delete disable" value="DELETE" />
+                                    <input type="button" id="uploadAvatar" class="button-2 upload" value="<?php echo $this->translate('upload'); ?>" />
+                                    <input type="button" id="removeAvatar" class="button-2 delete" value="<?php echo $this->translate('delete'); ?>" />
                                 </div><!--End profileAvaButtons-->
                             </div>
                             
@@ -106,7 +106,7 @@
                     <div class="shadowSeparator clearfix">
                     <div class="shadowSeparatorBox clearfix"> 
 
-                        <h2>INTRODUCE YOURSELF:</h2>
+                        <h2><?php echo $this->translate('introduce yourself');?>:</h2>
                         <div class="formRow clearfix"><?php echo $this->profile->add_info; ?></div><!--End formRow-->
                         <div class="buttonRow clearfix"><?php echo $this->profile->saveProfile; ?></div><!--End buttonRow-->
 

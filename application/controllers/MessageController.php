@@ -9,6 +9,7 @@ class MessageController extends Zend_Controller_Action
             ->addActionContext('massdelete', 'json')
             ->addActionContext('massarchive', 'json')
             ->addActionContext('masstrash', 'json')
+            ->addActionContext('massrestore', 'json')
             ->initContext('json');
     }
 
@@ -61,8 +62,17 @@ class MessageController extends Zend_Controller_Action
                     $messageTable = new Application_Model_DbTable_Message();
                     $data['sender_id'] = $userId;
                     $data['recipient_id'] = $recipient['id'];
-                    $sendStatus = $messageTable->sendMessage($data);
+                    $friendsDb= new Application_Model_DbTable_Friends();
+                    $isFriend = $friendsDb->isBlocked($recipient['id']);
+                    if($isFriend){
+                        $sendStatus = $messageTable->sendMessage($data);
+                    }else{
+                        $sendStatus = $messageTable->sendMessage($data, 4);
+                    }
+
                     if($sendStatus){
+                        $notesDb = new Application_Model_Notifications();
+                        $notesDb->sendAlerts($recipient['id'], 'message');//sending email if needed
                         $this->_helper->flashMessenger->addMessage(array('success'=>'Message sent'));
                         $this->_helper->redirector('inbox', 'message');
                     } else {
@@ -81,6 +91,10 @@ class MessageController extends Zend_Controller_Action
         //$userData = $users->getUser($userId);
         //$form->populate($userData);
         //$this->view->data = $userData;
+        $friendTable = new Application_Model_DbTable_Friends();
+        $friends = $friendTable->getActiveFriends();
+
+        $this->view->friends = $friends;
     }
 
     public function sentAction()

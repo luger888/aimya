@@ -23,15 +23,15 @@ class Application_Form_Notifications extends Zend_Form
         /* Alerts */
         $alert = new Zend_Form_Element_MultiCheckbox('alert');
         $alert->setDecorators($this->basicDecorators);
-        $alert->addMultiOption('email', 'Receive Alerts via Email');
+        $alert->addMultiOption('friend', 'Receive Alert when I have a new friend request');
         $alert->addMultiOption('message', 'Receive Alert when I have a new message');
-        if($identity->role == $this->student){
-            $alert->addMultiOption('refund', 'Receive Alert when Refund is made to me');
-        }
-        if($identity->role != $this->student){
-            $alert->addMultiOption('payment', 'Receive Alert when payment is made to me');
-            $alert->addMultiOption('review', 'Receive Alert when someone wrote lesson review on my page');
-        }
+//        if($identity->role == $this->student){
+//            $alert->addMultiOption('refund', 'Receive Alert when Refund is made to me');
+//        }
+//        if($identity->role != $this->student){
+//            $alert->addMultiOption('payment', 'Receive Alert when payment is made to me');
+//            $alert->addMultiOption('review', 'Receive Alert when someone wrote lesson review on my page');
+//        }
         /* END -- Alerts */
 
 
@@ -44,8 +44,16 @@ class Application_Form_Notifications extends Zend_Form
             ->setErrorMessages(array('Insert your old password'));
 
         $newPassword = new Zend_Form_Element_Password('newPassword');
-        $newPassword //->addValidator('stringLength', false, array(6, 200))
-            ->setAttrib('class', 'clearInput required')
+        $newPassword ->addValidator('stringLength', false, array(6, 200));
+        $newPassword->addValidator('regex', true,
+            array(
+                'pattern' => '/[A-Za-z].*[0-9]|[0-9].*[A-Za-z]/',
+                'messages' => array(
+                    'regexNotMatch' => "Your password must contain letters and numbers.",
+                )
+            )
+        );
+        $newPassword->setAttrib('class', 'clearInput required')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators)
             ->setErrorMessages(array('Insert your password'));

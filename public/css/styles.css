@@ -555,6 +555,7 @@ input.button-2 {
 
 .leftNavigation {
     padding-top: 22px;
+    text-transform: uppercase;
 }
 
 .leftNavigation ul {
@@ -1197,7 +1198,7 @@ input.button-2 {
 .userRelationsTab.profile  .button-2{
     padding-right: 11px;
 }
-#block-confirm, #delete-confirm, #cancel-confirm{
+#block-confirm, #delete-confirm, #cancel-confirm, #cancel-unsubscribe{
     display: none;
 }
 /*Availability td padding-right */
@@ -1497,6 +1498,7 @@ input.button-2 {
     width:60px;
     font-family: 'helvetica-light-rnormal';
     font-weight: 500;
+    text-transform: capitalize;
 }
 .sendMessageBox .buttonsRow{
     float:right;
@@ -2009,8 +2011,8 @@ float:right;
 .featuresTab .profileRole{
     font: 11px helvetica;
     position: relative;
-    right: -19px;
-    top: -17px;
+    right: 684px;
+    top: 118px;
 }
 .userProfileTab .profileRole{
     font: 11px helvetica;

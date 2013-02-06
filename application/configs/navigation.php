@@ -14,7 +14,7 @@ return array(
 
             array
             (
-                'label' => 'LATEST FEATURED',
+                'label' => 'latest featured',
                 'tag' => 'leftMenu',
                 'route' => 'default',
                 'module' => 'default',
@@ -25,7 +25,7 @@ return array(
             ),
             array
             (
-                'label' => 'MY PROFILE',
+                'label' => 'my profile',
                 'tag' => 'leftMenu',
                 'route' => 'default',
                 'module' => 'default',
@@ -36,7 +36,7 @@ return array(
             ),
             array
             (
-                'label' => 'MY RESUME',
+                'label' => 'my resume',
                 'tag' => 'leftMenu',
                 'route' => 'default',
                 'module' => 'default',
@@ -47,7 +47,7 @@ return array(
             ),
             array
             (
-                'label' => 'MY INBOX',
+                'label' => 'my inbox',
                 'tag' => 'leftMenu',
                 'route' => 'default',
                 'module' => 'default',
@@ -58,7 +58,7 @@ return array(
             ),
             array
             (
-                'label' => 'MY BOOKINGS',
+                'label' => 'my bookings',
                 'tag' => 'leftMenu',
                 'route' => 'default',
                 'module' => 'default',
@@ -69,7 +69,7 @@ return array(
             ),
             array
             (
-                'label' => 'MY LESSONS',
+                'label' => 'my lessons',
                 'tag' => 'leftMenu',
                 'route' => 'default',
                 'module' => 'default',
@@ -80,7 +80,7 @@ return array(
             ),
             array
             (
-                'label' => 'ACCOUNTS/PAYMENTS',
+                'label' => 'accounts/payments',
                 'tag' => 'leftMenu',
                 'route' => 'default',
                 'module' => 'default',
@@ -91,7 +91,7 @@ return array(
             ),
             array
             (
-                'label' => 'ACCOUNTS/PAYMENTS',
+                'label' => 'accounts/payments',
                 'tag' => 'leftMenu',
                 'route' => 'default',
                 'module' => 'default',
@@ -102,7 +102,7 @@ return array(
             ),
             array
             (
-                'label' => 'CUSTOMER REVIEWS',
+                'label' => 'customer reviews',
                 'tag' => 'leftMenu',
                 'route' => 'default',
                 'module' => 'default',
@@ -113,7 +113,7 @@ return array(
             ),
             array
             (
-                'label' => 'MY ADMIN',
+                'label' => 'my admin',
                 'tag' => 'leftMenu',
                 'route' => 'default',
                 'module' => 'default',
@@ -123,7 +123,7 @@ return array(
                 'privilege'     => 'index',
             ),
 			array(
-                'label' => 'Inbox',
+                'label' => 'inbox',
                 'tag' => 'messageMenu',
                 'route' => 'default',
                 'module' => 'default',
@@ -133,7 +133,7 @@ return array(
                 'privilege'     => 'inbox',
             ),
             array(
-                'label' => 'Archived',
+                'label' => 'archived',
                 'tag' => 'messageMenu',
                 'route' => 'default',
                 'module' => 'default',
@@ -143,7 +143,7 @@ return array(
                 'privilege'     => 'archived',
             ),
             array(
-                'label' => 'Sent',
+                'label' => 'sent',
                 'tag' => 'messageMenu',
                 'route' => 'default',
                 'module' => 'default',
@@ -153,7 +153,7 @@ return array(
                 'privilege'     => 'sent',
             ),
             array(
-                'label' => 'Trash',
+                'label' => 'trash',
                 'tag' => 'messageMenu',
                 'route' => 'default',
                 'module' => 'default',
@@ -163,7 +163,7 @@ return array(
                 'privilege'     => 'trash',
             ),
             array(
-                'label' => 'Scheduled',
+                'label' => 'scheduled',
                 'tag' => 'lessonMenu',
                 'route' => 'default',
                 'module' => 'default',
@@ -173,7 +173,7 @@ return array(
                 'privilege'     => 'index',
             ),
             array(
-                'label' => 'On The Air',
+                'label' => 'on the air',
                 'tag' => 'lessonMenu',
                 'route' => 'default',
                 'module' => 'default',
@@ -183,7 +183,7 @@ return array(
                 'privilege'     => 'join',
             ),
             array(
-                'label' => 'Lesson Details',
+                'label' => 'lesson details',
                 'tag' => 'lessonMenu',
                 'route' => 'default',
                 'module' => 'default',

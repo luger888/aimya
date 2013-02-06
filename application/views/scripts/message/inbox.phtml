@@ -6,9 +6,9 @@
         <div class="shadowSeparator clearfix">
             <div class="shadowSeparatorBox clearfix">
                 <div class="messageButtons clearfix">
-                    <a href="<?php echo $this->baseUrl() . '/message/send/'?>"><span class="button-2 createMessage">Create New</span></a>
-                    <span class="button-2 trash" onclick="massTrash('<?php echo $action ?>', '<?php echo $this->baseUrl()?>')">Move to Trash</span>
-                    <span class="button-2 archived" onclick="massArchive('<?php echo $action ?>', '<?php echo $this->baseUrl()?>')">Move to Archived</span>
+                    <a href="<?php echo $this->baseUrl() . '/message/send/'?>"><span class="button-2 createMessage"><?php echo $this->translate('create new');?></span></a>
+                    <span class="button-2 trash" onclick="massTrash('<?php echo $action ?>', '<?php echo $this->baseUrl()?>')"><?php echo $this->translate('move to trash');?></span>
+                    <span class="button-2 archived" onclick="massArchive('<?php echo $action ?>', '<?php echo $this->baseUrl()?>')"><?php echo $this->translate('move to archived');?></span>
                 </div>
                 <div class="userMessages">
                     <table class="">
