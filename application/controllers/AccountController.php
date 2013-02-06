@@ -381,6 +381,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                     <div class='shadowSeparator clearfix'>
                         <div class='shadowSeparatorBox clearfix'>
                             <div class='featureItem clearfix'>
+                            <div class='featureItemWrapper'>
                                 <div class='imageBlock boxShadow'><img src='" . $avatarPath . "'></div>
                                 <div class='featuredButtonsTop clearfix'>
                                     <a class ='button-2 view viewProfile' href='" . Zend_Controller_Front::getInstance()->getBaseUrl() . '/user/' . $person['id'] . "'>" . $this->view->translate('VIEW PROFILE') . "</a>";
@@ -452,6 +453,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                 }
                 $featuredHtml .= "
                                 </ul>
+                                </div>
                                 <div class='profileRole'>";
                                     $role = ($person['role'] == '1' ? 'Student' : 'Instructor');
                                     $featuredHtml .= $role . "

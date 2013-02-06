@@ -883,7 +883,9 @@ input.button-2 {
     position: relative;
     padding: 12px 0 18px 0;
 }
-
+.featureItem  .featureItemWrapper{
+    min-height: 150px;
+}
 .imageBlock {
     width: 104px;
     padding: 3px;
@@ -2015,8 +2017,8 @@ float:right;
 .featuresTab .profileRole{
     font: 11px helvetica;
     position: relative;
-    right: 684px;
-    top: 118px;
+    right: -12px;
+    top: -32px;
 }
 .userProfileTab .profileRole{
     font: 11px helvetica;
