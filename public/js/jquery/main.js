@@ -417,7 +417,9 @@ function massTrash(current_action, url) {
         },
         success:function (result) {
             jQuery('.loadingIcon').remove();
-            window.location.href = url + "/message/" + current_action + "/current_action/" + current_action;
+            if(result.status == 'success') {
+                window.location.reload();
+            }
         }
     });
 
@@ -440,7 +442,9 @@ function massDelete(current_action, url) {
         },
         success:function (result) {
             jQuery('.loadingIcon').remove();
-            window.location.href = url + "/message/" + current_action + "/current_action/" + current_action;
+            if(result.status == 'success') {
+                window.location.reload();
+            }
         }
     });
 
@@ -463,7 +467,9 @@ function massArchive(current_action, url) {
         },
         success:function (result) {
             jQuery('.loadingIcon').remove();
-            window.location.href = url + "/message/" + current_action + "/current_action/" + current_action;
+            if(result.status == 'success') {
+                window.location.reload();
+            }
         }
     });
 }
@@ -485,7 +491,9 @@ function massRestore(current_action, url) {
         },
         success:function (result) {
             jQuery('.loadingIcon').remove();
-            window.location.href = url + "/message/" + current_action + "/current_action/" + current_action;
+            if(result.status == 'success') {
+                window.location.reload();
+            }
         }
     });
 }

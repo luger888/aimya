@@ -117,88 +117,72 @@ class Application_Model_DbTable_Message extends Application_Model_DbTable_Abstra
         return $this->update($array , $where);
     }
 
-    public function massTrash($messageIds, $userId) {
+    public function massTrash($messageId, $userId) {
 
-        $results = array();
-        $array = array();
+        $data = array();
         $where = array();
-        $idsArray = explode(',', $messageIds);
 
-        foreach($idsArray as $messageId) {
-            if($this->isSender($messageId, $userId)) {
-                $array['sender_status'] = 2;
-                $where[] = $this->getAdapter()->quoteInto('sender_id=?', $userId);
-                $where[] = $this->getAdapter()->quoteInto('id=?', $messageId);
-            } else {
-                $where[] = $this->getAdapter()->quoteInto('recipient_id=?', $userId);
-                $where[] = $this->getAdapter()->quoteInto('id=?', $messageId);
-                $array['recipient_status'] = 2;
-            }
-            $results = $this->update($array , $where);
+        if($this->isSender($messageId, $userId)) {
+            $data['sender_status'] = 2;
+            $where[] = $this->getAdapter()->quoteInto('sender_id=?', $userId);
+            $where[] = $this->getAdapter()->quoteInto('id=?', $messageId);
+        } else {
+            $where[] = $this->getAdapter()->quoteInto('recipient_id=?', $userId);
+            $where[] = $this->getAdapter()->quoteInto('id=?', $messageId);
+            $data['recipient_status'] = 2;
         }
+        return $this->update($data , $where);
     }
 
-    public function massDelete($messageIds, $userId) {
+    public function massDelete($messageId, $userId) {
 
-        $results = array();
-        $array = array();
+        $data = array();
         $where = array();
-        $idsArray = explode(',', $messageIds);
 
-        foreach($idsArray as $messageId) {
-            if($this->isSender($messageId, $userId)) {
-                $array['sender_status'] = 4;
-                $where[] = $this->getAdapter()->quoteInto('sender_id=?', $userId);
-                $where[] = $this->getAdapter()->quoteInto('id=?', $messageId);
-            } else {
-                $where[] = $this->getAdapter()->quoteInto('recipient_id=?', $userId);
-                $where[] = $this->getAdapter()->quoteInto('id=?', $messageId);
-                $array['recipient_status'] = 4;
-            }
-            $results = $this->update($array , $where);
+        if($this->isSender($messageId, $userId)) {
+            $data['sender_status'] = 4;
+            $where[] = $this->getAdapter()->quoteInto('sender_id=?', $userId);
+            $where[] = $this->getAdapter()->quoteInto('id=?', $messageId);
+        } else {
+            $where[] = $this->getAdapter()->quoteInto('recipient_id=?', $userId);
+            $where[] = $this->getAdapter()->quoteInto('id=?', $messageId);
+            $data['recipient_status'] = 4;
         }
+        return $this->update($data , $where);
     }
 
-    public function massArchive($messageIds, $userId) {
+    public function massArchive($messageId, $userId) {
 
-        $results = array();
-        $array = array();
+        $data = array();
         $where = array();
-        $idsArray = explode(',', $messageIds);
 
-        foreach($idsArray as $messageId) {
-            if($this->isSender($messageId, $userId)) {
-                $array['sender_status'] = 3;
-                $where[] = $this->getAdapter()->quoteInto('sender_id=?', $userId);
-                $where[] = $this->getAdapter()->quoteInto('id=?', $messageId);
-            } else {
-                $where[] = $this->getAdapter()->quoteInto('recipient_id=?', $userId);
-                $where[] = $this->getAdapter()->quoteInto('id=?', $messageId);
-                $array['recipient_status'] = 3;
-            }
-            $results = $this->update($array , $where);
+        if($this->isSender($messageId, $userId)) {
+            $data['sender_status'] = 3;
+            $where[] = $this->getAdapter()->quoteInto('sender_id=?', $userId);
+            $where[] = $this->getAdapter()->quoteInto('id=?', $messageId);
+        } else {
+            $where[] = $this->getAdapter()->quoteInto('recipient_id=?', $userId);
+            $where[] = $this->getAdapter()->quoteInto('id=?', $messageId);
+            $data['recipient_status'] = 3;
         }
+        return $this->update($data , $where);
     }
 
-    public function massRestore($messageIds, $userId) {
+    public function massRestore($messageId, $userId) {
 
-        $results = array();
-        $array = array();
+        $data = array();
         $where = array();
-        $idsArray = explode(',', $messageIds);
 
-        foreach($idsArray as $messageId) {
-            if($this->isSender($messageId, $userId)) {
-                $array['sender_status'] = 1;
-                $where[] = $this->getAdapter()->quoteInto('sender_id=?', $userId);
-                $where[] = $this->getAdapter()->quoteInto('id=?', $messageId);
-            } else {
-                $where[] = $this->getAdapter()->quoteInto('recipient_id=?', $userId);
-                $where[] = $this->getAdapter()->quoteInto('id=?', $messageId);
-                $array['recipient_status'] = 1;
-            }
-            $results = $this->update($array , $where);
+        if($this->isSender($messageId, $userId)) {
+            $data['sender_status'] = 1;
+            $where[] = $this->getAdapter()->quoteInto('sender_id=?', $userId);
+            $where[] = $this->getAdapter()->quoteInto('id=?', $messageId);
+        } else {
+            $where[] = $this->getAdapter()->quoteInto('recipient_id=?', $userId);
+            $where[] = $this->getAdapter()->quoteInto('id=?', $messageId);
+            $data['recipient_status'] = 1;
         }
+        return $this->update($data , $where);
     }
 
     public function checkNewMessage($userId) {
