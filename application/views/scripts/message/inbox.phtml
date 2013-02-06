@@ -32,22 +32,22 @@
                                 $originalTime = $message['created_at'];
                                 $time = date("H:i", strtotime($originalTime));
                                 if ($message['recipient_status'] == 0) {
-                                    $isNew = "?status=new";
+                                    $isNew = "&status=new";
                                     $classNew = 'newMessage';
 
                                 }
                                 echo '
 	                    <tr>
 	                        <td style="width:804px"><input type="checkbox" class="messageCheckboxes" value="' . $message['id'] . '">
-                                <a href="' . $this->baseUrl() . '/message/view/' . $message['id'] . $isNew . '">
+                                <a href="' . $this->baseUrl() . '/message/view/' . $message['id'] . '/?referer_action=' . Zend_Controller_Front::getInstance()->getRequest()->getActionName() . $isNew . '">
                                     <span class="activity'. $activity.'"></span><span class ="' . $classNew . ' messageSender">' . $message['username'] . '</span>
                                     <span class ="' . $classNew . ' messageTheme">' . $message['theme'] . '</span>
                                     <span class = "messageText">' . $text . '</span></a>
 
                                     <div class = "rightMessageBlock">
                                         <span class = "messageTime">' . $time . '</span>
-                                        <a href="' . $this->baseUrl() . '/message/reply/message_id/' . $message['id'] . '/current_action/"'. $action .'><span class="messageReply"></span></a>
-                                        <a href="' . $this->baseUrl() . '/message/forward/message_id/' . $message['id'] . '/current_action/"'. $action .'><span class="messageForward"></span></a>
+                                        <a title="Reply" href="' . $this->baseUrl() . '/message/reply/message_id/' . $message['id'] . '/current_action/"'. $action .'><span class="messageReply"></span></a>
+                                        <a title="Forward" href="' . $this->baseUrl() . '/message/forward/message_id/' . $message['id'] . '/current_action/"'. $action .'><span class="messageForward"></span></a>
                                     </div>
 
 	                    </tr>

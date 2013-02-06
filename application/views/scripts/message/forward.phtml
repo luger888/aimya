@@ -11,7 +11,7 @@
                     <div class="sendMessageBox clearfix">
                         <div class="formRow clearfix">
                             <div class="label messageForwardInbox"><?php echo $this->translate('to');?>:</div> <?php echo $form->message_id->setValue(Zend_Controller_Front::getInstance()->getRequest()->getParam('message_id'));?>
-                            <?php echo $form->username->setValue($sender['username']);?></div>
+                            <?php echo $form->username;?></div>
                         <div class="formRow clearfix">
                             <div class="label"><?php echo $this->translate('subject');?>:</div><?php echo  $form->subject->setValue($message['theme'])?></div>
                         <div class="formRow clearfix">
