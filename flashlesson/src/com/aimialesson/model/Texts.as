@@ -10,6 +10,8 @@ package com.aimialesson.model
 	{
 		
 		public static const ONLINE:String = "online";
+		public static const ONLINE_STUDENT:String = "onlineStudent";
+		public static const ONLINE_TEACHER:String = "onlineTeacher";
 		public static const STUDENT:String = "student";
 		public static const TEACHER:String = "teacher";
 		public static const REMAINING_TIME:String = "remainingTime";
@@ -60,7 +62,7 @@ package com.aimialesson.model
 				case (Texts.RU)	:	texts = ruTexts;
 					break;
 			}
-			if (!texts[Texts.NO] && !texts[Texts.ALERT]) texts = enTexts;
+		//	if (!texts[Texts.NO] && !texts[Texts.ALERT]) texts = enTexts;
 		}
 		
 		private static var instance : Texts;
