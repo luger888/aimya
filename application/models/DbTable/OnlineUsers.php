@@ -64,4 +64,36 @@ class Application_Model_DbTable_OnlineUsers extends Application_Model_DbTable_Ab
 
     }
 
+    public function curlIsOnline(){
+
+        $data = $this->select()
+            ->from($this->_name);
+
+        $result = $data->query()->fetchAll();
+        $usersToOffline = array();
+        $today = date('Y-m-d H:i:s');
+        foreach($result as $user){
+            if(strtotime($today) - strtotime($user['timestamp']) > 300){
+                array_push($usersToOffline, $user['id']);
+            }
+        }
+
+       if(count($usersToOffline)>0){
+
+
+           $data = array(
+
+               'status'=> 0,
+               'timestamp' => date('Y-m-d H:i:s')
+
+           );
+
+           $where = array(
+               $this->getAdapter()->quoteInto('id IN(?)', $usersToOffline)
+           );
+           return $this->update($data, $where);
+
+
+       }
+    }
 }
