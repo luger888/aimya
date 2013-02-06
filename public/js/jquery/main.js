@@ -62,45 +62,8 @@ $(document).ready(function () {
         $(this).find('.txt').appendTo($(this).find('.radioBoxWrapper'));
     });
 
-    jQuery.fn.shorten = function (settings) {
-        var config = {
-            showChars:100,
-            ellipsesText:"...",
-            moreText:"more",
-            lessText:"less"
-        };
 
-        if (settings) {
-            $.extend(config, settings);
-        }
 
-        $('.morelink').live('click', function () {
-            var $this = $(this);
-            if ($this.hasClass('less')) {
-                $this.removeClass('less');
-                $this.html(config.moreText);
-            } else {
-                $this.addClass('less');
-                $this.html(config.lessText);
-            }
-            $this.parent().prev().toggle();
-            $this.prev().toggle();
-            return false;
-        });
-
-        return this.each(function () {
-            var $this = $(this);
-
-            var content = $this.html();
-            if (content.length > config.showChars) {
-                var c = content.substr(0, config.showChars);
-                var h = content.substr(config.showChars, content.length - config.showChars);
-                var html = c + '<span class="moreellipses">' + config.ellipsesText + '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="javascript:void(0)" class="morelink">' + config.moreText + '</a></span>';
-                $this.html(html);
-                $(".morecontent span").hide();
-            }
-        });
-    };
 //---Styling uploads--------------------------------------------------------------------------------
     $('#uploadAvatar').click(function () {
         $('#avatar').click();
@@ -454,7 +417,9 @@ function massTrash(current_action, url) {
         },
         success:function (result) {
             jQuery('.loadingIcon').remove();
-            window.location.href = url + "/message/" + current_action + "/current_action/" + current_action;
+            if(result.status == 'success') {
+                window.location.reload();
+            }
         }
     });
 
@@ -477,7 +442,9 @@ function massDelete(current_action, url) {
         },
         success:function (result) {
             jQuery('.loadingIcon').remove();
-            window.location.href = url + "/message/" + current_action + "/current_action/" + current_action;
+            if(result.status == 'success') {
+                window.location.reload();
+            }
         }
     });
 
@@ -500,7 +467,9 @@ function massArchive(current_action, url) {
         },
         success:function (result) {
             jQuery('.loadingIcon').remove();
-            window.location.href = url + "/message/" + current_action + "/current_action/" + current_action;
+            if(result.status == 'success') {
+                window.location.reload();
+            }
         }
     });
 }
@@ -522,7 +491,9 @@ function massRestore(current_action, url) {
         },
         success:function (result) {
             jQuery('.loadingIcon').remove();
-            window.location.href = url + "/message/" + current_action + "/current_action/" + current_action;
+            if(result.status == 'success') {
+                window.location.reload();
+            }
         }
     });
 }
@@ -560,15 +531,15 @@ function getTimeLeft() {
 function updateSesion() {
     var baseUrl = $('#current_url').val();
     /*$.ajax({
-        'url':baseUrl + '/payment/remained/',
-        'dataType':'json',
-        'type':'post',
-        success:function (data) {
-            if (data.status == 'success') {
+     'url':baseUrl + '/payment/remained/',
+     'dataType':'json',
+     'type':'post',
+     success:function (data) {
+     if (data.status == 'success') {
 
-            }
-        }
-    });*/
+     }
+     }
+     });*/
 }
 
 function setDefaultTimezone() {
@@ -713,7 +684,7 @@ function getVideo(e, id) {
                 } else {
                     alert('Video is converting right now, please try again later.');
                 }
-            }else{
+            } else {
                 alert('Cannot find video on server. Please contact support.');
             }
         }
@@ -977,23 +948,23 @@ function approveRefund(subscriptionId) {
         type:"post",
         data:{
             'approveRefund':id,
-            'subscription_id': $('#subscription_id').val(),
-            'period': $('#period').val(),
-            'amount': $('#amount').val(),
-            'request_comment': $('#request_comment').val()
+            'subscription_id':$('#subscription_id').val(),
+            'period':$('#period').val(),
+            'amount':$('#amount').val(),
+            'request_comment':$('#request_comment').val()
         },
         success:function (response) {
-            if(response.status == 'success') {
+            if (response.status == 'success') {
                 window.location.reload();
             } else {
                 jQuery('.loadingIcon').remove();
-                for (key in response.errors){
+                for (key in response.errors) {
                     $("#" + key).removeClass("input-error");
                     $("#" + key).removeAttr('style');
-                    if(response.errors[key].length>0){
-                        $("#" + key).parent().after('<div class="error">' +response.errors[key] + '</div>');
+                    if (response.errors[key].length > 0) {
+                        $("#" + key).parent().after('<div class="error">' + response.errors[key] + '</div>');
                         $("#" + key).addClass("input-error");
-                        $("#" + key).change(function() {
+                        $("#" + key).change(function () {
                             $(this).removeClass("input-error");
                             $(this).parent().next().remove();
                         });
@@ -1041,41 +1012,42 @@ function showFriendFormFeatured(userId, defaultText, e) {
 
 function updateAvailaibility() {
     jQuery("body").append('<div class="loadingIcon"></div>');
+    var pathName = $('#current_url').val();
     $.ajax({
-        url:  pathName + "/account/updateavailability",
-        type: "post",
-        data: {
-            "checkboxMon":$('#checkboxMon').attr('checked') ? "1":"0",
+        url:pathName + "/account/updateavailability",
+        type:"post",
+        data:{
+            "checkboxMon":$('#checkboxMon').attr('checked') ? "1" : "0",
             "fromMon":$('#fromMon').val(),
             "toMon":$('#toMon').val(),
-            "checkboxTue":$('#checkboxTue').attr('checked') ? "1":"0",
+            "checkboxTue":$('#checkboxTue').attr('checked') ? "1" : "0",
             "fromTue":$('#fromTue').val(),
             "toTue":$('#toTue').val(),
-            "checkboxWed":$('#checkboxWed').attr('checked') ? "1":"0",
+            "checkboxWed":$('#checkboxWed').attr('checked') ? "1" : "0",
             "fromWed":$('#fromWed').val(),
             "toWed":$('#toWed').val(),
-            "checkboxThu":$('#checkboxThu').attr('checked') ? "1":"0",
+            "checkboxThu":$('#checkboxThu').attr('checked') ? "1" : "0",
             "fromThu":$('#fromThu').val(),
             "toThu":$('#toThu').val(),
-            "checkboxFri":$('#checkboxFri').attr('checked') ? "1":"0",
+            "checkboxFri":$('#checkboxFri').attr('checked') ? "1" : "0",
             "fromFri":$('#fromFri').val(),
             "toFri":$('#toFri').val(),
-            "checkboxSat":$('#checkboxSat').attr('checked') ? "1":"0",
+            "checkboxSat":$('#checkboxSat').attr('checked') ? "1" : "0",
             "fromSat":$('#fromSat').val(),
             "toSat":$('#toSat').val(),
-            "checkboxSun":$('#checkboxSun').attr('checked') ? "1":"0",
+            "checkboxSun":$('#checkboxSun').attr('checked') ? "1" : "0",
             "fromSun":$('#fromSun').val(),
             "toSun":$('#toSun').val()
         },
-        success: function(response){
+        success:function (response) {
             $('.error').remove();
-            for (key in response.errors){
+            for (key in response.errors) {
                 $("#" + key).removeClass("input-error");
                 $("#" + key).removeAttr('style');
-                if(response.errors[key].length>0){
-                    $("#" + key).parent().after('<div class="error">' +response.errors[key] + '</div>');
+                if (response.errors[key].length > 0) {
+                    $("#" + key).parent().after('<div class="error">' + response.errors[key] + '</div>');
                     $("#" + key).addClass("input-error");
-                    $("#" + key).change(function() {
+                    $("#" + key).change(function () {
                         $(this).removeClass("input-error");
                         $(this).parent().next().remove();
                     });
@@ -1089,4 +1061,89 @@ function updateAvailaibility() {
     return false;
 }
 
+function checkPassword(e) {
+    $('.error').text('');
+    var pathName = $('#current_url').val();
+    var error = 0;
+    if ($('#newPassword').val() != '' || $('#oldPassword').val() != '' || $('#newPasswordConfirm').val() != '') {
+        if($('#newPassword').val() == ''){
+            error++;
+            $('#newPassword').next('.error').text('Please insert the password!');
+        }
+        if($('#oldPassword').val() == ''){
+            error++;
+            $('#oldPassword').next('.error').text('Please insert the password!');
+        }
+        if($('#newPasswordConfirm').val() == ''){
+            error++;
+            $('#newPasswordConfirm').next('.error').text('Please insert the password!');
+        }
+        if($('#newPasswordConfirm').val() != $('#newPassword').val()){
+            error++;
+            $('#newPasswordConfirm').next('.error').text('Passwords should be same!');
+        }
+        if(error == 0){
+            $.ajax({
+                url:pathName + "/account/changepassword",
+                type:"post",
+                data:{
+                    'newPassword':$('#newPassword').val(),
+                    'oldPassword':$('#oldPassword').val(),
+                    'newPasswordConfirm':$('#newPasswordConfirm').val()
+                },
+                success:function (response) {
+                    if (response.success) {
+                        e.submit();
+                    }else if(response.passError){
+                        $('#oldPassword').next('.error').text('Wrong password!');
+                    }
+                    else if(response.errorLength){
+                        $('#newPassword').next('.error').text('Minimum 6 characters!');
+                    }
+                    else if(response.errorReg){
+                        $('#newPassword').next('.error').text('Your password must contain letters and numbers');
+                    }
+                }
+            });
+        }
 
+        return false;
+    } else {
+        e.submit();
+    }
+}
+(function($) {
+    $.fn.trunc = function(numWords) {
+        this.each(function() {
+            var me = $(this);
+            var original = me.text();
+            var truncated = original.split(" ");
+            if (truncated.length <= numWords) {
+                return;
+            }
+            while (truncated.length > numWords) {
+                truncated.pop();
+            }
+            truncated = truncated.join(" ");
+            collapse();
+
+            function expand() {
+                me.empty();
+                me.text(original);
+                var link = $('<a href="#">see less</a>');
+                link.click(collapse);
+                me.append(' [').append(link).append(']');
+                return false;
+            }
+
+            function collapse() {
+                me.empty();
+                me.text(truncated + "... ");
+                var link = $('<a href="#">see more</a>');
+                link.click(expand);
+                me.append(' [').append(link).append(']');
+                return false;
+            }
+        });
+    };
+})(jQuery);

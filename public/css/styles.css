@@ -883,7 +883,9 @@ input.button-2 {
     position: relative;
     padding: 12px 0 18px 0;
 }
-
+.featureItem  .featureItemWrapper{
+    min-height: 150px;
+}
 .imageBlock {
     width: 104px;
     padding: 3px;
@@ -1233,6 +1235,10 @@ input.button-2 {
     display: inline-block;
     padding-bottom: 21px;
     width: 150px;
+}
+.notificationsTab .passwordRecoveryBlock span.error{
+    padding-left:15px;
+    width: 250px;
 }
 .notificationsTab .notifyBlock{
     padding:5px;
@@ -2010,9 +2016,12 @@ float:right;
 }
 .featuresTab .profileRole{
     font: 11px helvetica;
+    padding: 0 0 0 15px;
     position: relative;
-    right: 684px;
-    top: 118px;
+    top: 5px;
+}
+.featuresTab .leftBlockFeature{
+    float:left;
 }
 .userProfileTab .profileRole{
     font: 11px helvetica;

@@ -63,8 +63,8 @@ class MessageController extends Zend_Controller_Action
                     $data['sender_id'] = $userId;
                     $data['recipient_id'] = $recipient['id'];
                     $friendsDb= new Application_Model_DbTable_Friends();
-                    $isFriend = $friendsDb->isBlocked($recipient['id']);
-                    if($isFriend){
+                    $isBlocked = $friendsDb->isBlocked($recipient['id']);
+                    if(!$isBlocked){
                         $sendStatus = $messageTable->sendMessage($data);
                     }else{
                         $sendStatus = $messageTable->sendMessage($data, 4);
@@ -322,11 +322,18 @@ class MessageController extends Zend_Controller_Action
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
         if($this->getRequest()->getParam('message_ids') && $this->getRequest()->getParam('action')) {
-
+            $messageCount = array();
+            $messageIds = explode(',', $this->getRequest()->getParam('message_ids'));
             $userId = Zend_Auth::getInstance()->getIdentity()->id;
             $messageTable = new Application_Model_DbTable_Message();
-            $messageCount = $messageTable->massDelete($this->getRequest()->getParam('message_ids'), $userId, $this->getRequest()->getParam('current_action'));
-
+            foreach($messageIds as $messageId) {
+                $messageCount[] = $messageTable->massDelete($messageId, $userId);
+            }
+            if(count($messageCount) > 0) {
+                $this->view->status = "success";
+            } else {
+                $this->view->status = "error";
+            }
             $this->view->messageCount = $messageCount;
         } else {
             $this->view->messageCount = "Bad parameters";
@@ -339,11 +346,18 @@ class MessageController extends Zend_Controller_Action
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
         if($this->getRequest()->getParam('message_ids') && $this->getRequest()->getParam('action')) {
-
+            $messageCount = array();
+            $messageIds = explode(',', $this->getRequest()->getParam('message_ids'));
             $userId = Zend_Auth::getInstance()->getIdentity()->id;
             $messageTable = new Application_Model_DbTable_Message();
-            $messageCount = $messageTable->massTrash($this->getRequest()->getParam('message_ids'), $userId);
-
+            foreach($messageIds as $messageId) {
+                $messageCount[] = $messageTable->massTrash($messageId, $userId);
+            }
+            if(count($messageCount) > 0) {
+                $this->view->status = "success";
+            } else {
+                $this->view->status = "error";
+            }
             $this->view->messageCount = $messageCount;
         } else {
             $this->view->messageCount = "Bad parameters";
@@ -356,11 +370,18 @@ class MessageController extends Zend_Controller_Action
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
         if($this->getRequest()->getParam('message_ids') && $this->getRequest()->getParam('action')) {
-
+            $messageCount = array();
+            $messageIds = explode(',', $this->getRequest()->getParam('message_ids'));
             $userId = Zend_Auth::getInstance()->getIdentity()->id;
             $messageTable = new Application_Model_DbTable_Message();
-            $messageCount = $messageTable->massArchive($this->getRequest()->getParam('message_ids'), $userId, $this->getRequest()->getParam('current_action'));
-
+            foreach($messageIds as $messageId) {
+                $messageCount[] = $messageTable->massArchive($messageId, $userId);
+            }
+            if(count($messageCount) > 0) {
+                $this->view->status = "success";
+            } else {
+                $this->view->status = "error";
+            }
             $this->view->messageCount = $messageCount;
         } else {
             $this->view->messageCount = "Bad parameters";
@@ -373,11 +394,18 @@ class MessageController extends Zend_Controller_Action
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
         if($this->getRequest()->getParam('message_ids') && $this->getRequest()->getParam('action')) {
-
+            $messageCount = array();
+            $messageIds = explode(',', $this->getRequest()->getParam('message_ids'));
             $userId = Zend_Auth::getInstance()->getIdentity()->id;
             $messageTable = new Application_Model_DbTable_Message();
-            $messageCount = $messageTable->massRestore($this->getRequest()->getParam('message_ids'), $userId, $this->getRequest()->getParam('current_action'));
-
+            foreach($messageIds as $messageId) {
+                $messageCount[] = $messageTable->massRestore($messageId, $userId);
+            }
+            if(count($messageCount) > 0) {
+                $this->view->status = "success";
+            } else {
+                $this->view->status = "error";
+            }
             $this->view->messageCount = $messageCount;
         } else {
             $this->view->messageCount = "Bad parameters";

@@ -5,7 +5,7 @@
     });
 </script>
 <div class="notificationsTab clearfix">
-    <form method='post' name='notifications' action="<?php echo $this->baseUrl()?>/account/notifications/">
+    <form method='post' name='notifications' action="<?php echo $this->baseUrl()?>/account/notifications/" onsubmit="checkPassword(this);return false;">
     <div class="shadowSeparator clearfix">
         <div class="shadowSeparatorBox clearfix">
             <h1> I WANT TO:</h1>
@@ -21,9 +21,9 @@
             <h1> CHANGE AIMYA PASSWORD:</h1>
 
             <div class="passwordRecoveryBlock">
-                <?php echo '<span>Old Password: </span>' . $this->notificationsForm->oldPassword; ?><br>
-                <?php echo '<span>New Password: </span>' . $this->notificationsForm->newPassword; ?><br>
-                <?php echo '<span>Confirm New Password: </span>' . $this->notificationsForm->newPasswordConfirm; ?>
+                <?php echo '<span>Old Password: </span>' . $this->notificationsForm->oldPassword; ?><span class="error"></span><br>
+                <?php echo '<span>New Password: </span>' . $this->notificationsForm->newPassword; ?><span class="error"></span><br>
+                <?php echo '<span>Confirm New Password: </span>' . $this->notificationsForm->newPasswordConfirm; ?><span class="error"></span>
             </div>
         </div>
     </div>
