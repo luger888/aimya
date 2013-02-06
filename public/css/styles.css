@@ -1234,6 +1234,10 @@ input.button-2 {
     padding-bottom: 21px;
     width: 150px;
 }
+.notificationsTab .passwordRecoveryBlock span.error{
+    padding-left:15px;
+    width: 250px;
+}
 .notificationsTab .notifyBlock{
     padding:5px;
 }
