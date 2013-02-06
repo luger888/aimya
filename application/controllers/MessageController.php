@@ -63,8 +63,8 @@ class MessageController extends Zend_Controller_Action
                     $data['sender_id'] = $userId;
                     $data['recipient_id'] = $recipient['id'];
                     $friendsDb= new Application_Model_DbTable_Friends();
-                    $isFriend = $friendsDb->isBlocked($recipient['id']);
-                    if($isFriend){
+                    $isBlocked = $friendsDb->isBlocked($recipient['id']);
+                    if(!$isBlocked){
                         $sendStatus = $messageTable->sendMessage($data);
                     }else{
                         $sendStatus = $messageTable->sendMessage($data, 4);
