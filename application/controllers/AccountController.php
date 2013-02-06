@@ -352,7 +352,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
 
     public function featuresAction()
     {
-        $this->view->headScript()->appendFile('../../js/jquery/account/features.js');
+        $this->view->headScript()->prependFile('/js/jquery/account/features.js');
         $dbUserModel = new Application_Model_DbTable_Users();
 
         $userType = 0;
