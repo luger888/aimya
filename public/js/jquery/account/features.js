@@ -119,6 +119,7 @@ function showMoreUsers (){
                 $('.messageContent').append(viewMorButton);
             }
             jQuery('.loadingIcon').remove();
+            $(".more").trunc(30);
         }
     });
 }
