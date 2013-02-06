@@ -112,7 +112,7 @@ package com.aimialesson.controllers
 		}
 
 		public function setSOProperty(name:String, value:Object):void {
-			so.setProperty(name, value);
+			if (!Main.getInstance().isServer)so.setProperty(name, value); // to escape all calls from app from server
 		}
 		
 		public function getSOProperty(name:String) : String {

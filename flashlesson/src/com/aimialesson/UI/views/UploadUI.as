@@ -130,6 +130,7 @@ package com.aimialesson.UI.views
 		
 		private function fileRef_progress(evt:ProgressEvent):void {
 			progressBar.visible = true;
+			debug ( "fileRef_progress"  + evt.bytesLoaded.toString());
 			if (evt.bytesTotal){
 				progressBar.percent = evt.bytesLoaded / evt.bytesTotal;
 				if (evt.bytesLoaded / evt.bytesTotal == 1){
