@@ -66,11 +66,9 @@ class MessageController extends Zend_Controller_Action
                     $isBlocked = $friendsDb->isBlocked($recipient['id']);
                     if(!$isBlocked){
                         $sendStatus = $messageTable->sendMessage($data);
-                    }else{
-                        $sendStatus = $messageTable->sendMessage($data, 4);
                     }
 
-                    if($sendStatus){
+                    if(isset($sendStatus)){
                         $notesDb = new Application_Model_Notifications();
                         $notesDb->sendAlerts($recipient['id'], 'message');//sending email if needed
                         $this->_helper->flashMessenger->addMessage(array('success'=>'Message sent'));
