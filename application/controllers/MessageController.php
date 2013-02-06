@@ -291,8 +291,16 @@ class MessageController extends Zend_Controller_Action
                 $messageTable->readMessage($this->getRequest()->getParam('message_id'), $userId);
             }
             $message = $messageTable->getMessage($this->getRequest()->getParam('message_id'), $userId);
+
             $userTable = new Application_Model_DbTable_Users();
-            $sender = $userTable->getItem($message['sender_id']);
+            if($message['sender_id'] == $userId) {
+                $sender = $userTable->getItem($message['recipient_id']);
+            } else {
+                $sender = $userTable->getItem($message['sender_id']);
+            }
+            if($this->getRequest()->getParam('action')) {
+                $this->view->referrerAction = $this->getRequest()->getParam('referer_action');
+            }
 
             $this->view->user = $sender;
             $this->view->message = $message;

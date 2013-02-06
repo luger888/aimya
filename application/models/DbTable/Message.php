@@ -218,7 +218,8 @@ class Application_Model_DbTable_Message extends Application_Model_DbTable_Abstra
         $data = $this->select()
             ->from($this->_name)
             ->where('id=?' , $messageId)
-            ->where('recipient_id=?', $userId);
+            ->where($this->getAdapter()->quoteInto('recipient_id=?', $userId) . ' OR ' . $this->getAdapter()->quoteInto('sender_id=?', $userId));
+            //->where('(' . 'recipient_id=?', $userId);
 
         return $data->query()->fetch();
     }
