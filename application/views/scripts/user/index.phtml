@@ -25,16 +25,18 @@ if ($this->userData['role'] == '1') {
     <?php $isInList = $friendTable->isInList($userData['id']); ?>
     <?php $defaultRequestText = ''; ?>
     <?php if (!$isFriend): ?>
-        <?php if($isInList): ?>
-            <?php if($isInList['sender_id'] == Zend_Auth::getInstance()->getIdentity()->id && $isInList['sender_status'] == 1): ?>
-                <span class="addAccount" style="background: none"><?php echo $this->translate('REQUEST SENT')?></span>
+        <?php if(!($this->userData['role'] == '1' && Zend_Auth::getInstance()->getIdentity()->role == '1')):?>
+            <?php if($isInList): ?>
+                <?php if($isInList['sender_id'] == Zend_Auth::getInstance()->getIdentity()->id && $isInList['sender_status'] == 1): ?>
+                    <span class="addAccount" style="background: none"><?php echo $this->translate('REQUEST SENT')?></span>
+                <?php else: ?>
+                    <?php $defaultRequestText = 'Hello ' . $this->userData['username'] . ', I have approved your request.'?>
+                    <input id="sendbutton" class="button-2 addAccount" type="button" onclick="showFriendForm('<?php echo $userData['id']; ?>', '<?php echo $defaultRequestText; ?>', this)" value="ADD TO MY ACCOUNT" name="sendbutton">
+                <?php endif; ?>
             <?php else: ?>
-                <?php $defaultRequestText = 'Hello ' . $this->userData['username'] . ', I have approved your request.'?>
+                <?php $defaultRequestText = 'Hello ' . $this->userData['username'] . ', I would like add you to my account.'?>
                 <input id="sendbutton" class="button-2 addAccount" type="button" onclick="showFriendForm('<?php echo $userData['id']; ?>', '<?php echo $defaultRequestText; ?>', this)" value="ADD TO MY ACCOUNT" name="sendbutton">
             <?php endif; ?>
-        <?php else: ?>
-            <?php $defaultRequestText = 'Hello ' . $this->userData['username'] . ', I would like add you to my account.'?>
-            <input id="sendbutton" class="button-2 addAccount" type="button" onclick="showFriendForm('<?php echo $userData['id']; ?>', '<?php echo $defaultRequestText; ?>', this)" value="ADD TO MY ACCOUNT" name="sendbutton">
         <?php endif; ?>
     <?php endif; ?>
     <ul class="userInfo">
