@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta CHARSET="UTF-8">
+    <title></title>
+    <?php
+    $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=utf-8');
+    $this->addHelperPath("ZendX/JQuery/View/Helper", "ZendX_JQuery_View_Helper");
+    ?>
+    <?php  echo $this->jQuery(); ?>
+
+    <?php $this->headLink()->appendStylesheet('/css/reset.css');?>
+    <?php $this->headLink()->appendStylesheet('/css/fonts.css');?>
+    <?php $this->headLink()->appendStylesheet('/css/homePage.css');?>
+    <?php $this->headLink()->appendStylesheet('http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css');?>
+
+    <?php $this->headScript()->appendFile('/js/jquery/jquery-ui-1.9.1.custom.min.js');?>
+    <?php $this->headScript()->appendFile('/js/jquery/customCheckboxRadio.js');?>
+    <?php $this->headScript()->appendFile('/js/jquery/cookieJquery.js');?>
+
+    <?php echo $this->headScript();?>
+    <?php echo $this->headLink();?>
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="/css/ie.css" type="text/css" media="all" />
+    <![endif]-->
+    <!--[if lt IE 9]>
+     <script type="text/javascript" src="/js/jquery/PIE.js"></script>
+    <![endif]-->
+</head>
+<body>
+<?php
+
+$front = Zend_Controller_Front::getInstance();
+$controllerName = $front->getRequest()->getControllerName();
+?>
+<!-- CONTENT -->
+
+<div id="page" class="clearfix">
+<div id="globalWrapper" class="clearfix">
+
+    <div id="wrapper" class="clearfix">
+
+        <div id="header" class="clearfix">
+            <a href="index" id="logo" title="Home page"></a>
+            <input id="user_activity" type="hidden" value="1">
+            <input id="current_url" type="hidden" value="<?php echo $this->baseUrl()?>">
+            <!-- LOGIN -->
+
+            <div id='loginFormHolder'>
+                <form id="signIn" action="<?php echo $this->baseUrl()?>/user/login" name="signIn"  method="post">
+                <div class="signInButton">
+                    <?php echo $this->login['login'] ?>
+                </div><!--End signInButton-->
+
+                <div class="signInBox">
+                    <label class="title"><?php echo $this->translate("login or email:") ?></label>
+                    <?php echo $this->login['username'] ?>
+                    <div class="loginRemember clearfix">
+                        <span class="checkboxBox"><?php echo $this->login['remember'] ?></span>
+                        <label><?php echo $this->translate("keep me signed in") ?></label>
+                    </div><!--End loginRemember-->
+                </div><!--End signInBox-->
+                    <div class="signInBox">
+                        <label class="title"><?php echo $this->translate("password:") ?></label>
+                        <?php echo$this->login['password'] ?>
+                        <a href="<?php echo$this->baseUrl()?>/user/recovery"><?php echo $this->translate("forgot your password?")?></a>
+                    </div><!--End signInBox-->
+                </form>
+            </div>
+            <!-- END /LOGIN -->
+        </div><!--End header-->
+
+        <ul class="underHeaderLang">
+
+            <li><a href="<?php echo $this->getHelper('baseUrl')->setBaseUrl('/en')->baseUrl(substr($_SERVER["REQUEST_URI"], 3));?>"><span class = "language english"></span></a></li>
+            <li><a href="<?php echo $this->getHelper('baseUrl')->setBaseUrl('/ja')->baseUrl(substr($_SERVER["REQUEST_URI"], 3));?>"><span class = "language japanese"></span></a></li>
+            <li><a href="<?php echo $this->getHelper('baseUrl')->setBaseUrl('/zh')->baseUrl(substr($_SERVER["REQUEST_URI"], 3));?>"><span class = "language chinese"></span></a></li>
+        </ul>
+
+        <div class="alertBlock">
+
+        </div>
+        <div id="content" class="homePage clearfix">
+
+            <div class="messages clearfix">
+                <?php echo $this->flashMessages();?>
+            </div><!--End messages-->
+
+
+
+
+            <div class="homeLeftCol">
+
+                <?php  echo $this->layout()->content;?>
+
+
+            </div><!--End homeLeftCol-->
+
+        </div><!--End content-->
+
+    </div><!--End wrapper-->
+
+</div><!--End globalWrapper-->
+
+<div id='footer' class="clearfix">
+    <div class="copyright">
+        <div>Copyright 2012 Aimya</div>
+        <div>Created by <a href="#" title="Svitla Systems">Svitla.com</a></div>
+        <ul class="footerNav">
+
+            <li><a href="<?php echo $this->baseUrl() ?>/about.html"><?php echo $this->translate('about')?></a></li>
+            <li><a href="<?php echo $this->baseUrl() ?>/help.html"><?php echo $this->translate('contact us')?></a></li>
+            <li><a href="<?php echo $this->baseUrl() ?>/policy.html"><?php echo $this->translate('privacy policy')?></a></li>
+            <li><a href="<?php echo $this->baseUrl() ?>/help.html"><?php echo $this->translate('terms and conditions')?></a></li>
+                </ul>
+    </div><!--End copyright-->
+</div><!--End footer-->
+
+</div><!--End page-->
+
+
+
+</body>
+</html>

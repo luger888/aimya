@@ -46,22 +46,23 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         $acl->addResource('test');
 
         #allow to user
-        $acl->allow(self::STUDENT , 'user', array('logout', 'timezone'));
-        $acl->allow(self::STUDENT , 'lesson', array('index', 'details', 'join', 'upload', 'notes', 'correspondence'));
-        $acl->allow(self::STUDENT , 'account', array('index', 'features', 'online', 'offline'));
+        $acl->allow(self::STUDENT , 'user', array('logout', 'timezone', 'index'));
+        $acl->allow(self::STUDENT , 'lesson', array('index', 'details', 'join', 'upload', 'notes', 'correspondence', 'files', 'full', 'getsize', 'notes', 'recording', 'review', 'setup', 'temp', 'updatesize', 'video'));
+        $acl->allow(self::STUDENT , 'account', array('index', 'features', 'online', 'offline', 'services', 'requestservices', 'notifications', 'edit', 'availability', 'users'));
 
         $acl->allow(self::STUDENT , 'friends', array('list', 'send'));
-        $acl->allow(self::STUDENT , 'message', array('inbox', 'send', 'sent', 'trash', 'archived', 'masstrash', 'massdelete', 'massarchive', 'massrestore'));
+        $acl->allow(self::STUDENT , 'message', array('inbox', 'send', 'sent', 'trash', 'archived', 'masstrash', 'massdelete', 'massarchive', 'massrestore', 'delete', 'forward', 'index', 'reply', 'view', 'count'));
         $acl->allow(self::STUDENT , 'search', array('search'));
-        $acl->allow(self::STUDENT , 'booking', array('index'));
+        $acl->allow(self::STUDENT , 'booking', array('index', 'approve', 'add', 'cancel', 'reject', 'count'));
         $acl->allow(self::STUDENT , 'feedback', array('create', 'form', 'view'));
         $acl->allow(self::STUDENT , 'payment', array('upgrade', 'remained', 'subscribe'));
         $acl->deny(self::TEACHER , 'payment', array('upgrade'));
         $acl->allow(self::TEACHER , 'payment', array('index', 'pay', 'email', 'subscribe', 'unsubscribe', 'downgrade'));
-        $acl->deny(self::STUDENT ,  'user', array('index', 'registration', 'login'));
+        $acl->deny(self::STUDENT ,  'user', array('registration', 'login'));
         $acl->allow(self::TEACHER , 'lesson', array('setup'));
         $acl->allow(self::TEACHER , 'review', array('index'));
-        $acl->allow(self::TEACHER , 'resume', array('index', 'pdf', 'download'));
+        $acl->allow(self::TEACHER , 'account', array('metrics'));
+        $acl->allow(self::TEACHER , 'resume', array('index', 'pdf', 'download', 'ajax', 'education', 'experience', 'objective', 'online', 'skills', 'upload'));
         #allow to guest
         $acl->deny(self::GUEST , 'user', array('logout'));
         $acl->deny(self::GUEST , 'account', array('index'));
@@ -70,6 +71,7 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         $acl->allow(self::GUEST , 'error', array('index'));
         $acl->allow(self::GUEST , 'test', array('index', 'paypal', 'response', 'responsenew'));
         $acl->allow(self::GUEST , 'payment', array('ipn', 'subsipn'));
+        $acl->allow(self::GUEST , 'account', array('curlcheckactivity'));
         #allow to admin
         $acl->allow(self::ADMIN , 'admin', array('index', 'users', 'payments', 'static', 'metrics'));
         $acl->allow(self::ADMIN , 'search', array('reindex'));
@@ -107,7 +109,7 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         if (!$this->_acl->isAllowed($role, $resource, $action)) {
 
 
-            #$request->setControllerName('error')->setActionName('page404');
+            $request->setControllerName('error')->setActionName('page404');
             //throw new Zend_Acl_Exception("This page is not accessible.", Application_Plugin_Access::ACCESS_DENIED);
 
         }
