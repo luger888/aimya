@@ -91,7 +91,8 @@ if ($this->userData['role'] == '1') {
                     if ($i == 0) {
                         echo  '<span class="title">SERVICES REQUESTED:</span>';
                     }
-                    echo '<div class="serviceItem"><span class = "mainCategory">' . $service['lesson_category'] . ':</span><span class="subCategory">' . $service['subcategory'] . '</span></div>';
+                    echo '<div class="serviceItem"><span class = "mainCategory">' . $service['lesson_category'] . ':</span><span class="subCategory">' . $service['subcategory'] . '</span>
+                         </div><div class = "serviceInfo" >' . $service['description'] . '</div>';
                     if ($i == 0) {
                         echo '<div class="middleSeparatorSecond"></div>';
                         $i++;
