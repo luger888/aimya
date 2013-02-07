@@ -498,6 +498,8 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
     //curl
     public function curlcheckactivityAction()
     {
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
         $onlineUserTable = new Application_Model_DbTable_OnlineUsers();
         $onlineUserTable->curlIsOnline();
     }
