@@ -67,8 +67,9 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         $accountData = $profileModel->getProfileAccount($identity->id);
         if($accountData['timezone'] != NULL) {
             $timezoneId = $timezoneTable->getTimezoneByGmt($accountData['timezone']);
+            $accountData['timezone'] = $timezoneId['id'];
         }
-        $accountData['timezone'] = $timezoneId['id'];
+
 
 
         $this->view->profile = $profileForm->populate($accountData);
