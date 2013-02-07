@@ -71,12 +71,13 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         $acl->allow(self::GUEST , 'test', array('index', 'paypal', 'response', 'responsenew'));
         $acl->allow(self::GUEST , 'payment', array('ipn', 'subsipn'));
         $acl->allow(self::GUEST , 'account', array('curlcheckactivity'));
+        $acl->allow(self::GUEST , 'cms', array('view'));
         #allow to admin
         $acl->allow(self::ADMIN , 'admin', array('index', 'users', 'payments', 'static', 'metrics'));
         $acl->allow(self::ADMIN , 'search', array('reindex'));
         $acl->allow(self::ADMIN , 'test', array('index', 'paypal'));
         $acl->allow(self::ADMIN , 'lesson', array('recording', 'temp'));
-        $acl->allow(self::ADMIN , 'cms', array('index', 'new', 'edit', 'delete', 'view'));
+        $acl->allow(self::ADMIN , 'cms', array('index', 'new', 'edit', 'delete'));
         Zend_Registry::set('Zend_Acl',$acl);
 
         $identity = Zend_Auth::getInstance()->getStorage()->read();
@@ -108,7 +109,7 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         if (!$this->_acl->isAllowed($role, $resource, $action)) {
 
 
-            $request->setControllerName('error')->setActionName('page404');
+            //$request->setControllerName('error')->setActionName('page404');
             //throw new Zend_Acl_Exception("This page is not accessible.", Application_Plugin_Access::ACCESS_DENIED);
 
         }
