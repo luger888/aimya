@@ -65,7 +65,6 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         $acl->allow(self::TEACHER , 'resume', array('index', 'pdf', 'download', 'ajax', 'education', 'experience', 'objective', 'online', 'skills', 'upload'));
         #allow to guest
         $acl->deny(self::GUEST , 'user', array('logout'));
-        $acl->deny(self::GUEST , 'account', array('index'));
         $acl->allow(self::GUEST , 'index', array('index'));
         $acl->allow(self::GUEST , 'user', array('index','registration', 'login', 'confirmation', 'recovery', 'timezone'));
         $acl->allow(self::GUEST , 'error', array('index'));
