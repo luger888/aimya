@@ -110,7 +110,9 @@ class MessageController extends Zend_Controller_Action
             $username = $user->getUser($value['sender_id']);
             $messages[$index]['isActive'] = $activity->isOnline($value['sender_id']);//check if user online
             $messages[$index]['username'] = $username['username'];//check if user online
+
         }
+
         $this->view->messageActions = $messageActionsForm;
         $this->view->messages = $messages;
     }
