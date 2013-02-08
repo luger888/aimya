@@ -45,8 +45,6 @@ $(document).ready(function() {
                     $("#" + key).removeClass("input-error");
                     $("#" + key).removeAttr('style');
                     if(response.errors[key].length>0){
-
-                        console.log(response.errors[key])
                         $("#" + key).parent().after('<div class="error">' +response.errors[key] + '</div>');
                         $("#" + key).addClass("input-error");
                         $("#" + key).change(function() {
