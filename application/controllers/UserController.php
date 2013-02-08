@@ -167,7 +167,7 @@ class UserController extends Zend_Controller_Action
                 }
             } else {
 
-                $this->view->errors = $reg->getErrors();
+                $this->view->errors = $reg->getMessages();
 
             }
         }
