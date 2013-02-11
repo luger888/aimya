@@ -40,7 +40,7 @@ class LessonController extends Zend_Controller_Action
         $this->view->availableLesson = $lesson;
         $this->view->bookingList = $extendedBookingList;
         $activeLesson = $lessonTable->checkAvailableLesson(Zend_Auth::getInstance()->getIdentity()->id);
-        Zend_Debug::dump($activeLesson['id']);die;
+        Zend_Debug::dump($userId);die;
 
     }
 
