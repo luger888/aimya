@@ -59,7 +59,6 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
             $xml = $payPalModel->generateXml($teacherId, $bookingId, $userProfit, $aimyaProfit);
 
-
             $response = $payPalModel->getAdaptivUrl($xml);
 
             if ($response) {
