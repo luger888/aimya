@@ -5,7 +5,7 @@
     <div class="messageTab viewMessageBlock">
         <div class="shadowSeparator clearfix">
             <div class="shadowSeparatorBox clearfix">
-                <div class="formRow clearfix viewSender"><span class = "messageViewSender"><?php echo $user['firstname'] . ' ' . $user['lastname']?></span><div class="messageTime view"><?php echo $message['created_at']?></div></div>
+                <div class="formRow clearfix viewSender"><span class = "messageViewSender"><a href="<?php echo $this->baseUrl().'/user/'.$user['id'];?>"><?php echo $user['firstname'] . ' ' . $user['lastname']?></a></span><div class="messageTime view"><?php echo $message['created_at']?></div></div>
                 <div class="formRow clearfix viewTheme"><span class = "messageViewTheme"><?php echo $message['theme']?></span></div>
                 <div class="formRow clearfix viewText"><span class = "messageViewText"><?php echo $message['text']?></span></div>
                 <?php //if($this->referrerAction == 'inbox'): ?>

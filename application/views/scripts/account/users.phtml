@@ -18,7 +18,6 @@
                 $url = "'{$this->baseUrl()}/account/edit'";
                 if ($this->friends) {
                     foreach ($this->friends as $value) {
-
                         if ($value['role'] == '1') {
                             $role = 'Student';
                         } else {
@@ -30,7 +29,7 @@
                             echo '<tr>
         <td>' . $value['firstname'] . '</td>
         <td>' . $value['lastname'] . '</td>
-        <td>' . $value['username'] . '</td>
+        <td><a href="'.$this->baseUrl().'/user/'.$value['id'].'">' . $value['username'] . '</a></td>
         <td>' . $role . '</td>
         <td>UTC ' . $value['timezone'] . '</td>
         <td><input type = "button" value="BLOCK" class = "button-2 block"  onclick ="blockUser(this, ' . $url . ');return false;"></div><input type = "button" value = "DELETE" class="button-2 delete" onclick="deleteUser(this, ' . $url . ');return false;"></div><input type = "hidden" value = ' . $value['id'] . '></td>
@@ -58,7 +57,7 @@
     </div>
 </div>
 <div class="usersAlert" id="delete-confirm" title="<?php echo $this->translate('delete user');?>:">
-    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span><?php echo $this->translate('By deleting this user, he or she  will hbe erased from your user list permanently.  You can add them back through a simple search for their profile in the future.  Are you sure you want to remove?') ?></p>
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span><?php echo $this->translate('By deleting this user, he or she  will be erased from your user list permanently.  You can add them back through a simple search for their profile in the future.  Are you sure you want to remove?') ?></p>
 </div>
 
 <div class="usersAlert" id="block-confirm" title="BLOCK USER:">
