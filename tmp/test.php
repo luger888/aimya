@@ -7,10 +7,11 @@
  */
 class Example extends PHPUnit_Extensions_SeleniumTestCase// PHPUnit_Extensions_SeleniumTestCase {
 {
-    private $_host = 'aimya.svitla.com';
+//    private $_host = 'aimya.svitla.com';
+    private $_host = 'localhost';
     private $_port = 4469;
     private $_browser = '*firefox';
-    private $_browserUrl = 'http://aimya.svitla.com/';
+    private $_browserUrl = 'http://aimya.com/';
     private $_login = 'server';
     private $_password = 'AimyaServer123';
     private $_waitTime = '120';
@@ -32,7 +33,7 @@ class Example extends PHPUnit_Extensions_SeleniumTestCase// PHPUnit_Extensions_S
         $this->admin_login          = $this->_login;
         $this->admin_password       = $this->_password;
         $this->wait_time       = $this->_waitTime;
-	$this->_lessonUrl = 'http://aimya.svitla.com/en/lesson/recording/?lessonId=' . (int)$_SERVER['argv'][3];
+	$this->_lessonUrl = 'http://aimya.com/en/lesson/recording/?lessonId=' . (int)$_SERVER['argv'][3];
 
     }
     public function testMyTestCase()
