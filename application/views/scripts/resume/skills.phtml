@@ -36,7 +36,7 @@
                                     $href ='http://aimya.com/' . substr($value['certificateUrl'][$index],2) . '/' . $cert ;
                                     $extension = substr($cert,-4);
                                        if($extension == '.doc'){
-                                           echo '<div><a class="certificate" href="'.$googleDocViewer.$href.'">' . $cert . ' target="_blank"</a></div>';
+                                           echo '<div><a class="certificate" href="'.$googleDocViewer.$href.' target="_blank">' . $cert . '"</a></div>';
                                        }else{
                                            echo '<div><a class="certificate" href="../' . $value['certificateUrl'][$index] . '/' . $cert . '">' . $cert . '</a></div>';
                                        }
