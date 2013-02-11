@@ -8,7 +8,7 @@ class Application_Model_DbTable_Profile extends Application_Model_DbTable_Abstra
 
         $data = array(
 
-            'add_info'=> preg_replace('#<(.*?)>#', '', $array['add_info']),
+            'add_info' => preg_replace('#<(.*?)>#', '', $array['add_info']),
             'birthday' => preg_replace('#<(.*?)>#', '', $array['birthday']),
             'language' => preg_replace('#<(.*?)>#', '', $array['language']),
             'updated_at' => date('Y-m-d H:i:s')
@@ -23,7 +23,7 @@ class Application_Model_DbTable_Profile extends Application_Model_DbTable_Abstra
 
         $data = array(
 
-            'education'=> preg_replace('#<(.*?)>#', '', $array['education']),
+            'education' => preg_replace('#<(.*?)>#', '', $array['education']),
             'degree' => preg_replace('#<(.*?)>#', '', $array['degree']),
             'address' => preg_replace('#<(.*?)>#', '', $array['address']),
             'telephone' => preg_replace('#<(.*?)>#', '', $array['phone'])
@@ -32,12 +32,13 @@ class Application_Model_DbTable_Profile extends Application_Model_DbTable_Abstra
         $this->update($data, $where);
 
     }
+
     public function updateAvatar($avatar, $id)
     {
 
         $data = array(
 
-            'avatar'=> preg_replace('#<(.*?)>#', '', $avatar)
+            'avatar' => preg_replace('#<(.*?)>#', '', $avatar)
 
         );
         $where = $this->getAdapter()->quoteInto('user_id = ?', (int)$id);
@@ -49,21 +50,27 @@ class Application_Model_DbTable_Profile extends Application_Model_DbTable_Abstra
     {
         $data = array(
 
-            'avatar'=> ''
+            'avatar' => ''
 
         );
         $where = $this->getAdapter()->quoteInto('user_id = ?', (int)$id);
         $this->update($data, $where);
     }
 
-    public function getProfile($user_id){
+    public function getProfile($user_id)
+    {
         $user_id = (int)$user_id;
         $row = $this->fetchRow($this->select()->where('user_id = ?', $user_id));
+        if ($row) {
+            return $row->toArray();
+        } else {
+            return false;
+        }
 
-        return $row->toArray();
     }
 
-    public function createProfile($id){
+    public function createProfile($id)
+    {
 
         $data = array(
 
@@ -76,18 +83,21 @@ class Application_Model_DbTable_Profile extends Application_Model_DbTable_Abstra
         $this->insert($data);
 
     }
-    public function updateObjective($array, $user_id){
+
+    public function updateObjective($array, $user_id)
+    {
 
         $data = array(
 
-            'objective'=> preg_replace('#<(.*?)>#', '', $array['objective'])
+            'objective' => preg_replace('#<(.*?)>#', '', $array['objective'])
 
         );
         $where = $this->getAdapter()->quoteInto('user_id = ?', (int)$user_id);
         $this->update($data, $where);
     }
 
-    public function getPayPalEmail($userId){
+    public function getPayPalEmail($userId)
+    {
 
         $data = $this->select()
             ->from($this->_name, array('paypal_email'))
@@ -96,10 +106,11 @@ class Application_Model_DbTable_Profile extends Application_Model_DbTable_Abstra
         return $data->query()->fetch();
     }
 
-    public function updatePaypalEmail($email, $userId){
+    public function updatePaypalEmail($email, $userId)
+    {
 
         $data = array(
-            'paypal_email'=> preg_replace('#<(.*?)>#', '', $email)
+            'paypal_email' => preg_replace('#<(.*?)>#', '', $email)
         );
         $where = $this->getAdapter()->quoteInto('user_id = ?', (int)$userId);
         return $this->update($data, $where);
