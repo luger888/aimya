@@ -61,8 +61,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
 
             $response = $payPalModel->getAdaptivUrl($xml);
-         Zend_Debug::dump(1);
-                Zend_Debug::dump($response);die;
+
             if ($response) {
                 $paymentTable = new Application_Model_DbTable_Orders();
 
