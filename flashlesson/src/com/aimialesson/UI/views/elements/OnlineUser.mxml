@@ -28,7 +28,7 @@
 	</fx:Script>
 	<s:HGroup verticalAlign="middle">
 		<s:HGroup verticalAlign="bottom">
-			<s:RichText text="{User.getInstance().partnerRoleID == User.STUDENT?Texts.getInstance().getText(Texts.ONLINE, true) + ' ' + Texts.getInstance().getText(Texts.STUDENT, true) + ':':Texts.getInstance().getText(Texts.ONLINE, true) + ' ' + Texts.getInstance().getText(Texts.TEACHER, true)}" styleName="HeaderStyle" />
+			<s:RichText text="{User.getInstance().partnerRoleID == User.STUDENT?Texts.getInstance().getText(Texts.ONLINE_STUDENT, true) + ':':Texts.getInstance().getText(Texts.ONLINE_TEACHER, true) + ':'}" styleName="HeaderStyle" />
 			<s:RichText id="partnerUserName" text="{User.getInstance().partnerName}" styleName="SmallNameStyle"/>
 		</s:HGroup>
 		<elements:Lamp id="partnerLamp"/>
