@@ -14,22 +14,25 @@ class UserController extends Zend_Controller_Action
     public function indexAction()
     {
         $accountId = $this->getRequest()->getParam('id');
-        $userId = Zend_Auth::getInstance()->getIdentity()->id;
-        $profileModel = new Application_Model_Profile();
-        $dbProfile = new Application_Model_DbTable_Profile();
-        $this->view->profile = $dbProfile->getProfile($accountId);
-        $dbAvailability = new Application_Model_DbTable_Availability();
-        $this->view->availability = $dbAvailability->getAvailability($accountId);
-        $this->view->avatarPath = $profileModel->getAvatarPath($accountId, 'base');
-        $userModel = new Application_Model_DbTable_Users();
-        $user = $userModel->getFullData($accountId);
-        if($user) {
-            $userData = $user;
-        } else {
-            $this->_helper->redirector('page404','error');
-        }
+      if($accountId){
+          $userModel = new Application_Model_DbTable_Users();
+          $user = $userModel->getFullData($accountId);
+          if($user['username']) {
+              $userData = $user;
+          }else{
+              $this->_helper->redirector('page404','error');
+          }
+          $profileModel = new Application_Model_Profile();
+          $dbProfile = new Application_Model_DbTable_Profile();
+          $this->view->profile = $dbProfile->getProfile($accountId);
+          $dbAvailability = new Application_Model_DbTable_Availability();
+          $this->view->availability = $dbAvailability->getAvailability($accountId);
+          $this->view->avatarPath = $profileModel->getAvatarPath($accountId, 'base');
+          $this->view->userData = $userData;
+      }else{
+          $this->_helper->redirector('page404','error');
+      }
 
-        $this->view->userData = $userData;
     }
 
     public function confirmationAction() {
