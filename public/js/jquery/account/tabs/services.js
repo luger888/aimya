@@ -75,7 +75,7 @@ function editService(e, service_type, url){
                         '<div class="formRow clearfix">'+
                             '<span class = "s-116">' + categoriesDropdown + '</span>' +
                             '<span class = "field-116"> <input id="subcategoryEditInput" value ="'+subcategory+'"></span>' +
-                            '<span class = "field-66"><input id="rateEditInput" value ="'+rate+'"></span><span class = "txt"> per </span>' +
+                            '<span class = "field-66">$<input id="rateEditInput" value ="'+rate+'"></span><span class = "txt"> per </span>' +
                             '<span class = "s-86">' + durationDropdown + '</span>' +
                         '</div>'+
                         '<div class ="errorBlock"></div>'+

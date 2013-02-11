@@ -88,9 +88,9 @@ package com.aimialesson.controllers
 				debug (parameters.domain);
 			}
 			if (parameters.lang){
+				debug ("lang:" + parameters.lang);
 				Texts.getInstance().lang = String(parameters.lang).substring(1);
 				Actions.getInstance().domain_add = parameters.lang;
-				debug (parameters.lang);
 			}
 			if (parameters.focus_name){
 				Main.getInstance().topic = parameters.focus_name;
