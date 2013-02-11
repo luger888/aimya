@@ -85,7 +85,8 @@ class LessonController extends Zend_Controller_Action
             if ($booking['video']) {
                 $lessonTable = new Application_Model_DbTable_Lesson();
                 $activeLesson = $lessonTable->checkAvailableLesson(Zend_Auth::getInstance()->getIdentity()->id);
-                
+
+                $videoPath = $lessonModel->createVideoPath($res, $activeLesson['creator_id']);
 
                 $openDispay = $lessonModel->openDisplay($activeLesson['id']);
                 sleep(5);
