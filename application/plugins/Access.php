@@ -55,10 +55,10 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         $acl->allow(self::STUDENT , 'search', array('search'));
         $acl->allow(self::STUDENT , 'booking', array('index', 'approve', 'add', 'cancel', 'reject', 'count'));
         $acl->allow(self::STUDENT , 'feedback', array('create', 'form', 'view'));
-        $acl->allow(self::STUDENT , 'payment', array('upgrade', 'remained', 'subscribe'));
+        $acl->allow(self::STUDENT , 'payment', array('upgrade', 'remained', 'subscribe', 'pay'));
         $acl->deny(self::STUDENT ,  'user', array('registration', 'login'));
         $acl->deny(self::TEACHER , 'payment', array('upgrade'));
-        $acl->allow(self::TEACHER , 'payment', array('index', 'email', 'subscribe', 'unsubscribe', 'downgrade'));
+        $acl->allow(self::TEACHER , 'payment', array('index', 'email', 'subscribe', 'unsubscribe', 'downgrade', 'pay'));
         $acl->allow(self::TEACHER , 'lesson', array('setup', 'start'));
         $acl->allow(self::TEACHER , 'review', array('index'));
         $acl->allow(self::TEACHER , 'account', array('metrics'));
