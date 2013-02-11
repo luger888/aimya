@@ -19,7 +19,7 @@ class Application_Model_PayPal
     private $testMode = 'sandbox';
     private $subscriptionCost = 30;
 
-    public function generateXml($sellerId, $bookingId, $userProfit, $aimyaProfit) {
+    public function generateXml($sellerId=4, $bookingId=7, $userProfit=0, $aimyaProfit=0) {
 
         $request = Zend_Controller_Front::getInstance()->getRequest();
 
