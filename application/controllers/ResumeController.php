@@ -246,7 +246,7 @@ class ResumeController extends Zend_Controller_Action implements Aimya_Controlle
         $uploadDir = '/img/uploads/' . $identity->id . '/certificate/' . $_POST['resumeType'] . '/' . $_POST['resumeTypeId'] . '/';
 
         // Set the allowed file extensions
-        $fileTypes = array('jpg', 'jpeg', 'gif', 'png'); // Allowed file extensions
+        $fileTypes = array('jpg', 'jpeg', 'gif', 'png', 'doc', 'pdf'); // Allowed file extensions
 
         if (!empty($_FILES)) {
             $tempFile = $_FILES['Filedata']['tmp_name'];
