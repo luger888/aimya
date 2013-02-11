@@ -39,6 +39,8 @@ class LessonController extends Zend_Controller_Action
         $extendedBookingList = $lessonModel->extendLesson($bookingList);
         $this->view->availableLesson = $lesson;
         $this->view->bookingList = $extendedBookingList;
+        $activeLesson = $lessonTable->checkAvailableLesson(Zend_Auth::getInstance()->getIdentity()->id);
+        Zend_Debug::dump($activeLesson['id']);die;
 
     }
 
@@ -84,7 +86,7 @@ class LessonController extends Zend_Controller_Action
             if ($booking['video']) {
                 $lessonTable = new Application_Model_DbTable_Lesson();
                 $activeLesson = $lessonTable->checkAvailableLesson(Zend_Auth::getInstance()->getIdentity()->id);
-
+                Zend_Debug::dump($activeLesson['id']);die;
                 $videoPath = $lessonModel->createVideoPath($res, $activeLesson['creator_id']);
 
                 $openDispay = $lessonModel->openDisplay($activeLesson['id']);
