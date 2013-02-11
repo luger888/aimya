@@ -81,8 +81,6 @@ class Application_Model_PayPal
                     "X-PAYPAL-RESPONSE-DATA-FORMAT: XML\r\n"
             )
         );
-        Zend_Debug::dump(1);
-        Zend_Debug::dump($params);die;
         $ctx = stream_context_create($params);
         $fp = fopen($this->adaptivUrl, "r", false, $ctx);
 
