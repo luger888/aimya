@@ -59,7 +59,6 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
             $xml = $payPalModel->generateXml($teacherId, $bookingId, $userProfit, $aimyaProfit);
 
-
             $response = $payPalModel->getAdaptivUrl($xml);
 
             if ($response) {
@@ -94,6 +93,9 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
     public function ipnAction()
     {
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
         $listener = new Aimya_PayPal_IpnListener();
 
         // tell the IPN listener to use the PayPal test sandbox
@@ -131,7 +133,9 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
     public function subsipnAction()
     {
-        $this->writeLog('------------------------------');
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        //$this->writeLog('------------------------------');
         $listener = new Aimya_PayPal_IpnListener();
 
         // tell the IPN listener to use the PayPal test sandbox
@@ -141,7 +145,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         try {
             $listener->requirePostMethod();
             $verified = $listener->processIpn();
-            $this->writeLog($verified);
+            //$this->writeLog($verified);
         } catch (Exception $e) {
             $this->writeLog($e->getMessage());
             exit(0);
@@ -149,7 +153,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
         if ($verified) {
             if ($_GET['subscription_id']) {
-                $this->writeLog($_GET['subscription_id']);
+                //$this->writeLog($_GET['subscription_id']);
                 $subscriptionId = $_GET['subscription_id'];
                 //$userId = $_GET['user_id'];
                 $subscriptionTable = new Application_Model_DbTable_Subscriptions();

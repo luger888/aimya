@@ -188,7 +188,7 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
         //Zend_Debug::dump($where);
         $data = array(
             'booking_status'=> 2,
-            'updated_at' => date('Y-m-d H:m:s')
+            'updated_at' => date('Y-m-d H:i:s')
         );
 
         $result = $this->update($data, $where);

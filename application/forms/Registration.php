@@ -75,9 +75,8 @@ class Application_Form_Registration extends Zend_Form
         $password->addValidator('regex', true,
                 array(
                     'pattern' => '/[A-Za-z].*[0-9]|[0-9].*[A-Za-z]/',
-                        'messages' => array(
-                            'regexNotMatch' => "Your password must contain letters and numbers.",
-                    )
+                        'messages'  => "Your password must contain letters and numbers"
+
                 )
             );
         //$password->getValidator('regex')->setMessage("Your password must contain letters and numbers.");

@@ -5,14 +5,18 @@ class IndexController extends Zend_Controller_Action
 
     public function init()
     {
-        /* Initialize action controller here */
+        $identity = Zend_Auth::getInstance()->getIdentity();
+        if($identity){// if no identity - show main page layout
+
+           $this->_helper->redirector('features', 'account');
+        }
     }
 
     public function indexAction()
     {
 
 
-        $this->view->headScript()->appendFile('../../js/jquery/validation/registrationValidation.js');
+        $this->view->headScript()->prependFile('/js/jquery/validation/registrationValidation.js');
         $login = new Application_Form_Login();
         $reg = new Application_Form_Registration();
 

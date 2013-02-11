@@ -20,8 +20,8 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         //basic tab
         $identity = Zend_Auth::getInstance()->getStorage()->read();
         $this->view->role = $identity->role;
-        $this->view->headScript()->appendFile('../../../js/jquery/account/tabs/services.js');
-        $this->view->headScript()->appendFile('../../../js/jquery/account/tabs/users.js');
+        $this->view->headScript()->prependFile('/js/jquery/account/tabs/services.js');
+        $this->view->headScript()->prependFile('/js/jquery/account/tabs/users.js');
         $timezoneTable = new Application_Model_DbTable_TimeZones();
         $profileForm = new Application_Form_Profile();
         $profileModel = new Application_Model_Profile();
@@ -65,8 +65,11 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
             }
         }
         $accountData = $profileModel->getProfileAccount($identity->id);
-        $timezoneId = $timezoneTable->getTimezoneByGmt($accountData['timezone']);
-        $accountData['timezone'] = $timezoneId['id'];
+        if($accountData['timezone'] != NULL) {
+            $timezoneId = $timezoneTable->getTimezoneByGmt($accountData['timezone']);
+            $accountData['timezone'] = $timezoneId['id'];
+        }
+
 
 
         $this->view->profile = $profileForm->populate($accountData);
@@ -352,7 +355,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
 
     public function featuresAction()
     {
-        $this->view->headScript()->appendFile('../../js/jquery/account/features.js');
+        $this->view->headScript()->prependFile('/js/jquery/account/features.js');
         $dbUserModel = new Application_Model_DbTable_Users();
 
         $userType = 0;
@@ -495,5 +498,12 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
             $this->view->data = 'problem with mysql request';
         }
     }
-
+    //curl
+    public function curlcheckactivityAction()
+    {
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        $onlineUserTable = new Application_Model_DbTable_OnlineUsers();
+        $onlineUserTable->curlIsOnline();
+    }
 }

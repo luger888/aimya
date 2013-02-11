@@ -28,9 +28,10 @@ class Application_Model_PayPal
         $ipnURL = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment/ipn?booking_id=' . $bookingId;
 
         $profileTable = new Application_Model_DbTable_Profile();
-        $bookingTable = new Application_Model_DbTable_Booking();
-
         $paypalEmail = $profileTable->getPayPalEmail($sellerId);
+        if(!$paypalEmail){
+            die('User didn\'t choose paypal email');
+        }
         //$paypalEmail['paypal_email'] = 'seller_1355909799_biz@gmail.com';
 
 
@@ -81,7 +82,6 @@ class Application_Model_PayPal
                     "X-PAYPAL-RESPONSE-DATA-FORMAT: XML\r\n"
             )
         );
-
         $ctx = stream_context_create($params);
         $fp = fopen($this->adaptivUrl, "r", false, $ctx);
 

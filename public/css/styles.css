@@ -46,13 +46,13 @@ body {
 }
 
 #logo {
-    background: url(../images/logo/inner-logo.png) no-repeat 0 0;
-    height: 47px;
-    width: 146px;
+    background: url("../images/logo/aimya_logo_main.png") no-repeat scroll 0 0 / 74px auto transparent;
     display: block;
-    margin-top: 8px;
     float: left;
+    height: 53px;
     margin-left: -5px;
+    margin-top: 2px;
+    width: 146px;
 }
 
 .headerSearch {

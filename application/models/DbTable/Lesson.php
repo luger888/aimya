@@ -75,7 +75,7 @@ class Application_Model_DbTable_Lesson extends Application_Model_DbTable_Abstrac
 
         //Zend_Debug::dump($where);
         $data = array(
-            'updated_at' => date('Y-m-d H:m:s')
+            'updated_at' => date('Y-m-d H:i:s')
         );
 
         if($isCreator) {
@@ -141,8 +141,7 @@ class Application_Model_DbTable_Lesson extends Application_Model_DbTable_Abstrac
         $data = $this->select()
             ->from($this->_name)
             ->where('id=?' , $lessonId)
-            ->where('(' . $this->getAdapter()->quoteInto('creator_id=?' , $userId) . ' OR ' . $this->getAdapter()->quoteInto('partner_id=?' , $userId) .') ')
-            ->where($this->getAdapter()->quoteInto('status=?' , 1));
+            ->where('(' . $this->getAdapter()->quoteInto('creator_id=?' , $userId) . ' OR ' . $this->getAdapter()->quoteInto('partner_id=?' , $userId) .') ');
 
         $result = $data->query()->fetch();
 

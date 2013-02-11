@@ -36,9 +36,9 @@ class Application_Model_User
             $dbNotifications->createNotifications($lastId);
 
             $folderModel = new Application_Model_Folder();
-            $basePath = 'img/uploads/' . $lastId . '/avatar/base/';
-            $mediumPath = 'img/uploads/' . $lastId . '/avatar/medium/';
-            $thumbnailPath = 'img/uploads/' . $lastId . '/avatar/thumbnail/';
+            $basePath = '/img/uploads/' . $lastId . '/avatar/base/';
+            $mediumPath = '/img/uploads/' . $lastId . '/avatar/medium/';
+            $thumbnailPath = '/img/uploads/' . $lastId . '/avatar/thumbnail/';
             $folderModel->createFolderChain($basePath, '/');
             $folderModel->createFolderChain($mediumPath, '/');
             $folderModel->createFolderChain($thumbnailPath, '/');
