@@ -728,7 +728,9 @@ input.button-2 {
     float: left;
     width: 320px;
 }
-
+.profileGeneral .leftCol .title{
+    text-transform: capitalize;
+}
 .profileGeneral .rightCol {
     float: right;
     width: 160px;
