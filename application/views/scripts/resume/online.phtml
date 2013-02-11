@@ -2,6 +2,7 @@
 <?php $this->headLink()->appendStylesheet('/css/fonts.css'); ?>
 <?php $this->headLink()->appendStylesheet('/css/onlineResume.css'); ?>
 <?php echo $this->headLink(); ?>
+<?php $googleDocViewer ='https://docs.google.com/viewer?url=' ;?>
 <div class="resumeOnlineMain">
     <div class="shadowSeparator">
         <div class="shadowSeparatorBox">
@@ -33,7 +34,13 @@
                     <?php if (isset($value['certificate'])) {
                         echo  '<div class="resumeItemCertificates clearfix">Certificates:';
                         foreach ($value['certificate'] as $index => $cert) {
-                            echo  '<div><a class="certificate" href="/' . $value['certificateUrl'][$index] . '/' . $cert . '">' . $cert . '</a></div>';
+                            $href ='http://aimya.com/' . substr($value['certificateUrl'][$index],2) . '/' . $cert ;
+                            $extension = substr($cert,-4);
+                            if($extension == '.doc' || $extension == '.pdf'){
+                                echo '<div><a class="certificate" target="_blank" href="'.$googleDocViewer.$href.'">' . $cert . '</a></div>';
+                            }else{
+                                echo '<div><a class="certificate" href="../' . $value['certificateUrl'][$index] . '/' . $cert . '">' . $cert . '</a></div>';
+                            }
                         }
                         echo  '</div>';
                     }
@@ -51,7 +58,13 @@
                     <?php if (isset($value['certificate'])) {
                         echo  '<div class="resumeItemCertificates clearfix">Certificates:';
                         foreach ($value['certificate'] as $index => $cert) {
-                            echo  '<div><a class="certificate" href="/' . $value['certificateUrl'][$index] . '/' . $cert . '">' . $cert . '</a></div>';
+                            $href ='http://aimya.com/' . substr($value['certificateUrl'][$index],2) . '/' . $cert ;
+                            $extension = substr($cert,-4);
+                            if($extension == '.doc' || $extension == '.pdf'){
+                                echo '<div><a class="certificate" target="_blank" href="'.$googleDocViewer.$href.'">' . $cert . '</a></div>';
+                            }else{
+                                echo '<div><a class="certificate" href="../' . $value['certificateUrl'][$index] . '/' . $cert . '">' . $cert . '</a></div>';
+                            }
                         }
                         echo  '</div>';
                     }
@@ -69,7 +82,13 @@
                     <?php if (isset($value['certificate'])) {
                         echo  '<div class="resumeItemCertificates clearfix">Certificates:';
                         foreach ($value['certificate'] as $index => $cert) {
-                            echo  '<div><a class="certificate" href="/' . $value['certificateUrl'][$index] . '/' . $cert . '">' . $cert . '</a></div>';
+                            $href ='http://aimya.com/' . substr($value['certificateUrl'][$index],2) . '/' . $cert ;
+                            $extension = substr($cert,-4);
+                            if($extension == '.doc' || $extension == '.pdf'){
+                                echo '<div><a class="certificate" target="_blank" href="'.$googleDocViewer.$href.'">' . $cert . '</a></div>';
+                            }else{
+                                echo '<div><a class="certificate" href="../' . $value['certificateUrl'][$index] . '/' . $cert . '">' . $cert . '</a></div>';
+                            }
                         }
                         echo  '</div>';
                     }
