@@ -1547,8 +1547,9 @@ input.button-2 {
 .messageTab.viewMessageBlock .buttonRow.viewReply{
     padding-left: 16px;
 }
-.messageTab.viewMessageBlock .messageViewSender{
-    font:600 12px arial;
+.messageTab.viewMessageBlock .messageViewSender a{
+    font:600 12px arial ;
+    text-decoration: underline;
 }
 .messageTab.viewMessageBlock .messageViewTheme{
     font:600 13px arial;
