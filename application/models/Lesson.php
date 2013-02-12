@@ -40,7 +40,7 @@ class Application_Model_Lesson
     {
 
         $folderModel = new Application_Model_Folder();
-        $notePath = 'users/' . $teacherId . '/25/video/';
+        $notePath = 'users/' . $teacherId . '/' . $lessonId . '/video/';
         $folderModel->createFolderChain($notePath, '/');
         return $notePath;
 
