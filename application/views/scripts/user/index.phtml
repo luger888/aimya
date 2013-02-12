@@ -112,7 +112,14 @@ if ($this->userData['role'] == '1') {
         <ul>
             <li><span class="day">Monday</span><span
                 class="from"><?php echo $this->availability['fromMon'];?></span>to<span
-                class="to"><?php echo $this->availability['toMon'];?></span></li>
+                class="to"><?php
+                    if($this->availability['toMon'] !== '...'){
+                        echo $this->availability['toMon'].'</span></li>';
+                    }else{
+                        echo 'ANY</span></li>';
+                    }
+                        ?>
+
             <li><span class="day">Tuesday</span><span
                 class="from"><?php echo $this->availability['fromTue'];?></span>to<span
                 class="to"><?php echo $this->availability['toTue'];?></span></li>

@@ -373,4 +373,16 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         return $this->update($array, $where);
 
     }
+    public function getCurrentTime($user_id)
+    {
+        $data = $this->select()
+            ->from('user', array('timezone'))
+            ->where('id=?', $user_id);
+
+        $timezone = $data->query()->fetch();
+
+        date_default_timezone_set($timezone);
+        $currentTime = date('h:i:s') ;
+        Zend_Debug::dump($currentTime);die;
+    }
 }

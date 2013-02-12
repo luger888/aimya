@@ -202,6 +202,13 @@ class UserController extends Zend_Controller_Action
                 $this->view->status = 'error';
             }
         }
+        if($this->getRequest()->getParam('time')) {
+            $userId = Zend_Auth::getInstance()->getIdentity()->id;
+            $userTable = new Application_Model_DbTable_Users();
+            $currentTime = $userTable->getCurrentTime($userId);
+            $this->view->time = $currentTime;
+
+        }
     }
 
 }
