@@ -381,7 +381,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
         $timezone = $data->query()->fetch();
 
-        date_default_timezone_set($timezone);
+        date_default_timezone_set('02:00');
         $currentTime = date('h:i:s') ;
         Zend_Debug::dump($currentTime);die;
     }
