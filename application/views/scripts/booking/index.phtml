@@ -511,7 +511,7 @@ jQuery(document).ready(function () {
                }
 
                 var current = new Date();
-console.log(startLesson)
+
                 if (event.booking_status == '0' && event.user_id == event.recipient_id && startLesson>current) {
 
                     element.find(".fc-event-content").append('<input type = "button"  id ="rejectBooking" onclick="rejectBooking(this)" value = "Reject"  class="fc-event-content-reject fc-button reject">');
@@ -552,9 +552,6 @@ console.log(startLesson)
     });
     var oldDateObj = new Date();
     var today = new Date(oldDateObj.getTime() + 10*60000);
-    $('#started_at').datepicker({
-        minDate: today
-    });
 
 
 
@@ -592,7 +589,7 @@ console.log(startLesson)
                 else if(response.blocked == 1){
                     jQuery('.loadingIcon').remove();
                     alert('You have been blocked. You can\'t book him! ')
-                }else if(response.success == 0 && response.fail ==0){
+                }else if(response.success == 0 && response.fail !=1){
                     jQuery('.loadingIcon').remove();
                     $('#booking').find('.error').remove();
 
@@ -623,6 +620,17 @@ console.log(startLesson)
         return false;
     });
     $('#bookLesson').click(function () {
+        $.post(
+
+            pathName + "/user/timezone/0/controller%3D%3Euser/1/action%3D%3Etimezone", {
+                "time": 1
+            },
+            function (response) {
+                $('#started_at').datepicker({
+                    minDate: response.time
+                });
+            });
+
         $('#booking').find('.error').remove();
         jQuery('#booking').css('display', 'block');
 
