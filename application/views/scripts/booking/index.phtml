@@ -418,13 +418,15 @@ jQuery(document).ready(function () {
                         var sender_utc = parseFloat(msg.booking[c].creator_tz.replace(':', "."));
                         var recipient_utc = parseFloat(msg.timezone.replace(':', "."));
                         var utc = recipient_utc - sender_utc;
-
+                        console.log(utc +'recipient_utc - sender_utc');
 //                        var time_zone = msg.booking[c].timezone - msg.booking[c].creator_tz;
 //                        var utc =  msg.booking[c].creator_tz.getTime() + ( msg.booking[c].creator_tz.getTimezoneOffset() * 60000);
 
                         if (msg.booking[c].recipient_id == msg.user_id) {
                             var unixStamp = Math.round((start).getTime() / 1000);
+                            console.log(utc +'  var unixStamp = Math.round((start).getTime() / 1000);');
                             var dateTime = unixStamp + utc * 3600;
+                            console.log(utc +' var dateTime = unixStamp + utc * 3600;');
                             dateTime = new Date(dateTime * 1000);
 
 
@@ -543,7 +545,7 @@ jQuery(document).ready(function () {
                     element.find(".fc-event-content").append('<div class="fc-event-content-approve pending"><span>Pending</span></div>');
                 } else {
                     console.log(startLesson +'startLesson')
-                    console.log(current = 'current')
+                    console.log(current + 'current')
                     element.find(".fc-event-content").append('<input type = "button"  id ="removetBooking" onclick="removeBooking(this)" value = "Remove"  class="fc-event-content-reject fc-button cancel">');
                     element.find(".fc-event-content").append('<input type = "hidden" id = "booking_id"  value = ' + event.booking_id + ' >');
                     element.find(".fc-event-content").append('<div class="fc-event-content-approve pending"><span>Expired</span></div>');
