@@ -381,7 +381,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
         $timezone = $data->query()->fetch();
 
-
+        date_default_timezone_set('Europe/London');
 
         $separatedData = explode(':', $timezone['timezone']); //exploding HH: MM by ':'
         $minutesInHours = $separatedData[0] * 60; // HH -> minutes
