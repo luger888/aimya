@@ -2035,12 +2035,15 @@ float:right;
 }
 .featuresTab .profileRole{
     font: 11px helvetica;
-    padding: 0 0 0 15px;
+    padding: 0 0 0 2px;
     position: relative;
     top: 5px;
 }
 .featuresTab .leftBlockFeature{
     float:left;
+}
+.featuresTab .leftBlockFeature .starsBlock{
+    padding-top:5px;
 }
 .userProfileTab .profileRole{
     font: 11px helvetica;

@@ -7,6 +7,7 @@ $(document).ready(function () {
         if (results)
             return results[1] || 0;
     };
+
     var user = $.urlParam('user');
     var category = $.urlParam('category');
     $('#author').val(user);
