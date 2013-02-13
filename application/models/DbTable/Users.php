@@ -390,7 +390,8 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         $minutesInHours = $separatedData[0] * 60; // HH -> minutes
         $minutesInDecimals = $separatedData[1]; // MM -> minutes
         $totalMinutes = $minutesInHours + $minutesInDecimals; //converted timezone to minutes
-        $dateWithUTC = gmdate("Y d m,H:i:s", strtotime($date) + (($totalMinutes) * 60)); //adding timezone to current date
+        $dateWithUTC = gmdate("m/d/Y h:i:s", strtotime($date) + (($totalMinutes) * 60)); //adding timezone to current date
+
         return $dateWithUTC;
     }
 }
