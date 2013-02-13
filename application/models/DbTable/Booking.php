@@ -59,6 +59,17 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
         $this->delete($where);
 
     }
+    public function removeBooking($id)
+    {
+        $where = array(
+
+            $this->getAdapter()->quoteInto('id =?', (int)$id)
+
+        );
+        $this->delete($where);
+
+    }
+
 
     public function cancelBooking($id, $userId, $status = '')
     {
