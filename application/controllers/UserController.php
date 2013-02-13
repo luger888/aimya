@@ -5,41 +5,45 @@ class UserController extends Zend_Controller_Action
     {
         $this->_helper->layout->setLayout("layoutInner");
         $this->_helper->AjaxContext()
-            ->addActionContext('registration','json')
-            ->addActionContext('login','json')
-            ->addActionContext('timezone','json')
+            ->addActionContext('registration', 'json')
+            ->addActionContext('login', 'json')
+            ->addActionContext('timezone', 'json')
             ->initContext('json');
     }
 
     public function indexAction()
     {
         $accountId = $this->getRequest()->getParam('id');
-      if($accountId){
-          $userModel = new Application_Model_DbTable_Users();
-          $user = $userModel->getFullData($accountId);
-          if($user['username']) {
-              $userData = $user;
-          }else{
-              $this->_helper->redirector('page404','error');
-          }
-          $profileModel = new Application_Model_Profile();
-          $dbProfile = new Application_Model_DbTable_Profile();
-          $this->view->profile = $dbProfile->getProfile($accountId);
-          $dbAvailability = new Application_Model_DbTable_Availability();
-          $this->view->availability = $dbAvailability->getAvailability($accountId);
-          $this->view->avatarPath = $profileModel->getAvatarPath($accountId, 'base');
-          $this->view->userData = $userData;
-      }else{
-          $this->_helper->redirector('page404','error');
-      }
+        if ($accountId) {
+            $reviewModel = new Application_Model_Review();
+            $this->view->stars = $reviewModel->getTotalReviews($accountId);
+
+            $userModel = new Application_Model_DbTable_Users();
+            $user = $userModel->getFullData($accountId);
+            if ($user['username']) {
+                $userData = $user;
+            } else {
+                $this->_helper->redirector('page404', 'error');
+            }
+            $profileModel = new Application_Model_Profile();
+            $dbProfile = new Application_Model_DbTable_Profile();
+            $this->view->profile = $dbProfile->getProfile($accountId);
+            $dbAvailability = new Application_Model_DbTable_Availability();
+            $this->view->availability = $dbAvailability->getAvailability($accountId);
+            $this->view->avatarPath = $profileModel->getAvatarPath($accountId, 'base');
+            $this->view->userData = $userData;
+        } else {
+            $this->_helper->redirector('page404', 'error');
+        }
 
     }
 
-    public function confirmationAction() {
+    public function confirmationAction()
+    {
 
         $data = $this->getRequest()->getParams();
 
-        if(isset($data)){
+        if (isset($data)) {
             if (!$data['query_id']) {
                 $this->view->message = 'no email';
             } else if (!$data['query_key']) {
@@ -53,7 +57,7 @@ class UserController extends Zend_Controller_Action
                 $model = new Application_Model_User();
                 $this->view->message = $model->approveUser($data);
 
-                $this->_helper->flashMessenger->addMessage(array('success'=>'Your account has been confirmed. Please login'));
+                $this->_helper->flashMessenger->addMessage(array('success' => 'Your account has been confirmed. Please login'));
                 $this->_helper->redirector('index', 'index');
 
             }
@@ -73,18 +77,18 @@ class UserController extends Zend_Controller_Action
         $this->view->login = $login->getElements();
         $this->view->recovery = $recoveryForm->getElements();
 
-        if($this->getRequest()->isPost()){
+        if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getParams();
             if ($recoveryForm->isValid($formData)) {
                 $model = new Application_Model_User();
                 $email = $this->getRequest()->getParam('email');
                 if ($email) {
                     $result = $model->passRecovery($email);
-                    if($result) {
-                        $this->_helper->flashMessenger->addMessage(array('success'=>'Your password was successfully changed. Please check your email to get new password'));
+                    if ($result) {
+                        $this->_helper->flashMessenger->addMessage(array('success' => 'Your password was successfully changed. Please check your email to get new password'));
                         $this->_helper->redirector('recovery', 'user');
                     } else {
-                        $this->_helper->flashMessenger->addMessage(array('failure'=>'Problem with sending email'));
+                        $this->_helper->flashMessenger->addMessage(array('failure' => 'Problem with sending email'));
                         $this->_helper->redirector('recovery', 'user');
                     }
                 } else {
@@ -131,12 +135,12 @@ class UserController extends Zend_Controller_Action
                     $authStorage->write($identity);
 
                     $this->view->status = $identity->status;
-                   // $this->_helper->redirector('index', 'account');
-                }else{
+                    // $this->_helper->redirector('index', 'account');
+                } else {
 
                     $this->view->alertFlash = 'Authentication failed. Login or password are incorrect';
                 }
-            }else{
+            } else {
                 $this->view->errors = $login->getErrors();
             }
         }
@@ -156,13 +160,13 @@ class UserController extends Zend_Controller_Action
                 if ($user->checkByMail($formData['email'])) {
                     $this->view->alertFlash = 'This email already exist';
                 }
-                else if($user->checkByUsername($formData['username'])){
+                else if ($user->checkByUsername($formData['username'])) {
                     $this->view->alertFlash = 'This username already exist';
 
                 } else {
                     $status = $modelUser->addNewUser($formData);
 
-                    if($status) {
+                    if ($status) {
                         $this->view->confirmFlash = 'Please confirm your email';
                     } else {
                         $this->view->alertFlash = 'Technical issues with email. Please try again later';
@@ -185,15 +189,15 @@ class UserController extends Zend_Controller_Action
 
     public function timezoneAction()
     {
-        if($this->getRequest()->getParam('timezone')) {
+        if ($this->getRequest()->getParam('timezone')) {
             $timezone = $this->getRequest()->getParam('timezone');
 
             $userTable = new Application_Model_DbTable_Users();
 
             $result = $userTable->getTimeZone();
-            if($result['timezone'] == '') {
+            if ($result['timezone'] == '') {
                 $status = $userTable->setDefaultTimezone($timezone);
-                if($status) {
+                if ($status) {
                     $this->view->status = 'success';
                 } else {
                     $this->view->status = 'error';
@@ -202,7 +206,7 @@ class UserController extends Zend_Controller_Action
                 $this->view->status = 'error';
             }
         }
-        if($this->getRequest()->getParam('time')) {
+        if ($this->getRequest()->getParam('time')) {
             $userId = Zend_Auth::getInstance()->getIdentity()->id;
             $userTable = new Application_Model_DbTable_Users();
             $currentTime = $userTable->getCurrentTime($userId);
