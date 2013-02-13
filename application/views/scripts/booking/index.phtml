@@ -409,11 +409,11 @@ jQuery(document).ready(function () {
                             start = new Date(start);
                             var offset = start.getTimezoneOffset() * MS_PER_MINUTE;
                             start = new Date(start - (offset) * -1);
-
+                            console.log(start);
                         } else {
 
                             start = new Date(start);
-                            console.log(dateTime);
+                            console.log(start);
                         }
                         var sender_utc = parseFloat(msg.booking[c].creator_tz.replace(':', "."));
                         var recipient_utc = parseFloat(msg.timezone.replace(':', "."));
@@ -543,7 +543,7 @@ jQuery(document).ready(function () {
                     element.find(".fc-event-content").append('<div class="fc-event-content-approve pending"><span>Pending</span></div>');
                 } else {
                     console.log(startLesson)
-                    console.log(event.started_at)
+                    console.log(current)
                     element.find(".fc-event-content").append('<input type = "button"  id ="removetBooking" onclick="removeBooking(this)" value = "Remove"  class="fc-event-content-reject fc-button cancel">');
                     element.find(".fc-event-content").append('<input type = "hidden" id = "booking_id"  value = ' + event.booking_id + ' >');
                     element.find(".fc-event-content").append('<div class="fc-event-content-approve pending"><span>Expired</span></div>');
