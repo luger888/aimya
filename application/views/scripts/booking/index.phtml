@@ -424,9 +424,9 @@ jQuery(document).ready(function () {
 
                         if (msg.booking[c].recipient_id == msg.user_id) {
                             var unixStamp = Math.round((start).getTime() / 1000);
-                            console.log(utc +'  var unixStamp = Math.round((start).getTime() / 1000);');
+                            console.log(unixStamp +'  var unixStamp = Math.round((start).getTime() / 1000);');
                             var dateTime = unixStamp + utc * 3600;
-                            console.log(utc +' var dateTime = unixStamp + utc * 3600;');
+                            console.log(dateTime +' var dateTime = unixStamp + utc * 3600;');
                             dateTime = new Date(dateTime * 1000);
 
 
