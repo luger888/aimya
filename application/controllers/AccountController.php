@@ -357,7 +357,6 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
     {
         $this->view->headScript()->prependFile('/js/jquery/account/features.js');
         $dbUserModel = new Application_Model_DbTable_Users();
-
         $userType = 0;
         if ($this->getRequest()->getParam('user')) {
             $userType = (int)$this->getRequest()->getParam('user');
@@ -374,6 +373,8 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
             $featuredHtml = "";
             $users = $dbUserModel->getLatestFeatured($userType, $lessonCat, $offset, $count);
             foreach ($users as $person) {
+                $reviewModel = new Application_Model_Review();
+                $reviewAv = $reviewModel->getAverageReview($person['id']);
                 $friendTable = new Application_Model_DbTable_Friends();
                 $isFriend = $friendTable->isFriend($person['id']);
                 $isPending = $friendTable->isPending($person['id']);
@@ -387,6 +388,10 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                             <div class='featureItem clearfix'>
                             <div class ='leftBlockFeature'><div class='imageBlock boxShadow'><img src=".$avatarPath."></div><div class='profileRole'>
                 ".$role."</div>
+                <div class='starsBlock'>
+                    <span data-rating='4' class='stars'></span><span
+                    class='total'>(0)</span>
+                </div>
                         </div>
                                 <div class='featuredButtonsTop clearfix'>
                                     <a class ='button-2 view viewProfile' href='" . Zend_Controller_Front::getInstance()->getBaseUrl() . '/user/' . $person['id'] . "'>" . $this->view->translate('VIEW PROFILE') . "</a>";
@@ -470,9 +475,11 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
             $featuredList = $dbUserModel->getLatestFeatured($userType, $lessonCat);
             $featuredCount = $dbUserModel->getFeaturedCount($userType, $lessonCat);
 
+
             $this->view->filters = new Application_Form_FeaturesFilter();
             $this->view->featured = $featuredList;
             $this->view->featuredCount = $featuredCount;
+
         }
 
 

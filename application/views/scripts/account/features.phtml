@@ -12,134 +12,140 @@
     <!--End filters-->
 
     <?php $profileModel = new Application_Model_Profile(); ?>
-    <div class="messageContent clearfix">
-        <input id="featured_count" type="hidden" value="<?php echo $this->featuredCount['featuredCount']; ?>">
-        <?php //Zend_Debug::dump($this->featured); ?>
-        <?php foreach ($this->featured as $person): ?>
+<div class="messageContent clearfix">
+    <input id="featured_count" type="hidden" value="<?php echo $this->featuredCount['featuredCount']; ?>">
+    <?php //Zend_Debug::dump($this->featured); ?>
+    <?php foreach ($this->featured as $person): ?>
 
-        <div class="shadowSeparator clearfix">
-            <div class="shadowSeparatorBox clearfix">
-                <div class="featureItem clearfix">
+    <div class="shadowSeparator clearfix">
+        <div class="shadowSeparatorBox clearfix">
+            <div class="featureItem clearfix">
 
-                        <?php $avatarPath = $profileModel->getAvatarPath($person['id'], 'medium') ?>
+                <?php $avatarPath = $profileModel->getAvatarPath($person['id'], 'medium') ?>
 
-                        <div class ="leftBlockFeature"><div class="imageBlock boxShadow"><img src="<?php echo $avatarPath;?>"></div><div class='profileRole'><?php $role = ($person['role'] == '1' ? 'Student' : 'Instructor');
-                            echo $role;?></div>
-                        </div>
-
-                        <div class="featuredButtonsTop clearfix">
-
-                            <?php echo '<a class ="button-2 view viewProfile" href="' . $this->baseUrl() . '/user/' . $person['id'] . '">VIEW PROFILE</a>'; ?>
-                            <?php $friendTable = new Application_Model_DbTable_Friends(); ?>
-                            <?php $isFriend = $friendTable->isFriend($person['id']); ?>
-                            <?php $isPending = $friendTable->isPending($person['id']); ?>
-                            <?php $isInList = $friendTable->isInList($person['id'])?>
-                            <?php if (Zend_Auth::getInstance()->getIdentity()->id != $person['id']): ?>
-                            <?php  if ($isFriend) { // if friend, dont show the add to account button
-                                echo "<a class ='sendMessage createMessage button-2 floatLeft' onclick='sendMessage(" . $person['id'] . ", this)' href='javascript:void(1)'>" . $this->translate('SEND MESSAGE') . "</a>";
-                            } elseif ($isPending) {
-                                echo "<span class ='request_sent'>" . $this->translate('REQUEST SENT') . "</span>";
-                            } else {
-                                if ($isInList['friend_id'] == Zend_Auth::getInstance()->getIdentity()->id && $isInList['recipient_status'] == 0) {
-                                    $defaultRequestText = 'Hello ' . $person['username'] . ', I have approved your request.';
-                                    echo "<a class ='button-2 add addAccount' onclick='showFriendFormFeatured(" . $person['id'] . ", \"$defaultRequestText\", this)' href='javascript:void(1)'>" . $this->translate('ADD TO MY ACCOUNT') . "</a>";
-                                } else {
-                                    $defaultRequestText = 'Hello ' . $person['username'] . ', I would like add you to my account.';
-                                    echo "<a class ='button-2 add addAccount' onclick='showFriendFormFeatured(" . $person['id'] . ", \"$defaultRequestText\", this)' href='javascript:void(1)'>" . $this->translate('ADD TO MY ACCOUNT') . "</a>";
-                                }
-                            }
-                            ?>
-                            <?php endif;?>
-                            <?php echo '<input type="hidden" value = "' . $person["id"] . '">';?>
-
-                        </div>
-                        <!--End featuredButtonsTop-->
-                        <ul class="featuredInfo">
-                            <li class="clearfix">
-                                <span class="title"><?php echo $this->translate('Name:') ?></span>
-
-                                <div
-                                    class="featuredTxt"><?php echo  ' ' . $person['firstname'] . ' ' . $person['lastname'];?></div>
-                            </li>
-
-                            <li class="clearfix">
-                                <span class="title"><?php echo $this->translate('Time zone:') ?></span>
-
-                                <div class="featuredTxt"><?php echo ' UTC ' . $person['timezone'];?></div>
-                            </li>
-
-                            <?php if (count($person['service_offered']) > 0): ?>
-                            <li class="clearfix">
-                                <span class="title"><?php echo $this->translate('Service offered:') ?></span>
-
-                                <div class="featuredTxt">
-                                    <?php
-                                    $i = 0;
-                                    foreach ($person['service_offered'] as $index => $service) {
-                                        echo $service['subcategory'];
-                                        if (count($person['service_offered']) - 1 != $i) echo ', ';
-                                        $i++;
-                                    }
-                                    ?>
-                                </div>
-                            </li>
-                            <?php endif; ?>
-                            <?php if (count($person['service_requested']) > 0): ?>
-                            <li class="clearfix">
-                                <span class="title"><?php echo $this->translate('Service requested:') ?></span>
-
-                                <div class="featuredTxt">
-                                    <?php
-                                    $i = 0;
-                                    foreach ($person['service_requested'] as $index => $service) {
-                                        echo $service['subcategory'];
-                                        if (count($person['service_requested']) - 1 != $i) echo ', ';
-                                        $i++;
-                                    }
-                                    ?>
-                                </div>
-                            </li>
-                            <?php endif; ?>
-                            <?php if (count($person['add_info']) > 0): ?>
-                            <li class="clearfix">
-                                <span class="title"><?php echo $this->translate('About me:') ?></span>
-
-                                <div class="featuredTxt more"><?php echo $person['add_info'];?></div>
-                            </li>
-                            <?php endif; ?>
-                        </ul>
-                    <!--End featuredInfo -->
-
-</div>
-                <!--End featureItem -->
+                <div class="leftBlockFeature">
+                    <div class="imageBlock boxShadow"><img src="<?php echo $avatarPath;?>"></div>
+                    <div class='profileRole'><?php $role = ($person['role'] == '1' ? 'Student' : 'Instructor');
+                        echo $role;?></div>
+                    <div class="starsBlock">
+                    <span data-rating="<?php echo $person['averageRating'];?>" class="stars"></span><span
+                    class="total"><?php if(isset($person['countRating'])) echo  $person['countRating'];?></span>
+                </div>
             </div>
-            <!--End shadowSeparatorBox-->
+
+            <div class="featuredButtonsTop clearfix">
+
+                <?php echo '<a class ="button-2 view viewProfile" href="' . $this->baseUrl() . '/user/' . $person['id'] . '">VIEW PROFILE</a>'; ?>
+                <?php $friendTable = new Application_Model_DbTable_Friends(); ?>
+                <?php $isFriend = $friendTable->isFriend($person['id']); ?>
+                <?php $isPending = $friendTable->isPending($person['id']); ?>
+                <?php $isInList = $friendTable->isInList($person['id'])?>
+                <?php if (Zend_Auth::getInstance()->getIdentity()->id != $person['id']): ?>
+                <?php  if ($isFriend) { // if friend, dont show the add to account button
+                    echo "<a class ='sendMessage createMessage button-2 floatLeft' onclick='sendMessage(" . $person['id'] . ", this)' href='javascript:void(1)'>" . $this->translate('SEND MESSAGE') . "</a>";
+                } elseif ($isPending) {
+                    echo "<span class ='request_sent'>" . $this->translate('REQUEST SENT') . "</span>";
+                } else {
+                    if ($isInList['friend_id'] == Zend_Auth::getInstance()->getIdentity()->id && $isInList['recipient_status'] == 0) {
+                        $defaultRequestText = 'Hello ' . $person['username'] . ', I have approved your request.';
+                        echo "<a class ='button-2 add addAccount' onclick='showFriendFormFeatured(" . $person['id'] . ", \"$defaultRequestText\", this)' href='javascript:void(1)'>" . $this->translate('ADD TO MY ACCOUNT') . "</a>";
+                    } else {
+                        $defaultRequestText = 'Hello ' . $person['username'] . ', I would like add you to my account.';
+                        echo "<a class ='button-2 add addAccount' onclick='showFriendFormFeatured(" . $person['id'] . ", \"$defaultRequestText\", this)' href='javascript:void(1)'>" . $this->translate('ADD TO MY ACCOUNT') . "</a>";
+                    }
+                }
+                ?>
+                <?php endif;?>
+                <?php echo '<input type="hidden" value = "' . $person["id"] . '">';?>
+
+            </div>
+            <!--End featuredButtonsTop-->
+            <ul class="featuredInfo">
+                <li class="clearfix">
+                    <span class="title"><?php echo $this->translate('Name:') ?></span>
+
+                    <div
+                        class="featuredTxt"><?php echo  ' ' . $person['firstname'] . ' ' . $person['lastname'];?></div>
+                </li>
+
+                <li class="clearfix">
+                    <span class="title"><?php echo $this->translate('Time zone:') ?></span>
+
+                    <div class="featuredTxt"><?php echo ' UTC ' . $person['timezone'];?></div>
+                </li>
+
+                <?php if (count($person['service_offered']) > 0): ?>
+                <li class="clearfix">
+                    <span class="title"><?php echo $this->translate('Service offered:') ?></span>
+
+                    <div class="featuredTxt">
+                        <?php
+                        $i = 0;
+                        foreach ($person['service_offered'] as $index => $service) {
+                            echo $service['subcategory'];
+                            if (count($person['service_offered']) - 1 != $i) echo ', ';
+                            $i++;
+                        }
+                        ?>
+                    </div>
+                </li>
+                <?php endif; ?>
+                <?php if (count($person['service_requested']) > 0): ?>
+                <li class="clearfix">
+                    <span class="title"><?php echo $this->translate('Service requested:') ?></span>
+
+                    <div class="featuredTxt">
+                        <?php
+                        $i = 0;
+                        foreach ($person['service_requested'] as $index => $service) {
+                            echo $service['subcategory'];
+                            if (count($person['service_requested']) - 1 != $i) echo ', ';
+                            $i++;
+                        }
+                        ?>
+                    </div>
+                </li>
+                <?php endif; ?>
+                <?php if (count($person['add_info']) > 0): ?>
+                <li class="clearfix">
+                    <span class="title"><?php echo $this->translate('About me:') ?></span>
+
+                    <div class="featuredTxt more"><?php echo $person['add_info'];?></div>
+                </li>
+                <?php endif; ?>
+            </ul>
+            <!--End featuredInfo -->
+
+        </div>
+        <!--End featureItem -->
+    </div>
+    <!--End shadowSeparatorBox-->
         </div><!--End shadowSeparator-->
 
 
-        <?php endforeach; ?>
-        <?php if ($this->featuredCount['featuredCount'] > 5): ?>
-        <div class="feauteresButtons center clearfix">
-            <input class="showMore button view-more" onclick="showMoreUsers(); return false;" type="button"
-                   value="<?php echo $this->translate('VIEW MORE') ?>">
-        </div><!--End feauteresButtons-->
+    <?php endforeach; ?>
+    <?php if ($this->featuredCount['featuredCount'] > 5): ?>
+    <div class="feauteresButtons center clearfix">
+        <input class="showMore button view-more" onclick="showMoreUsers(); return false;" type="button"
+               value="<?php echo $this->translate('VIEW MORE') ?>">
+    </div><!--End feauteresButtons-->
+    <?php endif; ?>
+</div>
+<!--End messageContent -->
+
+<div id="friend-request-dialog" title="<?php echo $this->translate('add to account') ?>:">
+    <div class="dialog-wrapper">
+        <?php $sendRequestForm = new Application_Form_Friend(); ?>
+        <?php if (!($this->userData['role'] == '1' && Zend_Auth::getInstance()->getIdentity()->role == '1')): ?>
+        <form action="<?php echo $this->baseUrl();?>/friends/send/" method="post" id="send_request">
+            <?php echo $sendRequestForm->friend_id; ?>
+            <?php echo $sendRequestForm->url;?>
+            <?php echo $sendRequestForm->request_comment;?>
+            <?php echo $sendRequestForm->sendbutton; ?>
+        </form>
         <?php endif; ?>
     </div>
-    <!--End messageContent -->
-
-    <div id="friend-request-dialog" title="<?php echo $this->translate('add to account') ?>:">
-        <div class="dialog-wrapper">
-            <?php $sendRequestForm = new Application_Form_Friend(); ?>
-            <?php if (!($this->userData['role'] == '1' && Zend_Auth::getInstance()->getIdentity()->role == '1')): ?>
-            <form action="<?php echo $this->baseUrl();?>/friends/send/" method="post" id="send_request">
-                <?php echo $sendRequestForm->friend_id; ?>
-                <?php echo $sendRequestForm->url;?>
-                <?php echo $sendRequestForm->request_comment;?>
-                <?php echo $sendRequestForm->sendbutton; ?>
-            </form>
-            <?php endif; ?>
-        </div>
-    </div>
+</div>
 </div><!--End featuresTab -->
 <script type="text/javascript">
     $(".more").trunc(30);

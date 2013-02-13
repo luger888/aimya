@@ -174,7 +174,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
             ->limit((int)$count, (int)$offset);
 
         $author = $data->query()->fetchAll();
-
+        $reviewModel = new Application_Model_Review();
         foreach ($author as $index => $value) {
             $serviceOffered = $this->getAdapter()
                 ->select()
@@ -192,8 +192,15 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
             $servicesOffered = $serviceOffered->query()->fetchAll();
             $servicesRequested = $serviceRequested->query()->fetchAll();
 
+
+            $ratings = $reviewModel->getAverageReview($value['id']);
+            if($ratings){
+                $author[$index]['averageRating'] = $ratings[0];
+                $author[$index]['countRating'] = $ratings[1];
+            }
             $author[$index]['service_offered'] = $servicesOffered;
             $author[$index]['service_requested'] = $servicesRequested;
+
 
         }
 
