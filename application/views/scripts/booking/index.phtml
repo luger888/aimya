@@ -4,23 +4,28 @@
 #booking {
     display: none;
 }
-.fc-event-cancel{
+
+.fc-event-cancel {
     float: right;
     margin-right: 2px;
-    cursor:pointer;
-    height:19px;
+    cursor: pointer;
+    height: 19px;
     padding: 0 5px;
     line-height: 19px;
 }
+
 .isTeacher {
     display: none;
 }
-.isTeacher span{
-    margin-right:3px;
+
+.isTeacher span {
+    margin-right: 3px;
 }
-.isTeacher label{
-    padding-right:15px;
+
+.isTeacher label {
+    padding-right: 15px;
 }
+
 #teacher-label {
     display: none;
 }
@@ -83,16 +88,20 @@ table:not(.fc-agenda-days) .fc-today {
 ul li {
     text-decoration: none;
 }
-.mainCalendar .button.book{
+
+.mainCalendar .button.book {
     margin-bottom: 5px;
     padding: 0 26px;
 }
+
 #dialog-form .mainBooking {
     padding: 18px 29px 0 18px
 }
+
 #dialog-form .mainBooking .button {
     margin-bottom: 15px;
 }
+
 .mainBooking .formRow div {
     float: left;
 }
@@ -116,14 +125,17 @@ ul li {
 .mainBooking #rate {
     width: 70px;
 }
-.mainBooking #started_at{
-    width:100px;
+
+.mainBooking #started_at {
+    width: 100px;
     margin-right: 35px;
 }
-.mainBooking #started_at_time{
-    width:75px;
-    margin-left:15px;
+
+.mainBooking #started_at_time {
+    width: 75px;
+    margin-left: 15px;
 }
+
 .mainBooking  .button {
     font-family: 'dosissemibold' !important;
     font-size: 12px !important;
@@ -146,12 +158,14 @@ ul li {
 .mainBooking .formRow {
     padding-bottom: 19px;
 }
+
 .mainBooking .error {
     clear: both;
     font-size: 11px;
     color: #9e4444;
     text-decoration: none;
 }
+
 .fc-button-prev, .fc-button-next {
     width: 15px !important;
 }
@@ -248,7 +262,8 @@ ul li {
     margin: 0;
     width: 66px;
 }
-.cancellation{
+
+.cancellation {
     margin-left: 15px;
 }
 
@@ -275,6 +290,7 @@ ul li {
                 <div class="label">Select Date:</div>
                 <div><?php echo $this->bookingForm->started_at;?></div>
                 <span class="floatLeft">Time:</span>
+
                 <div><?php echo $this->bookingForm->started_at_time;?></div>
             </div>
             <div class="formRow clearfix">
@@ -310,8 +326,9 @@ ul li {
 
     </div>
 </div>
-<div class = "usersAlert" id="cancel-confirm" title="LESSON CANCELLATION:">
-    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Message will be sent to other party to confirm the Lesson cancellation! Are you sure you want to Cancel?</p>
+<div class="usersAlert" id="cancel-confirm" title="LESSON CANCELLATION:">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Message will be sent to
+        other party to confirm the Lesson cancellation! Are you sure you want to Cancel?</p>
 </div>
 <script type='text/javascript'>
 jQuery(document).ready(function () {
@@ -323,8 +340,8 @@ jQuery(document).ready(function () {
             $('.isTeacher').css('display', 'none');
         }
     });
-    Date.prototype.addHours= function(h){
-        this.setHours(this.getHours()+h);
+    Date.prototype.addHours = function (h) {
+        this.setHours(this.getHours() + h);
         return this;
     }
     var pathName = $('#current_url').val();
@@ -383,23 +400,23 @@ jQuery(document).ready(function () {
 
                         var start = msg.booking[c].started_at;
 
-                        start = start.replace(" ","T");
+                        start = start.replace(" ", "T");
 
                         var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 
-                      if(is_chrome){
-                          var MS_PER_MINUTE = 60000;
-                          start = new Date(start);
-                          var offset =  start.getTimezoneOffset()*MS_PER_MINUTE;
-                          start = new Date(start - (offset)*-1);
+                        if (is_chrome) {
+                            var MS_PER_MINUTE = 60000;
+                            start = new Date(start);
+                            var offset = start.getTimezoneOffset() * MS_PER_MINUTE;
+                            start = new Date(start - (offset) * -1);
 
-                      }else{
+                        } else {
 
-                          start = new Date(start);
+                            start = new Date(start);
 
-                      }
-                        var sender_utc = parseFloat(msg.booking[c].creator_tz.replace(':',"."));
-                        var recipient_utc = parseFloat(msg.timezone.replace(':',"."));
+                        }
+                        var sender_utc = parseFloat(msg.booking[c].creator_tz.replace(':', "."));
+                        var recipient_utc = parseFloat(msg.timezone.replace(':', "."));
                         var utc = recipient_utc - sender_utc;
 
 //                        var time_zone = msg.booking[c].timezone - msg.booking[c].creator_tz;
@@ -407,13 +424,12 @@ jQuery(document).ready(function () {
 
                         if (msg.booking[c].recipient_id == msg.user_id) {
                             var unixStamp = Math.round((start).getTime() / 1000);
-                            var dateTime = unixStamp+utc*3600;
-                             dateTime = new Date(dateTime*1000);
+                            var dateTime = unixStamp + utc * 3600;
+                            dateTime = new Date(dateTime * 1000);
 
-                        }else{
+                        } else {
                             dateTime = msg.booking[c].started_at;//bug
-                            dateTime = dateTime.replace(/-/g,'/');
-
+                            dateTime = dateTime.replace(/-/g, '/');
 
 
                         }
@@ -467,71 +483,73 @@ jQuery(document).ready(function () {
                 } else {
                     recipient = $('#recipiend_id option[value="' + event.recipient_id + '"]').text();
                 }
-                if(event.booking_status == '1'){
+                if (event.booking_status == '1') {
                     var colorAlt = 'green';
                 }
-                if(event.booking_status == '0'){
-                     colorAlt = 'rose';
+                if (event.booking_status == '0') {
+                    colorAlt = 'rose';
                 }
-                if(event.video == '1'){
+                if (event.video == '1') {
                     videoActivity = 'active';
-                }else{
-                    videoActivity ='passive'
+                } else {
+                    videoActivity = 'passive'
                 }
-                if(event.notes == '1'){
+                if (event.notes == '1') {
                     notesActivity = 'active';
-                }else{
-                    notesActivity ='passive'
+                } else {
+                    notesActivity = 'passive'
                 }
-                if(event.feedback == '1'){
+                if (event.feedback == '1') {
                     feedbackActivity = 'active';
-                }else{
-                    feedbackActivity ='passive'
+                } else {
+                    feedbackActivity = 'passive'
                 }
                 element.find(".fc-event-head").append('<div class ="fc-event-focusName">Focus name: "' + event.title + '"</div>');
 
 
                 element.find(".fc-event-head").append('<div class = "fc-event-rate">Rate: $' + event.rate + ' / ' + duration + '</div>');
-                element.find(".fc-event-content").append('<div class = "fc-event-content-alt floatRight"><span class = "videoRec '+ colorAlt+' '+videoActivity+'"></span> <span class = "feedback '+ colorAlt+' '+feedbackActivity+'"></span><span class = "notes '+ colorAlt+' '+notesActivity+'"></span></div>');
+                element.find(".fc-event-content").append('<div class = "fc-event-content-alt floatRight"><span class = "videoRec ' + colorAlt + ' ' + videoActivity + '"></span> <span class = "feedback ' + colorAlt + ' ' + feedbackActivity + '"></span><span class = "notes ' + colorAlt + ' ' + notesActivity + '"></span></div>');
                 element.find(".fc-event-content").append('<div class = "fc-event-content-description"> Description: ' + event.add_info + '</div>');
                 element.find(".fc-event-content").append('<div class = "fc-event-content-requested">Request from: ' + sender + ' , to:  ' + recipient + '</div>');
-                if(event.booking_status == '1' && event.is_cancel =='0' && startLesson>current){
+                if (event.booking_status == '1' && event.is_cancel == '0' && startLesson > current) {
                     element.find(".fc-event-content").append('<input type="button" value="Cancel" class ="button fc-event-cancel" onclick ="cancelBooking(this);">');
-                    element.find(".fc-event-content").append('<input type = "hidden" value = '+ event.booking_id +'>');
-                    if(event.user_id == event.recipient_id){
-                        element.find(".fc-event-content").append('<input type = "hidden" value = '+ event.sender_id +'>');
-                    }else{
-                        element.find(".fc-event-content").append('<input type = "hidden" value = '+ event.recipient_id +'>');
+                    element.find(".fc-event-content").append('<input type = "hidden" value = ' + event.booking_id + '>');
+                    if (event.user_id == event.recipient_id) {
+                        element.find(".fc-event-content").append('<input type = "hidden" value = ' + event.sender_id + '>');
+                    } else {
+                        element.find(".fc-event-content").append('<input type = "hidden" value = ' + event.recipient_id + '>');
                     }
                 }
                 var startLesson = event.started_at;
                 //startLesson = startLesson.replace(" ","T");
-               if(typeof(startLesson) =='string'){
+                if (typeof(startLesson) == 'string') {
                     startLesson = new Date(startLesson);
-               }
+                }
 
                 var current = new Date();
 
-                if (event.booking_status == '0' && event.user_id == event.recipient_id && startLesson>current) {
+                if (event.booking_status == '0' && event.user_id == event.recipient_id && startLesson > current) {
 
                     element.find(".fc-event-content").append('<input type = "button"  id ="rejectBooking" onclick="rejectBooking(this)" value = "Reject"  class="fc-event-content-reject fc-button reject">');
                     element.find(".fc-event-content").append('<input type = "button" id ="confirmBooking" onclick="confirmBooking(this)" value = "Confirm" class = "fc-event-content-confirm fc-button">');
                     element.find(".fc-event-content").append('<input type = "hidden" id = "booking_id"  value = ' + event.booking_id + ' >');
                     element.find(".fc-event-content").append('<input type = "hidden" id = "sender_id"  value = ' + event.sender_id + ' >');
-                } else if (event.booking_status == '1' && startLesson>current) {
+                } else if (event.booking_status == '1' && startLesson > current) {
 
                     element.find(".fc-event-content").append('<div class="fc-event-content-approve"><span>Approved</span></div>');
-                } else if(event.booking_status == '0' && startLesson>current) {
+                } else if (event.booking_status == '0' && startLesson > current) {
 
                     element.find(".fc-event-content").append('<div class="fc-event-content-approve pending"><span>Pending</span></div>');
-                }else{
-
+                } else {
+                    element.find(".fc-event-content").append('<input type = "button"  id ="removetBooking" onclick="removeBooking(this)" value = "Remove"  class="fc-event-content-reject fc-button cancel">');
+                    element.find(".fc-event-content").append('<input type = "hidden" id = "booking_id"  value = ' + event.booking_id + ' >');
                     element.find(".fc-event-content").append('<div class="fc-event-content-approve pending"><span>Expired</span></div>');
+
                 }
-                if(event.user_id != event.is_cancel && event.is_cancel != '0'){
-                        element.find(".fc-event-content").append('<input type = "button" id ="confirmCancellation" onclick="confirmCancellation(this)" value = "Confirm Cancellation" class = "button cancellation">');
-                        element.find(".fc-event-content").append('<input type = "button"  id ="rejectCancellation" onclick="rejectCancellation(this)" value = "Reject Cancellation"  class="button cancellation">');
-                        element.find(".fc-event-content").append('<input type = "hidden" id = "booking_id"  value = ' + event.booking_id + ' >');
+                if (event.user_id != event.is_cancel && event.is_cancel != '0') {
+                    element.find(".fc-event-content").append('<input type = "button" id ="confirmCancellation" onclick="confirmCancellation(this)" value = "Confirm Cancellation" class = "button cancellation">');
+                    element.find(".fc-event-content").append('<input type = "button"  id ="rejectCancellation" onclick="rejectCancellation(this)" value = "Reject Cancellation"  class="button cancellation">');
+                    element.find(".fc-event-content").append('<input type = "hidden" id = "booking_id"  value = ' + event.booking_id + ' >');
                 }
             }
         }
@@ -542,7 +560,7 @@ jQuery(document).ready(function () {
 
     $("#dialog-form").dialog({
         autoOpen:false,
-        height: 'auto',
+        height:'auto',
         width:450,
         modal:true,
         resizable:false,
@@ -551,14 +569,16 @@ jQuery(document).ready(function () {
         }
     });
     var oldDateObj = new Date();
-    var today = new Date(oldDateObj.getTime() + 10*60000);
+    var today = new Date(oldDateObj.getTime() + 10 * 60000);
 
-
+    $('#started_at').datepicker({
+        minDate:today
+    });
 
     $('#sendBooking').click(function () {
         jQuery("body").append('<div class="loadingIcon"></div>');
 
-        if($('input[name=role]:checked').val() == '2'){
+        if ($('input[name=role]:checked').val() == '2') {
             var role = '0';
         }
         $.post(
@@ -578,34 +598,34 @@ jQuery(document).ready(function () {
 
             },
             function (response) {
-                if(response.fail == 1){
+                if (response.fail == 1) {
                     alert('You cannot double book!');
                     jQuery('.loadingIcon').remove();
                 }
-                if(response.success == 1 ){
+                if (response.success == 1) {
                     window.location.reload();
 
                 }
-                else if(response.blocked == 1){
+                else if (response.blocked == 1) {
                     jQuery('.loadingIcon').remove();
                     alert('You have been blocked. You can\'t book him! ')
-                }else if(response.success == 0 && response.fail !=1){
+                } else if (response.success == 0 && response.fail != 1) {
                     jQuery('.loadingIcon').remove();
                     $('#booking').find('.error').remove();
 
-                    if($('#recipiend_id').val() == 0){
+                    if ($('#recipiend_id').val() == 0) {
                         $('#recipiend_id').parent().parent().append('<div class="error">Choose recipient</div>');
                     }
-                    $("#recipiend_id").change(function() {
+                    $("#recipiend_id").change(function () {
                         $(this).removeClass("input-error");
                         $(this).parent().parent().find('.error').remove();
                     });
-                    for (key in response.errors){
+                    for (key in response.errors) {
 
-                        if(response.errors[key].length>0){
-                            $("#" + key).parent().parent().append('<div class="error">' +response.errors[key] + '</div>');
+                        if (response.errors[key].length > 0) {
+                            $("#" + key).parent().parent().append('<div class="error">' + response.errors[key] + '</div>');
                             $("#" + key).addClass("input-error");
-                            $("#" + key).change(function() {
+                            $("#" + key).change(function () {
                                 $(this).removeClass("input-error");
                                 $(this).parent().parent().find('.error').remove();
                             });
@@ -623,11 +643,27 @@ jQuery(document).ready(function () {
         $.post(
 
             pathName + "/user/timezone/0/controller%3D%3Euser/1/action%3D%3Etimezone", {
-                "time": 1
+                "time":1
             },
             function (response) {
-                $('#started_at').datepicker({
-                    minDate: response.time
+
+                var currentDate = new Date(response.time);
+
+                var currentTime = new Date(currentDate.getTime() + 10 * 60000);
+                $(function () {
+                    $('#started_at_time').scroller({ preset:'time', theme:'android-ics', ampm:false, timeFormat:'HH:ii'});
+                    $('#started_at').change(function () {
+                        var oldDateObj = new Date();
+                        var today = oldDateObj.getDate();
+                        var choosenDate = new Date($('#started_at').val()).getDate();
+                        if (choosenDate == today) {
+                            $('#started_at_time').val('');
+                            $('#started_at_time').scroller({ preset:'time', theme:'android-ics', ampm:false, timeFormat:'HH:ii', minDate:currentTime});
+                        } else {
+                            $('#started_at_time').scroller({ preset:'time', theme:'android-ics', ampm:false, timeFormat:'HH:ii'});
+                        }
+                    });
+
                 });
             });
 
@@ -658,7 +694,7 @@ function confirmBooking(e) {
         },
         function (response) {
 
-            if(response.approved){
+            if (response.approved) {
                 $(e).parents('.fc-event-inner').find('.fc-event-head').css('background-color', '#effad0');
                 $(e).parents('.fc-event-inner').css('background-color', '#effad0');
                 $(e).parents('.fc-event').css('border-color', '#7e954c');
@@ -666,10 +702,9 @@ function confirmBooking(e) {
                 $(e).parent().append('<div class="fc-event-content-approve"><span>Approved</span></div>');
                 $(e).parents('.fc-event').find('.fc-event-content-reject').remove();
                 $(e).parents('.fc-event').find('.fc-event-content-confirm').remove();
-            }else{
+            } else {
                 alert('You already  approved lesson on this time!')
             }
-
 
 
         });
@@ -696,10 +731,9 @@ function confirmCancellation(e) {
         },
         function (response) {
 
-            if(response.confirmed){
+            if (response.confirmed) {
                 window.location.reload();
             }
-
 
 
         });
@@ -712,7 +746,7 @@ function rejectCancellation(e) {
             "cancelRejectId":$(e).nextAll('#booking_id:first').val()
         },
         function (response) {
-            if(response.rejected){
+            if (response.rejected) {
                 window.location.reload();
             }
         });
@@ -723,35 +757,56 @@ function cancelBooking(e) {
     var pathName = $('#current_url').val();
     var id = $(e).nextAll('input[type=hidden]:first').val();
     var recipient_id = $(e).nextAll('input[type=hidden]:last').val();
-    $(function() {
-        $( "#cancel-confirm" ).dialog({
-            resizable: false,
+    $(function () {
+        $("#cancel-confirm").dialog({
+            resizable:false,
             height:140,
             width:360,
-            modal: true,
-            buttons: {
-                "Yes": function() {
-                    $( this ).dialog( "close" );
+            modal:true,
+            buttons:{
+                "Yes":function () {
+                    $(this).dialog("close");
                     $.ajax({
-                        url: pathName + "/booking/cancel",
-                        type: "post",
-                        data: {
+                        url:pathName + "/booking/cancel",
+                        type:"post",
+                        data:{
                             'booking_id':id,
                             'recipient_id':recipient_id
                         },
-                        success: function(response){
+                        success:function (response) {
                             window.location.reload();
                         }
                     });
                 },
-                No: function() {
-                    $( this ).dialog( "close" );
+                No:function () {
+                    $(this).dialog("close");
                 }
             }
         });
         $('.ui-icon-alert').remove();
     });
 }
+function removeBooking(e) {
+    jQuery("body").append('<div class="loadingIcon"></div>');
+    var pathName = $('#current_url').val();
+    var id = $(e).nextAll('input[type=hidden]:first').val();
+
+
+    $.ajax({
+        url:pathName + "/booking/remove",
+        type:"post",
+        data:{
+            'booking_id':id
+        },
+        success:function (response) {
+
+            window.location.reload();
+        }
+    });
+
+
+}
+
 </script>
 
 <div id='calendar'></div>

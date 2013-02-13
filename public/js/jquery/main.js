@@ -11,20 +11,20 @@ $(document).ready(function () {
     var currentTime = new Date(oldDateObj.getTime() + 10 * 60000);
 
 
-    $(function () {
-        $('#started_at_time').scroller({ preset:'time', theme:'android-ics', ampm:false, timeFormat:'HH:ii'});
-        $('#started_at').change(function () {
-
-            var choosenDate = new Date($('#started_at').val()).getDate();
-            if (choosenDate == today) {
-                $('#started_at_time').val('');
-                $('#started_at_time').scroller({ preset:'time', theme:'android-ics', ampm:false, timeFormat:'HH:ii', minDate:currentTime});
-            } else {
-                $('#started_at_time').scroller({ preset:'time', theme:'android-ics', ampm:false, timeFormat:'HH:ii'});
-            }
-        });
-
-    });
+//    $(function () {
+//        $('#started_at_time').scroller({ preset:'time', theme:'android-ics', ampm:false, timeFormat:'HH:ii'});
+//        $('#started_at').change(function () {
+//
+//            var choosenDate = new Date($('#started_at').val()).getDate();
+//            if (choosenDate == today) {
+//                $('#started_at_time').val('');
+//                $('#started_at_time').scroller({ preset:'time', theme:'android-ics', ampm:false, timeFormat:'HH:ii', minDate:currentTime});
+//            } else {
+//                $('#started_at_time').scroller({ preset:'time', theme:'android-ics', ampm:false, timeFormat:'HH:ii'});
+//            }
+//        });
+//
+//    });
 
 //    $.ajaxSetup({
 //        beforeSend: function(jqXHR, settings) {
