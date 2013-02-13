@@ -627,7 +627,7 @@ function getVideo(e, id) {
             flashvars.width = '500';
             flashvars.height = '350';
             flashvars.imagepath = '../../images/content/videoPlayer.png';
-            flashvars.videopath = '../../users/'+result.creator_id +'/'+id+'/video/video_lesson.flv';
+            flashvars.videopath = '../../users/'+result.creator_id +'/'+id+'/video/recorded_lesson.flv';
             //flashvars.color='0x2C75A3'
             flashvars.volume = '0.3';
             flashvars.fullscreenbutton = 'on';
@@ -878,7 +878,7 @@ function approveRefund(e){
         url: pathName + "/payment/unsubscribe",
         type: "post",
         data: {
-            'approveRefund':id,
+            'approveRefund':id
             /*'periodRefund': $('#periodRefund'),
             'pmoneyRefund': $('#periodRefund')*/
         },
