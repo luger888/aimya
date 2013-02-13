@@ -115,8 +115,8 @@ class Application_Model_Lesson
 
     public function getVideo($lessonCreatorId, $id)
     {
-        $path = '../../users/' . $lessonCreatorId . '/' . $id . '/video/video_lesson.flv';
-        $pathMkv = '../../users/' . $lessonCreatorId . '/' . $id . '/video/video_lesson_rec.mkv';
+        $path = '../../users/' . $lessonCreatorId . '/' . $id . '/video/video_lesson_rec.flv';
+        $pathMkv = '../../users/' . $lessonCreatorId . '/' . $id . '/video/video_lesson.mkv';
         if ((file_exists($path) OR is_dir($path))) {
             if (!file_exists($pathMkv) OR !is_dir($pathMkv)) {
                 return $path;
