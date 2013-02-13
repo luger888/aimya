@@ -10,6 +10,8 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
             ->addActionContext('offline', 'json')
             ->addActionContext('online', 'json')
             ->addActionContext('features', 'json')
+            ->addActionContext('updateavailability', 'json')
+            ->addActionContext('changepassword', 'json')
             ->initContext('json');
     }
 
@@ -18,16 +20,33 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         //basic tab
         $identity = Zend_Auth::getInstance()->getStorage()->read();
         $this->view->role = $identity->role;
-        $this->view->headScript()->appendFile('../../../js/jquery/account/tabs/services.js');
-        $this->view->headScript()->appendFile('../../../js/jquery/account/tabs/users.js');
+        $this->view->headScript()->prependFile('/js/jquery/account/tabs/services.js');
+        $this->view->headScript()->prependFile('/js/jquery/account/tabs/users.js');
+        $timezoneTable = new Application_Model_DbTable_TimeZones();
         $profileForm = new Application_Form_Profile();
         $profileModel = new Application_Model_Profile();
-        $this->view->profile = $profileForm->populate($profileModel->getProfileAccount($identity->id));
-        $this->view->avatarPath = $profileModel->getAvatarPath($identity->id, 'medium'); //path to avatar
+
+
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
 
             if ($profileForm->isValid($formData)) {
+                $updateUser = new Application_Model_DbTable_Users();
+                $currentUser = $updateUser->getItem($identity->id);
+                $checkByUsername = $updateUser->checkByUsername($formData['username']);
+
+                if ($checkByUsername && $currentUser['username'] != $formData['username']) {
+                    $this->_helper->flashMessenger->addMessage(array('failure' => 'This username already exist, please select another username'));
+                    $formData['username'] = $checkByUsername['username'];
+                    $this->_helper->redirector('index', 'account');
+                }
+                $checkByEmail = $updateUser->checkByMail($formData['email']);
+                if ($checkByEmail && $currentUser['email'] != $formData['email']) {
+                    $this->_helper->flashMessenger->addMessage(array('failure' => 'This email already exist, please select another email'));
+                    $formData['email'] = $checkByEmail['email'];
+                    $this->_helper->redirector('index', 'account');
+                }
+
                 Zend_Registry::set('username', "{$formData['firstname']} {$formData['lastname']}");
                 $profileForm->avatar->receive();
 
@@ -36,19 +55,25 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                 if ($_FILES['avatar']['name']) { //if new avatar -> update db
                     $updateProfile->updateAvatar($_FILES['avatar']['name'], $identity->id);
                 }
-                $updateUser = new Application_Model_DbTable_Users();
 
-                $timezoneTable = new Application_Model_DbTable_TimeZones();
                 $timezone = $timezoneTable->getItem($formData['timezone']);
                 $formData['timezone'] = $timezone['gmt'];
                 $updateUser->updateUser($formData, $identity->id);
-
             } else {
-
                 $this->view->errors = $profileForm->getErrors();
 
             }
         }
+        $accountData = $profileModel->getProfileAccount($identity->id);
+        if($accountData['timezone'] != NULL) {
+            $timezoneId = $timezoneTable->getTimezoneByGmt($accountData['timezone']);
+            $accountData['timezone'] = $timezoneId['id'];
+        }
+
+
+
+        $this->view->profile = $profileForm->populate($accountData);
+        $this->view->avatarPath = $profileModel->getAvatarPath($identity->id, 'medium'); //path to avatar
     }
 
     public function servicesAction()
@@ -109,6 +134,32 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         $this->view->servicesForm = $servicesForm;
     }
 
+    public function updateavailabilityAction()
+    {
+        $this->_helper->layout()->disableLayout();
+        $identity = Zend_Auth::getInstance()->getStorage()->read();
+        $dbAvailability = new Application_Model_DbTable_Availability();
+        $dbUser = new Application_Model_DbTable_Users();
+        $this->view->user = $dbUser->getUser($identity->id);
+
+        $availabilityForm = new Application_Form_Availability();
+        $this->view->availabilityForm = $availabilityForm->populate($dbAvailability->getAvailability($identity->id));
+
+        if ($this->getRequest()->isPost()) {
+            $formData = $this->getRequest()->getPost();
+            if ($availabilityForm->isValid($formData)) {
+                $dbAvailability->updateAvailability($formData, $identity->id);
+
+                $this->_helper->redirector('index', 'account');
+                $this->view->success = 1;
+            } else {
+
+                $this->view->errors = $availabilityForm->getErrors();
+                $this->view->success = 0;
+            }
+        }
+    }
+
     public function availabilityAction()
     {
         $this->_helper->layout()->disableLayout();
@@ -119,19 +170,15 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
 
         $availabilityForm = new Application_Form_Availability();
         $this->view->availabilityForm = $availabilityForm->populate($dbAvailability->getAvailability($identity->id));
+
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
-
             if ($availabilityForm->isValid($formData)) {
                 $dbAvailability->updateAvailability($formData, $identity->id);
-
-                $this->_helper->redirector('index', 'account');
-
 
             } else {
 
                 $this->view->errors = $availabilityForm->getErrors();
-
             }
         }
     }
@@ -148,42 +195,21 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         if ($this->getRequest()->isPost()) {
 
 
-            if($this->getRequest()->getParam('newPassword') !=''){
+            $formData = $this->getRequest()->getPost();
 
-                $password = md5($this->getRequest()->getParam('oldPassword'));
-                Zend_Auth::getInstance()->getStorage()->read();
+            if ($notificationForm->isValid($formData)) {
 
-                $authAdapter = new Zend_Auth_Adapter_DbTable(Zend_Db_Table::getDefaultAdapter());
+                $dbNotifications->updateNotifications($formData, $identity->id);
 
-                $authAdapter->setTableName('user')
-                    ->setIdentityColumn('username')
-                    ->setCredentialColumn('password')
-                    ->setIdentity($identity->username)
-                    ->setCredential($password);
+                $this->_helper->redirector('index', 'account');
 
-                $auth = Zend_Auth::getInstance();
-                $result = $auth->authenticate($authAdapter);
+            } else {
 
-                if ($result->isValid()) {
-                        $usersDb->changePass($this->getRequest()->getParam('newPassword'), $identity->id);
-                }else{
-                    $this->view->passError = 'Wrong password!';
-                }
+                $this->view->errors = $notificationForm->getErrors();
+                $this->_helper->redirector('index', 'account');
+
             }
-
-                $formData = $this->getRequest()->getPost();
-
-                if ($notificationForm->isValid($formData)) {
-
-                    $dbNotifications->updateNotifications($formData, $identity->id);
-                    $this->_helper->redirector('index', 'account');
-
-                } else {
-
-                    $this->view->errors = $notificationForm->getErrors();
-
-                }
-            }
+        }
 
 
     }
@@ -254,7 +280,12 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
             }
             /*  Users tab, update relations    */
             if ($this->getRequest()->getParam('updateUserId')) {
-                $dbUserRelations->updateUserStatus($this->getRequest()->getPost(), $identity->id);
+                if ($this->getRequest()->getParam('status') != 3) {
+                    $dbUserRelations->updateUserStatus($this->getRequest()->getPost(), $identity->id);
+                } else {
+                    $dbUserRelations->deleteFriend($this->getRequest()->getPost());
+                }
+
             }
             if ($this->getRequest()->getParam('updateService')) {
 
@@ -265,8 +296,12 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
 
                 $dbProfile = new Application_Model_DbTable_Profile();
                 $profileModel = new Application_Model_Profile();
-                unlink(substr($profileModel->getAvatarPath($identity->id, 'base'), 1)); //substr first slah
-                unlink(substr($profileModel->getAvatarPath($identity->id, 'medium'), 1));
+                if (substr($profileModel->getAvatarPath($identity->id, 'base'), 0, 12) != '/img/design/') {
+                    unlink(substr($profileModel->getAvatarPath($identity->id, 'base'), 1)); //substr first slah
+                    unlink(substr($profileModel->getAvatarPath($identity->id, 'medium'), 1));
+
+                }
+
 
                 $dbProfile->deleteAvatar($identity->id);
 
@@ -277,9 +312,50 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
         }
     }
 
+    public function changepasswordAction()
+    {
+        if ($this->getRequest()->isPost()) {
+            $identity = Zend_Auth::getInstance()->getStorage()->read();
+            $usersDb = new Application_Model_DbTable_Users();
+            $userInfo = $usersDb->getUserInfo($identity->id);
+            $userpassword = $userInfo['password'];
+            if ($this->getRequest()->getParam('newPassword') != '') {
+                //validators
+                $stringLengthValidator = new Zend_Validate_StringLength(6, 200); //addValidator('stringLength', false, array(6, 200));
+                $regexValidator = new Zend_Validate_Regex(array(
+                    'pattern' => '/[A-Za-z].*[0-9]|[0-9].*[A-Za-z]/',
+                    'messages' => array(
+                        'regexNotMatch' => "Your password must contain letters and numbers.",
+                    )
+                ));
+
+                if (!$stringLengthValidator->isValid($this->getRequest()->getParam('newPassword'))) {
+                    $this->view->errorLength = 1;
+                } else if (!$regexValidator->isValid($this->getRequest()->getParam('newPassword'))) {
+                    $this->view->errorReg = 1;
+                } else {
+
+
+                    $password = md5($this->getRequest()->getParam('oldPassword'));
+
+                    if ($userpassword==$password) {
+
+                        $usersDb->changePass($this->getRequest()->getParam('newPassword'), $identity->id);
+                        $this->_helper->flashMessenger->addMessage(array('success' => 'Password successfully changed'));
+                        $this->view->success = 1;
+
+                    } else {
+                        $this->_helper->flashMessenger->addMessage(array('failure' => 'Error with changing password, please try again later'));
+                        $this->view->passError = 'Wrong password!';
+                    }
+                }
+            }
+        }
+    }
+
     public function featuresAction()
     {
-        $this->view->headScript()->appendFile('../../js/jquery/account/features.js');
+        $this->view->headScript()->prependFile('/js/jquery/account/features.js');
         $dbUserModel = new Application_Model_DbTable_Users();
 
         $userType = 0;
@@ -301,12 +377,17 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                 $friendTable = new Application_Model_DbTable_Friends();
                 $isFriend = $friendTable->isFriend($person['id']);
                 $isPending = $friendTable->isPending($person['id']);
+                $isInList = $friendTable->isInList($person['id']);
+                $defaultRequestText = '';
                 $avatarPath = $profileModel->getAvatarPath($person['id'], 'medium');
+                 $role = ($person['role'] == '1' ? 'Student' : 'Instructor');
                 $featuredHtml .= "
                     <div class='shadowSeparator clearfix'>
                         <div class='shadowSeparatorBox clearfix'>
                             <div class='featureItem clearfix'>
-                                <div class='imageBlock boxShadow'><img src='" . $avatarPath . "'></div>
+                            <div class ='leftBlockFeature'><div class='imageBlock boxShadow'><img src=".$avatarPath."></div><div class='profileRole'>
+                ".$role."</div>
+                        </div>
                                 <div class='featuredButtonsTop clearfix'>
                                     <a class ='button-2 view viewProfile' href='" . Zend_Controller_Front::getInstance()->getBaseUrl() . '/user/' . $person['id'] . "'>" . $this->view->translate('VIEW PROFILE') . "</a>";
                 if (Zend_Auth::getInstance()->getIdentity()->id != $person['id']) {
@@ -315,7 +396,15 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                     } elseif ($isPending) {
                         $featuredHtml .= "<span class ='request_sent'>" . $this->view->translate('REQUEST SENT') . "</span>";
                     } else {
-                        $featuredHtml .= "<a class ='button-2 add addAccount' onclick='addToFriend(" . $person['id'] . ", this);' href='javascript:void(1)'>" . $this->view->translate('ADD TO MY ACCOUNT') . "</a>";
+                        if ($isInList['friend_id'] == Zend_Auth::getInstance()->getIdentity()->id && $isInList['recipient_status'] == 0) {
+                            $defaultRequestText = "Hello  {$person['username']}, I have approved your request.";
+                            $myText = "showFriendFormFeatured({$person['id']}, \"$defaultRequestText\", this)";
+                            $featuredHtml .= "<a class='button-2 add addAccount' onclick='$myText' href='javascript:void(1)'>" . $this->view->translate('ADD TO MY ACCOUNT') . "</a>";
+                        } else {
+                            $defaultRequestText = "Hello  {$person['username']}, I would like add you to my account.";
+                            $myText = "showFriendFormFeatured({$person['id']}, \"$defaultRequestText\", this)";
+                            $featuredHtml .= "<a class='button-2 add addAccount' onclick='$myText' href='javascript:void(1)'>" . $this->view->translate('ADD TO MY ACCOUNT') . "</a>";
+                        }
                     }
                 }
                 $featuredHtml .= "<input type='hidden' value='" . $person['id'] . "'>
@@ -369,6 +458,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                 }
                 $featuredHtml .= "
                                 </ul>
+                                </div>
                             </div>
                         </div>
                     </div>";
@@ -408,5 +498,12 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
             $this->view->data = 'problem with mysql request';
         }
     }
-
+    //curl
+    public function curlcheckactivityAction()
+    {
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        $onlineUserTable = new Application_Model_DbTable_OnlineUsers();
+        $onlineUserTable->curlIsOnline();
+    }
 }

@@ -10,6 +10,8 @@ package com.aimialesson.model
 	{
 		
 		public static const ONLINE:String = "online";
+		public static const ONLINE_STUDENT:String = "onlineStudent";
+		public static const ONLINE_TEACHER:String = "onlineTeacher";
 		public static const STUDENT:String = "student";
 		public static const TEACHER:String = "teacher";
 		public static const REMAINING_TIME:String = "remainingTime";
@@ -47,17 +49,28 @@ package com.aimialesson.model
 		[Bindable]
 		public var texts:Array;
 		
+		public var text_xml_url:String = "/flash/lessontexts.xml";
+		
 		public function setTexts():void { // just an attempt to fix the emty strings issue - on first loading. texts shoul
+			var newTexts:Array;
 			switch (lang){
 				case (Texts.EN)	:	texts = enTexts;
-					break;
-				case (Texts.JA)	:	texts = jaTexts;
-					break;
-				case (Texts.ZH)	:	texts = zhTexts;
-					break;
-				case (Texts.RU)	:	texts = ruTexts;
-					break;
+									return;
+									break;
+				case (Texts.JA)	:	newTexts = jaTexts;
+									break;
+				case (Texts.ZH)	:	newTexts = zhTexts;
+									break;
+				case (Texts.RU)	:	newTexts = ruTexts;
+									break;
 			}
+			texts = new Array();
+			for (var i:String in enTexts){
+				if (newTexts[i])
+					texts[i] = newTexts[i];
+				else texts[i] = enTexts[i];
+			}
+		//	if (!texts[Texts.NO] && !texts[Texts.ALERT]) texts = enTexts;
 		}
 		
 		private static var instance : Texts;
@@ -77,9 +90,10 @@ package com.aimialesson.model
 		public function getText ( value : String, upperCase : Boolean = false) : String {
 			var text:String;
 			debug ("getText:" + value);
+			text = enTexts[value];
 			switch (lang){
-				case (Texts.EN)	:	text = enTexts[value];
-									break;
+				//case (Texts.EN)	:	text = enTexts[value];
+					//				break;
 				case (Texts.JA)	:	text = jaTexts[value];
 									break;
 				case (Texts.ZH)	:	text = zhTexts[value];

@@ -4,11 +4,12 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <td> First Name</td>
-                    <td> Last Name</td>
-                    <td> User Name</td>
-                    <td> Time Zone</td>
-                    <td> Block / Delete</td>
+                    <td><?php echo $this->translate('First Name') ?></td>
+                    <td><?php echo $this->translate('Last Name') ?></td>
+                    <td><?php echo $this->translate('User Name') ?></td>
+                    <td><?php echo $this->translate('User Role') ?></td>
+                    <td><?php echo $this->translate('Time Zone') ?></td>
+                    <td><?php echo $this->translate('Block / Delete') ?></td>
                 </tr>
                 </thead>
                 <tbody>
@@ -17,13 +18,32 @@
                 $url = "'{$this->baseUrl()}/account/edit'";
                 if ($this->friends) {
                     foreach ($this->friends as $value) {
-                        echo '<tr>
+                        if ($value['role'] == '1') {
+                            $role = 'Student';
+                        } else {
+                            $role = 'Instructor';
+                        }
+
+                        if ($value['status'] != 2) {
+
+                            echo '<tr>
+        <td>' . $value['firstname'] . '</td>
+        <td>' . $value['lastname'] . '</td>
+        <td><a href="'.$this->baseUrl().'/user/'.$value['id'].'">' . $value['username'] . '</a></td>
+        <td>' . $role . '</td>
+        <td>UTC ' . $value['timezone'] . '</td>
+        <td><input type = "button" value="BLOCK" class = "button-2 block"  onclick ="blockUser(this, ' . $url . ');return false;"></div><input type = "button" value = "remove" class="button-2 delete" onclick="deleteUser(this, ' . $url . ');return false;"></div><input type = "hidden" value = ' . $value['id'] . '></td>
+    </tr>';
+                        }else{
+                            echo '<tr class="blocked">
         <td>' . $value['firstname'] . '</td>
         <td>' . $value['lastname'] . '</td>
         <td>' . $value['username'] . '</td>
+         <td>' . $role . '</td>
         <td>UTC ' . $value['timezone'] . '</td>
-        <td><input type = "button" value="BLOCK" class = "button-2 block"  onclick ="blockUser(this, ' . $url . ');return false;"></div><input type = "button" value = "DELETE" class="button-2 delete" onclick="deleteUser(this, ' . $url . ');return false;"></div><input type = "hidden" value = ' . $value['id'] . '></td>
+        <td><input type = "button" value="UNBLOCK" class = "button-2 block"  onclick ="unblockUser(this, ' . $url . ');return false;"></div><input type = "button" value = "DELETE" class="button-2 delete" onclick="deleteUser(this, ' . $url . ');return false;"></div><input type = "hidden" value = ' . $value['id'] . '></td>
     </tr>';
+                        }
                     }
 
                 }
@@ -36,11 +56,14 @@
         </div>
     </div>
 </div>
-<div class = "usersAlert" id="delete-confirm" title="DELETE USER:">
-    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>By deleting user, he will
-        be erased from your user list permanently. Are you sure you want to proceed?</p>
+<div class="usersAlert" id="delete-confirm" title="<?php echo $this->translate('delete user');?>:">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span><?php echo $this->translate('By deleting this user, he or she  will be erased from your user list permanently.  You can add them back through a simple search for their profile in the future.  Are you sure you want to remove?') ?></p>
 </div>
 
-<div class = "usersAlert" id="block-confirm" title="BLOCK USER:">
-    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Block user?</p>
+<div class="usersAlert" id="block-confirm" title="BLOCK USER:">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span><?php echo $this->translate('Block user') ?>?</p>
+</div>
+
+<div class="usersAlert" id="unblock-confirm" title="UNBLOCK USER:">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span><?php echo $this->translate('Unblock user') ?>?</p>
 </div>

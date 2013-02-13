@@ -9,6 +9,7 @@ class MessageController extends Zend_Controller_Action
             ->addActionContext('massdelete', 'json')
             ->addActionContext('massarchive', 'json')
             ->addActionContext('masstrash', 'json')
+            ->addActionContext('massrestore', 'json')
             ->initContext('json');
     }
 
@@ -61,8 +62,15 @@ class MessageController extends Zend_Controller_Action
                     $messageTable = new Application_Model_DbTable_Message();
                     $data['sender_id'] = $userId;
                     $data['recipient_id'] = $recipient['id'];
-                    $sendStatus = $messageTable->sendMessage($data);
-                    if($sendStatus){
+                    $friendsDb= new Application_Model_DbTable_Friends();
+                    $isBlocked = $friendsDb->isBlocked($recipient['id']);
+                    if(!$isBlocked){
+                        $sendStatus = $messageTable->sendMessage($data);
+                    }
+
+                    if(isset($sendStatus)){
+                        $notesDb = new Application_Model_Notifications();
+                        $notesDb->sendAlerts($recipient['id'], 'message');//sending email if needed
                         $this->_helper->flashMessenger->addMessage(array('success'=>'Message sent'));
                         $this->_helper->redirector('inbox', 'message');
                     } else {
@@ -81,6 +89,10 @@ class MessageController extends Zend_Controller_Action
         //$userData = $users->getUser($userId);
         //$form->populate($userData);
         //$this->view->data = $userData;
+        $friendTable = new Application_Model_DbTable_Friends();
+        $friends = $friendTable->getActiveFriends();
+
+        $this->view->friends = $friends;
     }
 
     public function sentAction()
@@ -98,7 +110,9 @@ class MessageController extends Zend_Controller_Action
             $username = $user->getUser($value['sender_id']);
             $messages[$index]['isActive'] = $activity->isOnline($value['sender_id']);//check if user online
             $messages[$index]['username'] = $username['username'];//check if user online
+
         }
+
         $this->view->messageActions = $messageActionsForm;
         $this->view->messages = $messages;
     }
@@ -279,8 +293,16 @@ class MessageController extends Zend_Controller_Action
                 $messageTable->readMessage($this->getRequest()->getParam('message_id'), $userId);
             }
             $message = $messageTable->getMessage($this->getRequest()->getParam('message_id'), $userId);
+
             $userTable = new Application_Model_DbTable_Users();
-            $sender = $userTable->getItem($message['sender_id']);
+            if($message['sender_id'] == $userId) {
+                $sender = $userTable->getItem($message['recipient_id']);
+            } else {
+                $sender = $userTable->getItem($message['sender_id']);
+            }
+            if($this->getRequest()->getParam('action')) {
+                $this->view->referrerAction = $this->getRequest()->getParam('referer_action');
+            }
 
             $this->view->user = $sender;
             $this->view->message = $message;
@@ -308,11 +330,18 @@ class MessageController extends Zend_Controller_Action
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
         if($this->getRequest()->getParam('message_ids') && $this->getRequest()->getParam('action')) {
-
+            $messageCount = array();
+            $messageIds = explode(',', $this->getRequest()->getParam('message_ids'));
             $userId = Zend_Auth::getInstance()->getIdentity()->id;
             $messageTable = new Application_Model_DbTable_Message();
-            $messageCount = $messageTable->massDelete($this->getRequest()->getParam('message_ids'), $userId, $this->getRequest()->getParam('current_action'));
-
+            foreach($messageIds as $messageId) {
+                $messageCount[] = $messageTable->massDelete($messageId, $userId);
+            }
+            if(count($messageCount) > 0) {
+                $this->view->status = "success";
+            } else {
+                $this->view->status = "error";
+            }
             $this->view->messageCount = $messageCount;
         } else {
             $this->view->messageCount = "Bad parameters";
@@ -325,11 +354,18 @@ class MessageController extends Zend_Controller_Action
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
         if($this->getRequest()->getParam('message_ids') && $this->getRequest()->getParam('action')) {
-
+            $messageCount = array();
+            $messageIds = explode(',', $this->getRequest()->getParam('message_ids'));
             $userId = Zend_Auth::getInstance()->getIdentity()->id;
             $messageTable = new Application_Model_DbTable_Message();
-            $messageCount = $messageTable->massTrash($this->getRequest()->getParam('message_ids'), $userId, $this->getRequest()->getParam('current_action'));
-
+            foreach($messageIds as $messageId) {
+                $messageCount[] = $messageTable->massTrash($messageId, $userId);
+            }
+            if(count($messageCount) > 0) {
+                $this->view->status = "success";
+            } else {
+                $this->view->status = "error";
+            }
             $this->view->messageCount = $messageCount;
         } else {
             $this->view->messageCount = "Bad parameters";
@@ -342,11 +378,42 @@ class MessageController extends Zend_Controller_Action
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
         if($this->getRequest()->getParam('message_ids') && $this->getRequest()->getParam('action')) {
-
+            $messageCount = array();
+            $messageIds = explode(',', $this->getRequest()->getParam('message_ids'));
             $userId = Zend_Auth::getInstance()->getIdentity()->id;
             $messageTable = new Application_Model_DbTable_Message();
-            $messageCount = $messageTable->massArchive($this->getRequest()->getParam('message_ids'), $userId, $this->getRequest()->getParam('current_action'));
+            foreach($messageIds as $messageId) {
+                $messageCount[] = $messageTable->massArchive($messageId, $userId);
+            }
+            if(count($messageCount) > 0) {
+                $this->view->status = "success";
+            } else {
+                $this->view->status = "error";
+            }
+            $this->view->messageCount = $messageCount;
+        } else {
+            $this->view->messageCount = "Bad parameters";
+        }
 
+    }
+
+    public function massrestoreAction()
+    {
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        if($this->getRequest()->getParam('message_ids') && $this->getRequest()->getParam('action')) {
+            $messageCount = array();
+            $messageIds = explode(',', $this->getRequest()->getParam('message_ids'));
+            $userId = Zend_Auth::getInstance()->getIdentity()->id;
+            $messageTable = new Application_Model_DbTable_Message();
+            foreach($messageIds as $messageId) {
+                $messageCount[] = $messageTable->massRestore($messageId, $userId);
+            }
+            if(count($messageCount) > 0) {
+                $this->view->status = "success";
+            } else {
+                $this->view->status = "error";
+            }
             $this->view->messageCount = $messageCount;
         } else {
             $this->view->messageCount = "Bad parameters";

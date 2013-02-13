@@ -54,7 +54,7 @@ $controllerName = $front->getRequest()->getControllerName();
                 </div><!--End signInButton-->
 
                 <div class="signInBox">
-                    <label class="title"><?php echo $this->translate("login or email") ?>:</label>
+                    <label class="title"><?php echo $this->translate("login or email:") ?></label>
                     <?php echo $this->login['username'] ?>
                     <div class="loginRemember clearfix">
                         <span class="checkboxBox"><?php echo $this->login['remember'] ?></span>
@@ -62,14 +62,22 @@ $controllerName = $front->getRequest()->getControllerName();
                     </div><!--End loginRemember-->
                 </div><!--End signInBox-->
                     <div class="signInBox">
-                        <label class="title"><?php echo $this->translate("password") ?>:</label>
+                        <label class="title"><?php echo $this->translate("password:") ?></label>
                         <?php echo$this->login['password'] ?>
-                        <a href="<?php echo$this->baseUrl()?>#"><?php echo $this->translate("forgot your password")?>?</a>
+                        <a href="<?php echo$this->baseUrl()?>/user/recovery"><?php echo $this->translate("forgot your password?")?></a>
                     </div><!--End signInBox-->
                 </form>
             </div>
             <!-- END /LOGIN -->
         </div><!--End header-->
+
+        <ul class="underHeaderLang">
+
+
+            <li><a href="<?php echo $this->getHelper('baseUrl')->setBaseUrl('/ja')->baseUrl(substr($_SERVER["REQUEST_URI"], 3));?>"><span class = "language japanese"></span></a></li>
+            <li><a href="<?php echo $this->getHelper('baseUrl')->setBaseUrl('/zh')->baseUrl(substr($_SERVER["REQUEST_URI"], 3));?>"><span class = "language chinese"></span></a></li>
+            <li><a href="<?php echo $this->getHelper('baseUrl')->setBaseUrl('/en')->baseUrl(substr($_SERVER["REQUEST_URI"], 3));?>"><span class = "language english"></span></a></li>
+        </ul>
 
         <div class="alertBlock">
 
@@ -80,8 +88,58 @@ $controllerName = $front->getRequest()->getControllerName();
                 <?php echo $this->flashMessages();?>
             </div><!--End messages-->
 
-              <?php  echo $this->layout()->content;?>
 
+
+            <div class="homeRightCol regBlock">
+
+                <h2 class="strictFont"><?php echo $this->translate("register") ?></h2>
+
+                <div id="registrationFormHolder">
+                    <form id="signUp" action="<?php echo $this->baseUrl()?>/user/registration/" name="signUp" method="post">
+
+                        <div class='memberButtons clearfix'>
+                            <?php echo $this->reg['type'];?>
+                        </div>
+                        <div class="formRow clearfix">
+                            <?php echo $this->reg['firstname'];?>
+                        </div><!--End formRow-->
+                        <div class="formRow clearfix">
+                            <?php echo $this->reg['lastname'];?>
+                        </div><!--End formRow-->
+                        <div class="formRow radio clearfix">
+                            <?php echo $this->reg['gender'];?>
+                        </div><!--End formRow-->
+                        <div class="formRow clearfix">
+                            <?php echo $this->reg['username'];?>
+                        </div><!--End formRow-->
+                        <div class="formRow clearfix">
+                            <?php echo $this->reg['email'];?>
+                        </div><!--End formRow-->
+                        <div class="formRow clearfix">
+                            <?php echo $this->reg['password'];?>
+                        </div><!--End formRow-->
+                        <div class="formRow clearfix">
+                            <?php echo $this->reg['password2'];?>
+                        </div><!--End formRow-->
+                        <div class="formRow buttonRow clearfix">
+                            <div class="socialIcons clearfix">
+                                <a href="#" title="Follow Us on Facebook" class="facebook" target="_blank"></a>
+                                <a href="#" title="Follow Us on Twitter" class="twitter" target="_blank"></a>
+                                <a href="#" title="Follow Us on Linked In" class="linkedin" target="_blank"></a>
+                            </div><!--End socialIcons-->
+                            <?php echo $this->reg['signup'];?>
+                        </div><!--End formRow-->
+                    </form>
+
+                </div><!--End registrationFormHolder-->
+
+            </div><!--End homeRightCol-->
+            <div class="homeLeftCol">
+
+                <?php  echo $this->layout()->content;?>
+
+
+            </div><!--End homeLeftCol-->
 
         </div><!--End content-->
 
@@ -99,7 +157,7 @@ $controllerName = $front->getRequest()->getControllerName();
             <li><a href="<?php echo $this->baseUrl() ?>/help.html"><?php echo $this->translate('contact us')?></a></li>
             <li><a href="<?php echo $this->baseUrl() ?>/policy.html"><?php echo $this->translate('privacy policy')?></a></li>
             <li><a href="<?php echo $this->baseUrl() ?>/help.html"><?php echo $this->translate('terms and conditions')?></a></li>
-                <ul>
+                </ul>
     </div><!--End copyright-->
 </div><!--End footer-->
 

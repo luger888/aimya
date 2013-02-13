@@ -33,11 +33,13 @@ body {
 
 #logo {
     float: left;
-    background-image: url('../images/logo/home-logo.png');
-    width: 196px;
-    height: 61px;
+    background-image: url('../images/logo/aimya_logo_main.png');
+    width: 100px;
+    height: 73px;
     display: block;
-    margin-top: 15px;
+    margin-top: 5px;
+    position: relative;
+    right: 117px;
 }
 
 #loginFormHolder {
@@ -110,15 +112,16 @@ input.btnLogin {
 
 .loginRemember .checkboxBox {
     float: left;
+
 }
 
 .loginRemember label {
+    color: #D0E4A0;
     float: left;
     font-size: 11px;
     line-height: 14px;
-    color: #d0e4a0;
-    text-decoration: none;
     padding-left: 6px;
+    text-decoration: none;
 }
 
 
@@ -139,7 +142,30 @@ input.btnLogin {
     position: relative;
     margin-bottom: 3px;
 }
+.underHeaderLang{
+    float:right;
+}
+.underHeaderLang  li{
+    list-style: none;
+    float:left;
+}
+.underHeaderLang  li .language{
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    padding: 0px 1px 0px 1px;
+    margin-top: 6px;
+}
 
+.underHeaderLang li .language.english{
+    background: url('../images/icons/lang/english.png') no-repeat 0 2px;
+}
+.underHeaderLang li .language.chinese{
+    background: url('../images/icons/lang/chinese.png') no-repeat 0 2px;
+}
+.underHeaderLang li .language.japanese{
+    background: url('../images/icons/lang/japanese.png') no-repeat 0 2px;
+}
 /*=================================================
   Footer
 =================================================*/
@@ -407,10 +433,29 @@ input.btnLogin {
     left: 1px !important;
     opacity: 1 !important;
     position: relative;
-    top: -16px !important;
     width: 12px;
 }
+.alert.success{
+    color:#537e6a !important;
+    background-color: #cce8bf !important;
+    border: 1px solid #a0c58e !important;
+}
 
+.alert.success .flash-success{
+    font: 700 11px Arial !important;
+    color: #315b47 !important;
+}
+.alert .close {
+    line-height: 20px;
+    position: relative;
+    width:12px;
+    height: 12px;
+    opacity: 1 !important;
+    float:right;
+}
+.alert.success .close {
+    background: url('../img/design/accountLayout/glyphicons/alertClose.png') no-repeat 33% 0;
+}
 .footerNav{
     float:right;
 

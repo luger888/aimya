@@ -51,20 +51,12 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
         return $data->query()->fetch();
     }
 
-    public function getLastId()
-    {
-        $data = $this->select()
-            ->from($this->_name, array('MAX(id)'));
-
-        return $data->query()->fetch();
-    }
-
     public function getPayKeyFromOrder($subscriptionId)
     {
         $subscriptionId = (int)$subscriptionId;
 
         $data = $this->select()
-            ->from($this->_name, array('pay_key'))
+            ->from($this->_name, array('pay_key', 'user_id'))
             ->where('id=?', $subscriptionId);
 
         return $data->query()->fetch();
@@ -126,7 +118,7 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
     public function getLatestSubscription($user_id)
     {
           $data = $this->select()
-                ->from($this->_name, array(new Zend_Db_Expr('max(created_at) as maxId')))
+                ->from($this->_name, array('id', 'aimya_profit', 'user_id', new Zend_Db_Expr('max(active_to) as maxId')))
                 ->where('user_id =?', $user_id)
                 ->where('status =?', 'paid');
         return $data->query()->fetch();
@@ -172,33 +164,42 @@ class Application_Model_DbTable_Subscriptions extends Application_Model_DbTable_
         return $data->query()->fetch();
     }
 
-    public function updateSubscriptionStatus($userId) {
+    public function updateSubscriptionStatus($subscriptionId) {
 
         $data = array(
             'status' => 'paid',
             'updated_at' => date('Y-m-d H:i:s')
         );
 
-        $where[] = $this->getAdapter()->quoteInto('user_id=?', $userId);;
+        //$where[] = $this->getAdapter()->quoteInto('user_id=?', (int)$userId);
+        $where[] = $this->getAdapter()->quoteInto('id=?', (int)$subscriptionId);
 
-        $this->update($data , $where);
+        return $this->update($data , $where);
     }
 
-    public function refundSubscription($subscriptionId, $activeTo, $aimyaProfit)
+    public function refundSubscription($subscriptionId, $userId, $activeTo, $aimyaProfit)
     {
-
-        $userId = Zend_Auth::getInstance()->getIdentity()->id;
         $data = array(
             'aimya_profit' => $aimyaProfit,
             'active_to' => $activeTo,
             'updated_at' => date('Y-m-d H:i:s')
         );
 
-        $where[] = $this->getAdapter()->quoteInto('id=?', $subscriptionId);
-        $where[] = $this->getAdapter()->quoteInto('user_id=?', $userId);
+        $where[] = $this->getAdapter()->quoteInto('id=?', (int)$subscriptionId);
+        $where[] = $this->getAdapter()->quoteInto('user_id=?', (int)$userId);
 
 
         return $this->update($data, $where);
+    }
+
+    public function getLastSubscriptionId()
+    {
+
+        $data = $this->select()
+            ->from($this->_name, array('maxId' => 'max(id)'));
+
+        $result = $data->query()->fetch();
+        return $result['maxId'];
     }
 
 }

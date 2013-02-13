@@ -29,13 +29,15 @@ class Application_Form_ServiceDetails extends Zend_Form
         } else {
             $serviceType->setValue(1);
         }
+        $lesson_category = new Aimya_Form_Element_SelectAttribs('lesson_category');
 
-        $lesson_category = new Zend_Form_Element_Select('lesson_category');
         $lesson_category->setAttrib('id', 'lesson_categoryInput')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
+
+        $lesson_category->addOption('', ' Specify your area of expertise',array());
         foreach ($lessonCategories as  $value) {
-            $lesson_category->addMultiOption($value['title'], $value['title']);
+            $lesson_category->addOption($value['title'], $value['title']);
         }
 
         $subcategory = new Zend_Form_Element_Text('subcategory');
@@ -69,22 +71,28 @@ class Application_Form_ServiceDetails extends Zend_Form
             ->setDecorators($this->basicDecorators)
             -> setAttrib('rows', '7');
 
+        $descriptionReq = new Zend_Form_Element_Textarea('description');
+        $descriptionReq->setLabel('Specify an area you need help with')
+            ->setAttrib('id', 'descriptionInput')
+            ->addFilters($this->basicFilters)
+            ->setDecorators($this->basicDecorators)
+            -> setAttrib('rows', '7');
         $submit = new Zend_Form_Element_Submit('saveService');
-        $submit ->setLabel('Save')
+        $submit ->setLabel('save')
             ->setAttrib('id', 'saveService')
            // ->setAttrib('onClick', 'validateService();return false;')
             ->setAttrib('class', 'button-2 save')
             ->setDecorators($this->basicDecorators);
 
         $submitReq = new Zend_Form_Element_Submit('saveService');
-        $submitReq ->setLabel('Save')
+        $submitReq ->setLabel('save')
             ->setAttrib('id', 'saveRequestedService')
             ->setAttrib('class', 'button-2 save')
 
             ->setDecorators($this->basicDecorators);
 
         if($action == 'requestservices') {
-            $this->addElements(array($serviceType, $lesson_category, $subcategory, $submitReq));
+            $this->addElements(array($serviceType, $lesson_category, $subcategory, $descriptionReq, $submitReq));
         }
         if($action == 'services') {
             $this->addElements(array($serviceType, $lesson_category, $subcategory, $rate, $duration, $description, $submit));

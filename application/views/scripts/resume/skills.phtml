@@ -17,10 +17,10 @@
                                 <div class="headRow clearfix">
                                     <h1>skill:</h1>
 
-                                    <div class="buttonRow clearfix">
-                                        <input type="button" value="edit" class="button-2 edit"
+                                    <div class="buttonRow">
+                                        <input type="button" value="<?php echo $this->translate('edit');?>" class="button-2 edit"
                                                onclick="editResumeItem(this,'skill');">
-                                        <input type="button" value="delete" class="button-2 delete"
+                                        <input type="button" value="<?php echo $this->translate('delete');?>" class="button-2 delete"
                                                onclick="deleteResumeItem(this, 'skill')";>
                                         <input type="hidden" value="<?php echo $value['id'];?>">
                                     </div>
@@ -31,7 +31,17 @@
                                 <?php if (isset($value['certificate'])) {
                                 echo '<div class="resumeItemCertificates clearfix">Certificates:';
                                 foreach ($value['certificate'] as $index => $cert) {
-                                    echo '<div><a class="certificate" href="../' . $value['certificateUrl'][$index] . '/' . $cert . '">' . $cert . '</a></div>';
+
+                                    $googleDocViewer ='https://docs.google.com/viewer?url=' ;
+                                    $href ='http://aimya.com/' . substr($value['certificateUrl'][$index],2) . '/' . $cert ;
+                                    $extension = substr($cert,-4);
+                                       if($extension == '.doc' || $extension == '.pdf'){
+                                           echo '<div><a class="certificate" target="_blank" href="'.$googleDocViewer.$href.'">' . $cert . '</a></div>';
+                                       }else{
+                                           echo '<div><a class="certificate" href="../' . $value['certificateUrl'][$index] . '/' . $cert . '">' . $cert . '</a></div>';
+                                       }
+
+
                                 }
                                 echo '</div>';
                             }
@@ -43,14 +53,13 @@
                     <?php endforeach;
                 echo '</div>
                 <div class="buttonsRow clearfix">
-                    <input type="button" class="button-2 add addResumeItem floatRight" value="add skill"
+                    <input type="button" class="button-2 add addResumeItem floatRight" value="'. $this->translate('add skill').'"
                    onclick="addResumeItem();">
                 </div>';
             } else {
                 echo '<script>addResumeItem()</script>';
             }
             ?>
-        </div>
             <div class="resumeItemForm">
                 <h1>Add new skill:</h1>
 
@@ -62,11 +71,13 @@
                 <div class="uploadWrapper">
 
                     <input id="file_uploadskill" type="file" name="file_upload"/>
-                    <input type="button" value="save" class="button-2 save floatRight"
+                    <input type="button" value="<?php echo $this->translate('save');?>" class="button-2 save floatRight"
                            onclick="saveResumeItem('skill');">
                 </div>
-                <div id="queue"></div>
+                <div id="queueskill"></div>
             </div>
+        </div>
+
         </div>
         <?php echo $this->partial('partials/resumeFooter.phtml');?>
 

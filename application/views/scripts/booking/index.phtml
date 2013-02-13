@@ -8,6 +8,9 @@
     float: right;
     margin-right: 2px;
     cursor:pointer;
+    height:19px;
+    padding: 0 5px;
+    line-height: 19px;
 }
 .isTeacher {
     display: none;
@@ -80,7 +83,10 @@ table:not(.fc-agenda-days) .fc-today {
 ul li {
     text-decoration: none;
 }
-
+.mainCalendar .button.book{
+    margin-bottom: 5px;
+    padding: 0 26px;
+}
 #dialog-form .mainBooking {
     padding: 18px 29px 0 18px
 }
@@ -272,7 +278,7 @@ ul li {
                 <div><?php echo $this->bookingForm->started_at_time;?></div>
             </div>
             <div class="formRow clearfix">
-                <div class="label">Focus Name:</div>
+                <div class="label">Session Focus:</div>
                 <div><?php echo $this->bookingForm->focus_name;?></div>
             </div>
             <div class="formRow clearfix">
@@ -378,7 +384,20 @@ jQuery(document).ready(function () {
                         var start = msg.booking[c].started_at;
 
                         start = start.replace(" ","T");
-                        start = new Date(start);
+
+                        var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+
+                      if(is_chrome){
+                          var MS_PER_MINUTE = 60000;
+                          start = new Date(start);
+                          var offset =  start.getTimezoneOffset()*MS_PER_MINUTE;
+                          start = new Date(start - (offset)*-1);
+
+                      }else{
+
+                          start = new Date(start);
+
+                      }
                         var sender_utc = parseFloat(msg.booking[c].creator_tz.replace(':',"."));
                         var recipient_utc = parseFloat(msg.timezone.replace(':',"."));
                         var utc = recipient_utc - sender_utc;
@@ -387,16 +406,17 @@ jQuery(document).ready(function () {
 //                        var utc =  msg.booking[c].creator_tz.getTime() + ( msg.booking[c].creator_tz.getTimezoneOffset() * 60000);
 
                         if (msg.booking[c].recipient_id == msg.user_id) {
-
-
                             var unixStamp = Math.round((start).getTime() / 1000);
-
                             var dateTime = unixStamp+utc*3600;
+                             dateTime = new Date(dateTime*1000);
+
                         }else{
-                            dateTime = msg.booking[c].started_at;
+                            dateTime = msg.booking[c].started_at;//bug
+                            dateTime = dateTime.replace(/-/g,'/');
+
+
+
                         }
-
-
                         events.push({
                             title:msg.booking[c].focus_name,
                             start:dateTime,
@@ -469,30 +489,44 @@ jQuery(document).ready(function () {
                     feedbackActivity ='passive'
                 }
                 element.find(".fc-event-head").append('<div class ="fc-event-focusName">Focus name: "' + event.title + '"</div>');
-                if(event.booking_status == '1' && event.is_cancel =='0'){
-                    element.find(".fc-event-head").append('<a class ="fc-event-cancel" onclick ="cancelBooking(this);">X</a>');
-                    element.find(".fc-event-head").append('<input type = "hidden" value = '+ event.booking_id +'>');
-                    if(event.user_id == event.recipient_id){
-                        element.find(".fc-event-head").append('<input type = "hidden" value = '+ event.sender_id +'>');
-                    }else{
-                        element.find(".fc-event-head").append('<input type = "hidden" value = '+ event.recipient_id +'>');
-                    }
-                }
+
 
                 element.find(".fc-event-head").append('<div class = "fc-event-rate">Rate: $' + event.rate + ' / ' + duration + '</div>');
                 element.find(".fc-event-content").append('<div class = "fc-event-content-alt floatRight"><span class = "videoRec '+ colorAlt+' '+videoActivity+'"></span> <span class = "feedback '+ colorAlt+' '+feedbackActivity+'"></span><span class = "notes '+ colorAlt+' '+notesActivity+'"></span></div>');
                 element.find(".fc-event-content").append('<div class = "fc-event-content-description"> Description: ' + event.add_info + '</div>');
                 element.find(".fc-event-content").append('<div class = "fc-event-content-requested">Request from: ' + sender + ' , to:  ' + recipient + '</div>');
+                if(event.booking_status == '1' && event.is_cancel =='0' && startLesson>current){
+                    element.find(".fc-event-content").append('<input type="button" value="Cancel" class ="button fc-event-cancel" onclick ="cancelBooking(this);">');
+                    element.find(".fc-event-content").append('<input type = "hidden" value = '+ event.booking_id +'>');
+                    if(event.user_id == event.recipient_id){
+                        element.find(".fc-event-content").append('<input type = "hidden" value = '+ event.sender_id +'>');
+                    }else{
+                        element.find(".fc-event-content").append('<input type = "hidden" value = '+ event.recipient_id +'>');
+                    }
+                }
+                var startLesson = event.started_at;
+                //startLesson = startLesson.replace(" ","T");
+               if(typeof(startLesson) =='string'){
+                    startLesson = new Date(startLesson);
+               }
 
-                if (event.booking_status == '0' && event.user_id == event.recipient_id) {
+                var current = new Date();
+
+                if (event.booking_status == '0' && event.user_id == event.recipient_id && startLesson>current) {
+
                     element.find(".fc-event-content").append('<input type = "button"  id ="rejectBooking" onclick="rejectBooking(this)" value = "Reject"  class="fc-event-content-reject fc-button reject">');
                     element.find(".fc-event-content").append('<input type = "button" id ="confirmBooking" onclick="confirmBooking(this)" value = "Confirm" class = "fc-event-content-confirm fc-button">');
                     element.find(".fc-event-content").append('<input type = "hidden" id = "booking_id"  value = ' + event.booking_id + ' >');
                     element.find(".fc-event-content").append('<input type = "hidden" id = "sender_id"  value = ' + event.sender_id + ' >');
-                } else if (event.booking_status == '1') {
+                } else if (event.booking_status == '1' && startLesson>current) {
+
                     element.find(".fc-event-content").append('<div class="fc-event-content-approve"><span>Approved</span></div>');
-                } else {
+                } else if(event.booking_status == '0' && startLesson>current) {
+
                     element.find(".fc-event-content").append('<div class="fc-event-content-approve pending"><span>Pending</span></div>');
+                }else{
+
+                    element.find(".fc-event-content").append('<div class="fc-event-content-approve pending"><span>Expired</span></div>');
                 }
                 if(event.user_id != event.is_cancel && event.is_cancel != '0'){
                         element.find(".fc-event-content").append('<input type = "button" id ="confirmCancellation" onclick="confirmCancellation(this)" value = "Confirm Cancellation" class = "button cancellation">');
@@ -501,12 +535,10 @@ jQuery(document).ready(function () {
                 }
             }
         }
-
-
     });
 
 //FORM DIALOG JQUERY
-    $('.fc-header tbody').append('<tr><td><input type="button" id="bookLesson" class = "button-2 book" value="book lesson"><td></tr>');
+    $('.fc-header tbody').append('<tr><td><input type="button" id="bookLesson" class = "button book" value="book lesson"><td></tr>');
 
     $("#dialog-form").dialog({
         autoOpen:false,
@@ -520,9 +552,6 @@ jQuery(document).ready(function () {
     });
     var oldDateObj = new Date();
     var today = new Date(oldDateObj.getTime() + 10*60000);
-    $('#started_at').datepicker({
-        minDate: today
-    });
 
 
 
@@ -549,10 +578,18 @@ jQuery(document).ready(function () {
 
             },
             function (response) {
-
-                if(response.success == 1){
+                if(response.fail == 1){
+                    alert('You cannot double book!');
+                    jQuery('.loadingIcon').remove();
+                }
+                if(response.success == 1 ){
                     window.location.reload();
-                }else{
+
+                }
+                else if(response.blocked == 1){
+                    jQuery('.loadingIcon').remove();
+                    alert('You have been blocked. You can\'t book him! ')
+                }else if(response.success == 0 && response.fail !=1){
                     jQuery('.loadingIcon').remove();
                     $('#booking').find('.error').remove();
 
@@ -583,6 +620,17 @@ jQuery(document).ready(function () {
         return false;
     });
     $('#bookLesson').click(function () {
+        $.post(
+
+            pathName + "/user/timezone/0/controller%3D%3Euser/1/action%3D%3Etimezone", {
+                "time": 1
+            },
+            function (response) {
+                $('#started_at').datepicker({
+                    minDate: response.time
+                });
+            });
+
         $('#booking').find('.error').remove();
         jQuery('#booking').css('display', 'block');
 
@@ -631,7 +679,8 @@ function rejectBooking(e) {
     $.post(
 
         pathName + "/booking/reject/0/controller%3D%3Ebooking/1/action%3D%3Ereject", {
-            "booking_id":$(e).nextAll('#booking_id:first').val()
+            "booking_id":$(e).nextAll('#booking_id:first').val(),
+            "sender_id":$(e).nextAll('#sender_id:first').val()
         },
         function (response) {
             e.parentNode.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode.parentNode);
@@ -691,7 +740,7 @@ function cancelBooking(e) {
                             'recipient_id':recipient_id
                         },
                         success: function(response){
-                            //window.location.reload();
+                            window.location.reload();
                         }
                     });
                 },

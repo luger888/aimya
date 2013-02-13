@@ -1,0 +1,33 @@
+<?php $subscriptionForm = $this->subscriptionForm; ?>
+<div class="paymentsTab mainContainer clearfix">
+    <div class="messageContent clearfix">
+        <div class="shadowSeparator clearfix">
+            <div class="shadowSeparatorBox clearfix">
+                <form action="<?php echo $this->baseUrl() . "/payment/subscribe"?>" name="subscribe" method="post">
+                    <div class="leftCol">
+                        <h1><?php echo $this->translate('upgrade your account to teacher:'); ?></h1>
+                        <div class="formRow clearfix">
+                            <!--<label class="title"><?php /*echo $this->translate('Date from:'); */?></label>
+                            <div class="formElem"><?php /*echo $subscriptionForm->date_from; */?></div>-->
+                            <label class="title"><?php echo $this->translate('Period:'); ?></label>
+                            <div class="formRow"><?php echo $subscriptionForm->period; ?></div>
+                            <div class="formRow"><?php echo $this->translate('By subscribing for 8 months period, you\'ll get 4 additional months for free'); ?></div>
+                        </div><!--End formRow-->
+                    </div>
+
+                    <div class="buttonRow floatRight clearfix"><?php echo $subscriptionForm->subscribe; ?>
+                </form>
+
+            </div><!--End shadowSeparatorBox-->
+        </div><!--End shadowSeparator-->
+    </div>
+</div><!--End featuresTab -->
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $(".more").shorten({
+            "showChars" : 200
+        });
+
+    });
+</script>

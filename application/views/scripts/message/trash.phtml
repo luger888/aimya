@@ -4,10 +4,11 @@
 <div class="messageTab">
     <div class="shadowSeparator clearfix">
         <div class="shadowSeparatorBox clearfix">
-            <div class="messageButtons trashBox clearfix">
-                <span class="button-2 archived" onclick="document.location='/message/send/'">Move to Archived</span>
-                <span class="button-2 inbox" onclick="document.location='/message/send/'">Move to Inbox</span>
-                <span class="button-2 delete" onclick="document.location='/message/send/'">Delete</span>
+            <div class="messageButtons clearfix">
+                <a href="<?php echo $this->baseUrl() . '/message/send/'?>"><span class="button-2 createMessage"><?php echo $this->translate('create new') ?></span></a>
+<!--                <span class="button-2 delete" onclick="massDelete('--><?php //echo $action ?><!--', '--><?php //echo $this->baseUrl()?><!--')">--><?php //echo $this->translate('delete') ?><!--</span>-->
+                <span class="button-2 inbox" onclick="massRestore('<?php echo $action ?>', '<?php echo $this->baseUrl()?>')"><?php echo $this->translate('restore') ?></span>
+                <span class="button-2 archived" onclick="massArchive('<?php echo $action ?>', '<?php echo $this->baseUrl()?>')"><?php echo $this->translate('move to archived') ?></span>
             </div>
             <div class="userMessages">
                 <table class="">
@@ -36,8 +37,8 @@
 
                                     <div class = "rightMessageBlock">
                                         <span class = "messageTime">' . $time . '</span>
-                                        <a href="' . $this->baseUrl() . '/message/reply/message_id/' . $message['id'] . '/current_action/"' . $action . '><span class="messageReply"></span></a>
-                                        <a href="' . $this->baseUrl() . '/message/forward/message_id/' . $message['id'] . '/current_action/"' . $action . '><span class="messageForward"></span></a>
+                                        <a title="Reply" href="' . $this->baseUrl() . '/message/reply/message_id/' . $message['id'] . '/current_action/"' . $action . '><span class="messageReply"></span></a>
+                                        <a title="Forward" href="' . $this->baseUrl() . '/message/forward/message_id/' . $message['id'] . '/current_action/"' . $action . '><span class="messageForward"></span></a>
                                     </div>
 
 	                    </tr>

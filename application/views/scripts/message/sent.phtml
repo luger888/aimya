@@ -7,8 +7,8 @@
             <div class="shadowSeparatorBox clearfix">
                 <div class="messageButtons clearfix">
                     <div class="messageButtons clearfix">
-                        <span class="button-2 trash" onclick="massTrash('<?php echo $action ?>', '<?php echo $this->baseUrl()?>')">Move to Trash</span>
-                        <span class="button-2 archived" onclick="massArchive('<?php echo $action ?>', '<?php echo $this->baseUrl()?>')">Move to Archived</span>
+                        <span class="button-2 trash" onclick="massTrash('<?php echo $action ?>', '<?php echo $this->baseUrl()?>')"><?php echo $this->translate('move to trash');?></span>
+                        <span class="button-2 archived" onclick="massArchive('<?php echo $action ?>', '<?php echo $this->baseUrl()?>')"><?php echo $this->translate('move to archived');?></span>
                     </div>
                     <div class="userMessages">
                         <table class="">
@@ -38,12 +38,13 @@
 
                                     <div class = "rightMessageBlock">
                                         <span class = "messageTime">' . $time . '</span>
-                                        <a href="' . $this->baseUrl() . '/message/reply/message_id/' . $message['id'] . '/current_action/"'. $action .'><span class="messageReply"></span></a>
-                                        <a href="' . $this->baseUrl() . '/message/forward/message_id/' . $message['id'] . '/current_action/"'. $action .'><span class="messageForward"></span></a>
+
+                                        <a title="Forward" href="' . $this->baseUrl() . '/message/forward/message_id/' . $message['id'] . '/current_action/"'. $action .'><span class="messageForward"></span></a>
                                     </div>
 
 	                    </tr>
 	                    ';
+                                    //<a title="Reply" href="' . $this->baseUrl() . '/message/reply/message_id/' . $message['id'] . '/current_action/"'. $action .'><span class="messageReply"></span></a>
                                 }
 
                             }

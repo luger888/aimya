@@ -19,9 +19,11 @@ class Application_Model_Lesson
     public function createPresentationPath($lessonId)
     {
         $identityId = Zend_Auth::getInstance()->getIdentity()->id;
+        $lessonTable = new Application_Model_DbTable_Lesson();
+        $activeLesson = $lessonTable->checkAvailableLesson($identityId);
 
         $folderModel = new Application_Model_Folder();
-        $notePath = 'users/' . $identityId . '/' . $lessonId . '/presentation/';
+        $notePath = 'users/' . $activeLesson['creator_id'] . '/' . $lessonId . '/presentation/';
         $folderModel->createFolderChain($notePath, '/');
         return $notePath;
     }
@@ -62,7 +64,7 @@ class Application_Model_Lesson
 
         exec("/usr/local/bin/phpscr.sh $lessonId $port > /dev/null 2>/dev/null &", $result);
 
-        if($result == 0) {
+        if ($result == 0) {
             return true;
         } else {
             return false;
@@ -75,11 +77,15 @@ class Application_Model_Lesson
         return $result;
     }
 
-    public function startRecording($display, $path, $time)
+    public function startRecording($display, $path, $time, $teacherStream, $lessonId)
     {
         $seconds = $time * 60;
         $time = gmdate("H:i:s", $seconds);
-        exec("phase2_rec.sh $display $path $time > /dev/null 2>/dev/null &");
+        exec("phase2_rec.sh $display $path $time $lessonId > /dev/null 2>/dev/null &");
+        $res = exec("/usr/local/bin/phase2.1_rtmpdump.sh $teacherStream $path > /dev/null 2>/dev/null &");
+        $pathAudio = $path .'_audio';
+        $this->write($res . '<br>');
+        $this->write("/usr/local/bin/phase2.1_rtmpdump.sh $teacherStream $pathAudio > /dev/null 2>/dev/null &");
         return true;
     }
 
@@ -97,15 +103,29 @@ class Application_Model_Lesson
     public function getNotes($lessonId, $teacherId)
     {
         $notePath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'notes' . DIRECTORY_SEPARATOR . 'notes.txt';
-        $fileContent = file_get_contents($notePath);
-        return $fileContent;
+        if (file_exists($notePath) OR is_dir($notePath)) {
+            $fileContent = file_get_contents($notePath);
+            return $fileContent;
+        } else {
+            return false;
+        }
+
+
     }
 
-    public function getVideo($lessonId)
+    public function getVideo($lessonCreatorId, $id)
     {
-        $identityId = Zend_Auth::getInstance()->getIdentity()->id;
-        $notePath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $identityId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'notes' . DIRECTORY_SEPARATOR . 'notes.txt';
-
+        $path = '../../users/' . $lessonCreatorId . '/' . $id . '/video/video_lesson.flv';
+        $pathMkv = '../../users/' . $lessonCreatorId . '/' . $id . '/video/video_lesson.mkv';
+        if ((file_exists($path) OR is_dir($path))) {
+            if (!file_exists($pathMkv) OR !is_dir($pathMkv)) {
+                return $path;
+            } else {
+                return 2;
+            }
+        } else {
+            return false;
+        }
 
 
     }
@@ -211,7 +231,7 @@ class Application_Model_Lesson
             }
             $currentTimeUtc = strtotime($dateWithUTC); //currentTime + UTC of user to UNIX stamp
             $timeDifference = $starting_time - $currentTimeUtc;
-            if ($timeDifference <= $reserveSeconds && $timeDifference > 0) { //if difference between current time and starting is 10 minutes or less, but not less than 0
+            if ($timeDifference <= $reserveSeconds && $timeDifference > 0) { //if difference between starting time and current is 10 minutes or less, but not less than 0
                 $isOnline = 1;
 
                 if ($bookingTable->isTeacher($lesson['booking']['id'], $identity->id)) { //if user is a teacher in current lesson
@@ -245,7 +265,13 @@ class Application_Model_Lesson
                 }
 
             } else {
-                $lesson['booking']['waiting'] = 1;
+                if($timeDifference < 0){
+                    $lesson['booking']['expired'] = 1;
+                }else{
+                    $lesson['booking']['waiting'] = 1;
+                }
+
+
                 $isOnline = 0;
             }
 

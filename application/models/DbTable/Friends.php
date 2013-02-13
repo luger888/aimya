@@ -11,9 +11,9 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
 
         $row = $this->fetchAll(
             $this->select()
-                ->where($this->getAdapter()->quoteInto('sender_id=?' , $userId) . ' OR ' . $this->getAdapter()->quoteInto('friend_id=?' , $userId))
-                ->where('(' . $this->getAdapter()->quoteInto('sender_status=?' , 1) . ') OR (' . $this->getAdapter()->quoteInto('sender_status=?' , 2) . ')')
-                ->where('(' . $this->getAdapter()->quoteInto('recipient_status=?' , 1) . ') OR (' . $this->getAdapter()->quoteInto('recipient_status=?' , 2) . ')')
+                ->where($this->getAdapter()->quoteInto('sender_id=?', $userId) . ' OR ' . $this->getAdapter()->quoteInto('friend_id=?', $userId))
+                ->where('(' . $this->getAdapter()->quoteInto('sender_status=?', 1) . ') OR (' . $this->getAdapter()->quoteInto('sender_status=?', 2) . ')')
+                ->where('(' . $this->getAdapter()->quoteInto('recipient_status=?', 1) . ') OR (' . $this->getAdapter()->quoteInto('recipient_status=?', 2) . ')')
                 ->group('id')
         );
         if (!$row) {
@@ -26,18 +26,26 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
     {
 
         $friendField = $this->isInList($array['updateUserId']);
-        if($friendField) {
+
+        if ($friendField) {
 
             $where = $this->getAdapter()->quoteInto('id=?', $friendField['id']);
 
-            if($friendField['sender_id'] == $user_id) {
-                $data = array('sender_status'=> $array['status'], 'updated_at' => date('Y-m-d H:i:s'));
+            if ($friendField['sender_id'] == $user_id) {
+                $data = array('sender_status' => $array['status'], 'updated_at' => date('Y-m-d H:i:s'));
             } else {
-                $data = array('recipient_status'=> $array['status'], 'updated_at' => date('Y-m-d H:i:s'));
+                $data = array('recipient_status' => $array['status'], 'updated_at' => date('Y-m-d H:i:s'));
             }
 
             $this->update($data, $where);
         }
+    }
+
+    public function deleteFriend($array = array())
+    {
+        $friendField = $this->isInList($array['updateUserId']);
+        $where = $this->getAdapter()->quoteInto('id=?', $friendField['id']);
+        $this->delete($where);
     }
 
     public function isFriend($friendId)
@@ -46,8 +54,8 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
 
         $data = $this->select()
             ->from($this->_name)
-            ->where('(' . $this->getAdapter()->quoteInto('sender_id=?' , $userId) . ' AND ' . $this->getAdapter()->quoteInto('friend_id=?' , $friendId) . ') OR (' . $this->getAdapter()->quoteInto('sender_id=?' , $friendId) . ' AND ' . $this->getAdapter()->quoteInto('friend_id=?' , $userId) . ')')
-            ->where('(' . $this->getAdapter()->quoteInto('sender_status=?' , 1) . ') AND (' . $this->getAdapter()->quoteInto('recipient_status=?' , 1) . ')');
+            ->where('(' . $this->getAdapter()->quoteInto('sender_id=?', $userId) . ' AND ' . $this->getAdapter()->quoteInto('friend_id=?', $friendId) . ') OR (' . $this->getAdapter()->quoteInto('sender_id=?', $friendId) . ' AND ' . $this->getAdapter()->quoteInto('friend_id=?', $userId) . ')')
+            ->where('(' . $this->getAdapter()->quoteInto('sender_status=?', 1) . ') AND (' . $this->getAdapter()->quoteInto('recipient_status=?', 1) . ')');
         $result = $data->query()->fetch();
 
         if ($result) {
@@ -55,6 +63,25 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
         } else {
             return false;
         }
+
+    }
+
+    public function isBlocked($friendId)
+    {
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+
+        $data = $this->select()
+            ->from($this->_name)
+            ->where('(' . $this->getAdapter()->quoteInto('sender_id=?', $userId) . ' AND ' . $this->getAdapter()->quoteInto('friend_id=?', $friendId) . ') OR (' . $this->getAdapter()->quoteInto('sender_id=?', $friendId) . ' AND ' . $this->getAdapter()->quoteInto('friend_id=?', $userId) . ')');
+        $result = $data->query()->fetch();
+        if ($result) {
+            if (($result['sender_id'] == $userId && $result['recipient_status'] == 2) || ($result['friend_id'] == $userId && $result['sender_status'] == 2)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return true;
 
     }
 
@@ -64,7 +91,7 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
 
         $data = $this->select()
             ->from($this->_name)
-            ->where($this->getAdapter()->quoteInto('sender_id=?' , $userId) . ' AND ' . $this->getAdapter()->quoteInto('friend_id=?' , $friendId) . ' AND ' . $this->getAdapter()->quoteInto('sender_status=?' , 1) . ' AND ' . $this->getAdapter()->quoteInto('recipient_status=?' , 0));
+            ->where($this->getAdapter()->quoteInto('sender_id=?', $userId) . ' AND ' . $this->getAdapter()->quoteInto('friend_id=?', $friendId) . ' AND ' . $this->getAdapter()->quoteInto('sender_status=?', 1) . ' AND ' . $this->getAdapter()->quoteInto('recipient_status=?', 0));
         $result = $data->query()->fetch();
 
         if ($result) {
@@ -75,7 +102,8 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
 
     }
 
-    public function addFriend($friendId) {
+    public function addFriend($friendId, $message)
+    {
         $status = false;
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
 
@@ -85,8 +113,8 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
 
         $user = $userTable->getItem($userId);
         $accountPage = Zend_Controller_Front::getInstance()->getBaseUrl() . "/user/{$userId}";
-        if($isInList){
-            if($isInList['recipient_status'] == 0 && $isInList['sender_status'] == 1) {
+        if ($isInList) {
+            if ($isInList['recipient_status'] == 0 && $isInList['sender_status'] == 1) {
                 $where = $this->getAdapter()->quoteInto('id = ?', (int)$isInList['id']);
                 $data = array(
                     'recipient_status' => 1,
@@ -98,9 +126,14 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
                 $data = array(
                     'sender_id' => $userId,
                     'recipient_id' => $friendId,
-                    'content' => 'Hello ' . $friend["username"] . ', I have approved your request. My Account page is <a href="' . $accountPage . '">' . $user["username"] . '</a>' ,
+                    'content' => $message . ' My Account page is <a href="' . $accountPage . '">' . $user["username"] . '</a>',
                     'subject' => "Add to Friend Request",
                 );
+
+                if ($message == '') {
+                    $data['content'] = 'Hello ' . $friend['username'] . ', I have approved your request. My Account page is <a href="' . $accountPage . '">' . $userId . '</a>';
+                }
+
                 $messageTable->sendMessage($data);
 
                 if ($status) {
@@ -126,11 +159,11 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
 
             $messageTable = new Application_Model_DbTable_Message();
             $data = array(
-                        'sender_id' => $userId,
-                        'recipient_id' => $friendId,
-                        'content' => 'Hello ' . $friend["username"] . ', I\'d like add you to my account. My Account page is <a href="' . $accountPage . '">' . $user["username"] . '</a>' ,
-                        'subject' => "Add to Friend Request",
-                    );
+                'sender_id' => $userId,
+                'recipient_id' => $friendId,
+                'content' => $message . ' My Account page is <a href="' . $accountPage . '">' . $user["username"] . '</a>. Or click <a href="' . Zend_Controller_Front::getInstance()->getBaseUrl() . '/friends/send/?friend_id=' . $userId . '&url=' . $accountPage . '">here</a> to add this user to your account',
+                'subject' => "Add to Friend Request",
+            );
             $messageTable->sendMessage($data);
             if ($status) {
                 return 'request';
@@ -140,32 +173,56 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
         }
     }
 
-    public function isInList($friendId) {
+    public function isInList($friendId)
+    {
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
 
         $data = $this->select()
             ->from($this->_name)
-            ->where('(' . $this->getAdapter()->quoteInto('sender_id=?' , $userId) . ' AND ' . $this->getAdapter()->quoteInto('friend_id=?' , $friendId) . ') OR (' . $this->getAdapter()->quoteInto('sender_id=?' , $friendId) . ' AND ' . $this->getAdapter()->quoteInto('friend_id=?' , $userId) . ')');
+            ->where('(' . $this->getAdapter()->quoteInto('sender_id=?', $userId) . ' AND ' . $this->getAdapter()->quoteInto('friend_id=?', $friendId) . ') OR (' . $this->getAdapter()->quoteInto('sender_id=?', $friendId) . ' AND ' . $this->getAdapter()->quoteInto('friend_id=?', $userId) . ')');
         $result = $data->query()->fetch();
 
         return $result;
     }
 
-    public function getJoinedPeers($perion = 'total') {
+    public function getJoinedPeers($perion = 'total')
+    {
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
 
         $data = $this->getAdapter()->select()
             ->from($this->_name, array('peers_count' => 'COUNT(updated_at)'))
-            ->where('(' . $this->getAdapter()->quoteInto('sender_id=?' , $userId) . ' OR ' . $this->getAdapter()->quoteInto('friend_id=?' , $userId) . ')')
-            ->where($this->getAdapter()->quoteInto('sender_status=?' , 1))
-            ->where($this->getAdapter()->quoteInto('recipient_status=?' , 1));
-            if($perion != 'total') {
-                $data->where('(updated_at >= DATE_SUB(NOW(), INTERVAL 1 MONTH) AND updated_at < NOW())');
-                /*} else {
-                    $data->where('YEAR(updated_at) = YEAR(CURRENT_DATE)');
-                }*/
-            }
+            ->where('(' . $this->getAdapter()->quoteInto('sender_id=?', $userId) . ' OR ' . $this->getAdapter()->quoteInto('friend_id=?', $userId) . ')')
+            ->where($this->getAdapter()->quoteInto('sender_status=?', 1))
+            ->where($this->getAdapter()->quoteInto('recipient_status=?', 1));
+        if ($perion != 'total') {
+            $data->where('(updated_at >= DATE_SUB(NOW(), INTERVAL 1 MONTH) AND updated_at < NOW())');
+            /*} else {
+                $data->where('YEAR(updated_at) = YEAR(CURRENT_DATE)');
+            }*/
+        }
 
         return $data->query()->fetch();
+    }
+
+    public function getActiveFriends()
+    {
+        $userId = (int)Zend_Auth::getInstance()->getIdentity()->id;
+
+        $data = $this->getAdapter()->select()
+            ->from($this->_name)
+            ->where($this->getAdapter()->quoteInto('sender_id=?', $userId) . ' OR ' . $this->getAdapter()->quoteInto('friend_id=?', $userId))
+            ->where($this->getAdapter()->quoteInto('sender_status=?', 1))
+            ->where($this->getAdapter()->quoteInto('recipient_status=?', 1))
+            ->group('id');
+        $result = $data->query()->fetchAll();
+
+        $userTable = new Application_Model_DbTable_Users();
+        $friends = array();
+        foreach ($result as $index => $value) {
+            $friendId = ($userId == $value['friend_id']) ? $value['sender_id'] : $value['friend_id'];
+            $friends[$index] = $userTable->getItem($friendId);
+        }
+
+        return $friends;
     }
 }

@@ -70,12 +70,19 @@ class Application_Form_Registration extends Zend_Form
             #->setDecorators($this->basicDecorators);
 
         $password = new Zend_Form_Element_Password('password');
-        $password -> setRequired(true)
-            ->addValidator('stringLength', false, array(6, 200))
-            #->setAttrib('placeholder', 'Password')
-            ->setAttrib('class', 'clearInput regTextInput')
+        $password -> setRequired(true);
+        $password->addValidator('stringLength', false, array(6, 200));
+        $password->addValidator('regex', true,
+                array(
+                    'pattern' => '/[A-Za-z].*[0-9]|[0-9].*[A-Za-z]/',
+                        'messages'  => "Your password must contain letters and numbers"
+
+                )
+            );
+        //$password->getValidator('regex')->setMessage("Your password must contain letters and numbers.");
+        $password->setAttrib('class', 'clearInput regTextInput')
             ->addFilters($this->basicFilters)
-            ->setErrorMessages(array('Insert your password'))
+            //->setErrorMessages(array('Insert your password'))
             #->setDecorators($this->basicDecorators)
             ->setLabel('password:');
 
@@ -93,8 +100,8 @@ class Application_Form_Registration extends Zend_Form
         $type = new Zend_Form_Element_Radio('type');
         $type->addMultiOptions(array(
 
-                '2' => '<span class="txt">TEACHING MEMBER</span>',
-                '1' => '<span class="txt">LEARNING MEMBER</span>'
+                '2' => '<span class="txt">'.$this->getView()->translate('teaching member').'</span>',
+                '1' => '<span class="txt">'.$this->getView()->translate('learning member').'</span>'
 
             )
 

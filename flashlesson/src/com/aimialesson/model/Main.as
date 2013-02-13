@@ -24,13 +24,13 @@ package com.aimialesson.model
 		public var isServer:Boolean = false;
 		
 		private var _fsMode:Boolean = false;
-		[Bindable(Event=Main.FS_MODE_CHANGED)]
+		[Bindable(Event="fsModeChange")]
 		public function set fsMode ( value : Boolean ) : void {
 			_fsMode = value;
 			dispatchEvent ( new Event ( Main.FS_MODE_CHANGED ));
 		}
 		public function get fsMode () : Boolean {
-			return _fsMode;
+			return _fsMode || isServer; // we need having fsMode == true always for server user
 		}
 		
 		/*private var _screenMode:String = "normal";
@@ -44,7 +44,7 @@ package com.aimialesson.model
 		}
 		*/
 		private var _session_started:Boolean = true;
-		[Bindable(Event=Main.SESSION_STARTED_CHANGED)]
+		[Bindable(Event="sessionStartedChange")]
 		public function set session_started ( value : Boolean ) : void {
 			_session_started = value;
 			dispatchEvent ( new Event ( Main.SESSION_STARTED_CHANGED ));
@@ -55,7 +55,7 @@ package com.aimialesson.model
 		}
 		
 		private var _lesson_finished:Boolean = false;
-		[Bindable(Event=Main.LESSON_FINISHED_CHANGED)]
+		[Bindable(Event="lessonFinishedChange")]
 		public function set lesson_finished ( value : Boolean ) : void {
 			_lesson_finished = value;
 			dispatchEvent ( new Event ( Main.LESSON_FINISHED_CHANGED ));

@@ -14,22 +14,25 @@ class UserController extends Zend_Controller_Action
     public function indexAction()
     {
         $accountId = $this->getRequest()->getParam('id');
-        $userId = Zend_Auth::getInstance()->getIdentity()->id;
-        $profileModel = new Application_Model_Profile();
-        $dbProfile = new Application_Model_DbTable_Profile();
-        $this->view->profile = $dbProfile->getProfile($accountId);
-        $dbAvailability = new Application_Model_DbTable_Availability();
-        $this->view->availability = $dbAvailability->getAvailability($accountId);
-        $this->view->avatarPath = $profileModel->getAvatarPath($accountId, 'base');
-        $userModel = new Application_Model_DbTable_Users();
-        $user = $userModel->getFullData($accountId);
-        if($user) {
-            $userData = $user;
-        } else {
-            $this->_helper->redirector('page404','error');
-        }
+      if($accountId){
+          $userModel = new Application_Model_DbTable_Users();
+          $user = $userModel->getFullData($accountId);
+          if($user['username']) {
+              $userData = $user;
+          }else{
+              $this->_helper->redirector('page404','error');
+          }
+          $profileModel = new Application_Model_Profile();
+          $dbProfile = new Application_Model_DbTable_Profile();
+          $this->view->profile = $dbProfile->getProfile($accountId);
+          $dbAvailability = new Application_Model_DbTable_Availability();
+          $this->view->availability = $dbAvailability->getAvailability($accountId);
+          $this->view->avatarPath = $profileModel->getAvatarPath($accountId, 'base');
+          $this->view->userData = $userData;
+      }else{
+          $this->_helper->redirector('page404','error');
+      }
 
-        $this->view->userData = $userData;
     }
 
     public function confirmationAction() {
@@ -62,16 +65,34 @@ class UserController extends Zend_Controller_Action
 
     public function recoveryAction()
     {
+        $this->_helper->layout->setLayout("layout");
+        $this->view->headScript()->appendFile('../../js/jquery/validation/registrationValidation.js');
+        $login = new Application_Form_Login();
+        $recoveryForm = new Application_Form_Recovery();
+
+        $this->view->login = $login->getElements();
+        $this->view->recovery = $recoveryForm->getElements();
+
         if($this->getRequest()->isPost()){
-
-            $model = new Application_Model_User();
-            $email = $this->getRequest()->getPost('email');
-            if ($email) {
-                $this->view->message = $model->passRecovery($email);
+            $formData = $this->getRequest()->getParams();
+            if ($recoveryForm->isValid($formData)) {
+                $model = new Application_Model_User();
+                $email = $this->getRequest()->getParam('email');
+                if ($email) {
+                    $result = $model->passRecovery($email);
+                    if($result) {
+                        $this->_helper->flashMessenger->addMessage(array('success'=>'Your password was successfully changed. Please check your email to get new password'));
+                        $this->_helper->redirector('recovery', 'user');
+                    } else {
+                        $this->_helper->flashMessenger->addMessage(array('failure'=>'Problem with sending email'));
+                        $this->_helper->redirector('recovery', 'user');
+                    }
+                } else {
+                    $this->view->message = 'no e-mail';
+                }
             } else {
-                $this->view->message = 'no e-mail';
+                $this->view->message = 'form data is not valid';
             }
-
         }
     }
 
@@ -110,8 +131,7 @@ class UserController extends Zend_Controller_Action
                     $authStorage->write($identity);
 
                     $this->view->status = $identity->status;
-
-
+                   // $this->_helper->redirector('index', 'account');
                 }else{
 
                     $this->view->alertFlash = 'Authentication failed. Login or password are incorrect';
@@ -182,5 +202,13 @@ class UserController extends Zend_Controller_Action
                 $this->view->status = 'error';
             }
         }
+        if($this->getRequest()->getParam('time')) {
+            $userId = Zend_Auth::getInstance()->getIdentity()->id;
+            $userTable = new Application_Model_DbTable_Users();
+            $currentTime = $userTable->getCurrentTime($userId);
+            $this->view->time = $currentTime;
+
+        }
     }
+
 }

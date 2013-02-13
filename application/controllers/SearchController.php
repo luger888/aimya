@@ -32,6 +32,12 @@ class SearchController extends Aimya_Controller_BaseController
     public function reindexAction()
     {
 
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        //$folderModel = new Application_Model_DbTable_Folder();
+        //$folderModel->createFolderChain();
+
         $serviceTable = new Application_Model_DbTable_ServiceDetail();
         @mkdir(realpath(APPLICATION_PATH) . DIRECTORY_SEPARATOR . 'data');
         @mkdir(realpath(APPLICATION_PATH) . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'search_indexes');

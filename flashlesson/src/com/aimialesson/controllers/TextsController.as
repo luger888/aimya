@@ -21,7 +21,6 @@ package com.aimialesson.controllers
 	[Event (name="loadTextsComplete", type="com.aimialesson.events.AppEvent")]
 	public class TextsController extends EventDispatcher
 	{
-		public const text_xml_url:String = "/flash/lessontexts.xml";
 		//public const text_xml_url:String = "lessontexts.xml";
 		private var loader:URLLoader = new URLLoader();
 		public var textsXML:XML;
@@ -37,7 +36,7 @@ package com.aimialesson.controllers
 			loader.addEventListener(Event.COMPLETE, onLoaded);
 			loader.addEventListener(IOErrorEvent.IO_ERROR, onIOError);
 			loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError);
-			var urlRequest:URLRequest = new URLRequest(Actions.getInstance().domain + text_xml_url);
+			var urlRequest:URLRequest = new URLRequest(Actions.getInstance().domain + Texts.getInstance().text_xml_url);
 			//var urlRequest:URLRequest = new URLRequest(text_xml_url);
 			/*var obj:Object = new Object();
 			if (User.getInstance().sessionID){

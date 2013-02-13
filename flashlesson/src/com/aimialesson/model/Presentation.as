@@ -27,7 +27,7 @@ package com.aimialesson.model
 			//dispatchEvent( new Event ( "currentImageURLChange" ) );
 		}
 		
-		[Bindable(Event=Presentation.LOADED_CHANGE)]
+		[Bindable(Event="loadedChange")]
 		public function set loaded ( value : Boolean) : void {
 		}
 		

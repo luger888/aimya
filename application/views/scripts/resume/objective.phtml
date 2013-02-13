@@ -2,7 +2,7 @@
     <div class="shadowSeparator clearfix">
         <div class="shadowSeparatorBox clearfix">
             <div class="headRow clearfix">
-                <h1>describe objective:</h1>
+                <h1><?php echo $this->translate('describe objective');?>:</h1>
 
             </div>
             <div class="formRow clearfix objective">
@@ -11,7 +11,7 @@
                 ?>
             </div>
             <div class="buttonRow">
-                <input type="button" class = "button-2 save floatRight"  value="save" onclick=updateObjective();>
+                <input type="button" class = "button-2 save floatRight"  value="<?php echo $this->translate('save');?>" onclick=updateObjective();>
             </div>
         </div>
 

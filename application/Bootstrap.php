@@ -140,7 +140,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $langRoute = new Zend_Controller_Router_Route(
             '/:lang',
             array(
-                'lang' => 'en'
+                'lang' => 'ja'
             ),
             array(
                 'lang' => '[a-z]{2}'

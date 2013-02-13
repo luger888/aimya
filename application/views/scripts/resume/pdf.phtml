@@ -1,5 +1,6 @@
+<?php $googleDocViewer = 'https://docs.google.com/viewer?url='; ?>
 <?php
-$stylesheet = file_get_contents('./css/onlineResume.css');
+$stylesheet = file_get_contents('./css/pdf.css');
 
 
 $html = "<div class='resumeOnlineMain'>
@@ -7,8 +8,7 @@ $html = "<div class='resumeOnlineMain'>
 
 
     <div class='title'>" . $this->user['firstname'] . " " . $this->user['lastname'] . "</div>
-            <div class='titleInfo'><div
-                class='degree'> " . $this->profile['degree'] . "</div> <div class = 'language'>" . $this->profile['language'] . "</div>
+            <div class='titleInfo'><div class='degree'> " . $this->profile['degree'] . "</div> <div class='language'>" . $this->profile['language'] . "</div>
             </div>
             ";
 
@@ -16,43 +16,67 @@ $html .= "<h1>" . 'objective' . ":</h1>
                 <div class='textBlock'>" . $this->profile['objective'] . "</div>";
 
 if ($this->experience) {
+    $html .= "<h1>" . $this->translate('experience') . ":</h1>";
     foreach ($this->experience as $value) {
-        $html .= "<h1>" . $this->translate('experience') . ":</h1>
-    <div class='textBlock'>" . $value['content'] . "</div>";
+        $html .= "<div class='textBlock'>" . $value['content'] . "</div>";
         if (isset($value['certificate'])) {
-            $html .=  '<div class="resumeItemCertificates clearfix">Certificates:';
+            $html .= '<div class="resumeItemCertificates clearfix">Certificates:';
             foreach ($value['certificate'] as $index => $cert) {
-                $html .=  '<div><a class="certificate" href="/' . $value['certificateUrl'][$index] . '/' . $cert . '">' . $cert . '</a></div>';
+                $href = 'http://aimya.com/' . substr($value['certificateUrl'][$index], 2) . '/' . $cert;
+                $extension = substr($cert, -4);
+                if ($extension == '.doc' || $extension == '.pdf') {
+                    $html .= '<div><a class="certificate" target="_blank" href="' . $googleDocViewer . $href . '">' . $cert . '</a></div>';
+                }
+
+                else {
+                    $html .= '<div><a class="certificate" href="../' . $value['certificateUrl'][$index] . '/' . $cert . '">' . $cert . '</a></div>';
+                }
             }
-            $html .=  '</div>';
+            $html .= '</div>';
         }
 
     }
 }
 if ($this->education) {
+    $html .= "<h1>" . $this->translate('education') . ":</h1>";
     foreach ($this->education as $value) {
-        $html .= "<h1>" . $this->translate('education') . ":</h1>
-    <div class='textBlock'>" . $value['content'] . "</div>";
+        $html .= "<div class='textBlock'>" . $value['content'] . "</div>";
         if (isset($value['certificate'])) {
-            $html .=  '<div class="resumeItemCertificates clearfix">Certificates:';
+            $html .= '<div class="resumeItemCertificates clearfix">Certificates:';
             foreach ($value['certificate'] as $index => $cert) {
-                $html .=  '<div><a class="certificate" href="/' . $value['certificateUrl'][$index] . '/' . $cert . '">' . $cert . '</a></div>';
+                $href = 'http://aimya.com/' . substr($value['certificateUrl'][$index], 2) . '/' . $cert;
+                $extension = substr($cert, -4);
+                if ($extension == '.doc' || $extension == '.pdf') {
+                    $html .= '<div><a class="certificate" target="_blank" href="' . $googleDocViewer . $href . '">' . $cert . '</a></div>';
+                }
+
+                else {
+                    $html .= '<div><a class="certificate" href="../' . $value['certificateUrl'][$index] . '/' . $cert . '">' . $cert . '</a></div>';
+                }
             }
-            $html .=  '</div>';
+            $html .= '</div>';
         }
     }
 }
 
 if ($this->skills) {
+    $html .= "<h1>" . $this->translate('skill') . ":</h1>";
     foreach ($this->skills as $value) {
-        $html .= "<h1>" . $this->translate('skill') . ":</h1>
-    <div class='textBlock'>" . $value['content'] . "</div>";
+        $html .= "<div class='textBlock'>" . $value['content'] . "</div>";
         if (isset($value['certificate'])) {
-            $html .=  '<div class="resumeItemCertificates clearfix">Certificates:';
+            $html .= '<div class="resumeItemCertificates clearfix">Certificates:';
             foreach ($value['certificate'] as $index => $cert) {
-                $html .=  '<div><a class="certificate" href="/' . $value['certificateUrl'][$index] . '/' . $cert . '">' . $cert . '</a></div>';
+                $href = 'http://aimya.com/' . substr($value['certificateUrl'][$index], 2) . '/' . $cert;
+                $extension = substr($cert, -4);
+                if ($extension == '.doc' || $extension == '.pdf') {
+                    $html .= '<div><a class="certificate" target="_blank" href="' . $googleDocViewer . $href . '">' . $cert . '</a></div>';
+                }
+
+                else {
+                    $html .= '<div><a class="certificate" href="../' . $value['certificateUrl'][$index] . '/' . $cert . '">' . $cert . '</a></div>';
+                }
             }
-            $html .=  '</div>';
+            $html .= '</div>';
         }
     }
 }

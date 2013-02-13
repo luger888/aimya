@@ -11,7 +11,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
     {
 
         $data = $this->select()
-            ->from('user', array('id', 'username', 'firstname', 'lastname', 'password'))
+            ->from('user', array('id', 'username', 'firstname', 'lastname', 'password', 'email'))
             ->where('email=?', $email);
 
         return $data->query()->fetch();
@@ -22,7 +22,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
     {
 
         $data = $this->select()
-            ->from('user', array('id', 'firstname', 'lastname', 'password'))
+            ->from('user', array('id', 'username', 'firstname', 'lastname', 'password'))
             ->where('username=?', $username);
 
         return $data->query()->fetch();
@@ -103,7 +103,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         $where = $this->getAdapter()->quoteInto('email=?', $data['email']);
 
 
-        $this->update($array, $where);
+        return $this->update($array, $where);
 
     }
 
@@ -118,7 +118,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
     public function getUserInfo($user_id)
     {
         $data = $this->select()
-            ->from('user', array('id', 'firstname', 'lastname', 'username', 'timezone', 'role'))
+            ->from('user', array('id', 'firstname', 'lastname', 'username', 'timezone', 'role', 'password'))
             ->where('id=?', (int)$user_id);
 
         return $data->query()->fetch();
@@ -359,5 +359,30 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         $where = $this->getAdapter()->quoteInto('id=?', $id);
 
         return $this->update($array, $where);
+    }
+
+    public function updateRole($userId, $role)
+    {
+
+        $array = array(
+            'role' => (int)$role,
+        );
+
+        $where[] = $this->getAdapter()->quoteInto('id=?', $userId);;
+
+        return $this->update($array, $where);
+
+    }
+    public function getCurrentTime($user_id)
+    {
+        $data = $this->select()
+            ->from('user', array('timezone'))
+            ->where('id=?', $user_id);
+
+        $timezone = $data->query()->fetch();
+
+        date_default_timezone_set('02:00');
+        $currentTime = date('h:i:s') ;
+        Zend_Debug::dump($currentTime);die;
     }
 }

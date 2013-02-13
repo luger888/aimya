@@ -46,8 +46,22 @@ class BookingController extends Zend_Controller_Action
                     $bookingDbTable = new Application_Model_DbTable_Booking();
                     $this->getRequest()->setParam('creator_tz', $userGmt['timezone']);
                     if($this->getRequest()->getParam('recipient_id')){
-                        $bookingDbTable->addBooking($this->getRequest()->getParams(), $identity->id);
-                        $this->view->success = 1;
+                        $isExist = $bookingDbTable->isExistBooking(null, $identity->id, $this->getRequest()->getParam('started_at'), $this->getRequest()->getParam('duration'));
+                        if(!$isExist){
+                            $friendsDb= new Application_Model_DbTable_Friends();
+                            $isBlocked = $friendsDb->isBlocked($this->getRequest()->getParam('recipient_id'));
+                            if(!$isBlocked){
+                                $bookingDbTable->addBooking($this->getRequest()->getParams(), $identity->id);
+                                $this->view->success = 1;
+                            }else{
+                                $this->view->blocked =1;
+                            }
+
+                        }else{
+                            $this->view->fail = 1;
+                        }
+
+
                     }
 
                 }else{
@@ -81,11 +95,19 @@ class BookingController extends Zend_Controller_Action
         if ($this->getRequest()->isPost()) {
 
             if ($this->getRequest()->getParam('booking_id')) {
-
+                $userTable = new Application_Model_DbTable_Users();
                 $bookingDbTable = new Application_Model_DbTable_Booking();
+
+                $bookingItem = $bookingDbTable->getItem($this->getRequest()->getParam('booking_id'));
+                $user = $userTable->getItem($this->getRequest()->getParam('sender_id'));
+
+                $messageTable = new Application_Model_DbTable_Message();
+                $message = array('sender_id'=>$identity->id,
+                    'recipient_id'=>$this->getRequest()->getParam('sender_id'),
+                    'content'=>"The booked lesson with ".$user['username']." on ".$bookingItem['started_at']." has been rejected. Please, reply person for more details.",
+                    'subject'=>"Lesson has been rejected.");
+                $messageTable->sendMessage($message);
                 $bookingDbTable->rejectBooking($this->getRequest()->getParam('booking_id'), $identity->id);
-
-
             }
         }
     }

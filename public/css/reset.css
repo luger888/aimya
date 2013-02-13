@@ -90,7 +90,7 @@ input[type='text'],input[type='password'], textarea {
 }
 .page404{
     background: url('../images/icons/error404.png') no-repeat;
-    width:100%;
+    width:665px;
     height:688px;
     margin-left: 150px;
 }

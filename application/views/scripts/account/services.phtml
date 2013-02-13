@@ -1,16 +1,16 @@
 <div id="tabs-2">
     <!--LIST OF SERVICES -->
     <div class="servicesTab clearfix">
-
-        <?php foreach ($this->services as $value): ?>
+        <?php if ($this->services) {
+        foreach ($this->services as $value): ?>
         <div class='service clearfix'>
         <div class="shadowSeparator clearfix">
         <div class="shadowSeparatorBox clearfix">
             <div class="titleRow clearfix">
                 <h2 id="lesson_category"><?php echo $value['lesson_category'];?></h2>
                 <div class="buttons clearfix">
-                    <input type='button' id='deleteService' class = "button-2 delete" value='Delete' onclick="deleteService(this, '<?php echo $this->baseUrl()?>/account/edit');return false;">
-                    <input type='button' id='editService' class = "button-2 edit" value='Edit'  onclick="editService(this, 1, '<?php echo $this->baseUrl()?>/account/edit');return false;">
+                    <input type='button' id='deleteService' class = "button-2 delete" value="<?php echo $this->translate('delete'); ?>" onclick="deleteService(this, '<?php echo $this->baseUrl()?>/account/edit');return false;">
+                    <input type='button' id='editService' class = "button-2 edit" value="<?php echo $this->translate('edit'); ?>"  onclick="editService(this, 1, '<?php echo $this->baseUrl()?>/account/edit');return false;">
                     <input type='hidden' value=" <?php echo $value['id'];?>">
                 </div><!--End buttons-->
             </div><!--End titleRow-->
@@ -30,7 +30,11 @@
         </div><!--End shadowSeparatorBox-->
         </div><!--End shadowSeparator-->
         </div><!--End service -->
-        <?php endforeach;?>
+        <?php endforeach;
+}else{
+        echo '<script>addService()</script>';
+    }
+        ?>
         <!-- END LIST OF SERVICES -->
 
         <div id="addService">
@@ -42,7 +46,7 @@
                     <?php echo $this->servicesForm->service_type; ?>
                     <span class="s-116"><?php echo $this->servicesForm->lesson_category; ?></span>
                     <span class="field-116"><?php echo $this->servicesForm->subcategory; ?></span>
-                    <span class="field-66"><?php echo $this->servicesForm->rate; ?> </span>
+                    <span class="field-66">$<?php echo $this->servicesForm->rate; ?> </span>
                     <span class="txt">per</span>
                     <span class="s-86"><?php echo $this->servicesForm->duration; ?></span>
                 </div><!--End formRow -->

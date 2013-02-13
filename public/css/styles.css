@@ -46,13 +46,13 @@ body {
 }
 
 #logo {
-    background: url(../images/logo/inner-logo.png) no-repeat 0 0;
-    height: 47px;
-    width: 146px;
+    background: url("../images/logo/aimya_logo_main.png") no-repeat scroll 0 0 / 74px auto transparent;
     display: block;
-    margin-top: 8px;
     float: left;
+    height: 53px;
     margin-left: -5px;
+    margin-top: 2px;
+    width: 146px;
 }
 
 .headerSearch {
@@ -376,6 +376,7 @@ input.button-2 {
 
 .button-2.delete {
     background: url(../images/icons/delete.png) no-repeat 0 3px;
+    float: right;
 }
 
 
@@ -465,6 +466,7 @@ input.button-2 {
     background: url("../images/icons/moveInbox.png") no-repeat scroll 0 2px transparent;
     padding-left: 15px;
     margin: 0 15px;
+    float: right;
 }
 .button-2.inbox:hover{
     background-position: 0 -21px;
@@ -553,6 +555,7 @@ input.button-2 {
 
 .leftNavigation {
     padding-top: 22px;
+    text-transform: uppercase;
 }
 
 .leftNavigation ul {
@@ -725,7 +728,9 @@ input.button-2 {
     float: left;
     width: 320px;
 }
-
+.profileGeneral .leftCol .title{
+    text-transform: capitalize;
+}
 .profileGeneral .rightCol {
     float: right;
     width: 160px;
@@ -792,6 +797,11 @@ input.button-2 {
     width: 143px;
     height: 142px;
     overflow: hidden;
+}
+
+.profileAvatar .avatar_name {
+    color: #1D3300;
+    margin: 5px 0 0 10px;
 }
 
 .profileAvaImg {
@@ -875,7 +885,9 @@ input.button-2 {
     position: relative;
     padding: 12px 0 18px 0;
 }
-
+.featureItem  .featureItemWrapper{
+    min-height: 150px;
+}
 .imageBlock {
     width: 104px;
     padding: 3px;
@@ -1025,7 +1037,7 @@ input.button-2 {
 }
 
 .s-116 select {
-    width: 116px;
+    width: 162px;
 }
 
 .s-86 select {
@@ -1033,7 +1045,7 @@ input.button-2 {
 }
 
 .field-116 input {
-    width: 116px;
+    width: 162px;
 }
 
 .field-66 input {
@@ -1074,10 +1086,12 @@ input.button-2 {
     float: left;
     font-size: 9px;
     margin-left: 6px;
-    margin-top: -36px;
-    padding-left: 4px;
+    margin-top: -24px;
+    /*padding-left: 4px;*/
     position: absolute;
-    width: 20px;
+    width: 12px;
+    text-align:center;
+    line-height: 13px;
 }
 
 .profileTab .leftNavigation .newBookingCount {
@@ -1087,10 +1101,12 @@ input.button-2 {
     float: left;
     font-size: 9px;
     margin-left: 6px;
-    margin-top: -36px;
-    padding-left: 4px;
+    margin-top: -24px;
+    /*padding-left: 4px;*/
     position: absolute;
-    width: 20px;
+    text-align:center;
+    width: 12px;
+    line-height: 13px;
 }
 
 #addRequestService .buttonsRow {
@@ -1114,13 +1130,13 @@ input.button-2 {
 }
 .availabilityTab table tr td {
     padding: 14px 0;
-
 }
 .availabilityTab table tr td:nth-child(1){
     padding-left: 26px;
 }
 .availabilityTab table tr{
     padding-left: 25px;
+    vertical-align: top;
 }
 .availabilityTab table tr:nth-child(odd){
     background-color: #FBFCFC;
@@ -1128,9 +1144,10 @@ input.button-2 {
 /*Availability td padding-right */
 .availabilityTab table tr td:nth-child(1){padding-right: 34px;}
 .availabilityTab table tr td:nth-child(2){padding-right: 290px; font-family: 'helvetica-light-rnormal';}
-.availabilityTab table tr td:nth-child(3){padding-right: 40px;}
-.availabilityTab table tr td:nth-child(4){padding-right: 39px; }
-.availabilityTab table tr td:nth-child(5){padding-right: 150px;}
+.availabilityTab table tr td:nth-child(3){padding-right: 37px;}
+.availabilityTab table tr td:nth-child(4){padding-right: 37px;}
+.availabilityTab table tr td:nth-child(5){padding-right: 35px; }
+.availabilityTab table tr td:nth-child(6){padding-right: 100px;}
 
 .availabilityTab select{
     width:69px;
@@ -1185,15 +1202,15 @@ input.button-2 {
 .userRelationsTab.profile  .button-2{
     padding-right: 11px;
 }
-#block-confirm, #delete-confirm, #cancel-confirm{
+#block-confirm, #delete-confirm, #cancel-confirm, #cancel-unsubscribe{
     display: none;
 }
 /*Availability td padding-right */
 .userRelationsTab.profile table tr td:nth-child(1){padding-right: 52px; padding-left: 5px;}
 .userRelationsTab.profile table tr td:nth-child(2){padding-right: 86px; padding-left: 5px;}
 .userRelationsTab.profile table tr td:nth-child(3){padding-right: 98px; padding-left: 5px;}
-.userRelationsTab.profile table tr td:nth-child(4){padding-right: 92px;  padding-left: 5px;}
-.userRelationsTab.profile table tr td:nth-child(5){padding-right: 97px;}
+.userRelationsTab.profile table tr td:nth-child(4){padding-right: 20px;  padding-left: 5px;}
+.userRelationsTab.profile table tr td:nth-child(5){padding-right: 60px;}
 .userRelationsTab.profile table tbody td:nth-child(5){  padding-left: 36px; padding-right: 0;}
 /*---NOTIFICATIONS/CHANGE PASSWORD-----------------------------------------------------------------*/
 .notificationsTab label, .notificationsTab .passwordRecoveryBlock{
@@ -1220,6 +1237,10 @@ input.button-2 {
     display: inline-block;
     padding-bottom: 21px;
     width: 150px;
+}
+.notificationsTab .passwordRecoveryBlock span.error{
+    padding-left:15px;
+    width: 250px;
 }
 .notificationsTab .notifyBlock{
     padding:5px;
@@ -1270,7 +1291,7 @@ input.button-2 {
     width: auto;
     padding: 21px 0 0 13px;
 }
-#block-confirm, #delete-confirm, #unsubscribe-confirm{
+#block-confirm, #delete-confirm, #unsubscribe-confirm, #unblock-confirm{
     display: none;
 }
 .ui-dialog-buttonset button{
@@ -1485,6 +1506,7 @@ input.button-2 {
     width:60px;
     font-family: 'helvetica-light-rnormal';
     font-weight: 500;
+    text-transform: capitalize;
 }
 .sendMessageBox .buttonsRow{
     float:right;
@@ -1525,8 +1547,9 @@ input.button-2 {
 .messageTab.viewMessageBlock .buttonRow.viewReply{
     padding-left: 16px;
 }
-.messageTab.viewMessageBlock .messageViewSender{
-    font:600 12px arial;
+.messageTab.viewMessageBlock .messageViewSender a{
+    font:600 12px arial ;
+    text-decoration: underline;
 }
 .messageTab.viewMessageBlock .messageViewTheme{
     font:600 13px arial;
@@ -1667,6 +1690,12 @@ input.button-2 {
 
 }
 
+.resumeGeneral .headRow .button-2{
+    float: left;
+}
+.underline{
+    text-decoration: underline;
+}
 .resumeGeneral .headRow h1{
     float:left;
 }
@@ -1777,9 +1806,10 @@ float:right;
     font-size: 9px;
     margin-left: 74px;
     margin-top: -48px;
-    padding-left: 4px;
+  /*  padding-left: 4px;*/
     position: absolute;
-    width: 20px;
+    text-align:center;
+    width: 12px;
 }
 .userRelationsTab.lesson .newBookingCount {
     background: url("../img/design/accountLayout/glyphicons/alertMessage.png") no-repeat scroll 0 53% transparent;
@@ -1788,9 +1818,10 @@ float:right;
     float: left;
     font-size: 9px;
     margin-left: 6px;
-    padding-left: 4px;
+   /* padding-left: 4px;*/
     position: absolute;
-    width: 20px;
+    text-align:center;
+    width: 12px;
 }
 .userRelationsTab.lesson tbody td{
     padding-left: 4px;
@@ -1943,6 +1974,7 @@ float:right;
     float:left;
     margin-left: 6px;
     margin-right: 22px;
+    margin-bottom: 100px;
 }
 .userProfileTab ul{
     margin-top:28px;
@@ -1985,6 +2017,15 @@ float:right;
     font: 13px helvetica;
 
 }
+.featuresTab .profileRole{
+    font: 11px helvetica;
+    padding: 0 0 0 15px;
+    position: relative;
+    top: 5px;
+}
+.featuresTab .leftBlockFeature{
+    float:left;
+}
 .userProfileTab .profileRole{
     font: 11px helvetica;
     right: 1px;
@@ -1997,12 +2038,16 @@ float:right;
     display: inline-block;
     padding-left: 15px;
 }
-
+.userProfileTab  .gender.female{
+    background: url("../img/design/accountLayout/glyphicons/female.png") no-repeat scroll 2px 42% transparent;
+}
+.userProfileTab  .gender.male{
+    background: url("../img/design/accountLayout/glyphicons/male.png") no-repeat scroll 1% 42% transparent;
+}
 .userProfileTab  .gender{
-    background: url("../img/design/accountLayout/glyphicons/gift.png") no-repeat scroll 0 42% transparent;
-    display: inline-block;
     padding-left: 15px;
 }
+
 .userProfileTab  .education{
     background: url("../img/design/accountLayout/glyphicons/university.png") no-repeat scroll 0 42% transparent;
     display: inline-block;
@@ -2097,6 +2142,10 @@ float:right;
     font:11px arial;
     position: relative;
     right: 29px;
+}
+
+.userProfileTab .firstSeparator .timezone {
+    float: right; position: relative; font-size: 14px; margin-top: -15px;
 }
 .userProfileTab  .lastSeparator{
     background: url("../img/design/accountLayout/2page_middle_separator.png") no-repeat scroll 0 0 transparent;
@@ -2214,7 +2263,7 @@ float:right;
     display: inline-block;
     padding-left: 30px;
     text-transform: capitalize;
-    width: 230px;
+    width: 250px;
 }
 .admin .metricItem .formRow:nth-child(even){
     background-color: #FCFCFC;
@@ -2268,4 +2317,7 @@ float:right;
 .error {
     color: #9E4444;
     font-size: 11px;
+}
+tr.blocked td{
+    color:grey;
 }

@@ -41,9 +41,9 @@ package com.aimialesson.controllers
 			debug("StreamController:initPartnerNetStream");
 			Media.getInstance().partnerNetStream = new NetStream(Media.getInstance().nc);
 			Media.getInstance().partnerNetStream.client = this;
-			Media.getInstance().partnerNetStream.maxPauseBufferTime = 0.1;
-			Media.getInstance().partnerNetStream.bufferTime = 0.02;
-			Media.getInstance().partnerNetStream.bufferTimeMax = 0.2;
+			Media.getInstance().partnerNetStream.maxPauseBufferTime = 0.0;
+			Media.getInstance().partnerNetStream.bufferTime = 0.00;
+			Media.getInstance().partnerNetStream.bufferTimeMax = 0.0;
 			Media.getInstance().partnerNetStream.addEventListener( NetStatusEvent.NET_STATUS, netStatusHandler );
 			Media.getInstance().partnerNetStream.addEventListener( IOErrorEvent.IO_ERROR, netIOError );
 			Media.getInstance().partnerNetStream.addEventListener( AsyncErrorEvent.ASYNC_ERROR, netASyncError );
@@ -112,7 +112,7 @@ package com.aimialesson.controllers
 				Media.getInstance().myNetStream.attachAudio(Media.getInstance().mic);
 			}
 			//Media.getInstance().myNetStream.bufferTime = 2;
-			Media.getInstance().myNetStream.publish(Media.getInstance().myStreamName, "live");
+			Media.getInstance().myNetStream.publish(Media.getInstance().myStreamName, Media.getInstance().type);
 		}
 		
 

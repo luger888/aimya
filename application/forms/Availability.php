@@ -11,9 +11,9 @@ class Application_Form_Availability extends Zend_Form
 
         /* HOURS array for SELECT */
         $hours = array();
-        foreach (range(1,24) as $fullhour) {
+        foreach (range(0,24) as $fullhour) {
             $parthour = $fullhour > 12 ? $fullhour - 12 : $fullhour;
-            $parthour .= $fullhour > 12 ? " pm" : " am";
+            $parthour .= $fullhour > 11 ? " pm" : " am";
             $hours[$parthour] = $parthour;
         }
         $addon =array('...' => '...');
@@ -24,16 +24,16 @@ class Application_Form_Availability extends Zend_Form
 
         /* DropDowns 'FROM' and 'TO' for every day of week */
         foreach($daysOfWeek as  $day) {
-
             $this->addElement('select',  'from' . $day, array(
                 'multiOptions' => $hours,
                 'class' => 'input-small',
-                'decorators'=>array('ViewHelper')
+                'decorators'=>array('ViewHelper', 'Errors'),
             ));
             $this->addElement('select',  'to' . $day, array(
                 'multiOptions' => $hours,
                 'class' => 'input-small',
-                'decorators'=>array('ViewHelper')
+                'decorators'=>array('ViewHelper', 'Errors'),
+                'validators'=>array(new Aimya_Validate_TimeFromValidator($this->getElement('from' . $day))),
             ));
 
         }

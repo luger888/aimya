@@ -28,10 +28,8 @@ class Application_Form_Booking extends Zend_Form
             ->addFilters($this->basicFilters)
             ->setSeparator('');
         $role->addMultiOptions(array(
-
                 '2' => 'student',
                 '1' => 'teacher'
-
             )
         );
         # ->setDecorators($this->basicDecorators);

@@ -16,7 +16,7 @@
                     <td> <?php echo $this->translate('User Name') ?></td>
                     <!--<td> <?php /*echo $this->translate('Status') */?></td>-->
                     <td> <?php echo $this->translate('Date/Time') ?></td>
-                    <td> <?php echo $this->translate('Focus Name') ?></td>
+                    <td> <?php echo $this->translate('Session Focus') ?></td>
                     <td> <?php echo $this->translate('Video REC') ?></td>
                     <td> <?php echo $this->translate('Feedback') ?></td>
                     <td> <?php echo $this->translate('PDF Notes') ?></td>
@@ -58,9 +58,9 @@
                     </td>
 
 
-            <td class="center payment">
+                    <td class="center payment">
                         <!--CASE: Send pay request BUTTON-->
-                        <?php if(isset($booking['booking']['sendRequest'])): ?>
+                        <?php if (isset($booking['booking']['sendRequest'])): ?>
                         <input type="button" class="button send"
                                onclick="payRequest(<?php echo $booking['userData']['id'];?>,
                                    <?php echo $booking['booking']['id'];?>,
@@ -68,16 +68,16 @@
                                value= <?php echo $this->translate('Send'); ?>>
                         <?php endif;?>
                         <!--CASE: Pending-->
-                        <?php if(isset($booking['booking']['pending'])): ?>
+                        <?php if (isset($booking['booking']['pending'])): ?>
                         <span class="result pending">Pending</span>
                         <?php endif;?>
                         <!--CASE: Paid-->
-                        <?php if(isset($booking['booking']['paid'])): ?>
+                        <?php if (isset($booking['booking']['paid'])): ?>
                         <span class="result success">Paid</span>
                         <?php endif;?>
 
                         <!--CASE: PAY BUTTON-->
-                        <?php if(isset($booking['booking']['pay'])): ?>
+                        <?php if (isset($booking['booking']['pay'])): ?>
                         <form method="POST" id='pay_<?php echo $booking['booking']['id'];?>'
                               action="<?php echo $this->baseUrl() . '/payment/pay/'?>">
                             <input name="teacher_id" type="hidden" value="<?php echo $booking['userData']['id'];?>">
@@ -87,13 +87,17 @@
                                 class="button-2 play">Pay</span></a>
                         </form>
                         <?php endif;?>
-                        <?php if(isset($booking['booking']['waiting'])): ?>
+                        <?php if (isset($booking['booking']['waiting'])): ?>
                         <span class="result">waiting</span>
                         <?php endif;?>
-                    </td><!--END payment -->
+                        <?php if (isset($booking['booking']['expired'])): ?>
+                        <span class="result">expired</span>
+                        <?php endif;?>
+                    </td>
+                    <!--END payment -->
                     <td class="center action">
                         <!--CASE: START LESSON BUTTON-->
-                        <?php if(isset($booking['booking']['startLesson'])): ?>
+                        <?php if (isset($booking['booking']['startLesson'])): ?>
                         <form method="POST" id='start_session_<?php echo $booking['booking']['id'];?>'
                               action="<?php echo $this->baseUrl() . '/lesson/setup/'?>">
                             <input name="student_id" type="hidden" value="<?php echo $booking['userData']['id'];?>">
@@ -104,8 +108,8 @@
                         </form>
 
                         <?php endif;?>
-                        <?php if(isset($booking['booking']['join'])): ?>
-                        <span class ="button-2 play">Join</span>
+                        <?php if (isset($booking['booking']['join'])): ?>
+                        <span class="button-2 play">Join</span>
                         <?php endif;?>
                     </td>
 

@@ -11,6 +11,8 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         $this->_helper->layout->setLayout("layoutInner");
         $this->_helper->AjaxContext()
             ->addActionContext('remained', 'json')
+            ->addActionContext('downgrade', 'json')
+            ->addActionContext('unsubscribe', 'json')
             ->initContext('json');
     }
 
@@ -57,7 +59,6 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
             $xml = $payPalModel->generateXml($teacherId, $bookingId, $userProfit, $aimyaProfit);
 
-
             $response = $payPalModel->getAdaptivUrl($xml);
 
             if ($response) {
@@ -92,6 +93,9 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
     public function ipnAction()
     {
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
         $listener = new Aimya_PayPal_IpnListener();
 
         // tell the IPN listener to use the PayPal test sandbox
@@ -129,6 +133,9 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
     public function subsipnAction()
     {
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        //$this->writeLog('------------------------------');
         $listener = new Aimya_PayPal_IpnListener();
 
         // tell the IPN listener to use the PayPal test sandbox
@@ -138,21 +145,29 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         try {
             $listener->requirePostMethod();
             $verified = $listener->processIpn();
+            //$this->writeLog($verified);
         } catch (Exception $e) {
             $this->writeLog($e->getMessage());
             exit(0);
         }
 
         if ($verified) {
-            $this->writeLog("VALID IPN");
-            $this->writeLog($listener->getTextReport());
-            if ($_GET['user_id']) {
-                $userId = $_GET['user_id'];
-                //$subscriptionId = $_GET['subscription_id'];
+            if ($_GET['subscription_id']) {
+                //$this->writeLog($_GET['subscription_id']);
+                $subscriptionId = $_GET['subscription_id'];
+                //$userId = $_GET['user_id'];
                 $subscriptionTable = new Application_Model_DbTable_Subscriptions();
-                $payKey = $subscriptionTable->getPayKeyFromSebscription($userId);
+                $payKey = $subscriptionTable->getPayKeyFromOrder($subscriptionId);
+                $userId = $payKey['user_id'];
                 if ($payKey['pay_key'] = $_POST['pay_key']) {
-                    $subscriptionTable->updateSubscriptionStatus($userId);
+                    $res = $subscriptionTable->updateSubscriptionStatus($subscriptionId);
+                    if($res) {
+                        $userTable = new Application_Model_DbTable_Users();
+                        $user = $userTable->getItem($userId);
+                        if($user['role'] == 1) {
+                            $userTable->updateRole($userId, 2);
+                        }
+                    }
                 }
             }
 
@@ -199,9 +214,10 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
             $aimyaProfit = $period * $this->subscriptionCost;
 
-            $lastId = $subscriptionTable->getAdapter()->lastInsertId();
+            $lastId = $subscriptionTable->getLastSubscriptionId() + 1;
 
             $requestData = $payPalModel->generateSubscriptionXml($lastId, $aimyaProfit);
+            if($period >= 8 && $period <= 12) $period = 12;
 
             $response = $payPalModel->getAdaptivUrl($requestData);
 
@@ -215,10 +231,12 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
                     $activeToDate = $latestSubscription['maxId'];
 
                     $current = new DateTime();
-                    $activeTo = new DateTime();
-                    $activeToField = date('Y-m-d h:i:s', strtotime("+$period month"));
+                    $activeTo = new DateTime($activeToDate);
+
                     if($current < $activeTo) {
-                        $activeToField = date($activeToDate, strtotime("+$period month"));
+                        $activeToField = date('Y-m-d H:i:s', strtotime($activeToDate . " +$period month"));
+                    } else {
+                        $activeToField = date('Y-m-d h:i:s', strtotime("+$period month"));
                     }
 
                     $data = array(
@@ -243,61 +261,6 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         }
     }
 
-    public function subscribenewAction()
-    {
-        $payPalModel = new Application_Model_PayPal();
-        $gateway = $payPalModel->getGatewayNew();
-
-        Aimya_PayPal_RecurringPayment_PaypalConfiguration::username($gateway['apiUsername']);
-        Aimya_PayPal_RecurringPayment_PaypalConfiguration::password($gateway['apiPassword']);
-        Aimya_PayPal_RecurringPayment_PaypalConfiguration::signature($gateway['apiSignature']);
-        Aimya_PayPal_RecurringPayment_PaypalConfiguration::business_name('Aimya Store');
-
-        Aimya_PayPal_RecurringPayment_PaypalConfiguration::return_url($gateway['returnUrl']);
-        Aimya_PayPal_RecurringPayment_PaypalConfiguration::cancel_url($gateway['cancelUrl']);
-        Aimya_PayPal_RecurringPayment_PaypalConfiguration::notify_url($gateway['notifyUrl']);
-
-
-        //Aimya_PayPal_RecurringPayment_PaypalDigitalGoods::environment( 'live' );
-
-        $subscription_details = array(
-            'description' => 'Example Subscription: $10 sign-up fee then $2/week for the next four weeks.',
-            'initial_amount' => '10.00',
-            'amount' => '2.00',
-            'period' => 'Week',
-            'frequency' => '1',
-            'total_cycles' => '4',
-        );
-
-        $paypal_subscription = new Aimya_PayPal_RecurringPayment_PaypalSubscription($subscription_details);
-        $html = "";
-        if (isset($_GET['paypal']) && $_GET['paypal'] == 'cancel') {
-
-            //$html .= "<script>if (window!=top) {top.location.replace(document.location);}</script>";
-            $html .= '<p>Your subscription has been cancelled. <a href="#" target="_top">Try again?</a></p>';
-
-        } elseif (isset($_GET['paypal']) && $_GET['paypal'] == 'paid') {
-
-            // Process the payment or start the Subscription
-            if (isset($_GET['PayerID'])) {
-                $response = $paypal_subscription->process_payment();
-            } else {
-                $response = $paypal_subscription->start_subscription();
-            }
-
-            $html .= '<h3>Payment Complete!</h3>';
-            if (isset($_GET['PayerID'])) {
-                $html .= "<p>Your Transaction ID is {$response['PAYMENTINFO_0_TRANSACTIONID']}</p>";
-                $html .= '<p>You can use this Transaction ID to see the details of your subscription like so:</p>';
-            } else {
-                $html .= '<p>You can use this Profile ID to see the details of your subscription like so:</p>';
-            }
-
-        }
-        $this->view->html = $html;
-        $this->view->obj = $paypal_subscription;
-    }
-
     public function unsubscribeAction()
     {
         if ($this->getRequest()->isPost()) {
@@ -317,8 +280,44 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
                 $refundDb->cancelRefund($this->getRequest()->getParam('cancelRefund'));
             }
             if ($this->getRequest()->getParam('approveRefund')) {
+                $refundForm = new Application_Form_Refund();
+                $data = $this->getRequest()->getPost();
+                if($refundForm->isValid($data)) {
+
+                    $period = $this->getRequest()->getParam('period');
+                    $amount = $this->getRequest()->getParam('amount');
+                    $requestComment = $this->getRequest()->getParam('request_comment');
+                    $subscriptionId = $this->getRequest()->getParam('subscription_id');
+
+                    $latestSubscription = $subscriptionDb->getItem($subscriptionId);
+                    $activeToDate = $latestSubscription['active_to'];
+                    $aimyaProfit = $latestSubscription['aimya_profit'];
+                    $userId = $latestSubscription['user_id'];
+
+                    $newAmount = $aimyaProfit - $amount;
+                    $activeTo = date('Y-m-d H:i:s', strtotime($activeToDate . " -$period month"));
+
+                    $result = $subscriptionDb->refundSubscription($subscriptionId, $user_id, $activeTo, $newAmount);
+                    if($result) {
+                        $refundDb->approveRefund($this->getRequest()->getParam('approveRefund'));
+                        $mesageTable = new Application_Model_DbTable_Message();
+                        $data = array(
+                            'sender_id' => $user_id,
+                            'recipient_id' => $userId,
+                            'content' => $requestComment,
+                            'subject' => 'Refund',
+                        );
+                        $mesageTable->sendMessage($data);
+                        $this->view->status = 'success';
+                    } else {
+                        $this->view->status = 'error';
+                    }
+                } else{
+                    $this->view->status = 'error';
+                    $this->view->errors = $refundForm->getErrors();
+                }
                 //$subscriptionDB->refundSubscription($this->getRequest()->getParam('approveRefund'))
-                $refundDb->approveRefund($this->getRequest()->getParam('approveRefund'));
+
             }
         }
 
@@ -345,6 +344,32 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         } else {
             $this->view->status = 'failure';
         }
+    }
+
+    public function upgradeAction()
+    {
+        $subscriptionForm = new Application_Form_Subscriptions();
+
+        $this->view->subscriptionForm = $subscriptionForm;
+    }
+
+    public function downgradeAction()
+    {
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        if ($this->getRequest()->isXmlHttpRequest()) {
+            $userId = Zend_Auth::getInstance()->getIdentity()->id;
+
+            $userTable = new Application_Model_DbTable_Users();
+            $result = $userTable->updateRole($userId, '1');
+            if($result) {
+                $this->view->answer = 'success';
+            } else {
+                $this->view->answer = 'error';
+            }
+        }
+
     }
 
     public function writeLog($data)

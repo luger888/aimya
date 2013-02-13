@@ -32,43 +32,12 @@
     ]]>
     </fx:Metadata> 
     
-    <fx:Script fb:purpose="styling">
-        <![CDATA[         
-            /**
-             *  @private
-             */
-            override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number) : void
-            {
-                // Push backgroundColor and backgroundAlpha directly.
-                // Handle undefined backgroundColor by hiding the background object.
-                /*if (isNaN(getStyle("backgroundColor"))))
-                {
-                    background.visible = false;
-                }
-                else
-                {
-                    background.visible = true;
-                    bgFill.color = getStyle("backgroundColor");
-                    bgFill.alpha = getStyle("backgroundAlpha");
-					borderStroke
-                }*/
-                
-                super.updateDisplayList(unscaledWidth, unscaledHeight);
-            }
-        ]]>        
-    </fx:Script>
     
     <s:states>
         <s:State name="normal" />
         <s:State name="disabled" />
     </s:states>
     
-    <!--- Defines the appearance of the SkinnableContainer class's background. -->
-	<!--s:RectangularDropShadow id="dropShadow" blurX="10" blurY="10"
-							 alpha="0.21" distance="0"  blRadius="6"
-							 angle="120" color="#000101" blendMode="multiply"
-							 left="0" top="0" right="0" bottom="0" /-->
-	
 	
 	<s:Rect left="0" right="0" top="0" bottom="0" >
 		<s:fill>

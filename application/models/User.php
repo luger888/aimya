@@ -36,9 +36,9 @@ class Application_Model_User
             $dbNotifications->createNotifications($lastId);
 
             $folderModel = new Application_Model_Folder();
-            $basePath = 'img/uploads/' . $lastId . '/avatar/base/';
-            $mediumPath = 'img/uploads/' . $lastId . '/avatar/medium/';
-            $thumbnailPath = 'img/uploads/' . $lastId . '/avatar/thumbnail/';
+            $basePath = '/img/uploads/' . $lastId . '/avatar/base/';
+            $mediumPath = '/img/uploads/' . $lastId . '/avatar/medium/';
+            $thumbnailPath = '/img/uploads/' . $lastId . '/avatar/thumbnail/';
             $folderModel->createFolderChain($basePath, '/');
             $folderModel->createFolderChain($mediumPath, '/');
             $folderModel->createFolderChain($thumbnailPath, '/');
@@ -101,23 +101,27 @@ class Application_Model_User
                 $pass .= substr($char_list,(rand()%(strlen($char_list))), 1);
             }
 
-            $data['password'] = $pass;
+            $userData['password'] = $pass;
 
             #update password
-            $db->recoverPass($data);
+
 
             #send e-mail
-            $mail = new Ohana_Mail;
-            $mail->setRecipient($data['email']);
-            $mail->setTemplate(Ohana_Mail::FORGOT_PASSWORD);
+            $mail = new Aimya_Mail;
+            $mail->setRecipient($userData['email']);
+            $mail->setTemplate(Aimya_Mail::FORGOT_PASSWORD);
             $mail->firstName = $userData['firstname'];
             $mail->lastName = $userData['lastname'];
-            $mail->email = $data['email'];
-            $mail->password = $data['password'];
+            $mail->email = $userData['email'];
+            $mail->password = $userData['password'];
             $mail->baseLink = "http://" . $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance()->getBaseUrl();
-            $mail->send();
 
-            return 'done';
+            $result = false;
+            if($mail->send()){
+                $result = $db->recoverPass($userData);
+            }
+
+            return $result;
 
         }else{
 

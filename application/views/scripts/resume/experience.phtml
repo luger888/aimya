@@ -1,5 +1,5 @@
-<?php $this->headScript()->appendFile('/js/jquery/jquery.uploadifive.js');?>
-<?php echo $this->headScript();?>
+<?php $this->headScript()->appendFile('/js/jquery/jquery.uploadifive.js'); ?>
+<?php echo $this->headScript(); ?>
 <script type="text/javascript">
     uploadify('experience');
 </script>
@@ -8,64 +8,73 @@
     <div class="shadowSeparatorBox clearfix">
         <div class="resumeList clearfix">
             <?php
-    if($this->experienceList){
-            foreach ($this->experienceList as $value):?>
-                <div class="shadowSeparator clearfix">
-                    <div class="shadowSeparatorBot clearfix">
-                        <div class="resumeItem clearfix">
-                            <div class="headRow clearfix">
-                                <h1>experience:</h1>
+            if ($this->experienceList) {
+                foreach ($this->experienceList as $value):?>
+                    <div class="shadowSeparator clearfix">
+                        <div class="shadowSeparatorBot clearfix">
+                            <div class="resumeItem clearfix">
+                                <div class="headRow clearfix">
+                                    <h1>experience:</h1>
 
-                                <div class="buttonRow clearfix">
-                                    <input type="button" value="edit" class="button-2 edit"
-                                           onclick="editResumeItem(this, 'experience');">
-                                    <input type="button" value="delete" class="button-2 delete"
-                                           onclick="deleteResumeItem(this, 'experience');">
-                                    <input type="hidden" value="<?php echo $value['id'];?>">
+                                    <div class="buttonRow">
+                                        <input type="button" value="<?php echo $this->translate('edit');?>" class="button-2 edit"
+                                               onclick="editResumeItem(this, 'experience');">
+                                        <input type="button" value="<?php echo $this->translate('delete');?>" class="button-2 delete"
+                                               onclick="deleteResumeItem(this, 'experience');">
+                                        <input type="hidden" value="<?php echo $value['id'];?>">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="resumeItemBody clearfix">
-                                <?php echo $value['content'];?>
-                            </div>
-                            <?php if (isset($value['certificate'])) {
-                            echo '<div class="resumeItemCertificates clearfix">Certificates:';
-                            foreach ($value['certificate'] as $index => $cert) {
-                                echo '<div><a class="certificate" href="../' . $value['certificateUrl'][$index] . '/' . $cert . '">' . $cert . '</a></div>';
+                                <div class="resumeItemBody clearfix">
+                                    <?php echo $value['content'];?>
+                                </div>
+                                <?php if (isset($value['certificate'])) {
+                                echo '<div class="resumeItemCertificates clearfix">Certificates:';
+                                foreach ($value['certificate'] as $index => $cert) {
+                                    $googleDocViewer ='https://docs.google.com/viewer?url=' ;
+                                    $href ='http://aimya.com/' . substr($value['certificateUrl'][$index],2) . '/' . $cert ;
+                                    $extension = substr($cert,-4);
+                                    if($extension == '.doc' || $extension == '.pdf'){
+                                        echo '<div><a class="certificate" target="_blank" href="'.$googleDocViewer.$href.'">' . $cert . '</a></div>';
+                                    }else{
+                                        echo '<div><a class="certificate" href="../' . $value['certificateUrl'][$index] . '/' . $cert . '">' . $cert . '</a></div>';
+                                    }
+
+                                }
+                                echo '</div>';
                             }
-                            echo '</div>';
-                        }
-                            ?>
+                                ?>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <?php endforeach;
-        echo '</div>
+                    <?php endforeach;
+                echo '</div>
                 <div class="buttonsRow clearfix">
-                    <input type="button" class="button-2 add addResumeItem floatRight" value="add experience"
-                   onclick="addResumeItem();">
+                    <input type="button" class="button-2 add addResumeItem floatRight" value="'. $this->translate('add experience').'" onclick="addResumeItem();">
                 </div>';
-    }else{
-        echo '<script>addResumeItem()</script>';
-    }
+            } else {
+                echo '<script>addResumeItem()</script>';
+            }
             ?>
+            <div class="resumeItemForm">
+                <h1>Add new experience:</h1>
+
+                <div class="formRow clearfix">
+                    <?php
+                    echo $this->experienceForm->getElement('experience');
+                    ?>
+                </div>
+                <div class="uploadWrapper">
+
+                    <input id="file_uploadexperience" name="file_upload" type="file" multiple="true">
+                    <input type="button" value="<?php echo $this->translate('save');?>" class="button-2 save floatRight"
+                           onclick="saveResumeItem('experience');">
+                </div>
+                <div id="queueexperience"></div>
+            </div>
         </div>
 
-        <div class="resumeItemForm">
-           <h1>Add new experience:</h1>
-            <div class="formRow clearfix">
-                <?php
-                echo $this->experienceForm->getElement('experience');
-                ?>
-            </div>
-            <div class="uploadWrapper">
 
-                <input id="file_uploadexperience" name="file_upload" type="file" multiple="true">
-                <input type="button" value="save" class="button-2 save floatRight"
-                       onclick="saveResumeItem('experience');">
-            </div>
-            <div id="queue"></div>
-        </div>
     </div>
 
 

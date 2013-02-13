@@ -10,7 +10,9 @@ if ($this->userData['role'] == '1') {
 }
 ?>
 <div class="userProfileTab">
-    <div class="firstSeparator"></div>
+    <div class="firstSeparator">
+        <div class="timezone"><?php echo $this->translate('time zone') ?>: <?php echo $this->userData['timezone']?><?php echo $this->translate('UTC') ?></div>
+    </div>
 
     <div class="imageBlock"><img src="<?php echo $this->avatarPath;?>"></div>
     <div
@@ -20,19 +22,27 @@ if ($this->userData['role'] == '1') {
     <?php $userData = $this->userData; ?>
     <?php $friendTable = new Application_Model_DbTable_Friends(); ?>
     <?php $isFriend = $friendTable->isFriend($userData['id']); ?>
+    <?php $isInList = $friendTable->isInList($userData['id']); ?>
+    <?php $defaultRequestText = ''; ?>
     <?php if (!$isFriend): ?>
-    <?php $sendRequestForm = new Application_Form_Friend(); ?>
-    <?php $sendRequestForm->friend_id->setValue($userData['id']); ?>
-    <form action="<?php echo $this->baseUrl();?>/friends/send/" method="post" id="send_request">
-        <?php echo $sendRequestForm->friend_id; ?>
-        <?php echo $sendRequestForm->url;?>
-        <?php echo $sendRequestForm->sendbutton; ?>
-
-    </form>
+        <?php if(!($this->userData['role'] == '1' && Zend_Auth::getInstance()->getIdentity()->role == '1')):?>
+            <?php if($isInList): ?>
+                <?php if($isInList['sender_id'] == Zend_Auth::getInstance()->getIdentity()->id && $isInList['sender_status'] == 1): ?>
+                    <span class="addAccount" style="background: none"><?php echo $this->translate('REQUEST SENT')?></span>
+                <?php else: ?>
+                    <?php $defaultRequestText = 'Hello ' . $this->userData['username'] . ', I have approved your request.'?>
+                    <input id="sendbutton" class="button-2 addAccount" type="button" onclick="showFriendForm('<?php echo $userData['id']; ?>', '<?php echo $defaultRequestText; ?>', this)" value="ADD TO MY ACCOUNT" name="sendbutton">
+                <?php endif; ?>
+            <?php else: ?>
+                <?php $defaultRequestText = 'Hello ' . $this->userData['username'] . ', I would like add you to my account.'?>
+                <input id="sendbutton" class="button-2 addAccount" type="button" onclick="showFriendForm('<?php echo $userData['id']; ?>', '<?php echo $defaultRequestText; ?>', this)" value="ADD TO MY ACCOUNT" name="sendbutton">
+            <?php endif; ?>
+        <?php endif; ?>
     <?php endif; ?>
     <ul class="userInfo">
         <?php if ($this->profile['birthday']) echo '<li class = "birthday">' . $this->profile["birthday"] . '</li><br>';?>
-        <?php if ($this->userData['gender']) echo '<li class = "gender">' . $this->userData["gender"] . '</li><br>';?>
+        <?php if ($this->userData['gender']=='male') echo '<li class = "gender male">' . $this->userData["gender"] . '</li><br>';
+        else echo '<li class = "gender female">' . $this->userData["gender"] . '</li><br>';?>
         <?php if ($this->profile['education']) echo '<li class = "education">' . $this->profile["education"] . '</li><br>';?>
         <?php if ($this->profile['degree']) echo '<li class = "degree">' . $this->profile["degree"] . '</li><br>';?>
         <?php if ($this->profile['language']) echo '<li class = "language">' . $this->profile["language"] . '</li><br>';?>
@@ -40,7 +50,7 @@ if ($this->userData['role'] == '1') {
     <div class="middleSeparator"></div>
     <?php if ($this->profile['add_info']): ?>
     <div class="aboutBlock">
-        <span class="title">ABOUT ME:</span>
+        <span class="title"><?php echo $this->translate('ABOUT ME') ?>:</span>
 
         <div class="aboutMe"><?php echo $this->profile['add_info'];?></div>
     </div>
@@ -81,7 +91,8 @@ if ($this->userData['role'] == '1') {
                     if ($i == 0) {
                         echo  '<span class="title">SERVICES REQUESTED:</span>';
                     }
-                    echo '<div class="serviceItem"><span class = "mainCategory">' . $service['lesson_category'] . ':</span><span class="subCategory">' . $service['subcategory'] . '</span></div>';
+                    echo '<div class="serviceItem"><span class = "mainCategory">' . $service['lesson_category'] . ':</span><span class="subCategory">' . $service['subcategory'] . '</span>
+                         </div><div class = "serviceInfo" >' . $service['description'] . '</div>';
                     if ($i == 0) {
                         echo '<div class="middleSeparatorSecond"></div>';
                         $i++;
@@ -97,13 +108,18 @@ if ($this->userData['role'] == '1') {
     <?php if ($this->availability): ?>
     <div class="availability clearfix">
         <span class="title">AVAILABLE:</span>
-
-        <div class="timezone">Time Zone: <?php echo $this->userData['timezone']?> UTC</div>
         <?php ?>
         <ul>
             <li><span class="day">Monday</span><span
                 class="from"><?php echo $this->availability['fromMon'];?></span>to<span
-                class="to"><?php echo $this->availability['toMon'];?></span></li>
+                class="to"><?php
+                    if($this->availability['toMon'] !== '...'){
+                        echo $this->availability['toMon'].'</span></li>';
+                    }else{
+                        echo 'ANY</span></li>';
+                    }
+                        ?>
+
             <li><span class="day">Tuesday</span><span
                 class="from"><?php echo $this->availability['fromTue'];?></span>to<span
                 class="to"><?php echo $this->availability['toTue'];?></span></li>
@@ -131,5 +147,20 @@ if ($this->userData['role'] == '1') {
     <div class="lastSeparator"></div>
 
 </div>
+<?php if (!$isFriend): ?>
+    <div id="friend-request-dialog" title="<?php echo $this->translate('add to account') ?>:">
+        <div class="dialog-wrapper">
+            <?php $sendRequestForm = new Application_Form_Friend(); ?>
+            <?php if(!($this->userData['role'] == '1' && Zend_Auth::getInstance()->getIdentity()->role == '1')):?>
+                <form action="<?php echo $this->baseUrl();?>/friends/send/" method="post" id="send_request">
+                    <?php echo $sendRequestForm->friend_id; ?>
+                    <?php echo $sendRequestForm->url;?>
+                    <?php echo $sendRequestForm->request_comment;?>
+                    <?php echo $sendRequestForm->sendbutton; ?>
+                </form>
+            <?php endif; ?>
+        </div>
+    </div>
+<?php endif; ?>
 
 

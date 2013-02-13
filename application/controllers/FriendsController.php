@@ -6,6 +6,7 @@ class FriendsController extends Zend_Controller_Action
         $this->_helper->layout->setLayout("layoutInner");
         $this   ->_helper->AjaxContext()
             ->addActionContext('send', 'json')
+            ->addActionContext('autocomplete', 'json')
             ->initContext('json');
     }
 
@@ -22,10 +23,12 @@ class FriendsController extends Zend_Controller_Action
                 $friendTable = new Application_Model_DbTable_Friends();
                 $url = $this->getRequest()->getParam('url');
                 $url = substr($url, 3);
-
-                $result = $friendTable->addFriend($friendId);
+                $message = $this->getRequest()->getParam('request_comment');
+                $result = $friendTable->addFriend($friendId, $message);
 
                 if($result) {
+                    $notesDb = new Application_Model_Notifications();
+                    $notesDb->sendAlerts($friendId, 'friend');//send email if needed
                     $this->_helper->flashMessenger->addMessage(array('success'=>'Request successfully sent'));
                     $this->redirect($url);
                 } else {
@@ -33,21 +36,40 @@ class FriendsController extends Zend_Controller_Action
                     $this->redirect($url);
                 }
             }
+        } elseif($this->getRequest()->isGet()) {
+            if($this->getRequest()->getParam('friend_id')){
+                $friendId = $this->getRequest()->getParam('friend_id');
+                $friendTable = new Application_Model_DbTable_Friends();
+                $url = $this->getRequest()->getParam('url');
+                $url = substr($url, 3);
+                $message = '';
+                $result = $friendTable->addFriend($friendId, $message);
+
+                if($result) {
+                    $this->_helper->flashMessenger->addMessage(array('success'=>'You successfully added this user to your account'));
+                    $this->redirect($url);
+                } else {
+                    $this->_helper->flashMessenger->addMessage(array('failure'=>'Problem with sending request, please try again later'));
+                    $this->redirect($url);
+                }
+            }
+        } else {
             if($this->getRequest()->getParam('friend_id')){
                 $friendId = $this->getRequest()->getParam('friend_id');
                 $friendTable = new Application_Model_DbTable_Friends();
 
-
-                $result = $friendTable->addFriend($friendId);
+                $message = '';
+                $result = $friendTable->addFriend($friendId, $message);
 
                 if($result) {
                     $this->view->result = $result;
                     $this->view->successFlash = "Request successfully sent";
                 } else {
-                     $this->view->alertFlash = 'Problem with sending request, please try again later';
+                    $this->view->alertFlash = 'Problem with sending request, please try again later';
                 }
             }
         }
+
     }
 
     public function listAction()
