@@ -655,13 +655,13 @@ jQuery(document).ready(function () {
                 var currentDate = new Date(response.time);
 
                 var currentTime = new Date(currentDate.getTime() + 10 * 60000);
-
                 $(function () {
                     $('#started_at_time').scroller({ preset:'time', theme:'android-ics', ampm:false, timeFormat:'HH:ii'});
                     $('#started_at').change(function () {
                         var oldDateObj = new Date();
                         var today = oldDateObj.getDate();
                         var choosenDate = new Date($('#started_at').val()).getDate();
+
                         if (choosenDate == today) {
                             $('#started_at_time').val('');
                             $('#started_at_time').scroller({ preset:'time', theme:'android-ics', ampm:false, timeFormat:'HH:ii', minDate:currentTime});

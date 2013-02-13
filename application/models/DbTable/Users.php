@@ -382,16 +382,13 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         $timezone = $data->query()->fetch();
 
 
-        date_default_timezone_set('Europe/London');
-        $date = gmdate("m/d/Y H:i"); //current time in GMT 0
-
 
         $separatedData = explode(':', $timezone['timezone']); //exploding HH: MM by ':'
         $minutesInHours = $separatedData[0] * 60; // HH -> minutes
         $minutesInDecimals = $separatedData[1]; // MM -> minutes
-        $totalMinutes = $minutesInHours + $minutesInDecimals; //converted timezone to minutes
-        $dateWithUTC = gmdate("m/d/Y h:i:s", strtotime($date) + (($totalMinutes) * 60)); //adding timezone to current date
+        $totalMinutes = $minutesInHours + $minutesInDecimals; //converted timezone to minutes     (540)
+        $dateWithUTC = date("m/d/Y H:i:s", time() + (($totalMinutes) * 60) ); //adding timezone to current date
 
-        return $dateWithUTC;
+        return  $dateWithUTC;
     }
 }
