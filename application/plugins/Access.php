@@ -53,7 +53,7 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         $acl->allow(self::STUDENT , 'friends', array('list', 'send'));
         $acl->allow(self::STUDENT , 'message', array('inbox', 'send', 'sent', 'trash', 'archived', 'masstrash', 'massdelete', 'massarchive', 'massrestore', 'delete', 'forward', 'index', 'reply', 'view', 'count'));
         $acl->allow(self::STUDENT , 'search', array('search'));
-        $acl->allow(self::STUDENT , 'booking', array('index', 'approve', 'add', 'cancel', 'reject', 'count'));
+        $acl->allow(self::STUDENT , 'booking', array('index', 'approve', 'add', 'cancel', 'reject', 'count', 'remove'));
         $acl->allow(self::STUDENT , 'feedback', array('create', 'form', 'view'));
         $acl->allow(self::STUDENT , 'payment', array('upgrade', 'remained', 'subscribe', 'pay'));
         $acl->deny(self::STUDENT ,  'user', array('registration', 'login'));

@@ -38,36 +38,36 @@ class BookingController extends Zend_Controller_Action
 
         if ($this->getRequest()->isPost()) {
             $data = $this->getRequest()->getParams();
-                if ($bookingForm->isValid($data)) {
-                    if ($identity->role == '1') {
-                        $this->getRequest()->setParam('is_sender_teacher', '0');
-                    }
-                    $userGmt = $userDbTable->getTimeZone($this->getRequest()->getParam('sender_id'));
-                    $bookingDbTable = new Application_Model_DbTable_Booking();
-                    $this->getRequest()->setParam('creator_tz', $userGmt['timezone']);
-                    if($this->getRequest()->getParam('recipient_id')){
-                        $isExist = $bookingDbTable->isExistBooking(null, $identity->id, $this->getRequest()->getParam('started_at'), $this->getRequest()->getParam('duration'));
-                        if(!$isExist){
-                            $friendsDb= new Application_Model_DbTable_Friends();
-                            $isBlocked = $friendsDb->isBlocked($this->getRequest()->getParam('recipient_id'));
-                            if(!$isBlocked){
-                                $bookingDbTable->addBooking($this->getRequest()->getParams(), $identity->id);
-                                $this->view->success = 1;
-                            }else{
-                                $this->view->blocked =1;
-                            }
-
-                        }else{
-                            $this->view->fail = 1;
+            if ($bookingForm->isValid($data)) {
+                if ($identity->role == '1') {
+                    $this->getRequest()->setParam('is_sender_teacher', '0');
+                }
+                $userGmt = $userDbTable->getTimeZone($this->getRequest()->getParam('sender_id'));
+                $bookingDbTable = new Application_Model_DbTable_Booking();
+                $this->getRequest()->setParam('creator_tz', $userGmt['timezone']);
+                if ($this->getRequest()->getParam('recipient_id')) {
+                    $isExist = $bookingDbTable->isExistBooking(null, $identity->id, $this->getRequest()->getParam('started_at'), $this->getRequest()->getParam('duration'));
+                    if (!$isExist) {
+                        $friendsDb = new Application_Model_DbTable_Friends();
+                        $isBlocked = $friendsDb->isBlocked($this->getRequest()->getParam('recipient_id'));
+                        if (!$isBlocked) {
+                            $bookingDbTable->addBooking($this->getRequest()->getParams(), $identity->id);
+                            $this->view->success = 1;
+                        } else {
+                            $this->view->blocked = 1;
                         }
 
-
+                    } else {
+                        $this->view->fail = 1;
                     }
 
-                }else{
-                    $this->view->success = 0;
-                    $this->view->errors = $bookingForm->getErrors();
+
                 }
+
+            } else {
+                $this->view->success = 0;
+                $this->view->errors = $bookingForm->getErrors();
+            }
         }
     }
 
@@ -78,7 +78,7 @@ class BookingController extends Zend_Controller_Action
             $bookingDbTable = new Application_Model_DbTable_Booking();
             if ($this->getRequest()->getParam('booking_id')) {
                 $isExist = $bookingDbTable->isExistBooking($this->getRequest()->getParam('booking_id'), $identity->id);
-                if(!$isExist){
+                if (!$isExist) {
                     $bookingDbTable = new Application_Model_DbTable_Booking();
                     $bookingDbTable->approveBooking($this->getRequest()->getParam('booking_id'), $identity->id);
                     $this->view->approved = 1;
@@ -102,10 +102,10 @@ class BookingController extends Zend_Controller_Action
                 $user = $userTable->getItem($this->getRequest()->getParam('sender_id'));
 
                 $messageTable = new Application_Model_DbTable_Message();
-                $message = array('sender_id'=>$identity->id,
-                    'recipient_id'=>$this->getRequest()->getParam('sender_id'),
-                    'content'=>"The booked lesson with ".$user['username']." on ".$bookingItem['started_at']." has been rejected. Please, reply person for more details.",
-                    'subject'=>"Lesson has been rejected.");
+                $message = array('sender_id' => $identity->id,
+                    'recipient_id' => $this->getRequest()->getParam('sender_id'),
+                    'content' => "The booked lesson with " . $user['username'] . " on " . $bookingItem['started_at'] . " has been rejected. Please, reply person for more details.",
+                    'subject' => "Lesson has been rejected.");
                 $messageTable->sendMessage($message);
                 $bookingDbTable->rejectBooking($this->getRequest()->getParam('booking_id'), $identity->id);
             }
@@ -126,10 +126,10 @@ class BookingController extends Zend_Controller_Action
                 $user = $userTable->getItem($this->getRequest()->getParam('recipient_id'));
 
                 $messageTable = new Application_Model_DbTable_Message();
-                $message = array('sender_id'=>$identity->id,
-                                'recipient_id'=>$this->getRequest()->getParam('recipient_id'),
-                                'content'=>"Dear ".$user['username'].". I am cancelling Lesson on ".$bookingItem['started_at'].". Please, confirm the cancellation and we will reschedule new time for a Lesson at more convenient time upon mutual agreement. In order to do so, please, go to “My Booking”, find the requested Lesson and confirm cancellation. Thank you",
-                                'subject'=>"Lesson Cancellation!");
+                $message = array('sender_id' => $identity->id,
+                    'recipient_id' => $this->getRequest()->getParam('recipient_id'),
+                    'content' => "Dear " . $user['username'] . ". I am cancelling Lesson on " . $bookingItem['started_at'] . ". Please, confirm the cancellation and we will reschedule new time for a Lesson at more convenient time upon mutual agreement. In order to do so, please, go to “My Booking”, find the requested Lesson and confirm cancellation. Thank you",
+                    'subject' => "Lesson Cancellation!");
                 $messageTable->sendMessage($message);
             }
             if ($this->getRequest()->getParam('cancelConfirmId')) {
@@ -139,6 +139,19 @@ class BookingController extends Zend_Controller_Action
             if ($this->getRequest()->getParam('cancelRejectId')) {
                 $bookingDbTable->cancelBooking($this->getRequest()->getParam('cancelRejectId'), $identity->id, 'reject');
                 $this->view->rejected = 1;
+            }
+        }
+    }
+
+    public function removeAction()
+    {
+        if ($this->getRequest()->isPost()) {
+            $bookingDbTable = new Application_Model_DbTable_Booking();
+            if ($this->getRequest()->getParam('booking_id')) {
+                $result = $bookingDbTable->removeBooking($this->getRequest()->getParam('booking_id'));
+                if($result){
+                    $this->view->success= 1;
+                }
             }
         }
     }
