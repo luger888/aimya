@@ -541,6 +541,8 @@ jQuery(document).ready(function () {
 
                     element.find(".fc-event-content").append('<div class="fc-event-content-approve pending"><span>Pending</span></div>');
                 } else {
+                    console.log(startLesson)
+                    console.log(current)
                     element.find(".fc-event-content").append('<input type = "button"  id ="removetBooking" onclick="removeBooking(this)" value = "Remove"  class="fc-event-content-reject fc-button cancel">');
                     element.find(".fc-event-content").append('<input type = "hidden" id = "booking_id"  value = ' + event.booking_id + ' >');
                     element.find(".fc-event-content").append('<div class="fc-event-content-approve pending"><span>Expired</span></div>');
