@@ -124,7 +124,8 @@ class Application_Model_Lesson
                 return 2;
             }
         } else {
-            return false;
+            Zend_Debug::dump(' if ((file_exists($path) OR is_dir($path))) { ----> false');
+            Zend_Debug::dump($path);die;
         }
 
 
