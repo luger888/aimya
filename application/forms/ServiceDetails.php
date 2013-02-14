@@ -18,8 +18,6 @@ class Application_Form_ServiceDetails extends Zend_Form
         $this->setName('serviceDetails');
 
         $action = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
-
-
         $serviceType = new Zend_Form_Element_Hidden('service_type');
         $serviceType->setAttrib('id', 'service_type')
             ->addFilters($this->basicFilters)
@@ -51,18 +49,18 @@ class Application_Form_ServiceDetails extends Zend_Form
             $lesson_categoryReq->addOption($value['title'], $value['title']);
         }
 
-
-
         $subcategory = new Zend_Form_Element_Text('subcategory');
         $subcategory ->setAttrib('placeholder', 'specify your area of expertise')
             ->setAttrib('id', 'subcategoryInput')
             ->addFilters($this->basicFilters)
+            ->setAttrib('maxlength', '25')
             ->setDecorators($this->basicDecorators)
             ->setErrorMessages(array('This must be a number. Currency is in US Dollars.'));
 
         $rate = new Zend_Form_Element_Text('rate');
         $rate ->setAttrib('class', 'required input-small')
             ->addValidator('Digits')
+            ->setAttrib('maxlength', '10')
             ->setAttrib('placeholder', 'rate')
             ->setAttrib('id', 'rateInput')
             ->addFilters($this->basicFilters)
