@@ -28,7 +28,7 @@
                         <div class='profileRole'><?php $role = ($person['role'] == '1' ? 'Student' : 'Instructor');
                             echo $role;?></div>
                         <?php if ($person['role'] != 1) {
-                        if(!$person['averageRating']){
+                        if(!isset($person['averageRating'])){
                             $person['averageRating'] =0;
                         }
                         echo '<div class="starsBlock">
