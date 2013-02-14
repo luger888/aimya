@@ -14,7 +14,7 @@ class Application_Form_ResumeEducation extends Zend_Form
         $education = new Zend_Form_Element_Textarea('education');
         $education ->setAttrib('id', 'education')
             ->addFilters($this->basicFilters)
-            ->setAttrib('maxlength', '1000')
+        
             ->setDecorators($this->basicDecorators)
             ->setAttrib('rows', '7');
 

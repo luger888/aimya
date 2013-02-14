@@ -14,7 +14,7 @@ class Application_Form_ResumeExperience extends Zend_Form
         $experience = new Zend_Form_Element_Textarea('experience');
         $experience ->setRequired(true)
             ->setAttrib('id', 'experience')
-            ->setAttrib('maxlength', '1000')
+        
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators)
             ->setAttrib('rows', '7');
