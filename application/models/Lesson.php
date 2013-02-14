@@ -119,7 +119,7 @@ class Application_Model_Lesson
         $pathMkv = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $teacherId . DIRECTORY_SEPARATOR . $lessonId . DIRECTORY_SEPARATOR . 'video' . DIRECTORY_SEPARATOR . 'video_lesson.mkv';
         if ((file_exists($path) OR is_dir($path))) {
             if (!file_exists($pathMkv) OR !is_dir($pathMkv)) {
-                return $path;
+                return 'http://aimya.com/users/'.$teacherId.'/'.$lessonId.'/video/video_lesson_rec.flv';
             } else {
                 return 2;
             }
