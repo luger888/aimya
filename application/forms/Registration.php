@@ -16,6 +16,7 @@ class Application_Form_Registration extends Zend_Form
             #->setAttrib('placeholder', 'First Name')
             ->setAttrib('class', 'regTextInput')
             ->setAttrib('id', 'firstname')
+            ->setAttrib('maxlength', '50')
             ->addFilters($this->basicFilters)
             ->setErrorMessages(array('Insert your first name'))
             ->setLabel('first name:');
@@ -26,6 +27,7 @@ class Application_Form_Registration extends Zend_Form
             ->addValidator('NotEmpty')
             ->setAttrib('class', 'regTextInput')
             #->setAttrib('placeholder', 'Last Name')
+            ->setAttrib('maxlength', '50')
             ->setAttrib('id', 'lastname')
             ->addFilters($this->basicFilters)
             ->setErrorMessages(array('Insert your last name'))
@@ -52,6 +54,7 @@ class Application_Form_Registration extends Zend_Form
         $userName->setRequired(true)
             ->addValidator('NotEmpty')
            # ->setAttrib('placeholder', 'User Name')
+            ->setAttrib('maxlength', '50')
             ->setAttrib('class', 'regTextInput')
             ->setAttrib('id', 'username')
             ->addFilters($this->basicFilters)
@@ -64,6 +67,7 @@ class Application_Form_Registration extends Zend_Form
             ->addValidator(new Zend_Validate_EmailAddress())
             #->setAttrib('placeholder', 'E-mail')
             #->setAttrib('placeholder', 'email address')
+            ->setAttrib('maxlength', '50')
             ->setAttrib('class', 'clearInput regTextInput email')
             ->setErrorMessages(array('Insert your email'))
             ->setLabel('email address:');
