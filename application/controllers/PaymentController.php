@@ -253,9 +253,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
                 }
 
                 $this->redirect($response['url']);
-                Zend_Debug::dump(1);die;
             } else {
-                Zend_Debug::dump(2);die;
                 $this->redirect('/payment');
             }
         } else {
