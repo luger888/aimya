@@ -937,6 +937,7 @@ input.button-2 {
 .featuredTxt {
     float: left;
     width: 440px;
+    word-wrap:break-word;
 }
 
 
