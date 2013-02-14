@@ -674,7 +674,7 @@ function getVideo(e, id) {
                     flashvars.infobutton = 'on';
                     flashvars.volumebutton = 'on';
                     flashvars.titletext = 'Dynamic Video Player V5';
-                    flashvars.descriptiontext = 'you can write a short description for your movie';
+                    flashvars.descriptiontext = '';
                     flashvars.autoplay = 'true';
 
                     attributes.id = 'vp1';
@@ -718,11 +718,11 @@ function getNotes(e, id) {
                 $('.dialogFooter').prepend('<input type="hidden" name="les_id" value = "' + id + '">');
                 $('.timeLeftSpan').html(result.date + ' ');
                 if (result.isTeacher && !result.rate) {
-                    element.find('#sendRating').remove();
-                    element.find('.timeLeft').remove();
-                    element.find('.comment').remove();
-                    element.find('#starsBlockFeedback').remove();
-                    element.find('.rate').remove();
+                    $('#sendRating').remove();
+                    $('.timeLeft').remove();
+                    $('.comment').remove();
+                    $('#starsBlock').remove();
+                    $('.rate').remove();
                 }
                 if (result.rate) {
                     $('#sendRating').remove();
