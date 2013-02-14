@@ -355,7 +355,17 @@ input.btnLogin {
     color: #000;
     display: block;
 }
-
+.formRow  .agreement{
+    font-size: 11px;
+    line-height: 34px;
+    color: #324503;
+    text-decoration: none;
+    text-shadow: 1px 1px 1px #fff;
+}
+.formRow  .agreement a{
+    font-size: 11px;
+    text-transform: capitalize;
+}
 .formRow.radio dt label {
     line-height: 14px;
 }
