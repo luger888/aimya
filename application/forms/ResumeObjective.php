@@ -11,6 +11,7 @@ class Application_Form_ResumeObjective extends Zend_Form
         $objective ->addValidator('NotEmpty')
             ->setRequired(true)
             ->setAttrib('id', 'objective')
+            ->setAttrib('maxlength', '1000')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators)
             ->setAttrib('rows', '7');
