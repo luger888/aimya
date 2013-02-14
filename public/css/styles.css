@@ -2275,7 +2275,7 @@ float:right;
 .admin .metricItem .head{
     display: inline-block;
     padding-left: 30px;
-    text-transform: capitalize;
+
     width: 100px;
 }
 
