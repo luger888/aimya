@@ -646,7 +646,7 @@ function getVideo(e, id) {
                     var flashvars = {};
                     var params = {};
                     var attributes = {};
-
+                    console.log(result.videopath);
                     params.codebase = 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0';
                     params.width = '320';
                     params.height = '240';
@@ -667,7 +667,7 @@ function getVideo(e, id) {
                     flashvars.width = '500';
                     flashvars.height = '350';
                     flashvars.imagepath = '../../images/content/videoPlayer.png';
-                    flashvars.videopath = 'http://aimya.com/users/4/58/video/video_lesson_rec.flv';
+                    flashvars.videopath = result.videopath;
                     //flashvars.color='0x2C75A3'
                     flashvars.volume = '0.3';
                     flashvars.fullscreenbutton = 'on';
