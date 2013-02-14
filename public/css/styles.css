@@ -1427,6 +1427,10 @@ input.button-2 {
 .messageTab .messageButtons .archived{
     padding-right:9px;
 }
+#mainContent ul li {
+    list-style-type:none;
+
+}
 #mainContent #tabsNavigation ul li {
     list-style-type:none;
     float:left;
