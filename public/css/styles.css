@@ -2275,14 +2275,14 @@ float:right;
 .admin .metricItem .head{
     display: inline-block;
     padding-left: 30px;
-
+    text-transform: capitalize;
     width: 100px;
 }
 
 .ui-tabs .metricItem .head{
     display: inline-block;
     padding-left: 30px;
-    text-transform: capitalize;
+
     width: 250px;
 }
 .admin .metricItem .formRow:nth-child(even){
