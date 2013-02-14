@@ -14,6 +14,7 @@ class Application_Form_ResumeSkills extends Zend_Form
         $skill = new Zend_Form_Element_Textarea('skill');
         $skill ->setAttrib('id', 'skill')
             ->addFilters($this->basicFilters)
+            ->setAttrib('maxlength', '1000')
             ->setDecorators($this->basicDecorators)
             ->setAttrib('rows', '7');
 

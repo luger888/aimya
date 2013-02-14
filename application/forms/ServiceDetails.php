@@ -80,6 +80,7 @@ class Application_Form_ServiceDetails extends Zend_Form
         $description = new Zend_Form_Element_Textarea('description');
         $description->setLabel('Describe Your Service Details')
             ->setAttrib('id', 'descriptionInput')
+            ->setAttrib('maxlength', '1000')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators)
             -> setAttrib('rows', '7');
