@@ -389,8 +389,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                             <div class ='leftBlockFeature'><div class='imageBlock boxShadow'><img src=".$avatarPath."></div><div class='profileRole'>
                 ".$role."</div>
                 <div class='starsBlock'>
-                    <span data-rating='4' class='stars'></span><span
-                    class='total'>(0)</span>
+                    <span data-rating='4' class='stars'></span>
                 </div>
                         </div>
                                 <div class='featuredButtonsTop clearfix'>
