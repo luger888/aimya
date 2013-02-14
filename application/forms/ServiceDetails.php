@@ -40,6 +40,19 @@ class Application_Form_ServiceDetails extends Zend_Form
             $lesson_category->addOption($value['title'], $value['title']);
         }
 
+        $lesson_categoryReq = new Aimya_Form_Element_SelectAttribs('lesson_category');
+
+        $lesson_categoryReq->setAttrib('id', 'lesson_categoryInput')
+            ->addFilters($this->basicFilters)
+            ->setDecorators($this->basicDecorators);
+
+        $lesson_categoryReq->addOption('', ' Specify an area you need help with',array());
+        foreach ($lessonCategories as  $value) {
+            $lesson_categoryReq->addOption($value['title'], $value['title']);
+        }
+
+
+
         $subcategory = new Zend_Form_Element_Text('subcategory');
         $subcategory ->setAttrib('placeholder', 'specify your area of expertise')
             ->setAttrib('id', 'subcategoryInput')
@@ -71,12 +84,7 @@ class Application_Form_ServiceDetails extends Zend_Form
             ->setDecorators($this->basicDecorators)
             -> setAttrib('rows', '7');
 
-        $descriptionReq = new Zend_Form_Element_Textarea('description');
-        $descriptionReq->setLabel('Specify an area you need help with')
-            ->setAttrib('id', 'descriptionInput')
-            ->addFilters($this->basicFilters)
-            ->setDecorators($this->basicDecorators)
-            -> setAttrib('rows', '7');
+
         $submit = new Zend_Form_Element_Submit('saveService');
         $submit ->setLabel('save')
             ->setAttrib('id', 'saveService')
@@ -92,7 +100,7 @@ class Application_Form_ServiceDetails extends Zend_Form
             ->setDecorators($this->basicDecorators);
 
         if($action == 'requestservices') {
-            $this->addElements(array($serviceType, $lesson_category, $subcategory, $descriptionReq, $submitReq));
+            $this->addElements(array($serviceType, $lesson_categoryReq, $subcategory, $description, $submitReq));
         }
         if($action == 'services') {
             $this->addElements(array($serviceType, $lesson_category, $subcategory, $rate, $duration, $description, $submit));
