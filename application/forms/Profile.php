@@ -47,6 +47,7 @@ class Application_Form_Profile extends Zend_Form
         $firstName = new Zend_Form_Element_Text('firstname');
         $firstName ->setAttrib('placeholder', 'First Name')
             ->setAttrib('class', 'required')
+            ->setAttrib('maxlength', '50')
             ->setAttrib('id', 'firstname')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
@@ -55,6 +56,7 @@ class Application_Form_Profile extends Zend_Form
         $lastName ->setAttrib('class', 'required')
             ->setAttrib('placeholder', 'Last Name')
             ->setAttrib('id', 'lastname')
+            ->setAttrib('maxlength', '50')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 
@@ -81,12 +83,14 @@ class Application_Form_Profile extends Zend_Form
         $language = new Zend_Form_Element_Text('language');
         $language ->setAttrib('placeholder', 'Language Spoken')
             ->setAttrib('id', 'language')
+            ->setAttrib('maxlength', '50')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 
         $username = new Zend_Form_Element_Text('username');
         $username ->setAttrib('id', 'username')
             ->setAttrib('placeholder', 'username')
+            ->setAttrib('maxlength', '50')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 
@@ -95,6 +99,7 @@ class Application_Form_Profile extends Zend_Form
             ->setAttrib('placeholder', 'E-mail')
             ->setAttrib('placeholder', 'email address')
             ->setAttrib('class', 'clearInput required email')
+            ->setAttrib('maxlength', '50')
             ->setDecorators($this->basicDecorators);
 
         $timeZone = new Zend_Form_Element_Select('timezone');
