@@ -1428,9 +1428,9 @@ input.button-2 {
 .messageTab .messageButtons .archived{
     padding-right:9px;
 }
-#mainContent ul li {
+#mainContent #tabsNavigation ul li {
     list-style-type:none;
-    /*float:left;*/
+    float:left;
 }
 
 .messageTab .userMessages{
@@ -2024,7 +2024,8 @@ float:right;
     width: 800px;
 }
 .userProfileTab .userRating{
-    padding: 10px 0;
+    padding: 0 0 0 9px;
+
 }
 .userProfileTab .services{
     clear:both;
