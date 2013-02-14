@@ -667,7 +667,7 @@ function getVideo(e, id) {
                     flashvars.width = '500';
                     flashvars.height = '350';
                     flashvars.imagepath = '../../images/content/videoPlayer.png';
-                    flashvars.videopath = result.videopath;
+                    flashvars.videopath = 'http://aimya.com/users/4/58/video/video_lesson_rec.flv';
                     //flashvars.color='0x2C75A3'
                     flashvars.volume = '0.3';
                     flashvars.fullscreenbutton = 'on';

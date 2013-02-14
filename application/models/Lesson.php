@@ -120,6 +120,7 @@ class Application_Model_Lesson
         if ((file_exists($path) OR is_dir($path))) {
             if (!file_exists($pathMkv) OR !is_dir($pathMkv)) {
                 return 'http://aimya.com/users/'.$teacherId.'/'.$lessonId.'/video/video_lesson_rec.flv';
+
             } else {
                 return 2;
             }
