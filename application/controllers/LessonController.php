@@ -513,7 +513,7 @@ class LessonController extends Zend_Controller_Action
             if($isTeacher){
                 $this->view->isTeacher = $isTeacher;
             }
-            $videoPath = $lessonModel->getVideo($lesson['id'], $lesson['creator_id']);
+            $videoPath = $lessonModel->getVideo( $lesson['creator_id'], $lesson['id']);
            if($videoPath){
                    $this->view->videoPath = $videoPath;
            }
