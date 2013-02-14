@@ -111,6 +111,11 @@ class Application_Form_Registration extends Zend_Form
             ->setDecorators($this->basicDecorators)
             ->setSeparator('');
 
+//        $agreement = new Zend_Form_Element_Checkbox('agreement');
+//        $agreement ->setRequired(true)
+//            ->setLabel('if you agree on terms of agreement')
+//            ->setDecorators($this->basicDecorators);
+
         $submit = new Zend_Form_Element_Submit('signup');
         $submit ->setAttrib('id', 'signupBtn')
                 ->setLabel('sign up')
