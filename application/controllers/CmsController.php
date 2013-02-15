@@ -17,15 +17,14 @@ class CmsController extends Aimya_Controller_BaseController
         $identity = Zend_Auth::getInstance()->getIdentity();
         if(!$identity){// if no identity - show main page layout
 
-            $this->_helper->layout->setLayout("layout");
+            $this->_helper->layout->setLayout("layoutStatic");
             $this->view->headScript()->appendFile('../../js/jquery/validation/registrationValidation.js');
             $login = new Application_Form_Login();
-            $reg = new Application_Form_Registration();
+
 
             $this->view->login = $login->getElements();
-            $this->view->reg = $reg->getElements();
         }else{
-            $this->_helper->layout->setLayout("layoutInner");
+            $this->_helper->layout->setLayout("layoutInnerstatic");
         }
 
     }
