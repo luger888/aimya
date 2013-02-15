@@ -75,7 +75,7 @@ class Application_Form_Registration extends Zend_Form
 
         $password = new Zend_Form_Element_Password('password');
         $password -> setRequired(true);
-        $password->addValidator('stringLength', false, array(6, 200));
+        $password->addValidator('stringLength', false, array(8, 200));
         $password->addValidator('regex', true,
                 array(
                     'pattern' => '/[A-Za-z].*[0-9]|[0-9].*[A-Za-z]/',
