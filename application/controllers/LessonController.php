@@ -236,8 +236,8 @@ class LessonController extends Zend_Controller_Action
             //$res = $lessonTable->setSeleniumPort($activeLesson['id'], $openDispay);
 
             //if ($res) {
-                $lessonModel->openLesson($activeLesson['id'], $openDispay);
-                //$lessonModel->startRecording($activeLesson['id'], $videoPath . 'video_lesson', 5);
+            $lessonModel->openLesson($activeLesson['id'], $openDispay);
+            //$lessonModel->startRecording($activeLesson['id'], $videoPath . 'video_lesson', 5);
             //}
         }
 
@@ -393,6 +393,7 @@ class LessonController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender(true);
 
         if ($this->getRequest()->isXmlHttpRequest()) {
+            $this->writeLog($this->getRequest()->getParams());
             if ($this->getRequest()->getParam('lesson_id') && $this->getRequest()->getParam('booking_id')) {
                 $lessonId = $this->getRequest()->getParam('lesson_id');
                 $bookingId = $this->getRequest()->getParam('booking_id');
@@ -415,6 +416,23 @@ class LessonController extends Zend_Controller_Action
 
             }
         }
+    }
+
+    public function writeLog($data)
+    {
+
+        if ($fh = @fopen("./img/lessonLog.txt", "a+")) {
+
+            $data = print_r($data, 1);
+            fwrite($fh, $data);
+            fclose($fh);
+            return (true);
+        }
+        else
+        {
+            return (false);
+        }
+
     }
 
     public function updatesizeAction()
@@ -510,13 +528,13 @@ class LessonController extends Zend_Controller_Action
             $identity = Zend_Auth::getInstance()->getStorage()->read();
             $bookingDb = new Application_Model_DbTable_Booking();
             $isTeacher = $bookingDb->isTeacher($lesson['booking_id'], $identity->id);
-            if($isTeacher){
+            if ($isTeacher) {
                 $this->view->isTeacher = $isTeacher;
             }
-            $videoPath = $lessonModel->getVideo( $lesson['creator_id'], $lesson['id']);
-           if($videoPath){
-                   $this->view->videoPath = $videoPath;
-           }
+            $videoPath = $lessonModel->getVideo($lesson['creator_id'], $lesson['id']);
+            if ($videoPath) {
+                $this->view->videoPath = $videoPath;
+            }
             $this->view->rate = $review['rating'];
             $this->view->date = $reviewDate;
             //$this->view->notes = $fileContent;
@@ -546,12 +564,12 @@ class LessonController extends Zend_Controller_Action
             $identity = Zend_Auth::getInstance()->getStorage()->read();
             $bookingDb = new Application_Model_DbTable_Booking();
             $isTeacher = $bookingDb->isTeacher($lesson['booking_id'], $identity->id);
-            if($isTeacher){
+            if ($isTeacher) {
                 $this->view->isTeacher = $isTeacher;
             }
             $this->view->rate = $review['rating'];
             $this->view->date = $reviewDate;
-            if($fileContent){
+            if ($fileContent) {
                 $this->view->notes = $fileContent;
             }
 
@@ -611,11 +629,11 @@ class LessonController extends Zend_Controller_Action
                     $lesson = $lessonTable->getItem($lessonId);
                     $bookingDb = new Application_Model_DbTable_Booking();
                     $isTeacher = $bookingDb->isTeacher($lesson['booking_id'], $userId);
-                    if(!$isTeacher){
+                    if (!$isTeacher) {
                         $result = $reviewTable->createReview($rating, $reviewId, $lessonId, $userId, $lesson['booking_id'], $lesson['creator_id']);
                         if ($result) {
                             $notesDb = new Application_Model_Notifications();
-                            $notesDb->sendAlerts($lesson['creator_id'], $rating);//sending email if needed
+                            $notesDb->sendAlerts($lesson['creator_id'], $rating); //sending email if needed
                             $this->view->success = 1;
                         }
                     }
