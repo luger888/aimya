@@ -396,7 +396,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                                     <a class ='button-2 view viewProfile' href='" . Zend_Controller_Front::getInstance()->getBaseUrl() . '/user/' . $person['id'] . "'>" . $this->view->translate('VIEW PROFILE') . "</a>";
                 if (Zend_Auth::getInstance()->getIdentity()->id != $person['id']) {
                     if ($isFriend) {
-                        $featuredHtml .= "<a class ='sendMessage' onclick='sendMessage(" . $person['id'] . ", this);' href='javascript:void(1)'>" . $this->view->translate('SEND MESSAGE') . "</a>";
+                        $featuredHtml .= "<a class ='sendMessage createMessage button-2 floatLeft' onclick='sendMessage(" . $person['id'] . ", this);' href='javascript:void(1)'>" . $this->view->translate('SEND MESSAGE') . "</a>";
                     } elseif ($isPending) {
                         $featuredHtml .= "<span class ='request_sent'>" . $this->view->translate('REQUEST SENT') . "</span>";
                     } else {
