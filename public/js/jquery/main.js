@@ -1117,11 +1117,14 @@ function checkPassword(e) {
             var me = $(this);
             var original = me.text();
             var truncated = original.split(" ");
-            if (truncated.length <= numWords) {
+            var myTruncatedString = original.substring(0,30);
+            if (original.length <= numWords) {
                 return;
             }
-            while (truncated.length > numWords) {
-                truncated.pop();
+            while (original.length > numWords) {
+                //truncated.pop();
+
+
             }
             truncated = truncated.join(" ");
             collapse();
@@ -1137,7 +1140,7 @@ function checkPassword(e) {
 
             function collapse() {
                 me.empty();
-                me.text(truncated + "... ");
+                me.text(myTruncatedString + "... ");
                 var link = $('<a href="#">see more</a>');
                 link.click(expand);
                 me.append(' [').append(link).append(']');

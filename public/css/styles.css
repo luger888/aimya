@@ -161,7 +161,7 @@ nav ul ul li a{
 }
 nav ul ul li .language{
     text-transform: capitalize;
-    padding-left:20px;
+    padding-left:15px;
 }
 nav ul ul li .language.english{
     background: url('../images/icons/lang/english.png') no-repeat 0 2px;
@@ -1887,6 +1887,8 @@ float:right;
     margin: 10px 0 23px 0;
     overflow: auto;
     width: 420px;
+    word-wrap: break-word;
+
 }
 .note:nth-child(even){
     background-color: #FCFCFC;
