@@ -1180,6 +1180,10 @@ input.button-2 {
     background-color: #f3f3f4 !important;
     font-family: 'helvetica-light-rnormal';
 }
+.userRelationsTab table thead td:nth-child(first) {
+    min-width: 175px;
+}
+
 .userRelationsTab table{
     border:1px solid #dbdbde;
     width:100%;
