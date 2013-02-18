@@ -121,7 +121,9 @@ ul li {
 .mainBooking #duration {
     width: 112px;
 }
-
+.mainBooking .addPrice{
+    padding-left:5px;
+}
 .mainBooking #rate {
     width: 70px;
 }
@@ -306,14 +308,28 @@ ul li {
             <div class="formRow clearfix checkBoxRow">
                 <div class="label">Video Recording:</div>
                 <div><?php echo $this->bookingForm->video;?></div>
+                <?php if ($this->role != 1) {
+                echo ' <div class="addPrice"> - $2 </div>';
+            }
+                ?>
+
+
             </div>
             <div class="formRow clearfix checkBoxRow">
                 <div class="label">Feedback:</div>
                 <div><?php echo $this->bookingForm->feedback;?></div>
+                <?php if ($this->role != 1) {
+                echo ' <div class="addPrice"> - $1 </div>';
+            }
+                ?>
             </div>
             <div class="formRow clearfix checkBoxRow">
                 <div class="label">Notes Copy:</div>
                 <div><?php echo $this->bookingForm->notes;?></div>
+                <?php if ($this->role != 1) {
+                echo ' <div class="addPrice"> - $1 </div>';
+            }
+                ?>
             </div>
             <div class="formRow clearfix">
                 <div class="label">Info:</div>
@@ -409,24 +425,24 @@ jQuery(document).ready(function () {
                             start = new Date(start);
                             var offset = start.getTimezoneOffset() * MS_PER_MINUTE;
                             start = new Date(start - (offset) * -1);
-                            console.log(start +'chrome');
+                            console.log(start + 'chrome');
                         } else {
 
                             start = new Date(start);
-                            console.log(start +'!chrome');
+                            console.log(start + '!chrome');
                         }
                         var sender_utc = parseFloat(msg.booking[c].creator_tz.replace(':', "."));
                         var recipient_utc = parseFloat(msg.timezone.replace(':', "."));
                         var utc = recipient_utc - sender_utc;
-                        console.log(utc +'recipient_utc - sender_utc');
+                        console.log(utc + 'recipient_utc - sender_utc');
 //                        var time_zone = msg.booking[c].timezone - msg.booking[c].creator_tz;
 //                        var utc =  msg.booking[c].creator_tz.getTime() + ( msg.booking[c].creator_tz.getTimezoneOffset() * 60000);
 
                         if (msg.booking[c].recipient_id == msg.user_id) {
                             var unixStamp = Math.round((start).getTime() / 1000);
-                            console.log(unixStamp +'  var unixStamp = Math.round((start).getTime() / 1000);');
+                            console.log(unixStamp + '  var unixStamp = Math.round((start).getTime() / 1000);');
                             var dateTime = unixStamp + utc * 3600;
-                            console.log(dateTime +' var dateTime = unixStamp + utc * 3600;');
+                            console.log(dateTime + ' var dateTime = unixStamp + utc * 3600;');
                             dateTime = new Date(dateTime * 1000);
 
 
@@ -544,7 +560,7 @@ jQuery(document).ready(function () {
 
                     element.find(".fc-event-content").append('<div class="fc-event-content-approve pending"><span>Pending</span></div>');
                 } else {
-                    console.log(startLesson +'startLesson')
+                    console.log(startLesson + 'startLesson')
                     console.log(current + 'current')
                     element.find(".fc-event-content").append('<input type = "button"  id ="removetBooking" onclick="removeBooking(this)" value = "Remove"  class="fc-event-content-reject fc-button cancel">');
                     element.find(".fc-event-content").append('<input type = "hidden" id = "booking_id"  value = ' + event.booking_id + ' >');
