@@ -650,3 +650,411 @@ test_ipn                                1
 payment_request_date                    Thu Feb 07 02:21:28 PST 2013
 
 
+VALID IPN--------------------------------------------------------------------------------
+[02/11/2013 3:50 AM] - https://www.sandbox.paypal.com/cgi-bin/webscr (curl)
+--------------------------------------------------------------------------------
+HTTP/1.1 100 Continue
+
+HTTP/1.1 200 OK
+Date: Mon, 11 Feb 2013 11:50:18 GMT
+Server: Apache
+X-Frame-Options: SAMEORIGIN
+Set-Cookie: c9MWDuvPtT9GIMyPc3jwol1VSlO=mZPJvJ9wDny4PctB02eXXJKkGXgR7HMtAHTWxdAOeKUuN4788CdIXRm14eon41J6fybqqM6zmGUgEBEw6ghwnan04WOUnlBnqEakdDVvNyxvaCrJKibgVU__bNVql9JSBVPAV0%7cBfIC6GlAFitcht5y9PKgCHVxCB-fgLqyb87nOiis6_xFqtv8057GKWyDrbHttDrv54VUCW%7c-LUQyKLXK8R8j7c-DIXxOxTxvUx7RtOIV37UQ38vGpzW6fC0vH0Nso6q7qKUIgaHgLa2_0%7c1360583418; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: cookie_check=yes; expires=Thu, 09-Feb-2023 11:50:18 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: navcmd=_notify-validate; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: navlns=0.0; expires=Sun, 06-Feb-2033 11:50:18 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: Apache=10.72.109.11.1360583418231323; path=/; expires=Wed, 04-Feb-43 11:50:18 GMT
+X-Cnection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+VERIFIED
+----------------------------------------------------------------------------------------------------
+0                                       NONE
+1                                       Completed
+transaction                             Array
+log_default_shipping_address_in_transactionfalse
+action_type                             PAY
+ipn_notification_url                    http://aimya.com/en/payment/ipn?booking_id=8
+charset                                 windows-1252
+transaction_type                        Adaptive Payment PAY
+notify_version                          UNVERSIONED
+cancel_url                              http://aimya.com/en/lesson
+verify_sign                             AHzz46Fp4ayN.hRqDItII9SVVGciAWi7uc44USFwD4BzsZzOozkZDm72
+sender_email                            aimBuy_1356606080_per@svitla.com
+fees_payer                              SENDER
+return_url                              http://aimya.com/en/lesson
+reverse_all_parallel_payments_on_error  false
+pay_key                                 AP-7A690910JW5831139
+status                                  COMPLETED
+test_ipn                                1
+payment_request_date                    Mon Feb 11 03:49:02 PST 2013
+
+
+VALID IPN--------------------------------------------------------------------------------
+[02/12/2013 4:52 AM] - https://www.sandbox.paypal.com/cgi-bin/webscr (curl)
+--------------------------------------------------------------------------------
+HTTP/1.1 100 Continue
+
+HTTP/1.1 200 OK
+Date: Tue, 12 Feb 2013 12:52:39 GMT
+Server: Apache
+X-Frame-Options: SAMEORIGIN
+Set-Cookie: c9MWDuvPtT9GIMyPc3jwol1VSlO=W66MiO-ZVene8midhFZBDWb5Mkb4MKvXnvXguckeMujQFTrG4y1p4UdTnOxE2OLLouwcOLCcr9joNYNbjwK9sWRIzVRybDdYbA-doBkiPftRm7BTMtYDO36CuPTVYWdenHJi2G%7cY76RZ5y5ah5Lk0Qbwap3-D6Bkz5gkwtGoi98ioesT6-bYw08615uoKXzTlO7-qo3jqTVoG%7cv9IqnoYX_O_QdssGF6qCkCdaYUTkAGHxfez1O0tbbdHG5IqYM9ZjsdQCA1YsIVi0pwJ810%7c1360673560; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: cookie_check=yes; expires=Fri, 10-Feb-2023 12:52:40 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: navcmd=_notify-validate; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: navlns=0.0; expires=Mon, 07-Feb-2033 12:52:40 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: Apache=10.72.109.11.1360673559679550; path=/; expires=Thu, 05-Feb-43 12:52:39 GMT
+X-Cnection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+VERIFIED
+----------------------------------------------------------------------------------------------------
+0                                       NONE
+1                                       Completed
+transaction                             Array
+log_default_shipping_address_in_transactionfalse
+action_type                             PAY
+ipn_notification_url                    http://aimya.com/en/payment/ipn?booking_id=17
+charset                                 windows-1252
+transaction_type                        Adaptive Payment PAY
+notify_version                          UNVERSIONED
+cancel_url                              http://aimya.com/en/lesson
+verify_sign                             AwLVHGepeC.awXcS.fB4SEJUCTvqAHeTsEAtAg4CB64sVymSwRL3gaaA
+sender_email                            aimBuy_1356606080_per@svitla.com
+fees_payer                              SENDER
+return_url                              http://aimya.com/en/lesson
+reverse_all_parallel_payments_on_error  false
+pay_key                                 AP-2F605714LJ2248820
+status                                  COMPLETED
+test_ipn                                1
+payment_request_date                    Tue Feb 12 04:43:21 PST 2013
+
+
+VALID IPN--------------------------------------------------------------------------------
+[02/12/2013 9:53 AM] - https://www.sandbox.paypal.com/cgi-bin/webscr (curl)
+--------------------------------------------------------------------------------
+HTTP/1.1 100 Continue
+
+HTTP/1.1 200 OK
+Date: Tue, 12 Feb 2013 17:53:50 GMT
+Server: Apache
+X-Frame-Options: SAMEORIGIN
+Set-Cookie: c9MWDuvPtT9GIMyPc3jwol1VSlO=-MnQs3YeFyML5IYOJRKtX09ReurgnX_vVPc97ECMQXhAARYTF_dh8_dKHo5g-j3cEdWRVCLlroBzTIUBOk7nl6o1idadaVT1UkYysvMaGMgANHr66pjYUXkDIoBpo9fYgrXKQm%7cxIwsoyUYJa_5Chcq7hY6pokRsE4UocesxYrzlU7K3x9-eRHdJIR8DWgBfn66ip4ftGfdsW%7c3YiACpLM9XxYIjb1MrmkJfLPzRFPTg3QdMPMp0o8H27ImPIEBPNCUXrSfOTnuvjh84m1Hm%7c1360691630; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: cookie_check=yes; expires=Fri, 10-Feb-2023 17:53:50 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: navcmd=_notify-validate; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: navlns=0.0; expires=Mon, 07-Feb-2033 17:53:50 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: Apache=10.72.109.11.1360691630207767; path=/; expires=Thu, 05-Feb-43 17:53:50 GMT
+X-Cnection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+VERIFIED
+----------------------------------------------------------------------------------------------------
+0                                       USD 10.00
+transaction                             Array
+payment_request_date                    Tue Feb 12 09:52:59 PST 2013
+return_url                              http://aimya.com/en/lesson
+fees_payer                              SENDER
+ipn_notification_url                    http://aimya.com/en/payment/ipn?booking_id=24
+sender_email                            aimBuy_1356606080_per@svitla.com
+verify_sign                             ARqhFJ0vgz4NG9wEVK0EsS-Uyfj1A3iDaVWgjX3pYrBy1pgwp3ODwbeP
+test_ipn                                1
+cancel_url                              http://aimya.com/en/lesson
+pay_key                                 AP-2HV497353W383333H
+action_type                             PAY
+transaction_type                        Adaptive Payment PAY
+status                                  COMPLETED
+log_default_shipping_address_in_transactionfalse
+charset                                 windows-1252
+notify_version                          UNVERSIONED
+reverse_all_parallel_payments_on_error  false
+
+
+VALID IPN--------------------------------------------------------------------------------
+[02/12/2013 10:48 AM] - https://www.sandbox.paypal.com/cgi-bin/webscr (curl)
+--------------------------------------------------------------------------------
+HTTP/1.1 100 Continue
+
+HTTP/1.1 200 OK
+Date: Tue, 12 Feb 2013 18:47:59 GMT
+Server: Apache
+X-Frame-Options: SAMEORIGIN
+Set-Cookie: c9MWDuvPtT9GIMyPc3jwol1VSlO=9oz4m6lDdr1oyBvp9FW1RaEdFZwHMQ-CLBVPZJCe9gqaAqQog18Sb0Gy7M5Q2RrW6x2hH6nWjGXOpVbLypVpNWlBVMsBcma9Lb1LcHKwxJfRcQmSIUlpa05E1NYXPykV-XO-FG%7cOqqevAp0VTXVKHbhSorYx5TyxuGZ5RbeHAS36E-eZ4WB6GEP0keGEiQ84F27lUBSHa-lzG%7cNnYiz-J6ROJfM1A0wAqdsPNUKNuuiTbGbSSgDbwZoLDfmNHDZakcLR62tNe0x-s5emF5D0%7c1360694880; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: cookie_check=yes; expires=Fri, 10-Feb-2023 18:48:00 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: navcmd=_notify-validate; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: navlns=0.0; expires=Mon, 07-Feb-2033 18:48:00 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: Apache=10.72.109.11.1360694879776844; path=/; expires=Thu, 05-Feb-43 18:47:59 GMT
+X-Cnection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+VERIFIED
+----------------------------------------------------------------------------------------------------
+0                                       USD 10.00
+transaction                             Array
+payment_request_date                    Tue Feb 12 10:45:50 PST 2013
+return_url                              http://aimya.com/en/lesson
+fees_payer                              SENDER
+ipn_notification_url                    http://aimya.com/en/payment/ipn?booking_id=26
+sender_email                            aimBuy_1356606080_per@svitla.com
+verify_sign                             AFcWxV21C7fd0v3bYYYRCpSSRl31AkAc2H5Lr8qCtBDUMEJdQvvRKv1Z
+test_ipn                                1
+cancel_url                              http://aimya.com/en/lesson
+pay_key                                 AP-12857364AX2646020
+action_type                             PAY
+transaction_type                        Adaptive Payment PAY
+status                                  COMPLETED
+log_default_shipping_address_in_transactionfalse
+charset                                 windows-1252
+notify_version                          UNVERSIONED
+reverse_all_parallel_payments_on_error  false
+
+
+VALID IPN--------------------------------------------------------------------------------
+[02/12/2013 12:03 PM] - https://www.sandbox.paypal.com/cgi-bin/webscr (curl)
+--------------------------------------------------------------------------------
+HTTP/1.1 100 Continue
+
+HTTP/1.1 200 OK
+Date: Tue, 12 Feb 2013 20:03:05 GMT
+Server: Apache
+X-Frame-Options: SAMEORIGIN
+Set-Cookie: c9MWDuvPtT9GIMyPc3jwol1VSlO=b5BG-BgC9wBDw_Sx8TE9A2mZOoPS0MeYFbSvaD_2AxNt9JfLcJljPU0Lv-gFr4C5OGd-y6N46z1lnCBnuKNff_iPcP5Sg5Hc6Zo586KyLSpGj_ZjmCjl6q-L8WcuLGjhI8gRNW%7camv8b_zXISQoE0WvzkHnNc_0jcRy7hfuLhm2eiUNsxjog56oDeVm2hrmw3fI4gSygeiXPG%7csjOCzDyFglZLpnsK6Grf97T-9v4rtl4k6VNTL7dDidD-WdQ8SA3R_5IpYq3lV_RTfsxYUm%7c1360699386; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: cookie_check=yes; expires=Fri, 10-Feb-2023 20:03:06 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: navcmd=_notify-validate; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: navlns=0.0; expires=Mon, 07-Feb-2033 20:03:06 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: Apache=10.72.109.11.1360699385966491; path=/; expires=Thu, 05-Feb-43 20:03:05 GMT
+X-Cnection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+VERIFIED
+----------------------------------------------------------------------------------------------------
+0                                       NONE
+1                                       Completed
+transaction                             Array
+log_default_shipping_address_in_transactionfalse
+action_type                             PAY
+ipn_notification_url                    http://aimya.com/en/payment/ipn?booking_id=28
+charset                                 windows-1252
+transaction_type                        Adaptive Payment PAY
+notify_version                          UNVERSIONED
+cancel_url                              http://aimya.com/en/lesson
+verify_sign                             ARChoIJFZH1AKilXFFl91Zm3yOv3AonZObAEr9uCHx4fbu71aP2higyY
+sender_email                            aimBuy_1356606080_per@svitla.com
+fees_payer                              SENDER
+return_url                              http://aimya.com/en/lesson
+reverse_all_parallel_payments_on_error  false
+pay_key                                 AP-62M89246G9330973E
+status                                  COMPLETED
+test_ipn                                1
+payment_request_date                    Tue Feb 12 12:01:47 PST 2013
+
+
+VALID IPN--------------------------------------------------------------------------------
+[02/13/2013 1:27 AM] - https://www.sandbox.paypal.com/cgi-bin/webscr (curl)
+--------------------------------------------------------------------------------
+HTTP/1.1 100 Continue
+
+HTTP/1.1 200 OK
+Date: Wed, 13 Feb 2013 09:27:12 GMT
+Server: Apache
+X-Frame-Options: SAMEORIGIN
+Set-Cookie: c9MWDuvPtT9GIMyPc3jwol1VSlO=76qF6Jy0_Tn8mMopvNP3l9-ynPpzUPN6l7bgYIzJ8RUFySLLORw04bPlaiMO1L_AHLZwhT1wmFmzNyKrjrawwP9URTXtN8K9XqZfJNdpFCURFGNPA_DqEfKiTMZq0zmDKpT8Xm%7c0fMZD-W76ZOjwnMSKB8XYgTcHpHTO5Rm-lCNEtNtxWHgujFrSrZ58y7sffgyanciCilAF0%7cDnAsd4TBs0TCdv_6fUjo-inn5tgAUlh1oXE_Jid7u8EVWuXqpVlAYhWPDwQzyT4d8Jaqjm%7c1360747633; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: cookie_check=yes; expires=Sat, 11-Feb-2023 09:27:13 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: navcmd=_notify-validate; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: navlns=0.0; expires=Tue, 08-Feb-2033 09:27:13 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: Apache=10.72.109.11.1360747632874673; path=/; expires=Fri, 06-Feb-43 09:27:12 GMT
+X-Cnection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+VERIFIED
+----------------------------------------------------------------------------------------------------
+0                                       NONE
+1                                       Completed
+transaction                             Array
+log_default_shipping_address_in_transactionfalse
+action_type                             PAY
+ipn_notification_url                    http://aimya.com/en/payment/ipn?booking_id=30
+charset                                 windows-1252
+transaction_type                        Adaptive Payment PAY
+notify_version                          UNVERSIONED
+cancel_url                              http://aimya.com/en/lesson
+verify_sign                             AFcWxV21C7fd0v3bYYYRCpSSRl31ANPGswW3sud95flpGu5oUO60YieK
+sender_email                            aimBuy_1356606080_per@svitla.com
+fees_payer                              SENDER
+return_url                              http://aimya.com/en/lesson
+reverse_all_parallel_payments_on_error  false
+pay_key                                 AP-06X38785DR525682Y
+status                                  COMPLETED
+test_ipn                                1
+payment_request_date                    Wed Feb 13 01:26:33 PST 2013
+
+
+VALID IPN--------------------------------------------------------------------------------
+[02/13/2013 3:43 AM] - https://www.sandbox.paypal.com/cgi-bin/webscr (curl)
+--------------------------------------------------------------------------------
+HTTP/1.1 100 Continue
+
+HTTP/1.1 200 OK
+Date: Wed, 13 Feb 2013 11:43:14 GMT
+Server: Apache
+X-Frame-Options: SAMEORIGIN
+Set-Cookie: c9MWDuvPtT9GIMyPc3jwol1VSlO=9p02BpFb7xUU4sK8bSb_dGyekg7wGyukPRfIUrlLHwDHCc46T3fQRm4CcxFbiDEX3-L2F5t7Tm6rM0cOKUs3pC8TJweeE68fgG4HEUNNsP1BIVkKUZl23abh8fXwEKi-19b5h0%7cmtKP6JJPbmKPAbOBwQK0WXKl1fSNha2eL1zfzua6JLXdC7t-YUO4lc-gaSxdepsfDwPKZW%7c9Q1C4EkROMbUuI0MlAQHEaW1ZRyQGtLXRVP9mbqD4NrNze6AmWoHKP-Fv35AfNp7ULAF7m%7c1360755794; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: cookie_check=yes; expires=Sat, 11-Feb-2023 11:43:15 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: navcmd=_notify-validate; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: navlns=0.0; expires=Tue, 08-Feb-2033 11:43:15 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: Apache=10.72.109.11.1360755794653186; path=/; expires=Fri, 06-Feb-43 11:43:14 GMT
+X-Cnection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+VERIFIED
+----------------------------------------------------------------------------------------------------
+0                                       NONE
+1                                       Completed
+transaction                             Array
+log_default_shipping_address_in_transactionfalse
+action_type                             PAY
+ipn_notification_url                    http://aimya.com/en/payment/ipn?booking_id=32
+charset                                 windows-1252
+transaction_type                        Adaptive Payment PAY
+notify_version                          UNVERSIONED
+cancel_url                              http://aimya.com/en/lesson
+verify_sign                             AFcWxV21C7fd0v3bYYYRCpSSRl31AZdeS79tPtmRWZ9Et5jMeWdPJu5Z
+sender_email                            aimBuy_1356606080_per@svitla.com
+fees_payer                              SENDER
+return_url                              http://aimya.com/en/lesson
+reverse_all_parallel_payments_on_error  false
+pay_key                                 AP-10F51698PV262350N
+status                                  COMPLETED
+test_ipn                                1
+payment_request_date                    Wed Feb 13 03:42:29 PST 2013
+
+
+VALID IPN--------------------------------------------------------------------------------
+[02/13/2013 3:47 AM] - https://www.sandbox.paypal.com/cgi-bin/webscr (curl)
+--------------------------------------------------------------------------------
+HTTP/1.1 100 Continue
+
+HTTP/1.1 200 OK
+Date: Wed, 13 Feb 2013 11:47:47 GMT
+Server: Apache
+X-Frame-Options: SAMEORIGIN
+Set-Cookie: c9MWDuvPtT9GIMyPc3jwol1VSlO=majFHmnpp-rJ8Q5z6tgx3obkXkhi3am2N_cJBuNYO3eFTXMqm3k7beWbgHToUpPLFojjWD8CK71Pxg7qCi7bSyM_sV_T1eE5cRdS62m0UJ866jobm9heWA8R45nMmcwl8KSCOW%7ci2dX-03mCJzWAUPZRc1sxprWKjb7zFNwuAZ0CrbupSEq956HRAfNzKE41PF8isziFrRozG%7cAEdmByv087SJ7UmJI5dNAjvzHrZVf5NzmoABkIu3daL8VlZn3SEo5TXFBTUqY30ndF7_sW%7c1360756068; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: cookie_check=yes; expires=Sat, 11-Feb-2023 11:47:48 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: navcmd=_notify-validate; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: navlns=0.0; expires=Tue, 08-Feb-2033 11:47:48 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: Apache=10.72.109.11.1360756067882116; path=/; expires=Fri, 06-Feb-43 11:47:47 GMT
+X-Cnection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+VERIFIED
+----------------------------------------------------------------------------------------------------
+0                                       NONE
+1                                       Completed
+transaction                             Array
+log_default_shipping_address_in_transactionfalse
+action_type                             PAY
+ipn_notification_url                    http://aimya.com/en/payment/ipn?booking_id=33
+charset                                 windows-1252
+transaction_type                        Adaptive Payment PAY
+notify_version                          UNVERSIONED
+cancel_url                              http://aimya.com/en/lesson
+verify_sign                             ArL18ppG1u-0lej96A2o4ruqjTqdA6g9Rt4cBqsyxAcSH9avr2t2Y0th
+sender_email                            buyer_1355908947_per@gmail.com
+fees_payer                              SENDER
+return_url                              http://aimya.com/en/lesson
+reverse_all_parallel_payments_on_error  false
+pay_key                                 AP-0CD07331UW7416450
+status                                  COMPLETED
+test_ipn                                1
+payment_request_date                    Wed Feb 13 03:44:30 PST 2013
+
+
+VALID IPN--------------------------------------------------------------------------------
+[02/15/2013 3:28 AM] - https://www.sandbox.paypal.com/cgi-bin/webscr (curl)
+--------------------------------------------------------------------------------
+HTTP/1.1 100 Continue
+
+HTTP/1.1 200 OK
+Date: Fri, 15 Feb 2013 11:28:45 GMT
+Server: Apache
+X-Frame-Options: SAMEORIGIN
+Set-Cookie: c9MWDuvPtT9GIMyPc3jwol1VSlO=2DAEkC-aAib6cJdPDGIRhr6ZNKdUQRZNCD8ckQxUAlxHXrVlkRlkAnaD8dpqed8I7GkPS-X705XGEqPYnZuPHGc-q0RhCx4dH_8WC-QObPdr1GGTZAmKe4o_pgxDpOKYYkwFMW%7ctkjoHg7T5t_aBDv_O9DWbmbs9DGrEYMUgaBRbWgjLNZwpL639_Q9VTLbaoAM2Stpoxjpp0%7cPeomGxYF0Pn8Z3FXJkYU39fMoNrgsk4UDhVRP-dRyP_tkCds5UcSjRK2KSGD_DNmGcgjg0%7c1360927725; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: cookie_check=yes; expires=Mon, 13-Feb-2023 11:28:45 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: navcmd=_notify-validate; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: navlns=0.0; expires=Thu, 10-Feb-2033 11:28:45 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: Apache=10.72.109.11.1360927725451944; path=/; expires=Sun, 08-Feb-43 11:28:45 GMT
+X-Cnection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+VERIFIED
+----------------------------------------------------------------------------------------------------
+0                                       NONE
+1                                       Completed
+transaction                             Array
+log_default_shipping_address_in_transactionfalse
+action_type                             PAY
+ipn_notification_url                    http://aimya.com/en/payment/ipn?booking_id=36
+charset                                 windows-1252
+transaction_type                        Adaptive Payment PAY
+notify_version                          UNVERSIONED
+cancel_url                              http://aimya.com/en/lesson
+verify_sign                             AiPC9BjkCyDFQXbSkoZcgqH3hpacAIjiGyFc5BKByzS1UCogCyqBAFSn
+sender_email                            aimBuy_1356606080_per@svitla.com
+fees_payer                              SENDER
+return_url                              http://aimya.com/en/lesson
+reverse_all_parallel_payments_on_error  false
+pay_key                                 AP-04X04865U8735111A
+status                                  COMPLETED
+test_ipn                                1
+payment_request_date                    Fri Feb 15 03:28:02 PST 2013
+
+
+VALID IPN--------------------------------------------------------------------------------
+[02/15/2013 3:46 PM] - https://www.sandbox.paypal.com/cgi-bin/webscr (curl)
+--------------------------------------------------------------------------------
+HTTP/1.1 100 Continue
+
+HTTP/1.1 200 OK
+Date: Fri, 15 Feb 2013 23:46:09 GMT
+Server: Apache
+X-Frame-Options: SAMEORIGIN
+Set-Cookie: c9MWDuvPtT9GIMyPc3jwol1VSlO=F__U7tu2lQfcYTxlOwPzv-SrUORbUBEDFzUDQj9X5dnIIi75NcJ3jUnhx3zUztjvhNEaJ0EVpbmBAc4G9Xh-3L9vi_x2Q3_UgNcPfbeZotSnjWPqIPlUG2Pt-2FfNwfbWqjY40%7ckeiI8HWa7zj3RwvwgyE_ixd_Sje_qYD0T1F7lGlsU2zcB1Xrd5ULRlAt-LqlrawY5-yXAm%7czx6t04wr7T3Kaa3pUbexgtOj7ue4OLGlC9qKE-jWORLGUrISXFqrvT4A14EUOHH4RIuOfG%7c1360971970; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: cookie_check=yes; expires=Mon, 13-Feb-2023 23:46:10 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: navcmd=_notify-validate; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: navlns=0.0; expires=Thu, 10-Feb-2033 23:46:10 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: Apache=10.72.109.11.1360971969719279; path=/; expires=Sun, 08-Feb-43 23:46:09 GMT
+X-Cnection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+VERIFIED
+----------------------------------------------------------------------------------------------------
+0                                       NONE
+1                                       Completed
+transaction                             Array
+log_default_shipping_address_in_transactionfalse
+action_type                             PAY
+ipn_notification_url                    http://aimya.com/en/payment/ipn?booking_id=42
+charset                                 windows-1252
+transaction_type                        Adaptive Payment PAY
+notify_version                          UNVERSIONED
+cancel_url                              http://aimya.com/en/lesson
+verify_sign                             AAaIF3coezMmWpHrj.4xBpBsa9PmAMnHT5tPlKV2FPa8LsPSr2XgPV0-
+sender_email                            howard_1357903100_per@gmail.com
+fees_payer                              SENDER
+return_url                              http://aimya.com/en/lesson
+reverse_all_parallel_payments_on_error  false
+pay_key                                 AP-4CL62840V1149680N
+status                                  COMPLETED
+test_ipn                                1
+payment_request_date                    Fri Feb 15 15:44:20 PST 2013
+
+
