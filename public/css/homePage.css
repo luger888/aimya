@@ -148,6 +148,7 @@ input.btnLogin {
 .underHeaderLang  li{
     list-style: none;
     float:left;
+    margin-right: 6px;
 }
 .underHeaderLang  li .language{
     width: 15px;

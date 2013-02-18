@@ -161,7 +161,7 @@ nav ul ul li a{
 }
 nav ul ul li .language{
     text-transform: capitalize;
-    padding-left:15px;
+    padding-left:20px;
 }
 nav ul ul li .language.english{
     background: url('../images/icons/lang/english.png') no-repeat 0 2px;
