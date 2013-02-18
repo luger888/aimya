@@ -1180,7 +1180,7 @@ input.button-2 {
     background-color: #f3f3f4 !important;
     font-family: 'helvetica-light-rnormal';
 }
-.userRelationsTab table thead td:nth-child(first) {
+.userRelationsTab table td.ranking {
     min-width: 175px;
 }
 
