@@ -48,7 +48,7 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         #allow to user
         $acl->allow(self::STUDENT , 'user', array('logout', 'timezone', 'index'));
         $acl->allow(self::STUDENT , 'lesson', array('index', 'details', 'join', 'upload', 'notes', 'correspondence', 'files', 'full', 'getsize', 'notes', 'recording', 'review', 'setup', 'temp', 'updatesize', 'video', 'pay',  'end', 'stop'));
-        $acl->allow(self::STUDENT , 'account', array('index', 'features', 'online', 'offline', 'services', 'requestservices', 'notifications', 'edit', 'availability', 'users', 'updateavailability'));
+        $acl->allow(self::STUDENT , 'account', array('index', 'features', 'online', 'offline', 'services', 'requestservices', 'notifications', 'edit', 'availability', 'users', 'updateavailability', 'changepassword'));
 
         $acl->allow(self::STUDENT , 'friends', array('list', 'send'));
         $acl->allow(self::STUDENT , 'message', array('inbox', 'send', 'sent', 'trash', 'archived', 'masstrash', 'massdelete', 'massarchive', 'massrestore', 'delete', 'forward', 'index', 'reply', 'view', 'count'));
