@@ -186,7 +186,8 @@ function addToFriend(id, obj) {
 function sendMessage(id, element) {
     var baseUrl = $('#current_url').val();
 
-    alert('in development');
+    window.location.href=baseUrl+'/message/send';
+    
     return false;
 }
 
