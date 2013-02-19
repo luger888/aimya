@@ -187,7 +187,7 @@ function sendMessage(id, element) {
     var baseUrl = $('#current_url').val();
 
     window.location.href=baseUrl+'/message/send';
-    
+
     return false;
 }
 
