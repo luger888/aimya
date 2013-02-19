@@ -5,7 +5,7 @@ class CmsController extends Aimya_Controller_BaseController
 
     public function init()
     {
-
+        $this->_helper->layout->setLayout("layoutInner");
         $this->_helper->AjaxContext()
             ->addActionContext('index', 'json')
             ->addActionContext('new', 'json')
@@ -14,18 +14,7 @@ class CmsController extends Aimya_Controller_BaseController
             ->addActionContext('view', 'json')
             ->initContext('json');
 
-        $identity = Zend_Auth::getInstance()->getIdentity();
-        if(!$identity){// if no identity - show main page layout
 
-            $this->_helper->layout->setLayout("layoutStatic");
-            $this->view->headScript()->appendFile('../../js/jquery/validation/registrationValidation.js');
-            $login = new Application_Form_Login();
-
-
-            $this->view->login = $login->getElements();
-        }else{
-            $this->_helper->layout->setLayout("layoutInnerstatic");
-        }
 
     }
 
@@ -128,7 +117,18 @@ class CmsController extends Aimya_Controller_BaseController
 
     public function viewAction()
     {
+        $identity = Zend_Auth::getInstance()->getIdentity();
+        if(!$identity){// if no identity - show main page layout
 
+            $this->_helper->layout->setLayout("layoutStatic");
+            $this->view->headScript()->appendFile('../../js/jquery/validation/registrationValidation.js');
+            $login = new Application_Form_Login();
+
+
+            $this->view->login = $login->getElements();
+        }else{
+            $this->_helper->layout->setLayout("layoutInnerstatic");
+        }
         $language = substr(Zend_Controller_Front::getInstance()->getBaseUrl(), '1');
 
         $uri = $this->getRequest()->getParam('uri');
