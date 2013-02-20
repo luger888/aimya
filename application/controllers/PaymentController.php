@@ -18,6 +18,13 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
     public function indexAction()
     {
+
+        if (strpos(getenv("HTTP_REFERER"),'aimya') == true) {
+            Zend_Debug::dump(getenv("HTTP_REFERER"));
+        }else{
+            $this->redirect('/account');
+        }
+
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
         $emailForm = new Application_Form_PaypalEmail();
         $subscriptionForm = new Application_Form_Subscriptions();
