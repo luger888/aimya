@@ -252,7 +252,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
                     $subscriptionTable->createSubscription($data);
                 }
 
-                $this->redirect($response['url']);
+                $this->redirect('/account');
             } else {
                 $this->redirect('/payment');
             }
