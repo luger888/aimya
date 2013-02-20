@@ -22,6 +22,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         if (strpos(getenv("HTTP_REFERER"),'aimya') == true) {
             Zend_Debug::dump(getenv("HTTP_REFERER"));
         }else{
+            Zend_Debug::dump(getenv("HTTP_REFERER"));
             $this->redirect('/account');
         }
 
