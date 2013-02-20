@@ -6,7 +6,7 @@
         <?php endif;?>
         <span class="selectBox s-123"><?php echo $this->filters->lesson_category; ?></span>
 
-        <p>Display:</p>
+        <p><?php echo $this->translate('Display');?>:</p>
 
     </div>
     <!--End filters-->
@@ -25,7 +25,7 @@
 
                     <div class="leftBlockFeature">
                         <div class="imageBlock boxShadow"><img src="<?php echo $avatarPath;?>"></div>
-                        <div class='profileRole'><?php $role = ($person['role'] == '1' ? 'Student' : 'Instructor');
+                        <div class='profileRole'><?php $role = ($person['role'] == '1' ? $this->translate('Student') : $this->translate('Instructor'));
                             echo $role;?></div>
                         <?php if ($person['role'] != 1) {
                         if(!isset($person['averageRating'])){
@@ -41,7 +41,7 @@
 
                     <div class="featuredButtonsTop clearfix">
 
-                        <?php echo '<a class ="button-2 view viewProfile" href="' . $this->baseUrl() . '/user/' . $person['id'] . '">VIEW PROFILE</a>'; ?>
+                        <?php echo '<a class ="button-2 view viewProfile" href="' . $this->baseUrl() . '/user/' . $person['id'] . '"> '.$this->translate('view profile').'</a>'; ?>
                         <?php $friendTable = new Application_Model_DbTable_Friends(); ?>
                         <?php $isFriend = $friendTable->isFriend($person['id']); ?>
                         <?php $isPending = $friendTable->isPending($person['id']); ?>
@@ -54,10 +54,10 @@
                         } else {
                             if ($isInList['friend_id'] == Zend_Auth::getInstance()->getIdentity()->id && $isInList['recipient_status'] == 0) {
                                 $defaultRequestText = 'Hello ' . $person['username'] . ', I have approved your request.';
-                                echo "<a class ='button-2 add addAccount' onclick='showFriendFormFeatured(" . $person['id'] . ", \"$defaultRequestText\", this)' href='javascript:void(1)'>" . $this->translate('ADD TO MY ACCOUNT') . "</a>";
+                                echo "<a class ='button-2 add addAccount' onclick='showFriendFormFeatured(" . $person['id'] . ", \"$defaultRequestText\", this)' href='javascript:void(1)'>" . $this->translate('add to my account') . "</a>";
                             } else {
                                 $defaultRequestText = 'Hello ' . $person['username'] . ', I would like add you to my account.';
-                                echo "<a class ='button-2 add addAccount' onclick='showFriendFormFeatured(" . $person['id'] . ", \"$defaultRequestText\", this)' href='javascript:void(1)'>" . $this->translate('ADD TO MY ACCOUNT') . "</a>";
+                                echo "<a class ='button-2 add addAccount' onclick='showFriendFormFeatured(" . $person['id'] . ", \"$defaultRequestText\", this)' href='javascript:void(1)'>" . $this->translate('add to my account') . "</a>";
                             }
                         }
                         ?>
@@ -68,21 +68,21 @@
                     <!--End featuredButtonsTop-->
                     <ul class="featuredInfo">
                         <li class="clearfix">
-                            <span class="title"><?php echo $this->translate('Name:') ?></span>
+                            <span class="title"><?php echo $this->translate('Name') ?>:</span>
 
                             <div
                                 class="featuredTxt"><?php echo  ' ' . $person['firstname'] . ' ' . $person['lastname'];?></div>
                         </li>
 
                         <li class="clearfix">
-                            <span class="title"><?php echo $this->translate('Time zone:') ?></span>
+                            <span class="title"><?php echo $this->translate('Time zone') ?>:</span>
 
                             <div class="featuredTxt"><?php echo ' UTC ' . $person['timezone'];?></div>
                         </li>
 
                         <?php if (count($person['service_offered']) > 0): ?>
                         <li class="clearfix">
-                            <span class="title"><?php echo $this->translate('Service offered:') ?></span>
+                            <span class="title"><?php echo $this->translate('Service offered') ?>:</span>
 
                             <div class="featuredTxt">
                                 <?php
@@ -98,7 +98,7 @@
                         <?php endif; ?>
                         <?php if (count($person['service_requested']) > 0): ?>
                         <li class="clearfix">
-                            <span class="title"><?php echo $this->translate('Service requested:') ?></span>
+                            <span class="title"><?php echo $this->translate('Service requested') ?>:</span>
 
                             <div class="featuredTxt">
                                 <?php
@@ -114,7 +114,7 @@
                         <?php endif; ?>
                         <?php if (count($person['add_info']) > 0): ?>
                         <li class="clearfix">
-                            <span class="title"><?php echo $this->translate('About me:') ?></span>
+                            <span class="title"><?php echo $this->translate('About me') ?>:</span>
 
                             <div class="featuredTxt more"><?php echo $person['add_info'];?></div>
                         </li>

@@ -22,7 +22,7 @@ class Application_Form_PaypalEmail extends Zend_Form
 
         $submit = new Zend_Form_Element_Submit('saveemail');
         $submit->setAttrib('id', 'saveemail')
-               ->setLabel('Save')
+               ->setLabel('save')
             ->setAttrib('class', 'button-2 save')
             ->setDecorators($this->basicDecorators);
 

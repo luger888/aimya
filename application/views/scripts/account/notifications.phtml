@@ -8,7 +8,7 @@
     <form method='post' name='notifications' action="<?php echo $this->baseUrl()?>/account/notifications/" onsubmit="checkPassword(this);return false;">
     <div class="shadowSeparator clearfix">
         <div class="shadowSeparatorBox clearfix">
-            <h1> I WANT TO:</h1>
+            <h1> <?php echo $this->translate('i want to');?>:</h1>
             <div class = 'notificationsAlertsBlock'>
                 <?php
                 echo $this->notificationsForm->alert;
@@ -18,12 +18,12 @@
     </div>
     <div class="shadowSeparator clearfix">
         <div class="shadowSeparatorBox clearfix">
-            <h1> CHANGE AIMYA PASSWORD:</h1>
+            <h1> <?php echo $this->translate('change aimya password');?>:</h1>
 
             <div class="passwordRecoveryBlock">
-                <?php echo '<span>Old Password: </span>' . $this->notificationsForm->oldPassword; ?><span class="error"></span><br>
-                <?php echo '<span>New Password: </span>' . $this->notificationsForm->newPassword; ?><span class="error"></span><br>
-                <?php echo '<span>Confirm New Password: </span>' . $this->notificationsForm->newPasswordConfirm; ?><span class="error"></span>
+                <?php echo '<span>'.$this->translate('Old Password').': </span>' . $this->notificationsForm->oldPassword; ?><span class="error"></span><br>
+                <?php echo '<span>'.$this->translate('New Password').': </span>' . $this->notificationsForm->newPassword; ?><span class="error"></span><br>
+                <?php echo '<span>'.$this->translate('Confirm New Password').': </span>' . $this->notificationsForm->newPasswordConfirm; ?><span class="error"></span>
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
         echo '
         <div class="shadowSeparator clearfix">
              <div class="shadowSeparatorBox clearfix">
-                <h1> I WANT TO:</h1> <div class="notificationsAlertsBlock">' . $this->notificationsForm->notify . '</div>
+                 <h1>'.$this->translate('i want to').':</h1> <div class="notificationsAlertsBlock">' . $this->notificationsForm->notify . '</div>
              </div>
         </div>';
     }

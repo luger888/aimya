@@ -67,7 +67,7 @@ class Application_Form_Notifications extends Zend_Form
 
 
         $submit = new Zend_Form_Element_Submit('saveNotifications');
-        $submit ->setLabel('Save')
+        $submit ->setLabel('save')
             ->setAttrib('class', 'button-2 save')
             ->setAttrib('id', 'saveNotifications')
             ->setDecorators($this->basicDecorators);
