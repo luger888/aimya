@@ -69,7 +69,7 @@ class UserController extends Zend_Controller_Action
 
     public function recoveryAction()
     {
-        $this->_helper->layout->setLayout("layout");
+        $this->_helper->layout->setLayout("layout-error");
         $this->view->headScript()->appendFile('../../js/jquery/validation/registrationValidation.js');
         $login = new Application_Form_Login();
         $recoveryForm = new Application_Form_Recovery();
