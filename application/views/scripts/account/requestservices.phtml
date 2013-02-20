@@ -7,7 +7,7 @@
                 <div class="shadowSeparatorBox clearfix">
 
                     <div class="titleRow clearfix">
-                        <h2 id="lesson_category"><?php echo $value['lesson_category'];?></h2>
+                        <h2 id="lesson_category"><?php echo $this->translate($value['lesson_category']);?></h2>
 
                         <div class="buttons clearfix">
                             <input type='button' id='deleteService' class="button-2 delete" value="<?php echo $this->translate('delete'); ?>"
@@ -24,7 +24,7 @@
                     <div class="serviceBody short clearfix">
                         <span id="subcategory"><?php echo $value['subcategory'];?></span>
                     </div>
-                    <h2> Service Description :</h2>
+                    <h2> <?php echo $this->translate('Service Description');?> :</h2>
 
                     <div id="description"><?php echo $value['description'];?></div>
 

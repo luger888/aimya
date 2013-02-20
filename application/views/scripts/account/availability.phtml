@@ -12,8 +12,8 @@
                 <h1><?php echo $this->translate('i am available');?>:</h1>
 
                 <div class="dateZoneBlock">
-                    <span class ="dateUTC">You are currently in UTC <?php echo $this->user['timezone']; ?></span>
-                    <p><span class ="dateHint">to change time zone go to General tab</span></p>
+                    <span class ="dateUTC"><?php echo $this->translate('You are currently in UTC');?> <?php echo $this->user['timezone']; ?></span>
+                    <p><span class ="dateHint"><?php echo $this->translate('to change time zone go to General tab');?></span></p>
                 </div>
             </div>
             <div class = "bottomBox clearfix">
@@ -32,7 +32,7 @@
                             $$day = 'checkbox' . $daysOfWeek[$index];
 
                             $$availableTo = 'to' . $daysOfWeek[$index];
-                            echo "<tr><td>{$this->availabilityForm->$checkbox}<div class='dayCheckbox'></div></td><td>{$this->translate($daysOfWeekFull[$index])}</td><td>from</td><td><div class='styledSelect'>{$this->availabilityForm->$selectFrom}</div></td> <td>to</td> <td><div class='styledSelect'>{$this->availabilityForm->$selectTo}</div></td></td></tr>";
+                            echo "<tr><td>{$this->availabilityForm->$checkbox}<div class='dayCheckbox'></div></td><td>{$this->translate($daysOfWeekFull[$index])}</td><td>{$this->translate('from')}</td><td><div class='styledSelect'>{$this->availabilityForm->$selectFrom}</div></td> <td>{$this->translate('to')}</td> <td><div class='styledSelect'>{$this->availabilityForm->$selectTo}</div></td></td></tr>";
                         }
 
                         ?>
