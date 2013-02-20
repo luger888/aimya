@@ -412,6 +412,7 @@ class LessonController extends Zend_Controller_Action
                     $this->view->answer = 'success';
                 } else {
                     $this->view->answer = 'failure';
+                    $this->writeLog($status.$bookingStatus);
                 }
 
             }
