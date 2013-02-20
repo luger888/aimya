@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: david
- * Date: 29.01.13
- * Time: 14:32
- * To change this template use File | Settings | File Templates.
- */
 
 class Aimya_Validate_TimeFromValidator extends Zend_Validate_Abstract
 {
@@ -43,7 +36,7 @@ class Aimya_Validate_TimeFromValidator extends Zend_Validate_Abstract
         if (substr($this->_from->getValue(),strlen($value) - 2, 2) == 'pm'){
             $fromhour = $fromhour +12;
         }
-        if ($hour <= $fromhour) {
+        if ($hour <= $fromhour && $hour!=0) {
             $this->_error(self::NOT_LESS);
             return false;
         }else{
