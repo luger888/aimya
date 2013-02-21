@@ -894,6 +894,7 @@ input.button-2 {
     background: #fff;
     overflow: hidden;
     border: 1px solid #e9e9e9;
+    float: left;
 }
 
 .imageBlock img {
