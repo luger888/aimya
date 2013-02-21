@@ -111,7 +111,7 @@ class Application_Model_PayPal
         //$buyerId = Zend_Auth::getInstance()->getIdentity()->id;
 
         $cancelUrl = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment';
-        $returnURL = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment/subscribe';
+        $returnURL = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/account';
         $ipnURL = $request->getScheme() . '://' . $request->getHttpHost() . Zend_Controller_Front::getInstance()->getBaseUrl() . '/payment/subsipn?subscription_id=' . $subscribeId;
 
         /*$userTable = new Application_Model_DbTable_Users();
