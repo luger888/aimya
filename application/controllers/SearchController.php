@@ -46,13 +46,20 @@ class SearchController extends Aimya_Controller_BaseController
         $dbUserModel = new Application_Model_DbTable_Users();
 
         $services = $serviceTable->getServices();
-
+        $users = $dbUserModel->getUsers();
         foreach($services as $service)
         {
             $doc = new Zend_Search_Lucene_Document();
             $doc->addField(Zend_Search_Lucene_Field::Text('lesson_category', $service['lesson_category'])); //here field = ur database column
             $doc->addField(Zend_Search_Lucene_Field::Text('subcategory',$service['subcategory']));
             $doc->addField(Zend_Search_Lucene_Field::Text('user_id',$service['user_id']));
+            $index->addDocument($doc);
+        }
+        foreach($users as $user)
+        {
+            $doc = new Zend_Search_Lucene_Document();
+            $doc->addField(Zend_Search_Lucene_Field::Text('username', $user['username'])); //here field = ur database column
+            $doc->addField(Zend_Search_Lucene_Field::Text('user_id',$user['id']));
             $index->addDocument($doc);
         }
         $this->view->servicesCount = count($services);
