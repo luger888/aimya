@@ -393,7 +393,6 @@ class LessonController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender(true);
 
         if ($this->getRequest()->isXmlHttpRequest()) {
-            $this->writeLog($this->getRequest()->getParams());
             if ($this->getRequest()->getParam('lesson_id') && $this->getRequest()->getParam('booking_id')) {
                 $lessonId = $this->getRequest()->getParam('lesson_id');
                 $bookingId = $this->getRequest()->getParam('booking_id');
@@ -402,9 +401,11 @@ class LessonController extends Zend_Controller_Action
                 $bookingStatus = $bookingTable->changeStatus($bookingId);
                 $booking = $bookingTable->getItem($bookingId);
                 if ($booking['video']) {
+
                     $lesson = $lessonTable->getItem($lessonId);
                     $seleniumPort = $lesson['selenium_port'];
                     $lessonId = $lesson['id'];
+                    $this->writeLog('VIDEO KILLER: ' . $lessonId.' / ' . $seleniumPort);
                     exec("phase3_kill.sh $lessonId $seleniumPort $lessonId");
                 }
                 $status = $lessonTable->changeStatus($lessonId);
