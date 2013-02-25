@@ -406,7 +406,7 @@ class LessonController extends Zend_Controller_Action
                     $seleniumPort = $lesson['selenium_port'];
                     $lessonId = $lesson['id'];
 
-                    exec("sudo phase3_kill.sh $lessonId $seleniumPort $lessonId");
+                    exec("sudo /usr/local/bin/phase3_kill.sh $lessonId $seleniumPort $lessonId");
 
                 }
                 $status = $lessonTable->changeStatus($lessonId);
