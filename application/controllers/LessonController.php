@@ -407,14 +407,14 @@ class LessonController extends Zend_Controller_Action
                     $lessonId = $lesson['id'];
 
                     exec("phase3_kill.sh $lessonId $seleniumPort $lessonId", $result);
-                    $this->writeLog('VIDEO KILLER: ' . $lessonId.' / ' . $result);
+                    $this->writeLog('VIDEO KILLER: ' . $lessonId.' / ' . $result. '\n');
                 }
                 $status = $lessonTable->changeStatus($lessonId);
                 if ($status && $bookingStatus) {
                     $this->view->answer = 'success';
                 } else {
                     $this->view->answer = 'failure';
-                    $this->writeLog($status.$bookingStatus);
+                    $this->writeLog('Failure:'.$status.$bookingStatus);
                 }
 
             }
