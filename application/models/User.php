@@ -125,7 +125,7 @@ class Application_Model_User
 
         }else{
 
-            return 'no e-mail in base';
+            return 2;
 
         }
     }

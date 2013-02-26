@@ -84,11 +84,11 @@ class UserController extends Zend_Controller_Action
                 $email = $this->getRequest()->getParam('email');
                 if ($email) {
                     $result = $model->passRecovery($email);
-                    if ($result) {
+                    if ($result && $result!=2) {
                         $this->_helper->flashMessenger->addMessage(array('success' => 'Your password was successfully changed. Please check your email to get new password'));
                         $this->_helper->redirector('recovery', 'user');
                     } else {
-                        $this->_helper->flashMessenger->addMessage(array('failure' => 'Problem with sending email'));
+                        $this->_helper->flashMessenger->addMessage(array('failure' => 'There is no such e-mail in database'));
                         $this->_helper->redirector('recovery', 'user');
                     }
                 } else {
