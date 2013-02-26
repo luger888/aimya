@@ -338,7 +338,7 @@ input.btnLogin {
     width: 168px;
 }
 
-.formRow dt label {
+.formRow dt label, .emailBlock dt label{
     font-size: 12px;
     line-height: 34px;
     color: #324503;
@@ -490,4 +490,19 @@ input.btnLogin {
 }
 .copyright div:nth-child(even){
     float:left;
+}
+.emailBlock {
+
+}
+.emailBlock form{
+    margin-left:15px;
+}
+.emailBlock .regTextInput.email{
+    width: 160px;
+}
+.recoverySubmit{
+    float: right;
+    margin-right: 106px;
+    margin-top: 25px;
+    padding: 0 9px;
 }

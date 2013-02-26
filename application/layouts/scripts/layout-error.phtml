@@ -42,7 +42,7 @@ $controllerName = $front->getRequest()->getControllerName();
     <div id="wrapper" class="clearfix">
 
         <div id="header" class="clearfix">
-            <a href="index" id="logo" title="Home page"></a>
+            <a href="<?php echo $this->baseUrl()?>/index" id="logo" title="Home page"></a>
             <input id="user_activity" type="hidden" value="1">
             <input id="current_url" type="hidden" value="<?php echo $this->baseUrl()?>">
             <!-- LOGIN -->
