@@ -77,11 +77,12 @@ class Application_Form_Booking extends Zend_Form
         $rate ->setAttrib('class', 'required input-small')
             ->setRequired(true)
             ->addValidator('NotEmpty')
-            ->addValidator('Digits')
+            ->addValidator('Digits', array('greaterThan', true, 0))
             ->setAttrib('id', 'rate')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
-
+        $validator=new Zend_Validate_GreaterThan(0);
+        $rate->addValidator($validator,true);
         $duration = new Zend_Form_Element_Select('duration');
         $duration->setAttrib('id', 'duration')
             ->addFilters($this->basicFilters)
