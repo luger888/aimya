@@ -16,12 +16,12 @@ class Application_Form_Recovery extends Zend_Form
             ->setAttrib('placeholder', 'E-mail')
             ->setAttrib('class', 'clearInput regTextInput email')
             ->setErrorMessages(array('Insert your email'))
-            ->setLabel('email address:');
+            ->setLabel('Email address:');
 
         $submit = new Zend_Form_Element_Submit('send');
         $submit->setAttrib('id', 'send')
             ->setLabel('Send')
-            ->setAttrib('class', 'btn')
+            ->setAttrib('class', 'btn button recoverySubmit')
             ->setDecorators($this->basicDecorators);
 
         $this->addElements(array($email, $submit));
