@@ -112,7 +112,7 @@ class Application_Form_Profile extends Zend_Form
         $intro = new Zend_Form_Element_Textarea('add_info');
         $intro->setLabel('Introduce Yourself')
             ->setAttrib('id', 'intro')
-            ->setAttrib('maxlength', '1000')
+            ->setAttrib('maxlength', '500')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators)
             -> setAttrib('rows', '7');
