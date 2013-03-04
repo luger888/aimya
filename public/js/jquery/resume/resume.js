@@ -66,25 +66,27 @@ function saveResumeItem(tab) {
     var resumeContent = $('#' + tab).val();
     var baseUrl = $('#current_url').val();
     dataObject[tab] = resumeContent;
-    jQuery("body").append('<div class="loadingIcon"></div>');
-    $.ajax({
-            url:baseUrl + "/resume/ajax",
-            type:"post",
-            data:dataObject,
-            success:function (response) {
-                if (response.lastId) {
-                    $('#file_upload' + tab).data('uploadifive').settings.formData = { 'resumeType':tab, 'resumeTypeId':response.lastId };
-                    $('#file_upload' + tab).uploadifive('upload');
-                    if ($('#queue' + tab + ' .filename').text() == '') {
-                        window.location.reload();
+    if(resumeContent !=''){
+
+        jQuery("body").append('<div class="loadingIcon"></div>');
+        $.ajax({
+                url:baseUrl + "/resume/ajax",
+                type:"post",
+                data:dataObject,
+                success:function (response) {
+                    if (response.lastId) {
+                        $('#file_upload' + tab).data('uploadifive').settings.formData = { 'resumeType':tab, 'resumeTypeId':response.lastId };
+                        $('#file_upload' + tab).uploadifive('upload');
+                        if ($('#queue' + tab + ' .filename').text() == '') {
+                            window.location.reload();
+                        }
                     }
+
+
                 }
-
-
             }
-        }
-    );
-
+        );
+    }
 }
 
 function deleteResumeItem(e, tab) {
