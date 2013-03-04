@@ -66,6 +66,7 @@ function saveResumeItem(tab) {
     var resumeContent = $('#' + tab).val();
     var baseUrl = $('#current_url').val();
     dataObject[tab] = resumeContent;
+    $('.error').remove;
     if(resumeContent !=''){
 
         jQuery("body").append('<div class="loadingIcon"></div>');
@@ -86,6 +87,8 @@ function saveResumeItem(tab) {
                 }
             }
         );
+    }else{
+        $('.resumeItemForm .formRow').after('<div class="error">Please insert information</div>')
     }
 }
 
