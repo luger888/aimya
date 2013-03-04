@@ -66,7 +66,7 @@ function saveResumeItem(tab) {
     var resumeContent = $('#' + tab).val();
     var baseUrl = $('#current_url').val();
     dataObject[tab] = resumeContent;
-    $('.error').remove;
+    $('.error').remove();
     if(resumeContent !=''){
 
         jQuery("body").append('<div class="loadingIcon"></div>');
