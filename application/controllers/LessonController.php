@@ -48,63 +48,69 @@ class LessonController extends Zend_Controller_Action
         $studentId = $this->getRequest()->getParam('student_id');
         $bookingId = $this->getRequest()->getParam('booking_id');
         if (isset($studentId) && isset($bookingId)) {
-            $broker = new Aimya_View_Helper_BaseLink();
-            $baseLink = $broker->baseLink();
-
-            $userModel = new Application_Model_DbTable_Users();
-            $student = $userModel->getItem($studentId);
-            $teacher = $userModel->getItem(Zend_Auth::getInstance()->getIdentity()->id);
-            $lessonModel = new Application_Model_Lesson();
-            $params = array(
-                'teacherStream' => $teacher['username'],
-                'studentStream' => $student['username'],
-                'soID' => $teacher['id'] . $student['id'],
-            );
-
-            $resultParams = $lessonModel->createFlashParams($params);
-
-            $dataToInsert = array(
-                'creator_id' => $teacher['id'],
-                'partner_id' => $student['id'],
-                'creator_stream_name' => $resultParams['teacherStream'],
-                'partner_stream_name' => $resultParams['studentStream'],
-                'so_id' => $resultParams['soID'],
-                'booking_id' => $bookingId,
-                'status' => 1,
-            );
-
             $lessonTable = new Application_Model_DbTable_Lesson();
-            $bookingTable = new Application_Model_DbTable_Booking();
-            $booking = $bookingTable->getItem($bookingId);
+            $isAvailable = $lessonTable->checkAvailableLesson();
+            if (!$isAvailable) {
 
-            $res = $lessonTable->startLesson($dataToInsert);
-            if ($booking['feedback']) {
-                $lessonFeadbackTable = new Application_Model_DbTable_LessonFeedback();
-                $lessonFeadbackTable->createDefaultFeedback($res, Zend_Auth::getInstance()->getIdentity()->id);
-            }
-            if ($booking['video']) {
-                $lessonTable = new Application_Model_DbTable_Lesson();
-                $activeLesson = $lessonTable->checkAvailableLesson(Zend_Auth::getInstance()->getIdentity()->id);
 
-                $videoPath = $lessonModel->createVideoPath($res, $activeLesson['creator_id']);
+                $broker = new Aimya_View_Helper_BaseLink();
+                $baseLink = $broker->baseLink();
 
-                $openDispay = $lessonModel->openDisplay($activeLesson['id']);
-                sleep(8);
-                if ($openDispay !== FALSE) {
-                    $res = $lessonTable->setSeleniumPort($activeLesson['id'], $openDispay);
+                $userModel = new Application_Model_DbTable_Users();
+                $student = $userModel->getItem($studentId);
+                $teacher = $userModel->getItem(Zend_Auth::getInstance()->getIdentity()->id);
+                $lessonModel = new Application_Model_Lesson();
+                $params = array(
+                    'teacherStream' => $teacher['username'],
+                    'studentStream' => $student['username'],
+                    'soID' => $teacher['id'] . $student['id'],
+                );
 
-                    if ($res) {
-                        $lessonModel->openLesson($activeLesson['id'], $openDispay);
+                $resultParams = $lessonModel->createFlashParams($params);
 
-                        $stream = getHostByName(getHostName()) . '/oflaDemo/' . $resultParams['teacherStream'];
+                $dataToInsert = array(
+                    'creator_id' => $teacher['id'],
+                    'partner_id' => $student['id'],
+                    'creator_stream_name' => $resultParams['teacherStream'],
+                    'partner_stream_name' => $resultParams['studentStream'],
+                    'so_id' => $resultParams['soID'],
+                    'booking_id' => $bookingId,
+                    'status' => 1,
+                );
 
-                        $lessonModel->startRecording($activeLesson['id'], $videoPath . 'video_lesson', $booking['duration'], $stream, $activeLesson['id']);
+
+                $bookingTable = new Application_Model_DbTable_Booking();
+                $booking = $bookingTable->getItem($bookingId);
+
+                $res = $lessonTable->startLesson($dataToInsert);
+                if ($booking['feedback']) {
+                    $lessonFeadbackTable = new Application_Model_DbTable_LessonFeedback();
+                    $lessonFeadbackTable->createDefaultFeedback($res, Zend_Auth::getInstance()->getIdentity()->id);
+                }
+                if ($booking['video']) {
+                    $lessonTable = new Application_Model_DbTable_Lesson();
+                    $activeLesson = $lessonTable->checkAvailableLesson(Zend_Auth::getInstance()->getIdentity()->id);
+
+                    $videoPath = $lessonModel->createVideoPath($res, $activeLesson['creator_id']);
+
+                    $openDispay = $lessonModel->openDisplay($activeLesson['id']);
+                    sleep(8);
+                    if ($openDispay !== FALSE) {
+                        $res = $lessonTable->setSeleniumPort($activeLesson['id'], $openDispay);
+
+                        if ($res) {
+                            $lessonModel->openLesson($activeLesson['id'], $openDispay);
+
+                            $stream = getHostByName(getHostName()) . '/oflaDemo/' . $resultParams['teacherStream'];
+
+                            $lessonModel->startRecording($activeLesson['id'], $videoPath . 'video_lesson', $booking['duration'], $stream, $activeLesson['id']);
+                        }
                     }
+
                 }
 
+                $this->_helper->redirector('join', 'lesson');
             }
-
-            $this->_helper->redirector('join', 'lesson');
         }
     }
 
@@ -414,7 +420,7 @@ class LessonController extends Zend_Controller_Action
                     $this->view->answer = 'success';
                 } else {
                     $this->view->answer = 'failure';
-                    $this->writeLog('Failure:'.$status.$bookingStatus);
+                    $this->writeLog('Failure:' . $status . $bookingStatus);
                 }
 
             }
@@ -430,9 +436,7 @@ class LessonController extends Zend_Controller_Action
             fwrite($fh, $data);
             fclose($fh);
             return (true);
-        }
-        else
-        {
+        } else {
             return (false);
         }
 
@@ -587,9 +591,7 @@ class LessonController extends Zend_Controller_Action
             fputs($fh, $the_string, strlen($the_string));
             fclose($fh);
             return (true);
-        }
-        else
-        {
+        } else {
             return (false);
         }
     }
