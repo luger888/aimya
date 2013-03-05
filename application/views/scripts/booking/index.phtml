@@ -681,9 +681,8 @@ jQuery(document).ready(function () {
                         if (choosenDate == today) {
                             $('#started_at_time').val('');
                             //$('#started_at_time').timeEntry({minTime: currentTime});
-                            $.timeEntry.setDefaults({minTime: currentTime});
+                            $.timeEntry.setDefaults({minTime: '8:00AM', maxTime:'12:00AM'});
                         } else {
-                            $('#started_at_time').val('');
                             $('#started_at_time').timeEntry({show24Hours: true});
                         }
                     });
