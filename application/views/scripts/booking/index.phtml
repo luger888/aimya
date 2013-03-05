@@ -683,8 +683,8 @@ jQuery(document).ready(function () {
                             $('#started_at_time').timeEntry({show24Hours: true,
                                 minTime: currentTime});
                         } else {
-                            $('#started_at_time').timeEntry({show24Hours: true,
-                                minTime: currentTime});
+                            $('#started_at_time').val('');
+                            $('#started_at_time').timeEntry({show24Hours: true});
                         }
                     });
 
