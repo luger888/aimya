@@ -677,7 +677,7 @@ jQuery(document).ready(function () {
                         var oldDateObj = new Date();
                         var today = oldDateObj.getDate();
                         var choosenDate = new Date($('#started_at').val()).getDate();
-
+                       console.log(currentTime);
                         if (choosenDate == today) {
                             $('#started_at_time').val('');
                             $('#started_at_time').timeEntry({
