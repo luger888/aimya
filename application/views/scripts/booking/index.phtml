@@ -603,12 +603,18 @@ jQuery(document).ready(function () {
         if ($('input[name=role]:checked').val() == '2') {
             var role = '0';
         }
+        if( $('#started_at').val() !=''){
+            var started_at = $('#started_at').val() + ' ' + $('#started_at_time').val();
+        }else{
+            started_at = '';
+        }
+
         $.post(
 
             pathName + "/booking/add/0/controller%3D%3Ebooking/1/action%3D%3Eadd", {
                 "recipient_id":$('#recipiend_id').val(),
                 "focus_name":$('#focus_name').val(),
-                "started_at":$('#started_at').val() + ' ' + $('#started_at_time').val(),
+                "started_at":started_at,
                 "duration":$('#duration').val(),
                 "feedback":$('#feedback:checked').val() || 0,
                 "video":$('#video:checked').val() || 0,
