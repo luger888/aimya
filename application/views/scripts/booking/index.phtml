@@ -672,7 +672,8 @@ jQuery(document).ready(function () {
                 var currentTime = new Date(currentDate.getTime() + 10 * 60000);
 
                 $(function () {
-                    $('#started_at_time').timeEntry({show24Hours: true});
+                    $('#started_at_time').timeEntry({show24Hours: true,
+                        minTime: currentTime});
                     $('#started_at').change(function () {
                         var oldDateObj = new Date();
                         var today = oldDateObj.getDate();
@@ -683,7 +684,8 @@ jQuery(document).ready(function () {
                             $('#started_at_time').timeEntry({
                                 minTime: '08:30AM', maxTime: '05:30PM'});
                         } else {
-                            $('#started_at_time').timeEntry({show24Hours: true});
+                            $('#started_at_time').timeEntry({
+                                minTime: '08:30AM', maxTime: '05:30PM'});
                         }
                     });
 
