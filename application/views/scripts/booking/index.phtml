@@ -672,7 +672,8 @@ jQuery(document).ready(function () {
                 var currentTime = new Date(currentDate.getTime() + 10 * 60000);
 
                 $(function () {
-                    $('#started_at_time').timeEntry({show24Hours: true});
+                    $('#started_at_time').timeEntry({minTime: new Date(0, 0, 0, 8, 30, 0),
+                        maxTime: new Date(0, 0, 0, 17, 30, 0)});
                     $('#started_at').change(function () {
                         var oldDateObj = new Date();
                         var today = oldDateObj.getDate();
