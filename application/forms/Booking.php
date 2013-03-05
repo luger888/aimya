@@ -59,8 +59,8 @@ class Application_Form_Booking extends Zend_Form
 
         $start_at_time = new Zend_Form_Element_Text('started_at_time');
         $start_at_time ->setAttrib('id', 'started_at_time')
-//            ->setRequired(true)
-//            ->addValidator('NotEmpty')
+            ->setRequired(true)
+            ->addValidator('NotEmpty')
             ->setAttrib('class','hasTimepicker')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
