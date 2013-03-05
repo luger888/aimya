@@ -684,7 +684,7 @@ jQuery(document).ready(function () {
                             //$.timeEntry.setDefaults({minTime: '8:00AM', maxTime:'12:00AM'});
                                 $('#started_at_time').timeEntry('option', {minTime: currentTime});
                         } else {
-                            $('#started_at_time').timeEntry({show24Hours: true});
+                            $('#started_at_time').timeEntry('option', {minTime: false});
                         }
                     });
 
