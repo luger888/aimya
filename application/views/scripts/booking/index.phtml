@@ -681,7 +681,7 @@ jQuery(document).ready(function () {
                                console.log(new Date(0, 0, 0, currentTime.getHours(), currentTime.getMinutes(), 0));
                                console.log(currentTime);
                             $('#started_at_time').val('');
-                            $('#started_at_time').timeEntry({minTime: currentTime});
+                            $('#started_at_time').timeEntry({minTime: currentDate});
                         } else {
                             $('#started_at_time').timeEntry({show24Hours: true});
                         }
