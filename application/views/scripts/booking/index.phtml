@@ -681,17 +681,14 @@ jQuery(document).ready(function () {
                 var currentTime = new Date(currentDate.getTime() + 10 * 60000);
 
                 $(function () {
-                    $('#started_at_time').timeEntry({show24Hours: true, spinnerImage: ''});
+                    $('#started_at_time').timeEntry({show24Hours: true, spinnerImage: '', noSeparatorEntry: true});
                     $('#started_at').change(function () {
                         var oldDateObj = new Date();
                         var today = oldDateObj.getDate();
                         var choosenDate = new Date($('#started_at').val()).getDate();
 
                         if (choosenDate == today) {
-
-                            //$('#started_at_time').timeEntry({minTime: currentTime});
-                            //$.timeEntry.setDefaults({minTime: '8:00AM', maxTime:'12:00AM'});
-                                $('#started_at_time').timeEntry('option', {minTime: currentTime});
+                            $('#started_at_time').timeEntry('option', {minTime: currentTime});
                         } else {
                             $('#started_at_time').timeEntry('option', {minTime: false});
                         }
