@@ -680,8 +680,8 @@ jQuery(document).ready(function () {
 
                         if (choosenDate == today) {
                             $('#started_at_time').val('');
-                            $('#started_at_time').timeEntry({show24Hours: true,
-                                minTime: currentTime});
+                            //$('#started_at_time').timeEntry({minTime: currentTime});
+                            $.timeEntry.setDefaults({minTime: currentTime});
                         } else {
                             $('#started_at_time').val('');
                             $('#started_at_time').timeEntry({show24Hours: true});
