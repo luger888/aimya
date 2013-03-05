@@ -679,7 +679,7 @@ jQuery(document).ready(function () {
                         var choosenDate = new Date($('#started_at').val()).getDate();
                            if (choosenDate == today) {
                             $('#started_at_time').val('');
-                            $('#restrictTimeRange').timeEntry({minTime: new Date(0, 0, 0, currentTime.getHours(), currentTime.getMinutes(), 0),
+                            $('#started_at_time').timeEntry({minTime: new Date(0, 0, 0, currentTime.getHours(), currentTime.getMinutes(), 0),
                                 maxTime: new Date(0, 0, 0, 17, 30, 0)});
                         } else {
                             $('#started_at_time').timeEntry({show24Hours: true});
