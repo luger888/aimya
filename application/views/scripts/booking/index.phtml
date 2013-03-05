@@ -672,7 +672,8 @@ jQuery(document).ready(function () {
                 var currentTime = new Date(currentDate.getTime() + 10 * 60000);
 
                 $(function () {
-                    $('#started_at_time').scroller({ preset:'time', theme:'android-ics', ampm:false, timeFormat:'HH:ii'});
+                    $('#started_at_time').timeEntry({minTime: new Date(0, 0, 0, 8, 30, 0),
+                        maxTime: new Date(0, 0, 0, 17, 30, 0)});
                     $('#started_at').change(function () {
                         var oldDateObj = new Date();
                         var today = oldDateObj.getDate();
@@ -680,9 +681,11 @@ jQuery(document).ready(function () {
 
                         if (choosenDate == today) {
                             $('#started_at_time').val('');
-                            $('#started_at_time').scroller({ preset:'time', theme:'android-ics', ampm:false, timeFormat:'HH:ii', minDate:currentTime});
+                            $('#started_at_time').timeEntry({minTime: new Date(0, 0, 0, 8, 30, 0),
+                                maxTime: new Date(0, 0, 0, 17, 30, 0)});
                         } else {
-                            $('#started_at_time').scroller({ preset:'time', theme:'android-ics', ampm:false, timeFormat:'HH:ii'});
+                            $('#started_at_time').timeEntry({minTime: new Date(0, 0, 0, 8, 30, 0),
+                                maxTime: new Date(0, 0, 0, 17, 30, 0)});
                         }
                     });
 
