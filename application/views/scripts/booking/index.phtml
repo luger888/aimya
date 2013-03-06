@@ -121,9 +121,11 @@ ul li {
 .mainBooking #duration {
     width: 112px;
 }
-.mainBooking .addPrice{
-    padding-left:5px;
+
+.mainBooking .addPrice {
+    padding-left: 5px;
 }
+
 .mainBooking #rate {
     width: 70px;
 }
@@ -417,7 +419,7 @@ jQuery(document).ready(function () {
                         }
 
                         var start = msg.booking[c].started_at;
-                        
+
                         start = start.replace(" ", "T");
 
                         var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
@@ -596,123 +598,142 @@ jQuery(document).ready(function () {
     $('#started_at').datepicker({
         minDate:today
     });
-    $(function () {
-        $("#send-booking").dialog({
-            resizable:false,
-            height:140,
-            width:360,
-            modal:true,
-            buttons:{
-                "Yes":function () {
-                    $(this).dialog("close");
-                    $.post(
 
-                            pathName + "/booking/add/0/controller%3D%3Ebooking/1/action%3D%3Eadd", {
-                                "recipient_id":$('#recipiend_id').val(),
-                                "focus_name":$('#focus_name').val(),
-                                "started_at":started_at,
-                                "duration":$('#duration').val(),
-                                "feedback":$('#feedback:checked').val() || 0,
-                                "video":$('#video:checked').val() || 0,
-                                "notes":$('#notes:checked').val() || 0,
-                                "started_at_time":$('#started_at_time').val(),
-                                "rate":$('#rate').val(),
-                                "is_sender_teacher":role || 1,
-                                "add_info":$('#add_info').val()
-
-
-                            },
-                            function (response) {
-                                if (response.fail == 1) {
-                                    alert('You cannot double book!');
-                                    jQuery('.loadingIcon').remove();
-                                }
-                                if (response.success == 1) {
-                                    window.location.reload();
-
-                                }
-                                else if (response.blocked == 1) {
-                                    jQuery('.loadingIcon').remove();
-                                    alert('You have been blocked. You can\'t book him! ')
-                                } else if (response.success == 0 && response.fail != 1) {
-                                    jQuery('.loadingIcon').remove();
-                                    $('#booking').find('.error').remove();
-
-                                    if ($('#recipiend_id').val() == 0) {
-                                        $('#recipiend_id').parent().parent().append('<div class="error">Choose recipient</div>');
-                                    }
-                                    $("#recipiend_id").change(function () {
-                                        $(this).removeClass("input-error");
-                                        $(this).parent().parent().find('.error').remove();
-                                    });
-                                    for (key in response.errors) {
-
-                                        if (response.errors[key].length > 0) {
-                                            $("#" + key).parent().parent().append('<div class="error">' + response.errors[key] + '</div>');
-                                            $("#" + key).addClass("input-error");
-                                            $("#" + key).change(function () {
-                                                $(this).removeClass("input-error");
-                                                $(this).parent().parent().find('.error').remove();
-                                            });
-                                        }
-
-                                    }
-                                }
-
-
-                            });
-                },
-                No:function () {
-                    $(this).dialog("close");
-                }
-            }
-        });
-        $('.ui-icon-alert').remove();
-    });
     $('#sendBooking').click(function () {
         jQuery("body").append('<div class="loadingIcon"></div>');
 
         if ($('input[name=role]:checked').val() == '2') {
             var role = '0';
         }
-        if( $('#started_at').val() !=''){
+        if ($('#started_at').val() != '') {
             var started_at = $('#started_at').val() + ' ' + $('#started_at_time').val();
-        }else{
+        } else {
             started_at = '';
         }
 
+        $.post(
+
+                pathName + "/booking/add/0/controller%3D%3Ebooking/1/action%3D%3Eadd", {
+                    "recipient_id":$('#recipiend_id').val(),
+                    "focus_name":$('#focus_name').val(),
+                    "started_at":started_at,
+                    "duration":$('#duration').val(),
+                    "feedback":$('#feedback:checked').val() || 0,
+                    "video":$('#video:checked').val() || 0,
+                    "notes":$('#notes:checked').val() || 0,
+                    "started_at_time":$('#started_at_time').val(),
+                    "rate":$('#rate').val(),
+                    "is_sender_teacher":role || 1,
+                    "add_info":$('#add_info').val(),
+                    "validation":1
 
 
+                },
+                function (response) {
+                    if (response.fail == 1) {
+                        alert('You cannot double book!');
+                        jQuery('.loadingIcon').remove();
+                    }
+                    if (response.success == 1) {
+                        jQuery('.loadingIcon').remove();
+                        $(function () {
+                            $("#send-booking").dialog({
+                                resizable:false,
+                                height:140,
+                                width:360,
+                                modal:true,
+                                buttons:{
+                                    "Yes":function () {
+                                        $(this).dialog("close");
+                                        $.post(
+
+                                                pathName + "/booking/add/0/controller%3D%3Ebooking/1/action%3D%3Eadd", {
+                                                    "recipient_id":$('#recipiend_id').val(),
+                                                    "focus_name":$('#focus_name').val(),
+                                                    "started_at":started_at,
+                                                    "duration":$('#duration').val(),
+                                                    "feedback":$('#feedback:checked').val() || 0,
+                                                    "video":$('#video:checked').val() || 0,
+                                                    "notes":$('#notes:checked').val() || 0,
+                                                    "started_at_time":$('#started_at_time').val(),
+                                                    "rate":$('#rate').val(),
+                                                    "is_sender_teacher":role || 1,
+                                                    "add_info":$('#add_info').val(),
+                                                    "approve":1
+
+
+                                                });
+
+                                    },
+                                    No:function () {
+                                        $(this).dialog("close");
+                                    }
+                                }
+                            });
+                        });
+                        window.location.reload();
+
+                    }
+                    else if (response.blocked == 1) {
+                        jQuery('.loadingIcon').remove();
+                        alert('You have been blocked. You can\'t book him! ')
+                    } else if (response.success == 0 && response.fail != 1) {
+                        jQuery('.loadingIcon').remove();
+                        $('#booking').find('.error').remove();
+
+                        if ($('#recipiend_id').val() == 0) {
+                            $('#recipiend_id').parent().parent().append('<div class="error">Choose recipient</div>');
+                        }
+                        $("#recipiend_id").change(function () {
+                            $(this).removeClass("input-error");
+                            $(this).parent().parent().find('.error').remove();
+                        });
+                        for (key in response.errors) {
+
+                            if (response.errors[key].length > 0) {
+                                $("#" + key).parent().parent().append('<div class="error">' + response.errors[key] + '</div>');
+                                $("#" + key).addClass("input-error");
+                                $("#" + key).change(function () {
+                                    $(this).removeClass("input-error");
+                                    $(this).parent().parent().find('.error').remove();
+                                });
+                            }
+
+                        }
+                    }
+
+                });
+        
         return false;
     });
     $('#bookLesson').click(function () {
         $.post(
 
-            pathName + "/user/timezone/0/controller%3D%3Euser/1/action%3D%3Etimezone", {
-                "time":1
-            },
-            function (response) {
+                pathName + "/user/timezone/0/controller%3D%3Euser/1/action%3D%3Etimezone", {
+                    "time":1
+                },
+                function (response) {
 
-                var currentDate = new Date(response.time);
+                    var currentDate = new Date(response.time);
 
-                var currentTime = new Date(currentDate.getTime() + 10 * 60000);
+                    var currentTime = new Date(currentDate.getTime() + 10 * 60000);
 
-                $(function () {
-                    $('#started_at_time').timeEntry({show24Hours: true, spinnerImage: '', noSeparatorEntry: true});
-                    $('#started_at').change(function () {
-                        var oldDateObj = new Date();
-                        var today = oldDateObj.getDate();
-                        var choosenDate = new Date($('#started_at').val()).getDate();
+                    $(function () {
+                        $('#started_at_time').timeEntry({show24Hours:true, spinnerImage:'', noSeparatorEntry:true});
+                        $('#started_at').change(function () {
+                            var oldDateObj = new Date();
+                            var today = oldDateObj.getDate();
+                            var choosenDate = new Date($('#started_at').val()).getDate();
 
-                        if (choosenDate == today) {
-                            $('#started_at_time').timeEntry('option', {minTime: currentTime});
-                        } else {
-                            $('#started_at_time').timeEntry('option', {minTime: false});
-                        }
+                            if (choosenDate == today) {
+                                $('#started_at_time').timeEntry('option', {minTime:currentTime});
+                            } else {
+                                $('#started_at_time').timeEntry('option', {minTime:false});
+                            }
+                        });
+
                     });
-
                 });
-            });
 
         $('#booking').find('.error').remove();
         jQuery('#booking').css('display', 'block');
@@ -736,67 +757,67 @@ function confirmBooking(e) {
     pathName = $('#current_url').val();
     $.post(
 
-        pathName + "/booking/approve/0/controller%3D%3Ebooking/1/action%3D%3Eapprove", {
-            "booking_id":$(e).nextAll('#booking_id:first').val()
-        },
-        function (response) {
+            pathName + "/booking/approve/0/controller%3D%3Ebooking/1/action%3D%3Eapprove", {
+                "booking_id":$(e).nextAll('#booking_id:first').val()
+            },
+            function (response) {
 
-            if (response.approved) {
-                $(e).parents('.fc-event-inner').find('.fc-event-head').css('background-color', '#effad0');
-                $(e).parents('.fc-event-inner').css('background-color', '#effad0');
-                $(e).parents('.fc-event').css('border-color', '#7e954c');
-                $(e).parents('.fc-event-inner').css('border-color', '#7e954c');
-                $(e).parent().append('<div class="fc-event-content-approve"><span>Approved</span></div>');
-                $(e).parents('.fc-event').find('.fc-event-content-reject').remove();
-                $(e).parents('.fc-event').find('.fc-event-content-confirm').remove();
-            } else {
-                alert('You already  approved lesson on this time!')
-            }
+                if (response.approved) {
+                    $(e).parents('.fc-event-inner').find('.fc-event-head').css('background-color', '#effad0');
+                    $(e).parents('.fc-event-inner').css('background-color', '#effad0');
+                    $(e).parents('.fc-event').css('border-color', '#7e954c');
+                    $(e).parents('.fc-event-inner').css('border-color', '#7e954c');
+                    $(e).parent().append('<div class="fc-event-content-approve"><span>Approved</span></div>');
+                    $(e).parents('.fc-event').find('.fc-event-content-reject').remove();
+                    $(e).parents('.fc-event').find('.fc-event-content-confirm').remove();
+                } else {
+                    alert('You already  approved lesson on this time!')
+                }
 
 
-        });
+            });
 }
 function rejectBooking(e) {
     var pathName = $('#current_url').val();
     $.post(
 
-        pathName + "/booking/reject/0/controller%3D%3Ebooking/1/action%3D%3Ereject", {
-            "booking_id":$(e).nextAll('#booking_id:first').val(),
-            "sender_id":$(e).nextAll('#sender_id:first').val()
-        },
-        function (response) {
-            e.parentNode.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode.parentNode);
-        });
+            pathName + "/booking/reject/0/controller%3D%3Ebooking/1/action%3D%3Ereject", {
+                "booking_id":$(e).nextAll('#booking_id:first').val(),
+                "sender_id":$(e).nextAll('#sender_id:first').val()
+            },
+            function (response) {
+                e.parentNode.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode.parentNode);
+            });
 }
 
 function confirmCancellation(e) {
     var pathName = $('#current_url').val();
     $.post(
 
-        pathName + "/booking/cancel/0/controller%3D%3Ebooking/1/action%3D%3Ecancel", {
-            "cancelConfirmId":$(e).nextAll('#booking_id:first').val()
-        },
-        function (response) {
+            pathName + "/booking/cancel/0/controller%3D%3Ebooking/1/action%3D%3Ecancel", {
+                "cancelConfirmId":$(e).nextAll('#booking_id:first').val()
+            },
+            function (response) {
 
-            if (response.confirmed) {
-                window.location.reload();
-            }
+                if (response.confirmed) {
+                    window.location.reload();
+                }
 
 
-        });
+            });
 }
 function rejectCancellation(e) {
     var pathName = $('#current_url').val();
     $.post(
 
-        pathName + "/booking/cancel/0/controller%3D%3Ebooking/1/action%3D%3Ecancel", {
-            "cancelRejectId":$(e).nextAll('#booking_id:first').val()
-        },
-        function (response) {
-            if (response.rejected) {
-                window.location.reload();
-            }
-        });
+            pathName + "/booking/cancel/0/controller%3D%3Ebooking/1/action%3D%3Ecancel", {
+                "cancelRejectId":$(e).nextAll('#booking_id:first').val()
+            },
+            function (response) {
+                if (response.rejected) {
+                    window.location.reload();
+                }
+            });
 }
 
 
@@ -858,6 +879,7 @@ function removeBooking(e) {
 
 <div id='calendar'></div>
 </div>
-<div class="usersAlert" id="send-booking" title="OFFER DETAILS:">
-    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span><?php echo $this->translate('Block user') ?>?</p>
+<div class="usersAlert" id="send-booking" title="BLOCK USER:">
+    <p><span class="ui-icon ui-icon-alert"
+             style="float: left; margin: 0 7px 20px 0;"></span><?php echo $this->translate('Block user') ?>?</p>
 </div>
