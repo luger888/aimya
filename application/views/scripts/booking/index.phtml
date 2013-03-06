@@ -662,6 +662,9 @@ jQuery(document).ready(function () {
                                                     "approve":1
 
 
+                                                },
+                                                function (response) {
+                                                    window.location.reload();
                                                 });
 
                                     },
@@ -671,7 +674,7 @@ jQuery(document).ready(function () {
                                 }
                             });
                         });
-                        window.location.reload();
+
 
                     }
                     else if (response.blocked == 1) {
