@@ -596,7 +596,79 @@ jQuery(document).ready(function () {
     $('#started_at').datepicker({
         minDate:today
     });
+    $(function () {
+        $("#send-booking").dialog({
+            resizable:false,
+            height:140,
+            width:360,
+            modal:true,
+            buttons:{
+                "Yes":function () {
+                    $(this).dialog("close");
+                    $.post(
 
+                            pathName + "/booking/add/0/controller%3D%3Ebooking/1/action%3D%3Eadd", {
+                                "recipient_id":$('#recipiend_id').val(),
+                                "focus_name":$('#focus_name').val(),
+                                "started_at":started_at,
+                                "duration":$('#duration').val(),
+                                "feedback":$('#feedback:checked').val() || 0,
+                                "video":$('#video:checked').val() || 0,
+                                "notes":$('#notes:checked').val() || 0,
+                                "started_at_time":$('#started_at_time').val(),
+                                "rate":$('#rate').val(),
+                                "is_sender_teacher":role || 1,
+                                "add_info":$('#add_info').val()
+
+
+                            },
+                            function (response) {
+                                if (response.fail == 1) {
+                                    alert('You cannot double book!');
+                                    jQuery('.loadingIcon').remove();
+                                }
+                                if (response.success == 1) {
+                                    window.location.reload();
+
+                                }
+                                else if (response.blocked == 1) {
+                                    jQuery('.loadingIcon').remove();
+                                    alert('You have been blocked. You can\'t book him! ')
+                                } else if (response.success == 0 && response.fail != 1) {
+                                    jQuery('.loadingIcon').remove();
+                                    $('#booking').find('.error').remove();
+
+                                    if ($('#recipiend_id').val() == 0) {
+                                        $('#recipiend_id').parent().parent().append('<div class="error">Choose recipient</div>');
+                                    }
+                                    $("#recipiend_id").change(function () {
+                                        $(this).removeClass("input-error");
+                                        $(this).parent().parent().find('.error').remove();
+                                    });
+                                    for (key in response.errors) {
+
+                                        if (response.errors[key].length > 0) {
+                                            $("#" + key).parent().parent().append('<div class="error">' + response.errors[key] + '</div>');
+                                            $("#" + key).addClass("input-error");
+                                            $("#" + key).change(function () {
+                                                $(this).removeClass("input-error");
+                                                $(this).parent().parent().find('.error').remove();
+                                            });
+                                        }
+
+                                    }
+                                }
+
+
+                            });
+                },
+                No:function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+        $('.ui-icon-alert').remove();
+    });
     $('#sendBooking').click(function () {
         jQuery("body").append('<div class="loadingIcon"></div>');
 
@@ -609,62 +681,7 @@ jQuery(document).ready(function () {
             started_at = '';
         }
 
-        $.post(
 
-            pathName + "/booking/add/0/controller%3D%3Ebooking/1/action%3D%3Eadd", {
-                "recipient_id":$('#recipiend_id').val(),
-                "focus_name":$('#focus_name').val(),
-                "started_at":started_at,
-                "duration":$('#duration').val(),
-                "feedback":$('#feedback:checked').val() || 0,
-                "video":$('#video:checked').val() || 0,
-                "notes":$('#notes:checked').val() || 0,
-                "started_at_time":$('#started_at_time').val(),
-                "rate":$('#rate').val(),
-                "is_sender_teacher":role || 1,
-                "add_info":$('#add_info').val()
-
-
-            },
-            function (response) {
-                if (response.fail == 1) {
-                    alert('You cannot double book!');
-                    jQuery('.loadingIcon').remove();
-                }
-                if (response.success == 1) {
-                    window.location.reload();
-
-                }
-                else if (response.blocked == 1) {
-                    jQuery('.loadingIcon').remove();
-                    alert('You have been blocked. You can\'t book him! ')
-                } else if (response.success == 0 && response.fail != 1) {
-                    jQuery('.loadingIcon').remove();
-                    $('#booking').find('.error').remove();
-
-                    if ($('#recipiend_id').val() == 0) {
-                        $('#recipiend_id').parent().parent().append('<div class="error">Choose recipient</div>');
-                    }
-                    $("#recipiend_id").change(function () {
-                        $(this).removeClass("input-error");
-                        $(this).parent().parent().find('.error').remove();
-                    });
-                    for (key in response.errors) {
-
-                        if (response.errors[key].length > 0) {
-                            $("#" + key).parent().parent().append('<div class="error">' + response.errors[key] + '</div>');
-                            $("#" + key).addClass("input-error");
-                            $("#" + key).change(function () {
-                                $(this).removeClass("input-error");
-                                $(this).parent().parent().find('.error').remove();
-                            });
-                        }
-
-                    }
-                }
-
-
-            });
 
         return false;
     });
@@ -840,4 +857,7 @@ function removeBooking(e) {
 </script>
 
 <div id='calendar'></div>
+</div>
+<div class="usersAlert" id="send-booking" title="OFFER DETAILS:">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span><?php echo $this->translate('Block user') ?>?</p>
 </div>

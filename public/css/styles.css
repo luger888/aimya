@@ -1207,7 +1207,7 @@ input.button-2 {
 .userRelationsTab.profile  .button-2{
     padding-right: 11px;
 }
-#block-confirm, #delete-confirm, #cancel-confirm, #cancel-unsubscribe{
+#block-confirm, #delete-confirm, #cancel-confirm, #cancel-unsubscribe, #send-booking{
     display: none;
 }
 /*Availability td padding-right */
@@ -1296,7 +1296,7 @@ input.button-2 {
     width: auto;
     padding: 21px 0 0 13px;
 }
-#block-confirm, #delete-confirm, #unsubscribe-confirm, #unblock-confirm{
+#block-confirm, #delete-confirm, #unsubscribe-confirm, #unblock-confirm, #send-booking{
     display: none;
 }
 .ui-dialog-buttonset button{
