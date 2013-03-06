@@ -37,7 +37,7 @@ class BookingController extends Zend_Controller_Action
         $userDbTable = new Application_Model_DbTable_Users();
 
         if ($this->getRequest()->isPost()) {
-            if ($this->getRequest->getParam('validation')) {
+            if ($this->getRequest()->getParam('validation')) {
                 $data = $this->getRequest()->getParams();
                 if ($bookingForm->isValid($data)) {
                     $this->view->validation = 1;
@@ -47,7 +47,7 @@ class BookingController extends Zend_Controller_Action
                     $this->view->errors = $bookingForm->getErrors();
                 }
             }
-            if ($this->getRequest->getParam('approve')) {
+            if ($this->getRequest()->getParam('approve')) {
                 if ($identity->role == '1') {
                     $this->getRequest()->setParam('is_sender_teacher', '0');
                 }
