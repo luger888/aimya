@@ -599,7 +599,7 @@ jQuery(document).ready(function () {
         minDate:today
     });
 
-    $('#sendBooking').click(function () {
+    $('#sendBooking').click(function () {/* CLICKING ON SEND BOOKING BUTTON*/
         jQuery("body").append('<div class="loadingIcon"></div>');
 
         if ($('input[name=role]:checked').val() == '2') {
@@ -611,7 +611,7 @@ jQuery(document).ready(function () {
             started_at = '';
         }
 
-        $.post(
+        $.post( /* SENDING PARAMETRS FOR VALIDATION*/
 
                 pathName + "/booking/add/0/controller%3D%3Ebooking/1/action%3D%3Eadd", {
                     "recipient_id":$('#recipiend_id').val(),
@@ -634,18 +634,18 @@ jQuery(document).ready(function () {
                         alert('You cannot double book!');
                         jQuery('.loadingIcon').remove();
                     }
-                    if (response.validation == 1) {
+                    if (response.validation == 1) { /* IF PARAMETERS PASS THE VALIDATION*/
                         jQuery('.loadingIcon').remove();
                         $(function () {
-                            $("#send-booking").dialog({
+                            $("#send-booking").dialog({ /* OPEN DIALOG WINDOW WITH CONFIRMATION*/
                                 resizable:false,
                                 height:140,
                                 width:360,
                                 modal:true,
                                 buttons:{
-                                    "Yes":function () {
+                                    "Yes":function () { /* IF CONFIRMED*/
                                         $(this).dialog("close");
-                                        $.post(
+                                        $.post( /* SENDING PARAMETRS FOR INSERTING INTO DATABASE*/
 
                                                 pathName + "/booking/add/0/controller%3D%3Ebooking/1/action%3D%3Eadd", {
                                                     "recipient_id":$('#recipiend_id').val(),
@@ -668,7 +668,7 @@ jQuery(document).ready(function () {
                                                 });
 
                                     },
-                                    No:function () {
+                                    No:function () { /* IF DIALOG NOT CONFIRMED, DO NOTHING*/
                                         $(this).dialog("close");
                                     }
                                 }
@@ -883,6 +883,10 @@ function removeBooking(e) {
 <div id='calendar'></div>
 </div>
 <div class="usersAlert" id="send-booking" title="OFFER DETAILS:">
-    <p><span style="float: left; margin: 0 7px 20px 0;"></span><?php echo $this->translate('You’re about to send an offer for a lesson.  If accepted, this information will be added to your and your teaching member’s schedule. Do you wish to proceed?');?></p>
+    <p><span style="float: left; margin: 0 7px 20px 0;"></span><?php echo $this->translate('You’re about to send an offer for a lesson.  If accepted, this information will be added to your and your learning member’s schedule.');?></p>
+    <p><span style="float: left; margin: 0 7px 20px 0;"></span><?php echo $this->translate('Do you wish to proceed?');?></p>
+</div>
+<div class="usersAlert" id="send-booking-stu" title="OFFER DETAILS:">
+    <p><span style="float: left; margin: 0 7px 20px 0;"></span><?php echo $this->translate('You’re about to send an offer for a lesson.  If accepted, this information will be added to your and your learning member’s schedule.');?></p>
     <p><span style="float: left; margin: 0 7px 20px 0;"></span><?php echo $this->translate('Do you wish to proceed?');?></p>
 </div>
