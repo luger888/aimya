@@ -1296,8 +1296,9 @@ input.button-2 {
     width: auto;
     padding: 21px 0 0 13px;
 }
-#block-confirm, #delete-confirm, #unsubscribe-confirm, #unblock-confirm, #send-booking{
+#block-confirm, #delete-confirm, #unsubscribe-confirm, #unblock-confirm, #send-booking, #send-booking-stu{
     display: none;
+    height: auto !important;
 }
 .ui-dialog-buttonset button{
     border:none !important;

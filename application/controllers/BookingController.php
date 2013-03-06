@@ -35,12 +35,24 @@ class BookingController extends Zend_Controller_Action
         $bookingForm = new Application_Form_Booking();
         $identity = Zend_Auth::getInstance()->getIdentity();
         $userDbTable = new Application_Model_DbTable_Users();
-
+        $friendsDb = new Application_Model_DbTable_Friends();
         if ($this->getRequest()->isPost()) {
             if ($this->getRequest()->getParam('validation')) {
                 $data = $this->getRequest()->getParams();
                 if ($bookingForm->isValid($data)) {
-                    $this->view->validation = 1;
+                    $isExist = $bookingDbTable->isExistBooking(null, $identity->id, $this->getRequest()->getParam('started_at'), $this->getRequest()->getParam('duration'));
+                    if (!$isExist) {
+                        $isBlocked = $friendsDb->isBlocked($this->getRequest()->getParam('recipient_id'));
+                        if (!$isBlocked) {
+                            $this->view->validation = 1;
+                        } else {
+                            $this->view->blocked = 1;
+                        }
+
+                    } else {
+                        $this->view->fail = 1;
+                    }
+
 
                 } else {
                     $this->view->success = 0;
@@ -57,17 +69,11 @@ class BookingController extends Zend_Controller_Action
                 if ($this->getRequest()->getParam('recipient_id')) {
                     $isExist = $bookingDbTable->isExistBooking(null, $identity->id, $this->getRequest()->getParam('started_at'), $this->getRequest()->getParam('duration'));
                     if (!$isExist) {
-                        $friendsDb = new Application_Model_DbTable_Friends();
                         $isBlocked = $friendsDb->isBlocked($this->getRequest()->getParam('recipient_id'));
                         if (!$isBlocked) {
                             $bookingDbTable->addBooking($this->getRequest()->getParams(), $identity->id);
                             $this->view->success = 1;
-                        } else {
-                            $this->view->blocked = 1;
                         }
-
-                    } else {
-                        $this->view->fail = 1;
                     }
                 }
             }
