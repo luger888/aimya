@@ -35,6 +35,7 @@ class BookingController extends Zend_Controller_Action
         $bookingForm = new Application_Form_Booking();
         $identity = Zend_Auth::getInstance()->getIdentity();
         $userDbTable = new Application_Model_DbTable_Users();
+        $bookingDbTable = new Application_Model_DbTable_Booking();
         $friendsDb = new Application_Model_DbTable_Friends();
         if ($this->getRequest()->isPost()) {
             if ($this->getRequest()->getParam('validation')) {
@@ -64,7 +65,7 @@ class BookingController extends Zend_Controller_Action
                     $this->getRequest()->setParam('is_sender_teacher', '0');
                 }
                 $userGmt = $userDbTable->getTimeZone($this->getRequest()->getParam('sender_id'));
-                $bookingDbTable = new Application_Model_DbTable_Booking();
+
                 $this->getRequest()->setParam('creator_tz', $userGmt['timezone']);
                 if ($this->getRequest()->getParam('recipient_id')) {
                     $isExist = $bookingDbTable->isExistBooking(null, $identity->id, $this->getRequest()->getParam('started_at'), $this->getRequest()->getParam('duration'));
