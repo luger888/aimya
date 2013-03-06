@@ -634,7 +634,7 @@ jQuery(document).ready(function () {
                         alert('You cannot double book!');
                         jQuery('.loadingIcon').remove();
                     }
-                    if (response.success == 1) {
+                    if (response.validation == 1) {
                         jQuery('.loadingIcon').remove();
                         $(function () {
                             $("#send-booking").dialog({
