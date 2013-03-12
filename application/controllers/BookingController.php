@@ -28,14 +28,22 @@ class BookingController extends Zend_Controller_Action
         $this->view->role = $identity->role;
         $userGmt = $userDbTable->getTimeZone($identity->id);
         $this->view->timezone = $userGmt['timezone'];
+
+        $tzDbTable = new Application_Model_DbTable_TimeZones();
+        $tz = $tzDbTable->getTimezoneByGmt($userGmt['timezone']);
+
+        $dtzone = new DateTimeZone($tz2['code']);
+
+        $dtime = new DateTime();
+        $dtime->setTimeZone($dtzone);
+        $time = $dtime->format('g:i A m/d/y');
     }
     public function tztestAction(){
         $identity = Zend_Auth::getInstance()->getIdentity();
         $userDbTable = new Application_Model_DbTable_Users();
         $tzDbTable = new Application_Model_DbTable_TimeZones();
         $userGmt = $userDbTable->getTimeZone($identity->id);
-        $tz2 = $tzDbTable->getTimezoneByGmt($userGmt['timezone']);
-        $tz = 'Europe/Kiev';
+        $tz = $tzDbTable->getTimezoneByGmt($userGmt['timezone']);
 
         // create the DateTimeZone object for later
         $dtzone = new DateTimeZone($tz2['code']);
@@ -48,7 +56,7 @@ class BookingController extends Zend_Controller_Action
         $dtime->setTimeZone($dtzone);
 
         // print the time using your preferred format
-        $time = $dtime->format('g:i A m/d/y');
+        $time = $dtime->getOffset();
 
         Zend_Debug::dump($time) ;
     }
