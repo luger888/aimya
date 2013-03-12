@@ -30,7 +30,7 @@ class BookingController extends Zend_Controller_Action
         $this->view->timezone = $userGmt['timezone'];
     }
     public function tztestAction(){
-        $tz = 'Europe/Moscow';
+        $tz = 'Europe/Kiev';
 
         // create the DateTimeZone object for later
         $dtzone = new DateTimeZone($tz);
