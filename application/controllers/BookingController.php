@@ -23,7 +23,8 @@ class BookingController extends Zend_Controller_Action
         $identity = Zend_Auth::getInstance()->getIdentity();
         $bookingDbTable = new Application_Model_DbTable_Booking();
         $this->view->bookingForm = new Application_Form_Booking();
-        $this->view->booking = $bookingDbTable->getBookingByUser($identity->id);
+        $booking = $bookingDbTable->getBookingByUser($identity->id);
+        $this->view->booking = $booking;
         $this->view->user_id = $identity->id;
         $this->view->role = $identity->role;
         $userGmt = $userDbTable->getTimeZone($identity->id);
@@ -36,7 +37,9 @@ class BookingController extends Zend_Controller_Action
 
         $dtime = new DateTime();
         $dtime->setTimeZone($dtzone);
-        $time = $dtime->format('g:i A m/d/y');
+        $time = $dtime->getOffset();
+        $this->view->timezone2 = $time;
+
     }
     public function tztestAction(){
         $identity = Zend_Auth::getInstance()->getIdentity();
@@ -96,7 +99,13 @@ class BookingController extends Zend_Controller_Action
                 }
                 $userGmt = $userDbTable->getTimeZone($this->getRequest()->getParam('sender_id'));
 
-                $this->getRequest()->setParam('creator_tz', $userGmt['timezone']);
+                $tzDbTable = new Application_Model_DbTable_TimeZones(); /*TimeZones object*/
+                $tz = $tzDbTable->getTimezoneByGmt($userGmt['timezone']);/*get timezone code for php*/
+                $dtzone = new DateTimeZone($tz['code']);/*creating timezone object with given code from db*/
+                $dtime = new DateTime();
+                $dtime->setTimeZone($dtzone);/*setting timezone object to time object*/
+                $time = $dtime->getOffset();/*getting UTC offset in UNIX-stamp*/
+                $this->getRequest()->setParam('creator_tz', $time);
                 if ($this->getRequest()->getParam('recipient_id')) {
                     $isExist = $bookingDbTable->isExistBooking(null, $identity->id, $this->getRequest()->getParam('started_at'), $this->getRequest()->getParam('duration'));
                     if (!$isExist) {
