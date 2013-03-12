@@ -29,7 +29,24 @@ class BookingController extends Zend_Controller_Action
         $userGmt = $userDbTable->getTimeZone($identity->id);
         $this->view->timezone = $userGmt['timezone'];
     }
+    public function tztestAction(){
+        $tz = 'Europe/Minsk';
 
+        // create the DateTimeZone object for later
+        $dtzone = new DateTimeZone($tz);
+
+        // create a DateTime object
+        $dtime = new DateTime();
+
+
+        // convert this to the user's timezone using the DateTimeZone object
+        $dtime->setTimeZone($dtzone);
+
+        // print the time using your preferred format
+        $time = $dtime->format('g:i A m/d/y');
+
+        Zend_Debug::dump($time) ;
+    }
     public function addAction()
     {
         $bookingForm = new Application_Form_Booking();
