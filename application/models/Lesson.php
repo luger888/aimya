@@ -228,7 +228,7 @@ class Application_Model_Lesson
             if ($lesson['booking']['sender_id'] != $identity->id) {
                 $creator_tz = $lesson['booking']['creator_tz']; //unix stamp
 
-                $starting_time = ($starting_time + $totalMinutes * 60) - $creator_tz * 60;
+                $starting_time = ($starting_time + $time * 60) - $creator_tz * 60;
 
             }
             $currentTimeUtc = strtotime($dateWithUTC); //currentTime + UTC of user to UNIX stamp
