@@ -30,10 +30,14 @@ class BookingController extends Zend_Controller_Action
         $this->view->timezone = $userGmt['timezone'];
     }
     public function tztestAction(){
+        $userDbTable = new Application_Model_DbTable_Users();
+        $tzDbTable = new Application_Model_DbTable_TimeZones();
+        $userGmt = $userDbTable->getTimeZone($identity->id);
+        $tz2 = $tzDbTable->getTimezoneByGmt($userGmt['timezone']);
         $tz = 'Europe/Kiev';
 
         // create the DateTimeZone object for later
-        $dtzone = new DateTimeZone($tz);
+        $dtzone = new DateTimeZone($tz2);
 
         // create a DateTime object
         $dtime = new DateTime();

@@ -15,7 +15,7 @@ class Application_Model_DbTable_TimeZones extends Application_Model_DbTable_Abst
     public function getTimezoneByGmt($gmt){
 
         $data = $this->select()
-            ->from($this->_name, array('id'))
+            ->from($this->_name, array('id', 'code', 'name'))
             ->where('gmt=?', $gmt);
 
         return $data->query()->fetch();
