@@ -206,7 +206,7 @@ class Application_Model_Lesson
         $date = gmdate("m/d/Y H:i"); //current time in GMT 0
 
         $userGmt = $userTable->getTimeZone($identity->id); //getting time zone of logged user
-        $userGmt =  $userGmt['timezone']); //exploding HH: MM by ':'
+        $userGmt =  $userGmt['timezone']; //exploding HH: MM by ':'
         $tz = $tzDbTable->getTimezoneByGmt($userGmt);
 
         $dtzone = new DateTimeZone($tz['code']);
