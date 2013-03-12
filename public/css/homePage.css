@@ -151,11 +151,11 @@ input.btnLogin {
     margin-right: 6px;
 }
 .underHeaderLang  li .language{
-    width: 15px;
-    height: 15px;
     display: inline-block;
-    padding: 0px 1px 0px 1px;
+    height: 16px;
     margin-top: 6px;
+    padding: 0 1px;
+    width: 24px;
 }
 
 .underHeaderLang li .language.english{
