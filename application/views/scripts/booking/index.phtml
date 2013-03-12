@@ -445,7 +445,7 @@ jQuery(document).ready(function () {
                         if (msg.booking[c].recipient_id == msg.user_id) {
                             var unixStamp = Math.round((start).getTime() / 1000);
 
-                            var dateTime = unixStamp + utc * 3600;
+                            var dateTime = unixStamp + utc;
                             console.log(dateTime);
                             dateTime = new Date(dateTime * 1000);
                             console.log(dateTime);
