@@ -206,12 +206,17 @@ class Application_Model_Lesson
         $date = gmdate("m/d/Y H:i"); //current time in GMT 0
 
         $userGmt = $userTable->getTimeZone($identity->id); //getting time zone of logged user
-        $separatedData = explode(':', $userGmt['timezone']); //exploding HH: MM by ':'
-        $minutesInHours = $separatedData[0] * 60; // HH -> minutes
-        $minutesInDecimals = $separatedData[1]; // MM -> minutes
-        $totalMinutes = $minutesInHours + $minutesInDecimals; //converted timezone to minutes
+        $userGmt =  $userGmt['timezone']); //exploding HH: MM by ':'
+        $tz = $tzDbTable->getTimezoneByGmt($userGmt);
+
+        $dtzone = new DateTimeZone($tz['code']);
+
+        $dtime = new DateTime();
+        $dtime->setTimeZone($dtzone);
+        $time = $dtime->getOffset();
+
         $isTeacher = 0;
-        $dateWithUTC = gmdate("m/d/Y H:i", strtotime($date) + (($totalMinutes) * 60)); //adding timezone to current date
+        $dateWithUTC = gmdate("m/d/Y H:i", strtotime($date) + (($time) * 60)); //adding timezone to current date
         // END -- TIME FORMATTING BY TIMEZONES BLOCK
         $lessonTable = new Application_Model_DbTable_Lesson();
 
@@ -222,7 +227,7 @@ class Application_Model_Lesson
             $starting_time = strtotime($lesson['booking']['started_at']); //booking started_at time to UNIX stamp
             if ($lesson['booking']['sender_id'] != $identity->id) {
                 $creator_tz = $lesson['booking']['creator_tz']; //unix stamp
-                
+
                 $starting_time = ($starting_time + $totalMinutes * 60) - $creator_tz * 60;
 
             }
