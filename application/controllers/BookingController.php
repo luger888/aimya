@@ -30,6 +30,7 @@ class BookingController extends Zend_Controller_Action
         $this->view->timezone = $userGmt['timezone'];
     }
     public function tztestAction(){
+        $identity = Zend_Auth::getInstance()->getIdentity();
         $userDbTable = new Application_Model_DbTable_Users();
         $tzDbTable = new Application_Model_DbTable_TimeZones();
         $userGmt = $userDbTable->getTimeZone($identity->id);
