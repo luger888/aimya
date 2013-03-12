@@ -446,9 +446,9 @@ jQuery(document).ready(function () {
                             var unixStamp = Math.round((start).getTime() / 1000);
 
                             var dateTime = unixStamp + utc * 3600;
-
+                            console.log(dateTime);
                             dateTime = new Date(dateTime * 1000);
-
+                            console.log(dateTime);
 
                         } else {
                             dateTime = msg.booking[c].started_at;//bug
