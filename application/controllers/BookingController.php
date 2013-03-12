@@ -28,7 +28,7 @@ class BookingController extends Zend_Controller_Action
         $this->view->user_id = $identity->id;
         $this->view->role = $identity->role;
         $userGmt = $userDbTable->getTimeZone($identity->id);
-        $this->view->timezone = $userGmt['timezone'];
+
 
         $tzDbTable = new Application_Model_DbTable_TimeZones();
         $tz = $tzDbTable->getTimezoneByGmt($userGmt['timezone']);
@@ -38,7 +38,8 @@ class BookingController extends Zend_Controller_Action
         $dtime = new DateTime();
         $dtime->setTimeZone($dtzone);
         $time = $dtime->getOffset();
-        $this->view->timezone2 = $time;
+        $this->view->timezone = $time;
+
 
     }
     public function tztestAction(){
