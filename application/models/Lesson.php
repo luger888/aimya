@@ -221,13 +221,9 @@ class Application_Model_Lesson
             $lessonDuration = $lesson['booking']['duration'] * 60; //lesson duration in seconds
             $starting_time = strtotime($lesson['booking']['started_at']); //booking started_at time to UNIX stamp
             if ($lesson['booking']['sender_id'] != $identity->id) {
-                $separatedData = explode(':', $lesson['booking']['creator_tz']); //exploding HH: MM by ':'
-                $minutesInHours = $separatedData[0] * 60; // HH -> minutes
-                $minutesInDecimals = $separatedData[1]; // MM -> minutes
-                $totalCreatorTZ = $minutesInHours + $minutesInDecimals; //converted timezone to minutes
-
-
-                $starting_time = ($starting_time + $totalMinutes * 60) - $totalCreatorTZ * 60;
+                $creator_tz = $lesson['booking']['creator_tz']; //unix stamp
+                
+                $starting_time = ($starting_time + $totalMinutes * 60) - $creator_tz * 60;
 
             }
             $currentTimeUtc = strtotime($dateWithUTC); //currentTime + UTC of user to UNIX stamp
