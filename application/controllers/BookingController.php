@@ -106,7 +106,7 @@ class BookingController extends Zend_Controller_Action
                 $dtime = new DateTime();
                 $dtime->setTimeZone($dtzone);/*setting timezone object to time object*/
                 $time = $dtime->getOffset();/*getting UTC offset in UNIX-stamp*/
-                $this->getRequest()->setParam('creator_tz', $time);
+                $this->getRequest()->setParam('tzDbTable ', $time);
                 if ($this->getRequest()->getParam('recipient_id')) {
                     $isExist = $bookingDbTable->isExistBooking(null, $identity->id, $this->getRequest()->getParam('started_at'), $this->getRequest()->getParam('duration'));
                     if (!$isExist) {
@@ -253,6 +253,11 @@ class BookingController extends Zend_Controller_Action
         // Zend_Debug::dump($extendedBookingList);
         $this->view->bookingPaymentStatus = $bookingPaymentStatus;
         $this->view->bookingCount = $bookingCount;
+
+    }
+
+}
+
 
     }
 
