@@ -38,7 +38,7 @@ class BookingController extends Zend_Controller_Action
         $tz = 'Europe/Kiev';
 
         // create the DateTimeZone object for later
-        $dtzone = new DateTimeZone($tz2);
+        $dtzone = new DateTimeZone($tz2['code']);
 
         // create a DateTime object
         $dtime = new DateTime();
