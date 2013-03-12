@@ -160,17 +160,19 @@ nav ul ul li a{
 
 }
 nav ul ul li .language{
+    display: inline-block;
+    height: 19px;
+    padding-left: 28px;
     text-transform: capitalize;
-    padding-left:15px;
 }
 nav ul ul li .language.english{
-    background: url('../images/icons/lang/english.png') no-repeat 0 2px;
+    background: url('../images/icons/lang/english.png') no-repeat 0 0;
 }
 nav ul ul li .language.chinese{
-    background: url('../images/icons/lang/chinese.png') no-repeat 0 2px;
+    background: url('../images/icons/lang/chinese.png') no-repeat 0 0;
 }
 nav ul ul li .language.japanese{
-    background: url('../images/icons/lang/japanese.png') no-repeat 0 2px;
+    background: url('../images/icons/lang/japanese.png') no-repeat 0 0;
 }
 nav ul .last{
     width: 104px;
