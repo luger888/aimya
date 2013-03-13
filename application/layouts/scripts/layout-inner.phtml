@@ -50,7 +50,7 @@
 
     $dtime = new DateTime();
     $dtime->setTimeZone($dtzone);
-    $time = substr($dtime['date'], 5);
+    $time = substr($dtime->date, 5);
 echo $time;
 
 
