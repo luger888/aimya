@@ -36,7 +36,7 @@
      <script type="text/javascript" src="/js/jquery/PIE.js"></script>
     <![endif]-->
 </head>
-<body onload="updateClock(); setInterval('updateClock()', 1000 )">
+<body onload="updateClock(); setInterval('updateClock()', 60000 )">
     <div id="flash_div" style="display: none; height: 100%; width: 100%"></div>
 <?php
     $identity = Zend_Auth::getInstance()->getStorage()->read();
@@ -50,7 +50,7 @@
 
     $dtime = new DateTime();
     $dtime->setTimeZone($dtzone);
-    $time = $dtime->format('g:i');
+    $time = $dtime->setTimestamp($dtime);
 
 
 
@@ -94,7 +94,6 @@ if (Zend_Registry::isRegistered('username')) {
 
     function updateClock ( )
     {
-
         document.getElementById("clock").firstChild.nodeValue = '<?php echo $time;?>';
     }
 
