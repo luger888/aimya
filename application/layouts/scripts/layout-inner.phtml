@@ -50,7 +50,7 @@ $dtzone = new DateTimeZone($tz['code']);
 
 $dtime = new DateTime();
 $dtime->setTimeZone($dtzone);
-$time = $dtime->format('g:i');
+$time = $dtime->format('Y-m-d H:i:s');
 $time = strtotime($time);
 
 
