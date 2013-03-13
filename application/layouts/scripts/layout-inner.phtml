@@ -50,8 +50,8 @@
 
     $dtime = new DateTime();
     $dtime->setTimeZone($dtzone);
-    $time = $dtime->getOffset();
-
+    $time = substr($dtime['date'], 5);
+echo $time;
 
 
 //information in left block of account:
