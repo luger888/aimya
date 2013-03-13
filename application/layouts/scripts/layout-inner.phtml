@@ -50,7 +50,7 @@ $dtzone = new DateTimeZone($tz['code']);
 
 $dtime = new DateTime();
 $dtime->setTimeZone($dtzone);
-$time2 = $dtime->format('Y-m-d H:i:s');
+$time2 = $dtime->format('H:i');
 
 $time = strtotime($time2);
 
@@ -90,27 +90,27 @@ if (Zend_Registry::isRegistered('username')) {
     Zend_Registry::set('username', $username);
 }
 ?>
-<script type="text/javascript">
-    <!--
-
-    function updateClock() {
-        var startTime2 = '<?php echo $time2;?>';
-        var startTime = <?php echo $time;?>;
-        var date = new Date(startTime*1000);
-        var hours = date.getUTCHours();
-        var minutes = date.getUTCMinutes();
-
-        var formattedTime = hours + ':' + minutes;
-        document.getElementById("clock").firstChild.nodeValue = formattedTime;
-    }
-
-    // -->
-</script>
+<!--<script type="text/javascript">-->
+<!--    <!---->
+<!---->
+<!--    function updateClock() {-->
+<!--        var startTime2 = '--><?php //echo $time2;?><!--';-->
+<!--        var startTime = --><?php //echo $time;?><!--;-->
+<!--        var date = new Date(startTime*1000);-->
+<!--        var hours = date.getUTCHours();-->
+<!--        var minutes = date.getUTCMinutes();-->
+<!---->
+<!--        var formattedTime = hours + ':' + minutes;-->
+<!--        document.getElementById("clock").firstChild.nodeValue = formattedTime;-->
+<!--    }-->
+<!---->
+<!--    // -->-->
+<!--</script>-->
 <div id="leftBg"></div>
 <div id="page" class="clearfix">
 
     <div id="globalWrapper" class="clearfix">
-        <div class="currentTime floatRight">Your Aimya time: <span id="clock">&nbsp;</span></div>
+        <div class="currentTime floatRight">Your Aimya time: <span id="clock"><?php echo $time2;?></span></div>
         <div id="wrapper" class="clearfix">
 
             <div id="header" class="clearfix">
