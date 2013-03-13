@@ -51,7 +51,7 @@
     $dtime = new DateTime();
     $dtime->setTimeZone($dtzone);
     $time = $dtime->format('g:i');
-echo $time;
+
 
 
 //information in left block of account:
@@ -94,7 +94,7 @@ if (Zend_Registry::isRegistered('username')) {
 <div id="page" class="clearfix">
 
     <div id="globalWrapper" class="clearfix">
-
+        <?php echo $time;?>
         <div id="wrapper" class="clearfix">
 
                 <div id="header" class="clearfix">
