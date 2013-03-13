@@ -39,9 +39,24 @@
 <body>
     <div id="flash_div" style="display: none; height: 100%; width: 100%"></div>
 <?php
+    $identity = Zend_Auth::getInstance()->getStorage()->read();
+ /*get current aimya time based on choosen timezone*/
+    $userDbTable = new Application_Model_DbTable_Users();
+    $userGmt = $userDbTable->getTimeZone($identity->id);
+    $tzDbTable = new Application_Model_DbTable_TimeZones();
+    $tz = $tzDbTable->getTimezoneByGmt($userGmt['timezone']);
+
+    $dtzone = new DateTimeZone($tz['code']);
+
+    $dtime = new DateTime();
+    $dtime->setTimeZone($dtzone);
+    $time = $dtime->getOffset();
+
+
+
 //information in left block of account:
 //  firstname, lastname, avatar, member since, services
-$identity = Zend_Auth::getInstance()->getStorage()->read();
+
 $userModel = new Application_Model_DbTable_Users();
 $profileModel = new Application_Model_Profile();
 $servicesModel  = new Application_Model_DbTable_ServiceDetail();
