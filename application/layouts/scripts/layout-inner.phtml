@@ -50,8 +50,9 @@ $dtzone = new DateTimeZone($tz['code']);
 
 $dtime = new DateTime();
 $dtime->setTimeZone($dtzone);
-$time = $dtime->format('Y-m-d H:i:s');
-$time = strtotime($time);
+$time2 = $dtime->format('Y-m-d H:i:s');
+
+$time = strtotime($time2);
 
 
 //information in left block of account:
@@ -93,6 +94,7 @@ if (Zend_Registry::isRegistered('username')) {
     <!--
 
     function updateClock() {
+        var startTime2 = <?php echo $time2;?>;
         var startTime = <?php echo $time;?>;
         var date = new Date(startTime*1000);
         var hours = date.getUTCHours();
