@@ -62,7 +62,7 @@ class BookingController extends Zend_Controller_Action
         // print the time using your preferred format
         $time = $dtime->getOffset();
 
-        Zend_Debug::dump($dtime) ;
+        Zend_Debug::dump($time) ;
     }
     public function addAction()
     {
