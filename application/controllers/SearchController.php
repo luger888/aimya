@@ -59,6 +59,8 @@ class SearchController extends Aimya_Controller_BaseController
         {
             $doc = new Zend_Search_Lucene_Document();
             $doc->addField(Zend_Search_Lucene_Field::Text('username', $user['username'])); //here field = ur database column
+            $doc->addField(Zend_Search_Lucene_Field::Text('firstname', $user['firstname']));
+            $doc->addField(Zend_Search_Lucene_Field::Text('lastname', $user['lastname']));
             $doc->addField(Zend_Search_Lucene_Field::Text('user_id',$user['id']));
             $index->addDocument($doc);
         }
