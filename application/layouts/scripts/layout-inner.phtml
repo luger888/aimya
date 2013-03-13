@@ -94,7 +94,7 @@ if (Zend_Registry::isRegistered('username')) {
     <!--
 
     function updateClock() {
-        var startTime2 = <?php echo $time2;?>;
+        var startTime2 = '<?php echo $time2;?>';
         var startTime = <?php echo $time;?>;
         var date = new Date(startTime*1000);
         var hours = date.getUTCHours();
