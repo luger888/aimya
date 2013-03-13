@@ -216,7 +216,7 @@ class Application_Model_Lesson
         $time = $dtime->getOffset();
 
         $isTeacher = 0;
-        $dateWithUTC = gmdate("m/d/Y H:i", strtotime($date) + (($time) * 60 *60)); //adding timezone to current date
+        $dateWithUTC = gmdate("m/d/Y H:i", strtotime($date) + (($time) * 60)); //adding timezone to current date
         Zend_Debug::dump($dateWithUTC);
         die;
         // END -- TIME FORMATTING BY TIMEZONES BLOCK
