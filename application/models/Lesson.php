@@ -228,11 +228,9 @@ class Application_Model_Lesson
             $starting_time = strtotime($lesson['booking']['started_at']); //booking started_at time to UNIX stamp
             if ($lesson['booking']['sender_id'] != $identity->id) {
                 $creator_tz = $lesson['booking']['creator_tz']; //timezone in seconds
-                Zend_Debug::dump($starting_time);
 
                 $starting_time = ($starting_time + $time  ) - $creator_tz ;
-                Zend_Debug::dump($time);
-                Zend_Debug::dump($creator_tz);
+                Zend_Debug::dump($starting_time);
                 die;
             }
             $currentTimeUtc = strtotime($dateWithUTC); //currentTime + UTC of user to UNIX stamp
