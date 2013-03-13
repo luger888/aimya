@@ -229,7 +229,8 @@ class Application_Model_Lesson
                 $creator_tz = $lesson['booking']['creator_tz']; //unix stamp
 
                 $starting_time = ($starting_time + $time * 60 *60) - $creator_tz * 60 *60;
-
+                Zend_Debug::dump($starting_time);
+                die;
             }
             $currentTimeUtc = strtotime($dateWithUTC); //currentTime + UTC of user to UNIX stamp
             $timeDifference = $starting_time - $currentTimeUtc;

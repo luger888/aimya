@@ -256,10 +256,10 @@ class BookingController extends Zend_Controller_Action
 
     }
 
-}
 
 
-    }
+
+    
 
 }
 
