@@ -36,7 +36,9 @@ body {
 #globalWrapper {
     background: url(../images/bg/inner-top.png) repeat-x 0 0;
 }
-
+.currentTime{
+    
+}
 /*=============================================
    Header
 =============================================*/
