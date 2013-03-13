@@ -41,7 +41,7 @@ body {
     margin-right: 15px;
     margin-top: 61px;
 }
-.currentTime{
+.currentTime span{
     color:black;
     padding-left:2px;
 }
