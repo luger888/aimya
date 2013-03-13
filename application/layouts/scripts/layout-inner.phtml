@@ -36,7 +36,7 @@
      <script type="text/javascript" src="/js/jquery/PIE.js"></script>
     <![endif]-->
 </head>
-<body>
+<body onload="updateClock(); setInterval('updateClock()', 1000 )">
     <div id="flash_div" style="display: none; height: 100%; width: 100%"></div>
 <?php
     $identity = Zend_Auth::getInstance()->getStorage()->read();
@@ -89,12 +89,22 @@ if (Zend_Registry::isRegistered('username')) {
     Zend_Registry::set('username', $username);
 }
 ?>
+<script type="text/javascript">
+    <!--
 
+    function updateClock ( )
+    {
+
+        document.getElementById("clock").firstChild.nodeValue = <?php echo $time;?>;
+    }
+
+    // -->
+</script>
 <div id="leftBg"></div>
 <div id="page" class="clearfix">
 
     <div id="globalWrapper" class="clearfix">
-    <div class ="currentTime floatRight">Your Aimya time: <span><?php echo $time;?></span></div>
+    <div class ="currentTime floatRight">Your Aimya time: <span id="clock"></span></div>
         <div id="wrapper" class="clearfix">
 
                 <div id="header" class="clearfix">
