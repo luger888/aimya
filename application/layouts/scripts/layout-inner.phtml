@@ -93,7 +93,13 @@ if (Zend_Registry::isRegistered('username')) {
     <!--
 
     function updateClock() {
-        document.getElementById("clock").firstChild.nodeValue = '<?php echo $time;?>';
+        var startTime = <?php echo $time;?>;
+        var date = new Date(startTime*1000);
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var seconds = date.getSeconds();
+        var formattedTime = hours + ':' + minutes + ':' + seconds;
+        document.getElementById("clock").firstChild.nodeValue = formattedTime;
     }
 
     // -->
