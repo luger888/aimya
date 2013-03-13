@@ -167,7 +167,7 @@ class UserController extends Zend_Controller_Action
                     $status = $modelUser->addNewUser($formData);
 
                     if ($status) {
-                        $this->view->confirmFlash = 'Please confirm your email';
+                        $this->view->confirmFlash = 'Email Verification: An email has been sent to the email address you provided.  Please open that email and click on the provided link to activate your account.';
                     } else {
                         $this->view->alertFlash = 'Technical issues with email. Please try again later';
                     }
