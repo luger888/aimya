@@ -217,8 +217,7 @@ class Application_Model_Lesson
 
         $isTeacher = 0;
         $dateWithUTC = gmdate("m/d/Y H:i", strtotime($date) + (($time))); //adding timezone to current date
-        Zend_Debug::dump($dateWithUTC);
-        die;
+
         // END -- TIME FORMATTING BY TIMEZONES BLOCK
         $lessonTable = new Application_Model_DbTable_Lesson();
 
@@ -228,9 +227,11 @@ class Application_Model_Lesson
             $lessonDuration = $lesson['booking']['duration'] * 60; //lesson duration in seconds
             $starting_time = strtotime($lesson['booking']['started_at']); //booking started_at time to UNIX stamp
             if ($lesson['booking']['sender_id'] != $identity->id) {
-                $creator_tz = $lesson['booking']['creator_tz']; //unix stamp
+                $creator_tz = $lesson['booking']['creator_tz']; //timezone in seconds
 
-                $starting_time = ($starting_time + $time * 60 ) - $creator_tz * 60 ;
+                $starting_time = ($starting_time + $time  ) - $creator_tz  ;
+                Zend_Debug::dump($starting_time);
+                die;
 
             }
             $currentTimeUtc = strtotime($dateWithUTC); //currentTime + UTC of user to UNIX stamp
