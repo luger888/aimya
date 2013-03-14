@@ -129,13 +129,16 @@ class UserController extends Zend_Controller_Action
                 $result = $auth->authenticate($authAdapter);
 
                 if ($result->isValid()) {
-
                     $identity = $authAdapter->getResultRowObject();
-                    $authStorage = $auth->getStorage();
-                    $authStorage->write($identity);
-
                     $this->view->status = $identity->status;
-                     $this->_helper->redirector('index', 'account');
+                  if( $identity->status ==1){
+                      $authStorage = $auth->getStorage();
+                      $authStorage->write($identity);
+                  }
+
+
+
+                     //$this->_helper->redirector('index', 'account');
                 } else {
 
                     $this->view->alertFlash = 'Authentication failed. Login or password are incorrect';
