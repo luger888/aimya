@@ -273,10 +273,15 @@ ul li {
     margin-left: 15px;
 }
 .incomeForm{
-    border:1px solid grey;
+    border: 1px dotted #C7CCC2;
+    padding: 9px;
  }
 #send-booking .info{
-    font-size:9px;
+    font-size:11px;
+    margin-top: 20px;
+}
+#send-booking .confirmBookingInfo{
+    padding-bottom: 0;
 }
 .incomeForm .red{
     color:red;
@@ -286,7 +291,8 @@ ul li {
     border-top:1px solid red;
 }
 .confirmationBookingForm{
-    padding:9px;
+    padding: 9px 9px 0;
+    border-bottom: 1px solid grey;
 }
 </style>
 <div class="mainCalendar mainContainer clearfix">
@@ -953,5 +959,5 @@ function removeBooking(e) {
 </div>
 <div class="usersAlert" id="send-booking" title="OFFER DETAILS:">
     <p class="info"><span style="float: left; margin: 0 7px 20px 0;"></span><?php echo $this->translate('You’re about to send an offer for a lesson.  If accepted,<br> this information will be added to your and your partner schedule.');?></p>
-    <p><span style="float: left; margin: 0 7px 20px 0;"></span><?php echo $this->translate('Do you wish to proceed?');?></p>
+    <p class ="confirmBookingInfo"><span style="float: left; margin: 0 7px 20px 0;"></span><?php echo $this->translate('Do you wish to proceed?');?></p>
 </div>
