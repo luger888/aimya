@@ -673,7 +673,13 @@ jQuery(document).ready(function () {
                                     }
                                 }
                             });
-                            $('#send-booking').prepend('<p>From:</p>');
+                            $('#send-booking').prepend('<p>From:</p>' +
+                                '<p>To: ' + $('#recipiend_id option[value="' + $('#recipiend_id').val() + '"]').text() + '</p>'+
+                                '<p>Date: ' + $('#started_at').val()+ '</p>'+
+                                '<p>Time: ' + $('#started_at_time').val()+ '</p>'+
+                                '<p>Price: ' + $('#rate').val()+ '</p>'+
+                                '<p>Duration: ' + $('#duration').val() + '</p>'+
+                                '<p>Services included:</p>');
                         });
 
 
