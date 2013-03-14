@@ -677,13 +677,13 @@ jQuery(document).ready(function () {
                             if($('#video:checked').val()){
                                 choosenServices.push('video');
                             }
-                            else if($('#notes:checked').val()){
+                            if($('#notes:checked').val()){
                                 choosenServices.push('notes');
                             }
-                            else if($('#feedback:checked').val()){
+                            if($('#feedback:checked').val()){
                                 choosenServices.push('feedback');
                             }
-                            else{
+                           if(choosenServices.length ==0){
                                 choosenServices.push('none');
                             }
                             var servicesString = choosenServices.join(',');
@@ -692,8 +692,8 @@ jQuery(document).ready(function () {
                                 '<p>To: ' + $('#recipiend_id option[value="' + $('#recipiend_id').val() + '"]').text() + '</p>'+
                                 '<p>Date: ' + $('#started_at').val()+ '</p>'+
                                 '<p>Time: ' + $('#started_at_time').val()+ '</p>'+
-                                '<p>Price: ' + $('#rate').val()+ '</p> $'+
-                                '<p>Duration: ' + $('#duration').val() + '</p> min'+
+                                '<p>Price: ' + $('#rate').val()+ ' $</p>'+
+                                '<p>Duration: ' + $('#duration').val() + ' min</p>'+
                                 '<p>Services included:'+servicesString+'</p>');
                         });
 
