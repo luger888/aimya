@@ -702,8 +702,7 @@ jQuery(document).ready(function () {
                            if(choosenServices.length ==0){
                                 choosenServices.push('none');
                             }
-                            console.log(parseInt($('#rate').val())- costs);
-                            console.log(typeof($('#rate').val()));
+                           var grossIncome = parseInt($('#rate').val())- costs;
                             var servicesString = choosenServices.join(', ');
                                 if(role == 0){
                                     $('#send-booking').prepend('<div class ="confirmationBookingForm"><p>From: You</p>' +
@@ -726,7 +725,7 @@ jQuery(document).ready(function () {
                                          videoRecord +
                                          lessonNotes +
                                          lessonFeedback +
-                                        '<p>TOTAL Gross Income: US$ ' + parseInt($('#rate').val())- costs+ '</p></div></div>');
+                                        '<p>TOTAL Gross Income: US$ ' + grossIncome + '</p></div></div>');
                                 }
 
                         });
