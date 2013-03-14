@@ -36,7 +36,15 @@ body {
 #globalWrapper {
     background: url(../images/bg/inner-top.png) repeat-x 0 0;
 }
-
+.currentTime{
+    color: grey;
+    margin-right: 15px;
+    margin-top: 61px;
+}
+.currentTime span{
+    color:#4A4A4A;
+    padding-left:2px;
+}
 /*=============================================
    Header
 =============================================*/

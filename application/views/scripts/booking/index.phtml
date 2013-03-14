@@ -272,7 +272,32 @@ ul li {
 .cancellation {
     margin-left: 15px;
 }
-
+.incomeForm{
+    border: 1px dotted #C7CCC2;
+    padding: 9px;
+ }
+#send-booking .info{
+    font-size:11px;
+    margin-top: 20px;
+}
+#send-booking .confirmBookingInfo, #send-booking{
+    padding-bottom: 0;
+}
+.incomeForm .red{
+    color:red;
+}
+.incomeForm span.row{
+    width: 131px;
+    display: inline-block;
+}
+.incomeForm  .totalGrossIncome{
+    padding-top:5px;
+    border-top:1px solid red;
+}
+.confirmationBookingForm{
+    padding: 9px 9px 0;
+    border-bottom: 1px solid grey;
+}
 </style>
 <div class="mainCalendar mainContainer clearfix">
 <div id="dialog-form" title="BOOKING DETAILS">
@@ -640,7 +665,7 @@ jQuery(document).ready(function () {
                             $("#send-booking").dialog({ /* OPEN DIALOG WINDOW WITH CONFIRMATION*/
                                 resizable:false,
                                 height:140,
-                                width:360,
+                                width:'auto',
                                 modal:true,
                                 buttons:{
                                     "Yes":function () { /* IF CONFIRMED*/
@@ -671,9 +696,61 @@ jQuery(document).ready(function () {
                                     No:function () { /* IF DIALOG NOT CONFIRMED, DO NOTHING*/
                                         $(this).dialog("close");
                                     }
+                                },
+                                close: function(event, ui)
+                                {
+                                    $('.confirmationBookingForm').remove();
                                 }
                             });
-                            $('#send-booking').prepend('<p>From:</p>');
+                            var costs = 0;
+                            var choosenServices = new Array();
+                            var videoRecord='';
+                            var lessonNotes='';
+                            var lessonFeedback='';
+                            if($('#video:checked').val()){
+                                choosenServices.push('video');
+                                costs+=2;
+                                 videoRecord = '<p class="red"><span class="row">Video Record:</span>    - US$ 2.00 </p>';
+                            }
+                            if($('#notes:checked').val()){
+                                choosenServices.push('notes');
+                                costs+=1;
+                                 lessonNotes = '<p class="red"><span class="row">Lesson Notes:</span>    - US$ 1.00 </p>';
+                            }
+                            if($('#feedback:checked').val()){
+                                choosenServices.push('feedback');
+                                costs+=1;
+                                 lessonFeedback = '<p class="red"><span class="row">Lesson Feedback:</span> - US$ 1.00 </p>';
+                            }
+                           if(choosenServices.length ==0){
+                                choosenServices.push('none');
+                            }
+                           var grossIncome = parseInt($('#rate').val())- costs;
+                            var servicesString = choosenServices.join(', ');
+                                if(role == 0){
+                                    $('#send-booking').prepend('<div class ="confirmationBookingForm"><p>From: You</p>' +
+                                        '<p>To: ' + $('#recipiend_id option[value="' + $('#recipiend_id').val() + '"]').text() + '</p>'+
+                                        '<p>Date: ' + $('#started_at').val()+ '</p>'+
+                                        '<p>Time: ' + $('#started_at_time').val()+ '</p>'+
+                                        '<p>Price: US$' + $('#rate').val()+ '</p>'+
+                                        '<p>Duration: ' + $('#duration').val() + ' minutes</p>'+
+                                        '<p>Services included: '+servicesString+'</p></div>');
+                                }else{
+                                    $('#send-booking').prepend('<div class ="confirmationBookingForm clearfix"><div class ="leftBlockInfo floatLeft"><p>From: You</p>' +
+                                        '<p>To: ' + $('#recipiend_id option[value="' + $('#recipiend_id').val() + '"]').text() + '</p>'+
+                                        '<p>Date: ' + $('#started_at').val()+ '</p>'+
+                                        '<p>Time: ' + $('#started_at_time').val()+ '</p>'+
+                                        '<p>Price: US$' + $('#rate').val()+ '</p>'+
+                                        '<p>Duration: ' + $('#duration').val() + ' minutes</p>'+
+                                        '<p>Services included: '+servicesString+'</p></div>' +
+                                        '<div class ="incomeForm floatRight">' +
+                                        '<p><span class="row">Lesson Income:</span> US$ ' + $('#rate').val()+ '.00</p>' +
+                                         videoRecord +
+                                         lessonNotes +
+                                         lessonFeedback +
+                                        '<p class="totalGrossIncome"><span class="row">TOTAL Gross Income:</span> <span class="underline">US$ ' + grossIncome.toFixed(2) + '</span></p></div></div>');
+                                }
+
                         });
 
 
@@ -885,10 +962,6 @@ function removeBooking(e) {
 <div id='calendar'></div>
 </div>
 <div class="usersAlert" id="send-booking" title="OFFER DETAILS:">
-    <p><span style="float: left; margin: 0 7px 20px 0;"></span><?php echo $this->translate('You’re about to send an offer for a lesson.  If accepted, this information will be added to your and your learning member’s schedule.');?></p>
-    <p><span style="float: left; margin: 0 7px 20px 0;"></span><?php echo $this->translate('Do you wish to proceed?');?></p>
-</div>
-<div class="usersAlert" id="send-booking-stu" title="OFFER DETAILS:">
-    <p><span style="float: left; margin: 0 7px 20px 0;"></span><?php echo $this->translate('You’re about to send an offer for a lesson.  If accepted, this information will be added to your and your learning member’s schedule.');?></p>
-    <p><span style="float: left; margin: 0 7px 20px 0;"></span><?php echo $this->translate('Do you wish to proceed?');?></p>
+    <p class="info"><span style="float: left; margin: 0 7px 20px 0;"></span><?php echo $this->translate('You’re about to send an offer for a lesson.  If accepted, this information will be added to your <br>and your partner schedule.');?></p>
+    <p class ="confirmBookingInfo"><span style="float: left; margin: 0 7px 20px 0;"></span><?php echo $this->translate('Do you wish to proceed?');?></p>
 </div>
