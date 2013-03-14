@@ -22,6 +22,16 @@ class IndexController extends Zend_Controller_Action
 
         $this->view->login = $login->getElements();
         $this->view->reg = $reg->getElements();
+        $mail = new Aimya_Mail;
+        $mail->setRecipient('morbes77@gmail.com');
+        $mail->setTemplate(Aimya_Mail::SIGNUP_ACTIVATION);
+        $mail->firstname = 1;
+        $mail->lastname = 1;
+        $mail->email = 1;
+        $mail->password = 1;
+        $mail->token = 1;
+        $mail->baseLink = "http://" . $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance()->getBaseUrl();
+        $mail->send();
     }
 
 
