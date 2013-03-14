@@ -96,7 +96,7 @@ class Aimya_Mail
 
         $viewContent = realpath($templatePath) . DIRECTORY_SEPARATOR . $this->templateName . '.tpl';
         $stringMail = file_get_contents($viewContent);
-        $html = vsprintf($stringMail, $this->templateVariables);
+        $html = @vsprintf($stringMail, $this->templateVariables);
 
         $this->_mail->addTo($this->recipient);
         $this->_mail->setSubject($subject);
