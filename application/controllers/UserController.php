@@ -146,6 +146,7 @@ class UserController extends Zend_Controller_Action
                     }
                 }else{
                     $this->view->status = 0;
+
                 }
 
             } else {
