@@ -72,13 +72,17 @@ body {
     margin: 13px 0 0 64px;
 }
 .searchInfo {
-    color: white;
-    cursor: pointer;
+
     float: left;
-    font-size: 15px;
+
     margin-left: 6px;
     margin-top: 17px;
     text-decoration: underline;
+}
+.searchInfo a{
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
 }
 .headerSearch .btnSearch {
     display: none;
