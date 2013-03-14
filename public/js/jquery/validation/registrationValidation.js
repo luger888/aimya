@@ -126,7 +126,8 @@ function resend(){
         url: "/user/resend",
         type: "post",
         data: {
-            "username" : $("#username-login").val()
+            "username" : $("#username-login").val(),
+            "password" : $("#password-login").val()
         },
         success: function(response){
         }
