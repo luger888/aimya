@@ -135,7 +135,7 @@ class UserController extends Zend_Controller_Action
                     $authStorage->write($identity);
 
                     $this->view->status = $identity->status;
-                    // $this->_helper->redirector('index', 'account');
+                     $this->_helper->redirector('index', 'account');
                 } else {
 
                     $this->view->alertFlash = 'Authentication failed. Login or password are incorrect';
