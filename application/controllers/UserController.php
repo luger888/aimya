@@ -235,7 +235,7 @@ class UserController extends Zend_Controller_Action
             $mail->firstname = $user['firstname'];
             $mail->lastname = $user['lastname'];
             $mail->email = $user['email'];
-            $mail->password = $user['password'];
+            $mail->password = $this->getRequest()->getParam('password');
             $mail->token = $user;
             $mail->baseLink = "http://" . $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance()->getBaseUrl();
 
