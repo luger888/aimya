@@ -272,8 +272,12 @@ ul li {
 .cancellation {
     margin-left: 15px;
 }
-.incomeForm{
-    /*margin-top:27px;*/
+.incomeForm .red{
+    color:red;
+}
+.incomeForm  .totalGrossIncome{
+    padding-top:5px;
+    border-top:1px solid red;
 }
 .confirmationBookingForm{
     padding:9px;
@@ -684,9 +688,9 @@ jQuery(document).ready(function () {
                             });
                             var costs = 0;
                             var choosenServices = new Array();
-                            var videoRecord;
-                            var lessonNotes;
-                            var lessonFeedback;
+                            var videoRecord='';
+                            var lessonNotes='';
+                            var lessonFeedback='';
                             if($('#video:checked').val()){
                                 choosenServices.push('video');
                                 costs+=2;
@@ -728,7 +732,7 @@ jQuery(document).ready(function () {
                                          videoRecord +
                                          lessonNotes +
                                          lessonFeedback +
-                                        '<p>TOTAL Gross Income: US$ ' + grossIncome + '</p></div></div>');
+                                        '<p class="totalGrossIncome">TOTAL Gross Income: US$ ' + grossIncome + '</p></div></div>');
                                 }
 
                         });
