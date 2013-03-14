@@ -673,13 +673,27 @@ jQuery(document).ready(function () {
                                     }
                                 }
                             });
+                            var choosenServices = new Array();
+                            if($('#video:checked').val()){
+                                choosenServices += 'video';
+                            }
+                            else if(!$('#notes:checked').val()){
+                                choosenServices += 'notes';
+                            }
+                            else if(!$('#feedback:checked').val()){
+                                choosenServices += 'feedback';
+                            }
+                            else{
+                                choosenServices += 'none';
+                            }
+                            choosenServices = choosenServices.join();
                             $('#send-booking').prepend('<p>From:</p>' +
                                 '<p>To: ' + $('#recipiend_id option[value="' + $('#recipiend_id').val() + '"]').text() + '</p>'+
                                 '<p>Date: ' + $('#started_at').val()+ '</p>'+
                                 '<p>Time: ' + $('#started_at_time').val()+ '</p>'+
-                                '<p>Price: ' + $('#rate').val()+ '</p>'+
-                                '<p>Duration: ' + $('#duration').val() + '</p>'+
-                                '<p>Services included:</p>');
+                                '<p>Price: ' + $('#rate').val()+ '</p> $'+
+                                '<p>Duration: ' + $('#duration').val() + '</p> min'+
+                                '<p>Services included:'+choosenServices+'</p>');
                         });
 
 
