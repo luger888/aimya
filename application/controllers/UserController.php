@@ -227,7 +227,6 @@ class UserController extends Zend_Controller_Action
     public function resendAction()
     {
         if ($username = $this->getRequest()->getParam('username')) {
-
             $userDb = new Application_Model_DbTable_Users();
             $user = $userDb->checkByUsername($username);
             $mail = new Aimya_Mail;
