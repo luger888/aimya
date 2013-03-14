@@ -431,7 +431,11 @@ input.btnLogin {
     border-radius:2px;
     padding: 8px;
 }
-
+.alert a{
+    font: 11px Arial !important;
+    color:#ad4c4c !important;
+    text-decoration: underline;
+}
 .alert .flash-warning{
     font: 700 11px Arial !important;
     color: #981919 !important;
