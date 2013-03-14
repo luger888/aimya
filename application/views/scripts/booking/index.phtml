@@ -687,7 +687,7 @@ jQuery(document).ready(function () {
                                 choosenServices += 'none';
                             }
                             var servicesString = choosenServices.join(',');
-
+                            console.log(servicesString);
                             $('#send-booking').prepend('<p>From:</p>' +
                                 '<p>To: ' + $('#recipiend_id option[value="' + $('#recipiend_id').val() + '"]').text() + '</p>'+
                                 '<p>Date: ' + $('#started_at').val()+ '</p>'+
