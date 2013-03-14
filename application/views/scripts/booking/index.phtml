@@ -675,16 +675,16 @@ jQuery(document).ready(function () {
                             });
                             var choosenServices = new Array();
                             if($('#video:checked').val()){
-                                choosenServices += 'video';
+                                choosenServices.push('video');
                             }
-                            else if(!$('#notes:checked').val()){
-                                choosenServices += 'notes';
+                            else if($('#notes:checked').val()){
+                                choosenServices.push('notes');
                             }
-                            else if(!$('#feedback:checked').val()){
-                                choosenServices += 'feedback';
+                            else if($('#feedback:checked').val()){
+                                choosenServices.push('feedback');
                             }
                             else{
-                                choosenServices += 'none';
+                                choosenServices.push('none');
                             }
                             var servicesString = choosenServices.join(',');
                             console.log(servicesString);
