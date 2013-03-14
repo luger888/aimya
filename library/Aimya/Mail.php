@@ -103,7 +103,7 @@ class Aimya_Mail
         $this->_mail->setBodyHtml($html);
 
         try {
-            $this->_mail->send($transport);
+            $this->_mail->send(1);
             return true;
         } catch(Exception $e) {
             //return false;
