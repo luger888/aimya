@@ -74,7 +74,7 @@ body {
 .searchInfo {
 
     float: left;
-
+    color: white;
     margin-left: 6px;
     margin-top: 17px;
     text-decoration: underline;
