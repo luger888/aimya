@@ -103,11 +103,12 @@ class Aimya_Mail
         $this->_mail->setBodyHtml($html);
 
         try {
-            $this->_mail->send(1);
+            $this->_mail->send($transport);
             return true;
         } catch(Exception $e) {
-            //return false;
+
             echo 'Error Code: ',  $e->getMessage(), "\n";
+            //return false;
         }
     }
 }
