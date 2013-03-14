@@ -84,7 +84,7 @@ class UserController extends Zend_Controller_Action
                 $email = $this->getRequest()->getParam('email');
                 if ($email) {
                     $result = $model->passRecovery($email);
-                    if ($result && $result!=2) {
+                    if ($result && $result != 2) {
                         $this->_helper->flashMessenger->addMessage(array('success' => 'Your password was successfully changed. Please check your email to get new password'));
                         $this->_helper->redirector('recovery', 'user');
                     } else {
@@ -115,34 +115,39 @@ class UserController extends Zend_Controller_Action
                 $f = new Aimya_Filter_EmailToUsername();
                 $username = $f->filter($username);
                 $password = md5($this->getRequest()->getPost('password'));
-                Zend_Auth::getInstance()->getStorage()->read();
+                $userDb = new Application_Model_DbTable_Users();
+                $user = $userDb->checkByUsername($username);
+                if ($user['status'] == 1) {
 
-                $authAdapter = new Zend_Auth_Adapter_DbTable(Zend_Db_Table::getDefaultAdapter());
+                    Zend_Auth::getInstance()->getStorage()->read();
 
-                $authAdapter->setTableName('user')
-                    ->setIdentityColumn('username')
-                    ->setCredentialColumn('password')
-                    ->setIdentity($username)
-                    ->setCredential($password);
+                    $authAdapter = new Zend_Auth_Adapter_DbTable(Zend_Db_Table::getDefaultAdapter());
 
-                $auth = Zend_Auth::getInstance();
-                $result = $auth->authenticate($authAdapter);
+                    $authAdapter->setTableName('user')
+                        ->setIdentityColumn('username')
+                        ->setCredentialColumn('password')
+                        ->setIdentity($username)
+                        ->setCredential($password);
 
-                if ($result->isValid()) {
-                    $identity = $authAdapter->getResultRowObject();
-                    $this->view->status = $identity->status;
-//                  if( $identity->status ===1){
-//                      $authStorage = $auth->getStorage();
-//                      $authStorage->write($identity);
-//                  }
+                    $auth = Zend_Auth::getInstance();
+                    $result = $auth->authenticate($authAdapter);
+
+                    if ($result->isValid()) {
+                        $identity = $authAdapter->getResultRowObject();
+                        $authStorage = $auth->getStorage();
+                        $authStorage->write($identity);
+                        $this->view->status = 1;
 
 
+                        //$this->_helper->redirector('index', 'account');
+                    } else {
 
-                     //$this->_helper->redirector('index', 'account');
-                } else {
-
-                    $this->view->alertFlash = 'Authentication failed. Login or password are incorrect';
+                        $this->view->alertFlash = 'Authentication failed. Login or password are incorrect';
+                    }
+                }else{
+                    $this->view->status = 0;
                 }
+
             } else {
                 $this->view->errors = $login->getErrors();
             }
@@ -162,8 +167,7 @@ class UserController extends Zend_Controller_Action
                 $user = new Application_Model_DbTable_Users();
                 if ($user->checkByMail($formData['email'])) {
                     $this->view->alertFlash = 'This email already exist';
-                }
-                else if ($user->checkByUsername($formData['username'])) {
+                } else if ($user->checkByUsername($formData['username'])) {
                     $this->view->alertFlash = 'This username already exist';
 
                 } else {
