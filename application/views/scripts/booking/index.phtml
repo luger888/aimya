@@ -287,7 +287,7 @@ ul li {
     color:red;
 }
 .incomeForm span{
-    width:75px;
+    width: 131px;
     display: inline-block;
 }
 .incomeForm  .totalGrossIncome{
@@ -710,17 +710,17 @@ jQuery(document).ready(function () {
                             if($('#video:checked').val()){
                                 choosenServices.push('video');
                                 costs+=2;
-                                 videoRecord = '<p class="red"><span>Video Record:</span>    - US$2 </p>';
+                                 videoRecord = '<p class="red"><span>Video Record:</span>    - US$ 2 </p>';
                             }
                             if($('#notes:checked').val()){
                                 choosenServices.push('notes');
                                 costs+=1;
-                                 lessonNotes = '<p class="red"><span>Lesson Notes:</span>    - US$1 </p>';
+                                 lessonNotes = '<p class="red"><span>Lesson Notes:</span>    - US$ 1 </p>';
                             }
                             if($('#feedback:checked').val()){
                                 choosenServices.push('feedback');
                                 costs+=1;
-                                 lessonFeedback = '<p class="red"><span>Lesson Feedback:</span> - US$1 </p>';
+                                 lessonFeedback = '<p class="red"><span>Lesson Feedback:</span> - US$ 1 </p>';
                             }
                            if(choosenServices.length ==0){
                                 choosenServices.push('none');
@@ -962,6 +962,6 @@ function removeBooking(e) {
 <div id='calendar'></div>
 </div>
 <div class="usersAlert" id="send-booking" title="OFFER DETAILS:">
-    <p class="info"><span style="float: left; margin: 0 7px 20px 0;"></span><?php echo $this->translate('You’re about to send an offer for a lesson.  If accepted,<br> this information will be added to your and your partner schedule.');?></p>
+    <p class="info"><span style="float: left; margin: 0 7px 20px 0;"></span><?php echo $this->translate('You’re about to send an offer for a lesson.  If accepted, this information will be added to your <br>and your partner schedule.');?></p>
     <p class ="confirmBookingInfo"><span style="float: left; margin: 0 7px 20px 0;"></span><?php echo $this->translate('Do you wish to proceed?');?></p>
 </div>
