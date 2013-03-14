@@ -272,6 +272,12 @@ ul li {
 .cancellation {
     margin-left: 15px;
 }
+.incomeForm{
+    border:1px solid grey;
+ }
+#send-booking .info{
+    font-size:9px;
+}
 .incomeForm .red{
     color:red;
 }
@@ -946,6 +952,6 @@ function removeBooking(e) {
 <div id='calendar'></div>
 </div>
 <div class="usersAlert" id="send-booking" title="OFFER DETAILS:">
-    <p><span style="float: left; margin: 0 7px 20px 0;"></span><?php echo $this->translate('You’re about to send an offer for a lesson.  If accepted,<br> this information will be added to your and your partner schedule.');?></p>
+    <p class="info"><span style="float: left; margin: 0 7px 20px 0;"></span><?php echo $this->translate('You’re about to send an offer for a lesson.  If accepted,<br> this information will be added to your and your partner schedule.');?></p>
     <p><span style="float: left; margin: 0 7px 20px 0;"></span><?php echo $this->translate('Do you wish to proceed?');?></p>
 </div>
