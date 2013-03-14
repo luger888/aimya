@@ -122,7 +122,16 @@ $(document).ready(function() {
 });
 
 function resend(){
-    alert(5);
+    $.ajax({
+        url: $('#signIn').attr('action'),
+        type: "post",
+        data: {
+            "username" : "/user/resend"
+        },
+        success: function(response){
+        }
+    });
+    return false;
 }
 /*---PIE - add css3 to ie 7 and ie8 -----------------------------------------------------*/
 
