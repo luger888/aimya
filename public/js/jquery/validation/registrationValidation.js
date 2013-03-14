@@ -123,10 +123,10 @@ $(document).ready(function() {
 
 function resend(){
     $.ajax({
-        url: $('#signIn').attr('action'),
+        url: "/user/resend",
         type: "post",
         data: {
-            "username" : "/user/resend"
+            "username" : $("#username-login").val()
         },
         success: function(response){
         }
