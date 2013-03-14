@@ -671,6 +671,10 @@ jQuery(document).ready(function () {
                                     No:function () { /* IF DIALOG NOT CONFIRMED, DO NOTHING*/
                                         $(this).dialog("close");
                                     }
+                                },
+                                close: function(event, ui)
+                                {
+                                    $(this).dialog('destroy').remove();
                                 }
                             });
                             var choosenServices = new Array();
@@ -686,15 +690,15 @@ jQuery(document).ready(function () {
                            if(choosenServices.length ==0){
                                 choosenServices.push('none');
                             }
-                            var servicesString = choosenServices.join(',');
-                            console.log(servicesString);
+                            var servicesString = choosenServices.join(', ');
+
                             $('#send-booking').prepend('<p>From:</p>' +
                                 '<p>To: ' + $('#recipiend_id option[value="' + $('#recipiend_id').val() + '"]').text() + '</p>'+
                                 '<p>Date: ' + $('#started_at').val()+ '</p>'+
                                 '<p>Time: ' + $('#started_at_time').val()+ '</p>'+
                                 '<p>Price: ' + $('#rate').val()+ ' $</p>'+
                                 '<p>Duration: ' + $('#duration').val() + ' min</p>'+
-                                '<p>Services included:'+servicesString+'</p>');
+                                '<p>Services included: '+servicesString+'</p>');
                         });
 
 
