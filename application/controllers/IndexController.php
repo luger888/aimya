@@ -22,7 +22,7 @@ class IndexController extends Zend_Controller_Action
 
         $this->view->login = $login->getElements();
         $this->view->reg = $reg->getElements();
-        $mail = new Aimya_Mail;
+        $mail = new Aimya_Mail();
         $mail->setRecipient('morbes77@gmail.com');
         $mail->setTemplate(Aimya_Mail::SIGNUP_ACTIVATION);
         $mail->firstname = 1;
