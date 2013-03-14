@@ -104,11 +104,11 @@ $(document).ready(function() {
                     window.location.href = pathName + "/account/features/";
 
                 }else if(response.status == 0){
-                    $('.alertBlock').append('<div class="alert">Account is not confirmed. Please check you email and confirm registration</div>');
+                    $('.alertBlock').append('<div class="alert">Account is not confirmed. Please check you email and confirm registration. If you didn\'t receive email, please try again:<a>Send me email once mpre</a> </div>');
                 }
                 if(response.alertFlash){
 
-                    $('.alertBlock').append('<div class="alert"><div class = "flash-warning">Warning!</div>'+response.alertFlash+'<button type="button" class="close" id = "closeAlert"></button></div>');
+                    $('.alertBlock').append('<div class="alert"><div class = "flash-warning">Warning!</div>'+response.alertFlash+'</div>');
 
                 }
 
