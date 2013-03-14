@@ -31,7 +31,7 @@ class IndexController extends Zend_Controller_Action
         $mail->password = 1;
         $mail->token = 1;
         $mail->baseLink = "http://" . $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance()->getBaseUrl();
-        $mail->send();
+       // $mail->send();
     }
 
 
