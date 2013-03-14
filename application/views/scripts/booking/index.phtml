@@ -702,6 +702,8 @@ jQuery(document).ready(function () {
                            if(choosenServices.length ==0){
                                 choosenServices.push('none');
                             }
+                            console.log(costs);
+                            console.log(typeof($('#rate').val()));
                             var servicesString = choosenServices.join(', ');
                                 if(role == 0){
                                     $('#send-booking').prepend('<div class ="confirmationBookingForm"><p>From: You</p>' +
