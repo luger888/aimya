@@ -117,14 +117,16 @@ if (Zend_Registry::isRegistered('username')) {
 
                 <a href="<?php echo $this->baseUrl() ?>/account/features" id="logo"></a>
                 <input id="user_activity" type="hidden" value="1">
-                <input id="current_url" type="hidden" value="<?php echo $this->baseUrl()?>">
+                <input id="current_url" type="hidden" value="<?php echo $this->baseUrl() ?>">
 
                 <div class="searchForm headerSearch">
-                    <form id="search_form" method="get" action="<?php echo $this->baseUrl() ?>/search/search/">
-                        <?php $searchForm = $this->addSearchForm();?>
-                        <?php echo $searchForm->search_string?>
-                        <?php echo $searchForm->searchbtn ?>
-                    </form>
+                    <div class="searchBlock">
+                        <form id="search_form" method="get" action="<?php echo $this->baseUrl() ?>/search/search/">
+                            <?php $searchForm = $this->addSearchForm();?>
+                            <?php echo $searchForm->search_string?>
+                            <?php echo $searchForm->searchbtn ?>
+                        </form>
+                    </div>
                 </div>
 
                 <nav id="globalNav">
@@ -132,28 +134,31 @@ if (Zend_Registry::isRegistered('username')) {
                         <li><a href="<?php echo $this->baseUrl() ?>/booking"><?php echo $this->translate("home"); ?></a>
                         </li>
                         <li><a
-                            href="<?php echo $this->baseUrl() ?>/policy.html"><?php echo $this->translate("privacy policy"); ?></a>
+                                href="<?php echo $this->baseUrl() ?>/policy.html"><?php echo $this->translate("privacy policy"); ?></a>
                         </li>
                         <li><a
-                            href="<?php echo $this->baseUrl() ?>/about.html"><?php echo $this->translate("about aimya"); ?></a>
+                                href="<?php echo $this->baseUrl() ?>/about.html"><?php echo $this->translate("about aimya"); ?></a>
                         </li>
                         <li><a
-                            href="<?php echo $this->baseUrl() ?>/help.html"><?php echo $this->translate("help"); ?></a>
+                                href="<?php echo $this->baseUrl() ?>/help.html"><?php echo $this->translate("help"); ?></a>
                         </li>
                         <li><a
-                            href="<?php echo $this->baseUrl() ?>/user/logout/"><?php echo $this->translate("sign out"); ?></a>
+                                href="<?php echo $this->baseUrl() ?>/user/logout/"><?php echo $this->translate("sign out"); ?></a>
                         </li>
                         <li class="last"><a href="#"><?php echo $this->translate('language')?></a>
                             <ul>
                                 <li><a
-                                    href="<?php echo $this->getHelper('baseUrl')->setBaseUrl('/en')->baseUrl(substr($_SERVER["REQUEST_URI"], 3));?>"><span
-                                    class="language english"><?php echo $this->translate('english')?></span></a></li>
+                                        href="<?php echo $this->getHelper('baseUrl')->setBaseUrl('/en')->baseUrl(substr($_SERVER["REQUEST_URI"], 3)); ?>"><span
+                                            class="language english"><?php echo $this->translate('english')?></span></a>
+                                </li>
                                 <li><a
-                                    href="<?php echo $this->getHelper('baseUrl')->setBaseUrl('/ja')->baseUrl(substr($_SERVER["REQUEST_URI"], 3));?>"><span
-                                    class="language japanese"><?php echo $this->translate('japanese')?></span></a></li>
+                                        href="<?php echo $this->getHelper('baseUrl')->setBaseUrl('/ja')->baseUrl(substr($_SERVER["REQUEST_URI"], 3)); ?>"><span
+                                            class="language japanese"><?php echo $this->translate('japanese')?></span></a>
+                                </li>
                                 <li><a
-                                    href="<?php echo $this->getHelper('baseUrl')->setBaseUrl('/zh')->baseUrl(substr($_SERVER["REQUEST_URI"], 3));?>"><span
-                                    class="language chinese"><?php echo $this->translate('chinese')?></span></a></li>
+                                        href="<?php echo $this->getHelper('baseUrl')->setBaseUrl('/zh')->baseUrl(substr($_SERVER["REQUEST_URI"], 3)); ?>"><span
+                                            class="language chinese"><?php echo $this->translate('chinese')?></span></a>
+                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -170,7 +175,7 @@ if (Zend_Registry::isRegistered('username')) {
                         <h3> <?php echo $username;?></h3>
                         <h5> <?php echo $role;?></h5>
 
-                        <div class="leftNavPhoto clearfix"><img src="<?php echo $avatarPath;?>"></div>
+                        <div class="leftNavPhoto clearfix"><img src="<?php echo $avatarPath; ?>"></div>
                         <?php
                         if ($servicesOffered || $servicesRequested) {
                             $i = 0;
@@ -259,9 +264,9 @@ if (Zend_Registry::isRegistered('username')) {
 </div>
 <!--End page-->
 <?php if ($roleInDb == 2): ?>
-<script type="text/javascript">
-    getTimeLeft();
-</script>
-    <?php endif;?>
+    <script type="text/javascript">
+        getTimeLeft();
+    </script>
+<?php endif;?>
 </body>
 </html>
