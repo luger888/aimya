@@ -273,7 +273,10 @@ ul li {
     margin-left: 15px;
 }
 .incomeForm{
-    margin-top:50px;
+    margin-top:27px;
+}
+.confirmationBookingForm{
+    padding:5px;
 }
 </style>
 <div class="mainCalendar mainContainer clearfix">
@@ -679,15 +682,22 @@ jQuery(document).ready(function () {
                                     $('.confirmationBookingForm').remove();
                                 }
                             });
+                            var costs = 0;
                             var choosenServices = new Array();
                             if($('#video:checked').val()){
                                 choosenServices.push('video');
+                                costs+=2;
+                                var videoRecord = '<p class="red">Video Record:    - US$2 </p>';
                             }
                             if($('#notes:checked').val()){
                                 choosenServices.push('notes');
+                                costs+=1;
+                                var lessonNotes = '<p class="red">Lesson Notes:    - US$1 </p>';
                             }
                             if($('#feedback:checked').val()){
                                 choosenServices.push('feedback');
+                                costs+=1;
+                                var lessonFeedback = '<p class="red">Lesson Feedback: - US$1 </p>';
                             }
                            if(choosenServices.length ==0){
                                 choosenServices.push('none');
@@ -710,7 +720,11 @@ jQuery(document).ready(function () {
                                         '<p>Duration: ' + $('#duration').val() + ' minutes</p>'+
                                         '<p>Services included: '+servicesString+'</p></div>' +
                                         '<div class ="incomeForm floatRight">' +
-                                        '<p>Lesson Income: US$ ' + $('#rate').val()+ '</p></div></div>');
+                                        '<p>Lesson Income: US$ ' + $('#rate').val()+ '</p>' +
+                                         videoRecord +
+                                         lessonNotes +
+                                         lessonFeedback +
+                                        '<p>TOTAL Gross Income: US$ ' + $('#rate').val()- costs+ '</p></div></div>');
                                 }
 
                         });
