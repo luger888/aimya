@@ -8,6 +8,7 @@ class UserController extends Zend_Controller_Action
             ->addActionContext('registration', 'json')
             ->addActionContext('login', 'json')
             ->addActionContext('timezone', 'json')
+            ->addActionContext('resend', 'json')
             ->initContext('json');
     }
 
@@ -223,4 +224,25 @@ class UserController extends Zend_Controller_Action
         }
     }
 
+    public function resendAction()
+    {
+        if ($username = $this->getRequest()->getParam('username')) {
+
+            $userDb = new Application_Model_DbTable_Users();
+            $user = $userDb->checkByUsername($username);
+            $mail = new Aimya_Mail;
+            $mail->setRecipient($user['email']);
+            $mail->setTemplate(Aimya_Mail::SIGNUP_ACTIVATION);
+            $mail->firstname = $user['firstname'];
+            $mail->lastname = $user['lastname'];
+            $mail->email = $user['email'];
+            $mail->password = $user['password'];
+            $mail->token = $user;
+            $mail->baseLink = "http://" . $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance()->getBaseUrl();
+
+            if($mail->send()){
+                $this->view->email = 1;
+            }
+        }
+    }
 }
