@@ -130,8 +130,7 @@ function resend(){
             "password" : $("#password-login").val()
         },
         success: function(response){
-        alert(5);
-            $('.alertBlock').html('<div class="success">Email has been sent. Please check your email and confirm registration.</div>');
+            $('.alertBlock').html('<div class="alert">Email has been sent. Please check your email and confirm registration.</div>');
         }
     });
     return false;
