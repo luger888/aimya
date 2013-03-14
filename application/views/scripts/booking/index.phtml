@@ -286,6 +286,10 @@ ul li {
 .incomeForm .red{
     color:red;
 }
+.incomeForm span{
+    width:75px;
+    display: inline-block;
+}
 .incomeForm  .totalGrossIncome{
     padding-top:5px;
     border-top:1px solid red;
@@ -706,17 +710,17 @@ jQuery(document).ready(function () {
                             if($('#video:checked').val()){
                                 choosenServices.push('video');
                                 costs+=2;
-                                 videoRecord = '<p class="red">Video Record:    - US$2 </p>';
+                                 videoRecord = '<p class="red"><span>Video Record:</span>    - US$2 </p>';
                             }
                             if($('#notes:checked').val()){
                                 choosenServices.push('notes');
                                 costs+=1;
-                                 lessonNotes = '<p class="red">Lesson Notes:    - US$1 </p>';
+                                 lessonNotes = '<p class="red"><span>Lesson Notes:</span>    - US$1 </p>';
                             }
                             if($('#feedback:checked').val()){
                                 choosenServices.push('feedback');
                                 costs+=1;
-                                 lessonFeedback = '<p class="red">Lesson Feedback: - US$1 </p>';
+                                 lessonFeedback = '<p class="red"><span>Lesson Feedback:</span> - US$1 </p>';
                             }
                            if(choosenServices.length ==0){
                                 choosenServices.push('none');
@@ -740,11 +744,11 @@ jQuery(document).ready(function () {
                                         '<p>Duration: ' + $('#duration').val() + ' minutes</p>'+
                                         '<p>Services included: '+servicesString+'</p></div>' +
                                         '<div class ="incomeForm floatRight">' +
-                                        '<p>Lesson Income: US$ ' + $('#rate').val()+ '</p>' +
+                                        '<p><span>Lesson Income:</span> US$ ' + $('#rate').val()+ '</p>' +
                                          videoRecord +
                                          lessonNotes +
                                          lessonFeedback +
-                                        '<p class="totalGrossIncome">TOTAL Gross Income: US$ ' + grossIncome + '</p></div></div>');
+                                        '<p class="totalGrossIncome"><span>TOTAL Gross Income:</span> US$ ' + grossIncome + '</p></div></div>');
                                 }
 
                         });
