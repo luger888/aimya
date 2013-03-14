@@ -104,7 +104,7 @@ $(document).ready(function() {
                     window.location.href = pathName + "/account/features/";
 
                 }else if(response.status == 0){
-                    $('.alertBlock').append('<div class="alert">Account is not confirmed. Please check you email and confirm registration. If you didn\'t receive email, <a>please try again</a>. </div>');
+                    $('.alertBlock').append('<div class="alert">Account is not confirmed. Please check you email and confirm registration. If you didn\'t receive email, <a onclick="resend();return false;">please try again</a>. </div>');
                 }
                 if(response.alertFlash){
 
@@ -121,6 +121,9 @@ $(document).ready(function() {
 
 });
 
+function resend(){
+    alert(5);
+}
 /*---PIE - add css3 to ie 7 and ie8 -----------------------------------------------------*/
 
 $(function() {

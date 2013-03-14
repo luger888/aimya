@@ -433,8 +433,9 @@ input.btnLogin {
 }
 .alert a{
     font: 11px Arial !important;
-    color:#ad4c4c !important;
+    color:#822929 !important;
     text-decoration: underline;
+    cursor: pointer;
 }
 .alert .flash-warning{
     font: 700 11px Arial !important;
