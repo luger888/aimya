@@ -131,10 +131,10 @@ class UserController extends Zend_Controller_Action
                 if ($result->isValid()) {
                     $identity = $authAdapter->getResultRowObject();
                     $this->view->status = $identity->status;
-                  if( $identity->status ===1){
-                      $authStorage = $auth->getStorage();
-                      $authStorage->write($identity);
-                  }
+//                  if( $identity->status ===1){
+//                      $authStorage = $auth->getStorage();
+//                      $authStorage->write($identity);
+//                  }
 
 
 
