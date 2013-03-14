@@ -1,5 +1,7 @@
 $(document).ready(function () {
-
+    $(function() {
+        $( document ).tooltip();
+    });
     $('.alert-block .close').click(function () {
         $(this).parents('.alert-block').remove();
     });
