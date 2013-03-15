@@ -1,9 +1,10 @@
 $(document).ready(function () {
-    $("#searchTip").tooltip({
-        bodyHandler: function() {
-            return $("#tooltip-content").html();
-        },
-        showURL: false
+    $('#searchTip').tooltip({
+        tooltipClass:'tooltip',
+        content: function() {
+            return $(this).attr('title');
+        }
+
     });
     $('.alert-block .close').click(function () {
         $(this).parents('.alert-block').remove();
