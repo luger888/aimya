@@ -45,11 +45,12 @@ class LessonController extends Zend_Controller_Action
 
     public function setupAction()
     {
+        $userId = Zend_Auth::getInstance()->getIdentity()->id;
         $studentId = $this->getRequest()->getParam('student_id');
         $bookingId = $this->getRequest()->getParam('booking_id');
         if (isset($studentId) && isset($bookingId)) {
             $lessonTable = new Application_Model_DbTable_Lesson();
-            $isAvailable = $lessonTable->checkAvailableLesson();
+            $isAvailable = $lessonTable->checkAvailableLesson($userId);
             if (!$isAvailable) {
 
 
