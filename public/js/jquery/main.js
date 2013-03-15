@@ -1,6 +1,9 @@
 $(document).ready(function () {
-    $(function() {
-        $( document ).tooltip();
+    $("#searchTip").tooltip({
+        bodyHandler: function() {
+            return $("#tooltip-content").html();
+        },
+        showURL: false
     });
     $('.alert-block .close').click(function () {
         $(this).parents('.alert-block').remove();
