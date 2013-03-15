@@ -128,7 +128,7 @@ if (Zend_Registry::isRegistered('username')) {
                         </form>
                     </div>
                 </div>
-                <div class="searchInfo"><a title="test">?</a></div>
+                <div class="searchInfo"><a id ="searchTip" title="*Services offered">?</a></div>
                 <nav id="globalNav">
                     <ul>
                         <li><a href="<?php echo $this->baseUrl() ?>/booking"><?php echo $this->translate("home"); ?></a>
@@ -268,5 +268,10 @@ if (Zend_Registry::isRegistered('username')) {
         getTimeLeft();
     </script>
 <?php endif;?>
+<div id="tooltip-content">
+    <p>Line1</p>
+    <p>Line2 <span style="...">blah blah</span></p>
+    <p>Line3</p>
+</div>
 </body>
 </html>
