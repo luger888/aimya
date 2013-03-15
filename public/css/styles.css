@@ -38,8 +38,9 @@ body {
 }
 .currentTime{
     color: grey;
-    margin-right: 15px;
     margin-top: 61px;
+    position: absolute;
+    right: 10px;
 }
 .currentTime span{
     color:#4A4A4A;
