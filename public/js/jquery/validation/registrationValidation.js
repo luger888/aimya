@@ -106,6 +106,9 @@ $(document).ready(function() {
                 }else if(response.status == 0){
                     $('.alertBlock').append('<div class="alert">Account is not confirmed. Please check you email and confirm registration. If you didn\'t receive email, <a onclick="resend();return false;">please try again</a>. </div>');
                 }
+            else if(response.status == 2){
+                $('.alertBlock').append('<div class="alert">Your account had been suspended. For more info, contact support.</div>');
+            }
                 if(response.alertFlash){
 
                     $('.alertBlock').append('<div class="alert"><div class = "flash-warning">Warning!</div>'+response.alertFlash+'</div>');
