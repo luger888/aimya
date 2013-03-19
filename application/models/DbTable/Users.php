@@ -150,7 +150,6 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
         $subQuery = $this->getAdapter()->select()
             ->from(array('service_detail'), array('MAX(updated_at)'))
-            ->where('status = 1')
             ->group('user_id')
             ->having('user_id = sd.user_id');
 
