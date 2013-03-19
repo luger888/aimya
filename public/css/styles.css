@@ -1205,7 +1205,7 @@ input.button-2 {
     font-family: 'helvetica-light-rnormal';
 }
 .userRelationsTab table td.ranking {
-    min-width: 75px;
+    min-width: 100px;
 }
 
 .userRelationsTab table{
