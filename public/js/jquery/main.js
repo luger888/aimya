@@ -1,6 +1,10 @@
 $(document).ready(function () {
-    $(function() {
-        $( document ).tooltip();
+    $('#searchTip').tooltip({
+        tooltipClass:'tooltip',
+        content: function() {
+            return $(this).attr('title');
+        }
+
     });
     $('.alert-block .close').click(function () {
         $(this).parents('.alert-block').remove();
