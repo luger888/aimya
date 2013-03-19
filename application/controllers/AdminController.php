@@ -61,6 +61,9 @@ class AdminController extends Zend_Controller_Action
             if ($this->getRequest()->getParam('suspendId')) {
                $usersDb->changeUserStatus($this->getRequest()->getParam('suspendId'), $this->getRequest()->getParam('status'));
             }
+            if ($this->getRequest()->getParam('deleteId')) {
+                $usersDb->deleteUser($this->getRequest()->getParam('deleteId'));
+            }
         }
 
     }

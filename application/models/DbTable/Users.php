@@ -407,4 +407,13 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
         return  $dateWithUTC;
     }
+
+    public function deleteUser($user_id){
+        $where = array(
+
+            $this->getAdapter()->quoteInto('id =?', (int)$user_id)
+
+        );
+        $this->delete($where);
+    }
 }
