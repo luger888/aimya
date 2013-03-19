@@ -156,6 +156,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         $data = $this->getAdapter()->select()
             ->from(array('sd' => 'service_detail'), array('sd.lesson_category', 'sd.updated_at'))
             ->joinLeft('user', 'user.id = sd.user_id', array('user.id', 'user.firstname', 'user.lastname', 'user.username', 'user.role', 'user.timezone'))
+            ->where('user.status = 1')
             ->joinLeft('account', 'account.user_id = sd.user_id', array('account.add_info'))
             ->where('sd.updated_at=?', $subQuery);
 
