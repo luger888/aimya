@@ -11,10 +11,10 @@ function removeCat(e, id) {
     if (answer) {
 
         $.ajax({
-                url:baseUrl + "/admin/index",
-                type:"post",
-                data:{'deleteCat':id},
-                success:function (response) {
+                url: baseUrl + "/admin/index",
+                type: "post",
+                data: {'deleteCat': id},
+                success: function (response) {
                     if (response.result) {
                         $(e).parents('.formRow').remove();
                     }
@@ -38,7 +38,7 @@ function removeNewCat(e) {
 function saveCat(e) {
     var categories = new Array();
     $('.newCat').each(function (index) {
-        if($(this).val()!=''){
+        if ($(this).val() != '') {
             categories.push($(this).val());
         }
 
@@ -46,11 +46,11 @@ function saveCat(e) {
     if (categories) {
         var baseUrl = $('#current_url').val();
         $.ajax({
-            url:baseUrl + "/admin/index",
-            type:"post",
-            data:{'categories':categories},
-            success:function (response) {
-                    window.location.reload();
+            url: baseUrl + "/admin/index",
+            type: "post",
+            data: {'categories': categories},
+            success: function (response) {
+                window.location.reload();
 
             }
         })
@@ -71,7 +71,7 @@ function removeNewDur(e) {
 function saveDur(e) {
     var durations = new Array();
     $('.newCat').each(function (index) {
-        if($(this).val()!=''){
+        if ($(this).val() != '') {
             durations.push($(this).val());
         }
 
@@ -79,10 +79,10 @@ function saveDur(e) {
     if (durations) {
         var baseUrl = $('#current_url').val();
         $.ajax({
-            url:baseUrl + "/admin/index",
-            type:"post",
-            data:{'durations':durations},
-            success:function (response) {
+            url: baseUrl + "/admin/index",
+            type: "post",
+            data: {'durations': durations},
+            success: function (response) {
                 window.location.reload();
 
             }
@@ -100,10 +100,10 @@ function removeDur(e, id) {
     if (answer) {
 
         $.ajax({
-                url:baseUrl + "/admin/index",
-                type:"post",
-                data:{'deleteDur':id},
-                success:function (response) {
+                url: baseUrl + "/admin/index",
+                type: "post",
+                data: {'deleteDur': id},
+                success: function (response) {
                     if (response.result) {
                         $(e).parents('.formRow').remove();
                     }
@@ -114,19 +114,19 @@ function removeDur(e, id) {
     }
     return false;
 }
-function suspension(e, status){
+function suspension(e, status) {
     var id = $(e).nextAll('input[type=hidden]:first').val();
     var baseUrl = $('#current_url').val();
-    if(status == 2){
+    if (status == 2) {
         var answer = confirm("Suspend user?");
         if (answer) {
 
             $.ajax({
-                    url:baseUrl + "/admin/users",
-                    type:"post",
-                    data:{'suspendId':id,
-                    'status': 2},
-                    success:function (response) {
+                    url: baseUrl + "/admin/users",
+                    type: "post",
+                    data: {'suspendId': id,
+                        'status': 2},
+                    success: function (response) {
                         if (response) {
                             window.location.reload();
                         }
@@ -135,13 +135,13 @@ function suspension(e, status){
                 }
             );
         }
-    }else{
+    } else if (status == 1) {
         $.ajax({
-                url:baseUrl + "/admin/users",
-                type:"post",
-                data:{'suspendId':id,
+                url: baseUrl + "/admin/users",
+                type: "post",
+                data: {'suspendId': id,
                     'status': 1},
-                success:function (response) {
+                success: function (response) {
                     if (response) {
                         window.location.reload();
                     }
@@ -149,6 +149,23 @@ function suspension(e, status){
                 }
             }
         );
+    } else if (status == 3) {
+        var answer = confirm("Delete user permanently?");
+        if (answer) {
+            $.ajax({
+                    url: baseUrl + "/admin/users",
+                    type: "post",
+                    data: {'deleteId': id,
+                        'status': 1},
+                    success: function (response) {
+                        if (response) {
+                            window.location.reload();
+                        }
+
+                    }
+                }
+            );
+        }
     }
     return false;
 }
