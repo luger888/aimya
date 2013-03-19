@@ -48,7 +48,7 @@ class Application_Form_Booking extends Zend_Form
         $recipiend_id->addOption('', 'Choose recipient',array());
         foreach ($friendsArray as  $value) {
 
-            $recipiend_id->addOption($value['id'], $value['lastname'].substr($value['firstname'], 0 ,1). '. ('.$value['username'].')', array('class' => $value['role']));
+            $recipiend_id->addOption($value['id'], $value['lastname']. ' '. strtoupper(substr($value['firstname'], 0 ,1)). '. ('.$value['username'].')', array('class' => $value['role']));
         }
 
 
