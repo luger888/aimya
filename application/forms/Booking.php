@@ -17,6 +17,8 @@ class Application_Form_Booking extends Zend_Form
         foreach($friendsArray as $value){
             $friends[$value['id']] = $value['username'];
             $friends[$value['role']] = $value['role'];
+            $friends[$value['firstname']] = $value['firstname'];
+            $friends[$value['lastname']] = $value['lastname'];
         }
 
         /*  BOOKING FORM */
@@ -46,7 +48,7 @@ class Application_Form_Booking extends Zend_Form
         $recipiend_id->addOption('', 'Choose recipient',array());
         foreach ($friendsArray as  $value) {
 
-            $recipiend_id->addOption($value['id'], $value['username'], array('class' => $value['role']));
+            $recipiend_id->addOption($value['id'], $value['username'].'('.$value['lastname'] . ' '. $value['firstname'].')', array('class' => $value['role']));
         }
 
 
