@@ -21,7 +21,7 @@
                     <?php //Zend_Debug::dump($booking)?>
                 <tr>
                     <td class="username">
-                        <?php echo $user['username'];?>
+                        <a href="<?php echo $this->baseUrl().'/user/'.$user['id']?>"><?php echo $user['username'];?></a>
                     </td>
                     <td class="name">
                         <?php echo $user['firstname'];?>
