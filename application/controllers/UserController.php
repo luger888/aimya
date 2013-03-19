@@ -145,9 +145,12 @@ class UserController extends Zend_Controller_Action
 
                         $this->view->alertFlash = 'Authentication failed. Login or password are incorrect';
                     }
+                }else if($user['status'] ==2){
+
+                    $this->view->status = 2;
+
                 }else{
                     $this->view->status = 0;
-
                 }
 
             } else {
