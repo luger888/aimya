@@ -21,7 +21,7 @@ class UserController extends Zend_Controller_Action
 
             $userModel = new Application_Model_DbTable_Users();
             $user = $userModel->getFullData($accountId);
-            if ($user['username']) {
+            if ($user['username'] && $user['status'] !=2) {
                 $userData = $user;
             } else {
                 $this->_helper->redirector('page404', 'error');
