@@ -313,7 +313,7 @@ class LessonController extends Zend_Controller_Action
             $this->write($text);*/
 
             exec("sudo /usr/local/bin/conv.sh $filePath", $convResult);
-            $this->write($convResult);
+            //$this->write($convResult);
             //$this->write($filePath);
 
             $info = pathinfo($filePath);
