@@ -56,6 +56,7 @@ class Application_Form_Booking extends Zend_Form
         $start_at ->setAttrib('id', 'started_at')
             ->setRequired(true)
             ->addValidator('NotEmpty')
+            ->setErrorMessages(array('Please specify a date'))
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 
@@ -80,6 +81,7 @@ class Application_Form_Booking extends Zend_Form
         $rate ->setAttrib('class', 'required input-small')
             ->setRequired(true)
             ->addValidator('NotEmpty')
+            ->setErrorMessages(array('Please type the price for this lesson (in US dollars, digits only)'))
             ->addValidator('Digits', array('greaterThan', true, 0))
             ->setAttrib('id', 'rate')
             ->addFilters($this->basicFilters)
