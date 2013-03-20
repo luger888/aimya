@@ -74,6 +74,7 @@ class Application_Form_Booking extends Zend_Form
             ->setRequired(true)
             ->addValidator('NotEmpty')
             ->setAttrib('class', 't-165')
+            ->setErrorMessages(array('Please type focus name'))
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 
@@ -82,12 +83,13 @@ class Application_Form_Booking extends Zend_Form
             ->setRequired(true)
             ->addValidator('NotEmpty')
             ->setErrorMessages(array('Please type the price for this lesson (in US dollars, digits only)'))
-            ->addValidator('Digits', array('greaterThan', false, 0))
+            ->addValidator('Digits', true)
             ->setAttrib('id', 'rate')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
         $validator=new Zend_Validate_GreaterThan(0);
         $rate->addValidator($validator,true);
+
         $duration = new Zend_Form_Element_Select('duration');
         $duration->setAttrib('id', 'duration')
             ->addFilters($this->basicFilters)
