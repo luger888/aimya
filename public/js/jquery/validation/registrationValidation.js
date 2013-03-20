@@ -107,7 +107,7 @@ $(document).ready(function() {
                     $('.alertBlock').append('<div class="alert">Account is not confirmed. Please check you email and confirm registration. If you didn\'t receive email, <a onclick="resend();return false;">please try again</a>. </div>');
                 }
             else if(response.status == 2){
-                $('.alertBlock').append('<div class="alert">Your account had been suspended. For more info, contact support.</div>');
+                $('.alertBlock').append('<div class="alert">Your account had been suspended. For more info, contact support (help@aimya.com).</div>');
             }
                 if(response.alertFlash){
 
