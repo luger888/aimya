@@ -14,7 +14,7 @@ class Application_Form_Presentation extends Zend_Form
         $presentation ->setLabel('Upload Image')
              ->setAttrib('id', 'Filedata')
              ->addValidator('Size', false, 25024000)
-             ->addValidator('Extension', false, 'ppt,pdf,pptx');
+             ->addValidator('Extension', false, 'ppt,pdf,pptx,doc,docx');
              //->setDestination('./flash/presentation/'.$identity->id.'/1/');
 
 
