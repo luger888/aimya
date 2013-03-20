@@ -45,7 +45,7 @@
                     else if($user['status']==2){
                         echo '<input type="button" class="button-2 unblock" value ="restore" onclick="suspension(this, 1);return false;">';
                     }?>
-                        <input type="button" class="button-2 delete" value ="delete" onclick="suspension(this, 3);return false;">
+                        <input type="button" class="button-2 delete disable" value ="delete" onclick="suspension(this, 3);return false;">
                         <input type="hidden" value = "<?php echo $user['id']?>">
                     </td>
                 </tr>
