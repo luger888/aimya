@@ -65,6 +65,7 @@ class Application_Form_Booking extends Zend_Form
             ->setRequired(true)
             ->addValidator('NotEmpty')
             ->setAttrib('class','hasTimepicker')
+            ->setErrorMessages(array('Please specify a time'))
             ->setAttrib('autocomplete','off')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
