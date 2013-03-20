@@ -1103,11 +1103,16 @@ function checkPassword(e) {
                         $('#oldPassword').next('.error').text('Wrong password!');
                     }
                     else if(response.errorLength){
-                        $('#newPassword').next('.error').text('Minimum 6 characters!');
+                        $('#newPassword').next('.error').text('Must be between 6 to 20 characters in length.');
                     }
                     else if(response.errorReg){
-                        $('#newPassword').next('.error').text('Your password must contain letters and numbers');
+                        $('#newPassword').next('.error').text('Must contain at least one alpha character and at least one digit.');
                     }
+                    else if(response.errorSame){
+                        $('#newPassword').next('.error').text('Must NOT be your original password');
+
+                    }
+
                 }
             });
         }

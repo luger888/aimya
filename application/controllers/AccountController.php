@@ -321,7 +321,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
             $userpassword = $userInfo['password'];
             if ($this->getRequest()->getParam('newPassword') != '') {
                 //validators
-                $stringLengthValidator = new Zend_Validate_StringLength(6, 200); //addValidator('stringLength', false, array(6, 200));
+                $stringLengthValidator = new Zend_Validate_StringLength(6, 20); //addValidator('stringLength', false, array(6, 200));
                 $regexValidator = new Zend_Validate_Regex(array(
                     'pattern' => '/[A-Za-z].*[0-9]|[0-9].*[A-Za-z]/',
                     'messages' => array(
@@ -333,7 +333,10 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                     $this->view->errorLength = 1;
                 } else if (!$regexValidator->isValid($this->getRequest()->getParam('newPassword'))) {
                     $this->view->errorReg = 1;
-                } else {
+                }else if ($this->getRequest()->getParam('newPassword') == $this->getRequest()->getParam('oldPassword')) {
+                    $this->view->errorSame = 1;
+                }
+                else {
 
 
                     $password = md5($this->getRequest()->getParam('oldPassword'));
