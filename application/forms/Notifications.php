@@ -49,7 +49,7 @@ class Application_Form_Notifications extends Zend_Form
             array(
                 'pattern' => '/[A-Za-z].*[0-9]|[0-9].*[A-Za-z]/',
                 'messages' => array(
-                    'regexNotMatch' => "Your password must contain letters and numbers.",
+                    'regexNotMatch' => "Must contain at least one alpha character and at least one digit",
                 )
             )
         );
