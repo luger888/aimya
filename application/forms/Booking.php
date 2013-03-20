@@ -81,7 +81,7 @@ class Application_Form_Booking extends Zend_Form
         $rate = new Zend_Form_Element_Text('rate');
         $rate ->setAttrib('class', 'required input-small')
             ->setRequired(true)
-            ->addValidator('NotEmpty')
+            ->addValidator('NotEmpty', true)
             ->setErrorMessages(array('Please type the price for this lesson (in US dollars, digits only)'))
             ->addValidator('Digits', true)
             ->setAttrib('id', 'rate')
