@@ -290,7 +290,7 @@ class LessonController extends Zend_Controller_Action
         $presPath = $lessonModel->createPresentationPath($activeLesson['id']);
         $presPath = realpath(APPLICATION_PATH . '/../public/') . DIRECTORY_SEPARATOR . $presPath;
 
-        $this->write($presPath);
+        //$this->write($presPath);
 
         $formData = $this->getRequest()->getParams();
 

@@ -7,6 +7,7 @@ class ErrorController extends Zend_Controller_Action
 
         $identity = Zend_Auth::getInstance()->getIdentity();
         if (!$identity) { // if no identity - show main page layout
+            $this->_helper->redirector('index', 'index');
             $this->_helper->layout->setLayout("layoutError");
             $login = new Application_Form_Login();
             $this->view->login = $login->getElements();
