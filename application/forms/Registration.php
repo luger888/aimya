@@ -75,8 +75,8 @@ class Application_Form_Registration extends Zend_Form
 
         $password = new Zend_Form_Element_Password('password');
         $password -> setRequired(true);
-        $password->addValidator('stringLength', true, array(8, 200));
-        $password->setErrorMessages(array('Your password must contain letters and numbers, at least 8 characters'));
+        $password->addValidator('stringLength', true, array(6, 200));
+        $password->setErrorMessages(array('Your password must contain letters and numbers, at least 6 characters'));
         $password->addValidator('regex', true,
                 array(
                     'pattern' => '/[A-Za-z].*[0-9]|[0-9].*[A-Za-z]/',
