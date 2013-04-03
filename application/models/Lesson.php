@@ -270,7 +270,8 @@ class Application_Model_Lesson
                 if($timeDifference < 0){
                     $lesson['booking']['expired'] = 1;
                 }else{
-                    $lesson['booking']['waiting'] = 1;
+                    Zend_Debug::dump($starting_time . $currentTimeUtc);die;
+                    $lesson['booking']['waiting'] = $timeDifference;
                 }
 
 
