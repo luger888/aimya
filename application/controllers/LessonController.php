@@ -103,8 +103,8 @@ class LessonController extends Zend_Controller_Action
                             $lessonModel->openLesson($activeLesson['id'], $openDispay);
 
                             $stream = getHostByName(getHostName()) . '/oflaDemo/' . $resultParams['teacherStream'];
-
-                            $lessonModel->startRecording($activeLesson['id'], $videoPath . 'video_lesson', $booking['duration'], $stream, $activeLesson['id']);
+                            $studentStream = getHostByName(getHostName()) . '/oflaDemo/' . $resultParams['studentStream'];
+                            $lessonModel->startRecording($activeLesson['id'], $videoPath . 'video_lesson', $booking['duration'], $stream, $activeLesson['id'], $studentStream);
                         }
                     }
 

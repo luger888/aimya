@@ -85,8 +85,10 @@ class Application_Model_Lesson
         $res = exec("/usr/local/bin/phase2.1_rtmpdump.sh $teacherStream $path > /dev/null 2>/dev/null &");
         if($studentStream){
             $res2 = exec("/usr/local/bin/phase2.1.1_rtmpdump_stud.sh $studentStream $path > /dev/null 2>/dev/null &");
+            $this->write($res2 . '<br>', 'videoRec');
         }
         $pathAudio = $path .'_audio';
+
         $this->write($res . '<br>');
         $this->write("/usr/local/bin/phase2.1_rtmpdump.sh $teacherStream $pathAudio > /dev/null 2>/dev/null &");
         return true;
@@ -176,9 +178,9 @@ class Application_Model_Lesson
         rmdir($dir);
     }
 
-    function write($the_string)
+    function write($the_string, $name = 'logfile')
     {
-        if ($fh = @fopen("./img/logfile.txt", "a+")) {
+        if ($fh = @fopen("./img/".$name.".txt", "a+")) {
             fputs($fh, $the_string, strlen($the_string));
             fclose($fh);
             return (true);
