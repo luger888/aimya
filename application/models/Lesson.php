@@ -216,7 +216,7 @@ class Application_Model_Lesson
         $time = $dtime->getOffset();
 
         $isTeacher = 0;
-        $dateWithUTC = gmdate("m/d/Y H:i", strtotime($date) + (($time))); //adding timezone to current date
+        $dateWithUTC = gmdate("m/d/Y H:i", time() + (($time))); //adding timezone to current date
 
         // END -- TIME FORMATTING BY TIMEZONES BLOCK
         $lessonTable = new Application_Model_DbTable_Lesson();
@@ -270,8 +270,8 @@ class Application_Model_Lesson
                 if($timeDifference < 0){
                     $lesson['booking']['expired'] = 1;
                 }else{
-                    Zend_Debug::dump($starting_time . $currentTimeUtc . $dateWithUTC);die;
-                    $lesson['booking']['waiting'] = $timeDifference;
+
+                    $lesson['booking']['waiting'] = 1;
                 }
 
 
