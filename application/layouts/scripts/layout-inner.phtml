@@ -42,8 +42,7 @@ $identity = Zend_Auth::getInstance()->getStorage()->read();
 $userDbTable = new Application_Model_DbTable_Users();
 $userGmt = $userDbTable->getTimeZone($identity->id);
 $tzDbTable = new Application_Model_DbTable_TimeZones();
-if($userGmt != ''){
-    Zend_Debug::dump($userGmt);
+if($userGmt['timezone'] != ''){
     $tz = $tzDbTable->getTimezoneByGmt($userGmt['timezone']);
     $dtzone = new DateTimeZone($tz['code']);
     $dtime = new DateTime();
