@@ -77,14 +77,21 @@ class Application_Model_Lesson
         return $result;
     }
 
-    public function startRecording($display, $path, $time, $teacherStream, $lessonId)
+    public function startRecording($display, $path, $time, $teacherStream, $lessonId, $studentStream = null)
     {
+        $this->write('start <br>', 'videoRec');
         $seconds = $time * 60;
         $time = gmdate("H:i:s", $seconds);
         exec("phase2_rec.sh $display $path $time $lessonId > /dev/null 2>/dev/null &");
         $res = exec("/usr/local/bin/phase2.1_rtmpdump.sh $teacherStream $path > /dev/null 2>/dev/null &");
+        if($studentStream){
+            $res2 = exec("/usr/local/bin/phase2.1.1_rtmpdump_stud.sh $studentStream $path > /dev/null 2>/dev/null &");
+            $this->write(date('Y-m-d H:i:s').' / '.$studentStream . ' ->studentStream' . $teacherStream . ' ->teacherSteam', 'videoRec');
+        }
         $pathAudio = $path .'_audio';
-        $this->write($res . '<br>');
+
+        $this->write($res . ' teacherStream<br>', 'videoRec');
+        $this->write('end <br>', 'videoRec');
         $this->write("/usr/local/bin/phase2.1_rtmpdump.sh $teacherStream $pathAudio > /dev/null 2>/dev/null &");
         return true;
     }
@@ -107,6 +114,7 @@ class Application_Model_Lesson
             $fileContent = file_get_contents($notePath);
             return $fileContent;
         } else {
+
             return false;
         }
 
@@ -173,9 +181,9 @@ class Application_Model_Lesson
         rmdir($dir);
     }
 
-    function write($the_string)
+    function write($the_string, $name = 'logfile')
     {
-        if ($fh = @fopen("./img/logfile.txt", "a+")) {
+        if ($fh = @fopen("./img/".$name.".txt", "a+")) {
             fputs($fh, $the_string, strlen($the_string));
             fclose($fh);
             return (true);
@@ -216,7 +224,7 @@ class Application_Model_Lesson
         $time = $dtime->getOffset();
 
         $isTeacher = 0;
-        $dateWithUTC = gmdate("m/d/Y H:i", strtotime($date) + (($time))); //adding timezone to current date
+        $dateWithUTC = gmdate("m/d/Y H:i", time() + (($time))); //adding timezone to current date
 
         // END -- TIME FORMATTING BY TIMEZONES BLOCK
         $lessonTable = new Application_Model_DbTable_Lesson();
@@ -270,6 +278,7 @@ class Application_Model_Lesson
                 if($timeDifference < 0){
                     $lesson['booking']['expired'] = 1;
                 }else{
+
                     $lesson['booking']['waiting'] = 1;
                 }
 

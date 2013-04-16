@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta CHARSET="UTF-8">
+    <title></title>
+    <?php
+    $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=utf-8');
+    $this->addHelperPath("ZendX/JQuery/View/Helper", "ZendX_JQuery_View_Helper");
+    ?>
+    <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />
+    <meta content="telephone=no" name="format-detection">
+    <?php  echo $this->jQuery(); ?>
+    <?php $this->headLink()->appendStylesheet('/css/reset.css');?>
+    <?php $this->headLink()->appendStylesheet('/css/fonts.css');?>
+    <?php $this->headLink()->appendStylesheet('/css/styles.css');?>
+    <?php $this->headLink()->appendStylesheet('/css/mobiscroll-2.3.1.custom.min.css');?>
+
+    <?php $this->headLink()->appendStylesheet('http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css');?>
+    <?php $this->headScript()->appendFile('/js/jquery/jquery-ui-1.9.1.custom.min.js');?>
+    <?php $this->headScript()->appendFile('/js/jquery/customCheckboxRadio.js');?>
+    <?php $this->headScript()->appendFile('/js/jquery/mobiscroll-2.3.1.custom.min.js');?>
+    <?php $this->headScript()->appendFile('/js/jquery/cookieJquery.js');?>
+    <?php $this->headScript()->appendFile('/js/jquery/jquery.uploadifive.js');?>
+    <?php $this->headScript()->appendFile('/js/jquery/jquery.raty.js');?>
+    <?php $this->headScript()->appendFile('/js/jquery/main.js');?>
+    <?php $this->headScript()->appendFile('/js/jquery/jquery-ui-timepicker-addon.js');?>
+    <?php $this->headScript()->appendFile('/flash/swfobject.js');?>
+
+    <?php echo $this->headScript();?>
+    <?php echo $this->headLink();?>
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="/css/ie.css" type="text/css" media="all" />
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/js/jquery/PIE.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div id="flash_div" style="display: none; height: 100%; width: 100%"></div>
+<?php
+//information in left block of account:
+//  firstname, lastname, avatar, member since, services
+$identity = Zend_Auth::getInstance()->getStorage()->read();
+$userModel = new Application_Model_DbTable_Users();
+$profileModel = new Application_Model_Profile();
+$servicesModel  = new Application_Model_DbTable_ServiceDetail();
+$identityId = $identity->id;
+$username = $userModel->getUser($identityId);
+$avatarPath = $profileModel->getAvatarPath($identityId, 'base'); //path to avatar
+if($username['role'] == '1'){
+    $role = 'Student';
+}else if($username['role'] == '2'){
+    $role = 'Instructor';
+}else if($username['role'] == '3'){
+    $role = 'Admin';
+}
+
+$roleInDb = $username['role'];
+
+if($identity->role != $username['role'] && $identity->role == '1') {
+    $profileModel->overwriteSession($username['id']);
+}
+
+
+$servicesOffered = $servicesModel->getServiceByUser($identityId, 1);
+$servicesRequested = $servicesModel->getServiceByUser($identityId, 2);
+
+if (Zend_Registry::isRegistered('username')) {
+    $username = Zend_Registry::get('username');
+} else {
+
+    $username = "{$username['firstname']} {$username['lastname']}";
+    Zend_Registry::set('username', $username);
+}
+?>
+
+
+<div id="pagestatic" class="clearfix">
+
+    <div id="globalWrapper" class="clearfix">
+
+        <div id="wrapper" class="clearfix">
+
+            <div id="header" class="clearfix">
+
+                <a href="<?php echo $this->baseUrl() ?>/account/features" id="logo"></a>
+                <input id="user_activity" type="hidden" value="1">
+                <input id="current_url" type="hidden" value="<?php echo $this->baseUrl()?>">
+                <div class="searchForm headerSearch">
+                    <form id="search_form" method="get" action="<?php echo $this->baseUrl() ?>/search/search/">
+                        <?php $searchForm = $this->addSearchForm();?>
+                        <?php echo $searchForm->search_string?>
+                        <?php echo $searchForm->searchbtn ?>
+                    </form>
+                </div>
+
+                <nav id="globalNav">
+                    <ul>
+                        <li><a href="<?php echo $this->baseUrl() ?>/booking"><?php echo $this->translate("home"); ?></a></li>
+                        <li><a href="<?php echo $this->baseUrl() ?>/policy.html"><?php echo $this->translate("privacy policy"); ?></a></li>
+                        <li><a href="<?php echo $this->baseUrl() ?>/about.html"><?php echo $this->translate("about aimya"); ?></a></li>
+                        <li><a href="<?php echo $this->baseUrl() ?>/help.html"><?php echo $this->translate("help"); ?></a></li>
+                        <li><a href="<?php echo $this->baseUrl() ?>/user/logout/"><?php echo $this->translate("sign out"); ?></a></li>
+                        <li class="last"><a href="#"><?php echo $this->translate('language')?></a>
+                            <ul>
+                                <li><a href="<?php echo $this->getHelper('baseUrl')->setBaseUrl('/en')->baseUrl(substr($_SERVER["REQUEST_URI"], 3));?>"><span class = "language english"><?php echo $this->translate('english')?></span></a></li>
+                                <li><a href="<?php echo $this->getHelper('baseUrl')->setBaseUrl('/ja')->baseUrl(substr($_SERVER["REQUEST_URI"], 3));?>"><span class = "language japanese"><?php echo $this->translate('japanese')?></span></a></li>
+                                <li><a href="<?php echo $this->getHelper('baseUrl')->setBaseUrl('/zh')->baseUrl(substr($_SERVER["REQUEST_URI"], 3));?>"><span class = "language chinese"><?php echo $this->translate('chinese')?></span></a></li>
+                            </ul></li>
+                    </ul>
+                </nav>
+
+            </div><!--End header-->
+
+
+            <div id="content" class="clearfix">
+
+
+
+                <div id="mainContent" class="clearfix">
+                    <div class="alertBlock modal"></div>
+                    <div class="messages">
+                        <?php echo $this->flashMessages();?>
+                    </div>
+
+                    <?php echo $this->layout()->content; ?>
+
+                </div><!--End mainContent-->
+
+            </div><!--End content-->
+
+        </div><!--end wrapper-->
+
+    </div><!--End globalWrapper-->
+
+    <div id="footer" class="clearfix">
+        <div class="footerWrapper clearfix">
+            <div class="socialIcons inner clearfix">
+                <a href="#" title="Follow Us on Facebook" class="facebook" target="_blank"></a>
+                <a href="#" title="Follow Us on Twitter" class="twitter" target="_blank"></a>
+                <a href="#" title="Follow Us on Linked In" class="linkedin" target="_blank"></a>
+            </div><!--End socialIcons-->
+            <div class="copyright clearfix">
+                Copyright 2012 Aimya<br>
+                Created by Svitla.com
+            </div>
+        </div><!--End footerWrapper-->
+    </div><!--End page-->
+
+</div><!--End page-->
+<?php if($roleInDb == 2):?>
+<script type="text/javascript">
+    getTimeLeft();
+</script>
+    <?php endif;?>
+</body>
+</html>
