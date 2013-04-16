@@ -79,17 +79,19 @@ class Application_Model_Lesson
 
     public function startRecording($display, $path, $time, $teacherStream, $lessonId, $studentStream = null)
     {
+        $this->write('start <br>', 'videoRec');
         $seconds = $time * 60;
         $time = gmdate("H:i:s", $seconds);
         exec("phase2_rec.sh $display $path $time $lessonId > /dev/null 2>/dev/null &");
         $res = exec("/usr/local/bin/phase2.1_rtmpdump.sh $teacherStream $path > /dev/null 2>/dev/null &");
         if($studentStream){
             $res2 = exec("/usr/local/bin/phase2.1.1_rtmpdump_stud.sh $studentStream $path > /dev/null 2>/dev/null &");
-            $this->write($res2 . '<br>', 'videoRec');
+            $this->write(date('Y-m-d H:i:s').' / '.$studentStream . ' ->studentStream'.chr(13).chr(10) . $teacherStream . ' ->teacherSteam'.chr(13).chr(10), 'videoRec');
         }
         $pathAudio = $path .'_audio';
 
-        $this->write($res . '<br>');
+        $this->write($res . ' teacherStream<br>', 'videoRec');
+        $this->write('end <br>', 'videoRec');
         $this->write("/usr/local/bin/phase2.1_rtmpdump.sh $teacherStream $pathAudio > /dev/null 2>/dev/null &");
         return true;
     }

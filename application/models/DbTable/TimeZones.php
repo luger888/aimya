@@ -16,7 +16,7 @@ class Application_Model_DbTable_TimeZones extends Application_Model_DbTable_Abst
 
         $data = $this->select()
             ->from($this->_name, array('id', 'code', 'name'))
-            ->where('gmt=?', $gmt);
+            ->where('gmt = ?', $gmt);
 
         return $data->query()->fetch();
 
