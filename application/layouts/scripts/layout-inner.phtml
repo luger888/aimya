@@ -110,7 +110,13 @@ if (Zend_Registry::isRegistered('username')) {
 <div id="page" class="clearfix">
 
     <div id="globalWrapper" class="clearfix">
-        <div class="currentTime floatRight">Your Aimya time: <span id="clock"><?php echo $time2;?></span></div>
+        <div class="currentTime floatRight">Your Aimya time: <span id="clock"><?php
+                if(isset($time2))
+                {
+                    echo $time2;
+                }
+
+                ?></span></div>
         <div id="wrapper" class="clearfix">
 
             <div id="header" class="clearfix">
