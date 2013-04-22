@@ -90,10 +90,10 @@ class Application_Model_Lesson
         }
        // exec("phase_killtimer.sh $lessonId $seleniumPort $lessonId $time > /dev/null 2>/dev/null &");
         $pathAudio = $path .'_audio';
-        $this->write(date('Y-m-d H:i:s').' / '.$studentStream . ' ->studentStream /n'. $teacherStream . ' ->teacherSteam /n' . $time . ' -> time /n' . $lessonId . ' ->lesson_id /n'. $seleniumPort . ' ->port', 'videoRec');
-        $this->write($res . ' teacherStream<br>', 'videoRec');
+        //$this->write(date('Y-m-d H:i:s').' / '.$studentStream . ' ->studentStream /n'. $teacherStream . ' ->teacherSteam /n' . $time . ' -> time /n' . $lessonId . ' ->lesson_id /n'. $seleniumPort . ' ->port', 'videoRec');
+       // $this->write($res . ' teacherStream<br>', 'videoRec');
         $this->write('end', 'videoRec');
-        $this->write("/usr/local/bin/phase2.1_rtmpdump.sh $teacherStream $pathAudio > /dev/null 2>/dev/null &");
+       // $this->write("/usr/local/bin/phase2.1_rtmpdump.sh $teacherStream $pathAudio > /dev/null 2>/dev/null &");
         return true;
     }
 
