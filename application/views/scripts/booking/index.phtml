@@ -467,18 +467,18 @@ jQuery(document).ready(function () {
 //                        var time_zone = msg.booking[c].timezone - msg.booking[c].creator_tz;
 //                        var utc =  msg.booking[c].creator_tz.getTime() + ( msg.booking[c].creator_tz.getTimezoneOffset() * 60000);
 
-                        if (msg.booking[c].recipient_id == msg.user_id) {
+                        if (msg.booking[c].recipient_id == msg.user_id) { //if current user is recipient
                             var unixStamp = Math.round((start).getTime() / 1000);
 
                             var dateTime = unixStamp + utc;
 
                             dateTime = new Date(dateTime * 1000);
 
-
-                        } else {
-                            dateTime = msg.booking[c].started_at;//bug
+console.log(dateTime + ' rec');
+                        } else {//if current user is sender
+                            dateTime = msg.booking[c].started_at;
                             dateTime = dateTime.replace(/-/g, '/');
-
+                            console.log(dateTime + ' sen');
 
                         }
                         events.push({
