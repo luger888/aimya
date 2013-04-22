@@ -83,6 +83,7 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
             }
             return true;
         }
+        Zend_Debug::dump($friendId);die;
         return false;
     }
 
