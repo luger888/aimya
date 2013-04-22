@@ -637,6 +637,7 @@ jQuery(document).ready(function () {
         }
         if ($('#recipiend_id').val() == 0) {
             $('#recipiend_id').parent().parent().append('<div class="error">Choose recipient</div>');
+            jQuery('.loadingIcon').remove();
             return false;
         }
         $("#recipiend_id").change(function () {
