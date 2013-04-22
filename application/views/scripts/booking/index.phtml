@@ -648,8 +648,9 @@ jQuery(document).ready(function () {
         if($('#video:checked').val() == 1)totalPrice +=2;
         if($('#feedback:checked').val() == 1)totalPrice +=1;
         if($('#notes:checked').val() == 1)totalPrice +=1;
-        if(totalPrice<=$('#rate').val()){
-            $('#rate').parent().parent().append('<div class="error">Your rate should be more than '+ totalPrice +'</div>');
+        if(totalPrice>=$('#rate').val()){
+            $('#rate').parent().parent().append('<div class="error">Your rate should be more than '+ totalPrice +' dollars</div>');
+            jQuery('.loadingIcon').remove();
             return false;
         }
         $("#rate").change(function () {
