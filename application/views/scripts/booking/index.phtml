@@ -614,7 +614,7 @@ jQuery(document).ready(function () {
         modal:true,
         resizable:false,
         close:function () {
-
+            $('#dialog-form input').prop('checked', false);
         }
     });
     var oldDateObj = new Date();
