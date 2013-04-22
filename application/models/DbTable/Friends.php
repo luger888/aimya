@@ -69,20 +69,21 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
     public function isBlocked($friendId)
     {
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
-
-        $data = $this->select()
-            ->from($this->_name)
-            ->where('(' . $this->getAdapter()->quoteInto('sender_id=?', $userId) . ' AND ' . $this->getAdapter()->quoteInto('friend_id=?', $friendId) . ') OR (' . $this->getAdapter()->quoteInto('sender_id=?', $friendId) . ' AND ' . $this->getAdapter()->quoteInto('friend_id=?', $userId) . ')');
-        $result = $data->query()->fetch();
-        if ($result) {
-            if (($result['sender_id'] == $userId && $result['recipient_status'] == 2) || ($result['friend_id'] == $userId && $result['sender_status'] == 2)) {
-                return true;
-            } else {
-                return false;
+        if ($friendId != 0) {
+            $data = $this->select()
+                ->from($this->_name)
+                ->where('(' . $this->getAdapter()->quoteInto('sender_id=?', $userId) . ' AND ' . $this->getAdapter()->quoteInto('friend_id=?', $friendId) . ') OR (' . $this->getAdapter()->quoteInto('sender_id=?', $friendId) . ' AND ' . $this->getAdapter()->quoteInto('friend_id=?', $userId) . ')');
+            $result = $data->query()->fetch();
+            if ($result) {
+                if (($result['sender_id'] == $userId && $result['recipient_status'] == 2) || ($result['friend_id'] == $userId && $result['sender_status'] == 2)) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
+            return true;
         }
-        return true;
-
+        return false;
     }
 
     public function isPending($friendId)
