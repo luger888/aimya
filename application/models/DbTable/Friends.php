@@ -79,6 +79,7 @@ class Application_Model_DbTable_Friends extends Application_Model_DbTable_Abstra
                 if (($result['sender_id'] == $userId && $result['recipient_status'] == 2) || ($result['friend_id'] == $userId && $result['sender_status'] == 2)) {
                     return true;
                 } else {
+                    Zend_Debug::dump($result);die;
                     return false;
                 }
             }
