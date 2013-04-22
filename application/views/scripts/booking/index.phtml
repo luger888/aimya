@@ -473,7 +473,7 @@ jQuery(document).ready(function () {
                             var dateTime = unixStamp + utc;
 
                             dateTime = new Date(dateTime * 1000);
-
+                            dateTime= dateTime.toISOString();
 console.log(dateTime + ' rec');
                         } else {//if current user is sender
                             dateTime = msg.booking[c].started_at;
