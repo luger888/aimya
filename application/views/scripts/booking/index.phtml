@@ -636,12 +636,14 @@ jQuery(document).ready(function () {
             started_at = '';
         }
         if ($('#recipiend_id').val() == 0) {
-
             $('#recipiend_id').parent().parent().append('<div class="error">Choose recipient</div>');
             jQuery('.loadingIcon').remove();
             return false;
         }
-
+        $("#recipiend_id").change(function () {
+            $(this).removeClass("input-error");
+            $(this).parent().parent().find('.error').remove();
+        });
         var totalPrice = 0;
         if($('#video:checked').val() == 1)totalPrice +=2;
         if($('#feedback:checked').val() == 1)totalPrice +=1;
@@ -651,7 +653,10 @@ jQuery(document).ready(function () {
             jQuery('.loadingIcon').remove();
             return false;
         }
-
+        $("#rate").change(function () {
+            $(this).removeClass("input-error");
+            $(this).parent().parent().find('.error').remove();
+        });
         $.post( /* SENDING PARAMETRS FOR VALIDATION*/
 
                 pathName + "/booking/add/0/controller%3D%3Ebooking/1/action%3D%3Eadd", {
@@ -778,12 +783,11 @@ jQuery(document).ready(function () {
                         jQuery('.loadingIcon').remove();
                         $('#booking').find('.error').remove();
 
-
+                        if ($('#recipiend_id').val() == 0) {
+                            $('#recipiend_id').parent().parent().append('<div class="error">Choose recipient</div>');
+                        }
                         $("#recipiend_id").change(function () {
                             $(this).removeClass("input-error");
-                            $(this).parent().parent().find('.error').remove();
-                        });
-                        $("#rate").change(function () {
                             $(this).parent().parent().find('.error').remove();
                         });
                         for (key in response.errors) {
