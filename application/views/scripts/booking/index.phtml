@@ -644,6 +644,18 @@ jQuery(document).ready(function () {
             $(this).removeClass("input-error");
             $(this).parent().parent().find('.error').remove();
         });
+        var totalPrice = 0;
+        if($('#video:checked').val() == 1)totalPrice +=2;
+        if($('#feedback:checked').val() == 1)totalPrice +=1;
+        if($('#notes:checked').val() == 1)totalPrice +=1;
+        if(totalPrice<=$('#rate').val()){
+            $('#rate').parent().parent().append('<div class="error">Your rate should be more than '+ totalPrice +'</div>');
+            return false;
+        }
+        $("#rate").change(function () {
+            $(this).removeClass("input-error");
+            $(this).parent().parent().find('.error').remove();
+        });
         $.post( /* SENDING PARAMETRS FOR VALIDATION*/
 
                 pathName + "/booking/add/0/controller%3D%3Ebooking/1/action%3D%3Eadd", {
