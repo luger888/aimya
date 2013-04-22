@@ -88,7 +88,7 @@ class Application_Model_Lesson
             $res2 = exec("/usr/local/bin/phase2.1.1_rtmpdump_stud.sh $studentStream $path > /dev/null 2>/dev/null &");
             //$this->write(date('Y-m-d H:i:s').' / '.$studentStream . ' ->studentStream'.chr(13).chr(10) . $teacherStream . ' ->teacherSteam'.chr(13).chr(10), 'videoRec');
         }
-        exec("phase_killtimer.sh $time $lessonId $seleniumPort $lessonId > /dev/null 2>/dev/null &");
+        exec("phase_killtimer.sh $lessonId $seleniumPort $lessonId $time > /dev/null 2>/dev/null &");
         $pathAudio = $path .'_audio';
 
         $this->write($res . ' teacherStream<br>', 'videoRec');
