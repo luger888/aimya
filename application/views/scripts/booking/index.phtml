@@ -472,12 +472,8 @@ jQuery(document).ready(function () {
 
                             var dateTime = unixStamp + utc;
 
-                            dateTime = new Date(dateTime * 1000);
+                            dateTime = dateTime * 1000;
 
-                            var curr_date = dateTime.getDate();
-                            var curr_month = dateTime.getMonth() + 1; //Months are zero based
-                            var curr_year = dateTime.getFullYear();
-                           dateTime = curr_date + "-" + curr_month + "-" + curr_year;
 console.log(dateTime + ' rec');
                         } else {//if current user is sender
                             dateTime = msg.booking[c].started_at;
