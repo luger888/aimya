@@ -635,7 +635,14 @@ jQuery(document).ready(function () {
         } else {
             started_at = '';
         }
-
+        if ($('#recipiend_id').val() == 0) {
+            $('#recipiend_id').parent().parent().append('<div class="error">Choose recipient</div>');
+            return false;
+        }
+        $("#recipiend_id").change(function () {
+            $(this).removeClass("input-error");
+            $(this).parent().parent().find('.error').remove();
+        });
         $.post( /* SENDING PARAMETRS FOR VALIDATION*/
 
                 pathName + "/booking/add/0/controller%3D%3Ebooking/1/action%3D%3Eadd", {
