@@ -474,11 +474,7 @@ jQuery(document).ready(function () {
 
                             dateTime = new Date(dateTime * 1000);
 
-                            var s = dateTime.toISOString();
-                            var a = s.split(/[^0-9]/);
-                            var d  =new Date (a[0],a[1]-1,a[2],a[3],a[4],a[5] );
-                           
-console.log(d + ' rec');
+console.log(dateTime + ' rec');
                         } else {//if current user is sender
                             dateTime = msg.booking[c].started_at;
                             dateTime = dateTime.replace(/-/g, '/');
