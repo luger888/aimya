@@ -636,6 +636,7 @@ jQuery(document).ready(function () {
             started_at = '';
         }
         if ($('#recipiend_id').val() == 0) {
+
             $('#recipiend_id').parent().parent().append('<div class="error">Choose recipient</div>');
             jQuery('.loadingIcon').remove();
             return false;
@@ -782,13 +783,13 @@ jQuery(document).ready(function () {
                         jQuery('.loadingIcon').remove();
                         $('#booking').find('.error').remove();
 
-                        if ($('#recipiend_id').val() == 0) {
-                            $('#recipiend_id').parent().parent().append('<div class="error">Choose recipient</div>');
-                        }
-                        $("#recipiend_id").change(function () {
-                            $(this).removeClass("input-error");
-                            $(this).parent().parent().find('.error').remove();
-                        });
+//                        if ($('#recipiend_id').val() == 0) {
+//                            $('#recipiend_id').parent().parent().append('<div class="error">Choose recipient</div>');
+//                        }
+//                        $("#recipiend_id").change(function () {
+//                            $(this).removeClass("input-error");
+//                            $(this).parent().parent().find('.error').remove();
+//                        });
                         for (key in response.errors) {
 
                             if (response.errors[key].length > 0) {
