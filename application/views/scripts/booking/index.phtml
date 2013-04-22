@@ -472,13 +472,13 @@ jQuery(document).ready(function () {
 
                             var dateTime = unixStamp + utc;
 
-                            dateTime = dateTime * 1000;
+                            dateTime = new Date(dateTime * 1000);
 
 console.log(dateTime + ' rec');
                         } else {//if current user is sender
                             dateTime = msg.booking[c].started_at;
                             dateTime = dateTime.replace(/-/g, '/');
-                            console.log(dateTime + ' sen');
+                            console.log(dateTime + ' rec');
 
                         }
                         events.push({
