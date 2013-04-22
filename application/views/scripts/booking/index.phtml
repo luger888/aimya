@@ -614,7 +614,7 @@ jQuery(document).ready(function () {
         modal:true,
         resizable:false,
         close:function () {
-            $('#dialog-form input').prop('checked', false);
+            $('#dialog-form .checkboxWrapper').removeClass('checked');
         }
     });
     var oldDateObj = new Date();
