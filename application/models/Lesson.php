@@ -236,11 +236,9 @@ class Application_Model_Lesson
                 $starting_time = ($starting_time + $time  ) - $creator_tz ;
 
             }
-            $currentTimeUtc = gmmktime(); //currentTime + UTC of user to UNIX stamp
+            $currentTimeUtc = strtotime($dateWithUTC); //currentTime + UTC of user to UNIX stamp
             $timeDifference = $starting_time - $currentTimeUtc;
-            Zend_Debug::dump($dateWithUTC);
-            Zend_Debug::dump($currentTimeUtc);
-            Zend_Debug::dump($timeDifference);die;
+            
             if ($timeDifference <= $reserveSeconds && $timeDifference > 0) { //if difference between starting time and current is 10 minutes or less, but not less than 0
                 $isOnline = 1;
 
