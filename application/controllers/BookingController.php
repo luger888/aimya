@@ -26,6 +26,8 @@ class BookingController extends Zend_Controller_Action
         $booking = $bookingDbTable->getBookingByUser($identity->id);
         $this->view->booking = $booking;
         $this->view->user_id = $identity->id;
+        $current_time = $userDbTable->getCurrentTime($identity->id);
+        $this->view->current_time = $current_time;
         $this->view->role = $identity->role;
         $userGmt = $userDbTable->getTimeZone($identity->id); //id
 
