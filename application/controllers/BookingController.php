@@ -101,7 +101,7 @@ class BookingController extends Zend_Controller_Action
                 $userGmt = $userDbTable->getTimeZone($this->getRequest()->getParam('sender_id'));
 
                 $tzDbTable = new Application_Model_DbTable_TimeZones(); /*TimeZones object*/
-                $tz = $tzDbTable->getTimezoneByGmt($userGmt['timezone']);/*get timezone code for php*/
+                $tz = $tzDbTable->getItem($userGmt['timezone']);/*get timezone code for php*/
                 $dtzone = new DateTimeZone($tz['code']);/*creating timezone object with given code from db*/
                 $dtime = new DateTime();
                 $dtime->setTimeZone($dtzone);/*setting timezone object to time object*/
