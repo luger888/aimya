@@ -15,7 +15,12 @@
     <div class="messageContent clearfix">
         <input id="featured_count" type="hidden" value="<?php echo $this->featuredCount['featuredCount']; ?>">
         <?php //Zend_Debug::dump($this->featured); ?>
-        <?php foreach ($this->featured as $person): ?>
+        <?php foreach ($this->featured as $person):
+            $timeZone = $userModel->getTimeZone();
+            $tzDbTable = new Application_Model_DbTable_TimeZones();
+            $timeZone =  $tzDbTable->getItem($timeZone['timezone']);
+            $person['timezone'] = $timeZone['gmt'];
+            ?>
 
         <div class="shadowSeparator clearfix">
             <div class="shadowSeparatorBox clearfix">
