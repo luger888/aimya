@@ -575,9 +575,9 @@ jQuery(document).ready(function () {
                     startLesson = new Date(startLesson);
                 }
 
-                var current = new Date();
+                var current = new Date(event.current_time);
 
-                console.log(event.current_time);
+                console.log(startLesson);
                 console.log(current);
                 if (event.booking_status == '0' && event.user_id == event.recipient_id && startLesson > current) {
 
