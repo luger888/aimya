@@ -254,7 +254,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
                 $this->redirect($response['url']);
             } else {
-                $this->redirect('/payment');
+               // $this->redirect('/payment');
             }
         } else {
             $this->_helper->flashMessenger->addMessage(array('failure' => 'Problem with parameters'));
