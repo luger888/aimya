@@ -27,11 +27,11 @@ class BookingController extends Zend_Controller_Action
         $this->view->booking = $booking;
         $this->view->user_id = $identity->id;
         $this->view->role = $identity->role;
-        $userGmt = $userDbTable->getTimeZone($identity->id);
+        $userGmt = $userDbTable->getTimeZone($identity->id); //id
 
 
         $tzDbTable = new Application_Model_DbTable_TimeZones();
-        $tz = $tzDbTable->getTimezoneByGmt($userGmt['timezone']);
+        $tz = $tzDbTable->getItem($userGmt['timezone']);
 
         $dtzone = new DateTimeZone($tz['code']);
 
