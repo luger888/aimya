@@ -399,12 +399,13 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         $timezone = $data->query()->fetch();
 
         date_default_timezone_set('Europe/London');
+        $tzDbTable = new Application_Model_DbTable_TimeZones();
 
-        $separatedData = explode(':', $timezone['timezone']); //exploding HH: MM by ':'
-        $minutesInHours = $separatedData[0] * 60; // HH -> minutes
-        $minutesInDecimals = $separatedData[1]; // MM -> minutes
-        $totalMinutes = $minutesInHours + $minutesInDecimals; //converted timezone to minutes     (540)
-        $dateWithUTC = date("m/d/Y H:i:s", time() + (($totalMinutes) * 60) ); //adding timezone to current date
+        $tz = $tzDbTable->getItem($timezone['timezone']);
+        $dtzone = new DateTimeZone($tz['code']);
+        $dtime = new DateTime();
+        $dtime->setTimeZone($dtzone);
+        $dateWithUTC = $dtime->format("m/d/Y H:i:s");
 
         return  $dateWithUTC;
     }
