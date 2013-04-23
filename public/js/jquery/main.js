@@ -363,7 +363,7 @@ function payMoney(e) {
     $(e).parent().submit();
 }
 function startLesson(e) {
-
+    jQuery("body").append('<div class="loadingIcon"></div>');
     $(e).parent().submit();
 }
 //LESSONS
