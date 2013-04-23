@@ -57,7 +57,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                 }
 
                 $timezone = $timezoneTable->getItem($formData['timezone']);
-                $formData['timezone'] = $timezone['gmt'];
+                $formData['timezone'] = $timezone['id'];
                 $updateUser->updateUser($formData, $identity->id);
             } else {
                 $this->view->errors = $profileForm->getErrors();

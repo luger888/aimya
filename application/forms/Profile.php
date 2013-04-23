@@ -10,7 +10,6 @@ class Application_Form_Profile extends Zend_Form
         $identity =  Zend_Auth::getInstance()->getStorage()->read();
         $this->setName('profile');
         $this->setEnctype(Zend_Form::ENCTYPE_MULTIPART);
-        $idents = DateTimeZone::listIdentifiers();
         $timeZonesDbModel = new Application_Model_DbTable_TimeZones();
         $timeZones = $timeZonesDbModel->getTimeZones();//category from db
 
