@@ -82,8 +82,12 @@ class BookingController extends Zend_Controller_Action
                         $isBlocked = $friendsDb->isBlocked($this->getRequest()->getParam('recipient_id'));
                         if (!$isBlocked) {
                             $this->view->validation = 1;
+                            if ($identity->role == '1') {
+                                $this->view->role = 0;
+                            }else{
+                                $this->view->role = $this->getRequest()->getParam('is_sender_teacher');
+                            }
 
-                            $this->view->role = $this->getRequest()->getParam('is_sender_teacher');
                         } else {
                             $this->view->blocked = 1;
                         }
