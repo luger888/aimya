@@ -235,7 +235,7 @@ class Application_Model_Lesson
                 $starting_time = ($starting_time + $time  ) - $creator_tz ;
 
             }
-            $currentTimeUtc = strtotime('now'); //currentTime + UTC of user to UNIX stamp
+            $currentTimeUtc = gmmktime(); //currentTime + UTC of user to UNIX stamp
             $timeDifference = $starting_time - $currentTimeUtc;
             Zend_Debug::dump($dateWithUTC);
             Zend_Debug::dump($currentTimeUtc);
