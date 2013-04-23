@@ -212,14 +212,10 @@ class Application_Model_Lesson
 
         //TIME FORMATTING BY TIMEZONES BLOCK
         date_default_timezone_set('Europe/London');
-        $date = gmdate("m/d/Y H:i"); //current time in GMT 0
+        $userGmt = $userTable->getTimeZone($identity->id); //getting time zone 'id' of logged user
         $tzDbTable = new Application_Model_DbTable_TimeZones();
-        $userGmt = $userTable->getTimeZone($identity->id); //getting time zone of logged user
-        $userGmt =  $userGmt['timezone']; //exploding HH: MM by ':'
-        $tz = $tzDbTable->getTimezoneByGmt($userGmt);
-
+        $tz = $tzDbTable->getItem($userGmt['timezone']);
         $dtzone = new DateTimeZone($tz['code']);
-
         $dtime = new DateTime();
         $dtime->setTimeZone($dtzone);
         $time = $dtime->getOffset();
