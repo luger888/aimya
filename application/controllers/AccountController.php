@@ -386,7 +386,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
                 $timeZone = $userModel->getTimeZone();
                 $tzDbTable = new Application_Model_DbTable_TimeZones();
                 $timeZone =  $tzDbTable->getItem($timeZone['timezone']);
-                $person['timeZone'] = $timeZone['gmt'];
+                $person['timezone'] = $timeZone['gmt'];
                 $defaultRequestText = '';
                 $avatarPath = $profileModel->getAvatarPath($person['id'], 'medium');
                  $role = ($person['role'] == '1' ? 'Student' : 'Instructor');
