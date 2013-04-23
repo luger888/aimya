@@ -474,11 +474,11 @@ jQuery(document).ready(function () {
 
                             dateTime = new Date(dateTime * 1000);
 
-                console.log(dateTime + ' rec');
+
                         } else {//if current user is sender
                             dateTime = msg.booking[c].started_at;
                             dateTime = dateTime.replace(/-/g, '/');
-                            console.log(dateTime + ' rec');
+
 
                         }
                         events.push({
@@ -498,6 +498,7 @@ jQuery(document).ready(function () {
                             booking_id:msg.booking[c].id + "",
                             timezone_recipient:msg.timezone,
                             timezone_sender:msg.booking[c].creator_tz,
+                            current_time:msg.current_time,
                             user_id:msg.user_id,
                             allDay:false,
                             color:eventColor,
@@ -575,7 +576,8 @@ jQuery(document).ready(function () {
                 }
 
                 var current = new Date();
-                console.log(startLesson);
+
+                console.log(event.current_time);
                 console.log(current);
                 if (event.booking_status == '0' && event.user_id == event.recipient_id && startLesson > current) {
 
