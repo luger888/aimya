@@ -575,7 +575,8 @@ jQuery(document).ready(function () {
                 }
 
                 var current = new Date();
-
+                console.log(startLesson);
+                console.log(current);
                 if (event.booking_status == '0' && event.user_id == event.recipient_id && startLesson > current) {
 
                     element.find(".fc-event-content").append('<input type = "button"  id ="rejectBooking" onclick="rejectBooking(this)" value = "Reject"  class="fc-event-content-reject fc-button reject">');
