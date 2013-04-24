@@ -83,7 +83,7 @@ $controllerName = $front->getRequest()->getControllerName();
 
         </div>
         <div id="content" class="homePage clearfix">
-
+            <!-- Begin Official PayPal Seal --><div style= " float: right;position: absolute;right: -150px;"><a href="https://www.paypal.com/us/verified/pal=aimyallc%40gmail%2ecom" target="_blank"><img src="/images/logo/verification_seal.png" border="0" alt="Official PayPal Seal"></A><!-- End Official PayPal Seal --></div>
             <div class="messages clearfix">
                 <?php echo $this->flashMessages();?>
             </div><!--End messages-->
@@ -154,6 +154,7 @@ $controllerName = $front->getRequest()->getControllerName();
     <div class="copyright">
         <div>Copyright 2012 Aimya</div>
         <div>Created by <a href="#" title="Svitla Systems">Svitla.com</a></div>
+
         <ul class="footerNav">
 
             <li><a href="<?php echo $this->baseUrl() ?>/about.html"><?php echo $this->translate('about')?></a></li>
