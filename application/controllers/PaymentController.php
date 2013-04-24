@@ -1,9 +1,9 @@
 <?php
 class PaymentController extends Zend_Controller_Action implements Aimya_Controller_AccountInterface
 {
-    private $videoCost = 3;
-    private $notesCost = 2;
-    private $feedbackCost = 2;
+    private $videoCost = 2;
+    private $notesCost = 1;
+    private $feedbackCost = 1;
     private $subscriptionCost = 30;
 
     public function init()
