@@ -1,7 +1,9 @@
 $(document).ready(function () {
 
     $('#subscribe').click(function(){
-       console.log(5);
+      if($('#period option').checked){
+          return false;
+      }
     });
     $('#searchTip').tooltip({
         tooltipClass:'tooltip',
