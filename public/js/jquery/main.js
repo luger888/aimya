@@ -2,8 +2,8 @@ $(document).ready(function () {
 
     $('#subscribe').click(function(){
       if($('#period option:selected').val() == '0'){
-          $("#period").parent().parent().find('.error').remove();
-          $("#period").parent().after('<div class="error">Choose period</div>');
+          $("#period").parent().find('.error').remove();
+          $("#period").after('<div class="error">Choose period</div>');
           return false;
       }
     });
