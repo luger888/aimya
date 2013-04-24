@@ -553,6 +553,14 @@ jQuery(document).ready(function () {
                 } else {
                     feedbackActivity = 'passive'
                 }
+                var startLesson = event.started_at;
+                //startLesson = startLesson.replace(" ","T");
+                if (typeof(startLesson) == 'string') {
+                    startLesson = new Date(startLesson);
+                }
+
+                var current = new Date(event.current_time);
+
                 element.find(".fc-event-head").append('<div class ="fc-event-focusName">Focus name: "' + event.title + '"</div>');
 
 
@@ -569,13 +577,6 @@ jQuery(document).ready(function () {
                         element.find(".fc-event-content").append('<input type = "hidden" value = ' + event.recipient_id + '>');
                     }
                 }
-                var startLesson = event.started_at;
-                //startLesson = startLesson.replace(" ","T");
-                if (typeof(startLesson) == 'string') {
-                    startLesson = new Date(startLesson);
-                }
-
-                var current = new Date(event.current_time);
 
                 if (event.booking_status == '0' && event.user_id == event.recipient_id && startLesson > current) {
 
