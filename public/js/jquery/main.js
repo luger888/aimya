@@ -1,4 +1,8 @@
 $(document).ready(function () {
+
+    $('#subscribe').click(function(){
+       console.log(5);
+    });
     $('#searchTip').tooltip({
         tooltipClass:'tooltip',
         content: function() {
@@ -865,6 +869,7 @@ function sendRating(e) {
         }
     });
 }
+
 function refund() {
     var pathName = $('#current_url').val();
     $(function () {
