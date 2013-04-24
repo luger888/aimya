@@ -1,7 +1,8 @@
 $(document).ready(function () {
 
     $('#subscribe').click(function(){
-      if($('#period option').checked){
+      if($('#period option:selected').val() == '0'){
+        alert(0);
           return false;
       }
     });
