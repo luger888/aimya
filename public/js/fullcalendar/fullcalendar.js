@@ -3060,7 +3060,7 @@ function AgendaView(element, calendar, viewName) {
 				.appendTo(slotLayer);
 				
 		slotContent =
-			$("<div style='position:relative;width:100%;overflow:hidden'/>")
+			$("<div style='position:relative;width:100%'/>")
 				.appendTo(slotScroller);
 				
 		slotSegmentContainer =
