@@ -19,6 +19,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
     public function indexAction()
     {
         $userIdentity = Zend_Auth::getInstance()->getIdentity();
+        Zend_Debug::dump($userIdentity->role);die;
         if($userIdentity->role == 1){
             $this->redirect('/payment/upgrade');
         }
