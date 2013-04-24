@@ -18,14 +18,17 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
 
     public function indexAction()
     {
-        $userId = Zend_Auth::getInstance()->getIdentity()->id;
+        $userIdentity = Zend_Auth::getInstance()->getIdentity();
+        if($userIdentity->role == 1){
+            $this->redirect('/payment/upgrade');
+        }
         $emailForm = new Application_Form_PaypalEmail();
         $subscriptionForm = new Application_Form_Subscriptions();
 
         $profileTable = new Application_Model_DbTable_Profile();
-        $email = $profileTable->getPayPalEmail($userId);
+        $email = $profileTable->getPayPalEmail($userIdentity->id);
         if ($email) {
-            $this->view->emailForm = $emailForm->populate($profileTable->getPayPalEmail($userId));
+            $this->view->emailForm = $emailForm->populate($profileTable->getPayPalEmail($userIdentity->id));
         } else {
             $this->view->emailForm = $emailForm;
         }
