@@ -40,6 +40,7 @@ class BookingController extends Zend_Controller_Action
         $dtime = new DateTime();
         $dtime->setTimeZone($dtzone);
         $time = $dtime->getOffset();
+        Zend_Debug::dump($time);
         $this->view->timezone = $time;
 
 
