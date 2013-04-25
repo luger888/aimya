@@ -512,6 +512,7 @@ class AccountController extends Zend_Controller_Action implements Aimya_Controll
             $this->view->data = 'problem with mysql request';
         }
     }
+
     //curl
     public function curlcheckactivityAction()
     {

@@ -66,7 +66,7 @@ class Application_Plugin_Access extends Zend_Controller_Plugin_Abstract
         #allow to guest
         $acl->deny(self::GUEST , 'user', array('logout'));
         $acl->allow(self::GUEST , 'index', array('index'));
-        $acl->allow(self::GUEST , 'user', array('index','registration', 'login', 'confirmation', 'recovery', 'timezone', 'resend'));
+        $acl->allow(self::GUEST , 'user', array('index','registration', 'login', 'confirmation', 'recovery', 'timezone', 'resend', 'fb'));
         $acl->allow(self::GUEST , 'error', array('index'));
         $acl->allow(self::GUEST , 'test', array('index', 'paypal', 'response', 'responsenew'));
         $acl->allow(self::GUEST , 'payment', array('ipn', 'subsipn'));
