@@ -445,8 +445,7 @@ jQuery(document).ready(function () {
 
                         var start = msg.booking[c].started_at;
 
-                        start = start.replace(" ", "T");
-
+                        start = start.replace(/-/g, "/");
                         var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 
                         if (is_chrome) {
@@ -459,11 +458,12 @@ jQuery(document).ready(function () {
 
                             start = new Date(start);
 
+
                         }
                         var sender_utc = msg.booking[c].creator_tz; //unix-stamp
                         var recipient_utc = msg.timezone; //unix-stamp
                         var utc = recipient_utc - sender_utc;
-                            console.log(recipient_utc + ' rec_utc');
+
 //                        var time_zone = msg.booking[c].timezone - msg.booking[c].creator_tz;
 //                        var utc =  msg.booking[c].creator_tz.getTime() + ( msg.booking[c].creator_tz.getTimezoneOffset() * 60000);
 
@@ -471,7 +471,7 @@ jQuery(document).ready(function () {
                             var unixStamp = Math.round((start).getTime() / 1000);
 
                             var dateTime = unixStamp + utc;
-                            console.log(utc);
+
                             dateTime = new Date(dateTime * 1000);
 
 
@@ -481,7 +481,7 @@ jQuery(document).ready(function () {
 
 
                         }
-                        console.log(dateTime);
+
                         events.push({
                             title:msg.booking[c].focus_name,
                             start:dateTime,
@@ -751,7 +751,7 @@ jQuery(document).ready(function () {
                             }
                            var grossIncome = parseInt($('#rate').val())- costs;
                             var servicesString = choosenServices.join(', ');
-                            console.log(response.role);
+
                                 if(response.role == 0){
                                     $('#send-booking').prepend('<div class ="confirmationBookingForm"><p>From: You</p>' +
                                         '<p>To: ' + $('#recipiend_id option[value="' + $('#recipiend_id').val() + '"]').text() + '</p>'+
