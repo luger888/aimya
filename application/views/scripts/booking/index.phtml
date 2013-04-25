@@ -463,7 +463,7 @@ jQuery(document).ready(function () {
                         var sender_utc = msg.booking[c].creator_tz; //unix-stamp
                         var recipient_utc = msg.timezone; //unix-stamp
                         var utc = recipient_utc - sender_utc;
-
+                            console.log(recipient_utc + ' rec_utc');
 //                        var time_zone = msg.booking[c].timezone - msg.booking[c].creator_tz;
 //                        var utc =  msg.booking[c].creator_tz.getTime() + ( msg.booking[c].creator_tz.getTimezoneOffset() * 60000);
 
