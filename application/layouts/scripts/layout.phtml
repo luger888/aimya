@@ -18,6 +18,7 @@
     <?php $this->headScript()->appendFile('/js/jquery/jquery-ui-1.9.1.custom.min.js');?>
     <?php $this->headScript()->appendFile('/js/jquery/customCheckboxRadio.js');?>
     <?php $this->headScript()->appendFile('/js/jquery/cookieJquery.js');?>
+    <?php $this->headScript()->appendFile('/js/jquery/fb.js');?>
 
     <?php echo $this->headScript();?>
     <?php echo $this->headLink();?>
@@ -126,7 +127,7 @@ $controllerName = $front->getRequest()->getControllerName();
                         </div><!--End formRow-->
                         <div class="formRow buttonRow clearfix">
                             <div class="socialIcons clearfix">
-                                <a href="#" title="Follow Us on Facebook" class="facebook" target="_blank"></a>
+                                <a title="Facebook" class="facebook"  onclick="fb_login();"></a>
                                 <a href="#" title="Follow Us on Twitter" class="twitter" target="_blank"></a>
                                 <a href="#" title="Follow Us on Linked In" class="linkedin" target="_blank"></a>
                             </div><!--End socialIcons-->
