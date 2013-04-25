@@ -36,11 +36,10 @@ class BookingController extends Zend_Controller_Action
         $tz = $tzDbTable->getItem($userGmt['timezone']);
 
         $dtzone = new DateTimeZone($tz['code']);
-       // Zend_Debug::dump($dtzone) ;
+
         $dtime = new DateTime();
         $dtime->setTimeZone($dtzone);
         $time = $dtime->getOffset();
-        //Zend_Debug::dump($time);
         $this->view->timezone = $time;
 
 
