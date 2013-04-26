@@ -304,8 +304,11 @@ input.button {
 
 .socialIcons .linkedin {
     background-position: -58px 0;
-}
 
+}
+a[id*=li_ui_li_gen_]{
+    height:18px !important;
+}
 .socialIcons.inner .linkedin {
     background-position: -58px -38px;
 }

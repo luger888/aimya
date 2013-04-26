@@ -35,7 +35,15 @@
 $front = Zend_Controller_Front::getInstance();
 $controllerName = $front->getRequest()->getControllerName();
 ?>
-<!-- CONTENT -->
+<script type="text/javascript" src="http://platform.linkedin.com/in.js">
+     api_key: cf8kvfevx5af
+     //onLoad: onLinkedInLoad
+     authorize: true
+     scope: r_emailaddress
+     </script>
+<body>
+
+<!-- 3. Displays a button to let the viewer authenticate -->
 
 <div id="page" class="clearfix">
 <div id="globalWrapper" class="clearfix">
@@ -129,7 +137,8 @@ $controllerName = $front->getRequest()->getControllerName();
                             <div class="socialIcons clearfix">
                                 <a title="Facebook" class="facebook"  onclick="fb_login();"></a>
                                 <a href="#" title="Follow Us on Twitter" class="twitter" target="_blank"></a>
-                                <a href="#" title="Follow Us on Linked In" class="linkedin" target="_blank"></a>
+
+                                <a title="Follow Us on Linked In" id = "linkedin" class="linkedin" ></a>
                             </div><!--End socialIcons-->
                             <?php echo $this->reg['signup'];?>
                         </div><!--End formRow-->
@@ -167,7 +176,23 @@ $controllerName = $front->getRequest()->getControllerName();
 </div><!--End footer-->
 
 </div><!--End page-->
+<script type="text/javascript">
+    $("#linkedin").bind('click',function () {
 
+        IN.User.authorize();
+        return false;
+    });
+
+    IN.Event.on(IN, 'auth', function(){
+        /* your code here */
+//for instance
+
+        IN.API.Profile("me").fields("id,firstName,lastName,emailAddress,public-profile-url").result(function (me) {
+            var member = me.values[0];
+            console.log(member);
+        });
+    });
+    </script>
 
 
 </body>

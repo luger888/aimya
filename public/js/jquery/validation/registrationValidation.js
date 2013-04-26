@@ -4,7 +4,7 @@ $(document).ready(function() {
     //---Home page member buttons--------------------------------------------------------------------------------
 
     $('.memberButtons input:first').attr('checked', 'checked');
-
+//
 
     //---Styling radio and checkbox buttons--------------------------------------------------------------------------------
 
