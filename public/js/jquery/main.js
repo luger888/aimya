@@ -317,7 +317,7 @@ $(document).ready(function () {
         modal:true,
         resizable:false,
         close:function () {
-            $(this).remove();
+            $('.notesWindow').html('');
         }
     });
 
