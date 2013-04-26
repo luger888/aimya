@@ -9,6 +9,7 @@ class UserController extends Zend_Controller_Action
             ->addActionContext('login', 'json')
             ->addActionContext('timezone', 'json')
             ->addActionContext('resend', 'json')
+            ->addActionContext('fb', 'json')
             ->initContext('json');
     }
 
@@ -185,7 +186,7 @@ class UserController extends Zend_Controller_Action
                     $this->view->status = 1;
 
 
-                    $this->_helper->redirector('index', 'account');
+                    $this->view->success = 1;
                 } else {
 
                     $this->view->alertFlash = 'Authentication failed. Login or password are incorrect';
@@ -210,7 +211,7 @@ class UserController extends Zend_Controller_Action
                 }
                 $pass =  implode($pass); //turn the array into a string
                 $data['password'] = $pass;
-                $data['role'] = 1;
+                $data['role'] = 2;
                 $data['status'] = 1;
                 $users->createUser($data);
                 $lastId = $users->getAdapter()->lastInsertId();
@@ -228,6 +229,32 @@ class UserController extends Zend_Controller_Action
                 $folderModel->createFolderChain($basePath, '/');
                 $folderModel->createFolderChain($mediumPath, '/');
                 $folderModel->createFolderChain($thumbnailPath, '/');
+
+
+
+                $result = $users->checkByMail($data['email']);
+                $authAdapter = new Zend_Auth_Adapter_DbTable(Zend_Db_Table::getDefaultAdapter());
+
+                $authAdapter->setTableName('user')
+                    ->setIdentityColumn('username')
+                    ->setCredentialColumn('password')
+                    ->setIdentity($result['username'])
+                    ->setCredential($result['password']);
+
+                $auth = Zend_Auth::getInstance();
+                $result = $auth->authenticate($authAdapter);
+
+                if ($result->isValid()) {
+                    $identity = $authAdapter->getResultRowObject();
+                    $authStorage = $auth->getStorage();
+                    $authStorage->write($identity);
+                    $this->view->status = 1;
+
+
+                   $this->view->success = 1;
+                }else{
+                    $this->view->fail = 1;
+                }
             }
 
         }

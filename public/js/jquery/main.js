@@ -317,7 +317,7 @@ $(document).ready(function () {
         modal:true,
         resizable:false,
         close:function () {
-
+            $(this).remove();
         }
     });
 
@@ -627,6 +627,7 @@ function getVideo(e, id) {
                     var id = parent.find('input[type=hidden]').val();
                     $("#notes-dialog").dialog({
                         width:546
+
                     });
                     var focusName = parent.find('.focus');
                     var dateLesson = parent.find('.date');

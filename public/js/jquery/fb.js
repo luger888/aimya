@@ -92,7 +92,9 @@ function fb_login() {
                             data: response
                         },
                         success: function (result) {
-
+                            if( result.success == 1){
+                                window.location.href = baseUrl + "/account/features";
+                            }
                         }
                     }
                 );
