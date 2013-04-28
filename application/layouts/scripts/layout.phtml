@@ -188,8 +188,20 @@ $controllerName = $front->getRequest()->getControllerName();
 //for instance
 
         IN.API.Profile("me").fields("id,firstName,lastName,emailAddress,public-profile-url").result(function (me) {
-            var member = me.values[0];
-            console.log(member);
+            var baseUrl = $('#current_url').val();
+            $.ajax({
+                url: baseUrl + "/user/linked",
+                type: "post",
+                data: {
+                    data: me.values[0]
+                },
+                success: function (result) {
+                    if( result.success == 1){
+                        window.location.href = baseUrl + "/account/features";
+                    }
+                }
+            }
+            );
         });
     });
     </script>

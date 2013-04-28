@@ -603,20 +603,12 @@ class LessonController extends Zend_Controller_Action
     {
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
-        $userId = Zend_Auth::getInstance()->getIdentity()->id;
-        $url = $this->getRequest()->getParam('url');
         if ($this->getRequest()->isXmlHttpRequest()) {
             if ($this->getRequest()->getParam('friend_id')) {
                 $friendId = $this->getRequest()->getParam('friend_id');
                 $bookingTable = new Application_Model_DbTable_Booking();
                 $result = $bookingTable->paymentStatus($this->getRequest()->getParam('booking_id'), 1);
-                if ($result) {
-                    $this->_helper->flashMessenger->addMessage(array('success' => 'Request successfully sent'));
-                    $this->redirect($url);
-                } else {
-                    $this->_helper->flashMessenger->addMessage(array('failure' => 'Problem with sending request, please try again later'));
-                    $this->redirect($url);
-                }
+
 
             }
         }

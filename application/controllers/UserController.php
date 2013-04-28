@@ -163,9 +163,13 @@ class UserController extends Zend_Controller_Action
     public function fbAction()
     {
         if ($this->getRequest()->isPost()) {
+
             $users = new Application_Model_DbTable_Users();
             $data = $this->getRequest()->getParam('data');
+
+
             $result = $users->checkByMail($data['email']);
+
             if($result == true){                        //LOGIN
 
                 $authAdapter = new Zend_Auth_Adapter_DbTable(Zend_Db_Table::getDefaultAdapter());
@@ -192,6 +196,7 @@ class UserController extends Zend_Controller_Action
                     $this->view->alertFlash = 'Authentication failed. Login or password are incorrect';
                 }
             }else{//registration\
+
                 $profile = new Application_Model_DbTable_Profile();
                 $onlineUser = new Application_Model_DbTable_OnlineUsers();
                 $dbAvailability = new Application_Model_DbTable_Availability();
@@ -200,7 +205,7 @@ class UserController extends Zend_Controller_Action
                 unset($data['first_name']);
                 $data['lastname'] = $data['last_name'];
                 unset($data['last_name']);
-
+                unset($data['timezone']);
 
                 $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
                 $pass = array(); //remember to declare $pass as an array
@@ -252,6 +257,111 @@ class UserController extends Zend_Controller_Action
 
 
                    $this->view->success = 1;
+                }else{
+                    $this->view->fail = 1;
+                }
+            }
+
+        }
+    }
+    public function linkedAction()
+    {
+        if ($this->getRequest()->isPost()) {
+
+            $users = new Application_Model_DbTable_Users();
+            $data = $this->getRequest()->getParam('data');
+
+            $result = $users->checkByMail($data['emailAddress']);
+
+            if($result == true){                        //LOGIN
+
+                $authAdapter = new Zend_Auth_Adapter_DbTable(Zend_Db_Table::getDefaultAdapter());
+
+                $authAdapter->setTableName('user')
+                    ->setIdentityColumn('username')
+                    ->setCredentialColumn('password')
+                    ->setIdentity($result['username'])
+                    ->setCredential($result['password']);
+
+                $auth = Zend_Auth::getInstance();
+                $result = $auth->authenticate($authAdapter);
+
+                if ($result->isValid()) {
+                    $identity = $authAdapter->getResultRowObject();
+                    $authStorage = $auth->getStorage();
+                    $authStorage->write($identity);
+                    $this->view->status = 1;
+
+
+                    $this->view->success = 1;
+                } else {
+
+                    $this->view->alertFlash = 'Authentication failed. Login or password are incorrect';
+                }
+            }else{//registration\
+
+                $profile = new Application_Model_DbTable_Profile();
+                $onlineUser = new Application_Model_DbTable_OnlineUsers();
+                $dbAvailability = new Application_Model_DbTable_Availability();
+                $dbNotifications  = new Application_Model_DbTable_Notifications();
+                $data['firstname'] = $data['firstName'];
+                $data['email'] = $data['emailAddress'];
+                $data['lastname'] = $data['lastName'];
+                unset($data['firstName']);
+                unset($data['lastName']);
+
+                $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
+                $pass = array(); //remember to declare $pass as an array
+                $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+                for ($i = 0; $i < 8; $i++) {
+                    $n = rand(0, $alphaLength);
+                    $pass[] = $alphabet[$n];
+                }
+                $pass =  implode($pass); //turn the array into a string
+                $data['password'] = $pass;
+                $data['username'] = $data['id'];
+                $data['role'] = 2;
+                $data['gender'] = 'male';
+                $data['status'] = 1;
+                $users->createUser($data);
+                $lastId = $users->getAdapter()->lastInsertId();
+                $profile->createProfile($lastId);
+
+                $onlineUser->createLine($lastId);
+
+                $dbAvailability->createAvailability($lastId);
+                $dbNotifications->createNotifications($lastId);
+
+                $folderModel = new Application_Model_Folder();
+                $basePath = '/img/uploads/' . $lastId . '/avatar/base/';
+                $mediumPath = '/img/uploads/' . $lastId . '/avatar/medium/';
+                $thumbnailPath = '/img/uploads/' . $lastId . '/avatar/thumbnail/';
+                $folderModel->createFolderChain($basePath, '/');
+                $folderModel->createFolderChain($mediumPath, '/');
+                $folderModel->createFolderChain($thumbnailPath, '/');
+
+
+
+                $result = $users->checkByMail($data['emailAddress']);
+                $authAdapter = new Zend_Auth_Adapter_DbTable(Zend_Db_Table::getDefaultAdapter());
+
+                $authAdapter->setTableName('user')
+                    ->setIdentityColumn('username')
+                    ->setCredentialColumn('password')
+                    ->setIdentity($result['username'])
+                    ->setCredential($result['password']);
+
+                $auth = Zend_Auth::getInstance();
+                $result = $auth->authenticate($authAdapter);
+
+                if ($result->isValid()) {
+                    $identity = $authAdapter->getResultRowObject();
+                    $authStorage = $auth->getStorage();
+                    $authStorage->write($identity);
+                    $this->view->status = 1;
+
+
+                    $this->view->success = 1;
                 }else{
                     $this->view->fail = 1;
                 }

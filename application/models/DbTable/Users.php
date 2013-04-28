@@ -9,12 +9,12 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
     public function checkByMail($email)
     {
-
         $data = $this->select()
-            ->from('user', array('id', 'username', 'firstname', 'lastname', 'password', 'email'))
+            ->from($this->_name, array('id', 'username', 'firstname', 'lastname', 'password', 'email'))
             ->where('email=?', $email);
 
         return $data->query()->fetch();
+
 
     }
 
@@ -254,10 +254,11 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
     public function setDefaultTimezone($timezone)
     {
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
+        $timezoneDb = new Application_Model_DbTable_TimeZones();
+        $timezone = $timezoneDb->getTimezoneByGmt($timezone);
         $data = array(
-            'timezone' => preg_replace('#<(.*?)>#', '', $timezone),
+            'timezone' => preg_replace('#<(.*?)>#', '', $timezone['id']),
         );
-
         $where = $this->getAdapter()->quoteInto('id = ?', (int)$userId);
         $result = $this->update($data, $where);
 
