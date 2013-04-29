@@ -17,7 +17,12 @@
 
                 $url = "'{$this->baseUrl()}/account/edit'";
                 if ($this->friends) {
+                    $tzDbTable = new Application_Model_DbTable_TimeZones();
+
                     foreach ($this->friends as $value) {
+
+                $timeZone =  $tzDbTable->getItem($value['timezone']);
+                $userData['timezone'] = $timeZone['gmt'];
                         if ($value['role'] == '1') {
                             $role = 'Student';
                         } else {
@@ -31,7 +36,7 @@
         <td>' . $value['lastname'] . '</td>
         <td><a href="'.$this->baseUrl().'/user/'.$value['id'].'">' . $value['username'] . '</a></td>
         <td>' . $role . '</td>
-        <td>UTC ' . $value['timezone'] . '</td>
+        <td>UTC ' . $userData['timezone'] . '</td>
         <td><input type = "button" value="BLOCK" class = "button-2 block"  onclick ="blockUser(this, ' . $url . ');return false;"></div><input type = "button" value = "remove" class="button-2 delete" onclick="deleteUser(this, ' . $url . ');return false;"></div><input type = "hidden" value = ' . $value['id'] . '></td>
     </tr>';
                         }else{
