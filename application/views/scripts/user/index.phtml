@@ -56,7 +56,10 @@ if ($this->userData['role'] == '1') {
 
     <div class="userProfileRightBlock">
 
-        <?php $userData = $this->userData; ?>
+        <?php $userData = $this->userData;
+        $tzDbTable = new Application_Model_DbTable_TimeZones();
+        $timeZone =  $tzDbTable->getItem($userData['timezone']);
+        $userData['timezone'] = $timeZone['gmt'];?>
         <?php $friendTable = new Application_Model_DbTable_Friends(); ?>
         <?php $isFriend = $friendTable->isFriend($userData['id']); ?>
         <?php $isInList = $friendTable->isInList($userData['id']); ?>
@@ -83,7 +86,7 @@ if ($this->userData['role'] == '1') {
         <?php endif; ?>
 
         <div class="timezone"><?php echo $this->translate('time zone') ?>
-            : <?php echo $this->userData['timezone']?><?php echo $this->translate('UTC') ?></div>
+            : <?php echo $userData['timezone']?><?php echo $this->translate('UTC') ?></div>
     </div>
 </div>
 <div class="middleSeparator"></div>
