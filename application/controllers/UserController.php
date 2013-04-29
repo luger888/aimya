@@ -10,6 +10,7 @@ class UserController extends Zend_Controller_Action
             ->addActionContext('timezone', 'json')
             ->addActionContext('resend', 'json')
             ->addActionContext('fb', 'json')
+            ->addActionContext('linked', 'json')
             ->initContext('json');
     }
 
