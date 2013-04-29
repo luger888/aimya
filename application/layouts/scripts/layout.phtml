@@ -183,7 +183,7 @@ $controllerName = $front->getRequest()->getControllerName();
         return false;
     });
 
-    IN.Event.on(IN, 'auth', function(){
+    IN.Event.onOnce(IN, 'auth', function(){
         /* your code here */
 //for instance
 
