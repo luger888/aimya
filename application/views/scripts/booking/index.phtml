@@ -381,6 +381,10 @@ jQuery(document).ready(function () {
     $('#recipiend_id').change(function () {
         if ($("#recipiend_id option:selected").hasClass('2') || $("#recipiend_id option:selected").hasClass('3')) {
             $('.isTeacher').css('display', 'block');
+            if(!$('#teacher-2').parent().hasClass('checked')){
+                $('#teacher-1').parent().addClass('checked');
+            }
+
         } else {
             $('.isTeacher').css('display', 'none');
         }
@@ -814,6 +818,7 @@ jQuery(document).ready(function () {
         return false;
     });
     $('#bookLesson').click(function () {
+
         $.post(
 
                 pathName + "/user/timezone/0/controller%3D%3Euser/1/action%3D%3Etimezone", {
