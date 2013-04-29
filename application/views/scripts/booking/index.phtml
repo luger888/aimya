@@ -620,11 +620,11 @@ jQuery(document).ready(function () {
             $('#dialog-form .checkboxWrapper').removeClass('checked');
         }
     });
-    var oldDateObj = new Date();
-    var today = new Date(oldDateObj.getTime() + 10 * 60000);
+    var current_time = "<?php echo $this->current_time;?>";
+
 
     $('#started_at').datepicker({
-        minDate:today
+        minDate:current_time
     });
 
     $('#sendBooking').click(function () {/* CLICKING ON SEND BOOKING BUTTON*/
@@ -824,14 +824,14 @@ jQuery(document).ready(function () {
                     var currentDate = new Date(response.time);
 
                     var currentTime = new Date(currentDate.getTime() + 10 * 60000);
-
                     $(function () {
                         $('#started_at_time').timeEntry({show24Hours:true, spinnerImage:'', noSeparatorEntry:true});
                         $('#started_at').change(function () {
-                            var oldDateObj = new Date();
-                            var today = oldDateObj.getDate();
+                            var current_time = new Date("<?php echo $this->current_time;?>");
+                            var today = current_time.getDate();
                             var choosenDate = new Date($('#started_at').val()).getDate();
-
+                            console.log(today);
+                            console.log(choosenDate);
                             if (choosenDate == today) {
 
                                 $('#started_at_time').timeEntry('option', {minTime:currentTime});

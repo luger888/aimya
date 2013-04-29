@@ -77,16 +77,16 @@
                         <?php endif;?>
 
                         <!--CASE: PAY BUTTON-->
-                        <?php if (isset($booking['booking']['pay'])): ?>
-                        <form method="POST" id='pay_<?php echo $booking['booking']['id'];?>'
-                              action="<?php echo $this->baseUrl() . '/payment/pay/'?>">
-                            <input name="teacher_id" type="hidden" value="<?php echo $booking['userData']['id'];?>">
-                            <input name="booking_id" type="hidden" value="<?php echo $booking['booking']['id'];?>">
-                            <a href="#" id="<?php echo $booking['userData']['id'];?>"
-                               onclick="jQuery('#pay_<?php echo $booking['booking']['id'];?>').submit()"><span
-                                class="button-2 play">Pay</span></a>
-                        </form>
-                        <?php endif;?>
+<!--                        --><?php //if (isset($booking['booking']['pay'])): ?>
+<!--                        <form method="POST" id='pay_--><?php //echo $booking['booking']['id'];?><!--'-->
+<!--                              action="--><?php //echo $this->baseUrl() . '/payment/pay/'?><!--">-->
+<!--                            <input name="teacher_id" type="hidden" value="--><?php //echo $booking['userData']['id'];?><!--">-->
+<!--                            <input name="booking_id" type="hidden" value="--><?php //echo $booking['booking']['id'];?><!--">-->
+<!--                            <a href="#" id="--><?php //echo $booking['userData']['id'];?><!--"-->
+<!--                               onclick="jQuery('#pay_--><?php //echo $booking['booking']['id'];?><!--').submit()"><span-->
+<!--                                class="button-2 play">Pay</span></a>-->
+<!--                        </form>-->
+<!--                        --><?php //endif;?>
                         <?php if (isset($booking['booking']['waiting'])): ?>
                         <span class="result">reservation made</span>
                         <?php endif;?>
