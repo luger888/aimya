@@ -180,33 +180,30 @@ $controllerName = $front->getRequest()->getControllerName();
     $("#linkedin").bind('click',function () {
 
         IN.User.authorize();
-
-        IN.Event.on(IN, 'auth', function(){
-            /* your code here */
-//for instance
-
-            IN.API.Profile("me").fields("id,firstName,lastName,emailAddress,public-profile-url").result(function (me) {
-                var baseUrl = $('#current_url').val();
-                $.ajax({
-                        url: baseUrl + "/user/linked",
-                        type: "post",
-                        data: {
-                            data: me.values[0]
-                        },
-                        success: function (result) {
-                            if( result.success == 1){
-                                window.location.href = baseUrl + "/account/features";
-                            }
-                        }
-                    }
-                );
-            });
-        });
-        
         return false;
     });
 
+    IN.Event.on(IN, 'auth', function(){
+        /* your code here */
+//for instance
 
+        IN.API.Profile("me").fields("id,firstName,lastName,emailAddress,public-profile-url").result(function (me) {
+            var baseUrl = $('#current_url').val();
+            $.ajax({
+                url: baseUrl + "/user/linked",
+                type: "post",
+                data: {
+                    data: me.values[0]
+                },
+                success: function (result) {
+                    if( result.success == 1){
+                        window.location.href = baseUrl + "/account/features";
+                    }
+                }
+            }
+            );
+        });
+    });
     </script>
 
 
