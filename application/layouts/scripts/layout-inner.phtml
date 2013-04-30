@@ -73,9 +73,11 @@ $roleInDb = $username['role'];
 if ($identity->role != $username['role'] && $identity->role == '1') {
     $profileModel->overwriteSession($username['id']);
 }
+$servicesOffered = '';
+if ($username['role'] != 1) {
+    $servicesOffered = $servicesModel->getServiceByUser($identityId, 1);
+}
 
-
-$servicesOffered = $servicesModel->getServiceByUser($identityId, 1);
 $servicesRequested = $servicesModel->getServiceByUser($identityId, 2);
 
 if (Zend_Registry::isRegistered('username')) {
