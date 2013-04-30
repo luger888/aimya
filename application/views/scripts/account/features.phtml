@@ -84,6 +84,8 @@
                         </li>
 
                         <?php if (count($person['service_offered']) > 0): ?>
+                            <?php if ($person['role'] != 1):?>
+
                         <li class="clearfix">
                             <span class="title"><?php echo $this->translate('Service offered') ?>:</span>
 
@@ -98,6 +100,7 @@
                                 ?>
                             </div>
                         </li>
+                            <?php endif; ?>
                         <?php endif; ?>
                         <?php if (count($person['service_requested']) > 0): ?>
                         <li class="clearfix">
