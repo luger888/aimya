@@ -258,7 +258,7 @@ if($userGmt['timezone'] != ''){
 ?>
 <script>
     var now = moment.unix(<?php echo $time;?>);
-    now=now.add('hours', 2);
+    now=now.add('hours', 1);
              function update(){
 
                  $('#clock').text(now.add('seconds', 1).utc().format('HH:mm:ss'));
