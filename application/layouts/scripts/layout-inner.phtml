@@ -43,14 +43,7 @@ $identity = Zend_Auth::getInstance()->getStorage()->read();
 $userDbTable = new Application_Model_DbTable_Users();
 $userGmt = $userDbTable->getTimeZone($identity->id);
 $tzDbTable = new Application_Model_DbTable_TimeZones();
-if($userGmt['timezone'] != ''){
-    $tz = $tzDbTable->getItem($userGmt['timezone']);
-    $dtzone = new DateTimeZone($tz['code']);
-    $dtime = new DateTime();
-    $dtime->setTimeZone($dtzone);
-    $time2 = $dtime->format('H:i');
-    $time = strtotime($dtime);
-}
+
 //information in left block of account:
 //  firstname, lastname, avatar, member since, services
 
@@ -251,12 +244,25 @@ if (Zend_Registry::isRegistered('username')) {
         getTimeLeft();
     </script>
 <?php endif;?>
+<?php
+
+if($userGmt['timezone'] != ''){
+    $tz = $tzDbTable->getItem($userGmt['timezone']);
+    $dtzone = new DateTimeZone($tz['code']);
+    $dtime = new DateTime();
+    $dtime->setTimeZone($dtzone);
+    $time2 = $dtime->format('Y:m:d H:i:s');
+//    2008:08:07 18:11:31
+    $time = strtotime($time2);
+}
+?>
 <script>
+    var now = moment.unix(<?php echo $time;?>);
+    now=now.add('hours', 2);
              function update(){
-                 $('#clock').text(moment(<?php echo $time;?>).format('HH:mm:ss'));
 
+                 $('#clock').text(now.add('seconds', 1).utc().format('HH:mm:ss'));
             };
-
         update();
         setInterval(update, 1000);
 </script>
