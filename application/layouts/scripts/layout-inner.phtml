@@ -22,6 +22,7 @@
     <?php $this->headScript()->appendFile('/js/jquery/jquery.uploadifive.js');?>
     <?php $this->headScript()->appendFile('/js/jquery/jquery.raty.js');?>
     <?php $this->headScript()->appendFile('/js/jquery/main.js');?>
+    <?php $this->headScript()->appendFile('/js/jquery/moment.js');?>
     <?php $this->headScript()->appendFile('/js/jquery/jquery.timeentry.min.js');?>
     <?php $this->headScript()->appendFile('/flash/swfobject.js');?>
 
@@ -48,13 +49,8 @@ if($userGmt['timezone'] != ''){
     $dtime = new DateTime();
     $dtime->setTimeZone($dtzone);
     $time2 = $dtime->format('H:i');
-    $time = strtotime($time2);
+    $time = strtotime($dtime);
 }
-
-
-
-
-
 //information in left block of account:
 //  firstname, lastname, avatar, member since, services
 
@@ -92,33 +88,12 @@ if (Zend_Registry::isRegistered('username')) {
     Zend_Registry::set('username', $username);
 }
 ?>
-<!--<script type="text/javascript">-->
-<!--    <!---->
-<!---->
-<!--    function updateClock() {-->
-<!--        var startTime2 = '--><?php //echo $time2;?><!--';-->
-<!--        var startTime = --><?php //echo $time;?><!--;-->
-<!--        var date = new Date(startTime*1000);-->
-<!--        var hours = date.getUTCHours();-->
-<!--        var minutes = date.getUTCMinutes();-->
-<!---->
-<!--        var formattedTime = hours + ':' + minutes;-->
-<!--        document.getElementById("clock").firstChild.nodeValue = formattedTime;-->
-<!--    }-->
-<!---->
-<!--    // -->-->
-<!--</script>-->
+
 <div id="leftBg"></div>
 <div id="page" class="clearfix">
 
     <div id="globalWrapper" class="clearfix">
-        <div class="currentTime floatRight">Your Aimya time: <span id="clock"><?php
-                if(isset($time2))
-                {
-                    echo $time2;
-                }
-
-                ?></span></div>
+        <div class="currentTime floatRight">Your Aimya time: <span id="clock"></span></div>
         <div id="wrapper" class="clearfix">
 
             <div id="header" class="clearfix">
@@ -276,6 +251,14 @@ if (Zend_Registry::isRegistered('username')) {
         getTimeLeft();
     </script>
 <?php endif;?>
+<script>
+             function update(){
+                 $('#clock').text(moment(<?php echo $time;?>).format('HH:mm:ss'));
 
+            };
+
+        update();
+        setInterval(update, 1000);
+</script>
 </body>
 </html>
