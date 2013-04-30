@@ -36,6 +36,7 @@ class MessageController extends Zend_Controller_Action
         }
         $this->view->messageActions = $messageActionsForm;
         $this->view->messages = $messages;
+        date_default_timezone_set('Europe/London');
     }
 
     public function sendAction()
