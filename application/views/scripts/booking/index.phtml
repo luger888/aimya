@@ -482,6 +482,7 @@ jQuery(document).ready(function () {
                             started_at:dateTime,
                             recipient_id:msg.booking[c].recipient_id,
                             booking_status:msg.booking[c].booking_status,
+                            payment_status:msg.booking[c].payment_status,
                             add_info:msg.booking[c].add_info,
                             rate:msg.booking[c].rate,
                             duration:msg.booking[c].duration,
@@ -586,10 +587,15 @@ jQuery(document).ready(function () {
 
                     element.find(".fc-event-content").append('<div class="fc-event-content-approve pending"><span>Pending</span></div>');
                 } else {
+                    if(event.payment_status !='2' && event.booking_status !='1' && startLesson < current)
+                    {
+                        element.find(".fc-event-content").append('<input type = "button"  id ="removetBooking" onclick="removeBooking(this)" value = "Remove"  class="fc-event-content-reject fc-button cancel">');
+                        element.find(".fc-event-content").append('<input type = "hidden" id = "booking_id"  value = ' + event.booking_id + ' >');
+                        element.find(".fc-event-content").append('<div class="fc-event-content-approve pending"><span>Expired</span></div>');
+                    }else{
 
-                    element.find(".fc-event-content").append('<input type = "button"  id ="removetBooking" onclick="removeBooking(this)" value = "Remove"  class="fc-event-content-reject fc-button cancel">');
-                    element.find(".fc-event-content").append('<input type = "hidden" id = "booking_id"  value = ' + event.booking_id + ' >');
-                    element.find(".fc-event-content").append('<div class="fc-event-content-approve pending"><span>Expired</span></div>');
+                    }
+
 
                 }
                 if (event.user_id != event.is_cancel && event.is_cancel != '0') {
