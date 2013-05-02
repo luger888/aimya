@@ -39,7 +39,10 @@
 
                 <tbody>
                 <?php foreach ($studentLessons as $lesson): ?>
-                    <?php $date = substr($lesson['started_at'], 0, 10);
+
+                    <?php if($lesson['focus_name']):?>
+                <?php
+                    $date = substr($lesson['started_at'], 0, 10);
                     $time = substr($lesson['started_at'], 10);
                     $feedback = $feedbackTable->getFeedbackByLesson($lesson['id']);
                     ?>
@@ -73,6 +76,7 @@
                         <?php endif;?>
                     </td>
                 </tr>
+                <?php endif; ?>
                     <?php endforeach; ?>
 
 
