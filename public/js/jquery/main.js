@@ -645,6 +645,14 @@ function getVideo(e, id) {
                         $('#starsBlock').remove();
                         $('.rate').remove();
                     }
+                    if(!result.isTeacher && !result.rate){
+                        $('#dialogFooter').html('<div class ="timeLeft">You have <span class ="timeLeftSpan"></span>days left to rate this lesson!</div>' +
+                            '<div class ="rate cc">rate lesson:</div>'+
+                            '<div id ="starsBlock">'+
+                            '</div>'+
+                            '<div class ="comment cc">comment:<input class ="rateInput" type ="text"></div>'+
+                            '<div> <input type = "button" id = "sendRating" class ="button floatRight" value ="OK" onClick="sendRating(this);"></div>');
+                    }
                     if (result.rate) {
                         $('#sendRating').remove();
                         $('.timeLeft').remove();
@@ -739,8 +747,7 @@ function getNotes(e, id) {
                     $('#starsBlock').remove();
                     $('.rate').remove();
                 }
-                console.log(result.isTeacher);
-                console.log(result.rate);
+
                 if(!result.isTeacher && !result.rate){
                     $('#dialogFooter').html('<div class ="timeLeft">You have <span class ="timeLeftSpan"></span>days left to rate this lesson!</div>' +
                     '<div class ="rate cc">rate lesson:</div>'+
