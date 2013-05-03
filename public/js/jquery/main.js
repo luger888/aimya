@@ -719,12 +719,11 @@ function getNotes(e, id) {
             jQuery('.loadingIcon').remove();
             if (result.notes) {
                 $("#notes-dialog").dialog("open");
-console.log(result);
+
                 $('.notesWindow').html(result.notes);
                 var parent = $(e).parents('tr');
                 var id = parent.find('input[type=hidden]').val();
                 $('.notesWindow').css('overflow', 'visible');
-                $('.notesWindow').css('height', 'auto');
                 var focusName = parent.find('.focus');
                 var dateLesson = parent.find('.date');
                 $('.focusDialog').html('Focus: ' + focusName.text());
@@ -739,6 +738,14 @@ console.log(result);
                     $('.comment').remove();
                     $('#starsBlock').remove();
                     $('.rate').remove();
+                }
+                if(!result.isTeacher && !result.rate){
+                    $('#dialogFooter').html('<div class ="timeLeft">You have <span class ="timeLeftSpan"></span>days left to rate this lesson!</div>' +
+                    '<div class ="rate cc">rate lesson:</div>'+
+                        '<div id ="starsBlock">'+
+                        '</div>'+
+                            '<div class ="comment cc">comment:<input class ="rateInput" type ="text"></div>'+
+                                '<div> <input type = "button" id = "sendRating" class ="button floatRight" value ="OK" onClick="sendRating(this);"></div>');
                 }
                 if (result.rate) {
                     $('#sendRating').remove();
