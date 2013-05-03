@@ -318,7 +318,7 @@ $(document).ready(function () {
         resizable:false,
         close:function () {
             $('.notesWindow').html('');
-            
+
         }
     });
 
@@ -719,11 +719,12 @@ function getNotes(e, id) {
             jQuery('.loadingIcon').remove();
             if (result.notes) {
                 $("#notes-dialog").dialog("open");
-
+console.log(result);
                 $('.notesWindow').html(result.notes);
                 var parent = $(e).parents('tr');
                 var id = parent.find('input[type=hidden]').val();
                 $('.notesWindow').css('overflow', 'visible');
+                $('.notesWindow').css('height', 'auto');
                 var focusName = parent.find('.focus');
                 var dateLesson = parent.find('.date');
                 $('.focusDialog').html('Focus: ' + focusName.text());
