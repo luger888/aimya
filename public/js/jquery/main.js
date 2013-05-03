@@ -723,7 +723,7 @@ function getNotes(e, id) {
                 $('.notesWindow').html(result.notes);
                 var parent = $(e).parents('tr');
                 var id = parent.find('input[type=hidden]').val();
-                $('.notesWindow').css('overflow', 'visible');
+                $('.notesWindow').removeAttr('style');
                 var focusName = parent.find('.focus');
                 var dateLesson = parent.find('.date');
                 $('.focusDialog').html('Focus: ' + focusName.text());
