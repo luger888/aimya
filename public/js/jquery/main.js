@@ -647,7 +647,7 @@ function getVideo(e, id) {
                     }
                     console.log(result.isTeacher);
                     console.log(result.rate);
-                    if(result.isTeacher !='1' && !result.rate){
+                    if(result.isTeacher ==null && result.rate==null){
                         $('#dialogFooter').html('<div class ="timeLeft">You have <span class ="timeLeftSpan"></span>days left to rate this lesson!</div>' +
                             '<div class ="rate cc">rate lesson:</div>'+
                             '<div id ="starsBlock">'+
