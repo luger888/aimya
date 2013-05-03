@@ -783,8 +783,12 @@ jQuery(document).ready(function () {
                     }
                     else if (response.blocked == 1) {
                         jQuery('.loadingIcon').remove();
-                        alert('You have been blocked. You can\'t book him! ')
-                    } else if (response.success == 0 && response.fail != 1) {
+                        alert('You have been blocked. You can\'t book him! ');
+                    } else if(response.emailerror == 1){
+                        jQuery('.loadingIcon').remove();
+                        alert('You have no paypal email. You should fill the information in Accounts/Payments.');
+                    }
+                    else if (response.success == 0 && response.fail != 1) {
                         jQuery('.loadingIcon').remove();
                         $('#booking').find('.error').remove();
 
@@ -879,7 +883,10 @@ function confirmBooking(e) {
                     $(e).parent().append('<div class="fc-event-content-approve"><span>Approved</span></div>');
                     $(e).parents('.fc-event').find('.fc-event-content-reject').remove();
                     $(e).parents('.fc-event').find('.fc-event-content-confirm').remove();
-                } else {
+                } else if(response.emailerror){
+                    alert('You have no paypal email. You should fill the information in Accounts/Payments.');
+                }
+                else {
                     alert('You already  approved lesson on this time!')
                 }
 

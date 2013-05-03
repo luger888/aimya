@@ -72,6 +72,7 @@ class BookingController extends Zend_Controller_Action
         $identity = Zend_Auth::getInstance()->getIdentity();
         $userDbTable = new Application_Model_DbTable_Users();
         $bookingDbTable = new Application_Model_DbTable_Booking();
+        $profileDbTable = new Application_Model_DbTable_Profile();
         $friendsDb = new Application_Model_DbTable_Friends();
         if ($this->getRequest()->isPost()) {
             if ($this->getRequest()->getParam('validation')) {
@@ -81,7 +82,14 @@ class BookingController extends Zend_Controller_Action
                     if (!$isExist) {
                         $isBlocked = $friendsDb->isBlocked($this->getRequest()->getParam('recipient_id'));
                         if (!$isBlocked) {
-                            $this->view->validation = 1;
+                            $isExistPaypalEmail = $profileDbTable->getPayPalEmail($identity->id);
+                            if($this->getRequest()->getParam('is_sender_teacher') == '1' && $isExistPaypalEmail['paypal_email'] == '' && $identity->role != '1'){
+                                $this->view->emailerror = 1;
+                                $this->view->check = $this->getRequest()->getParam('is_sender_teacher');
+                            }else{
+                                $this->view->validation = 1;
+                            }
+
                             if ($identity->role == '1') {
                                 $this->view->role = 0;
                             }else{
@@ -137,9 +145,17 @@ class BookingController extends Zend_Controller_Action
             if ($this->getRequest()->getParam('booking_id')) {
                 $isExist = $bookingDbTable->isExistBooking($this->getRequest()->getParam('booking_id'), $identity->id);
                 if (!$isExist) {
-                    $bookingDbTable = new Application_Model_DbTable_Booking();
-                    $bookingDbTable->approveBooking($this->getRequest()->getParam('booking_id'), $identity->id);
-                    $this->view->approved = 1;
+                    $profileDbTable = new Application_Model_DbTable_Profile();
+                    $isExistPaypalEmail = $profileDbTable->getPayPalEmail($identity->id);
+                    if($isExistPaypalEmail['paypal_email'] == '' && $identity->role != '1'){
+                        $this->view->emailerror = 1;
+
+                    }else{
+                        $bookingDbTable = new Application_Model_DbTable_Booking();
+                        $bookingDbTable->approveBooking($this->getRequest()->getParam('booking_id'), $identity->id);
+                        $this->view->approved = 1;
+                    }
+
                 }
 
 
