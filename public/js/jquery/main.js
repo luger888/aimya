@@ -318,6 +318,7 @@ $(document).ready(function () {
         resizable:false,
         close:function () {
             $('.notesWindow').html('');
+            $("#notes-dialog").empty();
         }
     });
 
