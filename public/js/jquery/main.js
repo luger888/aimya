@@ -739,6 +739,8 @@ function getNotes(e, id) {
                     $('#starsBlock').remove();
                     $('.rate').remove();
                 }
+                console.log(result.isTeacher);
+                console.log(result.rate);
                 if(!result.isTeacher && !result.rate){
                     $('#dialogFooter').html('<div class ="timeLeft">You have <span class ="timeLeftSpan"></span>days left to rate this lesson!</div>' +
                     '<div class ="rate cc">rate lesson:</div>'+
