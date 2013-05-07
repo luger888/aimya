@@ -494,17 +494,24 @@ input.button-2 {
 .button-2.inbox:hover{
     background-position: 0 -21px;
 }
+.button-2.inbox.disable{
+    background-position: 0 -43px;
+}
 .button-2.trash {
     background: url(../images/icons/trash.png) no-repeat 0 3px;
 }
-
+.button-2.trash.disable {
+    background: url(../images/icons/trash.png) no-repeat 0 -37px;
+}
 .button-2.trash:hover {
     background-position: 0 -18px;
 }
 .button-2.archived {
     background: url(../images/icons/archived.png) no-repeat 0 3px;
 }
-
+.button-2.archived.disable {
+    background: url(../images/icons/archived.png) no-repeat 0 -37px;
+}
 .button-2.archived:hover {
     background-position: 0 -17px;
 }
