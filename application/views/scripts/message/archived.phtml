@@ -7,8 +7,8 @@
             <div class="messageButtons clearfix">
                 <a href="<?php echo $this->baseUrl() . '/message/send/'?>"><span class="button-2 createMessage"><?php echo $this->translate('create new') ?></span></a>
 <!--                <span class="button-2 delete" onclick="massDelete('--><?php //echo $action ?><!--', '--><?php //echo $this->baseUrl()?><!--')">--><?php //echo $this->translate('delete') ?><!--</span>-->
-                <span class="button-2 inbox" onclick="massRestore('<?php echo $action ?>', '<?php echo $this->baseUrl()?>')"><?php echo $this->translate('restore') ?></span>
-                <span class="button-2 trash" onclick="massTrash('<?php echo $action ?>', '<?php echo $this->baseUrl()?>')"><?php echo $this->translate('move to trash') ?></span>
+                <span class="button-2 inbox disable" onclick="massRestore('<?php echo $action ?>', '<?php echo $this->baseUrl()?>')"><?php echo $this->translate('restore') ?></span>
+                <span class="button-2 trash disable" onclick="massTrash('<?php echo $action ?>', '<?php echo $this->baseUrl()?>')"><?php echo $this->translate('move to trash') ?></span>
             </div>
             <div class="userMessages">
                 <table class="">
@@ -58,4 +58,14 @@
     <!-- END shadowSeparator -->
 </div>
 <!-- END messageTab -->
+<script>
+    $("input[type=checkbox]").change(function(){
+        if($('input:checkbox').filter(':checked').length>0){
+            $(".button-2").removeClass('disable');
+        }else{
+            $(".restore, .trash").addClass('disable');
+        }
 
+
+    });
+</script>
