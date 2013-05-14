@@ -31,7 +31,7 @@ class SearchController extends Aimya_Controller_BaseController
 
     public function reindexAction()
     {
-
+        Zend_Search_Lucene_Analysis_Analyzer::setDefault(new Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum_CaseInsensitive());
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
