@@ -76,6 +76,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         return $this->update($array, $where);
 
     }
+
     public function changePass($pass, $user_id)
     {
 
@@ -90,6 +91,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         $this->update($array, $where);
 
     }
+
     #recoverPass
 
     public function recoverPass($data)
@@ -111,8 +113,12 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
     {
         $user_id = (int)$user_id;
         $row = $this->fetchRow($this->select()->where('id = ?', $user_id));
+        if ($row) {
+            return $row->toArray();
+        } else {
+            return false;
+        }
 
-        return $row->toArray();
     }
 
     public function getUserInfo($user_id)
@@ -162,7 +168,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
         if ((int)Zend_Auth::getInstance()->getIdentity()->role == (int)1) $role = 2;
         if ($role != (int)0) {
-            if($role == (int)1) {
+            if ($role == (int)1) {
                 $data->where('user.role=?', $role);
             } else {
                 $data->where('user.role>=?', (int)2);
@@ -195,7 +201,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
 
             $ratings = $reviewModel->getAverageReview($value['id']);
-            if($ratings){
+            if ($ratings) {
                 $author[$index]['averageRating'] = $ratings[0];
                 $author[$index]['countRating'] = $ratings[1];
             }
@@ -214,7 +220,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         $data = $this->getAdapter()
             ->select()
             ->from($this->_name)
-        //->joinLeft('account', $where)
+            //->joinLeft('account', $where)
             ->joinLeft('account', 'account.user_id = user.id')
             ->where('user.id=?', $id);
         $services = $this->getAdapter()
@@ -241,6 +247,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         return $data->query()->fetch();
 
     }
+
     public function getTimeZoneCode($gmt)
     {
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
@@ -251,6 +258,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         return $data->query()->fetch();
 
     }
+
     public function setDefaultTimezone($timezone)
     {
         $userId = Zend_Auth::getInstance()->getIdentity()->id;
@@ -283,7 +291,7 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
         if ((int)Zend_Auth::getInstance()->getIdentity()->role == (int)1) $role = 2;
         if ($role != (int)0) {
-            if($role == (int)1) {
+            if ($role == (int)1) {
                 $data->where('user.role=?', $role);
             } else {
                 $data->where('user.role>=?', (int)2);
@@ -335,7 +343,6 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         $teacherResLM = $teachersLM->query()->fetch();
 
 
-
         $usersCount['allTime']['total'] = $result['COUNT'];
         $usersCount['allTime']['students'] = $studentRes['COUNT'];
         $usersCount['allTime']['teachers'] = $teacherRes['COUNT'];
@@ -346,7 +353,8 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         return $usersCount;
     }
 
-    public function getUsers(){
+    public function getUsers()
+    {
         $students = $this->getAdapter()->select()
             ->from(array($this->_name), array('id', 'firstname', 'lastname', 'username', 'role', 'status', 'created_at'))
 
@@ -355,7 +363,9 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
 
         return $students->query()->fetchAll();
     }
-    public function getUsersRefunds(){
+
+    public function getUsersRefunds()
+    {
         $students = $this->getAdapter()->select()
             ->from(array('us' => $this->_name), array('id', 'firstname', 'lastname', 'username', 'role', 'status', 'created_at'))
             ->joinLeft('subscription_history', 'us.id = subscription_history.user_id', array('active_to', 'updated_at'))
@@ -367,7 +377,8 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         return $students->query()->fetchAll();
     }
 
-    public function changeUserStatus($id, $status){
+    public function changeUserStatus($id, $status)
+    {
         $array = array(
 
             'status' => $status
@@ -386,11 +397,13 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
             'role' => (int)$role,
         );
 
-        $where[] = $this->getAdapter()->quoteInto('id=?', $userId);;
+        $where[] = $this->getAdapter()->quoteInto('id=?', $userId);
+        ;
 
         return $this->update($array, $where);
 
     }
+
     public function getCurrentTime($user_id)
     {
         $data = $this->select()
@@ -408,10 +421,11 @@ class Application_Model_DbTable_Users extends Application_Model_DbTable_Abstract
         $dtime->setTimeZone($dtzone);
         $dateWithUTC = $dtime->format("m/d/Y H:i:s");
 
-        return  $dateWithUTC;
+        return $dateWithUTC;
     }
 
-    public function deleteUser($user_id){
+    public function deleteUser($user_id)
+    {
         $where = array(
 
             $this->getAdapter()->quoteInto('id =?', (int)$user_id)
