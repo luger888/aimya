@@ -61,8 +61,8 @@ class UserController extends Zend_Controller_Action
 
                 $this->_helper->flashMessenger->addMessage(array('success' => 'Your account has been confirmed. Please login'));
 
-                $this->_helper->redirector('index', 'index');
-die(5);
+                $this->_helper->redirector('http://aimya.com');
+
             }
         } else {
             $this->view->message = 'request data is incorrect';
