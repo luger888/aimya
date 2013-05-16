@@ -454,7 +454,7 @@ class UserController extends Zend_Controller_Action
             $mail->password = $this->getRequest()->getParam('password');
             $mail->token = $user['confirmation_token'];
             $mail->baseLink = "http://" . $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance()->getBaseUrl();
-            Zend_Debug::dump( "http://" . $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance()->getBaseUrl());die;
+            Zend_Debug::dump( "http://" . $_SERVER['HTTP_HOST']);die;
             if($mail->send()){
                 $this->view->email = 1;
             }else{
