@@ -56,7 +56,6 @@ class UserController extends Zend_Controller_Action
                 $this->view->message = 'no data';
 
             } else {
-Zend_Debug::dump('1');die;
                 $model = new Application_Model_User();
                 $this->view->message = $model->approveUser($data);
 
