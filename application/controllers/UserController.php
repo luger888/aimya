@@ -440,6 +440,7 @@ class UserController extends Zend_Controller_Action
     public function resendAction()
     {
         if ($username = $this->getRequest()->getParam('username')) {
+
             $f = new Aimya_Filter_EmailToUsername();
             $username = $f->filter($username);
             $userDb = new Application_Model_DbTable_Users();
@@ -453,7 +454,7 @@ class UserController extends Zend_Controller_Action
             $mail->password = $this->getRequest()->getParam('password');
             $mail->token = $user['confirmation_token'];
             $mail->baseLink = "http://" . $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance()->getBaseUrl();
-
+            Zend_Debug::dump( $mail->baseLink);die;
             if($mail->send()){
                 $this->view->email = 1;
             }else{
