@@ -60,7 +60,8 @@ class UserController extends Zend_Controller_Action
                 $this->view->message = $model->approveUser($data);
 
                 $this->_helper->flashMessenger->addMessage(array('success' => 'Your account has been confirmed. Please login'));
-                $this->redirect('index');
+                
+                $this->_helper->redirector('index', 'index');
 
             }
         } else {
