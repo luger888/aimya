@@ -57,7 +57,6 @@ class Application_Model_User
 
         $db = new Application_Model_DbTable_Users();
         $id = $db->checkByMail($data['query_id']);
-Zend_Debug::dump($id);die;
         if($id){
 
             if($db->approve($data['query_id'], $data['query_key'])){
