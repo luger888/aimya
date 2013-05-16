@@ -457,8 +457,10 @@ class UserController extends Zend_Controller_Action
 
             if($mail->send()){
                 $this->view->email = 1;
+            }else{
+                $this->view->emailError = 1;
             }
-            $this->view->emailError = 1;
+
         }
     }
 }
