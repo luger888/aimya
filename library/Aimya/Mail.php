@@ -75,6 +75,7 @@ class Aimya_Mail
         $smtpport = $config->production->email->smtpport;
         $conf = array(
             //'ssl' => 'tls',
+   	     'auth' => 'login',
             'port' => $smtpport,
             'username' => $username,
             'password' => $password);
