@@ -1,0 +1,154 @@
+Array
+(
+    [controller] => lesson
+    [action] => end
+    [module] => default
+    [PHPSESSID] => f0u6hm567utna2lqati95lepb4
+    [lesson_id] => 67
+    [booking_id] => 46
+)
+Array
+(
+    [controller] => lesson
+    [action] => end
+    [module] => default
+    [lesson_id] => 68
+    [booking_id] => 47
+    [PHPSESSID] => ndl7mkuu3aolldbfhfkiarpae2
+)
+Array
+(
+    [controller] => lesson
+    [action] => end
+    [module] => default
+    [lesson_id] => 69
+    [booking_id] => 47
+    [PHPSESSID] => ndl7mkuu3aolldbfhfkiarpae2
+)
+Array
+(
+    [controller] => lesson
+    [action] => end
+    [module] => default
+    [lesson_id] => 70
+    [booking_id] => 47
+    [PHPSESSID] => ndl7mkuu3aolldbfhfkiarpae2
+)
+Array
+(
+    [controller] => lesson
+    [action] => end
+    [module] => default
+    [PHPSESSID] => ar84nhd0mn4a50gn5n61udf076
+    [booking_id] => 47
+    [lesson_id] => 71
+)
+Array
+(
+    [controller] => lesson
+    [action] => end
+    [module] => default
+    [PHPSESSID] => o8n4km5ubrv6u3iec2qd30fsc5
+    [booking_id] => 48
+    [lesson_id] => 72
+)
+Array
+(
+    [controller] => lesson
+    [action] => end
+    [module] => default
+    [PHPSESSID] => cabet4tnq5ev4tbq4fqfod0ev5
+    [booking_id] => 49
+    [lesson_id] => 74
+)
+Array
+(
+    [controller] => lesson
+    [action] => end
+    [module] => default
+    [booking_id] => 54
+    [PHPSESSID] => 0e6pbl20dpa6ae600cqjkules1
+    [lesson_id] => 75
+)
+Array
+(
+    [controller] => lesson
+    [action] => end
+    [module] => default
+    [lesson_id] => 76
+    [booking_id] => 61
+    [PHPSESSID] => huor9arsg8ktpe4v6fd4grtq02
+)
+Array
+(
+    [controller] => lesson
+    [action] => end
+    [module] => default
+    [lesson_id] => 77
+    [booking_id] => 62
+    [PHPSESSID] => j4akfcuva3r4c998t4htgir0f0
+)
+Array
+(
+    [controller] => lesson
+    [action] => end
+    [module] => default
+    [lesson_id] => 78
+    [booking_id] => 63
+    [PHPSESSID] => huor9arsg8ktpe4v6fd4grtq02
+)
+Array
+(
+    [controller] => lesson
+    [action] => end
+    [module] => default
+    [lesson_id] => 79
+    [booking_id] => 64
+    [PHPSESSID] => huor9arsg8ktpe4v6fd4grtq02
+)
+Array
+(
+    [controller] => lesson
+    [action] => end
+    [module] => default
+    [PHPSESSID] => a6png5rbdnbqpq4b4rssfkba76
+    [booking_id] => 65
+    [lesson_id] => 80
+)
+Array
+(
+    [controller] => lesson
+    [action] => end
+    [module] => default
+    [PHPSESSID] => a6png5rbdnbqpq4b4rssfkba76
+    [booking_id] => 65
+    [lesson_id] => 81
+)
+Array
+(
+    [controller] => lesson
+    [action] => end
+    [module] => default
+    [booking_id] => 67
+    [PHPSESSID] => i1fr18oia1s4srgt5pmpkgdl60
+    [lesson_id] => 83
+)
+Array
+(
+    [controller] => lesson
+    [action] => end
+    [module] => default
+    [PHPSESSID] => 0516749m5kqk7pm0ljiap487d3
+    [booking_id] => 69
+    [lesson_id] => 84
+)
+Array
+(
+    [controller] => lesson
+    [action] => end
+    [module] => default
+    [booking_id] => 70
+    [PHPSESSID] => adch54iot40q6begcpgiomi1p4
+    [lesson_id] => 85
+)
+VIDEO KILLER: 86 / 4113VIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / Array1VIDEO KILLER: 87 / Array1VIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / Array1VIDEO KILLER: 87 / Array1VIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 87 / ArrayVIDEO KILLER: 88 / Array\nVIDEO KILLER: 88 / Array\nVIDEO KILLER: 88 / Array\nVIDEO KILLER: 88 / Array\nVIDEO KILLER: 88 / Array\nVIDEO KILLER: 88 / Array\nVIDEO KILLER: 89 / Array\nVIDEO KILLER: 89 / Array\nVIDEO KILLER: 89 / Array\nVIDEO KILLER: 89 / Array\nVIDEO KILLER: 89 / Array\nVIDEO KILLER: 89 / Array\nVIDEO KILLER: 89 / Array\nVIDEO KILLER: 89 / Array\nVIDEO KILLER: 89 / Array\nVIDEO KILLER: 89 / Array\nVIDEO KILLER: 89 / Array\nVIDEO KILLER: 89 / Array\nVIDEO KILLER: 89 / Array\nVIDEO KILLER: 89 / Array\nVIDEO KILLER: 89 / Array\nVIDEO KILLER: 89 / Array\nVIDEO KILLER: 89 / Array\nFailure:VIDEO KILLER: 89 / Array\nVIDEO KILLER: 90 / Array\nVIDEO KILLER: 90 / Array\nVIDEO KILLER: 90 / Array\nFailure:VIDEO KILLER: 90 / Array\nVIDEO KILLER: 90 / Array\nVIDEO KILLER: 90 / Array\nVIDEO KILLER: 90 / Array\nVIDEO KILLER: 90 / Array\n

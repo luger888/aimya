@@ -441,7 +441,12 @@ class UserController extends Zend_Controller_Action
     public function resendAction()
     {
         if ($username = $this->getRequest()->getParam('username')) {
+$config = array('auth' => 'login',
+	         'port' => 465,
+                'username' => 'no-reply@aimya.com',
+                'password' => 'aimya');
 
+            $transport = new Zend_Mail_Transport_Smtp('mail.aimya.com', $config);
             $f = new Aimya_Filter_EmailToUsername();
             $username = $f->filter($username);
             $userDb = new Application_Model_DbTable_Users();

@@ -115,6 +115,7 @@ class Application_Model_Lesson
             $fileContent = file_get_contents($notePath);
             return $fileContent;
         } else {
+
             return false;
         }
 
