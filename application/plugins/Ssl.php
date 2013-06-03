@@ -1,5 +1,5 @@
 <?php
-class Plugin_Ssl extends Zend_Controller_Plugin_Abstract
+class Application_Plugin_Ssl extends Zend_Controller_Plugin_Abstract
 {
 
     public function preDispatch($request)
