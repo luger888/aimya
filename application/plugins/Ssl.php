@@ -8,8 +8,8 @@ class Application_Plugin_Ssl extends Zend_Controller_Plugin_Abstract
         //get the config settings for SSL
         $options = new Zend_Config_Ini(APPLICATION_PATH.'/configs/application.ini');
 
-//        $secure_modules = explode(',',$options->production->ssl->modules->require_ssl);
-//        $secure_controllers = explode(',',$options->production->ssl->controllers->require_ssl);
+        $secure_modules = explode(',',$options->production->ssl->modules->require_ssl);
+        $secure_controllers = explode(',',$options->production->ssl->controllers->require_ssl);
 
         $front = Zend_Controller_Front::getInstance();
         $request = $front->getRequest();
