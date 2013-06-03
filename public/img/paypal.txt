@@ -4862,3 +4862,44 @@ test_ipn                                1
 payment_request_date                    Tue May 07 01:59:13 PDT 2013
 
 
+VALID IPN--------------------------------------------------------------------------------
+[06/01/2013 4:44 AM] - https://www.sandbox.paypal.com/cgi-bin/webscr (curl)
+--------------------------------------------------------------------------------
+HTTP/1.1 100 Continue
+
+HTTP/1.1 200 OK
+Date: Sat, 01 Jun 2013 03:44:14 GMT
+Server: Apache
+X-Frame-Options: SAMEORIGIN
+Set-Cookie: c9MWDuvPtT9GIMyPc3jwol1VSlO=h8aJ6Vb-aWb1VI_u6Tk2MmQPMRcflmsz3yeeqwoBxxNz3KIlID0VUqfe8X_1byhzQ8nZCSIqBRvOWEkeO-5-B1gVLS7B16PWDduzPfqsmGrMLDfTyM7KNkotYBW_ym0r6CwsTW%7clzpkcA687GCWyjLe3-tJj02qaWuknGFVeWbi09GNhXv1Lz-Fmn3NBkPJFwRzxyVnvVBy3G%7cFlSDdPEgchpOHKKlWODWxEeC7qnxTfkGVf14ZFCu64J5MCWM75UTRUwkUJkAbuT8bBGaBm%7c1370058254; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: cookie_check=yes; expires=Tue, 30-May-2023 03:44:14 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: navcmd=_notify-validate; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: navlns=0.0; expires=Fri, 27-May-2033 03:44:14 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: Apache=10.72.109.11.1370058254096033; path=/; expires=Mon, 25-May-43 03:44:14 GMT
+X-Cnection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+VERIFIED
+----------------------------------------------------------------------------------------------------
+0                                       NONE
+1                                       Completed
+transaction                             Array
+log_default_shipping_address_in_transactionfalse
+action_type                             PAY
+ipn_notification_url                    https://aimya.com/en/payment/ipn?booking_id=489
+charset                                 windows-1252
+transaction_type                        Adaptive Payment PAY
+notify_version                          UNVERSIONED
+cancel_url                              https://aimya.com/en/lesson
+verify_sign                             A7XqGiPvEH8e6i2gYM0aj548wB3nAEkQJBSRE.d.F.rI8Nb3aULjXdEg
+sender_email                            howard_1357903100_per@gmail.com
+fees_payer                              SENDER
+return_url                              https://aimya.com/en/lesson
+reverse_all_parallel_payments_on_error  false
+pay_key                                 AP-4SS78291LS284831A
+status                                  COMPLETED
+test_ipn                                1
+payment_request_date                    Fri May 31 20:43:34 PDT 2013
+
+
