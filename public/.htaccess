@@ -1,4 +1,4 @@
-Env APPLICATION_ENV development
+SetEnv APPLICATION_ENV local
 
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -s [OR]
