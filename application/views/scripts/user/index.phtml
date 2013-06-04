@@ -21,19 +21,19 @@ if ($this->userData['role'] == '1') {
             <div
                 class="profileName"> <?php echo  ' ' . $this->userData['firstname'] . ' ' . $this->userData['lastname'];?></div>
 
-            <div class="profileRole"><?php echo  $role;?></div>
+            <div class="profileRole"><?php echo  $this->translate($role);?></div>
 
             <ul class="userInfo">
                 <?php if ($this->profile['birthday']) echo '<li class = "birthday">' . $this->profile["birthday"] . '</li>';?>
-                <?php if ($this->userData['gender'] == 'male') echo '<li class = "gender male">' . $this->userData["gender"] . '</li>';
-            else echo '<li class = "gender female">' . $this->userData["gender"] . '</li>';?>
+                <?php if ($this->userData['gender'] == 'male') echo '<li class = "gender male">' . $this->translate($this->userData["gender"]) . '</li>';
+            else echo '<li class = "gender female">' . $this->translate($this->userData["gender"]) . '</li>';?>
                 <?php if ($this->profile['education']) echo '<li class = "education">' . $this->profile["education"] . '</li>';?>
                 <?php if ($this->profile['degree']) echo '<li class = "degree">' . $this->profile["degree"] . '</li>';?>
                 <?php if ($this->profile['language']) echo '<li class = "language">' . $this->profile["language"] . '</li>';?>
             </ul>
         </div>
         <div class="userRating">
-            <h1><?php echo $this->translate('total reviews:')?></h1>
+            <h1><?php echo $this->translate('total reviews')?>:</h1>
             <ul class="starsUL">
                 <li><span data-rating="5" class="stars five"></span><span
                     class="total"><?php echo '(' . $this->stars['five'] . ')';?></span>
@@ -74,13 +74,13 @@ if ($this->userData['role'] == '1') {
                     <?php $defaultRequestText = 'Hello ' . $this->userData['username'] . ', I have approved your request.' ?>
                     <input id="sendbutton" class="button-2 addAccount" type="button"
                            onclick="showFriendForm('<?php echo $userData['id']; ?>', '<?php echo $defaultRequestText; ?>', this)"
-                           value="ADD TO MY ACCOUNT" name="sendbutton">
+                           value="<?php echo $this->translate('ADD TO MY ACCOUNT');?>" name="sendbutton">
                     <?php endif; ?>
                 <?php else: ?>
                 <?php $defaultRequestText = 'Hello ' . $this->userData['username'] . ', I would like add you to my account.' ?>
                 <input id="sendbutton" class="button-2 addAccount" type="button"
                        onclick="showFriendForm('<?php echo $userData['id']; ?>', '<?php echo $defaultRequestText; ?>', this)"
-                       value="ADD TO MY ACCOUNT" name="sendbutton">
+                       value="<?php echo $this->translate('ADD TO MY ACCOUNT');?>" name="sendbutton">
                 <?php endif; ?>
             <?php endif; ?>
         <?php endif; ?>
@@ -111,7 +111,7 @@ if ($this->userData['role'] == '1') {
                 if ($d == 0) { //show title only one time
                     echo  '<span class="title">SERVICES OFFERED:</span>';
                 }
-                echo '<div class = "serviceItem" ><span class = "mainCategory">' . $service['lesson_category'] . ':</span><span class="subCategory">' . $service['subcategory'] . '</span><span class ="rate"> $ ' . $service['rate'] . ' / ' . $service['duration'] . ' min</span>
+                echo '<div class = "serviceItem" ><span class = "mainCategory">' . $this->translate($service['lesson_category']) . ':</span><span class="subCategory">' . $service['subcategory'] . '</span><span class ="rate"> $ ' . $service['rate'] . ' / ' . $service['duration'] . ' min</span>
                             </div><div class = "serviceInfo" >' . $service['description'] . '</div>';
                 if ($d == 0) { //show separator only one time
                     echo '<div class="middleSeparatorSecond"></div>';
@@ -132,9 +132,9 @@ if ($this->userData['role'] == '1') {
 
             if ($service['service_type'] == 2) { //if requested service
                 if ($i == 0) {
-                    echo  '<span class="title">SERVICES REQUESTED:</span>';
+                    echo  '<span class="title">'.$this->translate('SERVICES REQUESTED').':</span>';
                 }
-                echo '<div class="serviceItem"><span class = "mainCategory">' . $service['lesson_category'] . ':</span><span class="subCategory">' . $service['subcategory'] . '</span>
+                echo '<div class="serviceItem"><span class = "mainCategory">' . $this->translate($service['lesson_category']) . ':</span><span class="subCategory">' . $service['subcategory'] . '</span>
                          </div><div class = "serviceInfo" >' . $service['description'] . '</div>';
                 if ($i == 0) {
                     echo '<div class="middleSeparatorSecond"></div>';
@@ -150,15 +150,15 @@ if ($this->userData['role'] == '1') {
 <!--AVAILABILITY BLOCK -->
 <?php if ($this->availability): ?>
 <div class="availability clearfix">
-    <span class="title">AVAILABLE:</span>
+    <span class="title"><?php echo $this->translate('AVAILABLE');?>:</span>
     <?php ?>
     <ul>
-        <li><span class="day">Monday</span><span
+        <li><span class="day"><?php echo $this->translate('Monday');?></span><span
             class="from"><?php
             if ($this->availability['fromMon'] !== '...') {
                 echo $this->availability['fromMon'] . '</span>';
             } else {
-                echo 'ANY</span>';
+                echo $this->translate('ANY') . '</span>';
             }
             ?>
             to<span
@@ -166,15 +166,15 @@ if ($this->userData['role'] == '1') {
                 if ($this->availability['toMon'] !== '...') {
                     echo $this->availability['toMon'] . '</span></li>';
                 } else {
-                    echo 'ANY</span></li>';
+                    echo $this->translate('ANY') . '</span></li>';
                 }
                 ?>
-                <li><span class="day">Tuesday</span><span
+                <li><span class="day"><?php echo $this->translate('Tuesday');?></span><span
                     class="from"><?php
                     if ($this->availability['fromTue'] !== '...') {
                         echo $this->availability['fromTue'] . '</span>';
                     } else {
-                        echo 'ANY</span>';
+                        echo $this->translate('ANY') . '</span>';
                     }
                     ?>
                     to<span
@@ -182,15 +182,15 @@ if ($this->userData['role'] == '1') {
                         if ($this->availability['toTue'] !== '...') {
                             echo $this->availability['toTue'] . '</span></li>';
                         } else {
-                            echo 'ANY</span></li>';
+                            echo $this->translate('ANY') . '</span></li>';
                         }
                         ?>
-                        <li><span class="day">Wednesday</span><span
+                        <li><span class="day"><?php echo $this->translate('Wednesday');?></span><span
                             class="from"><?php
                             if ($this->availability['fromWed'] !== '...') {
                                 echo $this->availability['fromWed'] . '</span>';
                             } else {
-                                echo 'ANY</span>';
+                                echo $this->translate('ANY') . '</span>';
                             }
                             ?>
                             to<span
@@ -198,16 +198,16 @@ if ($this->userData['role'] == '1') {
                                 if ($this->availability['toWed'] !== '...') {
                                     echo $this->availability['toWed'] . '</span></li>';
                                 } else {
-                                    echo 'ANY</span></li>';
+                                    echo $this->translate('ANY') . '</span></li>';
                                 }
                                 ?>
 
-                                <li><span class="day">Thursday</span><span
+                                <li><span class="day"><?php echo $this->translate('Thursday');?></span><span
                                     class="from"><?php
                                     if ($this->availability['fromThu'] !== '...') {
                                         echo $this->availability['fromThu'] . '</span>';
                                     } else {
-                                        echo 'ANY</span>';
+                                        echo $this->translate('ANY') . '</span>';
                                     }
                                     ?>
                                     to<span
@@ -215,16 +215,16 @@ if ($this->userData['role'] == '1') {
                                         if ($this->availability['toThu'] !== '...') {
                                             echo $this->availability['toThu'] . '</span></li>';
                                         } else {
-                                            echo 'ANY</span></li>';
+                                            echo $this->translate('ANY') . '</span></li>';
                                         }
                                         ?>
 
-                                        <li><span class="day">Friday</span><span
+                                        <li><span class="day"><?php echo $this->translate('Friday');?></span><span
                                             class="from"><?php
                                             if ($this->availability['fromFri'] !== '...') {
                                                 echo $this->availability['fromFri'] . '</span>';
                                             } else {
-                                                echo 'ANY</span>';
+                                                echo $this->translate('ANY') . '</span>';
                                             }
                                             ?>
                                             to<span
@@ -232,16 +232,16 @@ if ($this->userData['role'] == '1') {
                                                 if ($this->availability['toFri'] !== '...') {
                                                     echo $this->availability['toFri'] . '</span></li>';
                                                 } else {
-                                                    echo 'ANY</span></li>';
+                                                    echo $this->translate('ANY') . '</span></li>';
                                                 }
                                                 ?>
 
-                                                <li><span class="day">Saturday</span><span
+                                                <li><span class="day"><?php echo $this->translate('Saturday');?></span><span
                                                     class="from"><?php
                                                     if ($this->availability['fromSat'] !== '...') {
                                                         echo $this->availability['fromSat'] . '</span>';
                                                     } else {
-                                                        echo 'ANY</span>';
+                                                        echo $this->translate('ANY') . '</span>';
                                                     }
                                                     ?>
                                                     to<span
@@ -249,16 +249,16 @@ if ($this->userData['role'] == '1') {
                                                         if ($this->availability['toSat'] !== '...') {
                                                             echo $this->availability['toSat'] . '</span></li>';
                                                         } else {
-                                                            echo 'ANY</span></li>';
+                                                            echo $this->translate('ANY') . '</span></li>';
                                                         }
                                                         ?>
 
-                                                        <li><span class="day">Sunday</span><span
+                                                        <li><span class="day"><?php echo $this->translate('Sunday');?></span><span
                                                             class="from"><?php
                                                             if ($this->availability['fromSun'] !== '...') {
                                                                 echo $this->availability['fromSun'] . '</span>';
                                                             } else {
-                                                                echo 'ANY</span>';
+                                                                echo $this->translate('ANY') . '</span>';
                                                             }
                                                             ?>
                                                             to<span
@@ -266,7 +266,7 @@ if ($this->userData['role'] == '1') {
                                                                 if ($this->availability['toSun'] !== '...') {
                                                                     echo $this->availability['toSun'] . '</span></li>';
                                                                 } else {
-                                                                    echo 'ANY</span></li>';
+                                                                    echo $this->translate('ANY') . '</span></li>';
                                                                 }
                                                                 ?>
 

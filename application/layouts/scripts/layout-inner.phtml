@@ -86,7 +86,7 @@ if (Zend_Registry::isRegistered('username')) {
 <div id="page" class="clearfix">
 
     <div id="globalWrapper" class="clearfix">
-        <div class="currentTime floatRight">Your Aimya time: <span id="clock"></span></div>
+        <div class="currentTime floatRight"><?php echo $this->translate('Your Aimya time')?>: <span id="clock"></span></div>
         <div id="wrapper" class="clearfix">
 
             <div id="header" class="clearfix">
@@ -149,7 +149,7 @@ if (Zend_Registry::isRegistered('username')) {
                 <div id="leftSideBar" class="clearfix">
                     <div class="profileTab clearfix">
                         <h3> <?php echo $username;?></h3>
-                        <h5> <?php echo $role;?></h5>
+                        <h5> <?php echo $this->translate($role);?></h5>
 
                         <div class="leftNavPhoto clearfix"><img src="<?php echo $avatarPath; ?>"></div>
                         <?php

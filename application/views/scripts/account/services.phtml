@@ -20,7 +20,7 @@
 
                 $ <span id="rate"> <?php echo $value['rate'];?></span>
 
-                per <span id="duration"> <?php echo $value['duration'] .' min';?></span>
+                <?php echo $this->translate('per');?> <span id="duration"> <?php echo $value['duration'] .' min';?></span>
             </div><!--End titleRow-->
 
             <h2> Service Description :</h2>
@@ -47,12 +47,12 @@
                     <span class="s-116"><?php echo $this->servicesForm->lesson_category; ?></span>
                     <span class="field-116"><?php echo $this->servicesForm->subcategory; ?></span>
                     <span class="field-66">$<?php echo $this->servicesForm->rate; ?> </span>
-                    <span class="txt">per</span>
+                    <span class="txt"><?php echo $this->translate('per');?></span>
                     <span class="s-86"><?php echo $this->servicesForm->duration; ?></span>
                 </div><!--End formRow -->
                 <div class ="errorBlock"></div>
                 <div class="serviceDesc clearfix">                        
-                    <h2>DESCRIBE YOUR SERVICE DETAILS:</h2>
+                    <h2><?php echo $this->translate('DESCRIBE YOUR SERVICE DETAILS');?>:</h2>
                     <?php echo $this->servicesForm->description; ?>
                 </div><!--End serviceDesc -->
                 <div class="buttonsRow clearfix">
