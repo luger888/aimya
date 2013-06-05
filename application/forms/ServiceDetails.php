@@ -8,6 +8,8 @@ class Application_Form_ServiceDetails extends Zend_Form
     public function init()
     {
 
+        $translator = $this->getTranslator();
+
         $lessonDbModel = new Application_Model_DbTable_LessonCategory();
         $lessonCategories = $lessonDbModel->getLessonCategories();//category from db
         $durationDbModel = new Application_Model_DbTable_LessonDuration();
@@ -33,9 +35,9 @@ class Application_Form_ServiceDetails extends Zend_Form
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 
-        $lesson_category->addOption('', ' Specify your area of expertise',array());
+        $lesson_category->addOption('', $translator->translate(' Specify your area of expertise'),array());
         foreach ($lessonCategories as  $value) {
-            $lesson_category->addOption($value['title'], $value['title']);
+            $lesson_category->addOption($value['title'], $translator->translate($value['title']));
         }
 
         $lesson_categoryReq = new Aimya_Form_Element_SelectAttribs('lesson_category');
@@ -44,13 +46,13 @@ class Application_Form_ServiceDetails extends Zend_Form
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 
-        $lesson_categoryReq->addOption('', ' Specify an area you need help with',array());
+        $lesson_categoryReq->addOption('', $translator->translate(' Specify an area you need help with'),array());
         foreach ($lessonCategories as  $value) {
-            $lesson_categoryReq->addOption($value['title'], $value['title']);
+            $lesson_categoryReq->addOption($value['title'], $translator->translate($value['title']));
         }
 
         $subcategory = new Zend_Form_Element_Text('subcategory');
-        $subcategory ->setAttrib('placeholder', 'specify your area of expertise')
+        $subcategory ->setAttrib('placeholder', $translator->translate('specify your area of expertise'))
             ->setAttrib('id', 'subcategoryInput')
             ->addFilters($this->basicFilters)
             ->setAttrib('maxlength', '25')
@@ -61,7 +63,7 @@ class Application_Form_ServiceDetails extends Zend_Form
         $rate ->setAttrib('class', 'required input-small')
             ->addValidator('Digits')
             ->setAttrib('maxlength', '10')
-            ->setAttrib('placeholder', 'rate')
+            ->setAttrib('placeholder', $translator->translate('rate'))
             ->setAttrib('id', 'rateInput')
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
@@ -72,11 +74,11 @@ class Application_Form_ServiceDetails extends Zend_Form
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
         foreach ($lessonPeriods as  $value) {
-            $duration->addMultiOption($value['duration'], $value['duration'].' min');
+            $duration->addMultiOption($value['duration'], $value['duration'].$translator->translate(' min'));
         }
 
         $description = new Zend_Form_Element_Textarea('description');
-        $description->setLabel('Describe Your Service Details')
+        $description->setLabel($translator->translate('Describe Your Service Details'))
             ->setAttrib('id', 'descriptionInput')
             ->setAttrib('maxlength', '500')
             ->addFilters($this->basicFilters)
