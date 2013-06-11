@@ -4903,3 +4903,47 @@ test_ipn                                1
 payment_request_date                    Fri May 31 20:43:34 PDT 2013
 
 
+VALID IPN--------------------------------------------------------------------------------
+[06/10/2013 3:19 PM] - https://www.sandbox.paypal.com/cgi-bin/webscr (curl)
+--------------------------------------------------------------------------------
+HTTP/1.1 100 Continue
+
+HTTP/1.1 200 OK
+Date: Mon, 10 Jun 2013 14:19:33 GMT
+Server: Apache
+X-Frame-Options: SAMEORIGIN
+Set-Cookie: c9MWDuvPtT9GIMyPc3jwol1VSlO=947kg_2sRw9CCR7rPqO6dFMfu1FBhLpudO2CzegyW-mCk8hNHwUJjFg3A1z9hqx1jdvPRm3yt06aK-jFghTMIa81TrX8QI-90Zl4QLvvXSPnUJ0HiIHipPyqucyWA0H5INPXqm%7ciSMGjf5_44BWeJKTX9Cyy4eq9btFC0r7NF9RuGnm_tcTxF0-EnBYhwm6kOzD7VBesmEoDm%7c7e9zsvp98KHrKHd-PbxsEOeou3-Hs9ZlZQhe6J7YdaxT9NiceRuOL7v04cETF10wLc6ACW%7c1370873974; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: cookie_check=yes; expires=Thu, 08-Jun-2023 14:19:34 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: navcmd=_notify-validate; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: navlns=0.0; expires=Sun, 05-Jun-2033 14:19:34 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: Apache=10.72.109.11.1370873973992092; path=/; expires=Wed, 03-Jun-43 14:19:33 GMT
+X-Cnection: close
+Set-Cookie: X-PP-SILOVER=name%3DSANDBOX3.WEB.1%26silo_version%3D880%26app%3Dslingshot%26TIME%3D1977660753; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: Apache=10.72.128.11.1370873973981988; path=/; expires=Wed, 03-Jun-43 14:19:33 GMT
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=14400
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+VERIFIED
+----------------------------------------------------------------------------------------------------
+0                                       USD 10.00
+transaction                             Array
+payment_request_date                    Mon Jun 10 07:18:20 PDT 2013
+return_url                              https://aimya.com/en/lesson
+fees_payer                              SENDER
+ipn_notification_url                    https://aimya.com/en/payment/ipn?booking_id=493
+sender_email                            morbes77@gmail.com
+verify_sign                             AiPC9BjkCyDFQXbSkoZcgqH3hpacA0Elt7cbGJO7x2ivnFAfxtnMGCru
+test_ipn                                1
+cancel_url                              https://aimya.com/en/lesson
+pay_key                                 AP-89G38097LK3082010
+action_type                             PAY
+transaction_type                        Adaptive Payment PAY
+status                                  COMPLETED
+log_default_shipping_address_in_transactionfalse
+charset                                 windows-1252
+notify_version                          UNVERSIONED
+reverse_all_parallel_payments_on_error  false
+
+
