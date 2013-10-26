@@ -79,18 +79,18 @@ class Application_Form_Booking extends Zend_Form
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 
-        $rate = new Zend_Form_Element_Text('rate');
-        $rate ->setAttrib('class', 'required input-small')
-            ->setRequired(true)
-            ->addValidator('NotEmpty', true)
-            ->setErrorMessages(array('Please type the price for this lesson (in US dollars, digits only, max 500)'))
-            ->addValidator('Digits', true)
-            ->addValidator('lessThan', false, array('max' => 501))
-            ->setAttrib('id', 'rate')
-            ->addFilters($this->basicFilters)
-            ->setDecorators($this->basicDecorators);
-        $validator=new Zend_Validate_GreaterThan(0);
-        $rate->addValidator($validator,true);
+//        $rate = new Zend_Form_Element_Text('rate');
+//        $rate ->setAttrib('class', 'required input-small')
+//            ->setRequired(true)
+//            ->addValidator('NotEmpty', true)
+//            ->setErrorMessages(array('Please type the price for this lesson (in US dollars, digits only, max 500)'))
+//            ->addValidator('Digits', true)
+//            ->addValidator('lessThan', false, array('max' => 501))
+//            ->setAttrib('id', 'rate')
+//            ->addFilters($this->basicFilters)
+//            ->setDecorators($this->basicDecorators);
+//        $validator=new Zend_Validate_GreaterThan(0);
+//        $rate->addValidator($validator,true);
 
         $duration = new Zend_Form_Element_Select('duration');
         $duration->setAttrib('id', 'duration')
@@ -133,7 +133,7 @@ class Application_Form_Booking extends Zend_Form
     }
 
 
-        $this->addElements(array($role, $recipiend_id,  $start_at, $start_at_time,  $focus_name, $rate, $duration, $video, $feedback, $notes, $info, $submit ));
+        $this->addElements(array($role, $recipiend_id,  $start_at, $start_at_time,  $focus_name,  $duration, $video, $feedback, $notes, $info, $submit ));
 
     }
 }
