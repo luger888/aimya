@@ -20,7 +20,7 @@
                     <td> <?php echo $this->translate('Video REC') ?></td>
                     <td> <?php echo $this->translate('Feedback') ?></td>
                     <td> <?php echo $this->translate('PDF Notes') ?></td>
-                    <td> <?php echo $this->translate('Payment Request') ?></td>
+<!--                    <td> --><?php //echo $this->translate('Payment Request') ?><!--</td>-->
                     <td> <?php echo $this->translate('Action') ?></td>
                 </tr>
                 </thead>
@@ -58,10 +58,10 @@
                     </td>
 
 
-                    <td class="center payment">
-                        <!--CASE: Send pay request BUTTON-->
-                        <?php if (isset($booking['booking']['sendRequest'])): ?>
-                        <input type="button" class="button send"
+<!--                    <td class="center payment">-->
+<!--                        <!--CASE: Send pay request BUTTON-->-->
+<!--                        --><?php //if (isset($booking['booking']['sendRequest'])): ?>
+<!--                        <input type="button" class="button send"-->
                                onclick="payRequest(<?php echo $booking['userData']['id'];?>,
                                    <?php echo $booking['booking']['id'];?>,
                                    this);"
@@ -69,31 +69,20 @@
                         <?php endif;?>
                         <!--CASE: Pending-->
                         <?php if (isset($booking['booking']['pending'])): ?>
-                        <span class="result pending">Pending</span>
+<!--                        <span class="result pending">Pending</span>-->
                         <?php endif;?>
-                        <!--CASE: Paid-->
+<!--                        <!--CASE: Paid-->-->
                         <?php if (isset($booking['booking']['paid'])): ?>
-                        <span class="result success">Paid</span>
+<!--                        <span class="result success">Paid</span>-->
                         <?php endif;?>
-
-                        <!--CASE: PAY BUTTON-->
-<!--                        --><?php //if (isset($booking['booking']['pay'])): ?>
-<!--                        <form method="POST" id='pay_--><?php //echo $booking['booking']['id'];?><!--'-->
-<!--                              action="--><?php //echo $this->baseUrl() . '/payment/pay/'?><!--">-->
-<!--                            <input name="teacher_id" type="hidden" value="--><?php //echo $booking['userData']['id'];?><!--">-->
-<!--                            <input name="booking_id" type="hidden" value="--><?php //echo $booking['booking']['id'];?><!--">-->
-<!--                            <a href="#" id="--><?php //echo $booking['userData']['id'];?><!--"-->
-<!--                               onclick="jQuery('#pay_--><?php //echo $booking['booking']['id'];?><!--').submit()"><span-->
-<!--                                class="button-2 play">Pay</span></a>-->
-<!--                        </form>-->
-<!--                        --><?php //endif;?>
+<!---->
                         <?php if (isset($booking['booking']['waiting'])): ?>
-                        <span class="result">reservation made</span>
+<!--                        <span class="result">reservation made</span>-->
                         <?php endif;?>
                         <?php if (isset($booking['booking']['expired'])): ?>
                         <span class="result">expired</span>
-                        <?php endif;?>
-                    </td>
+<!--                        --><?php //endif;?>
+<!--                    </td>-->
                     <!--END payment -->
                     <td class="center action">
                         <!--CASE: START LESSON BUTTON-->
