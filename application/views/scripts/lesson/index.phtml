@@ -62,25 +62,25 @@
 <!--                        <!--CASE: Send pay request BUTTON-->-->
 <!--                        --><?php //if (isset($booking['booking']['sendRequest'])): ?>
 <!--                        <input type="button" class="button send"-->
-                               onclick="payRequest(<?php echo $booking['userData']['id'];?>,
-                                   <?php echo $booking['booking']['id'];?>,
-                                   this);"
-                               value= <?php echo $this->translate('Send'); ?>>
-                        <?php endif;?>
+<!--                               onclick="payRequest(--><?php //echo $booking['userData']['id'];?><!--,-->
+<!--                                   --><?php //echo $booking['booking']['id'];?><!--,-->
+<!--                                   this);"-->
+<!--                               value= --><?php //echo $this->translate('Send'); ?><!-->-->
+<!--                        --><?php //endif;?>
                         <!--CASE: Pending-->
-                        <?php if (isset($booking['booking']['pending'])): ?>
+<!--                        --><?php //if (isset($booking['booking']['pending'])): ?>
 <!--                        <span class="result pending">Pending</span>-->
-                        <?php endif;?>
+<!--                        --><?php //endif;?>
 <!--                        <!--CASE: Paid-->-->
-                        <?php if (isset($booking['booking']['paid'])): ?>
+<!--                        --><?php //if (isset($booking['booking']['paid'])): ?>
 <!--                        <span class="result success">Paid</span>-->
-                        <?php endif;?>
+<!--                        --><?php //endif;?>
 <!---->
-                        <?php if (isset($booking['booking']['waiting'])): ?>
+<!--                        --><?php //if (isset($booking['booking']['waiting'])): ?>
 <!--                        <span class="result">reservation made</span>-->
-                        <?php endif;?>
-                        <?php if (isset($booking['booking']['expired'])): ?>
-                        <span class="result">expired</span>
+<!--                        --><?php //endif;?>
+<!--                        --><?php //if (isset($booking['booking']['expired'])): ?>
+<!--                        <span class="result">expired</span>-->
 <!--                        --><?php //endif;?>
 <!--                    </td>-->
                     <!--END payment -->
