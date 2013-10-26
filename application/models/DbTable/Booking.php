@@ -105,6 +105,7 @@ class Application_Model_DbTable_Booking extends Application_Model_DbTable_Abstra
 
         $data = array(
             'booking_status' => 1,
+            'payment_status' => 2,//comment this, when you will turn back payment system  ::PAYMENT ROLLBACK::
             'updated_at' => date('Y-m-d H:i:s')
         );
         $where = array(

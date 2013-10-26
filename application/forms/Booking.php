@@ -79,7 +79,7 @@ class Application_Form_Booking extends Zend_Form
             ->addFilters($this->basicFilters)
             ->setDecorators($this->basicDecorators);
 
-//        $rate = new Zend_Form_Element_Text('rate');
+//        $rate = new Zend_Form_Element_Text('rate'); ::PAYMENT ROLLBACK::
 //        $rate ->setAttrib('class', 'required input-small')
 //            ->setRequired(true)
 //            ->addValidator('NotEmpty', true)

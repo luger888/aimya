@@ -83,7 +83,7 @@ class BookingController extends Zend_Controller_Action
                         $isBlocked = $friendsDb->isBlocked($this->getRequest()->getParam('recipient_id'));
                         if (!$isBlocked) {
                             $isExistPaypalEmail = $profileDbTable->getPayPalEmail($identity->id);
-//                            if($this->getRequest()->getParam('is_sender_teacher') == '1' && $isExistPaypalEmail['paypal_email'] == '' && $identity->role != '1'){
+//                            if($this->getRequest()->getParam('is_sender_teacher') == '1' && $isExistPaypalEmail['paypal_email'] == '' && $identity->role != '1'){ ::PAYMENT ROLLBACK::
 //                                $this->view->emailerror = 1;
 //                                $this->view->check = $this->getRequest()->getParam('is_sender_teacher');
 //                            }else{
@@ -145,7 +145,7 @@ class BookingController extends Zend_Controller_Action
             if ($this->getRequest()->getParam('booking_id')) {
                 $isExist = $bookingDbTable->isExistBooking($this->getRequest()->getParam('booking_id'), $identity->id);
                 if (!$isExist) {
-//                    $profileDbTable = new Application_Model_DbTable_Profile();
+//                    $profileDbTable = new Application_Model_DbTable_Profile(); ::PAYMENT ROLLBACK::
 //                    $isExistPaypalEmail = $profileDbTable->getPayPalEmail($identity->id);
 //                    if($isExistPaypalEmail['paypal_email'] == '' && $identity->role != '1'){  CHECK FOR EMAIL COMMENTED
 //                        $this->view->emailerror = 1;
