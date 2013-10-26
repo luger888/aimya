@@ -147,14 +147,14 @@ class BookingController extends Zend_Controller_Action
                 if (!$isExist) {
                     $profileDbTable = new Application_Model_DbTable_Profile();
                     $isExistPaypalEmail = $profileDbTable->getPayPalEmail($identity->id);
-                    if($isExistPaypalEmail['paypal_email'] == '' && $identity->role != '1'){
-                        $this->view->emailerror = 1;
-
-                    }else{
+//                    if($isExistPaypalEmail['paypal_email'] == '' && $identity->role != '1'){  CHECK FOR EMAIL COMMENTED
+//                        $this->view->emailerror = 1;
+//
+//                    }else{
                         $bookingDbTable = new Application_Model_DbTable_Booking();
                         $bookingDbTable->approveBooking($this->getRequest()->getParam('booking_id'), $identity->id);
                         $this->view->approved = 1;
-                    }
+//                    }
 
                 }
 
