@@ -83,12 +83,12 @@ class BookingController extends Zend_Controller_Action
                         $isBlocked = $friendsDb->isBlocked($this->getRequest()->getParam('recipient_id'));
                         if (!$isBlocked) {
                             $isExistPaypalEmail = $profileDbTable->getPayPalEmail($identity->id);
-                            if($this->getRequest()->getParam('is_sender_teacher') == '1' && $isExistPaypalEmail['paypal_email'] == '' && $identity->role != '1'){
-                                $this->view->emailerror = 1;
-                                $this->view->check = $this->getRequest()->getParam('is_sender_teacher');
-                            }else{
+//                            if($this->getRequest()->getParam('is_sender_teacher') == '1' && $isExistPaypalEmail['paypal_email'] == '' && $identity->role != '1'){
+//                                $this->view->emailerror = 1;
+//                                $this->view->check = $this->getRequest()->getParam('is_sender_teacher');
+//                            }else{
                                 $this->view->validation = 1;
-                            }
+//                            }
 
                             if ($identity->role == '1') {
                                 $this->view->role = 0;
