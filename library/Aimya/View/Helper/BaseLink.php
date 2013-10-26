@@ -15,7 +15,7 @@ class Aimya_View_Helper_BaseLink extends Zend_View_Helper_Abstract
 
     public function baseLink(){
         if($_SERVER) {
-            return "http://" . $_SERVER['HTTP_HOST'];
+            return "https://" . $_SERVER['HTTP_HOST'];
         }
     }
 

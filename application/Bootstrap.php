@@ -23,6 +23,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $fc -> registerPlugin(new Application_Plugin_Access());
 
     }
+    protected function _initPlugins() {
+        $frontController = Zend_Controller_Front::getInstance();
+        $frontController->registerPlugin( new Application_Plugin_Ssl());
+    }
     protected function _initRequest() {
 
         $this->bootstrap ('FrontController' );

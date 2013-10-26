@@ -56,13 +56,13 @@ class UserController extends Zend_Controller_Action
                 $this->view->message = 'no data';
 
             } else {
-
                 $model = new Application_Model_User();
                 $this->view->message = $model->approveUser($data);
 
                 $this->_helper->flashMessenger->addMessage(array('success' => 'Your account has been confirmed. Please login'));
-                $this->_helper->redirector('index', 'index');
 
+                //$this->_helper->redirector('http://aimya.com');
+                header('location:http://aimya.com');
             }
         } else {
             $this->view->message = 'request data is incorrect';
@@ -441,11 +441,13 @@ class UserController extends Zend_Controller_Action
     public function resendAction()
     {
         if ($username = $this->getRequest()->getParam('username')) {
+
             $config = array('auth' => 'login',
                 'username' => 'no-reply@aimya.com',
                 'password' => 'aimya');
 
             $transport = new Zend_Mail_Transport_Smtp('mail.aimya.com', $config);
+
             $userDb = new Application_Model_DbTable_Users();
             $user = $userDb->checkByUsername($username);
             $mail = new Aimya_Mail;
@@ -459,9 +461,12 @@ class UserController extends Zend_Controller_Action
             $mail->baseLink = "http://" . $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance()->getBaseUrl();
 
             if($mail->send($transport)){
+
                 $this->view->email = 1;
+            }else{
+                $this->view->emailError = 1;
             }
-            $this->view->emailError = 1;
+
         }
     }
 }

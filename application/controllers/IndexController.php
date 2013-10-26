@@ -7,7 +7,6 @@ class IndexController extends Zend_Controller_Action
     {
         $identity = Zend_Auth::getInstance()->getIdentity();
         if($identity){  // if there is identity - do not show main page layout
-
            $this->_helper->redirector('features', 'account');
         }
     }

@@ -2,26 +2,20 @@
     <?php echo $this->confirmFlash;?>
 </div>
 
-    <h2>Welcome!</h2>
+    <h2><?php echo $this->translate('welcome');?>!</h2>
 
     <div class="homeTxt clearfix">
-        <p>Looking for someone to help you learn a language or give you expert advice?  Looking for an interface where you can provide services without paying for gas or an overpriced cup of coffee?  At Aimya, you can advertise your services or what services you need.  You can also browse our database of Student and Teaching users for what you’re looking for.  All you need to do to get started is create a student profile for free.</p>
+        <p><?php echo $this->translate('Looking for someone to help you learn a language or give you expert advice?  Looking for an interface where you can provide services without paying for gas or an overpriced cup of coffee?  At Aimya, you can advertise your services or what services you need.  You can also browse our database of Student and Teaching users for what you’re looking for.  All you need to do to get started is create a student profile for free.');?></p>
     </div><!--End homeTxt-->
 
 <div class="homeGalleryHold clearfix">
     <div class="homeGalleryBox clearfix">
 <!--        <img src="/images/content/home-gal-1.jpg" alt="">-->
-        <object width="373" height="262">
-            <param name="movie" value="https://www.youtube.com/v/ZrxtZgyMPUU?rel=1&color1=0x2b405b&
-    color2=0x6b8ab6&border=1&fs=1"></param>
+        <object width="300" height="225">
+            <param name="movie" value="https://www.youtube.com/v/ZrxtZgyMPUU&hl=en_US&feature=player_embedded&version=2&color1=0xb1b1b1&color2=0xb1b1b1&showinfo=0&showsearch=0&theme=light"></param>
             <param name="allowFullScreen" value="true"></param>
-            <embed src="https://www.youtube.com/v/ZrxtZgyMPUU?rel=1&color1=0x2b405b&
-    color2=0x6b8ab6&border=1&fs=1"
-                   type="application/x-shockwave-flash"
-                   allowfullscreen="true"
-                   width="374" height="262">
-            </embed>
-        </object>
+            <param name="allowScriptAccess" value="always"></param>
+            <embed src="https://www.youtube.com/v/ZrxtZgyMPUU&hl=en_US&feature=player_embedded&version=2&color1=0xb1b1b1&color2=0xb1b1b1&showinfo=0&showsearch=0&theme=light" type="application/x-shockwave-flash" allowfullscreen="true" allowScriptAccess="always" width="374" height="262"></embed></object>
     </div><!--End homeGalleryBox-->
 </div><!--End homeGalleryHold-->
 

@@ -4,7 +4,7 @@
 <div id="tabs" class="tabsHolder clearfix">
     <div id="tabsNavigation" class="clearfix">
         <ul>
-            <li><a href="#tabs-1">basic</a></li>
+            <li><a href="#tabs-1"><?php echo $this->translate('basic');?></a></li>
             <li><a href="<?php echo $this->baseUrl()?>/resume/objective"><?php echo $this->translate('objective');?></a></li>
             <li><a href="<?php echo $this->baseUrl()?>/resume/experience"><?php echo $this->translate('experience');?></a></li>
             <li><a href="<?php echo $this->baseUrl()?>/resume/education"><?php echo $this->translate('education');?></a></li>
@@ -27,7 +27,7 @@
                                 if ($this->profile['gender'] == 'female') $gender = 'female'; ?>
                                 <li class = "userName"><?php echo $this->profile['firstname'] . ' ' . $this->profile['lastname'];?></li>
                                 <?php if ($this->profile['birthday']) echo '<li class = "birthday">' . $this->profile["birthday"] . '</li>';?>
-                                <?php if ($this->profile['gender']) echo '<li class = "gender ' .$gender .'">' . $this->profile["gender"] . '</li>';?>
+                                <?php if ($this->profile['gender']) echo '<li class = "gender ' .$gender .'">' . $this->translate($this->profile["gender"]) . '</li>';?>
                                 <?php if ($this->profile['email']) echo '<li class = "mail">' . $this->profile["email"] . '</li>';?>
                                 <?php if ($this->profile['language']) echo '<li class = "language">' . $this->profile["language"] . '</li>';?>
                                 <?php if ($this->profile['education']) echo '<li class = "education">' . $this->profile["education"] . '</li>';?>

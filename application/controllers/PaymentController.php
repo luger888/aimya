@@ -4,7 +4,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
     private $videoCost = 2;
     private $notesCost = 1;
     private $feedbackCost = 1;
-    private $subscriptionCost = 30;
+    private $subscriptionCost = 1;
 
     public function init()
     {
@@ -59,7 +59,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
             $userProfit = $rate - $aimyaProfit;
 
             $xml = $payPalModel->generateXml($teacherId, $bookingId, $userProfit, $aimyaProfit);
-
+	
             $response = $payPalModel->getAdaptivUrl($xml);
 
             if ($response) {
