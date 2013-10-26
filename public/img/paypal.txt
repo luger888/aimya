@@ -4947,3 +4947,92 @@ notify_version                          UNVERSIONED
 reverse_all_parallel_payments_on_error  false
 
 
+INVALID IPN--------------------------------------------------------------------------------
+[10/16/2013 3:37 AM] - https://www.sandbox.paypal.com/cgi-bin/webscr (curl)
+--------------------------------------------------------------------------------
+HTTP/1.1 100 Continue
+
+HTTP/1.1 200 OK
+Date: Wed, 16 Oct 2013 02:37:26 GMT
+Server: Apache
+X-Frame-Options: SAMEORIGIN
+Set-Cookie: c9MWDuvPtT9GIMyPc3jwol1VSlO=9MZsoUYnhQzw17CRWszDhEA45DeS4Aj5AOlPe4iVKnZGJzI0sXv_5gxCyT-1waogQhhKAf7HyUnmedm3xcP9pqULCQMOFgPyZ6wWMrnSaiTC6HNriUf5xwGA-HfLK2CVf0aLDqAhVIFVWaO3VTFFxcyLv3kcUXg2ScRFVgyY8jKFbbZ01QYMXQilB28e_z1gJdaxBncSDYVMm_7pgfkBORRVfWq73l1nVlOMbCmSwmwxpSEOOUJ99tsunLwKvzYSHRqB6rcKBQKF85cxoTioHkIY27rCVkiBjRNbszicLwWHcPxiP7TYM429yWQPmzN3OZ0_6SN56NbfXbG943gAzoHDRDNC8Lsr9Aik-zELYfMSEhUmy42c6oM6mryzxzYoxwtq7hC-fF4K8o0nkLnD1xW1AIWLuHUpQVYdgdf_V_7Vtptj7cw4a-hqF9S; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: cookie_check=yes; expires=Sat, 14-Oct-2023 02:37:27 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: navcmd=_notify-validate; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: navlns=0.0; expires=Fri, 16-Oct-2015 02:37:27 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: Apache=10.72.109.11.1381891046697816; path=/; expires=Fri, 09-Oct-43 02:37:26 GMT
+X-Cnection: close
+Set-Cookie: X-PP-SILOVER=name%3DSANDBOX3.WEB.1%26silo_version%3D880%26app%3Dslingshot%26TIME%3D3875233106; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: X-PP-SILOVER=; Expires=Thu, 01 Jan 1970 00:00:01 GMT
+Set-Cookie: Apache=10.72.128.11.1381891046688001; path=/; expires=Fri, 09-Oct-43 02:37:26 GMT
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=14400
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+INVALID
+----------------------------------------------------------------------------------------------------
+0                                       USD 1.00
+transaction                             Array
+payment_request_date                    Tue Oct 15 19:35:40 PDT 2013
+return_url                              https://aimya.com/en/account
+fees_payer                              SENDER
+ipn_notification_url                    https://aimya.com/en/payment/subsipn?subscription_id=84
+sender_email                            billkessler3@hotmail.com
+verify_sign                             AiPC9BjkCyDFQXbSkoZcgqH3hpacAJHXoTFoT1vyCtKLxXaNmnRQ4Ayr
+cancel_url                              https://aimya.com/en/payment
+pay_key                                 AP-35C53058P93485702
+action_type                             PAY
+transaction_type                        Adaptive Payment PAY
+status                                  COMPLETED
+log_default_shipping_address_in_transactionfalse
+charset                                 windows-1252
+notify_version                          UNVERSIONED
+reverse_all_parallel_payments_on_error  false
+
+
+INVALID IPN--------------------------------------------------------------------------------
+[10/16/2013 3:51 AM] - https://www.sandbox.paypal.com/cgi-bin/webscr (curl)
+--------------------------------------------------------------------------------
+HTTP/1.1 100 Continue
+
+HTTP/1.1 200 OK
+Date: Wed, 16 Oct 2013 02:51:20 GMT
+Server: Apache
+X-Frame-Options: SAMEORIGIN
+Set-Cookie: c9MWDuvPtT9GIMyPc3jwol1VSlO=JyAQUasTD7kN7DIyDf77_FVBvSaPhM2EmV-H6Mzw6MZJJfCveXYZiGjl0dTRnjP_ddwO95N8zLrCntm0vw7eQsdkSkPorvLjtJ93HBNELg5bNnQ4Hr5EP4ieLNtPhcxZeXYaKpNnEPzivQCr-doQc5vXEUL-3gsiBo87OMyVsu2XKDrJ7ENE1PanNvodYDjl1YmuiHfpEafEVHMp77o1rqyN7jJdUc0xXMHZEbt3Dg1IuHgAOiJYKpJAJ9sjy1WlnhpgN5jccHqGLSMsXdebtafhzOjGQqiuhprX2Hxe40xp5d8YGVtSGYFreATgN6haBuK8fe_qOUtH0Dfa0F6IwSieE1xFcuae2kMZ6uKN5sVYmRvrrS-8y1lZxt9v0sPR1jfKW06gXUfo36jNJG34eV8t99LpAbDVawy7HUJYXWxD72KiXq_34npQpRe; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: cookie_check=yes; expires=Sat, 14-Oct-2023 02:51:20 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: navcmd=_notify-validate; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: navlns=0.0; expires=Fri, 16-Oct-2015 02:51:20 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: Apache=10.72.109.11.1381891880297517; path=/; expires=Fri, 09-Oct-43 02:51:20 GMT
+X-Cnection: close
+Set-Cookie: X-PP-SILOVER=name%3DSANDBOX3.WEB.1%26silo_version%3D880%26app%3Dslingshot%26TIME%3D687824210; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: X-PP-SILOVER=; Expires=Thu, 01 Jan 1970 00:00:01 GMT
+Set-Cookie: Apache=10.72.128.11.1381891880287054; path=/; expires=Fri, 09-Oct-43 02:51:20 GMT
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=14400
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+INVALID
+----------------------------------------------------------------------------------------------------
+0                                       NONE
+1                                       Completed
+transaction                             Array
+log_default_shipping_address_in_transactionfalse
+action_type                             PAY
+ipn_notification_url                    https://aimya.com/en/payment/ipn?booking_id=503
+charset                                 windows-1252
+transaction_type                        Adaptive Payment PAY
+notify_version                          UNVERSIONED
+cancel_url                              https://aimya.com/en/lesson
+verify_sign                             AFcWxV21C7fd0v3bYYYRCpSSRl31A.hd-LznW1p9QbEktltdGafMO77N
+sender_email                            billkessler3@hotmail.com
+fees_payer                              SENDER
+return_url                              https://aimya.com/en/lesson
+reverse_all_parallel_payments_on_error  false
+pay_key                                 AP-7WE44084AT459071S
+status                                  COMPLETED
+payment_request_date                    Tue Oct 15 19:45:28 PDT 2013
+
+
