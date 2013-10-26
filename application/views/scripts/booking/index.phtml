@@ -331,14 +331,14 @@ ul li {
             <div class="formRow clearfix">
                 <div class="label">Lesson Time:</div>
                 <div><?php echo $this->bookingForm->duration;?></div>
-                <div class="txt">Price:</div>
-                <div><?php echo $this->bookingForm->rate;?></div>
+<!--                <div class="txt">Price:</div> PRICE INPUT-->
+<!--                <div>--><?php //echo $this->bookingForm->rate;?><!--</div>-->
             </div>
             <div class="formRow clearfix checkBoxRow">
                 <div class="label">Video Recording:</div>
                 <div><?php echo $this->bookingForm->video;?></div>
                 <?php if ($this->role != 1) {
-                echo ' <div class="addPrice"> - $2 </div>';
+                echo ' <div class="addPrice">  </div>';
             }
                 ?>
 
@@ -348,7 +348,7 @@ ul li {
                 <div class="label">Feedback:</div>
                 <div><?php echo $this->bookingForm->feedback;?></div>
                 <?php if ($this->role != 1) {
-                echo ' <div class="addPrice"> - $1 </div>';
+                echo ' <div class="addPrice"> </div>';
             }
                 ?>
             </div>
@@ -356,7 +356,7 @@ ul li {
                 <div class="label">Notes Copy:</div>
                 <div><?php echo $this->bookingForm->notes;?></div>
                 <?php if ($this->role != 1) {
-                echo ' <div class="addPrice"> - $1 </div>';
+                echo ' <div class="addPrice"> </div>';
             }
                 ?>
             </div>
@@ -648,9 +648,9 @@ jQuery(document).ready(function () {
             $(this).parent().parent().find('.error').remove();
         });
         var totalPrice = 1;
-        if($('#video:checked').val() == 1)totalPrice +=2;
-        if($('#feedback:checked').val() == 1)totalPrice +=1;
-        if($('#notes:checked').val() == 1)totalPrice +=1;
+        if($('#video:checked').val() == 1)totalPrice +=0;//2
+        if($('#feedback:checked').val() == 1)totalPrice +=0;//1
+        if($('#notes:checked').val() == 1)totalPrice +=0;//1
         if(totalPrice>$('#rate').val()){
             $('#rate').parent().parent().append('<div class="error">Your rate should be more than '+ totalPrice +' dollars</div>');
             jQuery('.loadingIcon').remove();
