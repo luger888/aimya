@@ -3,8 +3,6 @@
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
 
-
-
     function _initViewRes() {
 
         $this->bootstrap('view');
@@ -49,88 +47,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             $onlineUserTable->makeOnline($userId);
         }
     }
-
-    protected function _initCache() {
-        /*$cacheFrontendOptions = array(
-            'automatic_serialization' => true,
-            'cache_id_prefix' => 'translate'
-        );
-        $cacheBackendOptions = array(
-            'cache_dir' => APPLICATION_PATH . '/data/cache/',
-            'file_name_prefix' => 'aimya',
-            'hashed_directory_level' => 2
-        );
-
-        $cache = Zend_Cache::factory('Core', 'File', $cacheFrontendOptions, $cacheBackendOptions);
-        Zend_Translate::setCache($cache);
-        Zend_Translate::clearCache();*/
-
-
-
-        /*     $this->bootstrap('db');
-          $cacheFrontendOptions = array (
-          'automatic_serialization' => true,
-          'cache_id_prefix' => 'z'
-          );
-          $cacheBackendOptions = array (
-          'cache_dir' => APPLICATION_PATH . '/data/cache/',
-          'file_name_prefix' => 'uds',
-          'hashed_directory_level' => 2
-          );
-          $cache = Zend_Cache::factory('Core', 'Memcached', $cacheFrontendOptions, $cacheBackendOptions);
-          Zend_Registry::set('cache', $cache);
-          return $cache;
-
-         */
-        /*$frontendOptions = array(
-            'lifetime' => 10800,
-            'automatic_serialization' => true,
-            'debug_header' => true,
-            'regexps' => array(
-                '^/$' => array('cache' => true),
-                '^/cms/' => array('cache' => true),
-            ),
-        );
-        $backendOptions = array('cache_dir' => APPLICATION_PATH . '/data/cache');
-        $cachePage = Zend_Cache::factory('Page', 'File', $frontendOptions, $backendOptions);
-        $uri      = explode('/', $_SERVER['REQUEST_URI']);
-        $cacheKey = array();
-        foreach ($uri as $key) {
-            if (empty($key)) {
-                continue 1;
-            }
-            $cacheKey[] = $key;
-        }
-
-        echo $cachePage->start();
-
-
-        $this->bootstrap('db');
-        $cacheFrontendOptions = array(
-            'automatic_serialization' => true,
-            'cache_id_prefix' => 'z',
-            'lifetime' => 7200
-        );
-        $cacheBackendOptions = array(
-            'cache_dir' => APPLICATION_PATH . '/data/cache/',
-            'file_name_prefix' => 'aimya',
-            'hashed_directory_level' => 2
-        );
-        $cache = Zend_Cache::factory('Core', 'File', $cacheFrontendOptions, $cacheBackendOptions);
-        Zend_Registry::set('cache', $cache);
-        return $cache;*/
-    }
-
-    /*protected function _initRestRoute() {
-
-        $this->bootstrap ('Request');
-        $front = $this->getResource ('FrontController');
-        $restRoute = new Zend_Rest_Route ($front, array (), array (
-            'default' => array ('user', 'account')
-        ));
-
-        $front->getRouter()->addRoute('user', $restRoute );
-    }*/
 
     protected function _initRoutes(){
 
@@ -205,7 +121,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $router->addRoute('userRoute', $userRoute);
         $router->addRoute('messageRoute', $messageRoute);
 
-        //$router->addRoute('message/view/(\d+)', $messageRoute);
     }
 
     public function _initNavigation()
@@ -224,13 +139,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             ->setRole(Zend_Registry::get('currentRole'));
     }
 
-   /* public function _initConfig(){
-        Zend_Registry::set('constants',
-            new Zend_Config_Ini(
-                APPLICATION_PATH . '/configs/application.ini',
-                'constants')
-        );
-    }*/
 
     public function _initConfig(){
         Zend_Registry::set('constants',

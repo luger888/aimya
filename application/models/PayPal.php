@@ -10,14 +10,25 @@ class Application_Model_PayPal
     //private $adaptivUrl = 'https://svcs.sandbox.paypal.com/AdaptivePayments/Pay';
     //private $amiyaPayPalEmail = 'aimSto_1356606163_biz@svitla.com';
 
-    private $payPalApiLogin = 'aim_pr_1356696524_biz_api1.mail.ru';
-    private $payPalApiPassword = '1356696594';
-    private $payPalSignature = 'AGgiSKCZ2j6Msrbwd65ACNRY-hZIAANcIOdlhHhOA5jNQxS7Xf-1Dcj0';
-    private $payPalApiId = 'APP-80W284485P519543T';
-    private $adaptivUrl = 'https://svcs.sandbox.paypal.com/AdaptivePayments/Pay';
-    private $amiyaPayPalEmail = 'aim_pr_1356696524_biz@mail.ru';
-    private $testMode = 'sandbox';
-    private $subscriptionCost = 30;
+//    private $payPalApiLogin = 'aim_pr_1356696524_biz_api1.mail.ru';
+//    private $payPalApiPassword = '1356696594';
+//    private $payPalSignature = 'AGgiSKCZ2j6Msrbwd65ACNRY-hZIAANcIOdlhHhOA5jNQxS7Xf-1Dcj0';
+//    private $payPalApiId = 'APP-80W284485P519543T';
+//    private $adaptivUrl = 'https://svcs.sandbox.paypal.com/AdaptivePayments/Pay';
+//    private $amiyaPayPalEmail = 'aim_pr_1356696524_biz@mail.ru';
+//    private $testMode = 'sandbox';
+//    private $subscriptionCost = 30;
+
+
+
+    private $payPalApiLogin = 'aimyallc_api1.gmail.com';
+    private $payPalApiPassword = '26YQ3DTVGWL2GWXC';
+    private $payPalSignature = 'AbY-zszH9LldX1hbXqhRfoigOjLAAGN32LLO.UWYSVrDYlOTcSSpi2b1';
+    private $payPalApiId = 'APP-2GU249123L677934E';
+    private $adaptivUrl = 'https://svcs.paypal.com/AdaptivePayments/Pay';
+    private $amiyaPayPalEmail = 'Aimyallc@gmail.com';
+   // private $testMode = 'sandbox';
+    private $subscriptionCost = 1;
 
     public function generateXml($sellerId, $bookingId, $userProfit, $aimyaProfit) {
 
@@ -95,7 +106,7 @@ class Application_Model_PayPal
 
         if ($ack == 'Success') {
             $data = array(
-                'url' => "https://www.sandbox.paypal.com/webscr?cmd=_ap-payment&paykey=" . $paykey,
+                'url' => "https://www.paypal.com/webscr?cmd=_ap-payment&paykey=" . $paykey,
                 'pay_key' => $paykey
             );
             return $data;

@@ -32,7 +32,9 @@ abstract class Application_Model_DbTable_Abstract extends Zend_Db_Table_Abstract
     public function deleteItem($id)
     {
 
-        $this->delete('id=?', ((int)$id));
+        $where = $this->getAdapter()->quoteInto('id = ?', $id);
+
+        $this->delete($where);
 
     }
 

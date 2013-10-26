@@ -441,6 +441,11 @@ class UserController extends Zend_Controller_Action
     public function resendAction()
     {
         if ($username = $this->getRequest()->getParam('username')) {
+            $config = array('auth' => 'login',
+                'username' => 'no-reply@aimya.com',
+                'password' => 'aimya');
+
+            $transport = new Zend_Mail_Transport_Smtp('mail.aimya.com', $config);
             $userDb = new Application_Model_DbTable_Users();
             $user = $userDb->checkByUsername($username);
             $mail = new Aimya_Mail;
@@ -453,7 +458,7 @@ class UserController extends Zend_Controller_Action
             $mail->token = $user;
             $mail->baseLink = "http://" . $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance()->getBaseUrl();
 
-            if($mail->send()){
+            if($mail->send($transport)){
                 $this->view->email = 1;
             }
             $this->view->emailError = 1;

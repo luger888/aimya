@@ -15,11 +15,6 @@ class Application_Model_Selenium extends PHPUnit_Extensions_SeleniumTestCase //P
 
     protected function setUp() {
 
-        /*cmd=getNewBrowserSession&1=*firefox&2=http://aimya.svitla.com
-        cmd=open&1=http://aimya.svitla.com&sessionId=1ac47ac3e26a4eac992125c1c28e085e*/
-
-
-        //DISPLAY=:555 java -jar /usr/local/lib/selenium/selenium-server-standalone-2.4.0.jar \ -port 4459 > /var/log/selenium/selenium-output.log \ 2> /var/log/selenium/selenium-error.log &
 
         $this->setHost($this->_host);
         $this->setPort($this->_port);

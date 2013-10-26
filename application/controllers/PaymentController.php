@@ -100,7 +100,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         $listener = new Aimya_PayPal_IpnListener();
 
         // tell the IPN listener to use the PayPal test sandbox
-        $listener->use_sandbox = true;
+        $listener->use_sandbox = false;
 
         // try to process the IPN POST
         try {
@@ -140,7 +140,7 @@ class PaymentController extends Zend_Controller_Action implements Aimya_Controll
         $listener = new Aimya_PayPal_IpnListener();
 
         // tell the IPN listener to use the PayPal test sandbox
-        $listener->use_sandbox = true;
+        $listener->use_sandbox = false;
 
         // try to process the IPN POST
         try {

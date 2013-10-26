@@ -17,8 +17,6 @@ class SearchController extends Aimya_Controller_BaseController
         $searchString = $this->getRequest()->getParam('search_string');
         $hits = $index->find($searchString);
         $paginator = Zend_Paginator::factory($hits);
-        //$paginator->setCurrentPageNumber($this->_getParam('page'));
-        //$paginator->setItemCountPerPage(10);
 
         $userTable = new Application_Model_DbTable_Users();
         $usersArray = array();
@@ -35,8 +33,6 @@ class SearchController extends Aimya_Controller_BaseController
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-        //$folderModel = new Application_Model_DbTable_Folder();
-        //$folderModel->createFolderChain();
 
         $serviceTable = new Application_Model_DbTable_ServiceDetail();
         @mkdir(realpath(APPLICATION_PATH) . DIRECTORY_SEPARATOR . 'data');
